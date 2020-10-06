@@ -1,0 +1,957 @@
+//! @* \[38] Breaking paragraphs into lines.
+//! We come now to what is probably the most interesting algorithm of \TeX:
+//! the mechanism for choosing the ``best possible'' breakpoints that yield
+//! the individual lines of a paragraph. \TeX's line-breaking algorithm takes
+//! a given horizontal list and converts it to a sequence of boxes that are
+//! appended to the current vertical list. In the course of doing this, it
+//! creates a special data structure containing three kinds of records that are
+//! not used elsewhere in \TeX. Such nodes are created while a paragraph is
+//! being processed, and they are destroyed afterwards; thus, the other parts
+//! of \TeX\ do not need to know anything about how line-breaking is done.
+//!
+//! The method used here is based on an approach devised by Michael F. Plass and
+//! @^Plass, Michael Frederick@>
+//! @^Knuth, Donald Ervin@>
+//! the author in 1977, subsequently generalized and improved by the same two
+//! people in 1980. A detailed discussion appears in {\sl SOFTWARE---Practice
+//! \AM\ Experience \bf11} (1981), 1119--1184, where it is shown that the
+//! line-breaking problem can be regarded as a special case of the problem of
+//! computing the shortest path in an acyclic network. The cited paper includes
+//! numerous examples and describes the history of line breaking as it has been
+//! practiced by printers through the ages. The present implementation adds two
+//! new ideas to the algorithm of 1980: Memory space requirements are considerably
+//! reduced by using smaller records for inactive nodes than for active ones,
+//! and arithmetic overflow is avoided by using ``delta distances'' instead of
+//! keeping track of the total distance from the beginning of the paragraph to the
+//! current point.
+//!
+//! @ The |line_break| procedure should be invoked only in horizontal mode; it
+//! leaves that mode and places its output into the current vlist of the
+//! enclosing vertical mode (or internal vertical mode).
+//! There is one explicit parameter:  |final_widow_penalty| is the amount of
+//! additional penalty to be inserted before the final line of the paragraph.
+//!
+//! There are also a number of implicit parameters: The hlist to be broken
+//! starts at |link(head)|, and it is nonempty. The value of |prev_graf| in the
+//! enclosing semantic level tells where the paragraph should begin in the
+//! sequence of line numbers, in case hanging indentation or \.{\\parshape}
+//! is in use; |prev_graf| is zero unless this paragraph is being continued
+//! after a displayed formula.  Other implicit parameters, such as the
+//! |par_shape_ptr| and various penalties to use for hyphenation, etc., appear
+//! in |eqtb|.
+//!
+//! After |line_break| has acted, it will have updated the current vlist and the
+//! value of |prev_graf|. Furthermore, the global variable |just_box| will
+//! point to the final box created by |line_break|, so that the width of this
+//! line can be ascertained when it is necessary to decide whether to use
+//! |above_display_skip| or |above_display_short_skip| before a displayed formula.
+//!
+//! @<Glob...@>=
+//! @!just_box:pointer; {the |hlist_node| for the last line of the new paragraph}
+//!
+//! @ Since |line_break| is a rather lengthy procedure---sort of a small world unto
+//! itself---we must build it up little by little, somewhat more cautiously
+//! than we have done with the simpler procedures of \TeX. Here is the
+//! general outline.
+//!
+//! @p@t\4@>@<Declare subprocedures for |line_break|@>
+//! procedure line_break(@!final_widow_penalty:integer);
+//! label done,done1,done2,done3,done4,done5,continue;
+//! var @<Local variables for line breaking@>@;
+//! begin pack_begin_line:=mode_line; {this is for over/underfull box messages}
+//! @<Get ready to start line breaking@>;
+//! @<Find optimal breakpoints@>;
+//! @<Break the paragraph at the chosen breakpoints, justify the resulting lines
+//! to the correct widths, and append them to the current vertical list@>;
+//! @<Clean up the memory by removing the break nodes@>;
+//! pack_begin_line:=0;
+//! end;
+//!
+//! @ The first task is to move the list from |head| to |temp_head| and go
+//! into the enclosing semantic level. We also append the \.{\\parfillskip}
+//! glue to the end of the paragraph, removing a space (or other glue node) if
+//! it was there, since spaces usually precede blank lines and instances of
+//! `\.{\$\$}'. The |par_fill_skip| is preceded by an infinite penalty, so
+//! it will never be considered as a potential breakpoint.
+//!
+//! This code assumes that a |glue_node| and a |penalty_node| occupy the
+//! same number of |mem|~words.
+//! @^data structure assumptions@>
+//!
+//! @<Get ready to start...@>=
+//! link(temp_head):=link(head);
+//! if is_char_node(tail) then tail_append(new_penalty(inf_penalty))
+//! else if type(tail)<>glue_node then tail_append(new_penalty(inf_penalty))
+//! else  begin type(tail):=penalty_node; delete_glue_ref(glue_ptr(tail));
+//!   flush_node_list(leader_ptr(tail)); penalty(tail):=inf_penalty;
+//!   end;
+//! link(tail):=new_param_glue(par_fill_skip_code);
+//! init_cur_lang:=prev_graf mod @'200000;
+//! init_l_hyf:=prev_graf div @'20000000;
+//! init_r_hyf:=(prev_graf div @'200000) mod @'100;
+//! pop_nest;
+//!
+//! @ When looking for optimal line breaks, \TeX\ creates a ``break node'' for
+//! each break that is {\sl feasible}, in the sense that there is a way to end
+//! a line at the given place without requiring any line to stretch more than
+//! a given tolerance. A break node is characterized by three things: the position
+//! of the break (which is a pointer to a |glue_node|, |math_node|, |penalty_node|,
+//! or |disc_node|); the ordinal number of the line that will follow this
+//! breakpoint; and the fitness classification of the line that has just
+//! ended, i.e., |tight_fit|, |decent_fit|, |loose_fit|, or |very_loose_fit|.
+//!
+//! @d tight_fit=3 {fitness classification for lines shrinking 0.5 to 1.0 of their
+//!   shrinkability}
+//! @d loose_fit=1 {fitness classification for lines stretching 0.5 to 1.0 of their
+//!   stretchability}
+//! @d very_loose_fit=0 {fitness classification for lines stretching more than
+//!   their stretchability}
+//! @d decent_fit=2 {fitness classification for all other lines}
+//!
+//! @ The algorithm essentially determines the best possible way to achieve
+//! each feasible combination of position, line, and fitness. Thus, it answers
+//! questions like, ``What is the best way to break the opening part of the
+//! paragraph so that the fourth line is a tight line ending at such-and-such
+//! a place?'' However, the fact that all lines are to be the same length
+//! after a certain point makes it possible to regard all sufficiently large
+//! line numbers as equivalent, when the looseness parameter is zero, and this
+//! makes it possible for the algorithm to save space and time.
+//!
+//! An ``active node'' and a ``passive node'' are created in |mem| for each
+//! feasible breakpoint that needs to be considered. Active nodes are three
+//! words long and passive nodes are two words long. We need active nodes only
+//! for breakpoints near the place in the paragraph that is currently being
+//! examined, so they are recycled within a comparatively short time after
+//! they are created.
+//!
+//! @ An active node for a given breakpoint contains six fields:
+//!
+//! \yskip\hang|link| points to the next node in the list of active nodes; the
+//! last active node has |link=last_active|.
+//!
+//! \yskip\hang|break_node| points to the passive node associated with this
+//! breakpoint.
+//!
+//! \yskip\hang|line_number| is the number of the line that follows this
+//! breakpoint.
+//!
+//! \yskip\hang|fitness| is the fitness classification of the line ending at this
+//! breakpoint.
+//!
+//! \yskip\hang|type| is either |hyphenated| or |unhyphenated|, depending on
+//! whether this breakpoint is a |disc_node|.
+//!
+//! \yskip\hang|total_demerits| is the minimum possible sum of demerits over all
+//! lines leading from the beginning of the paragraph to this breakpoint.
+//!
+//! \yskip\noindent
+//! The value of |link(active)| points to the first active node on a linked list
+//! of all currently active nodes. This list is in order by |line_number|,
+//! except that nodes with |line_number>easy_line| may be in any order relative
+//! to each other.
+//!
+//! @d active_node_size=3 {number of words in active nodes}
+//! @d fitness==subtype {|very_loose_fit..tight_fit| on final line for this break}
+//! @d break_node==rlink {pointer to the corresponding passive node}
+//! @d line_number==llink {line that begins at this breakpoint}
+//! @d total_demerits(#)==mem[#+2].int {the quantity that \TeX\ minimizes}
+//! @d unhyphenated=0 {the |type| of a normal active break node}
+//! @d hyphenated=1 {the |type| of an active node that breaks at a |disc_node|}
+//! @d last_active==active {the active list ends where it begins}
+//!
+//! @ @<Initialize the special list heads...@>=
+//! type(last_active):=hyphenated; line_number(last_active):=max_halfword;
+//! subtype(last_active):=0; {the |subtype| is never examined by the algorithm}
+//!
+//! @ The passive node for a given breakpoint contains only four fields:
+//!
+//! \yskip\hang|link| points to the passive node created just before this one,
+//! if any, otherwise it is |null|.
+//!
+//! \yskip\hang|cur_break| points to the position of this breakpoint in the
+//! horizontal list for the paragraph being broken.
+//!
+//! \yskip\hang|prev_break| points to the passive node that should precede this
+//! one in an optimal path to this breakpoint.
+//!
+//! \yskip\hang|serial| is equal to |n| if this passive node is the |n|th
+//! one created during the current pass. (This field is used only when
+//! printing out detailed statistics about the line-breaking calculations.)
+//!
+//! \yskip\noindent
+//! There is a global variable called |passive| that points to the most
+//! recently created passive node. Another global variable, |printed_node|,
+//! is used to help print out the paragraph when detailed information about
+//! the line-breaking computation is being displayed.
+//!
+//! @d passive_node_size=2 {number of words in passive nodes}
+//! @d cur_break==rlink {in passive node, points to position of this breakpoint}
+//! @d prev_break==llink {points to passive node that should precede this one}
+//! @d serial==info {serial number for symbolic identification}
+//!
+//! @<Glob...@>=
+//! @!passive:pointer; {most recent node on passive list}
+//! @!printed_node:pointer; {most recent node that has been printed}
+//! @!pass_number:halfword; {the number of passive nodes allocated on this pass}
+//!
+//! @ The active list also contains ``delta'' nodes that help the algorithm
+//! compute the badness of individual lines. Such nodes appear only between two
+//! active nodes, and they have |type=delta_node|. If |p| and |r| are active nodes
+//! and if |q| is a delta node between them, so that |link(p)=q| and |link(q)=r|,
+//! then |q| tells the space difference between lines in the horizontal list that
+//! start after breakpoint |p| and lines that start after breakpoint |r|. In
+//! other words, if we know the length of the line that starts after |p| and
+//! ends at our current position, then the corresponding length of the line that
+//! starts after |r| is obtained by adding the amounts in node~|q|. A delta node
+//! contains six scaled numbers, since it must record the net change in glue
+//! stretchability with respect to all orders of infinity. The natural width
+//! difference appears in |mem[q+1].sc|; the stretch differences in units of
+//! pt, fil, fill, and filll appear in |mem[q+2..q+5].sc|; and the shrink difference
+//! appears in |mem[q+6].sc|. The |subtype| field of a delta node is not used.
+//!
+//! @d delta_node_size=7 {number of words in a delta node}
+//! @d delta_node=2 {|type| field in a delta node}
+//!
+//! @ As the algorithm runs, it maintains a set of six delta-like registers
+//! for the length of the line following the first active breakpoint to the
+//! current position in the given hlist. When it makes a pass through the
+//! active list, it also maintains a similar set of six registers for the
+//! length following the active breakpoint of current interest. A third set
+//! holds the length of an empty line (namely, the sum of \.{\\leftskip} and
+//! \.{\\rightskip}); and a fourth set is used to create new delta nodes.
+//!
+//! When we pass a delta node we want to do operations like
+//! $$\hbox{\ignorespaces|for
+//! k:=1 to 6 do cur_active_width[k]:=cur_active_width[k]+mem[q+k].sc|};$$ and we
+//! want to do this without the overhead of |for| loops. The |do_all_six|
+//! macro makes such six-tuples convenient.
+//!
+//! @d do_all_six(#)==#(1);#(2);#(3);#(4);#(5);#(6)
+//!
+//! @<Glob...@>=
+//! @!active_width:array[1..6] of scaled;
+//!   {distance from first active node to~|cur_p|}
+//! @!cur_active_width:array[1..6] of scaled; {distance from current active node}
+//! @!background:array[1..6] of scaled; {length of an ``empty'' line}
+//! @!break_width:array[1..6] of scaled; {length being computed after current break}
+//!
+//! @ Let's state the principles of the delta nodes more precisely and concisely,
+//! so that the following programs will be less obscure. For each legal
+//! breakpoint~|p| in the paragraph, we define two quantities $\alpha(p)$ and
+//! $\beta(p)$ such that the length of material in a line from breakpoint~|p|
+//! to breakpoint~|q| is $\gamma+\beta(q)-\alpha(p)$, for some fixed $\gamma$.
+//! Intuitively, $\alpha(p)$ and $\beta(q)$ are the total length of material from
+//! the beginning of the paragraph to a point ``after'' a break at |p| and to a
+//! point ``before'' a break at |q|; and $\gamma$ is the width of an empty line,
+//! namely the length contributed by \.{\\leftskip} and \.{\\rightskip}.
+//!
+//! Suppose, for example, that the paragraph consists entirely of alternating
+//! boxes and glue skips; let the boxes have widths $x_1\ldots x_n$ and
+//! let the skips have widths $y_1\ldots y_n$, so that the paragraph can be
+//! represented by $x_1y_1\ldots x_ny_n$. Let $p_i$ be the legal breakpoint
+//! at $y_i$; then $\alpha(p_i)=x_1+y_1+\cdots+x_i+y_i$, and $\beta(p_i)=
+//! x_1+y_1+\cdots+x_i$. To check this, note that the length of material from
+//! $p_2$ to $p_5$, say, is $\gamma+x_3+y_3+x_4+y_4+x_5=\gamma+\beta(p_5)
+//! -\alpha(p_2)$.
+//!
+//! The quantities $\alpha$, $\beta$, $\gamma$ involve glue stretchability and
+//! shrinkability as well as a natural width. If we were to compute $\alpha(p)$
+//! and $\beta(p)$ for each |p|, we would need multiple precision arithmetic, and
+//! the multiprecise numbers would have to be kept in the active nodes.
+//! \TeX\ avoids this problem by working entirely with relative differences
+//! or ``deltas.'' Suppose, for example, that the active list contains
+//! $a_1\,\delta_1\,a_2\,\delta_2\,a_3$, where the |a|'s are active breakpoints
+//! and the $\delta$'s are delta nodes. Then $\delta_1=\alpha(a_1)-\alpha(a_2)$
+//! and $\delta_2=\alpha(a_2)-\alpha(a_3)$. If the line breaking algorithm is
+//! currently positioned at some other breakpoint |p|, the |active_width| array
+//! contains the value $\gamma+\beta(p)-\alpha(a_1)$. If we are scanning through
+//! the list of active nodes and considering a tentative line that runs from
+//! $a_2$ to~|p|, say, the |cur_active_width| array will contain the value
+//! $\gamma+\beta(p)-\alpha(a_2)$. Thus, when we move from $a_2$ to $a_3$,
+//! we want to add $\alpha(a_2)-\alpha(a_3)$ to |cur_active_width|; and this
+//! is just $\delta_2$, which appears in the active list between $a_2$ and
+//! $a_3$. The |background| array contains $\gamma$. The |break_width| array
+//! will be used to calculate values of new delta nodes when the active
+//! list is being updated.
+//!
+//! @ Glue nodes in a horizontal list that is being paragraphed are not supposed to
+//! include ``infinite'' shrinkability; that is why the algorithm maintains
+//! four registers for stretching but only one for shrinking. If the user tries to
+//! introduce infinite shrinkability, the shrinkability will be reset to finite
+//! and an error message will be issued. A boolean variable |no_shrink_error_yet|
+//! prevents this error message from appearing more than once per paragraph.
+//!
+//! @d check_shrinkage(#)==if (shrink_order(#)<>normal)and(shrink(#)<>0) then
+//!   begin #:=finite_shrink(#);
+//!   end
+//!
+//! @<Glob...@>=
+//! @!no_shrink_error_yet:boolean; {have we complained about infinite shrinkage?}
+//!
+//! @ @<Declare subprocedures for |line_break|@>=
+//! function finite_shrink(@!p:pointer):pointer; {recovers from infinite shrinkage}
+//! var q:pointer; {new glue specification}
+//! begin if no_shrink_error_yet then
+//!   begin no_shrink_error_yet:=false;
+//!   print_err("Infinite glue shrinkage found in a paragraph");
+//! @.Infinite glue shrinkage...@>
+//!   help5("The paragraph just ended includes some glue that has")@/
+//!   ("infinite shrinkability, e.g., `\hskip 0pt minus 1fil'.")@/
+//!   ("Such glue doesn't belong there---it allows a paragraph")@/
+//!   ("of any length to fit on one line. But it's safe to proceed,")@/
+//!   ("since the offensive shrinkability has been made finite.");
+//!   error;
+//!   end;
+//! q:=new_spec(p); shrink_order(q):=normal;
+//! delete_glue_ref(p); finite_shrink:=q;
+//! end;
+//!
+//! @ @<Get ready to start...@>=
+//! no_shrink_error_yet:=true;@/
+//! check_shrinkage(left_skip); check_shrinkage(right_skip);@/
+//! q:=left_skip; r:=right_skip; background[1]:=width(q)+width(r);@/
+//! background[2]:=0; background[3]:=0; background[4]:=0; background[5]:=0;@/
+//! background[2+stretch_order(q)]:=stretch(q);@/
+//! background[2+stretch_order(r)]:=@|background[2+stretch_order(r)]+stretch(r);@/
+//! background[6]:=shrink(q)+shrink(r);
+//!
+//! @ A pointer variable |cur_p| runs through the given horizontal list as we look
+//! for breakpoints. This variable is global, since it is used both by |line_break|
+//! and by its subprocedure |try_break|.
+//!
+//! Another global variable called |threshold| is used to determine the feasibility
+//! of individual lines: Breakpoints are feasible if there is a way to reach
+//! them without creating lines whose badness exceeds |threshold|.  (The
+//! badness is compared to |threshold| before penalties are added, so that
+//! penalty values do not affect the feasibility of breakpoints, except that
+//! no break is allowed when the penalty is 10000 or more.) If |threshold|
+//! is 10000 or more, all legal breaks are considered feasible, since the
+//! |badness| function specified above never returns a value greater than~10000.
+//!
+//! Up to three passes might be made through the paragraph in an attempt to find at
+//! least one set of feasible breakpoints. On the first pass, we have
+//! |threshold=pretolerance| and |second_pass=final_pass=false|.
+//! If this pass fails to find a
+//! feasible solution, |threshold| is set to |tolerance|, |second_pass| is set
+//! |true|, and an attempt is made to hyphenate as many words as possible.
+//! If that fails too, we add |emergency_stretch| to the background
+//! stretchability and set |final_pass=true|.
+//!
+//! @<Glob...@>=
+//! @!cur_p:pointer; {the current breakpoint under consideration}
+//! @!second_pass:boolean; {is this our second attempt to break this paragraph?}
+//! @!final_pass:boolean; {is this our final attempt to break this paragraph?}
+//! @!threshold:integer; {maximum badness on feasible lines}
+//!
+//! @ The heart of the line-breaking procedure is `|try_break|', a subroutine
+//! that tests if the current breakpoint |cur_p| is feasible, by running
+//! through the active list to see what lines of text can be made from active
+//! nodes to~|cur_p|.  If feasible breaks are possible, new break nodes are
+//! created.  If |cur_p| is too far from an active node, that node is
+//! deactivated.
+//!
+//! The parameter |pi| to |try_break| is the penalty associated
+//! with a break at |cur_p|; we have |pi=eject_penalty| if the break is forced,
+//! and |pi=inf_penalty| if the break is illegal.
+//!
+//! The other parameter, |break_type|, is set to |hyphenated| or |unhyphenated|,
+//! depending on whether or not the current break is at a |disc_node|. The
+//! end of a paragraph is also regarded as `|hyphenated|'; this case is
+//! distinguishable by the condition |cur_p=null|.
+//!
+//! @d copy_to_cur_active(#)==cur_active_width[#]:=active_width[#]
+//! @d deactivate=60 {go here when node |r| should be deactivated}
+//!
+//! @<Declare subprocedures for |line_break|@>=
+//! procedure try_break(@!pi:integer;@!break_type:small_number);
+//! label exit,done,done1,continue,deactivate;
+//! var r:pointer; {runs through the active list}
+//! @!prev_r:pointer; {stays a step behind |r|}
+//! @!old_l:halfword; {maximum line number in current equivalence class of lines}
+//! @!no_break_yet:boolean; {have we found a feasible break at |cur_p|?}
+//! @<Other local variables for |try_break|@>@;
+//! begin @<Make sure that |pi| is in the proper range@>;
+//! no_break_yet:=true; prev_r:=active; old_l:=0;
+//! do_all_six(copy_to_cur_active);
+//! loop@+  begin continue: r:=link(prev_r);
+//!   @<If node |r| is of type |delta_node|, update |cur_active_width|,
+//!     set |prev_r| and |prev_prev_r|, then |goto continue|@>;
+//!   @<If a line number class has ended, create new active nodes for
+//!     the best feasible breaks in that class; then |return|
+//!     if |r=last_active|, otherwise compute the new |line_width|@>;
+//!   @<Consider the demerits for a line from |r| to |cur_p|;
+//!     deactivate node |r| if it should no longer be active;
+//!     then |goto continue| if a line from |r| to |cur_p| is infeasible,
+//!     otherwise record a new feasible break@>;
+//!   end;
+//! exit: @!stat @<Update the value of |printed_node| for
+//!   symbolic displays@>@+tats@;
+//! end;
+//!
+//! @ @<Other local variables for |try_break|@>=
+//! @!prev_prev_r:pointer; {a step behind |prev_r|, if |type(prev_r)=delta_node|}
+//! @!s:pointer; {runs through nodes ahead of |cur_p|}
+//! @!q:pointer; {points to a new node being created}
+//! @!v:pointer; {points to a glue specification or a node ahead of |cur_p|}
+//! @!t:integer; {node count, if |cur_p| is a discretionary node}
+//! @!f:internal_font_number; {used in character width calculation}
+//! @!l:halfword; {line number of current active node}
+//! @!node_r_stays_active:boolean; {should node |r| remain in the active list?}
+//! @!line_width:scaled; {the current line will be justified to this width}
+//! @!fit_class:very_loose_fit..tight_fit; {possible fitness class of test line}
+//! @!b:halfword; {badness of test line}
+//! @!d:integer; {demerits of test line}
+//! @!artificial_demerits:boolean; {has |d| been forced to zero?}
+//! @!save_link:pointer; {temporarily holds value of |link(cur_p)|}
+//! @!shortfall:scaled; {used in badness calculations}
+//!
+//! @ @<Make sure that |pi| is in the proper range@>=
+//! if abs(pi)>=inf_penalty then
+//!   if pi>0 then return {this breakpoint is inhibited by infinite penalty}
+//!   else pi:=eject_penalty {this breakpoint will be forced}
+//!
+//! @ The following code uses the fact that |type(last_active)<>delta_node|.
+//!
+//! @d update_width(#)==@|
+//!   cur_active_width[#]:=cur_active_width[#]+mem[r+#].sc
+//!
+//! @<If node |r|...@>=
+//! @^inner loop@>
+//! if type(r)=delta_node then
+//!   begin do_all_six(update_width);
+//!   prev_prev_r:=prev_r; prev_r:=r; goto continue;
+//!   end
+//!
+//! @ As we consider various ways to end a line at |cur_p|, in a given line number
+//! class, we keep track of the best total demerits known, in an array with
+//! one entry for each of the fitness classifications. For example,
+//! |minimal_demerits[tight_fit]| contains the fewest total demerits of feasible
+//! line breaks ending at |cur_p| with a |tight_fit| line; |best_place[tight_fit]|
+//! points to the passive node for the break before~|cur_p| that achieves such
+//! an optimum; and |best_pl_line[tight_fit]| is the |line_number| field in the
+//! active node corresponding to |best_place[tight_fit]|. When no feasible break
+//! sequence is known, the |minimal_demerits| entries will be equal to
+//! |awful_bad|, which is $2^{30}-1$. Another variable, |minimum_demerits|,
+//! keeps track of the smallest value in the |minimal_demerits| array.
+//!
+//! @d awful_bad==@'7777777777 {more than a billion demerits}
+//!
+//! @<Global...@>=
+//! @!minimal_demerits:array[very_loose_fit..tight_fit] of integer; {best total
+//!   demerits known for current line class and position, given the fitness}
+//! @!minimum_demerits:integer; {best total demerits known for current line class
+//!   and position}
+//! @!best_place:array[very_loose_fit..tight_fit] of pointer; {how to achieve
+//!   |minimal_demerits|}
+//! @!best_pl_line:array[very_loose_fit..tight_fit] of halfword; {corresponding
+//!   line number}
+//!
+//! @ @<Get ready to start...@>=
+//! minimum_demerits:=awful_bad;
+//! minimal_demerits[tight_fit]:=awful_bad;
+//! minimal_demerits[decent_fit]:=awful_bad;
+//! minimal_demerits[loose_fit]:=awful_bad;
+//! minimal_demerits[very_loose_fit]:=awful_bad;
+//!
+//! @ The first part of the following code is part of \TeX's inner loop, so
+//! we don't want to waste any time. The current active node, namely node |r|,
+//! contains the line number that will be considered next. At the end of the
+//! list we have arranged the data structure so that |r=last_active| and
+//! |line_number(last_active)>old_l|.
+//! @^inner loop@>
+//!
+//! @<If a line number class...@>=
+//! begin l:=line_number(r);
+//! if l>old_l then
+//!   begin {now we are no longer in the inner loop}
+//!   if (minimum_demerits<awful_bad)and@|
+//!       ((old_l<>easy_line)or(r=last_active)) then
+//!     @<Create new active nodes for the best feasible breaks
+//!       just found@>;
+//!   if r=last_active then return;
+//!   @<Compute the new line width@>;
+//!   end;
+//! end
+//!
+//! @ It is not necessary to create new active nodes having |minimal_demerits|
+//! greater than
+//! |minimum_demerits+abs(adj_demerits)|, since such active nodes will never
+//! be chosen in the final paragraph breaks. This observation allows us to
+//! omit a substantial number of feasible breakpoints from further consideration.
+//!
+//! @<Create new active nodes...@>=
+//! begin if no_break_yet then @<Compute the values of |break_width|@>;
+//! @<Insert a delta node to prepare for breaks at |cur_p|@>;
+//! if abs(adj_demerits)>=awful_bad-minimum_demerits then
+//!   minimum_demerits:=awful_bad-1
+//! else minimum_demerits:=minimum_demerits+abs(adj_demerits);
+//! for fit_class:=very_loose_fit to tight_fit do
+//!   begin if minimal_demerits[fit_class]<=minimum_demerits then
+//!     @<Insert a new active node
+//!       from |best_place[fit_class]| to |cur_p|@>;
+//!   minimal_demerits[fit_class]:=awful_bad;
+//!   end;
+//! minimum_demerits:=awful_bad;
+//! @<Insert a delta node to prepare for the next active node@>;
+//! end
+//!
+//! @ When we insert a new active node for a break at |cur_p|, suppose this
+//! new node is to be placed just before active node |a|; then we essentially
+//! want to insert `$\delta\,|cur_p|\,\delta^\prime$' before |a|, where
+//! $\delta=\alpha(a)-\alpha(|cur_p|)$ and $\delta^\prime=\alpha(|cur_p|)-\alpha(a)$
+//! in the notation explained above.  The |cur_active_width| array now holds
+//! $\gamma+\beta(|cur_p|)-\alpha(a)$; so $\delta$ can be obtained by
+//! subtracting |cur_active_width| from the quantity $\gamma+\beta(|cur_p|)-
+//! \alpha(|cur_p|)$. The latter quantity can be regarded as the length of a
+//! line ``from |cur_p| to |cur_p|''; we call it the |break_width| at |cur_p|.
+//!
+//! The |break_width| is usually negative, since it consists of the background
+//! (which is normally zero) minus the width of nodes following~|cur_p| that are
+//! eliminated after a break. If, for example, node |cur_p| is a glue node, the
+//! width of this glue is subtracted from the background; and we also look
+//! ahead to eliminate all subsequent glue and penalty and kern and math
+//! nodes, subtracting their widths as well.
+//!
+//! Kern nodes do not disappear at a line break unless they are |explicit|.
+//!
+//! @d set_break_width_to_background(#)==break_width[#]:=background[#]
+//!
+//! @<Compute the values of |break...@>=
+//! begin no_break_yet:=false; do_all_six(set_break_width_to_background);
+//! s:=cur_p;
+//! if break_type>unhyphenated then if cur_p<>null then
+//!   @<Compute the discretionary |break_width| values@>;
+//! while s<>null do
+//!   begin if is_char_node(s) then goto done;
+//!   case type(s) of
+//!   glue_node:@<Subtract glue from |break_width|@>;
+//!   penalty_node: do_nothing;
+//!   math_node: break_width[1]:=break_width[1]-width(s);
+//!   kern_node: if subtype(s)<>explicit then goto done
+//!     else break_width[1]:=break_width[1]-width(s);
+//!   othercases goto done
+//!   endcases;@/
+//!   s:=link(s);
+//!   end;
+//! done: end
+//!
+//! @ @<Subtract glue from |break...@>=
+//! begin v:=glue_ptr(s); break_width[1]:=break_width[1]-width(v);
+//! break_width[2+stretch_order(v)]:=break_width[2+stretch_order(v)]-stretch(v);
+//! break_width[6]:=break_width[6]-shrink(v);
+//! end
+//!
+//! @ When |cur_p| is a discretionary break, the length of a line ``from |cur_p| to
+//! |cur_p|'' has to be defined properly so that the other calculations work out.
+//! Suppose that the pre-break text at |cur_p| has length $l_0$, the post-break
+//! text has length $l_1$, and the replacement text has length |l|. Suppose
+//! also that |q| is the node following the replacement text. Then length of a
+//! line from |cur_p| to |q| will be computed as $\gamma+\beta(q)-\alpha(|cur_p|)$,
+//! where $\beta(q)=\beta(|cur_p|)-l_0+l$. The actual length will be the background
+//! plus $l_1$, so the length from |cur_p| to |cur_p| should be $\gamma+l_0+l_1-l$.
+//! If the post-break text of the discretionary is empty, a break may also
+//! discard~|q|; in that unusual case we subtract the length of~|q| and any
+//! other nodes that will be discarded after the discretionary break.
+//!
+//! The value of $l_0$ need not be computed, since |line_break| will put
+//! it into the global variable |disc_width| before calling |try_break|.
+//!
+//! @<Glob...@>=
+//! @!disc_width:scaled; {the length of discretionary material preceding a break}
+//!
+//! @ @<Compute the discretionary |break...@>=
+//! begin t:=replace_count(cur_p); v:=cur_p; s:=post_break(cur_p);
+//! while t>0 do
+//!   begin decr(t); v:=link(v);
+//!   @<Subtract the width of node |v| from |break_width|@>;
+//!   end;
+//! while s<>null do
+//!   begin @<Add the width of node |s| to |break_width|@>;
+//!   s:=link(s);
+//!   end;
+//! break_width[1]:=break_width[1]+disc_width;
+//! if post_break(cur_p)=null then s:=link(v);
+//!           {nodes may be discardable after the break}
+//! end
+//!
+//! @ Replacement texts and discretionary texts are supposed to contain
+//! only character nodes, kern nodes, ligature nodes, and box or rule nodes.
+//!
+//! @<Subtract the width of node |v|...@>=
+//! if is_char_node(v) then
+//!   begin f:=font(v);
+//!   break_width[1]:=break_width[1]-char_width(f)(char_info(f)(character(v)));
+//!   end
+//! else  case type(v) of
+//!   ligature_node: begin f:=font(lig_char(v));@/
+//!     break_width[1]:=@|break_width[1]-
+//!       char_width(f)(char_info(f)(character(lig_char(v))));
+//!     end;
+//!   hlist_node,vlist_node,rule_node,kern_node:
+//!     break_width[1]:=break_width[1]-width(v);
+//!   othercases confusion("disc1")
+//! @:this can't happen disc1}{\quad disc1@>
+//!   endcases
+//!
+//! @ @<Add the width of node |s| to |b...@>=
+//! if is_char_node(s) then
+//!   begin f:=font(s);
+//!   break_width[1]:=@|break_width[1]+char_width(f)(char_info(f)(character(s)));
+//!   end
+//! else  case type(s) of
+//!   ligature_node: begin f:=font(lig_char(s));
+//!     break_width[1]:=break_width[1]+
+//!       char_width(f)(char_info(f)(character(lig_char(s))));
+//!     end;
+//!   hlist_node,vlist_node,rule_node,kern_node:
+//!     break_width[1]:=break_width[1]+width(s);
+//!   othercases confusion("disc2")
+//! @:this can't happen disc2}{\quad disc2@>
+//!   endcases
+//!
+//! @ We use the fact that |type(active)<>delta_node|.
+//!
+//! @d convert_to_break_width(#)==@|
+//!   mem[prev_r+#].sc:=@|@t\hskip10pt@>mem[prev_r+#].sc
+//!   -cur_active_width[#]+break_width[#]
+//! @d store_break_width(#)==active_width[#]:=break_width[#]
+//! @d new_delta_to_break_width(#)==@|
+//!   mem[q+#].sc:=break_width[#]-cur_active_width[#]
+//!
+//! @<Insert a delta node to prepare for breaks at |cur_p|@>=
+//! if type(prev_r)=delta_node then {modify an existing delta node}
+//!   begin do_all_six(convert_to_break_width);
+//!   end
+//! else if prev_r=active then {no delta node needed at the beginning}
+//!   begin do_all_six(store_break_width);
+//!   end
+//! else  begin q:=get_node(delta_node_size); link(q):=r; type(q):=delta_node;@/
+//!   subtype(q):=0; {the |subtype| is not used}
+//!   do_all_six(new_delta_to_break_width);
+//!   link(prev_r):=q; prev_prev_r:=prev_r; prev_r:=q;
+//!   end
+//!
+//! @ When the following code is performed, we will have just inserted at
+//! least one active node before |r|, so |type(prev_r)<>delta_node|.
+//!
+//! @d new_delta_from_break_width(#)==@|mem[q+#].sc:=
+//!     cur_active_width[#]-break_width[#]
+//!
+//! @<Insert a delta node to prepare for the next active node@>=
+//! if r<>last_active then
+//!   begin q:=get_node(delta_node_size); link(q):=r; type(q):=delta_node;@/
+//!   subtype(q):=0; {the |subtype| is not used}
+//!   do_all_six(new_delta_from_break_width);
+//!   link(prev_r):=q; prev_prev_r:=prev_r; prev_r:=q;
+//!   end
+//!
+//! @ When we create an active node, we also create the corresponding
+//! passive node.
+//!
+//! @<Insert a new active node from |best_place[fit_class]| to |cur_p|@>=
+//! begin q:=get_node(passive_node_size);
+//! link(q):=passive; passive:=q; cur_break(q):=cur_p;
+//! @!stat incr(pass_number); serial(q):=pass_number;@+tats@;@/
+//! prev_break(q):=best_place[fit_class];@/
+//! q:=get_node(active_node_size); break_node(q):=passive;
+//! line_number(q):=best_pl_line[fit_class]+1;
+//! fitness(q):=fit_class; type(q):=break_type;
+//! total_demerits(q):=minimal_demerits[fit_class];
+//! link(q):=r; link(prev_r):=q; prev_r:=q;
+//! @!stat if tracing_paragraphs>0 then
+//!   @<Print a symbolic description of the new break node@>;
+//! tats@;@/
+//! end
+//!
+//! @ @<Print a symbolic description of the new break node@>=
+//! begin print_nl("@@@@"); print_int(serial(passive));
+//! @.\AT!\AT!@>
+//! print(": line "); print_int(line_number(q)-1);
+//! print_char("."); print_int(fit_class);
+//! if break_type=hyphenated then print_char("-");
+//! print(" t="); print_int(total_demerits(q));
+//! print(" -> @@@@");
+//! if prev_break(passive)=null then print_char("0")
+//! else print_int(serial(prev_break(passive)));
+//! end
+//!
+//! @ The length of lines depends on whether the user has specified
+//! \.{\\parshape} or \.{\\hangindent}. If |par_shape_ptr| is not null, it
+//! points to a $(2n+1)$-word record in |mem|, where the |info| in the first
+//! word contains the value of |n|, and the other $2n$ words contain the left
+//! margins and line lengths for the first |n| lines of the paragraph; the
+//! specifications for line |n| apply to all subsequent lines. If
+//! |par_shape_ptr=null|, the shape of the paragraph depends on the value of
+//! |n=hang_after|; if |n>=0|, hanging indentation takes place on lines |n+1|,
+//! |n+2|, \dots, otherwise it takes place on lines 1, \dots, $\vert
+//! n\vert$. When hanging indentation is active, the left margin is
+//! |hang_indent|, if |hang_indent>=0|, else it is 0; the line length is
+//! $|hsize|-\vert|hang_indent|\vert$. The normal setting is
+//! |par_shape_ptr=null|, |hang_after=1|, and |hang_indent=0|.
+//! Note that if |hang_indent=0|, the value of |hang_after| is irrelevant.
+//! @^length of lines@> @^hanging indentation@>
+//!
+//! @<Glob...@>=
+//! @!easy_line:halfword; {line numbers |>easy_line| are equivalent in break nodes}
+//! @!last_special_line:halfword; {line numbers |>last_special_line| all have
+//!   the same width}
+//! @!first_width:scaled; {the width of all lines |<=last_special_line|, if
+//!   no \.{\\parshape} has been specified}
+//! @!second_width:scaled; {the width of all lines |>last_special_line|}
+//! @!first_indent:scaled; {left margin to go with |first_width|}
+//! @!second_indent:scaled; {left margin to go with |second_width|}
+//!
+//! @ We compute the values of |easy_line| and the other local variables relating
+//! to line length when the |line_break| procedure is initializing itself.
+//!
+//! @<Get ready to start...@>=
+//! if par_shape_ptr=null then
+//!   if hang_indent=0 then
+//!     begin last_special_line:=0; second_width:=hsize;
+//!     second_indent:=0;
+//!     end
+//!   else @<Set line length parameters in preparation for hanging indentation@>
+//! else  begin last_special_line:=info(par_shape_ptr)-1;
+//!   second_width:=mem[par_shape_ptr+2*(last_special_line+1)].sc;
+//!   second_indent:=mem[par_shape_ptr+2*last_special_line+1].sc;
+//!   end;
+//! if looseness=0 then easy_line:=last_special_line
+//! else easy_line:=max_halfword
+//!
+//! @ @<Set line length parameters in preparation for hanging indentation@>=
+//! begin last_special_line:=abs(hang_after);
+//! if hang_after<0 then
+//!   begin first_width:=hsize-abs(hang_indent);
+//!   if hang_indent>=0 then first_indent:=hang_indent
+//!   else first_indent:=0;
+//!   second_width:=hsize; second_indent:=0;
+//!   end
+//! else  begin first_width:=hsize; first_indent:=0;
+//!   second_width:=hsize-abs(hang_indent);
+//!   if hang_indent>=0 then second_indent:=hang_indent
+//!   else second_indent:=0;
+//!   end;
+//! end
+//!
+//! @ When we come to the following code, we have just encountered the first
+//! active node~|r| whose |line_number| field contains |l|. Thus we want to
+//! compute the length of the $l\mskip1mu$th line of the current paragraph. Furthermore,
+//! we want to set |old_l| to the last number in the class of line numbers
+//! equivalent to~|l|.
+//!
+//! @<Compute the new line width@>=
+//! if l>easy_line then
+//!   begin line_width:=second_width; old_l:=max_halfword-1;
+//!   end
+//! else  begin old_l:=l;
+//!   if l>last_special_line then line_width:=second_width
+//!   else if par_shape_ptr=null then line_width:=first_width
+//!   else line_width:=mem[par_shape_ptr+2*l@,].sc;
+//!   end
+//!
+//! @ The remaining part of |try_break| deals with the calculation of
+//! demerits for a break from |r| to |cur_p|.
+//!
+//! The first thing to do is calculate the badness, |b|. This value will always
+//! be between zero and |inf_bad+1|; the latter value occurs only in the
+//! case of lines from |r| to |cur_p| that cannot shrink enough to fit the necessary
+//! width. In such cases, node |r| will be deactivated.
+//! We also deactivate node~|r| when a break at~|cur_p| is forced, since future
+//! breaks must go through a forced break.
+//!
+//! @<Consider the demerits for a line from |r| to |cur_p|...@>=
+//! begin artificial_demerits:=false;@/
+//! @^inner loop@>
+//! shortfall:=line_width-cur_active_width[1]; {we're this much too short}
+//! if shortfall>0 then
+//!   @<Set the value of |b| to the badness for stretching the line,
+//!     and compute the corresponding |fit_class|@>
+//! else @<Set the value of |b| to the badness for shrinking the line,
+//!     and compute the corresponding |fit_class|@>;
+//! if (b>inf_bad)or(pi=eject_penalty) then
+//!   @<Prepare to deactivate node~|r|, and |goto deactivate| unless
+//!     there is a reason to consider lines of text from |r| to |cur_p|@>
+//! else  begin prev_r:=r;
+//!   if b>threshold then goto continue;
+//!   node_r_stays_active:=true;
+//!   end;
+//! @<Record a new feasible break@>;
+//! if node_r_stays_active then goto continue; {|prev_r| has been set to |r|}
+//! deactivate: @<Deactivate node |r|@>;
+//! end
+//!
+//! @ When a line must stretch, the available stretchability can be found in the
+//! subarray |cur_active_width[2..5]|, in units of points, fil, fill, and filll.
+//!
+//! The present section is part of \TeX's inner loop, and it is most often performed
+//! when the badness is infinite; therefore it is worth while to make a quick
+//! test for large width excess and small stretchability, before calling the
+//! |badness| subroutine.
+//! @^inner loop@>
+//!
+//! @<Set the value of |b| to the badness for stretching...@>=
+//! if (cur_active_width[3]<>0)or(cur_active_width[4]<>0)or@|
+//!   (cur_active_width[5]<>0) then
+//!   begin b:=0; fit_class:=decent_fit; {infinite stretch}
+//!   end
+//! else  begin if shortfall>7230584 then if cur_active_width[2]<1663497 then
+//!     begin b:=inf_bad; fit_class:=very_loose_fit; goto done1;
+//!     end;
+//!   b:=badness(shortfall,cur_active_width[2]);
+//!   if b>12 then
+//!     if b>99 then fit_class:=very_loose_fit
+//!     else fit_class:=loose_fit
+//!   else fit_class:=decent_fit;
+//!   done1:
+//!   end
+//!
+//! @ Shrinkability is never infinite in a paragraph;
+//! we can shrink the line from |r| to |cur_p| by at most |cur_active_width[6]|.
+//!
+//! @<Set the value of |b| to the badness for shrinking...@>=
+//! begin if -shortfall>cur_active_width[6] then b:=inf_bad+1
+//! else b:=badness(-shortfall,cur_active_width[6]);
+//! if b>12 then fit_class:=tight_fit@+else fit_class:=decent_fit;
+//! end
+//!
+//! @ During the final pass, we dare not lose all active nodes, lest we lose
+//! touch with the line breaks already found. The code shown here makes sure
+//! that such a catastrophe does not happen, by permitting overfull boxes as
+//! a last resort. This particular part of \TeX\ was a source of several subtle
+//! bugs before the correct program logic was finally discovered; readers
+//! who seek to ``improve'' \TeX\ should therefore think thrice before daring
+//! to make any changes here.
+//! @^overfull boxes@>
+//!
+//! @<Prepare to deactivate node~|r|, and |goto deactivate| unless...@>=
+//! begin if final_pass and (minimum_demerits=awful_bad) and@|
+//!    (link(r)=last_active) and
+//!    (prev_r=active) then
+//!   artificial_demerits:=true {set demerits zero, this break is forced}
+//! else if b>threshold then goto deactivate;
+//! node_r_stays_active:=false;
+//! end
+//!
+//! @ When we get to this part of the code, the line from |r| to |cur_p| is
+//! feasible, its badness is~|b|, and its fitness classification is |fit_class|.
+//! We don't want to make an active node for this break yet, but we will
+//! compute the total demerits and record them in the |minimal_demerits| array,
+//! if such a break is the current champion among all ways to get to |cur_p|
+//! in a given line-number class and fitness class.
+//!
+//! @<Record a new feasible break@>=
+//! if artificial_demerits then d:=0
+//! else @<Compute the demerits, |d|, from |r| to |cur_p|@>;
+//! @!stat if tracing_paragraphs>0 then
+//!   @<Print a symbolic description of this feasible break@>;
+//! tats@;@/
+//! d:=d+total_demerits(r); {this is the minimum total demerits
+//!   from the beginning to |cur_p| via |r|}
+//! if d<=minimal_demerits[fit_class] then
+//!   begin minimal_demerits[fit_class]:=d;
+//!   best_place[fit_class]:=break_node(r); best_pl_line[fit_class]:=l;
+//!   if d<minimum_demerits then minimum_demerits:=d;
+//!   end
+//!
+//! @ @<Print a symbolic description of this feasible break@>=
+//! begin if printed_node<>cur_p then
+//!   @<Print the list between |printed_node| and |cur_p|,
+//!     then set |printed_node:=cur_p|@>;
+//! print_nl("@@");
+//! @.\AT!@>
+//! if cur_p=null then print_esc("par")
+//! else if type(cur_p)<>glue_node then
+//!   begin if type(cur_p)=penalty_node then print_esc("penalty")
+//!   else if type(cur_p)=disc_node then print_esc("discretionary")
+//!   else if type(cur_p)=kern_node then print_esc("kern")
+//!   else print_esc("math");
+//!   end;
+//! print(" via @@@@");
+//! if break_node(r)=null then print_char("0")
+//! else print_int(serial(break_node(r)));
+//! print(" b=");
+//! if b>inf_bad then print_char("*")@+else print_int(b);
+//! @.*\relax@>
+//! print(" p="); print_int(pi); print(" d=");
+//! if artificial_demerits then print_char("*")@+else print_int(d);
+//! end
+//!
+//! @ @<Print the list between |printed_node| and |cur_p|...@>=
+//! begin print_nl("");
+//! if cur_p=null then short_display(link(printed_node))
+//! else  begin save_link:=link(cur_p);
+//!   link(cur_p):=null; print_nl(""); short_display(link(printed_node));
+//!   link(cur_p):=save_link;
+//!   end;
+//! printed_node:=cur_p;
+//! end
+//!
+//! @ When the data for a discretionary break is being displayed, we will have
+//! printed the |pre_break| and |post_break| lists; we want to skip over the
+//! third list, so that the discretionary data will not appear twice.  The
+//! following code is performed at the very end of |try_break|.
+//!
+//! @<Update the value of |printed_node|...@>=
+//! if cur_p=printed_node then if cur_p<>null then if type(cur_p)=disc_node then
+//!   begin t:=replace_count(cur_p);
+//!   while t>0 do
+//!     begin decr(t); printed_node:=link(printed_node);
+//!     end;
+//!   end
+//!
+//! @ @<Compute the demerits, |d|, from |r| to |cur_p|@>=
+//! begin d:=line_penalty+b;
+//! if abs(d)>=10000 then d:=100000000@+else d:=d*d;
+//! if pi<>0 then
+//!   if pi>0 then d:=d+pi*pi
+//!   else if pi>eject_penalty then d:=d-pi*pi;
+//! if (break_type=hyphenated)and(type(r)=hyphenated) then
+//!   if cur_p<>null then d:=d+double_hyphen_demerits
+//!   else d:=d+final_hyphen_demerits;
+//! if abs(fit_class-fitness(r))>1 then d:=d+adj_demerits;
+//! end
+//!
+//! @ When an active node disappears, we must delete an adjacent delta node if the
+//! active node was at the beginning or the end of the active list, or if it
+//! was surrounded by delta nodes. We also must preserve the property that
+//! |cur_active_width| represents the length of material from |link(prev_r)|
+//! to~|cur_p|.
+//!
+//! @d combine_two_deltas(#)==@|mem[prev_r+#].sc:=mem[prev_r+#].sc+mem[r+#].sc
+//! @d downdate_width(#)==@|cur_active_width[#]:=cur_active_width[#]-
+//!   mem[prev_r+#].sc
+//!
+//! @<Deactivate node |r|@>=
+//! link(prev_r):=link(r); free_node(r,active_node_size);
+//! if prev_r=active then @<Update the active widths, since the first active
+//!   node has been deleted@>
+//! else if type(prev_r)=delta_node then
+//!   begin r:=link(prev_r);
+//!   if r=last_active then
+//!     begin do_all_six(downdate_width);
+//!     link(prev_prev_r):=last_active;
+//!     free_node(prev_r,delta_node_size); prev_r:=prev_prev_r;
+//!     end
+//!   else if type(r)=delta_node then
+//!     begin do_all_six(update_width);
+//!     do_all_six(combine_two_deltas);
+//!     link(prev_r):=link(r); free_node(r,delta_node_size);
+//!     end;
+//!   end
+//!
+//! @ The following code uses the fact that |type(last_active)<>delta_node|. If the
+//! active list has just become empty, we do not need to update the
+//! |active_width| array, since it will be initialized when an active
+//! node is next inserted.
+//!
+//! @d update_active(#)==active_width[#]:=active_width[#]+mem[r+#].sc
+//!
+//! @<Update the active widths,...@>=
+//! begin r:=link(active);
+//! if type(r)=delta_node then
+//!   begin do_all_six(update_active);
+//!   do_all_six(copy_to_cur_active);
+//!   link(active):=link(r); free_node(r,delta_node_size);
+//!   end;
+//! end
+//!

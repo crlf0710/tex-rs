@@ -1,0 +1,56 @@
+//! Copying of this file is authorized only if (1) you are D. E. Knuth, or if
+//! (2) you make absolutely no changes to your copy. (The WEB system provides
+//! for alterations via an auxiliary file; the master file should stay intact.)
+//! See Appendix H of the WEB manual for hints on how to install this program.
+//! And see Appendix A of the TRIP manual for details about how to validate it.
+//!
+//! Version 0 was released in September 1982 after it passed a variety of tests.
+//! Version 1 was released in November 1983 after thorough testing.
+//! Version 1.1 fixed ``disappearing font identifiers'' et alia (July 1984).
+//! Version 1.2 allowed `0' in response to an error, et alia (October 1984).
+//! Version 1.3 made memory allocation more flexible and local (November 1984).
+//! Version 1.4 fixed accents right after line breaks, et alia (April 1985).
+//! Version 1.5 fixed \the\toks after other expansion in \edefs (August 1985).
+//! Version 2.0 (almost identical to 1.5) corresponds to "Volume B" (April 1986).
+//! Version 2.1 corrected anomalies in discretionary breaks (January 1987).
+//! Version 2.2 corrected "(Please type...)" with null \endlinechar (April 1987).
+//! Version 2.3 avoided incomplete page in premature termination (August 1987).
+//! Version 2.4 fixed \noaligned rules in indented displays (August 1987).
+//! Version 2.5 saved cur_order when expanding tokens (September 1987).
+//! Version 2.6 added 10sp slop when shipping leaders (November 1987).
+//! Version 2.7 improved rounding of negative-width characters (November 1987).
+//! Version 2.8 fixed weird bug if no \patterns are used (December 1987).
+//! Version 2.9 made \csname\endcsname's "relax" local (December 1987).
+//! Version 2.91 fixed \outer\def\a0{}\a\a bug (April 1988).
+//! Version 2.92 fixed \patterns, also file names with complex macros (May 1988).
+//! Version 2.93 fixed negative halving in allocator when mem_min<0 (June 1988).
+//! Version 2.94 kept open_log_file from calling fatal_error (November 1988).
+//! Version 2.95 solved that problem a better way (December 1988).
+//! Version 2.96 corrected bug in "Infinite shrinkage" recovery (January 1989).
+//! Version 2.97 corrected blunder in creating 2.95 (February 1989).
+//! Version 2.98 omitted save_for_after at outer level (March 1989).
+//! Version 2.99 caught $$\begingroup\halign..$$ (June 1989).
+//! Version 2.991 caught .5\ifdim.6... (June 1989).
+//! Version 2.992 introduced major changes for 8-bit extensions (September 1989).
+//! Version 2.993 fixed a save_stack synchronization bug et alia (December 1989).
+//! Version 3.0 fixed unusual displays; was more \output robust (March 1990).
+//! Version 3.1 fixed nullfont, disabled \write{\the\prevgraf} (September 1990).
+//! Version 3.14 fixed unprintable font names and corrected typos (March 1991).
+//! Version 3.141 more of same; reconstituted ligatures better (March 1992).
+//! Version 3.1415 preserved nonexplicit kerns, tidied up (February 1993).
+//! Version 3.14159 allowed fontmemsize to change; bulletproofing (March 1995).
+//! Version 3.141592 fixed \xleaders, glueset, weird alignments (December 2002).
+//! Version 3.1415926 was a general cleanup with minor fixes (February 2008).
+//! Version 3.14159265 was similar (January 2014).
+//!
+//! A reward of $327.68 will be paid to the first finder of any remaining bug.
+
+#![allow(unused_macros)]
+
+macro_rules! migration_complete {
+    () => {};
+}
+
+macro_rules! documentation_adjusted {
+    () => {};
+}

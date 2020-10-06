@@ -1,0 +1,13 @@
+[package]
+name = "tex"
+version = "0.1.0"
+authors = ["CrLF0710"]
+edition = "2018"
+
+[dependencies]
+static_assertions = "1.1.0"
+typenum = "1.12.0"
+
+[features]
+unicode_support = []
+default = ['unicode_support']
