@@ -11,7 +11,7 @@
 // been a ``labor of love'' and the author hopes that users enjoy it.
 
 #![deny(warnings, missing_docs, missing_debug_implementations)]
-#![allow(dead_code, non_upper_case_globals, non_camel_case_types)]
+#![allow(dead_code, non_upper_case_globals, non_camel_case_types, unused_imports)]
 //! This is `TeX`, a document compiler intended to produce typesetting of high quality.
 
 #[macro_use]
@@ -30,9 +30,18 @@ mod section_0018;
 mod section_0019;
 mod section_0020_to_0024;
 mod section_0025;
-mod section_0026_to_0037;
+mod section_0026_to_0031;
+mod section_0032;
+mod section_0033;
+mod section_0034_to_0037;
 mod section_0038_to_0053;
-mod section_0054_to_0071;
+mod section_0054;
+mod section_0055;
+mod section_0056;
+mod section_0057_to_0060;
+#[macro_use]
+mod section_0061;
+mod section_0062_to_0071;
 mod section_0072_to_0098;
 mod section_0099_to_0100;
 mod section_0101;
@@ -87,9 +96,18 @@ mod section_1136_to_1198;
 mod section_1199_to_1207;
 mod section_1208_to_1298;
 mod section_1299_to_1329;
-mod section_1330_to_1337;
+mod section_1330;
+mod section_1331;
+mod section_1332;
+mod section_1333;
+mod section_1334;
+mod section_1335;
+mod section_1336;
+mod section_1337;
 mod section_1338_to_1339;
 mod section_1340_to_1377;
 mod section_1378;
 mod section_1379;
 mod section_1380;
+
+pub use section_1332::entry;

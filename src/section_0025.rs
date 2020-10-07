@@ -39,7 +39,7 @@ type eight_bits = u8;
 
 // @!alpha_file=packed file of text_char; {files that contain textual data}
 
-type alpha_file = packed_file_of_text_char;
+pub(crate) type alpha_file = packed_file_of_text_char;
 
 // @!byte_file=packed file of eight_bits; {files that contain binary data}
 

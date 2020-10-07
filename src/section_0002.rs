@@ -65,6 +65,6 @@
 // @d banner=='This is TeX, Version 3.14159265' {printed when \TeX\ starts}
 
 /// printed when `TeX` starts
-const banner: &'static str = "This is TeX, Version 3.14159265";
+pub(crate) const banner: &'static str = "This is TeX, Version 3.14159265";
 
 migration_complete!();

@@ -54,3 +54,19 @@ macro_rules! migration_complete {
 macro_rules! documentation_adjusted {
     () => {};
 }
+
+macro_rules! region_forward_label {
+    ({$($s: stmt)*} $lbl:lifetime <- ) => {
+        #[allow(redundant_semicolons, unused_labels)]
+        $lbl : loop {
+            $($s)*;
+            break;
+        }
+    };
+}
+
+macro_rules! goto_forward_label {
+    ($lbl:lifetime) => {
+        break $lbl;
+    };
+}

@@ -34,3 +34,16 @@
 //!   end;@#
 //! @t\4@>@<Basic printing procedures@>@/
 //! @t\4@>@<Error handling procedures@>@/
+
+#[globals_struct]
+pub mod TeXGlobals{
+    include!("src/section_0032.rs");
+    include!("src/section_0054.rs");
+    include!("src/section_1331.rs");
+}
+
+
+use crate::pascal::integer;
+use crate::section_0025::alpha_file;
+
+use globals_struct::{globals_struct};
