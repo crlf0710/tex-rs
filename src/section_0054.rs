@@ -53,7 +53,6 @@
 /// transcript of \TeX\ session
 pub(crate) static log_file: alpha_file = alpha_file::default();
 
-
 // @!selector : 0..max_selector; {where to print a message}
 // @!dig : array[0..22] of 0..15; {digits in a number being output}
 // @!tally : integer; {the number of characters recently printed}

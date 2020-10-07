@@ -25,7 +25,7 @@ const_assert!(max_halfword == halfword::MAX);
 
 /// These are not needed in Rust.
 #[doc(hidden)]
-const _ : () = ();
+const _: () = ();
 
 // @!two_halves = packed record@;@/
 //   @!rh:halfword;
@@ -37,7 +37,7 @@ const _ : () = ();
 #[derive(Copy, Clone)]
 union two_halves {
     lh: halfword,
-    b: (quarterword, quarterword)
+    b: (quarterword, quarterword),
 }
 
 // @!four_quarters = packed record@;@/
@@ -49,7 +49,7 @@ union two_halves {
 
 #[derive(Copy, Clone)]
 struct four_quarters {
-    b: (quarterword, quarterword, quarterword, quarterword)
+    b: (quarterword, quarterword, quarterword, quarterword),
 }
 
 // @!memory_word = record@;@/
@@ -72,8 +72,8 @@ union memory_word {
 // @!word_file = file of memory_word;
 type word_file = file_of<memory_word>;
 
-use crate::pascal::{integer, file_of};
+use crate::pascal::{file_of, integer};
 use crate::section_0101::scaled;
 use crate::section_0109::glue_ratio;
-use crate::section_0110::{min_quarterword, max_quarterword, min_halfword, max_halfword};
+use crate::section_0110::{max_halfword, max_quarterword, min_halfword, min_quarterword};
 use static_assertions::const_assert;

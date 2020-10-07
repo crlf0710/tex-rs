@@ -1,4 +1,3 @@
-
 //! @ When debugging, we may want to print a |memory_word| without knowing
 //! what type it is; so we print it in all modes.
 //! @^dirty \PASCAL@>@^debugging@>

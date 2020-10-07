@@ -68,4 +68,4 @@ pub const min_halfword: halfword = 0;
 /// largest allowable value in a `halfword`
 pub const max_halfword: halfword = 65535;
 
-use crate::section_0113::{quarterword, halfword};
+use crate::section_0113::{halfword, quarterword};

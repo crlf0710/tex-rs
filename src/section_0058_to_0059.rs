@@ -1,20 +1,3 @@
-//! @ To end a line of text output, we call |print_ln|.
-//!
-//! @<Basic print...@>=
-//! procedure print_ln; {prints an end-of-line}
-//! begin case selector of
-//! term_and_log: begin wterm_cr; wlog_cr;
-//!   term_offset:=0; file_offset:=0;
-//!   end;
-//! log_only: begin wlog_cr; file_offset:=0;
-//!   end;
-//! term_only: begin wterm_cr; term_offset:=0;
-//!   end;
-//! no_print,pseudo,new_string: do_nothing;
-//! othercases write_ln(write_file[selector])
-//! endcases;@/
-//! end; {|tally| is not affected}
-//!
 //! @ The |print_char| procedure sends one character to the desired destination,
 //! using the |xchr| array to map it into an external character compatible with
 //! |input_ln|. All printing comes through |print_ln| or |print_char|.
@@ -88,19 +71,4 @@
 //!   begin print_char(so(str_pool[j])); incr(j);
 //!   end;
 //! exit:end;
-//!
-//! @ Control sequence names, file names, and strings constructed with
-//! \.{\\string} might contain |ASCII_code| values that can't
-//! be printed using |print_char|. Therefore we use |slow_print| for them:
-//!
-//! @<Basic print...@>=
-//! procedure slow_print(@!s:integer); {prints string |s|}
-//! var j:pool_pointer; {current character code position}
-//! begin if (s>=str_ptr) or (s<256) then print(s)
-//! else begin j:=str_start[s];
-//!   while j<str_start[s+1] do
-//!     begin print(so(str_pool[j])); incr(j);
-//!     end;
-//!   end;
-//! end;
 //!

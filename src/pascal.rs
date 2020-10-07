@@ -2,7 +2,28 @@ pub type integer = i32;
 pub type real = f32;
 
 // TODO: Implement this.
-pub struct ranged_unsigned_integer<B, MIN, MAX>(PhantomData<B>, PhantomData<MIN>, PhantomData<MAX>);
+pub struct ranged_unsigned_integer<B, MIN, MAX>(B, PhantomData<MIN>, PhantomData<MAX>);
+
+impl<B, MIN, MAX> ranged_unsigned_integer<B, MIN, MAX> {
+    pub const fn new(val: B) -> Self {
+        //TODO: Add more checks here.
+        ranged_unsigned_integer(val, PhantomData, PhantomData)
+    }
+}
+
+impl<B: Clone, MIN, MAX> Clone for ranged_unsigned_integer<B, MIN, MAX> {
+    fn clone(&self) -> Self {
+        ranged_unsigned_integer(self.0.clone(), PhantomData, PhantomData)
+    }
+}
+
+impl<B: Copy, MIN, MAX> Copy for ranged_unsigned_integer<B, MIN, MAX> {}
+
+impl<B: Copy, MIN, MAX> ranged_unsigned_integer<B, MIN, MAX> {
+    pub fn get(self) -> B {
+        self.0
+    }
+}
 
 pub(crate) struct IoTarget {
     input_target: Box<dyn Read>,
@@ -99,7 +120,6 @@ pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
     writeln!(file, "").unwrap();
 }
 
-/// TODO: Implement this
 #[allow(unused_variables)]
 pub(crate) fn reset<F: PascalFile>(file: &mut F, path: &str, options: &str) {
     let new_input_target: Box<dyn Read> = if path == "TTY:" {
@@ -110,7 +130,6 @@ pub(crate) fn reset<F: PascalFile>(file: &mut F, path: &str, options: &str) {
     file.io_target_mut().input_target = new_input_target;
 }
 
-/// TODO: Implement this
 #[allow(unused_variables)]
 pub(crate) fn rewrite<F: PascalFile>(file: &mut F, path: &str, options: &str) {
     let new_output_target: Box<dyn Write> = if path == "TTY:" {
@@ -119,6 +138,10 @@ pub(crate) fn rewrite<F: PascalFile>(file: &mut F, path: &str, options: &str) {
         unimplemented!()
     };
     file.io_target_mut().output_target = new_output_target;
+}
+
+pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
+    file.io_target_mut().output_target.flush().unwrap();
 }
 
 use core::fmt::{self, Display};

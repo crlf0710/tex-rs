@@ -13,9 +13,23 @@ macro_rules! Initialize_the_output_routines {
         // if format_ident=0 then wterm_ln(' (no format preloaded)')
         // else  begin slow_print(format_ident); print_ln;
         //   end;
+        if $globals.format_ident.is_zero() {
+            wterm_ln($globals, " (no format preloaded)");
+        } else {
+            slow_print($globals, $globals.format_ident);
+            print_ln($globals);
+        }
+
         // update_terminal;
+        update_terminal($globals);
 
         use crate::section_0002::banner;
+        use crate::section_0034::update_terminal;
         use crate::section_0056::wterm;
+        use crate::section_0056::wterm_ln;
+        use crate::section_0057::print_ln;
+        use crate::section_0060::slow_print;
     };
 }
+
+migration_complete!();

@@ -14,18 +14,21 @@
 
 // @<Last-minute...@>=
 // procedure close_files_and_terminate;
-pub(crate) fn close_files_and_terminate() {
-// var k:integer; {all-purpose index}
-// begin @<Finish the extensions@>;
-// @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
-// wake_up_terminal; @<Finish the \.{DVI} file@>;
-// if log_opened then
-//   begin wlog_cr; a_close(log_file); selector:=selector-2;
-//   if selector=term_only then
-//     begin print_nl("Transcript written on ");
-// @.Transcript written...@>
-//     slow_print(log_name); print_char(".");
-//     end;
-//   end;
-// end;
+#[allow(unused_variables)]
+pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
+    // var k:integer; {all-purpose index}
+    // begin @<Finish the extensions@>;
+    // @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
+    // wake_up_terminal; @<Finish the \.{DVI} file@>;
+    // if log_opened then
+    //   begin wlog_cr; a_close(log_file); selector:=selector-2;
+    //   if selector=term_only then
+    //     begin print_nl("Transcript written on ");
+    // @.Transcript written...@>
+    //     slow_print(log_name); print_char(".");
+    //     end;
+    //   end;
+    // end;
 }
+
+use crate::section_0004::TeXGlobals;

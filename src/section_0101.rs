@@ -20,4 +20,4 @@ pub type nonnegative_integer = ranged_unsigned_integer<u32, U0, typenum_op!(U214
 pub type small_number = ranged_unsigned_integer<u8, U0, U63>;
 
 use crate::pascal::{integer, ranged_unsigned_integer};
-use typenum::{U0, U1, U63, U2147483648, op as typenum_op, __op_internal__};
+use typenum::{__op_internal__, op as typenum_op, U0, U1, U2147483648, U63};

@@ -29,8 +29,8 @@ pub(crate) fn wlog_cr(globals: &mut TeXGlobals) {
     write_ln_noargs(&mut globals.log_file);
 }
 
-use crate::section_0004::TeXGlobals;
 use crate::pascal::write;
 use crate::pascal::write_ln;
 use crate::pascal::write_ln_noargs;
+use crate::section_0004::TeXGlobals;
 use core::fmt::Display;
