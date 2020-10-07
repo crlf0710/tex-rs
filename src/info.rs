@@ -1,8 +1,9 @@
-//! Copying of this file is authorized only if (1) you are D. E. Knuth, or if
-//! (2) you make absolutely no changes to your copy. (The WEB system provides
-//! for alterations via an auxiliary file; the master file should stay intact.)
-//! See Appendix H of the WEB manual for hints on how to install this program.
-//! And see Appendix A of the TRIP manual for details about how to validate it.
+//! Copying of the original `tex.web` file is authorized only if (1) you are
+//! D. E. Knuth, or if (2) you make absolutely no changes to your copy.
+//! (The WEB system provides for alterations via an auxiliary file;
+//! the master file should stay intact.) See Appendix H of the WEB manual
+//! for hints on how to install this program. And see Appendix A of the TRIP manual
+//! for details about how to validate it.
 //!
 //! Version 0 was released in September 1982 after it passed a variety of tests.
 //! Version 1 was released in November 1983 after thorough testing.
@@ -43,7 +44,8 @@
 //! Version 3.1415926 was a general cleanup with minor fixes (February 2008).
 //! Version 3.14159265 was similar (January 2014).
 //!
-//! A reward of $327.68 will be paid to the first finder of any remaining bug.
+//! A reward of $327.68 will be paid to the first finder of any remaining bug of
+//! the original TeX program.
 
 #![allow(unused_macros)]
 

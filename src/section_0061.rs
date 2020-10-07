@@ -7,8 +7,9 @@
 // @<Initialize the output...@>=
 macro_rules! Initialize_the_output_routines {
     ($globals:expr) => {
-        wterm($globals, banner);
         // wterm(banner);
+        wterm($globals, banner);
+
         // if format_ident=0 then wterm_ln(' (no format preloaded)')
         // else  begin slow_print(format_ident); print_ln;
         //   end;
