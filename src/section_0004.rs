@@ -39,6 +39,7 @@
 pub mod TeXGlobals {
     include!("src/section_0032.rs");
     include!("src/section_0054.rs");
+    include!("src/section_0076.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
 }
@@ -46,5 +47,6 @@ pub mod TeXGlobals {
 use crate::pascal::integer;
 use crate::section_0025::alpha_file;
 use crate::section_0038::str_number;
+use crate::section_0076::history_state::{self, fatal_error_stop};
 
 use globals_struct::globals_struct;

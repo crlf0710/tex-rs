@@ -18,8 +18,12 @@ pub fn entry() {
     region_forward_label! {{
 
     // history:=fatal_error_stop; {in case we quit during initialization}
-    // t_open_out; {open the terminal for output}
+    /// in case we quit during initialization
+    {
+        globals.history = fatal_error_stop;
+    }
 
+    // t_open_out; {open the terminal for output}
     /// open the terminal for output
     t_open_out(globals);
 
@@ -48,7 +52,12 @@ pub fn entry() {
     };
     Initialize_the_output_routines!(globals);
     // @<Get the first line of input and prepare to start@>;
+    Get_the_first_line_of_input_and_prepare_to_start!(globals);
     // history:=spotless; {ready to go!}
+    /// ready to go!
+    {
+        globals.history = spotless;
+    }
 
     // main_control; {come to life}
     /// come to life
@@ -71,6 +80,7 @@ pub fn entry() {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0033::t_open_out;
+use crate::section_0076::history_state::{fatal_error_stop, spotless};
 use crate::section_1030::main_control;
 use crate::section_1333::close_files_and_terminate;
 use crate::section_1335::final_cleanup;

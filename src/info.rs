@@ -57,6 +57,15 @@ macro_rules! documentation_adjusted {
     () => {};
 }
 
+macro_rules! reversing_order_items {
+    () => {};
+    ({$($inner_item:item)*}) => {$($inner_item)*};
+    ({$($inner_item:item)*}$({$($inner_item2:item)*})+) => {
+        reversing_order_items!($({$($inner_item2)*})*);
+        $($inner_item)*
+    };
+}
+
 macro_rules! region_forward_label {
     ({$($s: stmt)*} $lbl:lifetime <- ) => {
         #[allow(redundant_semicolons, unused_labels)]
