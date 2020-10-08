@@ -35,7 +35,7 @@
 // @!eight_bits=0..255; {unsigned one-byte quantity}
 
 /// unsigned one-byte quantity
-type eight_bits = u8;
+pub(crate) type eight_bits = u8;
 
 // @!alpha_file=packed file of text_char; {files that contain textual data}
 

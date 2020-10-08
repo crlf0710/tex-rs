@@ -27,6 +27,10 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     // var@!t:integer; {general-purpose temporary variable}
     // begin if every_job<>null then begin_token_list(every_job,every_job_text);
     // big_switch: get_x_token;@/
+    region_backward_label! {
+    'big_switch <-
+    {
+    get_x_token(globals);
     // reswitch: @<Give diagnostic information, if requested@>;
     // case abs(mode)+cur_cmd of
     // hmode+letter,hmode+other_char,hmode+char_given: goto main_loop;
@@ -42,12 +46,16 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     // @t\4@>@<Cases of |main_control| that are not part of the inner loop@>@;
     // end; {of the big |case| statement}
     // goto big_switch;
+    goto_backward_label!('big_switch);
     // main_loop:@<Append character |cur_chr| and the following characters (if~any)
     //   to the current hlist in the current font; |goto reswitch| when
     //   a non-character has been fetched@>;
     // append_normal_space:@<Append a normal inter-word space to the current list,
     //   then |goto big_switch|@>;
+    }
+    |'big_switch|}
     // exit:end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0380::get_x_token;

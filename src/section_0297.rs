@@ -44,52 +44,23 @@
 //! recursive process, but the |get_next| procedure is not recursive.
 //! Therefore it will not be difficult to translate these algorithms into
 //! low-level languages that do not support recursion.
-//!
-//! @<Glob...@>=
-//! @!cur_cmd: eight_bits; {current command set by |get_next|}
-//! @!cur_chr: halfword; {operand of current command}
-//! @!cur_cs: pointer; {control sequence found here, zero if none found}
-//! @!cur_tok: halfword; {packed representative of |cur_cmd| and |cur_chr|}
-//!
-//! @ The |print_cmd_chr| routine prints a symbolic interpretation of a
-//! command code and its modifier. This is used in certain `\.{You can\'t}'
-//! error messages, and in the implementation of diagnostic routines like
-//! \.{\\show}.
-//!
-//! The body of |print_cmd_chr| is a rather tedious listing of print
-//! commands, and most of it is essentially an inverse to the |primitive|
-//! routine that enters a \TeX\ primitive into |eqtb|. Therefore much of
-//! this procedure appears elsewhere in the program,
-//! together with the corresponding |primitive| calls.
-//!
-//! @d chr_cmd(#)==begin print(#); print_ASCII(chr_code);
-//!   end
-//!
-//! @<Declare the procedure called |print_cmd_chr|@>=
-//! procedure print_cmd_chr(@!cmd:quarterword;@!chr_code:halfword);
-//! begin case cmd of
-//! left_brace: chr_cmd("begin-group character ");
-//! right_brace: chr_cmd("end-group character ");
-//! math_shift: chr_cmd("math shift character ");
-//! mac_param: chr_cmd("macro parameter character ");
-//! sup_mark: chr_cmd("superscript character ");
-//! sub_mark: chr_cmd("subscript character ");
-//! endv: print("end of alignment template");
-//! spacer: chr_cmd("blank space ");
-//! letter: chr_cmd("the letter ");
-//! other_char: chr_cmd("the character ");
-//! @t\4@>@<Cases of |print_cmd_chr| for symbolic printing of primitives@>@/
-//! othercases print("[unknown command code!]")
-//! endcases;
-//! end;
-//!
-//! @ Here is a procedure that displays the current command.
-//!
-//! @p procedure show_cur_cmd_chr;
-//! begin begin_diagnostic; print_nl("{");
-//! if mode<>shown_mode then
-//!   begin print_mode(mode); print(": "); shown_mode:=mode;
-//!   end;
-//! print_cmd_chr(cur_cmd,cur_chr); print_char("}");
-//! end_diagnostic(false);
-//! end;
+
+// @<Glob...@>=
+// @!cur_cmd: eight_bits; {current command set by |get_next|}
+#[globals_struct_field(TeXGlobals)]
+/// current command set by `get_next`
+pub(crate) static cur_cmd: eight_bits = eight_bits::default();
+// @!cur_chr: halfword; {operand of current command}
+#[globals_struct_field(TeXGlobals)]
+/// operand of current command
+pub(crate) static cur_chr: halfword = halfword::default();
+// @!cur_cs: pointer; {control sequence found here, zero if none found}
+#[globals_struct_field(TeXGlobals)]
+/// control sequence found here, zero if none found
+pub(crate) static cur_cs: pointer = null;
+// @!cur_tok: halfword; {packed representative of |cur_cmd| and |cur_chr|}
+#[globals_struct_field(TeXGlobals)]
+/// packed representative of `cur_cmd` and `cur_chr`
+pub(crate) static cur_tok: halfword = halfword::default();
+
+use globals_struct::globals_struct_field;

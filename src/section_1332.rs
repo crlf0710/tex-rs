@@ -13,9 +13,9 @@ pub fn entry() {
     let mut globals = TeXGlobals::default();
     let globals = &mut globals;
 
-    region_forward_label! {{
-    region_forward_label! {{
-    region_forward_label! {{
+    region_forward_label! {|'final_end|{
+    region_forward_label! {|'end_of_TEX|{
+    region_forward_label! {|'start_of_TEX|{
 
     // history:=fatal_error_stop; {in case we quit during initialization}
     /// in case we quit during initialization
@@ -39,12 +39,16 @@ pub fn entry() {
     //   goto final_end;
     //   end;
     // initialize; {set global variables to their starting values}
+    /// set global variables to their starting values
+    initialize(globals);
     // @!init if not get_strings_started then goto final_end;
     // init_prim; {call |primitive| for each primitive}
     // init_str_ptr:=str_ptr; init_pool_ptr:=pool_ptr; fix_date_and_time;
     // tini@/
-    // ready_already:=314159;
-    globals.ready_already = 314159;
+    /// ready_already:=314159;
+    {
+        globals.ready_already = 314159;
+    }
 
     }
     // start_of_TEX: @<Initialize the output routines@>;
@@ -79,6 +83,7 @@ pub fn entry() {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::initialize;
 use crate::section_0033::t_open_out;
 use crate::section_0076::history_state::{fatal_error_stop, spotless};
 use crate::section_1030::main_control;

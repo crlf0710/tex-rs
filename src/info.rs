@@ -67,8 +67,18 @@ macro_rules! reversing_order_items {
 }
 
 macro_rules! region_forward_label {
-    ({$($s: stmt)*} $lbl:lifetime <- ) => {
-        #[allow(redundant_semicolons, unused_labels)]
+    (|$lbl_:lifetime| {$($s: stmt)*} $lbl:lifetime <- ) => {
+        #[allow(redundant_semicolons, unused_labels, unreachable_code)]
+        $lbl : loop {
+            $($s)*;
+            break;
+        }
+    };
+}
+
+macro_rules! region_backward_label {
+    ($lbl:lifetime <- {$($s: stmt)*} |$lbl_:lifetime| ) => {
+        #[allow(redundant_semicolons, unused_labels, unreachable_code)]
         $lbl : loop {
             $($s)*;
             break;
@@ -79,5 +89,11 @@ macro_rules! region_forward_label {
 macro_rules! goto_forward_label {
     ($lbl:lifetime) => {
         break $lbl;
+    };
+}
+
+macro_rules! goto_backward_label {
+    ($lbl:lifetime) => {
+        continue $lbl;
     };
 }

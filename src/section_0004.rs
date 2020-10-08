@@ -16,37 +16,49 @@
 //! to specify a file name if |output| were specified here.
 //! @:PASCAL H}{\ph@>
 //! @^system dependencies@>
-//!
-//! @d mtype==t@&y@&p@&e {this is a \.{WEB} coding trick:}
-//! @f mtype==type {`\&{mtype}' will be equivalent to `\&{type}'}
-//! @f type==true {but `|type|' will not be treated as a reserved word}
-//!
-//! @p @t\4@>@<Compiler directives@>@/
-//! program TEX; {all file names are defined dynamically}
-//! label @<Labels in the outer block@>@/
-//! const @<Constants in the outer block@>@/
-//! mtype @<Types in the outer block@>@/
-//! var @<Global variables@>@/
-//! @#
-//! procedure initialize; {this procedure gets things started properly}
-//!   var @<Local variables for initialization@>@/
-//!   begin @<Initialize whatever \TeX\ might access@>@;
-//!   end;@#
-//! @t\4@>@<Basic printing procedures@>@/
-//! @t\4@>@<Error handling procedures@>@/
+
+// @d mtype==t@&y@&p@&e {this is a \.{WEB} coding trick:}
+// @f mtype==type {`\&{mtype}' will be equivalent to `\&{type}'}
+// @f type==true {but `|type|' will not be treated as a reserved word}
+//
+// @p @t\4@>@<Compiler directives@>@/
+// program TEX; {all file names are defined dynamically}
+// label @<Labels in the outer block@>@/
+// const @<Constants in the outer block@>@/
+// mtype @<Types in the outer block@>@/
+
+// var @<Global variables@>@/
 
 #[globals_struct]
-pub mod TeXGlobals {
+pub(crate) mod TeXGlobals {
     include!("src/section_0032.rs");
     include!("src/section_0054.rs");
     include!("src/section_0076.rs");
+    include!("src/section_0297.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
 }
 
+// @#
+// procedure initialize; {this procedure gets things started properly}
+/// this procedure gets things started properly
+#[allow(unused_variables)]
+pub(crate) fn initialize(globals: &mut TeXGlobals) {
+    // var @<Local variables for initialization@>@/
+    // begin @<Initialize whatever \TeX\ might access@>@;
+    // end;@#
+}
+
+// @t\4@>@<Basic printing procedures@>@/
+// @t\4@>@<Error handling procedures@>@/
+
 use crate::pascal::integer;
 use crate::section_0025::alpha_file;
+use crate::section_0025::eight_bits;
 use crate::section_0038::str_number;
 use crate::section_0076::history_state::{self, fatal_error_stop};
+use crate::section_0113::halfword;
+use crate::section_0115::null;
+use crate::section_0115::pointer;
 
 use globals_struct::globals_struct;

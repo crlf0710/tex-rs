@@ -10,5 +10,6 @@ typenum = "1.12.0"
 globals_struct = {git = "https://github.com/crlf0710/globals_struct"}
 
 [features]
+initex = []
 unicode_support = []
-default = ['unicode_support']
+default = ['initex', 'unicode_support']
