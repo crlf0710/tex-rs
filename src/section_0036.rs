@@ -23,6 +23,11 @@
 //! before a non-blank line comes in. The prompt is `\.{**}' instead of the
 //! later `\.*' because the meaning is slightly different: `\.{\\input}' need
 //! not be typed immediately after~`\.{**}'.)
-//!
-//! @d loc==cur_input.loc_field {location of first unread character in |buffer|}
-//!
+
+// @d loc==cur_input.loc_field {location of first unread character in |buffer|}
+/// location of first unread character in `buffer`
+macro_rules! loc {
+    ($globals:expr) => {
+        $globals.cur_input.loc_field
+    };
+}

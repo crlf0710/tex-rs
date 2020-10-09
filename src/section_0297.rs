@@ -63,4 +63,13 @@ pub(crate) static cur_cs: pointer = null;
 /// packed representative of `cur_cmd` and `cur_chr`
 pub(crate) static cur_tok: halfword = halfword::default();
 
-use globals_struct::globals_struct_field;
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0025::eight_bits;
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0113::halfword;
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0115::null;
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0115::pointer;
+
+use globals_struct::{globals_struct_field, globals_struct_use};

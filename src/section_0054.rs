@@ -66,4 +66,7 @@ pub(crate) static log_file: alpha_file = alpha_file::default();
 // @!first_count: integer; {another variable for pseudoprinting}
 //
 
-use globals_struct::globals_struct_field;
+#[globals_struct_use(TeXGlobals)]
+pub(crate) use crate::section_0025::alpha_file;
+
+use globals_struct::{globals_struct_field, globals_struct_use};

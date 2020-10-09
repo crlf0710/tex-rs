@@ -35,6 +35,7 @@ pub(crate) mod TeXGlobals {
     include!("src/section_0054.rs");
     include!("src/section_0076.rs");
     include!("src/section_0297.rs");
+    include!("src/section_0301.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
 }
@@ -51,14 +52,5 @@ pub(crate) fn initialize(globals: &mut TeXGlobals) {
 
 // @t\4@>@<Basic printing procedures@>@/
 // @t\4@>@<Error handling procedures@>@/
-
-use crate::pascal::integer;
-use crate::section_0025::alpha_file;
-use crate::section_0025::eight_bits;
-use crate::section_0038::str_number;
-use crate::section_0076::history_state::{self, fatal_error_stop};
-use crate::section_0113::halfword;
-use crate::section_0115::null;
-use crate::section_0115::pointer;
 
 use globals_struct::globals_struct;

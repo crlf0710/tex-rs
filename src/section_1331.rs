@@ -46,5 +46,7 @@
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static ready_already: integer = 0;
 
+#[globals_struct_use(TeXGlobals)]
 use crate::pascal::integer;
-use globals_struct::globals_struct_field;
+
+use globals_struct::{globals_struct_field, globals_struct_use};

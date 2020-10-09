@@ -20,7 +20,7 @@
 
 #[doc(hidden)]
 #[derive(Copy, Clone)]
-pub(crate) enum history_state {
+pub(crate) enum history_kind {
     /// `history` value when nothing has been amiss yet
     spotless = 0,
     /// `history` value when `begin_diagnostic` has been called
@@ -32,7 +32,7 @@ pub(crate) enum history_state {
 }
 
 #[doc(inline)]
-pub(crate) use history_state::*;
+pub(crate) use history_kind::*;
 
 // @<Glob...@>=
 // @!deletions_allowed:boolean; {is it safe for |error| to call |get_token|?}
@@ -41,10 +41,13 @@ pub(crate) use history_state::*;
 // @!history:spotless..fatal_error_stop; {has the source input been clean so far?}
 #[globals_struct_field(TeXGlobals)]
 /// has the source input been clean so far?
-pub(crate) static history: history_state = fatal_error_stop;
+pub(crate) static history: history_kind = fatal_error_stop;
 
 // @!error_count:-1..100; {the number of scrolled errors since the
 //   last paragraph ended}
 //
 
-use globals_struct::globals_struct_field;
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0076::history_kind::{self, fatal_error_stop};
+
+use globals_struct::{globals_struct_field, globals_struct_use};

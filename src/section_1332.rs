@@ -85,7 +85,7 @@ pub fn entry() {
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::initialize;
 use crate::section_0033::t_open_out;
-use crate::section_0076::history_state::{fatal_error_stop, spotless};
+use crate::section_0076::history_kind::{fatal_error_stop, spotless};
 use crate::section_1030::main_control;
 use crate::section_1333::close_files_and_terminate;
 use crate::section_1335::final_cleanup;

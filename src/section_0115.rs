@@ -25,6 +25,9 @@ pub(crate) const null: pointer = min_halfword;
 /// a pointer variable for occasional emergency use
 pub(crate) static temp_ptr: pointer = null;
 
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0115::pointer;
+
 use crate::section_0110::min_halfword;
 use crate::section_0113::halfword;
-use globals_struct::globals_struct_field;
+use globals_struct::{globals_struct_field, globals_struct_use};
