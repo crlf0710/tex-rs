@@ -14,19 +14,25 @@
 
 // @d active_base=1 {beginning of region 1, for active character equivalents}
 /// beginning of region 1, for active character equivalents
-pub(crate) const active_base: word = 1;
+pub(crate) type active_base_TYPENUM = U1;
+pub(crate) const active_base: word = active_base_TYPENUM::U32;
 // @d single_base=active_base+256 {equivalents of one-character control sequences}
 /// equivalents of one-character control sequences
-pub(crate) const single_base: word = active_base + 256;
+pub(crate) type single_base_TYPENUM = typenum::op!(active_base_TYPENUM + U256);
+pub(crate) const single_base: word = single_base_TYPENUM::U32;
 // @d null_cs=single_base+256 {equivalent of \.{\\csname\\endcsname}}
 /// equivalent of `\csname\endcsname`
-pub(crate) const null_cs: word = single_base + 256;
+pub(crate) type null_cs_TYPENUM = typenum::op!(single_base_TYPENUM + U256);
+pub(crate) const null_cs: word = null_cs_TYPENUM::U32;
 // @d hash_base=null_cs+1 {beginning of region 2, for the hash table}
 /// beginning of region 2, for the hash table
-pub(crate) const hash_base: word = null_cs + 1;
+pub(crate) type hash_base_TYPENUM = typenum::op!(null_cs_TYPENUM + U1);
+pub(crate) const hash_base: word = hash_base_TYPENUM::U32;
 // @d frozen_control_sequence=hash_base+hash_size {for error recovery}
 /// for error recovery
-pub(crate) const frozen_control_sequence: word = hash_base + hash_size as word;
+pub(crate) type frozen_control_sequence_TYPENUM =
+    typenum::op!(hash_base_TYPENUM + hash_size_TYPENUM);
+pub(crate) const frozen_control_sequence: word = frozen_control_sequence_TYPENUM::U32;
 // @d frozen_protection=frozen_control_sequence {inaccessible but definable}
 // @d frozen_cr=frozen_control_sequence+1 {permanent `\.{\\cr}'}
 // @d frozen_end_group=frozen_control_sequence+2 {permanent `\.{\\endgroup}'}
@@ -41,15 +47,18 @@ pub(crate) const frozen_control_sequence: word = hash_base + hash_size as word;
 // @d frozen_null_font=frozen_control_sequence+10
 //   {permanent `\.{\\nullfont}'}
 /// permanent `\nullfont`
-pub(crate) const frozen_null_font: word = frozen_control_sequence + 10;
+pub(crate) type frozen_null_font_TYPENUM = typenum::op!(frozen_control_sequence_TYPENUM + U10);
+pub(crate) const frozen_null_font: word = frozen_null_font_TYPENUM::U32;
 // @d font_id_base=frozen_null_font-font_base
 //   {begins table of 257 permanent font identifiers}
 // @d undefined_control_sequence=frozen_null_font+257 {dummy location}
 /// dummy location
-pub(crate) const undefined_control_sequence: word = frozen_null_font + 257;
+pub(crate) type undefined_control_sequence_TYPENUM = typenum::op!(frozen_null_font_TYPENUM + U257);
+pub(crate) const undefined_control_sequence: word = undefined_control_sequence_TYPENUM::U32;
 // @d glue_base=undefined_control_sequence+1 {beginning of region 3}
 /// beginning of region 3
-pub(crate) const glue_base: word = undefined_control_sequence + 1;
+pub(crate) type glue_base_TYPENUM = typenum::op!(undefined_control_sequence_TYPENUM + U1);
+pub(crate) const glue_base: word = glue_base_TYPENUM::U32;
 
 // @<Initialize table entries...@>=
 // eq_type(undefined_control_sequence):=undefined_cs;
@@ -60,4 +69,6 @@ pub(crate) const glue_base: word = undefined_control_sequence + 1;
 //
 
 use crate::pascal::word;
-use crate::section_0012::hash_size;
+use crate::section_0012::hash_size_TYPENUM;
+use typenum::Unsigned;
+use typenum::{U1, U10, U256, U257};

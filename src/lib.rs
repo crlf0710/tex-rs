@@ -28,16 +28,22 @@ mod pascal;
 mod section_0001;
 mod section_0002;
 mod section_0003;
+#[macro_use]
 mod section_0004;
 mod section_0005;
 mod section_0006_to_0010;
 mod section_0011;
 mod section_0012;
-mod section_0013_to_0016;
+mod section_0013_to_0015;
+#[macro_use]
+mod section_0016;
 mod section_0017;
+#[macro_use]
 mod section_0018;
 mod section_0019;
-mod section_0020_to_0024;
+mod section_0020;
+mod section_0021;
+mod section_0022_to_0024;
 mod section_0025;
 mod section_0026_to_0029;
 mod section_0030;
@@ -119,12 +125,17 @@ mod section_0300;
 mod section_0301;
 #[macro_use]
 mod section_0302;
-mod section_0303_to_0306;
+mod section_0303;
+#[macro_use]
+mod section_0304;
+mod section_0305_to_0306;
 mod section_0307;
 mod section_0308_to_0320;
 mod section_0321_to_0323;
 mod section_0324;
-mod section_0325_to_0331;
+mod section_0325_to_0330;
+#[macro_use]
+mod section_0331;
 mod section_0332_to_0340;
 reversing_order_items!(
     {

@@ -19,10 +19,14 @@
 // @d hash_size=2100 {maximum number of control sequences; it should be at most
 //   about |(mem_max-mem_min)/10|}
 /// maximum number of control sequences; it should be at most about `(mem_max-mem_min)/10`
-pub(crate) const hash_size: halfword = 2100;
+pub(crate) type hash_size_TYPENUM = U2100;
+pub(crate) const hash_size: halfword = hash_size_TYPENUM::U16;
 // @d hash_prime=1777 {a prime number equal to about 85\pct! of |hash_size|}
 // @d hyph_size=307 {another prime; the number of \.{\\hyphenation} exceptions}
 // @^system dependencies@>
 //
 
+type U2100 = typenum::op!(U1000 + U1000 + U100);
 use crate::section_0113::halfword;
+use typenum::Unsigned;
+use typenum::{U100, U1000};

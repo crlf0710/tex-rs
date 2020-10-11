@@ -21,18 +21,22 @@
 //
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
 /// lines of characters being read
 pub(crate) static buffer: buf_size_array<ASCII_code> = buf_size_array::default();
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
 /// the first unused position in `buffer`
 pub(crate) static first: u16_from_0_to_n<buf_size_TYPENUM> = u16_from_0_to_n::new(0);
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
 /// end of the line just input to `buffer`
 pub(crate) static last: u16_from_0_to_n<buf_size_TYPENUM> = u16_from_0_to_n::new(0);
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
 /// largest index used in `buffer`
 pub(crate) static max_buf_stack: u16_from_0_to_n<buf_size_TYPENUM> = u16_from_0_to_n::new(0);
 
@@ -58,4 +62,4 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 use crate::pascal::u16_from_0_to_n;
 use crate::section_0011::buf_size_TYPENUM;
 
-use globals_struct::{globals_struct_field, globals_struct_use};
+use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};

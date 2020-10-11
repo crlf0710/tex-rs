@@ -24,16 +24,20 @@
 // @d thick_mu_skip_code=17 {thick space in math formula}
 // @d glue_pars=18 {total number of glue parameters}
 /// total number of glue parameters
-pub(crate) const glue_pars: halfword = 18;
+pub(crate) type glue_pars_TYPENUM = U18;
+pub(crate) const glue_pars: halfword = glue_pars_TYPENUM::U16;
 // @d skip_base=glue_base+glue_pars {table of 256 ``skip'' registers}
 /// table of 256 ``skip'' registers
-pub(crate) const skip_base: word = glue_base + glue_pars as word;
+pub(crate) type skip_base_TYPENUM = typenum::op!(glue_base_TYPENUM + glue_pars_TYPENUM);
+pub(crate) const skip_base: word = skip_base_TYPENUM::U32;
 // @d mu_skip_base=skip_base+256 {table of 256 ``muskip'' registers}
 /// table of 256 "muskip" registers
-pub(crate) const mu_skip_base: word = skip_base + 256;
+pub(crate) type mu_skip_base_TYPENUM = typenum::op!(skip_base_TYPENUM + U256);
+pub(crate) const mu_skip_base: word = mu_skip_base_TYPENUM::U32;
 // @d local_base=mu_skip_base+256 {beginning of region 4}
 /// beginning of region 4
-pub(crate) const local_base: word = mu_skip_base + 256;
+pub(crate) type local_base_TYPENUM = typenum::op!(mu_skip_base_TYPENUM + U256);
+pub(crate) const local_base: word = local_base_TYPENUM::U32;
 // @#
 // @d skip(#)==equiv(skip_base+#) {|mem| location of glue specification}
 // @d mu_skip(#)==equiv(mu_skip_base+#) {|mem| location of math glue spec}
@@ -62,4 +66,6 @@ pub(crate) const local_base: word = mu_skip_base + 256;
 
 use crate::pascal::word;
 use crate::section_0113::halfword;
-use crate::section_0222::glue_base;
+use crate::section_0222::glue_base_TYPENUM;
+use typenum::Unsigned;
+use typenum::{U18, U256};

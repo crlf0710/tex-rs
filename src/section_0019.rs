@@ -28,13 +28,13 @@
 
 /// the data type of characters in text files
 #[cfg(not(feature = "unicode_support"))]
-struct text_char(u8);
+pub(crate) struct text_char(u8);
 
 /// the data type of characters in text files
 ///
 /// represents a unicode grapheme cluster
 #[cfg(feature = "unicode_support")]
-struct text_char(u32);
+pub(crate) struct text_char(u32);
 
 // @d first_text_char=0 {ordinal number of the smallest element of |text_char|}
 

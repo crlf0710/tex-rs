@@ -28,6 +28,9 @@ pub(crate) type buf_size_TYPENUM = U500;
 // @!stack_size=200; {maximum number of simultaneous input sources}
 // @!max_in_open=6; {maximum number of input files and error insertions that
 //   can be going on simultaneously}
+/// maximum number of input files and error insertions that can be going on simultaneously
+pub(crate) type max_in_open_TYPENUM = U6;
+pub(crate) const max_in_open: u8 = max_in_open_TYPENUM::U8;
 // @!font_max=75; {maximum internal font number; must not exceed |max_quarterword|
 //   and must be at most |font_base+256|}
 // @!font_mem_size=20000; {number of words of |font_info| for all fonts}
@@ -62,4 +65,4 @@ const_assert!(max_strings as u32 <= max_halfword as u32);
 use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U1000, U3, U500};
+use typenum::{Unsigned, U1000, U3, U500, U6};

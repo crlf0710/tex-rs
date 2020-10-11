@@ -37,25 +37,73 @@
 //! code uses standard \PASCAL\ to illustrate what needs to be done, but
 //! finer tuning is often possible at well-developed \PASCAL\ sites.
 //! @^inner loop@>
-//!
-//! @p function input_ln(var f:alpha_file;@!bypass_eoln:boolean):boolean;
-//!   {inputs the next line or returns |false|}
-//! var last_nonblank:0..buf_size; {|last| with trailing blanks removed}
-//! begin if bypass_eoln then if not eof(f) then get(f);
-//!   {input the first character of the line into |f^|}
-//! last:=first; {cf.\ Matthew 19\thinspace:\thinspace30}
-//! if eof(f) then input_ln:=false
-//! else  begin last_nonblank:=first;
-//!   while not eoln(f) do
-//!     begin if last>=max_buf_stack then
-//!       begin max_buf_stack:=last+1;
-//!       if max_buf_stack=buf_size then
-//!         @<Report overflow of the input buffer, and abort@>;
-//!       end;
-//!     buffer[last]:=xord[f^]; get(f); incr(last);
-//!     if buffer[last-1]<>" " then last_nonblank:=last;
-//!     end;
-//!   last:=last_nonblank; input_ln:=true;
-//!   end;
-//! end;
-//!
+
+// @p function input_ln(var f:alpha_file;@!bypass_eoln:boolean):boolean;
+//   {inputs the next line or returns |false|}
+#[allow(unused_variables)]
+/// inputs the next line or returns `false`
+pub(crate) fn input_ln(
+    globals_view: TeXGlobalsIoView<'_>,
+    f: &mut alpha_file,
+    bypass_eoln: boolean,
+) -> boolean {
+    // var last_nonblank:0..buf_size; {|last| with trailing blanks removed}
+    /// `last` with trailing blanks removed
+    let mut last_nonblank: u16_from_0_to_n<buf_size_TYPENUM>;
+    let input_ln;
+    // begin if bypass_eoln then if not eof(f) then get(f);
+    //   {input the first character of the line into |f^|}
+    /// input the first character of the line into `f^`
+    if bypass_eoln {
+        if !eof(f) {
+            get(f);
+        }
+    }
+    // last:=first; {cf.\ Matthew 19\thinspace:\thinspace30}
+    *globals_view.last = *globals_view.first;
+    // if eof(f) then input_ln:=false
+    if eof(f) {
+        input_ln = false;
+    }
+    // else  begin last_nonblank:=first;
+    else {
+        last_nonblank = *globals_view.first;
+        // while not eoln(f) do
+        while !eoln(f) {
+            // begin if last>=max_buf_stack then
+            if globals_view.last >= globals_view.max_buf_stack {
+                // begin max_buf_stack:=last+1;
+                *globals_view.max_buf_stack = *globals_view.last + 1;
+                // if max_buf_stack=buf_size then
+                if *globals_view.max_buf_stack == buf_size {
+                    // @<Report overflow of the input buffer, and abort@>;
+                }
+                // end;
+            }
+            // buffer[last]:=xord[f^]; get(f); incr(last);
+            globals_view.buffer[*globals_view.last] = xord(caret(f));
+            get(f);
+            incr!(*globals_view.last);
+            // if buffer[last-1]<>" " then last_nonblank:=last;
+            if globals_view.buffer[*globals_view.last - 1] != ASCII_code_literal!(b' ') {
+                last_nonblank = *globals_view.last;
+            }
+            // end;
+        }
+        // last:=last_nonblank; input_ln:=true;
+        *globals_view.last = last_nonblank;
+        input_ln = true;
+        // end;
+    }
+    // end;
+    input_ln
+}
+
+use crate::pascal::boolean;
+use crate::pascal::u16_from_0_to_n;
+use crate::pascal::{caret, eof, eoln, get};
+use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0011::buf_size;
+use crate::section_0011::buf_size_TYPENUM;
+use crate::section_0020::xord;
+use crate::section_0025::alpha_file;

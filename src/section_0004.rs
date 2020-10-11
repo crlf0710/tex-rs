@@ -30,6 +30,7 @@
 // var @<Global variables@>@/
 
 #[globals_struct]
+#[globals_struct_field_view(TeXGlobalsIoView, make_globals_io_view)]
 pub(crate) mod TeXGlobals {
     include!("src/section_0030.rs");
     include!("src/section_0032.rs");
@@ -38,6 +39,7 @@ pub(crate) mod TeXGlobals {
     include!("src/section_0253.rs");
     include!("src/section_0297.rs");
     include!("src/section_0301.rs");
+    include!("src/section_0304.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
 }
@@ -55,4 +57,4 @@ pub(crate) fn initialize(globals: &mut TeXGlobals) {
 // @t\4@>@<Basic printing procedures@>@/
 // @t\4@>@<Error handling procedures@>@/
 
-use globals_struct::globals_struct;
+use globals_struct::{globals_struct, globals_struct_field_view};

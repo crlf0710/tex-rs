@@ -7,12 +7,21 @@
 
 /// eight-bit numbers
 #[cfg(not(feature = "unicode_support"))]
-#[derive(Default, Copy, Clone)]
+#[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct ASCII_code(pub(crate) u8);
 
 /// 32-bit internal form character code, compatible with ascii
 #[cfg(feature = "unicode_support")]
-#[derive(Default, Copy, Clone)]
+#[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct ASCII_code(pub(crate) u32);
 
 migration_complete!();
+
+macro_rules! ASCII_code_literal {
+    ($val:expr) => {{
+        use crate::section_0018::ASCII_code;
+
+        let val: u8 = $val;
+        ASCII_code(val as _)
+    }};
+}

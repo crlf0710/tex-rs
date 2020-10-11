@@ -56,7 +56,7 @@ pub fn entry() {
     };
     Initialize_the_output_routines!(globals);
     // @<Get the first line of input and prepare to start@>;
-    Get_the_first_line_of_input_and_prepare_to_start!(globals);
+    Get_the_first_line_of_input_and_prepare_to_start!(globals, 'final_end);
     // history:=spotless; {ready to go!}
     /// ready to go!
     {

@@ -22,7 +22,10 @@ pub(crate) fn update_terminal(globals: &mut TeXGlobals) {
 
 // @d clear_terminal == break_in(term_in,true) {clear the terminal input buffer}
 // @d wake_up_terminal == do_nothing {cancel the user's cancellation of output}
-//
+///cancel the user's cancellation of output
+pub(crate) fn wake_up_terminal(_globals: &mut TeXGlobals) {
+    do_nothing!();
+}
 
 use crate::pascal::r#break;
 use crate::section_0004::TeXGlobals;

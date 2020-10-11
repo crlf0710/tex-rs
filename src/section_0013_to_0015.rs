@@ -36,34 +36,21 @@
 //!
 //! Incidentally, this program never declares a label that isn't actually used,
 //! because some fussy \PASCAL\ compilers will complain about redundant labels.
-//!
-//! @d exit=10 {go here to leave a procedure}
-//! @d restart=20 {go here to start a procedure again}
-//! @d reswitch=21 {go here to start a case statement again}
-//! @d continue=22 {go here to resume a loop}
-//! @d done=30 {go here to exit a loop}
-//! @d done1=31 {like |done|, when there is more than one loop}
-//! @d done2=32 {for exiting the second loop in a long block}
-//! @d done3=33 {for exiting the third loop in a very long block}
-//! @d done4=34 {for exiting the fourth loop in an extremely long block}
-//! @d done5=35 {for exiting the fifth loop in an immense block}
-//! @d done6=36 {for exiting the sixth loop in a block}
-//! @d found=40 {go here when you've found it}
-//! @d found1=41 {like |found|, when there's more than one per routine}
-//! @d found2=42 {like |found|, when there's more than two per routine}
-//! @d not_found=45 {go here when you've found nothing}
-//! @d common_ending=50 {go here when you want to merge with another branch}
-//!
-//! @ Here are some macros for common programming idioms.
-//!
-//! @d incr(#) == #:=#+1 {increase a variable by unity}
-//! @d decr(#) == #:=#-1 {decrease a variable by unity}
-//! @d negate(#) == #:=-# {change the sign of a variable}
-//! @d loop == @+ while true do@+ {repeat over and over until a |goto| happens}
-//! @f loop == xclause
-//!   {\.{WEB}'s |xclause| acts like `\ignorespaces|while true do|\unskip'}
-//! @d do_nothing == {empty statement}
-//! @d return == goto exit {terminate a procedure call}
-//! @f return == nil
-//! @d empty=0 {symbolic name for a null constant}
-//!
+//
+// @d exit=10 {go here to leave a procedure}
+// @d restart=20 {go here to start a procedure again}
+// @d reswitch=21 {go here to start a case statement again}
+// @d continue=22 {go here to resume a loop}
+// @d done=30 {go here to exit a loop}
+// @d done1=31 {like |done|, when there is more than one loop}
+// @d done2=32 {for exiting the second loop in a long block}
+// @d done3=33 {for exiting the third loop in a very long block}
+// @d done4=34 {for exiting the fourth loop in an extremely long block}
+// @d done5=35 {for exiting the fifth loop in an immense block}
+// @d done6=36 {for exiting the sixth loop in a block}
+// @d found=40 {go here when you've found it}
+// @d found1=41 {like |found|, when there's more than one per routine}
+// @d found2=42 {like |found|, when there's more than two per routine}
+// @d not_found=45 {go here when you've found nothing}
+// @d common_ending=50 {go here when you want to merge with another branch}
+//

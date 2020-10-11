@@ -15,6 +15,7 @@
 //
 // @d escape=0 {escape delimiter (called \.\\ in {\sl The \TeX book\/})}
 // @:TeXbook}{\sl The \TeX book@>
+/// escape delimiter (called `\` in *The TEXbook*)
 pub(crate) const escape: halfword = 0;
 // @d relax=0 {do nothing ( \.{\\relax} )}
 // @d left_brace=1 {beginning of a group ( \.\{ )}
@@ -40,5 +41,8 @@ pub(crate) const escape: halfword = 0;
 // @d invalid_char=15 {characters that shouldn't appear ( \.{\^\^?} )}
 // @d delim_num=15 {specify delimiter numerically ( \.{\\delimiter} )}
 // @d max_char_code=15 {largest catcode for individual characters}
+/// largest catcode for individual characters
+pub(crate) const max_char_code: quarterword = 15;
 
 use crate::section_0113::halfword;
+use crate::section_0113::quarterword;

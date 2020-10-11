@@ -17,35 +17,45 @@
 // @d err_help_loc=local_base+9 {points to token list for \.{\\errhelp}}
 // @d toks_base=local_base+10 {table of 256 token list registers}
 /// table of 256 token list registers
-pub(crate) const toks_base: word = local_base + 10;
+pub(crate) type toks_base_TYPENUM = typenum::op!(local_base_TYPENUM + U10);
+pub(crate) const toks_base: word = toks_base_TYPENUM::U32;
 // @d box_base=toks_base+256 {table of 256 box registers}
 /// table of 256 box registers
-pub(crate) const box_base: word = toks_base + 256;
+pub(crate) type box_base_TYPENUM = typenum::op!(toks_base_TYPENUM + U256);
+pub(crate) const box_base: word = box_base_TYPENUM::U32;
 // @d cur_font_loc=box_base+256 {internal font number outside math mode}
 /// internal font number outside math mode
-pub(crate) const cur_font_loc: word = box_base + 256;
+pub(crate) type cur_font_loc_TYPENUM = typenum::op!(box_base_TYPENUM + U256);
+pub(crate) const cur_font_loc: word = cur_font_loc_TYPENUM::U32;
 // @d math_font_base=cur_font_loc+1 {table of 48 math font numbers}
 /// table of 48 math font numbers
-pub(crate) const math_font_base: word = cur_font_loc + 1;
+pub(crate) type math_font_base_TYPENUM = typenum::op!(cur_font_loc_TYPENUM + U1);
+pub(crate) const math_font_base: word = math_font_base_TYPENUM::U32;
 // @d cat_code_base=math_font_base+48
 //   {table of 256 command codes (the ``catcodes'')}
 /// table of 256 command codes (the "catcodes")
-pub(crate) const cat_code_base: word = math_font_base + 48;
+pub(crate) type cat_code_base_TYPENUM = typenum::op!(math_font_base_TYPENUM + U48);
+pub(crate) const cat_code_base: word = cat_code_base_TYPENUM::U32;
 // @d lc_code_base=cat_code_base+256 {table of 256 lowercase mappings}
 /// table of 256 lowercase mappings
-pub(crate) const lc_code_base: word = cat_code_base + 256;
+pub(crate) type lc_code_base_TYPENUM = typenum::op!(cat_code_base_TYPENUM + U256);
+pub(crate) const lc_code_base: word = lc_code_base_TYPENUM::U32;
 // @d uc_code_base=lc_code_base+256 {table of 256 uppercase mappings}
 /// table of 256 uppercase mappings
-pub(crate) const uc_code_base: word = lc_code_base + 256;
+pub(crate) type uc_code_base_TYPENUM = typenum::op!(lc_code_base_TYPENUM + U256);
+pub(crate) const uc_code_base: word = uc_code_base_TYPENUM::U32;
 // @d sf_code_base=uc_code_base+256 {table of 256 spacefactor mappings}
 /// table of 256 spacefactor mappings
-pub(crate) const sf_code_base: word = uc_code_base + 256;
+pub(crate) type sf_code_base_TYPENUM = typenum::op!(uc_code_base_TYPENUM + U256);
+pub(crate) const sf_code_base: word = sf_code_base_TYPENUM::U32;
 // @d math_code_base=sf_code_base+256 {table of 256 math mode mappings}
 /// table of 256 math mode mappings
-pub(crate) const math_code_base: word = sf_code_base + 256;
+pub(crate) type math_code_base_TYPENUM = typenum::op!(sf_code_base_TYPENUM + U256);
+pub(crate) const math_code_base: word = math_code_base_TYPENUM::U32;
 // @d int_base=math_code_base+256 {beginning of region 5}
 /// beginning of region 5
-pub(crate) const int_base: word = math_code_base + 256;
+pub(crate) type int_base_TYPENUM = typenum::op!(math_code_base_TYPENUM + U256);
+pub(crate) const int_base: word = int_base_TYPENUM::U32;
 // @#
 // @d par_shape_ptr==equiv(par_shape_loc)
 // @d output_routine==equiv(output_routine_loc)
@@ -95,7 +105,7 @@ macro_rules! cat_code {
 // @!@:err_help_}{\.{\\errhelp} primitive@>
 
 use crate::pascal::word;
-use crate::section_0224::local_base;
+use crate::section_0224::local_base_TYPENUM;
 
 #[allow(non_snake_case)]
 pub(crate) fn index_offset_with_ASCII_code(initial: word, offset: ASCII_code) -> word {
@@ -114,3 +124,5 @@ pub(crate) fn index_offset_with_ASCII_code(initial: word, offset: ASCII_code) ->
 }
 
 use crate::section_0018::ASCII_code;
+use typenum::Unsigned;
+use typenum::{U1, U10, U256, U48};

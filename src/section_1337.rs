@@ -7,8 +7,9 @@
 
 // @<Get the first line...@>=
 macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
-    ($globals:expr) => {
+    ($globals:expr, $lbl_final_end:lifetime) => {
         // begin @<Initialize the input routines@>;
+        Initialize_the_input_routines!($globals, $lbl_final_end);
         // if (format_ident=0)or(buffer[loc]="&") then
         //   begin if format_ident<>0 then initialize; {erase preloaded format}
         //   if not open_fmt_file then goto final_end;
@@ -33,6 +34,7 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
         }
         // end
 
+        use crate::section_0037::init_terminal;
         use crate::section_0207::escape;
         use crate::section_0537::start_input;
     };

@@ -21,12 +21,10 @@
 // @d eq_type_field(#)==#.hh.b0
 // @d equiv_field(#)==#.hh.rh
 macro_rules! equiv_field {
-    ($val:expr) => {
-        {
-            use crate::section_0113::MEMORY_WORD_HH_RH;
-            $val[MEMORY_WORD_HH_RH]
-        }
-    }
+    ($val:expr) => {{
+        use crate::section_0113::MEMORY_WORD_HH_RH;
+        $val[MEMORY_WORD_HH_RH]
+    }};
 }
 // @d eq_level(#)==eq_level_field(eqtb[#]) {level of definition}
 // @d eq_type(#)==eq_type_field(eqtb[#]) {command code for equivalent}
@@ -35,7 +33,7 @@ macro_rules! equiv_field {
 macro_rules! equiv {
     ($globals:expr, $val:expr) => {
         equiv_field!($globals.eqtb[$val])
-    }
+    };
 }
 // @d level_zero=min_quarterword {level for undefined quantities}
 // @d level_one=level_zero+1 {outermost level for defined quantities}

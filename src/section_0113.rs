@@ -96,17 +96,13 @@ pub(crate) struct MEMORY_WORD_HH_RH;
 impl Index<MEMORY_WORD_HH_RH> for memory_word {
     type Output = halfword;
     fn index(&self, _: MEMORY_WORD_HH_RH) -> &halfword {
-        unsafe {
-            &self.hh.rh
-        }
+        unsafe { &self.hh.rh }
     }
 }
 
 impl IndexMut<MEMORY_WORD_HH_RH> for memory_word {
     fn index_mut(&mut self, _: MEMORY_WORD_HH_RH) -> &mut halfword {
-        unsafe {
-            &mut self.hh.rh
-        }
+        unsafe { &mut self.hh.rh }
     }
 }
 
