@@ -35,7 +35,13 @@ const _: () = ();
 //   end;
 
 #[derive(Copy, Clone)]
-union two_halves {
+struct two_halves {
+    rh: halfword,
+    lh_or_b01: halfword_or_b01,
+}
+
+#[derive(Copy, Clone)]
+union halfword_or_b01 {
     lh: halfword,
     b: (quarterword, quarterword),
 }
@@ -61,10 +67,11 @@ struct four_quarters {
 //   end;
 
 #[derive(Copy, Clone)]
-union memory_word {
+pub(crate) union memory_word {
     int: integer,
     sc: scaled,
     gr: glue_ratio,
+    w: word,
     hh: two_halves,
     qqqq: four_quarters,
 }
@@ -72,8 +79,35 @@ union memory_word {
 // @!word_file = file of memory_word;
 type word_file = file_of<memory_word>;
 
-use crate::pascal::{file_of, integer};
+use crate::pascal::{file_of, integer, word};
 use crate::section_0101::scaled;
 use crate::section_0109::glue_ratio;
 use crate::section_0110::{max_halfword, max_quarterword, min_halfword, min_quarterword};
 use static_assertions::const_assert;
+
+impl Default for memory_word {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+
+pub(crate) struct MEMORY_WORD_HH_RH;
+
+impl Index<MEMORY_WORD_HH_RH> for memory_word {
+    type Output = halfword;
+    fn index(&self, _: MEMORY_WORD_HH_RH) -> &halfword {
+        unsafe {
+            &self.hh.rh
+        }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_HH_RH> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_HH_RH) -> &mut halfword {
+        unsafe {
+            &mut self.hh.rh
+        }
+    }
+}
+
+use core::ops::{Index, IndexMut};

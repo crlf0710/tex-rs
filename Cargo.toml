@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 static_assertions = "1.1.0"
-typenum = "1.12.0"
+typenum = {git = "https://github.com/crlf0710/typenum"}
 globals_struct = {git = "https://github.com/crlf0710/globals_struct"}
 
 [features]

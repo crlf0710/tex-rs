@@ -31,9 +31,11 @@
 
 #[globals_struct]
 pub(crate) mod TeXGlobals {
+    include!("src/section_0030.rs");
     include!("src/section_0032.rs");
     include!("src/section_0054.rs");
     include!("src/section_0076.rs");
+    include!("src/section_0253.rs");
     include!("src/section_0297.rs");
     include!("src/section_0301.rs");
     include!("src/section_1299.rs");

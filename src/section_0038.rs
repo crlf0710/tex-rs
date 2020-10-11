@@ -46,18 +46,18 @@
 // @!pool_pointer = 0..pool_size; {for variables that point into |str_pool|}
 // @!str_number = 0..max_strings; {for variables that point into |str_start|}
 #[derive(Copy, Clone)]
-pub(crate) struct str_number(ranged_unsigned_integer<u32, U0, max_strings_TYPENUM>);
+pub(crate) struct str_number(u32_from_m_to_n<U0, max_strings_TYPENUM>);
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
 //
 
-use crate::pascal::{integer, ranged_unsigned_integer};
+use crate::pascal::{integer, u32_from_m_to_n};
 use crate::section_0011::max_strings_TYPENUM;
 use typenum::{U0, U1, U2147483648, U63};
 
 impl str_number {
-    pub(crate) const fn new_zero() -> Self {
-        str_number(ranged_unsigned_integer::new(0))
+    pub(crate) fn new_zero() -> Self {
+        str_number(u32_from_m_to_n::new(0))
     }
     pub(crate) fn is_zero(&self) -> bool {
         (self.0).get() == 0

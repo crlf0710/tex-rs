@@ -16,8 +16,8 @@ const two: scaled = scaled(0o400000);
 #[derive(Copy, Clone)]
 pub struct scaled(integer);
 
-pub type nonnegative_integer = ranged_unsigned_integer<u32, U0, typenum_op!(U2147483648 - U1)>;
-pub type small_number = ranged_unsigned_integer<u8, U0, U63>;
+pub type nonnegative_integer = u32_from_m_to_n<U0, ::typenum::op!(U2147483648 - U1)>;
+pub type small_number = u8_from_m_to_n<U0, U63>;
 
-use crate::pascal::{integer, ranged_unsigned_integer};
-use typenum::{__op_internal__, op as typenum_op, U0, U1, U2147483648, U63};
+use crate::pascal::{integer, u32_from_m_to_n, u8_from_m_to_n};
+use typenum::{U0, U1, U2147483648, U63};

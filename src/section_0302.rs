@@ -14,3 +14,10 @@ macro_rules! state {
         $globals.cur_input.state_field
     };
 }
+
+/// end of current line in `buffer`
+macro_rules! limit {
+    ($globals:expr) => {
+        $globals.cur_input.limit_field
+    };
+}

@@ -24,7 +24,16 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
         // @<Compute the magic offset@>;
         // @<Initialize the print |selector|...@>;
         // if (loc<limit)and(cat_code(buffer[loc])<>escape) then start_input;
-        //   {\.{\\input} assumed}
+        if loc!($globals) < limit!($globals) &&
+            cat_code!($globals, $globals.buffer[loc!($globals)]) != escape {
+            start_input($globals);
+            // {\.{\\input} assumed}
+            /// `\input` assumed.
+            const _: () = ();
+        }
         // end
+
+        use crate::section_0207::escape;
+        use crate::section_0537::start_input;
     };
 }

@@ -7,10 +7,12 @@
 
 /// eight-bit numbers
 #[cfg(not(feature = "unicode_support"))]
-pub struct ASCII_code(u8);
+#[derive(Default, Copy, Clone)]
+pub struct ASCII_code(pub(crate) u8);
 
 /// 32-bit internal form character code, compatible with ascii
 #[cfg(feature = "unicode_support")]
-pub struct ASCII_code(u32);
+#[derive(Default, Copy, Clone)]
+pub struct ASCII_code(pub(crate) u32);
 
 migration_complete!();

@@ -11,9 +11,16 @@
 // @!mem_min=0; {smallest index in \TeX's internal |mem| array;
 //   must be |min_halfword| or more;
 //   must be equal to |mem_bot| in \.{INITEX}, otherwise |<=mem_bot|}
+
 // @!buf_size=500; {maximum number of characters simultaneously present in
 //   current lines of open files and in control sequences between
 //   \.{\\csname} and \.{\\endcsname}; must not exceed |max_halfword|}
+/// maximum number of characters simultaneously present in
+/// current lines of open files and in control sequences between
+/// `\csname` and `\endcsname`; must not exceed `max_halfword`
+pub(crate) const buf_size: u16 = buf_size_TYPENUM::U16;
+pub(crate) type buf_size_TYPENUM = U500;
+
 // @!error_line=72; {width of context lines on terminal error messages}
 // @!half_error_line=42; {width of first lines of contexts in terminal
 //   error messages; should be between 30 and |error_line-15|}
@@ -53,6 +60,6 @@ const_assert!(max_strings as u32 <= max_halfword as u32);
 //
 
 use crate::section_0110::max_halfword;
-type U3000 = typenum_op!(U1000 * U3);
+type U3000 = ::typenum::op!(U1000 * U3);
 use static_assertions::const_assert;
-use typenum::{Unsigned, __op_internal__, op as typenum_op, U1000, U3};
+use typenum::{Unsigned, U1000, U3, U500};
