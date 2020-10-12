@@ -8,9 +8,14 @@
 // @!xchr: array [ASCII_code] of text_char;
 //   {specifies conversion of output characters}
 
-#[allow(unused_variables)]
+#[cfg(not(feature = "unicode_support"))]
 pub(crate) fn xord(val: text_char) -> ASCII_code {
     todo!();
+}
+
+#[cfg(feature = "unicode_support")]
+pub(crate) fn xord(val: text_char) -> ASCII_code {
+    ASCII_code(val.0)
 }
 
 use crate::section_0018::ASCII_code;

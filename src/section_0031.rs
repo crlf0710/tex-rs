@@ -81,7 +81,7 @@ pub(crate) fn input_ln(
                 // end;
             }
             // buffer[last]:=xord[f^]; get(f); incr(last);
-            globals_view.buffer[*globals_view.last] = xord(caret(f));
+            globals_view.buffer[*globals_view.last] = xord(buffer_variable(f));
             get(f);
             incr!(*globals_view.last);
             // if buffer[last-1]<>" " then last_nonblank:=last;
@@ -101,7 +101,7 @@ pub(crate) fn input_ln(
 
 use crate::pascal::boolean;
 use crate::pascal::u16_from_0_to_n;
-use crate::pascal::{caret, eof, eoln, get};
+use crate::pascal::{buffer_variable, eof, eoln, get};
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0011::buf_size;
 use crate::section_0011::buf_size_TYPENUM;

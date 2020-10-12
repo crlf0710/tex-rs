@@ -4,7 +4,8 @@ pub type word = u32;
 pub type boolean = bool;
 
 #[cfg(not(feature = "unicode_support"))]
-pub(crate) struct char(u8);
+#[derive(Copy, Clone)]
+pub(crate) struct char(pub(crate) u8);
 
 #[cfg(not(feature = "unicode_support"))]
 impl char {
@@ -14,7 +15,8 @@ impl char {
 }
 
 #[cfg(feature = "unicode_support")]
-pub(crate) struct char(u32, PhantomData<Rc<()>>);
+#[derive(Copy, Clone)]
+pub(crate) struct char(pub(crate) u32, PhantomData<Rc<()>>);
 
 #[cfg(feature = "unicode_support")]
 impl char {
@@ -290,157 +292,478 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
     };
 }
 
-pub(crate) struct IoTarget {
-    input_target: Box<dyn Read>,
-    output_target: Box<dyn Write>,
+pub(crate) trait ReadLine {
+    fn read_line(&mut self, buf: &mut String) -> io::Result<usize>;
+}
+
+impl ReadLine for io::Stdin {
+    fn read_line(&mut self, buf: &mut String) -> io::Result<usize> {
+        io::Stdin::read_line(self, buf)
+    }
+}
+
+impl<R: io::Read> ReadLine for io::BufReader<R> {
+    fn read_line(&mut self, buf: &mut String) -> io::Result<usize> {
+        <Self as io::BufRead>::read_line(self, buf)
+    }
+}
+
+pub(crate) enum LineBufferState<T> {
+    UnknownState {
+        initial_line: bool,
+    },
+    AfterReadLine {
+        line_buffer: Vec<T>,
+        line_position: usize,
+        line_no_more: bool,
+    },
+    Eof,
+}
+
+pub(crate) enum BlockBufferState<T> {
+    UnknownState,
+    AfterReadBlock {
+        bytes_buffer: Box<[u8]>,
+        bytes_avail_length: usize,
+        bytes_position: usize,
+        bytes_caret: Option<(T, usize)>,
+    },
+    Eof,
+}
+
+pub(crate) enum FileState<T> {
+    Undefined,
+    GenerationMode {
+        write_caret: Option<T>,
+        write_target: Box<dyn Write>,
+    },
+    LineInspectionMode {
+        read_line_buffer: LineBufferState<T>,
+        read_target: Box<dyn ReadLine>,
+    },
+    BlockInspectionMode {
+        read_block_buffer: BlockBufferState<T>,
+        read_target: Box<dyn Read>,
+    },
+}
+
+impl<T> Default for FileState<T> {
+    fn default() -> Self {
+        FileState::Undefined
+    }
+}
+
+impl<T> FileState<T> {
+    fn discard_caret_and_get_write_target(&mut self) -> &mut dyn Write {
+        match self {
+            FileState::GenerationMode {
+                write_caret,
+                write_target,
+            } => {
+                *write_caret = None;
+                write_target.as_mut()
+            }
+            _ => {
+                panic!("file not in generation mode!");
+            }
+        }
+    }
+
+    fn refill<F>(&mut self)
+    where
+        F: PascalFile<Unit = T>,
+    {
+        match self {
+            FileState::LineInspectionMode {
+                read_line_buffer,
+                read_target,
+            } => match read_line_buffer {
+                LineBufferState::UnknownState { initial_line } => {
+                    let initial_line = *initial_line;
+                    let mut buf = String::new();
+                    read_target.read_line(&mut buf).expect("read line failure");
+                    if initial_line && buf.is_empty() {
+                        *read_line_buffer = LineBufferState::Eof;
+                        return;
+                    }
+                    let mut line_chars = vec![];
+                    F::convert_line_string_crlf_to_lf(&mut buf);
+                    F::convert_line_string_to_units(&buf, &mut line_chars);
+                    let no_more = match line_chars.last() {
+                        Some(c) => !F::is_eoln_unit(c),
+                        None => true
+                    };
+                    if no_more {
+                        line_chars.push(F::eoln_unit());
+                    }
+                    *read_line_buffer = LineBufferState::AfterReadLine {
+                        line_buffer: line_chars,
+                        line_position: 0,
+                        line_no_more: no_more
+                    };
+                    return;
+                }
+                _ => unreachable!(),
+            },
+            FileState::BlockInspectionMode { .. } => {
+                todo!();
+            }
+            _ => {
+                panic!("file not in inspection mode!");
+            }
+        }
+    }
 }
 
 #[allow(unused_variables)]
 pub(crate) trait PascalFile {
     type Unit;
 
-    fn io_target(&self) -> &IoTarget;
-    fn io_target_mut(&mut self) -> &mut IoTarget;
-    fn write_fmt(&mut self, args: fmt::Arguments) -> io::Result<()> {
-        self.io_target_mut().output_target.write_fmt(args)
+    fn is_text_file() -> bool;
+
+    fn is_eoln_unit(unit: &Self::Unit) -> bool;
+
+    fn eoln_unit() -> Self::Unit;
+
+    fn convert_line_string_crlf_to_lf(input: &mut String);
+
+    fn convert_line_string_to_units(input: &str, units: &mut Vec<Self::Unit>);
+
+    fn file_state(&self) -> &FileState<Self::Unit>;
+
+    fn file_state_mut(&mut self) -> &mut FileState<Self::Unit>;
+
+    fn put_unit_to_target(&mut self, val: Self::Unit) {
+        todo!();
     }
 }
 
-impl Default for IoTarget {
+pub(crate) struct file_of_text_char(FileState<text_char>);
+
+impl Default for file_of_text_char {
     fn default() -> Self {
-        IoTarget {
-            input_target: Box::new(io::empty()),
-            output_target: Box::new(io::sink()),
+        file_of_text_char(FileState::default())
+    }
+}
+
+impl PascalFile for file_of_text_char {
+    type Unit = text_char;
+
+    fn is_text_file() -> bool {
+        true
+    }
+
+    fn is_eoln_unit(unit: &Self::Unit) -> bool {
+        unit.0 == b'\n' as _
+    }
+
+    fn eoln_unit() -> Self::Unit {
+        text_char::new(b'\n' as _)
+    }
+
+    fn convert_line_string_crlf_to_lf(input: &mut String) {
+        if input.ends_with("\r\n") {
+            input.pop();
+            input.pop();
+            input.push('\n');
         }
     }
-}
 
-// TODO: Implement this.
-pub struct packed_file_of_text_char(IoTarget);
-
-impl Default for packed_file_of_text_char {
-    fn default() -> Self {
-        packed_file_of_text_char(IoTarget::default())
+    fn convert_line_string_to_units(input: &str, units: &mut Vec<Self::Unit>) {
+        #[cfg(not(feature = "unicode_support"))]
+        {
+            for byte in input.bytes() {
+                units.push(text_char(byte))
+            }
+        }
+        #[cfg(feature = "unicode_support")]
+        {
+            use unicode_segmentation::UnicodeSegmentation;
+            for grapheme in input.graphemes(true) {
+                if grapheme.as_bytes().len() == 1 {
+                    units.push(text_char::new(grapheme.as_bytes()[0] as _))
+                } else {
+                    let (byte_offset, ch) = grapheme.char_indices().rev().next().unwrap();
+                    if byte_offset == 0 {
+                        units.push(text_char::new(ch as _))
+                    } else {
+                        todo!();
+                    }
+                }
+            }
+        }
     }
-}
 
-impl PascalFile for packed_file_of_text_char {
-    type Unit = crate::section_0019::text_char;
-
-    fn io_target(&self) -> &IoTarget {
+    fn file_state(&self) -> &FileState<text_char> {
         &self.0
     }
 
-    fn io_target_mut(&mut self) -> &mut IoTarget {
+    fn file_state_mut(&mut self) -> &mut FileState<text_char> {
         &mut self.0
     }
 }
 
-// TODO: Implement this.
-pub struct packed_file_of<T>(IoTarget, PhantomData<T>);
+pub(crate) type packed_file_of_text_char = file_of_text_char;
 
-impl<T> Default for packed_file_of<T> {
-    fn default() -> Self {
-        packed_file_of(IoTarget::default(), PhantomData)
-    }
-}
-
-impl<T> PascalFile for packed_file_of<T> {
-    type Unit = T;
-
-    fn io_target(&self) -> &IoTarget {
-        &self.0
-    }
-
-    fn io_target_mut(&mut self) -> &mut IoTarget {
-        &mut self.0
-    }
-}
-
-// TODO: Implement this.
-pub struct file_of<T>(IoTarget, PhantomData<T>);
+pub(crate) struct file_of<T>(FileState<T>);
 
 impl<T> Default for file_of<T> {
     fn default() -> Self {
-        file_of(IoTarget::default(), PhantomData)
+        file_of(FileState::default())
     }
 }
 
 impl<T> PascalFile for file_of<T> {
     type Unit = T;
 
-    fn io_target(&self) -> &IoTarget {
+    fn is_text_file() -> bool {
+        false
+    }
+
+    fn is_eoln_unit(_: &T) -> bool {
+        unreachable!()
+    }
+
+    fn eoln_unit() -> Self::Unit {
+        unreachable!()
+    }
+
+    fn convert_line_string_crlf_to_lf(_: &mut String) {
+        unreachable!()
+    }
+
+    fn convert_line_string_to_units(_: &str, _: &mut Vec<Self::Unit>) {
+        unreachable!()
+    }
+
+    fn file_state(&self) -> &FileState<T> {
         &self.0
     }
 
-    fn io_target_mut(&mut self) -> &mut IoTarget {
+    fn file_state_mut(&mut self) -> &mut FileState<T> {
         &mut self.0
+    }
+}
+
+pub(crate) type packed_file_of<T> = file_of<T>;
+
+#[allow(unused_variables)]
+pub(crate) fn rewrite<F: PascalFile>(file: &mut F, path: &str, options: &str) {
+    let new_write_target: Box<dyn Write> = if path == "TTY:" {
+        Box::new(io::stdout())
+    } else {
+        unimplemented!()
+    };
+    *file.file_state_mut() = FileState::GenerationMode {
+        write_target: new_write_target,
+        write_caret: None,
+    };
+}
+
+#[allow(unused_variables)]
+pub(crate) fn put<F: PascalFile>(file: &mut F) {
+    match file.file_state_mut() {
+        FileState::GenerationMode {
+            write_target,
+            write_caret,
+        } => {
+            let caret_value = write_caret
+                .take()
+                .expect("file buffer variable value is undefined!");
+            file.put_unit_to_target(caret_value);
+        }
+        _ => {
+            panic!("file not in generation mode!");
+        }
     }
 }
 
 #[allow(unused_variables)]
 pub(crate) fn reset<F: PascalFile>(file: &mut F, path: &str, options: &str) {
-    let new_input_target: Box<dyn Read> = if path == "TTY:" {
-        Box::new(io::stdin())
+    if F::is_text_file() {
+        let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
+            Box::new(io::stdin())
+        } else {
+            unimplemented!()
+        };
+        *file.file_state_mut() = FileState::LineInspectionMode {
+            read_target: new_read_target,
+            read_line_buffer: LineBufferState::UnknownState { initial_line: true },
+        };
     } else {
-        unimplemented!()
-    };
-    file.io_target_mut().input_target = new_input_target;
-}
-
-#[allow(unused_variables)]
-pub(crate) fn caret<F: PascalFile>(file: &mut F) -> F::Unit {
-    todo!();
-}
-
-#[allow(unused_variables)]
-pub(crate) fn eof<F: PascalFile>(file: &mut F) -> bool {
-    todo!();
-}
-
-#[allow(unused_variables)]
-pub(crate) fn eoln<F: PascalFile>(file: &mut F) -> bool {
-    todo!();
+        let new_read_target: Box<dyn Read> = if path == "TTY:" {
+            Box::new(io::stdin())
+        } else {
+            unimplemented!()
+        };
+        *file.file_state_mut() = FileState::BlockInspectionMode {
+            read_target: new_read_target,
+            read_block_buffer: BlockBufferState::UnknownState,
+        };
+    }
 }
 
 #[allow(unused_variables)]
 pub(crate) fn get<F: PascalFile>(file: &mut F) {
-    todo!();
+    loop {
+        match file.file_state_mut() {
+            FileState::LineInspectionMode {
+                read_line_buffer, ..
+            } => match read_line_buffer {
+                LineBufferState::Eof => {
+                    panic!("file eof reached");
+                }
+                LineBufferState::UnknownState { .. } => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                LineBufferState::AfterReadLine {
+                    line_buffer,
+                    line_position,
+                    line_no_more,
+                } => {
+                    if *line_position + 1 < line_buffer.len() {
+                        *line_position += 1;
+                    } else {
+                        if *line_no_more {
+                            *read_line_buffer = LineBufferState::Eof
+                        } else {
+                            *read_line_buffer = LineBufferState::UnknownState {
+                                initial_line: false,
+                            };
+                        }
+                    }
+                }
+            },
+            FileState::BlockInspectionMode { .. } => {
+                todo!();
+            }
+            _ => {
+                panic!("file not in inspection mode");
+            }
+        }
+        return;
+    }
 }
 
 #[allow(unused_variables)]
+pub(crate) fn buffer_variable<F: PascalFile>(file: &mut F) -> F::Unit
+where
+    F::Unit: Clone,
+{
+    loop {
+        match file.file_state() {
+            FileState::LineInspectionMode {
+                read_line_buffer,
+                read_target,
+            } => match read_line_buffer {
+                LineBufferState::Eof => {
+                    panic!("file eof reached");
+                }
+                LineBufferState::UnknownState { .. } => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                LineBufferState::AfterReadLine {
+                    line_buffer,
+                    line_position,
+                    ..
+                } => {
+                    return line_buffer[*line_position].clone();
+                }
+            },
+            FileState::BlockInspectionMode {
+                read_block_buffer,
+                read_target,
+            } => {
+                todo!();
+            }
+            _ => panic!("file not in inspection mode"),
+        }
+    }
+}
+
+pub(crate) fn eof<F: PascalFile>(file: &mut F) -> bool {
+    loop {
+        match file.file_state() {
+            FileState::LineInspectionMode {
+                read_line_buffer, ..
+            } => match read_line_buffer {
+                LineBufferState::Eof => {
+                    return true;
+                }
+                LineBufferState::UnknownState { .. } => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                LineBufferState::AfterReadLine { .. } => {
+                    return false;
+                }
+            },
+            FileState::BlockInspectionMode { .. } => {
+                todo!();
+            }
+            FileState::GenerationMode { .. } => {
+                return true;
+            }
+            _ => panic!("file not in any mode"),
+        }
+    }
+}
+
+#[allow(unused_variables)]
+pub(crate) fn eoln<F: PascalFile>(file: &mut F) -> bool {
+    loop {
+        match file.file_state() {
+            FileState::LineInspectionMode {
+                read_line_buffer, ..
+            } => match read_line_buffer {
+                LineBufferState::Eof => {
+                    panic!("file eof reached");
+                }
+                LineBufferState::UnknownState { .. } => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                LineBufferState::AfterReadLine {
+                    line_buffer,
+                    line_position,
+                    ..
+                } => {
+                    return F::is_eoln_unit(&line_buffer[*line_position]);
+                }
+            },
+            FileState::BlockInspectionMode { .. } => panic!("file is not text file"),
+            _ => panic!("file not in inspection mode"),
+        }
+    }
+}
+
 pub(crate) fn write<F: PascalFile, T: Display>(file: &mut F, val: T) {
-    write!(file, "{}", val).unwrap();
+    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    write!(write_target, "{}", val).unwrap();
 }
 
-#[allow(unused_variables)]
 pub(crate) fn write_ln<F: PascalFile, T: Display>(file: &mut F, val: T) {
-    writeln!(file, "{}", val).unwrap();
+    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    writeln!(write_target, "{}", val).unwrap();
 }
 
-#[allow(unused_variables)]
 pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
-    writeln!(file, "").unwrap();
-}
-
-#[allow(unused_variables)]
-pub(crate) fn rewrite<F: PascalFile>(file: &mut F, path: &str, options: &str) {
-    let new_output_target: Box<dyn Write> = if path == "TTY:" {
-        Box::new(io::stdout())
-    } else {
-        unimplemented!()
-    };
-    file.io_target_mut().output_target = new_output_target;
+    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    writeln!(write_target, "").unwrap();
 }
 
 pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
-    file.io_target_mut().output_target.flush().unwrap();
+    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    write_target.flush().unwrap();
 }
 
 pub(crate) fn close<F: PascalFile>(file: &mut F) {
-    *file.io_target_mut() = IoTarget::default();
+    *file.file_state_mut() = FileState::default();
 }
 
+use crate::section_0019::text_char;
 use core::fmt::{self, Display};
 use core::marker::PhantomData;
 use std::io::{self, Read, Write};
