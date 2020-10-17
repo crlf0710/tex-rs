@@ -106,4 +106,34 @@ impl IndexMut<MEMORY_WORD_HH_RH> for memory_word {
     }
 }
 
+pub(crate) struct MEMORY_WORD_HH_B1;
+
+impl Index<MEMORY_WORD_HH_B1> for memory_word {
+    type Output = quarterword;
+    fn index(&self, _: MEMORY_WORD_HH_B1) -> &quarterword {
+        unsafe { &self.hh.lh_or_b01.b.1 }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_HH_B1> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_HH_B1) -> &mut quarterword {
+        unsafe { &mut self.hh.lh_or_b01.b.1 }
+    }
+}
+
+pub(crate) struct MEMORY_WORD_HH_B0;
+
+impl Index<MEMORY_WORD_HH_B0> for memory_word {
+    type Output = quarterword;
+    fn index(&self, _: MEMORY_WORD_HH_B0) -> &quarterword {
+        unsafe { &self.hh.lh_or_b01.b.0 }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_HH_B0> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_HH_B0) -> &mut quarterword {
+        unsafe { &mut self.hh.lh_or_b01.b.0 }
+    }
+}
+
 use core::ops::{Index, IndexMut};

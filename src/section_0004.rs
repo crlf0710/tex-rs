@@ -37,9 +37,11 @@ pub(crate) mod TeXGlobals {
     include!("src/section_0054.rs");
     include!("src/section_0076.rs");
     include!("src/section_0253.rs");
+    include!("src/section_0256.rs");
     include!("src/section_0297.rs");
     include!("src/section_0301.rs");
     include!("src/section_0304.rs");
+    include!("src/section_0410.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
 }

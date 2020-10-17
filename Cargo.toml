@@ -10,6 +10,7 @@ static_assertions = "1.1.0"
 typenum = {git = "https://github.com/crlf0710/typenum"}
 globals_struct = {git = "https://github.com/crlf0710/globals_struct"}
 unicode-normalization = { version = "0.1.13", optional = true }
+linkme = "0.2.2"
 
 [features]
 initex = []

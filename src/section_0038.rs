@@ -46,7 +46,7 @@
 // @!pool_pointer = 0..pool_size; {for variables that point into |str_pool|}
 // @!str_number = 0..max_strings; {for variables that point into |str_start|}
 #[derive(Copy, Clone)]
-pub(crate) struct str_number(u32_from_m_to_n<U0, max_strings_TYPENUM>);
+pub(crate) struct str_number(pub(crate) u32_from_m_to_n<U0, max_strings_TYPENUM>);
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
 //
