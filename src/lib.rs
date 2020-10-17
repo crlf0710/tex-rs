@@ -217,7 +217,15 @@ reversing_order_items!(
     }
 );
 mod section_0539_to_0582;
-mod section_0583_to_0591;
+mod section_0583;
+mod section_0584;
+mod section_0585;
+mod section_0586;
+mod section_0587;
+mod section_0588;
+mod section_0589;
+mod section_0590;
+mod section_0591;
 mod section_0592_to_0599;
 mod section_0600_to_0643;
 mod section_0644_to_0679;
