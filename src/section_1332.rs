@@ -42,9 +42,18 @@ pub fn entry() {
     /// set global variables to their starting values
     initialize(globals);
     // @!init if not get_strings_started then goto final_end;
-    // init_prim; {call |primitive| for each primitive}
-    // init_str_ptr:=str_ptr; init_pool_ptr:=pool_ptr; fix_date_and_time;
-    // tini@/
+    region_initex! {
+    (globals) {
+        if !get_strings_started(globals) {
+            goto_forward_label!('final_end);
+        }
+        // init_prim; {call |primitive| for each primitive}
+        /// call `primitive` for each primitive
+        init_prim(globals);
+        // init_str_ptr:=str_ptr; init_pool_ptr:=pool_ptr; fix_date_and_time;
+        // tini@/
+    }
+    };
     /// ready_already:=314159;
     {
         globals.ready_already = 314159;
@@ -89,3 +98,5 @@ use crate::section_0076::history_kind::{fatal_error_stop, spotless};
 use crate::section_1030::main_control;
 use crate::section_1333::close_files_and_terminate;
 use crate::section_1335::final_cleanup;
+use crate::section_0047::get_strings_started;
+use crate::section_1336::init_prim;

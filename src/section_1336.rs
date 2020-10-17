@@ -16,7 +16,7 @@ macro_rules! Put_each_of_TeX_s_primitivies_into_the_hash_table {
 // @!init procedure init_prim; {initialize all the primitives}
 /// initialize all the primitives
 #[cfg(feature = "initex")]
-fn init_prim(globals: &mut TeXGlobals) {
+pub(crate) fn init_prim(globals: &mut TeXGlobals) {
     // begin no_new_control_sequence:=false;
     globals.no_new_control_sequence = false;
     // @<Put each...@>;

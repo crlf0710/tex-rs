@@ -97,3 +97,14 @@ macro_rules! goto_backward_label {
         continue $lbl;
     };
 }
+
+macro_rules! region_initex {
+    (($globals:expr) $($statements:tt)* ) => {
+        #[cfg(feature = "initex")]
+        {
+            if $globals.ready_already != 314159 {
+                $($statements)*
+            }
+        }
+    };
+}
