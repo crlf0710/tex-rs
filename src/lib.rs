@@ -263,4 +263,6 @@ mod section_1378;
 mod section_1379;
 mod section_1380;
 
+mod unicode_support;
+
 pub use section_1332::entry;

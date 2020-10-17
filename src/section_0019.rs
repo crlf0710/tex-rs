@@ -27,29 +27,22 @@
 // @d text_char == char {the data type of characters in text files}
 
 /// the data type of characters in text files
-#[cfg(not(feature = "unicode_support"))]
-pub(crate) struct text_char(u8);
-
-/// the data type of characters in text files
-///
-/// represents a unicode grapheme cluster
-#[cfg(feature = "unicode_support")]
-pub(crate) struct text_char(u32);
+pub(crate) type text_char = crate::pascal::char;
 
 // @d first_text_char=0 {ordinal number of the smallest element of |text_char|}
 
 /// ordinal number of the smallest element of [text_char]
-const first_text_char: text_char = text_char(0);
+const first_text_char: text_char = text_char::new(0);
 
 // @d last_text_char=255 {ordinal number of the largest element of |text_char|}
 
 /// ordinal number of the largest element of [text_char]
 #[cfg(not(feature = "unicode_support"))]
-const last_text_char: text_char = text_char(255);
+const last_text_char: text_char = text_char::new(255);
 
 /// ordinal number of the largest element of [text_char]
 #[cfg(feature = "unicode_support")]
-const last_text_char: text_char = text_char(u32::MAX);
+const last_text_char: text_char = text_char::new(u32::MAX);
 
 //
 // @<Local variables for init...@>=

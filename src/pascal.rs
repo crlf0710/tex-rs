@@ -3,6 +3,26 @@ pub type real = f32;
 pub type word = u32;
 pub type boolean = bool;
 
+#[cfg(not(feature = "unicode_support"))]
+pub(crate) struct char(u8);
+
+#[cfg(not(feature = "unicode_support"))]
+impl char {
+    pub(crate) const fn new(v: u8) -> Self {
+        char(v)
+    }
+}
+
+#[cfg(feature = "unicode_support")]
+pub(crate) struct char(u32, PhantomData<Rc<()>>);
+
+#[cfg(feature = "unicode_support")]
+impl char {
+    pub(crate) const fn new(v: u32) -> Self {
+        char(v, PhantomData)
+    }
+}
+
 macro_rules! define_ranged_unsigned_integer {
     ($v:vis $name:ident => $base_type:path; $typenum_const:ident) => {
         // TODO: Implement this.
@@ -412,4 +432,5 @@ pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
 use core::fmt::{self, Display};
 use core::marker::PhantomData;
 use std::io::{self, Read, Write};
+use std::rc::Rc;
 use typenum::Unsigned;
