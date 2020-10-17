@@ -1,11 +1,3 @@
-//! @ @<Glob...@>=
-//! @!str_pool:packed array[pool_pointer] of packed_ASCII_code; {the characters}
-//! @!str_start : array[str_number] of pool_pointer; {the starting pointers}
-//! @!pool_ptr : pool_pointer; {first unused position in |str_pool|}
-//! @!str_ptr : str_number; {number of the current string being created}
-//! @!init_pool_ptr : pool_pointer; {the starting value of |pool_ptr|}
-//! @!init_str_ptr : str_number; {the starting value of |str_ptr|}
-//!
 //! @ Several of the elementary string operations are performed using \.{WEB}
 //! macros instead of \PASCAL\ procedures, because many of the
 //! operations are done quite frequently and we want to avoid the

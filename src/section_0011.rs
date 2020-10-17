@@ -50,6 +50,12 @@ const_assert!(max_strings as u32 <= max_halfword as u32);
 //   error messages and help texts, and the names of all fonts and
 //   control sequences; must exceed |string_vacancies| by the total
 //   length of \TeX's own strings, which is currently about 23000}
+/// maximum number of characters in strings, including all
+///   error messages and help texts, and the names of all fonts and
+///   control sequences; must exceed |string_vacancies| by the total
+///   length of \TeX's own strings, which is currently about 23000
+pub(crate) const pool_size: u16 = pool_size_TYPENUM::U16;
+pub(crate) type pool_size_TYPENUM = U32000;
 // @!save_size=600; {space for saving values outside of current group; must be
 //   at most |max_halfword|}
 // @!trie_size=8000; {space for hyphenation patterns; should be larger for
@@ -64,5 +70,6 @@ const_assert!(max_strings as u32 <= max_halfword as u32);
 
 use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
+type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U1000, U3, U500, U6};
+use typenum::{Unsigned, U1000, U10000, U2, U3, U500, U6};

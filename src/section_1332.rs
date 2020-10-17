@@ -4,6 +4,17 @@
 //! \PASCAL\ runtime system is smart enough to detect such a ``mistake.''
 //! @^system dependencies@>
 
+#[distributed_slice]
+pub(crate) static CHECK_THE_CONSTANT_VALUES_FOR_CONSISTENCY: [fn(&mut TeXGlobals)] = [..];
+
+macro_rules! Check_the_constant_values_for_consistency {
+    ($globals:expr) => {
+        for f in CHECK_THE_CONSTANT_VALUES_FOR_CONSISTENCY {
+            f($globals);
+        }
+    };
+}
+
 /// Main entry to TeX
 #[allow(unused_mut, unused_variables)]
 pub fn entry() {
@@ -32,12 +43,17 @@ pub fn entry() {
         goto_forward_label!('start_of_TEX);
     }
     // @<Check the ``constant'' values...@>@;
+    Check_the_constant_values_for_consistency!(globals);
     // if bad>0 then
-    //   begin wterm_ln('Ouch---my internal constants have been clobbered!',
-    //     '---case ',bad:1);
-    // @.Ouch...clobbered@>
-    //   goto final_end;
-    //   end;
+    if globals.bad > 0 {
+        // begin wterm_ln('Ouch---my internal constants have been clobbered!',
+        //   '---case ',bad:1);
+        // @.Ouch...clobbered@>
+        wterm_ln(globals, format!("{}{}{:1}","Ouch---my internal constants have been clobbered!", "---case ", globals.bad));
+        //   goto final_end;
+        goto_forward_label!('final_end);
+        // end;
+    }
     // initialize; {set global variables to their starting values}
     /// set global variables to their starting values
     initialize(globals);
@@ -51,6 +67,9 @@ pub fn entry() {
         /// call `primitive` for each primitive
         init_prim(globals);
         // init_str_ptr:=str_ptr; init_pool_ptr:=pool_ptr; fix_date_and_time;
+        globals.init_str_ptr = globals.str_ptr;
+        globals.init_pool_ptr = globals.pool_ptr;
+        fix_date_and_time(globals);
         // tini@/
     }
     };
@@ -91,12 +110,14 @@ pub fn entry() {
     // end.
 }
 
-use crate::section_0004::TeXGlobals;
 use crate::section_0004::initialize;
+use crate::section_0004::TeXGlobals;
 use crate::section_0033::t_open_out;
+use crate::section_0047::get_strings_started;
 use crate::section_0076::history_kind::{fatal_error_stop, spotless};
+use crate::section_0241::fix_date_and_time;
 use crate::section_1030::main_control;
 use crate::section_1333::close_files_and_terminate;
 use crate::section_1335::final_cleanup;
-use crate::section_0047::get_strings_started;
 use crate::section_1336::init_prim;
+use linkme::distributed_slice;

@@ -32,8 +32,10 @@
 #[globals_struct]
 #[globals_struct_field_view(TeXGlobalsIoView, make_globals_io_view)]
 pub(crate) mod TeXGlobals {
+    include!("src/section_0013.rs");
     include!("src/section_0030.rs");
     include!("src/section_0032.rs");
+    include!("src/section_0039.rs");
     include!("src/section_0054.rs");
     include!("src/section_0076.rs");
     include!("src/section_0253.rs");
