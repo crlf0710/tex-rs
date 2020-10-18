@@ -2,12 +2,13 @@
 
 // @ @<Last-minute...@>=
 
+// FIXME: Using short name to workaround https://github.com/dtolnay/linkme/issues/35
 #[distributed_slice]
-pub(crate) static PUT_EACH_OF_TEX_S_PRIMITIVIES_INTO_THE_HASH_TABLE: [fn(&mut TeXGlobals)] = [..];
+pub(crate) static PRIM2HT: [fn(&mut TeXGlobals)] = [..];
 
 macro_rules! Put_each_of_TeX_s_primitivies_into_the_hash_table {
     ($globals:expr) => {
-        for f in PUT_EACH_OF_TEX_S_PRIMITIVIES_INTO_THE_HASH_TABLE {
+        for f in PRIM2HT {
             f($globals);
         }
     };

@@ -108,3 +108,13 @@ macro_rules! region_initex {
         }
     };
 }
+
+macro_rules! strpool_str {
+    ($s:expr) => {{
+        #[::linkme::distributed_slice(crate::string_pool::STRPL_STRS)]
+        static __: &'static str = $s;
+        let v = crate::string_pool::string_pool_index($s);
+        debug_assert!(v <= std::u32::MAX as usize);
+        crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
+    }};
+}

@@ -104,9 +104,20 @@ mod section_0036;
 mod section_0037;
 mod section_0038;
 mod section_0039;
-mod section_0040_to_0046;
-mod section_0047;
-mod section_0048_to_0053;
+mod section_0040_to_0042;
+mod section_0043;
+mod section_0044_to_0046;
+reversing_order_items!(
+    {
+        mod section_0047;
+    }
+    {
+        #[macro_use]
+        mod section_0048;
+    }
+);
+mod section_0049;
+mod section_0050_to_0053;
 mod section_0054;
 mod section_0055;
 mod section_0056;
@@ -281,6 +292,7 @@ mod section_1378;
 mod section_1379;
 mod section_1380;
 
+mod string_pool;
 mod unicode_support;
 
 pub use section_1332::entry;

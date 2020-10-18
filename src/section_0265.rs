@@ -3,11 +3,12 @@
 //! as follows:
 
 // @<Put each of \TeX's primitives into the hash table@>=
-#[distributed_slice(PUT_EACH_OF_TEX_S_PRIMITIVIES_INTO_THE_HASH_TABLE)]
+#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &mut TeXGlobals) {
     // primitive(" ",ex_space,0);@/
     // @!@:Single-character primitives /}{\quad\.{\\\ }@>
+    primitive(globals, strpool_str!(" "), ex_space, 0);
     // primitive("/",ital_corr,0);@/
     // @!@:Single-character primitives /}{\quad\.{\\/}@>
     // primitive("accent",accent,0);@/
@@ -99,5 +100,5 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
 use crate::section_0004::TeXGlobals;
 use crate::section_0208::*;
 use crate::section_0264::primitive;
-use crate::section_1336::PUT_EACH_OF_TEX_S_PRIMITIVIES_INTO_THE_HASH_TABLE;
+use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;
