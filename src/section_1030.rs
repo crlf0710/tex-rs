@@ -32,6 +32,10 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     {
     get_x_token(globals);
     // reswitch: @<Give diagnostic information, if requested@>;
+    region_backward_label! {
+    'reswitch <-
+    {
+    Give_diagnostic_information_if_requested!(globals);
     // case abs(mode)+cur_cmd of
     // hmode+letter,hmode+other_char,hmode+char_given: goto main_loop;
     // hmode+char_num: begin scan_char_num; cur_chr:=cur_val; goto main_loop;@+end;
@@ -52,6 +56,8 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     //   a non-character has been fetched@>;
     // append_normal_space:@<Append a normal inter-word space to the current list,
     //   then |goto big_switch|@>;
+    }
+    |'reswitch|}
     }
     |'big_switch|}
     // exit:end;

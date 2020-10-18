@@ -273,8 +273,16 @@ mod section_0942_to_0966;
 mod section_0967_to_0979;
 mod section_0980_to_1028;
 mod section_1029;
-mod section_1030;
-mod section_1031_to_1054;
+reversing_order_items!(
+    {
+        mod section_1030;
+    }
+    {
+        #[macro_use]
+        mod section_1031;
+    }
+);
+mod section_1032_to_1054;
 mod section_1055_to_1135;
 mod section_1136_to_1198;
 mod section_1199_to_1207;

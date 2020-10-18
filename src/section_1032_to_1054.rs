@@ -1,14 +1,3 @@
-//! @ When a new token has just been fetched at |big_switch|, we have an
-//! ideal place to monitor \TeX's activity.
-//! @^debugging@>
-//!
-//! @<Give diagnostic information, if requested@>=
-//! if interrupt<>0 then if OK_to_interrupt then
-//!   begin back_input; check_interrupt; goto big_switch;
-//!   end;
-//! @!debug if panicking then check_mem(false);@+@;@+gubed
-//! if tracing_commands>0 then show_cur_cmd_chr
-//!
 //! @ The following part of the program was first written in a structured
 //! manner, according to the philosophy that ``premature optimization is
 //! the root of all evil.'' Then it was rearranged into pieces of
