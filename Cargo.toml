@@ -15,4 +15,5 @@ linkme = "0.2.2"
 [features]
 initex = []
 unicode_support = ['unicode-normalization']
+debugging = []
 default = ['initex', 'unicode_support']

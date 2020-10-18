@@ -35,7 +35,7 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     region_backward_label! {
     'reswitch <-
     {
-    Give_diagnostic_information_if_requested!(globals);
+    Give_diagnostic_information_if_requested!(globals, 'big_switch);
     // case abs(mode)+cur_cmd of
     // hmode+letter,hmode+other_char,hmode+char_given: goto main_loop;
     // hmode+char_num: begin scan_char_num; cur_chr:=cur_val; goto main_loop;@+end;

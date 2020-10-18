@@ -109,6 +109,15 @@ macro_rules! region_initex {
     };
 }
 
+macro_rules! region_debug {
+    ($($statements:tt)* ) => {
+        #[cfg(all(feature = "debugging", debug_assertions))]
+        {
+            $($statements)*
+        }
+    };
+}
+
 macro_rules! strpool_str {
     ($s:expr) => {{
         #[::linkme::distributed_slice(crate::string_pool::STRPL_STRS)]
