@@ -50,6 +50,14 @@ macro_rules! define_ranged_unsigned_integer {
 
         impl<MIN, MAX> Copy for $name<MIN, MAX> {}
 
+        impl<MIN, MAX> Default for $name<MIN, MAX> where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
+            fn default() -> Self {
+                let val = <MIN as typenum::Unsigned>::$typenum_const;
+                debug_assert!(val <= <MAX as typenum::Unsigned>::$typenum_const);
+                $name(val, PhantomData)
+            }
+        }
+
         impl<MIN, MAX> PartialEq<$name<MIN, MAX>> for $name<MIN, MAX> {
             fn eq(&self, rhs: &Self) -> bool {
                 self.0.eq(&rhs.0)
@@ -427,6 +435,10 @@ pub(crate) fn rewrite<F: PascalFile>(file: &mut F, path: &str, options: &str) {
 
 pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
     file.io_target_mut().output_target.flush().unwrap();
+}
+
+pub(crate) fn close<F: PascalFile>(file: &mut F) {
+    *file.io_target_mut() = IoTarget::default();
 }
 
 use core::fmt::{self, Display};

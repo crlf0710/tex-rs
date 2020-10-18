@@ -3,7 +3,7 @@
 //
 // @<Make the first 256...@>=
 macro_rules! Make_the_first_256_strings {
-    ($g: expr) => {
+    ($globals:expr, $g: expr) => {
         // for k:=0 to 255 do
         for k in 0..=255 {
             // begin if (@<Character |k| cannot be printed@>) then
@@ -15,7 +15,7 @@ macro_rules! Make_the_first_256_strings {
             //   end
             // else append_char(k);
             // g:=make_string;
-            $g = make_string();
+            $g = make_string($globals);
         }
         // end
         use crate::section_0043::make_string;

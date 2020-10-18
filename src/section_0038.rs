@@ -44,7 +44,7 @@
 //
 // @<Types...@>=
 // @!pool_pointer = 0..pool_size; {for variables that point into |str_pool|}
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 /// for variables that point into `str_pool`
 pub(crate) struct pool_pointer(pub(crate) u32_from_m_to_n<U0, pool_size_TYPENUM>);
 
@@ -75,5 +75,44 @@ impl str_number {
     }
     pub(crate) fn is_zero(&self) -> bool {
         (self.0).get() == 0
+    }
+    pub(crate) fn get(&self) -> u32 {
+        (self.0).get()
+    }
+}
+
+impl PartialEq<u32> for str_number {
+    fn eq(&self, other: &u32) -> bool {
+        self.get() == *other
+    }
+}
+
+impl core::ops::AddAssign<u32> for str_number {
+    fn add_assign(&mut self, val: u32) {
+        self.0.add_assign(val);
+    }
+}
+
+impl core::ops::SubAssign<u32> for str_number {
+    fn sub_assign(&mut self, val: u32) {
+        self.0.sub_assign(val);
+    }
+}
+
+impl core::ops::Add<u32> for str_number {
+    type Output = Self;
+    fn add(mut self, val: u32) -> Self {
+        use core::ops::AddAssign;
+        self.add_assign(val);
+        self
+    }
+}
+
+impl core::ops::Sub<u32> for str_number {
+    type Output = Self;
+    fn sub(mut self, val: u32) -> Self {
+        use core::ops::SubAssign;
+        self.sub_assign(val);
+        self
     }
 }
