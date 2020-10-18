@@ -22,6 +22,7 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
         // if end_line_char_inactive then decr(limit)
         // else  buffer[limit]:=end_line_char;
         // fix_date_and_time;@/
+        fix_date_and_time($globals);
         // @<Compute the magic offset@>;
         // @<Initialize the print |selector|...@>;
         // if (loc<limit)and(cat_code(buffer[loc])<>escape) then start_input;

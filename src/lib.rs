@@ -173,6 +173,7 @@ mod section_0225_to_0229;
 #[macro_use]
 mod section_0230;
 mod section_0231_to_0235;
+#[macro_use]
 mod section_0236;
 mod section_0237_to_0240;
 mod section_0241;

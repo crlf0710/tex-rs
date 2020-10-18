@@ -9,9 +9,25 @@
 #[allow(unused_variables)]
 pub(crate) fn fix_date_and_time(globals: &mut TeXGlobals) {
     // begin time:=12*60; {minutes since midnight}
+    /// minutes since midnight
+    {
+        time!(globals) = 12 * 60;
+    }
     // day:=4; {fourth day of the month}
+    /// fourth day of the month
+    {
+        day!(globals) = 4;
+    }
     // month:=7; {seventh month of the year}
+    /// seventh month of the year
+    {
+        month!(globals) = 7;
+    }
     // year:=1776; {Anno Domini}
+    /// Anno Domini
+    {
+        year!(globals) = 1776;
+    }
     // end;
 }
 

@@ -29,9 +29,17 @@
 // @d delimiter_factor_code=18 {ratio for variable-size delimiters}
 // @d looseness_code=19 {change in number of lines for a paragraph}
 // @d time_code=20 {current time of day}
+/// current time of day
+pub(crate) const time_code: halfword = 20;
 // @d day_code=21 {current day of the month}
+/// current day of the month
+pub(crate) const day_code: halfword = 21;
 // @d month_code=22 {current month of the year}
+/// current month of the year
+pub(crate) const month_code: halfword = 22;
 // @d year_code=23 {current year of our Lord}
+/// current year of our Lord
+pub(crate) const year_code: halfword = 23;
 // @d show_box_breadth_code=24 {nodes per level in |show_box|}
 // @d show_box_depth_code=25 {maximum level in |show_box|}
 // @d hbadness_code=26 {hboxes exceeding this badness will be shown by |hpack|}
@@ -79,6 +87,13 @@ pub(crate) const dimen_base: word = del_code_base + 256;
 // @d del_code(#)==eqtb[del_code_base+#].int
 // @d count(#)==eqtb[count_base+#].int
 // @d int_par(#)==eqtb[int_base+#].int {an integer parameter}
+/// an integer parameter
+macro_rules! int_par {
+    ($globals:expr, $val:expr) => {
+        $globals.eqtb[crate::section_0230::int_base + $val as u32]
+            [crate::section_0113::MEMORY_WORD_INT]
+    };
+}
 // @d pretolerance==int_par(pretolerance_code)
 // @d tolerance==int_par(tolerance_code)
 // @d line_penalty==int_par(line_penalty_code)
@@ -100,9 +115,29 @@ pub(crate) const dimen_base: word = del_code_base + 256;
 // @d delimiter_factor==int_par(delimiter_factor_code)
 // @d looseness==int_par(looseness_code)
 // @d time==int_par(time_code)
+macro_rules! time {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::time_code)
+    };
+}
 // @d day==int_par(day_code)
+macro_rules! day {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::day_code)
+    };
+}
 // @d month==int_par(month_code)
+macro_rules! month {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::month_code)
+    };
+}
 // @d year==int_par(year_code)
+macro_rules! year {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::year_code)
+    };
+}
 // @d show_box_breadth==int_par(show_box_breadth_code)
 // @d show_box_depth==int_par(show_box_depth_code)
 // @d hbadness==int_par(hbadness_code)

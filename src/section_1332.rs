@@ -49,7 +49,8 @@ pub fn entry() {
         // begin wterm_ln('Ouch---my internal constants have been clobbered!',
         //   '---case ',bad:1);
         // @.Ouch...clobbered@>
-        wterm_ln(globals, format!("{}{}{:1}","Ouch---my internal constants have been clobbered!", "---case ", globals.bad));
+        wterm_ln(globals, format!("{}{}{:1}","Ouch---my internal constants have been clobbered!",
+            "---case ", globals.bad));
         //   goto final_end;
         goto_forward_label!('final_end);
         // end;

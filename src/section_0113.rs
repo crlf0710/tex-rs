@@ -91,6 +91,21 @@ impl Default for memory_word {
     }
 }
 
+pub(crate) struct MEMORY_WORD_INT;
+
+impl Index<MEMORY_WORD_INT> for memory_word {
+    type Output = integer;
+    fn index(&self, _: MEMORY_WORD_INT) -> &integer {
+        unsafe { &self.int }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_INT> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_INT) -> &mut integer {
+        unsafe { &mut self.int }
+    }
+}
+
 pub(crate) struct MEMORY_WORD_HH_RH;
 
 impl Index<MEMORY_WORD_HH_RH> for memory_word {
