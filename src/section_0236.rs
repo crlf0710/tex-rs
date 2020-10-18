@@ -53,6 +53,8 @@ pub(crate) const year_code: halfword = 23;
 // @d tracing_output_code=34 {show boxes when they are shipped out}
 // @d tracing_lost_chars_code=35 {show characters that aren't in the font}
 // @d tracing_commands_code=36 {show command codes at |big_switch|}
+/// show command codes at `big_switch`
+pub(crate) const tracing_commands_code: halfword = 36;
 // @d tracing_restores_code=37 {show equivalents when they are restored}
 // @d uc_hyph_code=38 {hyphenate words beginning with a capital letter}
 // @d output_penalty_code=39 {penalty found at current page break}
@@ -151,6 +153,11 @@ macro_rules! year {
 // @d tracing_output==int_par(tracing_output_code)
 // @d tracing_lost_chars==int_par(tracing_lost_chars_code)
 // @d tracing_commands==int_par(tracing_commands_code)
+macro_rules! tracing_commands {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_commands_code)
+    }
+}
 // @d tracing_restores==int_par(tracing_restores_code)
 // @d uc_hyph==int_par(uc_hyph_code)
 // @d output_penalty==int_par(output_penalty_code)

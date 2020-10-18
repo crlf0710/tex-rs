@@ -24,5 +24,5 @@ pub(crate) fn check_mem(globals: &mut TeXGlobals, print_locs: boolean) {
     // gubed
 }
 
-use crate::section_0004::TeXGlobals;
 use crate::pascal::boolean;
+use crate::section_0004::TeXGlobals;

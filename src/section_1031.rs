@@ -24,7 +24,13 @@ macro_rules! Give_diagnostic_information_if_requested {
             use crate::section_0167::check_mem;
         };
         // if tracing_commands>0 then show_cur_cmd_chr
+        if tracing_commands!($globals) > 0 {
+            show_cur_cmd_chr($globals);
+        }
 
+        use crate::section_0299::show_cur_cmd_chr;
         use crate::section_0325::back_input;
     }
 }
+
+migration_complete!();
