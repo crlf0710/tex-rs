@@ -26,7 +26,7 @@
 //   @!state_field, @!index_field: quarterword;
 //   @!start_field,@!loc_field, @!limit_field, @!name_field: halfword;
 //   end;
-#[derive(Default)]
+#[derive(Default, Clone, Copy)]
 pub(crate) struct in_state_record {
     pub(crate) state_field: quarterword,
     pub(crate) index_field: quarterword,

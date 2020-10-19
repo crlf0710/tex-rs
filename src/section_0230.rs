@@ -4,7 +4,7 @@
 //! portions of \TeX. There are also a bunch of special things like font and
 //! token parameters, as well as the tables of \.{\\toks} and \.{\\box}
 //! registers.
-//
+
 // @d par_shape_loc=local_base {specifies paragraph shape}
 // @d output_routine_loc=local_base+1 {points to token list for \.{\\output}}
 // @d every_par_loc=local_base+2 {points to token list for \.{\\everypar}}

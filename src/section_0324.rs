@@ -7,7 +7,6 @@
 /// leave a token-list input level
 #[allow(unused_variables)]
 pub(crate) fn end_token_list(globals: &mut TeXGlobals) {
-    todo!();
     // begin if token_type>=backed_up then {token list to be deleted}
     //   begin if token_type<=inserted then flush_list(start)
     //   else  begin delete_token_ref(start); {update reference count}
@@ -23,6 +22,7 @@ pub(crate) fn end_token_list(globals: &mut TeXGlobals) {
     //   else fatal_error("(interwoven alignment preambles are not allowed)");
     // @.interwoven alignment preambles...@>
     // pop_input;
+    pop_input!(globals);
     // check_interrupt;
     // end;
 }

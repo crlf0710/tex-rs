@@ -50,12 +50,22 @@ macro_rules! cur_file {
 
 // @<Glob...@>=
 // @!in_open : 0..max_in_open; {the number of lines in the buffer, less one}
+/// the number of lines in the buffer, less one
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static in_open: u8_from_0_to_n<max_in_open_TYPENUM> = u8_from_0_to_n::new(0);
+
 // @!open_parens : 0..max_in_open; {the number of open text files}
+/// the number of open text files
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static open_parens: u8_from_0_to_n<max_in_open_TYPENUM> = u8_from_0_to_n::new(0);
 
 // @!input_file : array[1..max_in_open] of alpha_file;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static input_file: input_file_range_array<alpha_file> =
     input_file_range_array::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0011::max_in_open_TYPENUM;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0304::input_file_range_array;
@@ -76,6 +86,15 @@ pub(crate) static line: integer = integer::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::integer;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::u8_from_m_to_n;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::u8_from_0_to_n;
+
+#[globals_struct_use(TeXGlobals)]
+use typenum::U1;
 
 use crate::pascal::u8_from_m_to_n;
 use crate::section_0004::TeXGlobals;

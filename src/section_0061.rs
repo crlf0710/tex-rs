@@ -16,7 +16,7 @@ macro_rules! Initialize_the_output_routines {
         if $globals.format_ident.is_zero() {
             wterm_ln($globals, " (no format preloaded)");
         } else {
-            slow_print($globals, $globals.format_ident);
+            slow_print($globals, $globals.format_ident.into());
             print_ln($globals);
         }
 

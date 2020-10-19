@@ -46,23 +46,23 @@
 // @!pool_pointer = 0..pool_size; {for variables that point into |str_pool|}
 #[derive(Copy, Clone, Default)]
 /// for variables that point into `str_pool`
-pub(crate) struct pool_pointer(pub(crate) u32_from_m_to_n<U0, pool_size_TYPENUM>);
+pub(crate) struct pool_pointer(pub(crate) u32_from_0_to_n<pool_size_TYPENUM>);
 
 // @!str_number = 0..max_strings; {for variables that point into |str_start|}
 #[derive(Copy, Clone)]
 /// for variables that point into `str_start`
-pub(crate) struct str_number(pub(crate) u32_from_m_to_n<U0, max_strings_TYPENUM>);
+pub(crate) struct str_number(pub(crate) u32_from_0_to_n<max_strings_TYPENUM>);
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
 
-use crate::pascal::{integer, u32_from_m_to_n};
+use crate::pascal::{integer, u32_from_0_to_n};
 use crate::section_0011::max_strings_TYPENUM;
 use crate::section_0011::pool_size_TYPENUM;
 use typenum::{U0, U1, U2147483648, U63};
 
 impl pool_pointer {
     pub(crate) fn new_zero() -> Self {
-        pool_pointer(u32_from_m_to_n::new(0))
+        pool_pointer(u32_from_0_to_n::new(0))
     }
     pub(crate) fn is_zero(&self) -> bool {
         (self.0).get() == 0
@@ -71,13 +71,19 @@ impl pool_pointer {
 
 impl str_number {
     pub(crate) fn new_zero() -> Self {
-        str_number(u32_from_m_to_n::new(0))
+        str_number(u32_from_0_to_n::new(0))
     }
     pub(crate) fn is_zero(&self) -> bool {
         (self.0).get() == 0
     }
     pub(crate) fn get(&self) -> u32 {
         (self.0).get()
+    }
+}
+
+impl From<str_number> for integer {
+    fn from(val: str_number) -> Self {
+        val.0.get() as i32
     }
 }
 

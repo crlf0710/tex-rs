@@ -391,7 +391,7 @@ impl<T> FileState<T> {
                     F::convert_line_string_to_units(&buf, &mut line_chars);
                     let no_more = match line_chars.last() {
                         Some(c) => !F::is_eoln_unit(c),
-                        None => true
+                        None => true,
                     };
                     if no_more {
                         line_chars.push(F::eoln_unit());
@@ -399,7 +399,7 @@ impl<T> FileState<T> {
                     *read_line_buffer = LineBufferState::AfterReadLine {
                         line_buffer: line_chars,
                         line_position: 0,
-                        line_no_more: no_more
+                        line_no_more: no_more,
                     };
                     return;
                 }

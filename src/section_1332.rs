@@ -42,6 +42,7 @@ pub fn entry() {
     if globals.ready_already == 314159 {
         goto_forward_label!('start_of_TEX);
     }
+
     // @<Check the ``constant'' values...@>@;
     Check_the_constant_values_for_consistency!(globals);
     // if bad>0 then

@@ -7,17 +7,37 @@
 pub(crate) fn start_input(globals: &mut TeXGlobals) {
     // label done;
     // begin scan_file_name; {set |cur_name| to desired file name}
+    /// set `cur_name` to desired file name
+    scan_file_name();
     // if cur_ext="" then cur_ext:=".tex";
     // pack_cur_name;
+    region_forward_label! {
+    |'done|
+    {
     // loop@+  begin begin_file_reading; {set up |cur_file| and new level of input}
-    //   if a_open_in(cur_file) then goto done;
-    //   if cur_area="" then
-    //     begin pack_file_name(cur_name,TEX_area,cur_ext);
-    //     if a_open_in(cur_file) then goto done;
-    //     end;
-    //   end_file_reading; {remove the level that didn't work}
-    //   prompt_file_name("input file name",".tex");
-    //   end;
+    loop {
+        /// set up `cur_file` and new level of input
+        begin_file_reading(globals);
+        // if a_open_in(cur_file) then goto done;
+        if a_open_in(&mut cur_file!(globals)) {
+            goto_forward_label!('done);
+        }
+        // if cur_area="" then
+        //   begin pack_file_name(cur_name,TEX_area,cur_ext);
+        //   if a_open_in(cur_file) then goto done;
+        if a_open_in(&mut cur_file!(globals)) {
+            goto_forward_label!('done);
+        }
+        //   end;
+        // end_file_reading; {remove the level that didn't work}
+        /// remove the level that didn't work
+        end_file_reading(globals);
+        // prompt_file_name("input file name",".tex");
+        // end;
+    }
+    }
+    'done <-
+    }
     // done: name:=a_make_name_string(cur_file);
     // if job_name=0 then
     //   begin job_name:=cur_name; open_log_file;
@@ -26,6 +46,10 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
     // if term_offset+length(name)>max_print_line-2 then print_ln
     // else if (term_offset>0)or(file_offset>0) then print_char(" ");
     // print_char("("); incr(open_parens); slow_print(name); update_terminal;
+    print_char(globals, ASCII_code_literal!(b'('));
+    incr!(globals.open_parens);
+    slow_print(globals, name!(globals).into());
+    update_terminal(globals);
     // state:=new_line;
     // if name=str_ptr-1 then {we can conserve string pool space now}
     //   begin flush_string; name:=cur_name;
@@ -36,3 +60,10 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0034::update_terminal;
+use crate::section_0526::scan_file_name;
+use crate::section_0058::print_char;
+use crate::section_0060::slow_print;
+use crate::section_0328::begin_file_reading;
+use crate::section_0329::end_file_reading;
+use crate::section_0027::a_open_in;

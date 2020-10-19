@@ -7,10 +7,8 @@
 // procedure slow_print(@!s:integer); {prints string |s|}
 
 /// prints string `s`.
-///
-/// NOTE: `s` type changed to str_number here.
 #[allow(unused_variables)]
-pub(crate) fn slow_print(globals: &mut TeXGlobals, s: str_number) {
+pub(crate) fn slow_print(globals: &mut TeXGlobals, s: integer) {
     // var j:pool_pointer; {current character code position}
     // begin if (s>=str_ptr) or (s<256) then print(s)
     // else begin j:=str_start[s];
@@ -21,5 +19,6 @@ pub(crate) fn slow_print(globals: &mut TeXGlobals, s: str_number) {
     // end;
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;
