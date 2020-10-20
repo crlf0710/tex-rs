@@ -9,10 +9,56 @@
 //! implement \TeX\ can open a file whose external name is specified by
 //! |name_of_file|.
 //! @^system dependencies@>
-//!
-//! @<Glob...@>=
-//! @!name_of_file:packed array[1..file_name_size] of char;@;@/
-//!   {on some systems this may be a \&{record} variable}
-//! @!name_length:0..file_name_size;@/{this many characters are actually
-//!   relevant in |name_of_file| (the rest are blank)}
-//!
+
+// @<Glob...@>=
+// @!name_of_file:packed array[1..file_name_size] of char;@;@/
+//   {on some systems this may be a \&{record} variable}
+/// on some systems this may be a **record** variable
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+pub(crate) static name_of_file: name_of_file_array<crate::pascal::char> =
+    name_of_file_array::from_copied(crate::pascal::char::new(b' ' as _));
+
+type name_of_file_array_LENGTH_TYPENUM = typenum::op!(file_name_size_TYPENUM - U1 + U1);
+
+define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
+    pub(crate) name_of_file_array[u16_from_m_to_n<U1, file_name_size_TYPENUM>] =>
+    u16; U16; U1; name_of_file_array_LENGTH_TYPENUM
+);
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0026::name_of_file_array;
+
+// @!name_length:0..file_name_size;@/{this many characters are actually
+//   relevant in |name_of_file| (the rest are blank)}
+/// this many characters are actually relevant in `name_of_file` (the rest are blank)
+#[globals_struct_field(TeXGlobals)]
+static name_length: u16_from_0_to_n<file_name_size_TYPENUM> = u16_from_0_to_n::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::u16_from_0_to_n;
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0011::file_name_size_TYPENUM;
+
+use crate::pascal::u16_from_m_to_n;
+use crate::section_0011::file_name_size_TYPENUM;
+use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;
+
+impl Into<String> for &'_ name_of_file_array<crate::pascal::char> {
+    fn into(self) -> String {
+        let mut result = String::new();
+        for ch in self.iter() {
+            #[cfg(not(feature = "unicode_support"))]
+            {
+                result.push(ch.0 as char);
+            }
+            #[cfg(feature = "unicode_support")]
+            {
+                use crate::unicode_support::chars_from_generalized_char;
+                result.extend(chars_from_generalized_char(*ch));
+            }
+        }
+        result
+    }
+}

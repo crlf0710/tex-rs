@@ -22,16 +22,29 @@
 //! |name_of_file| could be opened.
 //
 // @d reset_OK(#)==erstat(#)=0
+#[allow(unused_macros)]
+macro_rules! reset_OK {
+    ($f:expr) => {
+        crate::pascal::erstat($f) == 0
+    };
+}
 // @d rewrite_OK(#)==erstat(#)=0
+#[allow(unused_macros)]
+macro_rules! rewrite_OK {
+    ($f:expr) => {
+        crate::pascal::erstat($f) == 0
+    };
+}
 //
 // @p function a_open_in(var f:alpha_file):boolean;
 //   {open a text file for input}
 /// open a text file for input
 #[allow(unused_variables)]
-pub(crate) fn a_open_in(f: &mut alpha_file) -> boolean {
+pub(crate) fn a_open_in(globals: TeXGlobalsIoFilenameView<'_>, f: &mut alpha_file) -> boolean {
     // begin reset(f,name_of_file,'/O'); a_open_in:=reset_OK(f);
+    reset(f, &*globals.name_of_file, "/O");
+    return reset_OK!(f);
     // end;
-    todo!();
 }
 // @#
 // function a_open_out(var f:alpha_file):boolean;
@@ -61,4 +74,6 @@ pub(crate) fn a_open_in(f: &mut alpha_file) -> boolean {
 //
 
 use crate::pascal::boolean;
+use crate::pascal::reset;
+use crate::section_0004::TeXGlobalsIoFilenameView;
 use crate::section_0025::alpha_file;

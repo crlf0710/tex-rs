@@ -172,6 +172,19 @@ macro_rules! make_default_array {
     }};
 }
 
+macro_rules! make_copied_array {
+    ($elem_ty:ty; $elem_val:expr; $elem_cnt:expr) => {{
+        use core::mem::{self, MaybeUninit};
+        let mut data: [MaybeUninit<$elem_ty>; $elem_cnt] =
+            unsafe { MaybeUninit::uninit().assume_init() };
+        for elem in &mut data[..] {
+            *elem = MaybeUninit::new($elem_val);
+        }
+        let data = MaybeUninit::new(data);
+        unsafe { mem::transmute_copy::<_, [$elem_ty; $elem_cnt]>(&data) }
+    }};
+}
+
 macro_rules! define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length {
     ($v:vis $name:ident[$index_type:path] => $base_index_type:path; $typenum_const:ident; $len_typenum:path) => {
         $v struct $name<ELEMENT>
@@ -238,6 +251,17 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
         ([ELEMENT; <$length_typenum as typenum::Unsigned>::$typenum_const as usize]);
 
         impl<ELEMENT> $name<ELEMENT> {
+            $v fn iter(&self) -> core::slice::Iter<'_, ELEMENT> {
+                (self.0)[..].iter()
+            }
+        }
+
+        impl<ELEMENT> $name<ELEMENT>
+        where
+            ELEMENT: Copy {
+            $v fn from_copied(val: ELEMENT) -> Self {
+                $name(make_copied_array!(ELEMENT; val; <$length_typenum as typenum::Unsigned>::$typenum_const as usize ))
+            }
         }
 
         impl<ELEMENT> Clone for $name<ELEMENT>
@@ -548,7 +572,8 @@ impl<T> PascalFile for file_of<T> {
 pub(crate) type packed_file_of<T> = file_of<T>;
 
 #[allow(unused_variables)]
-pub(crate) fn rewrite<F: PascalFile>(file: &mut F, path: &str, options: &str) {
+pub(crate) fn rewrite<F: PascalFile, P: Into<String>>(file: &mut F, path: P, options: &str) {
+    let path = path.into();
     let new_write_target: Box<dyn Write> = if path == "TTY:" {
         Box::new(io::stdout())
     } else {
@@ -579,10 +604,13 @@ pub(crate) fn put<F: PascalFile>(file: &mut F) {
 }
 
 #[allow(unused_variables)]
-pub(crate) fn reset<F: PascalFile>(file: &mut F, path: &str, options: &str) {
+pub(crate) fn reset<F: PascalFile, P: Into<String>>(file: &mut F, path: P, options: &str) {
+    let path = path.into();
     if F::is_text_file() {
         let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
             Box::new(io::stdin())
+        } else if path == crate::section_0011::pool_name {
+            unimplemented!();
         } else {
             unimplemented!()
         };
@@ -757,6 +785,11 @@ pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
 pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
     let write_target = file.file_state_mut().discard_caret_and_get_write_target();
     write_target.flush().unwrap();
+}
+
+#[allow(unused_variables)]
+pub(crate) fn erstat<F: PascalFile>(file: &mut F) -> integer {
+    todo!();
 }
 
 pub(crate) fn close<F: PascalFile>(file: &mut F) {

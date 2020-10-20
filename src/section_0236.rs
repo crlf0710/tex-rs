@@ -156,7 +156,7 @@ macro_rules! year {
 macro_rules! tracing_commands {
     ($globals:expr) => {
         int_par!($globals, crate::section_0236::tracing_commands_code)
-    }
+    };
 }
 // @d tracing_restores==int_par(tracing_restores_code)
 // @d uc_hyph==int_par(uc_hyph_code)

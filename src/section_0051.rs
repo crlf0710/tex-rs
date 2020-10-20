@@ -20,7 +20,7 @@ macro_rules! Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_gi
     ($globals:expr, $get_strings_started:expr) => {
         // name_of_file:=pool_name; {we needn't set |name_length|}
         // if a_open_in(pool_file) then
-        if a_open_in(&mut $globals.pool_file) {
+        if a_open_in(make_globals_io_filename_view!($globals), &mut $globals.pool_file) {
             // begin c:=false;
             // repeat @<Read one string, but return |false| if the
             //   string memory space is getting too tight for comfort@>;
@@ -34,6 +34,7 @@ macro_rules! Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_gi
             bad_pool!($globals, $get_strings_started, "! I can''t read TEX.POOL.");
         }
         // @.I can't read TEX.POOL@>
+        use crate::section_0004::TeXGlobalsIoFilenameView;
         use crate::section_0027::a_open_in;
         use crate::section_0028::a_close;
     };

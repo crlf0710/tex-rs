@@ -66,8 +66,13 @@ pub(crate) type pool_size_TYPENUM = U32000;
 // @!trie_op_size=500; {space for ``opcodes'' in the hyphenation patterns}
 // @!dvi_buf_size=800; {size of the output buffer; must be a multiple of 8}
 // @!file_name_size=40; {file names shouldn't be longer than this}
+/// file names shouldn't be longer than this
+pub(crate) const file_name_size: u16 = file_name_size_TYPENUM::U16;
+pub(crate) type file_name_size_TYPENUM = U40;
 // @!pool_name='TeXformats:TEX.POOL                     ';
 //   {string of length |file_name_size|; tells where the string pool appears}
+/// string of length `file_name_size`; tells where the string pool appears
+pub(crate) const pool_name: &'static str = "TeXformats:TEX.POOL                     ";
 // @.TeXformats@>
 //
 
@@ -75,4 +80,4 @@ use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U1000, U10000, U2, U200, U3, U500, U6};
+use typenum::{Unsigned, U1000, U10000, U2, U200, U3, U40, U500, U6};

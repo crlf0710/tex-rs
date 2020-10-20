@@ -19,13 +19,13 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
         /// set up `cur_file` and new level of input
         begin_file_reading(globals);
         // if a_open_in(cur_file) then goto done;
-        if a_open_in(&mut cur_file!(globals)) {
+        if a_open_in(make_globals_io_filename_view!(globals), &mut cur_file!(globals)) {
             goto_forward_label!('done);
         }
         // if cur_area="" then
         //   begin pack_file_name(cur_name,TEX_area,cur_ext);
         //   if a_open_in(cur_file) then goto done;
-        if a_open_in(&mut cur_file!(globals)) {
+        if a_open_in(make_globals_io_filename_view!(globals), &mut cur_file!(globals)) {
             goto_forward_label!('done);
         }
         //   end;
@@ -59,7 +59,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
     // end;
 }
 
-use crate::section_0004::TeXGlobals;
+use crate::section_0004::{TeXGlobals, TeXGlobalsIoFilenameView};
 use crate::section_0034::update_terminal;
 use crate::section_0526::scan_file_name;
 use crate::section_0058::print_char;
