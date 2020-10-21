@@ -32,6 +32,8 @@ pub(crate) const escape: halfword = 0;
 // @d spacer=10 {characters equivalent to blank space ( \.{\ } )}
 // @d letter=11 {characters regarded as letters ( \.{A..Z}, \.{a..z} )}
 // @d other_char=12 {none of the special character types}
+/// none of the special character types
+pub(crate) const other_char: quarterword = 12;
 // @d active_char=13 {characters that invoke macros ( \.{\char`\~} )}
 // @d par_end=13 {end of paragraph ( \.{\\par} )}
 // @d match=13 {match a macro parameter}

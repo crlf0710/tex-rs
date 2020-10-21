@@ -73,16 +73,44 @@ pub(crate) const int_base: word = int_base_TYPENUM::U32;
 // @d fam_fnt(#)==equiv(math_font_base+#)
 // @d cat_code(#)==equiv(cat_code_base+#)
 macro_rules! cat_code {
-    ($globals:expr, $val:expr) => {{
-        use crate::section_0230::{cat_code_base, index_offset_with_ASCII_code};
-        equiv!($globals, index_offset_with_ASCII_code(cat_code_base, $val))
-    }};
+    ($globals:expr, $val:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::index_offset_with_ASCII_code(
+                crate::section_0230::cat_code_base,
+                $val
+            )
+        )
+    };
 }
 // @d lc_code(#)==equiv(lc_code_base+#)
 // @d uc_code(#)==equiv(uc_code_base+#)
 // @d sf_code(#)==equiv(sf_code_base+#)
+macro_rules! sf_code {
+    ($globals:expr, $val:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::index_offset_with_ASCII_code(
+                crate::section_0230::sf_code_base,
+                $val
+            )
+        )
+    };
+}
 // @d math_code(#)==equiv(math_code_base+#)
 //   {Note: |math_code(c)| is the true math code plus |min_halfword|}
+/// Note: `math_code(c)` is the true math code plus `min_halfword`
+macro_rules! math_code {
+    ($globals:expr, $val:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::index_offset_with_ASCII_code(
+                crate::section_0230::math_code_base,
+                $val
+            )
+        )
+    };
+}
 //
 // @<Put each...@>=
 // primitive("output",assign_toks,output_routine_loc);

@@ -41,7 +41,7 @@ pub(crate) fn get_next(globals: &mut TeXGlobals) {
         );
     }
     // @<If an alignment entry has just ended, take appropriate action@>;
-    todo!();
+    If_an_alignment_entry_has_just_ended_take_appropriate_action!(globals);
     }
     |'restart|
     }

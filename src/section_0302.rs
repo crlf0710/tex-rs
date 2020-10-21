@@ -12,13 +12,18 @@ macro_rules! state {
 
 // @d index==cur_input.index_field {reference for buffer information}
 /// reference for buffer information
-#[allow(unused_macros)]
 macro_rules! index {
     ($globals:expr) => {
         $globals.cur_input.index_field
     };
 }
 // @d start==cur_input.start_field {starting position in |buffer|}
+/// starting position in `buffer`
+macro_rules! start {
+    ($globals:expr) => {
+        $globals.cur_input.start_field
+    };
+}
 // @d limit==cur_input.limit_field {end of current line in |buffer|}
 /// end of current line in `buffer`
 macro_rules! limit {

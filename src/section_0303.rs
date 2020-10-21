@@ -41,6 +41,8 @@
 //! be |skip_blanks|.
 
 // @d mid_line=1 {|state| code when scanning a line of characters}
+/// `state` code when scanning a line of characters
+pub(crate) const mid_line: quarterword = 1;
 // @d skip_blanks=2+max_char_code {|state| code when ignoring blanks}
 // @d new_line=3+max_char_code+max_char_code {|state| code at start of line}
 /// `state` code at start of line

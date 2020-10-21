@@ -83,6 +83,18 @@ define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
 pub(crate) static line: integer = integer::default();
 
 // @!line_stack : array[1..max_in_open] of integer;
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static line_stack: line_stack_array<integer> = line_stack_array::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0304::line_stack_array;
+
+pub(crate) type line_stack_array_LENGTH_TYPENUM = typenum::op!(max_in_open_TYPENUM - U1 + U1);
+
+define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
+    pub(crate) line_stack_array[u8_from_m_to_n<U1, max_in_open_TYPENUM>] =>
+    u8; U8; U1; line_stack_array_LENGTH_TYPENUM
+);
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::integer;

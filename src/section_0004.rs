@@ -60,6 +60,7 @@ pub(crate) mod TeXGlobals {
 pub(crate) fn initialize(globals: &mut TeXGlobals) {
     // var @<Local variables for initialization@>@/
     // begin @<Initialize whatever \TeX\ might access@>@;
+    Initialize_whatever_TeX_might_access!(globals);
     // end;@#
 }
 

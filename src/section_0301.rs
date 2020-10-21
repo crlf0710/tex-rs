@@ -14,6 +14,8 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 pub(crate) static input_ptr: u16_from_0_to_n<stack_size_TYPENUM> = u16_from_0_to_n::new(0);
 
 // @!max_in_stack: 0..stack_size; {largest value of |input_ptr| when pushing}
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static max_in_stack: u16_from_0_to_n<stack_size_TYPENUM> = u16_from_0_to_n::new(0);
 
 // @!cur_input : in_state_record;
 //   {the ``top'' input state, according to convention (1)}
