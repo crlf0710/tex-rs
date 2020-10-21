@@ -24,14 +24,17 @@
 // @d emergency_stretch_code=20 {reduces badnesses on final pass of line-breaking}
 // @d dimen_pars=21 {total number of dimension parameters}
 /// total number of dimension parameters
-pub(crate) const dimen_pars: halfword = 21;
+pub(crate) type dimen_pars_TYPENUM = U21;
+pub(crate) const dimen_pars: halfword = dimen_pars_TYPENUM::U16;
 // @d scaled_base=dimen_base+dimen_pars
 //   {table of 256 user-defined \.{\\dimen} registers}
 /// table of 256 user-defined `\dimen` registers
-pub(crate) const scaled_base: word = dimen_base + dimen_pars as word;
+pub(crate) type scaled_base_TYPENUM = typenum::op!(dimen_base_TYPENUM + dimen_pars_TYPENUM);
+pub(crate) const scaled_base: word = scaled_base_TYPENUM::U32;
 // @d eqtb_size=scaled_base+255 {largest subscript of |eqtb|}
 /// largest subscript of `eqtb`
-pub(crate) const eqtb_size: word = scaled_base + 255;
+pub(crate) type eqtb_size_TYPENUM = typenum::op!(scaled_base_TYPENUM + U255);
+pub(crate) const eqtb_size: word = eqtb_size_TYPENUM::U32;
 // @#
 // @d dimen(#)==eqtb[scaled_base+#].sc
 // @d dimen_par(#)==eqtb[dimen_base+#].sc {a scaled quantity}
@@ -86,4 +89,6 @@ pub(crate) const eqtb_size: word = scaled_base + 255;
 
 use crate::pascal::word;
 use crate::section_0113::halfword;
-use crate::section_0236::dimen_base;
+use crate::section_0236::dimen_base_TYPENUM;
+use typenum::Unsigned;
+use typenum::{U21, U255};

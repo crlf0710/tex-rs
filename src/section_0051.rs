@@ -19,6 +19,8 @@ macro_rules! bad_pool {
 macro_rules! Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_give_an_error_message_and_return_false {
     ($globals:expr, $get_strings_started:expr) => {
         // name_of_file:=pool_name; {we needn't set |name_length|}
+        /// we needn't set `name_length`
+        $globals.name_of_file.assign_str(pool_name);
         // if a_open_in(pool_file) then
         if a_open_in(make_globals_io_filename_view!($globals), &mut $globals.pool_file) {
             // begin c:=false;
@@ -35,6 +37,7 @@ macro_rules! Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_gi
         }
         // @.I can't read TEX.POOL@>
         use crate::section_0004::TeXGlobalsIoFilenameView;
+        use crate::section_0011::pool_name;
         use crate::section_0027::a_open_in;
         use crate::section_0028::a_close;
     };

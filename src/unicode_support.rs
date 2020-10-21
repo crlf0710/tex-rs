@@ -48,7 +48,7 @@ enum GraphemeRegistryItem {
 enum GraphemeRegistryItemIter {
     RegItem(GraphemeRegistryItem),
     StrIter(std::str::Chars<'static>),
-    None
+    None,
 }
 
 impl Iterator for GraphemeRegistryItemIter {
@@ -56,32 +56,26 @@ impl Iterator for GraphemeRegistryItemIter {
 
     fn next(&mut self) -> Option<char> {
         match self {
-            GraphemeRegistryItemIter::RegItem(item) => {
-                match item {
-                    GraphemeRegistryItem::SingleScalarValue(c) => {
-                        let c = *c;
-                        *self = GraphemeRegistryItemIter::None;
-                        Some(c)
-                    }
-                    GraphemeRegistryItem::MultiScalarValue(s) => {
-                        let mut chars = (*s).chars();
-                        let next = chars.next();
-                        *self = GraphemeRegistryItemIter::StrIter(chars);
-                        next
-                    }
-                    GraphemeRegistryItem::InvalidValue(_) => {
-                        let x = '\u{FFFD}';
-                        *self = GraphemeRegistryItemIter::None;
-                        Some(x)
-                    }
+            GraphemeRegistryItemIter::RegItem(item) => match item {
+                GraphemeRegistryItem::SingleScalarValue(c) => {
+                    let c = *c;
+                    *self = GraphemeRegistryItemIter::None;
+                    Some(c)
                 }
-            }
-            GraphemeRegistryItemIter::StrIter(iter) => {
-                iter.next()
-            }
-            GraphemeRegistryItemIter::None => {
-                None
-            }
+                GraphemeRegistryItem::MultiScalarValue(s) => {
+                    let mut chars = (*s).chars();
+                    let next = chars.next();
+                    *self = GraphemeRegistryItemIter::StrIter(chars);
+                    next
+                }
+                GraphemeRegistryItem::InvalidValue(_) => {
+                    let x = '\u{FFFD}';
+                    *self = GraphemeRegistryItemIter::None;
+                    Some(x)
+                }
+            },
+            GraphemeRegistryItemIter::StrIter(iter) => iter.next(),
+            GraphemeRegistryItemIter::None => None,
         }
     }
 }
@@ -100,7 +94,7 @@ pub(crate) fn generalized_char_from_str(s: &str) -> generalized_char {
     generalized_char::new(result)
 }
 
-pub(crate) fn chars_from_generalized_char(val: generalized_char) -> impl Iterator<Item=char> {
+pub(crate) fn chars_from_generalized_char(val: generalized_char) -> impl Iterator<Item = char> {
     use core::convert::TryFrom;
     let val = val.0;
     let item = if val < GRAPHEME_REGISTRY_INITIAL_VALUE {

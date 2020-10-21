@@ -332,6 +332,12 @@ impl<R: io::Read> ReadLine for io::BufReader<R> {
     }
 }
 
+impl<T: AsRef<[u8]>> ReadLine for io::Cursor<T> {
+    fn read_line(&mut self, buf: &mut String) -> io::Result<usize> {
+        <Self as io::BufRead>::read_line(self, buf)
+    }
+}
+
 pub(crate) enum LineBufferState<T> {
     UnknownState {
         initial_line: bool,
@@ -457,16 +463,24 @@ pub(crate) trait PascalFile {
 
     fn file_state_mut(&mut self) -> &mut FileState<Self::Unit>;
 
+    fn error_state(&self) -> usize;
+
     fn put_unit_to_target(&mut self, val: Self::Unit) {
         todo!();
     }
 }
 
-pub(crate) struct file_of_text_char(FileState<text_char>);
+pub(crate) struct file_of_text_char {
+    file_state: FileState<text_char>,
+    error_state: usize,
+}
 
 impl Default for file_of_text_char {
     fn default() -> Self {
-        file_of_text_char(FileState::default())
+        file_of_text_char {
+            file_state: FileState::default(),
+            error_state: usize::default(),
+        }
     }
 }
 
@@ -519,21 +533,31 @@ impl PascalFile for file_of_text_char {
     }
 
     fn file_state(&self) -> &FileState<text_char> {
-        &self.0
+        &self.file_state
     }
 
     fn file_state_mut(&mut self) -> &mut FileState<text_char> {
-        &mut self.0
+        &mut self.file_state
+    }
+
+    fn error_state(&self) -> usize {
+        self.error_state
     }
 }
 
 pub(crate) type packed_file_of_text_char = file_of_text_char;
 
-pub(crate) struct file_of<T>(FileState<T>);
+pub(crate) struct file_of<T> {
+    file_state: FileState<T>,
+    error_state: usize,
+}
 
 impl<T> Default for file_of<T> {
     fn default() -> Self {
-        file_of(FileState::default())
+        file_of {
+            file_state: FileState::default(),
+            error_state: usize::default(),
+        }
     }
 }
 
@@ -561,11 +585,15 @@ impl<T> PascalFile for file_of<T> {
     }
 
     fn file_state(&self) -> &FileState<T> {
-        &self.0
+        &self.file_state
     }
 
     fn file_state_mut(&mut self) -> &mut FileState<T> {
-        &mut self.0
+        &mut self.file_state
+    }
+
+    fn error_state(&self) -> usize {
+        self.error_state
     }
 }
 
@@ -610,7 +638,7 @@ pub(crate) fn reset<F: PascalFile, P: Into<String>>(file: &mut F, path: P, optio
         let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
             Box::new(io::stdin())
         } else if path == crate::section_0011::pool_name {
-            unimplemented!();
+            Box::new(crate::string_pool::pool_file())
         } else {
             unimplemented!()
         };
@@ -788,8 +816,8 @@ pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
 }
 
 #[allow(unused_variables)]
-pub(crate) fn erstat<F: PascalFile>(file: &mut F) -> integer {
-    todo!();
+pub(crate) fn erstat<F: PascalFile>(file: &mut F) -> usize {
+    file.error_state()
 }
 
 pub(crate) fn close<F: PascalFile>(file: &mut F) {

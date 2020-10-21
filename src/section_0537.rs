@@ -51,6 +51,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
     slow_print(globals, name!(globals).into());
     update_terminal(globals);
     // state:=new_line;
+    state!(globals) = new_line;
     // if name=str_ptr-1 then {we can conserve string pool space now}
     //   begin flush_string; name:=cur_name;
     //   end;
@@ -64,6 +65,7 @@ use crate::section_0034::update_terminal;
 use crate::section_0526::scan_file_name;
 use crate::section_0058::print_char;
 use crate::section_0060::slow_print;
+use crate::section_0303::new_line;
 use crate::section_0328::begin_file_reading;
 use crate::section_0329::end_file_reading;
 use crate::section_0027::a_open_in;

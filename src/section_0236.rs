@@ -75,16 +75,20 @@ pub(crate) const tracing_commands_code: halfword = 36;
 // @d error_context_lines_code=54 {maximum intermediate line pairs shown}
 // @d int_pars=55 {total number of integer parameters}
 /// total number of integer parameters
-pub(crate) const int_pars: halfword = 55;
+pub(crate) type int_pars_TYPENUM = typenum::U55;
+pub(crate) const int_pars: halfword = int_pars_TYPENUM::U16;
 // @d count_base=int_base+int_pars {256 user \.{\\count} registers}
 /// 256 user `\count` registers
-pub(crate) const count_base: word = int_base + int_pars as word;
+pub(crate) type count_base_TYPENUM = typenum::op!(int_base_TYPENUM + int_pars_TYPENUM);
+pub(crate) const count_base: word = count_base_TYPENUM::U32;
 // @d del_code_base=count_base+256 {256 delimiter code mappings}
 /// 256 delimiter code mappings
-pub(crate) const del_code_base: word = count_base + 256;
+pub(crate) type del_code_base_TYPENUM = typenum::op!(count_base_TYPENUM + U256);
+pub(crate) const del_code_base: word = del_code_base_TYPENUM::U32;
 // @d dimen_base=del_code_base+256 {beginning of region 6}
 /// beginning of region 6
-pub(crate) const dimen_base: word = del_code_base + 256;
+pub(crate) type dimen_base_TYPENUM = typenum::op!(del_code_base_TYPENUM + U256);
+pub(crate) const dimen_base: word = dimen_base_TYPENUM::U32;
 // @#
 // @d del_code(#)==eqtb[del_code_base+#].int
 // @d count(#)==eqtb[count_base+#].int
@@ -183,4 +187,6 @@ macro_rules! tracing_commands {
 
 use crate::pascal::word;
 use crate::section_0113::halfword;
-use crate::section_0230::int_base;
+use crate::section_0230::int_base_TYPENUM;
+use typenum::Unsigned;
+use typenum::U256;

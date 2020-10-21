@@ -45,6 +45,32 @@ use crate::section_0011::file_name_size_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;
 
+impl name_of_file_array<crate::pascal::char> {
+    pub(crate) fn assign_str(&mut self, val: &str) {
+        #[cfg(not(feature = "unicode_support"))]
+        {
+            debug_assert_eq!(
+                name_of_file_array_LENGTH_TYPENUM::U16 as usize,
+                val.bytes().count()
+            );
+            for (dest, src) in self.0.iter_mut().zip(val.bytes()) {
+                *dest = crate::pascal::char::new(src);
+            }
+        }
+        #[cfg(feature = "unicode_support")]
+        {
+            debug_assert_eq!(
+                name_of_file_array_LENGTH_TYPENUM::U16 as usize,
+                val.chars().count()
+            );
+            for (dest, src) in self.0.iter_mut().zip(val.chars()) {
+                *dest = crate::pascal::char::new(src as _);
+            }
+        }
+        use typenum::Unsigned;
+    }
+}
+
 impl Into<String> for &'_ name_of_file_array<crate::pascal::char> {
     fn into(self) -> String {
         let mut result = String::new();

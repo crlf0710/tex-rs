@@ -14,9 +14,6 @@ use crate::section_0253::eqtb_range_array;
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0113::memory_word;
 
-type eqtb_size_TYPENUM = typenum::U16;
-type int_base_TYPENUM = typenum::U8;
-
 type eqtb_range_array_LENGTH_TYPENUM = typenum::op!(eqtb_size_TYPENUM - active_base_TYPENUM + U1);
 
 define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
@@ -43,5 +40,7 @@ define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
 
 use crate::pascal::u32_from_m_to_n;
 use crate::section_0222::active_base_TYPENUM;
+use crate::section_0230::int_base_TYPENUM;
+use crate::section_0247::eqtb_size_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;
