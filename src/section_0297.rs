@@ -53,7 +53,11 @@ pub(crate) static cur_cmd: eight_bits = eight_bits::default();
 // @!cur_chr: halfword; {operand of current command}
 #[globals_struct_field(TeXGlobals)]
 /// operand of current command
-pub(crate) static cur_chr: halfword = halfword::default();
+pub(crate) static cur_chr: cur_chr_type = cur_chr_type::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0297::cur_chr_type;
+
 // @!cur_cs: pointer; {control sequence found here, zero if none found}
 #[globals_struct_field(TeXGlobals)]
 /// control sequence found here, zero if none found
@@ -61,7 +65,10 @@ pub(crate) static cur_cs: pointer = null;
 // @!cur_tok: halfword; {packed representative of |cur_cmd| and |cur_chr|}
 #[globals_struct_field(TeXGlobals)]
 /// packed representative of `cur_cmd` and `cur_chr`
-pub(crate) static cur_tok: halfword = halfword::default();
+pub(crate) static cur_tok: cur_tok_type = cur_tok_type::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0297::cur_tok_type;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0025::eight_bits;
@@ -73,3 +80,76 @@ use crate::section_0115::null;
 use crate::section_0115::pointer;
 
 use globals_struct::{globals_struct_field, globals_struct_use};
+
+#[cfg(not(feature = "unicode_support"))]
+#[derive(Copy, Clone, Default)]
+pub(crate) struct cur_chr_type(halfword);
+
+#[cfg(feature = "unicode_support")]
+#[derive(Copy, Clone, Default)]
+pub(crate) struct cur_chr_type(word);
+
+impl From<ASCII_code> for cur_chr_type {
+    fn from(v: ASCII_code) -> Self {
+        cur_chr_type(v.0 as _)
+    }
+}
+
+impl From<cur_chr_type> for ASCII_code  {
+    fn from(v: cur_chr_type) -> Self {
+        ASCII_code(v.0 as _)
+    }
+}
+
+#[cfg(not(feature = "unicode_support"))]
+type cur_tok_type_repr = halfword;
+
+#[cfg(not(feature = "unicode_support"))]
+const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0o400;
+
+#[cfg(feature = "unicode_support")]
+type cur_tok_type_repr = word;
+
+#[cfg(feature = "unicode_support")]
+const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0x4000000;
+
+#[derive(Copy, Clone, Default)]
+pub(crate) struct cur_tok_type(cur_tok_type_repr);
+
+impl cur_tok_type {
+    #[cfg(not(feature = "unicode_support"))]
+    pub(crate) const fn new(val: halfword) -> Self {
+        cur_tok_type(val)
+    }
+
+    #[cfg(feature = "unicode_support")]
+    pub(crate) const fn new(val: word) -> Self {
+        cur_tok_type(val)
+    }
+
+    pub(crate) fn from_cmd_and_chr(cmd: eight_bits, chr: cur_chr_type) -> Self {
+        cur_tok_type(
+            cmd as cur_tok_type_repr * cur_tok_type_cmd_multiplier + chr.0 as cur_tok_type_repr,
+        )
+    }
+
+    pub(crate) fn from_cs(cs: pointer) -> Self {
+        cur_tok_type(cs_token_flag.0 + cs as cur_tok_type_repr)
+    }
+}
+
+/*
+impl core::ops::Add<halfword> for cur_tok_type {
+    type Output = cur_tok_type;
+    fn add(self, val: halfword) -> Self {
+        cur_tok_type(self.0.checked_add(val as _).unwrap())
+    }
+}
+*/
+
+use crate::pascal::word;
+use crate::section_0018::ASCII_code;
+use crate::section_0025::eight_bits;
+use crate::section_0113::halfword;
+use crate::section_0115::pointer;
+use crate::section_0289::cs_token_flag;

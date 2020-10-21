@@ -21,11 +21,15 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) {
             goto_forward_label!('done);
         }
         // if cur_cmd>=call then
+        if globals.cur_cmd >= call {
         //   if cur_cmd<end_template then macro_call
         //   else  begin cur_cs:=frozen_endv; cur_cmd:=endv;
         //     goto done; {|cur_chr=null_list|}
         //     end
-        // else expand;
+        } else {
+            // else expand;
+            expand(globals);
+        }
         // goto restart;
         goto_backward_label!('restart);
     }
@@ -38,14 +42,17 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) {
     'done <-
     }
     if globals.cur_cs == 0 {
-        globals.cur_tok = (globals.cur_cmd as halfword * 0o400) + globals.cur_chr
+        globals.cur_tok = cur_tok_type::from_cmd_and_chr(globals.cur_cmd, globals.cur_chr);
     } else {
-        globals.cur_tok = cs_token_flag + globals.cur_cs;
+        globals.cur_tok = cur_tok_type::from_cs(globals.cur_cs);
     }
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
 use crate::section_0209::max_command;
+use crate::section_0210::call;
 use crate::section_0289::cs_token_flag;
+use crate::section_0297::cur_tok_type;
 use crate::section_0341::get_next;
+use crate::section_0366::expand;

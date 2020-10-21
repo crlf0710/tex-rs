@@ -9,6 +9,8 @@ pub(crate) struct char(pub(crate) u8);
 
 #[cfg(not(feature = "unicode_support"))]
 impl char {
+    pub(crate) const MAX: char = char(255);
+
     pub(crate) const fn new(v: u8) -> Self {
         char(v)
     }
@@ -20,6 +22,7 @@ pub(crate) struct char(pub(crate) u32, PhantomData<Rc<()>>);
 
 #[cfg(feature = "unicode_support")]
 impl char {
+    pub(crate) const MAX: char = char(0xFFFFFF, PhantomData);
     pub(crate) const fn new(v: u32) -> Self {
         char(v, PhantomData)
     }

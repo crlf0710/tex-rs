@@ -42,7 +42,7 @@ const last_text_char: text_char = text_char::new(255);
 
 /// ordinal number of the largest element of [text_char]
 #[cfg(feature = "unicode_support")]
-const last_text_char: text_char = text_char::new(u32::MAX);
+const last_text_char: text_char = text_char::MAX;
 
 //
 // @<Local variables for init...@>=

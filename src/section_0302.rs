@@ -17,6 +17,7 @@ macro_rules! index {
         $globals.cur_input.index_field
     };
 }
+
 // @d start==cur_input.start_field {starting position in |buffer|}
 /// starting position in `buffer`
 macro_rules! start {
@@ -24,6 +25,7 @@ macro_rules! start {
         $globals.cur_input.start_field
     };
 }
+
 // @d limit==cur_input.limit_field {end of current line in |buffer|}
 /// end of current line in `buffer`
 macro_rules! limit {
@@ -31,9 +33,13 @@ macro_rules! limit {
         $globals.cur_input.limit_field
     };
 }
+
 // @d name==cur_input.name_field {name of the current file}
+/// name of the current file
 macro_rules! name {
     ($globals:expr) => {
         $globals.cur_input.name_field
     };
 }
+
+migration_complete!();

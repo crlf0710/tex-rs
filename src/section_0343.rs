@@ -10,12 +10,21 @@ macro_rules! Input_from_external_file__goto_restart_if_no_input_found {
                 /// current line not yet finished
                 const _ : () = ();
                 // begin cur_chr:=buffer[loc]; incr(loc);
+                $globals.cur_chr = $globals.buffer[loc!($globals)].into();
+                incr!(loc!($globals));
                 // reswitch: cur_cmd:=cat_code(cur_chr);
-                // @<Change state if necessary, and |goto switch| if the
-                //   current character should be ignored,
-                //   or |goto reswitch| if the current character
-                //   changes to another@>;
-                // end
+                region_backward_label! {
+                'reswitch <-
+                {
+                    $globals.cur_cmd = cat_code!($globals, $globals.cur_chr.into()) as _;
+                    // @<Change state if necessary, and |goto switch| if the
+                    //   current character should be ignored,
+                    //   or |goto reswitch| if the current character
+                    //   changes to another@>;
+                    // end
+                }
+                |'reswitch|
+                }
             } else {
                 // else  begin state:=new_line;@/
                 state!($globals) = new_line;
@@ -23,6 +32,7 @@ macro_rules! Input_from_external_file__goto_restart_if_no_input_found {
                 //   or |goto restart| if there is no next line,
                 //   or |return| if a \.{\\read} line has finished@>;
                 // check_interrupt;
+                check_interrupt!($globals);
                 // goto switch;
                 goto_backward_label!('switch);
                 // end;

@@ -18,7 +18,10 @@
 
 // @d cs_token_flag==@'7777 {amount added to the |eqtb| location in a
 //   token that stands for a control sequence; is a multiple of~256, less~1}
-pub(crate) const cs_token_flag: u16 = 0o7777;
+#[cfg(not(feature = "unicode_support"))]
+pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0o7777);
+#[cfg(feature = "unicode_support")]
+pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0xFFFFFFFF);
 
 // @d left_brace_token=@'0400 {$2^8\cdot|left_brace|$}
 // @d left_brace_limit=@'1000 {$2^8\cdot(|left_brace|+1)$}
@@ -32,3 +35,5 @@ pub(crate) const cs_token_flag: u16 = 0o7777;
 // @d other_token=@'6000 {$2^8\cdot|other_char|$}
 // @d match_token=@'6400 {$2^8\cdot|match|$}
 // @d end_match_token=@'7000 {$2^8\cdot|end_match|$}
+
+use crate::section_0297::cur_tok_type;
