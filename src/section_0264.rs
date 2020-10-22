@@ -12,7 +12,6 @@ pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword,
     // @!j:small_number; {index into |buffer|}
     // @!l:small_number; {length of the string}
     // begin if s<256 then cur_val:=s+single_base
-    todo!();
     /*
     if s.0 < 256 {
         globals.cur_val = s.0 + single_base

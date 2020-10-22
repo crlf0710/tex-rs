@@ -36,14 +36,20 @@ macro_rules! define_ranged_unsigned_integer {
         impl<MIN, MAX> $name<MIN, MAX> where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
             $v fn new(val: $base_type) -> Self {
                 //use static_assertions::const_assert;
-                debug_assert!(val >= <MIN as typenum::Unsigned>::$typenum_const);
-                debug_assert!(val <= <MAX as typenum::Unsigned>::$typenum_const);
+                assert!(val >= <MIN as typenum::Unsigned>::$typenum_const);
+                assert!(val <= <MAX as typenum::Unsigned>::$typenum_const);
                 //TODO: Add more checks here.
                 $name(val, PhantomData)
             }
 
             $v fn get(self) -> $base_type {
                 self.0
+            }
+        }
+
+        impl<MIN, MAX> From<$base_type> for $name<MIN, MAX> where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
+            fn from(v: $base_type) -> Self {
+                $name::new(v)
             }
         }
 
@@ -78,6 +84,12 @@ macro_rules! define_ranged_unsigned_integer {
         impl<MIN, MAX> PartialOrd<$name<MIN, MAX>> for $name<MIN, MAX> {
             fn partial_cmp(&self, rhs: &Self) -> Option<core::cmp::Ordering> {
                 self.0.partial_cmp(&rhs.0)
+            }
+        }
+
+        impl<MIN, MAX> PartialOrd<$base_type> for $name<MIN, MAX> {
+            fn partial_cmp(&self, rhs: &$base_type) -> Option<core::cmp::Ordering> {
+                self.0.partial_cmp(rhs)
             }
         }
 

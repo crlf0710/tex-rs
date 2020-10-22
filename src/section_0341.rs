@@ -8,7 +8,7 @@
 // @p procedure get_next; {sets |cur_cmd|, |cur_chr|, |cur_cs| to next token}
 /// sets `cur_cmd`, `cur_chr`, `cur_cs` to next token
 #[allow(unused_variables)]
-pub(crate) fn get_next(globals: &mut TeXGlobals) {
+pub(crate) fn get_next(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     region_forward_label! {
     |'exit|
     {
@@ -49,7 +49,9 @@ pub(crate) fn get_next(globals: &mut TeXGlobals) {
     // exit:end;
     'exit <-
     }
+    return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0307::token_list;
+use crate::section_0081::JumpOutToEndOfTEX;

@@ -5,7 +5,7 @@
 // @p procedure get_x_token; {sets |cur_cmd|, |cur_chr|, |cur_tok|,
 //   and expands macros}
 /// sets `cur_cmd`, `cur_chr`, `cur_tok`, and expands macros
-pub(crate) fn get_x_token(globals: &mut TeXGlobals) {
+pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label restart,done;
     // begin restart: get_next;
     region_forward_label! {
@@ -14,7 +14,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) {
     region_backward_label! {
     'restart <-
     {
-        get_next(globals);
+        get_next(globals)?;
         // @^inner loop@>
         // if cur_cmd<=max_command then goto done;
         if globals.cur_cmd <= max_command {
@@ -46,9 +46,12 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) {
     } else {
         globals.cur_tok = cur_tok_type::from_cs(globals.cur_cs);
     }
+
+    return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::JumpOutToEndOfTEX;
 use crate::section_0113::halfword;
 use crate::section_0209::max_command;
 use crate::section_0210::call;

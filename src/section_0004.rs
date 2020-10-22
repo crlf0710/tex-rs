@@ -40,6 +40,7 @@ pub(crate) mod TeXGlobals {
     include!("src/section_0039.rs");
     include!("src/section_0050.rs");
     include!("src/section_0054.rs");
+    include!("src/section_0073.rs");
     include!("src/section_0076.rs");
     include!("src/section_0096.rs");
     include!("src/section_0165.rs");

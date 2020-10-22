@@ -1,13 +1,3 @@
-//! @ The procedure |print_nl| is like |print|, but it makes sure that the
-//! string appears at the beginning of a new line.
-//!
-//! @<Basic print...@>=
-//! procedure print_nl(@!s:str_number); {prints string |s| at beginning of line}
-//! begin if ((term_offset>0)and(odd(selector)))or@|
-//!   ((file_offset>0)and(selector>=log_only)) then print_ln;
-//! print(s);
-//! end;
-//!
 //! @ The procedure |print_esc| prints a string that is preceded by
 //! the user's escape character (which is usually a backslash).
 //!
@@ -116,26 +106,5 @@
 //! while j<pool_ptr do
 //!   begin print_char(so(str_pool[j])); incr(j);
 //!   end;
-//! end;
-//!
-//! @ Here is a procedure that asks the user to type a line of input,
-//! assuming that the |selector| setting is either |term_only| or |term_and_log|.
-//! The input is placed into locations |first| through |last-1| of the
-//! |buffer| array, and echoed on the transcript file if appropriate.
-//!
-//! This procedure is never called when |interaction<scroll_mode|.
-//!
-//! @d prompt_input(#)==begin wake_up_terminal; print(#); term_input;
-//!     end {prints a string and gets a line of input}
-//!
-//! @p procedure term_input; {gets a line from the terminal}
-//! var k:0..buf_size; {index into |buffer|}
-//! begin update_terminal; {now the user sees the prompt for sure}
-//! if not input_ln(term_in,true) then fatal_error("End of file on the terminal!");
-//! @.End of file on the terminal@>
-//! term_offset:=0; {the user's line ended with \<\rm return>}
-//! decr(selector); {prepare to echo the input}
-//! if last<>first then for k:=first to last-1 do print(buffer[k]);
-//! print_ln; incr(selector); {restore previous status}
 //! end;
 //!

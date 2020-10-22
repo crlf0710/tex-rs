@@ -56,3 +56,6 @@ use crate::section_0018::ASCII_code;
 use crate::section_0113::halfword;
 use crate::section_0207::other_char;
 use linkme::distributed_slice;
+
+// Workaround https://github.com/rust-lang/rust/issues/47384
+pub(crate) fn workaround_47384() {}

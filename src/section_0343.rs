@@ -31,6 +31,7 @@ macro_rules! Input_from_external_file__goto_restart_if_no_input_found {
                 // @<Move to next line of file,
                 //   or |goto restart| if there is no next line,
                 //   or |return| if a \.{\\read} line has finished@>;
+                Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_or_return_if_a_read_line_has_finished!($globals);
                 // check_interrupt;
                 check_interrupt!($globals);
                 // goto switch;

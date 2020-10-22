@@ -1,0 +1,31 @@
+//! @ The |jump_out| procedure just cuts across all active procedure levels and
+//! goes to |end_of_TEX|. This is the only nontrivial |@!goto| statement in the
+//! whole program. It is used when there is no recovery from a particular error.
+//!
+//! Some \PASCAL\ compilers do not implement non-local |goto| statements.
+//! @^system dependencies@>
+//! In such cases the body of |jump_out| should simply be
+//! `|close_files_and_terminate|;\thinspace' followed by a call on some system
+//! procedure that quietly terminates the program.
+//
+// @<Error hand...@>=
+// procedure jump_out;
+fn jump_out() -> Result<(), JumpOutToEndOfTEX> {
+    // begin goto end_of_TEX;
+    return Err(JumpOutToEndOfTEX);
+    // end;
+}
+
+pub(crate) struct JumpOutToEndOfTEX;
+
+#[allow(unused_macros)]
+macro_rules! try_or_jump {
+    ($val:expr, $jump_target:lifetime) => {
+        match $val {
+            Ok(v) => v,
+            Err(crate::section_0081::JumpOutToEndOfTEX) => goto_forward_label!($jump_target),
+        }
+    };
+}
+
+migration_complete!();

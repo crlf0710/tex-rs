@@ -12,6 +12,17 @@
 // @f tini==end
 const _ : () = ();
 
+// FIXME: Using short name to workaround https://github.com/dtolnay/linkme/issues/35
+#[distributed_slice]
+pub(crate) static SET_INIT_KEYVAR: [fn(&mut TeXGlobals)] = [..];
+
+macro_rules! Set_initial_values_of_key_variables {
+    ($globals:expr) => {
+        for f in crate::section_0008::SET_INIT_KEYVAR {
+            f($globals);
+        }
+    }
+}
 
 // FIXME: Using short name to workaround https://github.com/dtolnay/linkme/issues/35
 #[distributed_slice]
@@ -29,6 +40,7 @@ macro_rules! Initialize_table_entries_done_by_INITEX_only {
 macro_rules! Initialize_whatever_TeX_might_access {
     ($globals:expr) => {
         // @<Set initial values of key variables@>@/
+        Set_initial_values_of_key_variables!($globals);
         // @!init @<Initialize table entries (done by \.{INITEX} only)@>@;@+tini
         region_initex! {
             ($globals) {

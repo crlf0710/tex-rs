@@ -18,6 +18,8 @@ macro_rules! Check_the_constant_values_for_consistency {
 /// Main entry to TeX
 #[allow(unused_mut, unused_variables)]
 pub fn entry() {
+    workarounds!();
+
     // @p begin @!{|start_here|}
 
     /// start_here
@@ -95,7 +97,7 @@ pub fn entry() {
 
     // main_control; {come to life}
     /// come to life
-    main_control(globals);
+    try_or_jump!(main_control(globals), 'end_of_TEX);
     // final_cleanup; {prepare for death}
     /// prepare for death
     final_cleanup(globals);

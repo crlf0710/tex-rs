@@ -127,3 +127,20 @@ macro_rules! strpool_str {
         crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
     }};
 }
+
+macro_rules! return_nojump {
+    () => {
+        return Ok(());
+    };
+    ($val: expr) => {
+        return Ok($val);
+    };
+}
+
+macro_rules! workarounds {
+    () => {
+        crate::section_0074::workaround_47384();
+        crate::section_0232::workaround_47384();
+        crate::section_0265::workaround_47384();
+    };
+}

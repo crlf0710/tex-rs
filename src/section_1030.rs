@@ -18,7 +18,7 @@
 
 /// governs `TeX`'s activities
 #[allow(unused_variables)]
-pub(crate) fn main_control(globals: &mut TeXGlobals) {
+pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label big_switch,reswitch,main_loop,main_loop_wrapup,
     //   main_loop_move,main_loop_move+1,main_loop_move+2,main_loop_move_lig,
     //   main_loop_lookahead,main_loop_lookahead+1,
@@ -30,7 +30,7 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     region_backward_label! {
     'big_switch <-
     {
-    get_x_token(globals);
+    get_x_token(globals)?;
     // reswitch: @<Give diagnostic information, if requested@>;
     region_backward_label! {
     'reswitch <-
@@ -61,7 +61,9 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) {
     }
     |'big_switch|}
     // exit:end;
+    return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0380::get_x_token;
+use crate::section_0081::JumpOutToEndOfTEX;

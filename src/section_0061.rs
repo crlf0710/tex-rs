@@ -11,13 +11,13 @@ macro_rules! Initialize_the_output_routines {
         wterm($globals, banner);
 
         // if format_ident=0 then wterm_ln(' (no format preloaded)')
-        // else  begin slow_print(format_ident); print_ln;
-        //   end;
         if $globals.format_ident.is_zero() {
             wterm_ln($globals, " (no format preloaded)");
         } else {
+            // else  begin slow_print(format_ident); print_ln;
             slow_print($globals, $globals.format_ident.into());
             print_ln($globals);
+            // end;
         }
 
         // update_terminal;

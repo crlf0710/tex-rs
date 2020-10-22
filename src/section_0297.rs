@@ -89,13 +89,19 @@ pub(crate) struct cur_chr_type(halfword);
 #[derive(Copy, Clone, Default)]
 pub(crate) struct cur_chr_type(word);
 
+impl cur_chr_type {
+    pub(crate) fn new_zero() -> Self {
+        cur_chr_type(0)
+    }
+}
+
 impl From<ASCII_code> for cur_chr_type {
     fn from(v: ASCII_code) -> Self {
         cur_chr_type(v.0 as _)
     }
 }
 
-impl From<cur_chr_type> for ASCII_code  {
+impl From<cur_chr_type> for ASCII_code {
     fn from(v: cur_chr_type) -> Self {
         ASCII_code(v.0 as _)
     }
