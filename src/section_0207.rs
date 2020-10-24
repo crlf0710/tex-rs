@@ -39,6 +39,8 @@ pub(crate) const ignore: quarterword = 9;
 /// characters equivalent to blank space ( ` ` )
 pub(crate) const spacer: quarterword = 10;
 // @d letter=11 {characters regarded as letters ( \.{A..Z}, \.{a..z} )}
+/// characters regarded as letters ( `A..Z`, `a..z` )
+pub(crate) const letter: quarterword = 11;
 // @d other_char=12 {none of the special character types}
 /// none of the special character types
 pub(crate) const other_char: quarterword = 12;

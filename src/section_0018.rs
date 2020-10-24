@@ -7,14 +7,27 @@
 
 /// eight-bit numbers
 #[cfg(not(feature = "unicode_support"))]
-#[derive(Default, Copy, Clone, PartialEq, Eq)]
+#[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd)]
 pub struct ASCII_code(pub(crate) u8);
+
+#[cfg(not(feature = "unicode_support"))]
+impl ASCII_code {
+    pub(crate) fn numeric_value(self) -> u8 {
+        self.0
+    }
+}
 
 /// 32-bit internal form character code, compatible with ascii
 #[cfg(feature = "unicode_support")]
-#[derive(Default, Copy, Clone, PartialEq, Eq)]
+#[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd)]
 pub struct ASCII_code(pub(crate) u32);
 
+#[cfg(feature = "unicode_support")]
+impl ASCII_code {
+    pub(crate) fn numeric_value(self) -> u32 {
+        self.0
+    }
+}
 migration_complete!();
 
 macro_rules! ASCII_code_literal {

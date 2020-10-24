@@ -18,6 +18,8 @@
 pub(crate) const call: quarterword = max_command + 11;
 // @d long_call=max_command+12 {long, non-outer control sequence}
 // @d outer_call=max_command+13 {non-long, outer control sequence}
+/// non-long, outer control sequence
+pub(crate) const outer_call: quarterword = max_command + 13;
 // @d long_outer_call=max_command+14 {long, outer control sequence}
 // @d end_template=max_command+15 {end of an alignment template}
 // @d dont_expand=max_command+16 {the following token was marked by \.{\\noexpand}}

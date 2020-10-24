@@ -16,24 +16,82 @@
 // @<Scan a control...@>=
 macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
     ($globals:expr) => {
+        region_forward_label! {
+        |'found|
+        {
         // begin if loc>limit then cur_cs:=null_cs {|state| is irrelevant in this case}
-        // else  begin start_cs: k:=loc; cur_chr:=buffer[k]; cat:=cat_code(cur_chr);
-        //   incr(k);
-        //   if cat=letter then state:=skip_blanks
-        //   else if cat=spacer then state:=skip_blanks
-        //   else state:=mid_line;
-        //   if (cat=letter)and(k<=limit) then
-        //     @<Scan ahead in the buffer until finding a nonletter;
-        //     if an expanded code is encountered, reduce it
-        //     and |goto start_cs|; otherwise if a multiletter control
-        //     sequence is found, adjust |cur_cs| and |loc|, and
-        //     |goto found|@>
-        //   else @<If an expanded code is present, reduce it and |goto start_cs|@>;
-        //   cur_cs:=single_base+buffer[loc]; incr(loc);
-        //   end;
+        if loc!($globals) > limit!($globals) {
+            /// `state` is irrelevant in this case
+            const _ : () = ();
+            $globals.cur_cs = null_cs;
+        } else {
+            region_backward_label! {
+            'start_cs <-
+            {
+                // else  begin start_cs: k:=loc; cur_chr:=buffer[k]; cat:=cat_code(cur_chr);
+                let mut k = loc!($globals);
+                $globals.cur_chr = $globals.buffer[k].into();
+                let mut cat = cat_code!($globals, $globals.buffer[k]) as quarterword;
+                // incr(k);
+                incr!(k);
+                // if cat=letter then state:=skip_blanks
+                if cat == letter {
+                    state!($globals) = skip_blanks;
+                } else if cat == spacer {
+                    // else if cat=spacer then state:=skip_blanks
+                    state!($globals) = skip_blanks;
+                } else {
+                    // else state:=mid_line;
+                    state!($globals) = mid_line;
+                }
+                // if (cat=letter)and(k<=limit) then
+                if cat==letter && k <= limit!($globals) {
+                    // @<Scan ahead in the buffer until finding a nonletter;
+                    // if an expanded code is encountered, reduce it
+                    // and |goto start_cs|; otherwise if a multiletter control
+                    // sequence is found, adjust |cur_cs| and |loc|, and
+                    // |goto found|@>
+                    Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_code_is_encountered_reduce_it_and_goto_start_cs__otherwise_if_a_multiletter_control_sequence_is_found_adjust_cur_cs_and_loc_and_goto_found!
+                        ($globals, k, cat, 'start_cs, 'found);
+                } else {
+                    // else @<If an expanded code is present, reduce it and |goto start_cs|@>;
+                    If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!($globals);
+                }
+                // cur_cs:=single_base+buffer[loc]; incr(loc);
+                #[cfg(feature = "unicode_support")]
+                if $globals.buffer[loc!($globals)] > ASCII_code::from(255) {
+                    todo!("buffer item > 255, is {}", $globals.buffer[loc!($globals)].0);
+                }
+                $globals.cur_cs = single_base as halfword +
+                    $globals.buffer[loc!($globals)].numeric_value() as halfword;
+                incr!(loc!($globals));
+            }
+            |'start_cs|
+            }
+            // end;
+        }
+        }
         // found: cur_cmd:=eq_type(cur_cs); cur_chr:=equiv(cur_cs);
+        'found <-
+        }
+        $globals.cur_cmd = eq_type!($globals, $globals.cur_cs as u32);
+        $globals.cur_chr = ASCII_code::from(equiv!($globals, $globals.cur_cs as u32) as integer).into();
         // if cur_cmd>=outer_call then check_outer_validity;
-        // end
-        todo!();
+        if $globals.cur_cmd >= outer_call {
+            check_outer_validity();
+            // end
+        }
+        use crate::section_0113::halfword;
+        use crate::section_0113::quarterword;
+        use crate::section_0222::null_cs;
+        use crate::section_0222::single_base;
+        use crate::section_0018::ASCII_code;
+        use crate::section_0210::outer_call;
+        use crate::section_0336::check_outer_validity;
+        use crate::section_0207::spacer;
+        use crate::section_0207::letter;
+        use crate::section_0303::skip_blanks;
+        use crate::section_0303::mid_line;
+        use crate::pascal::integer;
     }
 }

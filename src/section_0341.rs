@@ -24,6 +24,7 @@ pub(crate) fn get_next(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX
     // @!cat:0..max_char_code; {|cat_code(cur_chr)|, usually}
     // @!c,@!cc:ASCII_code; {constituents of a possible expanded code}
     // @!d:2..3; {number of excess characters in an expanded code}
+    const _: () = ();
     // begin restart: cur_cs:=0;
     region_backward_label! {
     'restart <-

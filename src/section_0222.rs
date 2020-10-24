@@ -23,7 +23,7 @@ pub(crate) const single_base: word = single_base_TYPENUM::U32;
 // @d null_cs=single_base+256 {equivalent of \.{\\csname\\endcsname}}
 /// equivalent of `\csname\endcsname`
 pub(crate) type null_cs_TYPENUM = typenum::op!(single_base_TYPENUM + U256);
-pub(crate) const null_cs: word = null_cs_TYPENUM::U32;
+pub(crate) const null_cs: halfword = null_cs_TYPENUM::U16;
 // @d hash_base=null_cs+1 {beginning of region 2, for the hash table}
 /// beginning of region 2, for the hash table
 pub(crate) type hash_base_TYPENUM = typenum::op!(null_cs_TYPENUM + U1);
@@ -70,5 +70,6 @@ pub(crate) const glue_base: word = glue_base_TYPENUM::U32;
 
 use crate::pascal::word;
 use crate::section_0012::hash_size_TYPENUM;
+use crate::section_0113::halfword;
 use typenum::Unsigned;
 use typenum::{U1, U10, U256, U257};
