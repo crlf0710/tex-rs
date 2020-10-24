@@ -1,17 +1,3 @@
-//! @ Several of the elementary string operations are performed using \.{WEB}
-//! macros instead of \PASCAL\ procedures, because many of the
-//! operations are done quite frequently and we want to avoid the
-//! overhead of procedure calls. For example, here is
-//! a simple macro that computes the length of a string.
-//! @.WEB@>
-//!
-//! @d length(#)==(str_start[#+1]-str_start[#]) {the number of characters
-//!   in string number \#}
-//!
-//! @ The length of the current string is called |cur_length|:
-//!
-//! @d cur_length == (pool_ptr - str_start[str_ptr])
-//!
 //! @ Strings are created by appending character codes to |str_pool|.
 //! The |append_char| macro, defined here, does not check to see if the
 //! value of |pool_ptr| has gotten too high; this test is supposed to be

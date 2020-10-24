@@ -24,13 +24,43 @@
 //! |true| during the time that new hash table entries are forbidden.
 //
 // @d next(#) == hash[#].lh {link for coalesced lists}
+/// link for coalesced lists
+macro_rules! next {
+    ($globals:expr, $p:expr) => {
+        $globals.hash[$p][crate::section_0113::TWO_HALVES_LH]
+    }
+}
 // @d text(#) == hash[#].rh {string number for control sequence name}
+/// string number for control sequence name
+macro_rules! text {
+    ($globals:expr, $p:expr) => {
+        $globals.hash[$p][crate::section_0113::TWO_HALVES_RH]
+    }
+}
 // @d hash_is_full == (hash_used=hash_base) {test if all positions are occupied}
 // @d font_id_text(#) == text(font_id_base+#) {a frozen font identifier's name}
 //
 // @<Glob...@>=
 // @!hash: array[hash_base..undefined_control_sequence-1] of two_halves;
 //   {the hash table}
+/// the hash table
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static hash: hash_array<two_halves> = hash_array::default();
+
+type hash_array_last_index_TYPENUM = typenum::op!(undefined_control_sequence_TYPENUM - U1);
+type hash_array_LENGTH_TYPENUM = typenum::op!(hash_array_last_index_TYPENUM - hash_base_TYPENUM + U1);
+
+define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
+    pub(crate) hash_array[u16_from_m_to_n<hash_base_TYPENUM, hash_array_last_index_TYPENUM>] =>
+    u16; U16; hash_base_TYPENUM; hash_array_LENGTH_TYPENUM
+);
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0256::hash_array;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0113::two_halves;
+
 // @!hash_used:pointer; {allocation pointer for |hash|}
 // @!no_new_control_sequence:boolean; {are new identifiers legal?}
 /// are new identifiers legal?
@@ -41,4 +71,9 @@ pub(crate) static no_new_control_sequence: boolean = true;
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::boolean;
 
+
+use crate::pascal::u16_from_m_to_n;
+use crate::section_0222::undefined_control_sequence_TYPENUM;
+use crate::section_0222::hash_base_TYPENUM;
+use typenum::U1;
 use globals_struct::{globals_struct_field, globals_struct_use};

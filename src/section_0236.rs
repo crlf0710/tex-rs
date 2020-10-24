@@ -98,7 +98,8 @@ pub(crate) const dimen_base: word = dimen_base_TYPENUM::U32;
 /// an integer parameter
 macro_rules! int_par {
     ($globals:expr, $val:expr) => {
-        $globals.eqtb[crate::section_0230::int_base + $val as u32]
+        $globals.eqtb[crate::section_0230::int_base as crate::section_0115::pointer
+            + $val as crate::section_0115::pointer]
             [crate::section_0113::MEMORY_WORD_INT]
     };
 }

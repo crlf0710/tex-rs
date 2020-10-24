@@ -17,8 +17,8 @@ use crate::section_0113::memory_word;
 type eqtb_range_array_LENGTH_TYPENUM = typenum::op!(eqtb_size_TYPENUM - active_base_TYPENUM + U1);
 
 define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
-    pub(crate) eqtb_range_array[u32_from_m_to_n<active_base_TYPENUM, eqtb_size_TYPENUM>] =>
-    u32; U32; active_base_TYPENUM; eqtb_range_array_LENGTH_TYPENUM
+    pub(crate) eqtb_range_array[u16_from_m_to_n<active_base_TYPENUM, eqtb_size_TYPENUM>] =>
+    u16; U16; active_base_TYPENUM; eqtb_range_array_LENGTH_TYPENUM
 );
 
 // @!xeq_level:array[int_base..eqtb_size] of quarterword;
@@ -34,11 +34,11 @@ use crate::section_0253::xeq_level_range_array;
 type xeq_level_range_array_LENGTH_TYPENUM = typenum::op!(eqtb_size_TYPENUM - int_base_TYPENUM + U1);
 
 define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
-    pub(crate) xeq_level_range_array[u32_from_m_to_n<int_base_TYPENUM, eqtb_size_TYPENUM>] =>
-    u32; U32; int_base_TYPENUM; xeq_level_range_array_LENGTH_TYPENUM
+    pub(crate) xeq_level_range_array[u16_from_m_to_n<int_base_TYPENUM, eqtb_size_TYPENUM>] =>
+    u16; U16; int_base_TYPENUM; xeq_level_range_array_LENGTH_TYPENUM
 );
 
-use crate::pascal::u32_from_m_to_n;
+use crate::pascal::u16_from_m_to_n;
 use crate::section_0222::active_base_TYPENUM;
 use crate::section_0230::int_base_TYPENUM;
 use crate::section_0247::eqtb_size_TYPENUM;

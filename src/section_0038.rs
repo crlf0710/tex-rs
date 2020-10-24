@@ -69,7 +69,17 @@ impl pool_pointer {
     }
 }
 
+impl core::ops::Sub<Self> for pool_pointer {
+    type Output = integer;
+    fn sub(self, rhs: Self) -> integer {
+        (self.0.get() as integer) - (rhs.0.get() as integer)
+    }
+}
+
 impl str_number {
+    pub(crate) fn new(v: u32) -> Self {
+        str_number(u32_from_0_to_n::new(v))
+    }
     pub(crate) fn new_zero() -> Self {
         str_number(u32_from_0_to_n::new(0))
     }

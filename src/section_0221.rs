@@ -40,7 +40,7 @@ macro_rules! equiv_field {
 #[allow(unused_macros)]
 macro_rules! eq_level {
     ($globals:expr, $val:expr) => {
-        eq_level_field!($globals.eqtb[$val])
+        eq_level_field!($globals.eqtb[$val as crate::section_0115::pointer])
     };
 }
 // @d eq_type(#)==eq_type_field(eqtb[#]) {command code for equivalent}
@@ -48,14 +48,14 @@ macro_rules! eq_level {
 #[allow(unused_macros)]
 macro_rules! eq_type {
     ($globals:expr, $val:expr) => {
-        eq_type_field!($globals.eqtb[$val])
+        eq_type_field!($globals.eqtb[$val as crate::section_0115::pointer])
     };
 }
 // @d equiv(#)==equiv_field(eqtb[#]) {equivalent value}
 /// equivalent value
 macro_rules! equiv {
     ($globals:expr, $val:expr) => {
-        equiv_field!($globals.eqtb[$val])
+        equiv_field!($globals.eqtb[$val as crate::section_0115::pointer])
     };
 }
 // @d level_zero=min_quarterword {level for undefined quantities}

@@ -35,7 +35,7 @@ const _: () = ();
 //   end;
 
 #[derive(Copy, Clone)]
-struct two_halves {
+pub(crate) struct two_halves {
     rh: halfword,
     lh_or_b01: halfword_or_b01,
 }
@@ -148,6 +148,42 @@ impl Index<MEMORY_WORD_HH_B0> for memory_word {
 impl IndexMut<MEMORY_WORD_HH_B0> for memory_word {
     fn index_mut(&mut self, _: MEMORY_WORD_HH_B0) -> &mut quarterword {
         unsafe { &mut self.hh.lh_or_b01.b.0 }
+    }
+}
+
+impl Default for two_halves {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+
+pub(crate) struct TWO_HALVES_RH;
+
+impl Index<TWO_HALVES_RH> for two_halves {
+    type Output = halfword;
+    fn index(&self, _: TWO_HALVES_RH) -> &halfword {
+        &self.rh
+    }
+}
+
+impl IndexMut<TWO_HALVES_RH> for two_halves {
+    fn index_mut(&mut self, _: TWO_HALVES_RH) -> &mut halfword {
+        &mut self.rh
+    }
+}
+
+pub(crate) struct TWO_HALVES_LH;
+
+impl Index<TWO_HALVES_LH> for two_halves {
+    type Output = halfword;
+    fn index(&self, _: TWO_HALVES_LH) -> &halfword {
+        unsafe { &self.lh_or_b01.lh }
+    }
+}
+
+impl IndexMut<TWO_HALVES_LH> for two_halves {
+    fn index_mut(&mut self, _: TWO_HALVES_LH) -> &mut halfword {
+        unsafe { &mut self.lh_or_b01.lh }
     }
 }
 
