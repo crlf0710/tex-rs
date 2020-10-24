@@ -1,9 +1,3 @@
-//! @ @<Set init...@>=
-//! format_ident:=0;
-//!
-//! @ @<Initialize table entries...@>=
-//! format_ident:=" (INITEX)";
-//!
 //! @ @<Declare act...@>=
 //! @!init procedure store_fmt_file;
 //! label found1,found2,done1,done2;

@@ -290,7 +290,9 @@ mod section_0464_to_0486;
 mod section_0487_to_0510;
 mod section_0511_to_0525;
 mod section_0526;
-mod section_0527_to_0531;
+mod section_0527_to_0529;
+mod section_0530;
+mod section_0531;
 mod section_0532_to_0536;
 reversing_order_items!(
     {
@@ -342,7 +344,9 @@ mod section_1136_to_1198;
 mod section_1199_to_1207;
 mod section_1208_to_1298;
 mod section_1299;
-mod section_1300_to_1329;
+mod section_1300;
+mod section_1301;
+mod section_1302_to_1329;
 mod section_1330;
 mod section_1331;
 reversing_order_items!(

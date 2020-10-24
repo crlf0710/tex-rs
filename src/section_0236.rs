@@ -67,6 +67,8 @@ pub(crate) const tracing_commands_code: halfword = 36;
 // @d default_hyphen_char_code=46 {value of \.{\\hyphenchar} when a font is loaded}
 // @d default_skew_char_code=47 {value of \.{\\skewchar} when a font is loaded}
 // @d end_line_char_code=48 {character placed at the right end of the buffer}
+/// character placed at the right end of the buffer
+pub(crate) const end_line_char_code: halfword = 48;
 // @d new_line_char_code=49 {character that prints as |print_ln|}
 // @d language_code=50 {current hyphenation table}
 // @d left_hyphen_min_code=51 {minimum left hyphenation fragment size}
@@ -174,6 +176,11 @@ macro_rules! tracing_commands {
 // @d default_hyphen_char==int_par(default_hyphen_char_code)
 // @d default_skew_char==int_par(default_skew_char_code)
 // @d end_line_char==int_par(end_line_char_code)
+macro_rules! end_line_char {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::end_line_char_code)
+    };
+}
 // @d new_line_char==int_par(new_line_char_code)
 // @d language==int_par(language_code)
 // @d left_hyphen_min==int_par(left_hyphen_min_code)

@@ -2,6 +2,25 @@
 //! There is one more branch.
 //
 // @d end_line_char_inactive == (end_line_char<0)or(end_line_char>255)
+#[cfg(not(feature = "unicode_support"))]
+macro_rules! end_line_char_inactive {
+    ($globals:expr) => {
+        {
+            end_line_char!($globals) < 0 || end_line_char!($globals) > 255
+        }
+    }
+}
+
+#[cfg(feature = "unicode_support")]
+macro_rules! end_line_char_inactive {
+    ($globals:expr) => {
+        {
+            // FIXME: needs to do something here.
+            end_line_char!($globals) < 0 || end_line_char!($globals) > 255 && true
+        }
+    }
+}
+
 //
 // @<Move to next line of file, or |goto restart|...@>=
 macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_or_return_if_a_read_line_has_finished {
@@ -31,7 +50,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 // if limit=start then {previous line was empty}
                 //   print_nl("(Please type a command or say `\end')");
                 if limit!($globals) == start!($globals) {
-                    print_nl(strpool_str!("(Please type a command or say `\\end')"));
+                    print_nl($globals, strpool_str!("(Please type a command or say `\\end')"));
                 }
                 // @.Please type...@>
                 // print_ln; first:=start;

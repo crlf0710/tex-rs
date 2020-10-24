@@ -32,7 +32,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
         // end_file_reading; {remove the level that didn't work}
         /// remove the level that didn't work
         end_file_reading(globals);
-        // prompt_file_name("input file name",".tex");
+        prompt_file_name(globals, strpool_str!("input file name"),strpool_str!(".tex"));
         // end;
     }
     }
@@ -69,3 +69,4 @@ use crate::section_0303::new_line;
 use crate::section_0328::begin_file_reading;
 use crate::section_0329::end_file_reading;
 use crate::section_0027::a_open_in;
+use crate::section_0530::prompt_file_name;

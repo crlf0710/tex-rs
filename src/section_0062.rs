@@ -5,11 +5,12 @@
 // procedure print_nl(@!s:str_number); {prints string |s| at beginning of line}
 /// prints string `s` at beginning of line
 #[allow(unused_variables)]
-pub(crate) fn print_nl(s: str_number) {
+pub(crate) fn print_nl(globals: &mut TeXGlobals, s: str_number) {
     // begin if ((term_offset>0)and(odd(selector)))or@|
     //   ((file_offset>0)and(selector>=log_only)) then print_ln;
     // print(s);
     // end;
 }
 
+use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;
