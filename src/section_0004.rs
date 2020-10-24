@@ -1,3 +1,4 @@
+#![allow(missing_docs)]
 //! The program begins with a normal \PASCAL\ program heading, whose
 //! components will be filled in later, using the conventions of \.{WEB}.
 //! @.WEB@>
@@ -32,7 +33,7 @@
 #[globals_struct]
 #[globals_struct_field_view(TeXGlobalsIoView, make_globals_io_view)]
 #[globals_struct_field_view(TeXGlobalsIoFilenameView, make_globals_io_filename_view)]
-pub(crate) mod TeXGlobals {
+pub mod TeXGlobals {
     include!("src/section_0013.rs");
     include!("src/section_0026.rs");
     include!("src/section_0030.rs");
@@ -53,6 +54,10 @@ pub(crate) mod TeXGlobals {
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
 }
+
+impl_debug_with_literal!(TeXGlobals, "TeXGlobals");
+impl_debug_with_literal!(TeXGlobalsIoView['view], "TeXGlobalsIoView");
+
 
 // @#
 // procedure initialize; {this procedure gets things started properly}

@@ -150,16 +150,22 @@ mod section_0060;
 mod section_0061;
 mod section_0062;
 mod section_0063_to_0070;
-#[macro_use]
-mod section_0071;
-mod section_0072;
-mod section_0073;
-mod section_0074;
-mod section_0075;
-mod section_0076;
-mod section_0077_to_0080;
-#[macro_use]
-mod section_0081;
+reversing_order_items!(
+    {
+        #[macro_use]
+        mod section_0071;
+        mod section_0072;
+        mod section_0073;
+        mod section_0074;
+        mod section_0075;
+        mod section_0076;
+        mod section_0077_to_0080;
+    }
+    {
+        #[macro_use]
+        mod section_0081;
+    }
+);
 mod section_0082_to_0086;
 mod section_0087;
 mod section_0088_to_0092;
@@ -266,7 +272,18 @@ reversing_order_items!(
         mod section_0343;
     }
     {
-        mod section_0344_to_0356;
+        #[macro_use]
+        mod section_0344;
+    }
+    {
+        #[macro_use]
+        mod section_0345;
+    }
+    {
+        mod section_0346_to_0353;
+        #[macro_use]
+        mod section_0354;
+        mod section_0355_to_0356;
     }
     {
         #[macro_use]
@@ -278,7 +295,10 @@ reversing_order_items!(
         mod section_0360;
     }
 );
-mod section_0361_to_0365;
+mod section_0361_to_0362;
+mod section_0363;
+mod section_0364;
+mod section_0365;
 mod section_0366;
 mod section_0367_to_0379;
 mod section_0380;
@@ -291,8 +311,15 @@ mod section_0487_to_0510;
 mod section_0511_to_0525;
 mod section_0526;
 mod section_0527_to_0529;
-mod section_0530;
-mod section_0531;
+reversing_order_items!(
+    {
+        mod section_0530;
+    }
+    {
+        #[macro_use]
+        mod section_0531;
+    }
+);
 mod section_0532_to_0536;
 reversing_order_items!(
     {
@@ -371,4 +398,5 @@ mod section_1380;
 mod string_pool;
 mod unicode_support;
 
+pub use section_0004::TeXGlobals;
 pub use section_1332::entry;

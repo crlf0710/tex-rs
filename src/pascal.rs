@@ -8,6 +8,9 @@ pub type boolean = bool;
 pub(crate) struct char(pub(crate) u8);
 
 #[cfg(not(feature = "unicode_support"))]
+impl core::fmt::Debug for char {}
+
+#[cfg(not(feature = "unicode_support"))]
 impl char {
     pub(crate) const MAX: char = char(255);
 
@@ -25,6 +28,17 @@ impl char {
     pub(crate) const MAX: char = char(0xFFFFFF, PhantomData);
     pub(crate) const fn new(v: u32) -> Self {
         char(v, PhantomData)
+    }
+}
+
+#[cfg(feature = "unicode_support")]
+impl core::fmt::Debug for char {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        assert!(self.0 < 0xFFFFFF);
+        f.debug_list()
+            .entries(crate::unicode_support::chars_from_generalized_char(*self))
+            .finish()?;
+        Ok(())
     }
 }
 
@@ -299,6 +313,16 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
             }
         }
 
+        impl<ELEMENT: core::fmt::Debug> core::fmt::Debug for $name<ELEMENT> {
+            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+                let start_k = <$length_typenum as typenum::Unsigned>::$typenum_const as usize;
+                let mut debug_map = f.debug_map();
+                debug_map.entries((start_k..).zip(self.0.iter()));
+                debug_map.finish()?;
+                Ok(())
+            }
+        }
+
         impl<ELEMENT> core::ops::Index<$index_type> for $name<ELEMENT>
         {
             type Output = ELEMENT;
@@ -499,6 +523,8 @@ impl Default for file_of_text_char {
     }
 }
 
+impl_debug_with_literal!(file_of_text_char, "file_of_text_char");
+
 impl PascalFile for file_of_text_char {
     type Unit = text_char;
 
@@ -566,6 +592,8 @@ pub(crate) struct file_of<T> {
     file_state: FileState<T>,
     error_state: usize,
 }
+
+impl_debug_with_literal!(file_of[T], "file_of<T>");
 
 impl<T> Default for file_of<T> {
     fn default() -> Self {
@@ -647,7 +675,12 @@ pub(crate) fn put<F: PascalFile>(file: &mut F) {
 }
 
 #[allow(unused_variables)]
-pub(crate) fn reset<F: PascalFile, P: Into<String>>(file: &mut F, path: P, options: &str) {
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
+    file: &mut F,
+    path: P,
+    options: &str,
+) {
     let path = path.into();
     if F::is_text_file() {
         let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
@@ -828,6 +861,29 @@ pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
 pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
     let write_target = file.file_state_mut().discard_caret_and_get_write_target();
     write_target.flush().unwrap();
+}
+
+pub(crate) fn break_in<F: PascalFile>(file: &mut F, _: boolean) {
+    // FIXME: this seems nonstandard. Verify if this handling is correct.
+    // and not sure what the 2nd argument should do here.
+    let file_state = file.file_state_mut();
+    match file_state {
+        FileState::LineInspectionMode {
+            read_line_buffer, ..
+        } => match read_line_buffer {
+            LineBufferState::AfterReadLine { line_no_more, .. } => {
+                if *line_no_more {
+                    *read_line_buffer = LineBufferState::Eof
+                } else {
+                    *read_line_buffer = LineBufferState::UnknownState {
+                        initial_line: false,
+                    };
+                }
+            }
+            _ => {}
+        },
+        _ => panic!("file is not in line-inspection mode"),
+    }
 }
 
 #[allow(unused_variables)]

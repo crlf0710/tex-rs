@@ -128,20 +128,39 @@ macro_rules! strpool_str {
     }};
 }
 
-macro_rules! return_nojump {
-    () => {
-        return Ok(());
-    };
-    ($val: expr) => {
-        return Ok($val);
-    };
-}
-
 macro_rules! workarounds {
     () => {
         crate::section_0074::workaround_47384();
         crate::section_0232::workaround_47384();
         crate::section_0265::workaround_47384();
         crate::section_1301::workaround_47384();
+    };
+}
+
+macro_rules! impl_debug_with_literal {
+    ($impl_type:ident, $literal: expr) => {
+        impl core::fmt::Debug for $impl_type {
+            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+                write!(f, $literal)?;
+                Ok(())
+            }
+        }
+    };
+    ($impl_type:ident [ $($generics:tt)* ] , $literal: expr) => {
+        impl<$($generics)*> core::fmt::Debug for $impl_type<$($generics)*> {
+            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+                write!(f, $literal)?;
+                Ok(())
+            }
+        }
+    };
+}
+
+macro_rules! trace_expr {
+    ($($x:tt)*) => {
+        #[cfg(feature = "trace")]
+        {
+            tracing::trace!($($x)*);
+        }
     };
 }

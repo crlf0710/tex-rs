@@ -18,7 +18,12 @@ fn jump_out() -> Result<(), JumpOutToEndOfTEX> {
 
 pub(crate) struct JumpOutToEndOfTEX;
 
-#[allow(unused_macros)]
+impl fmt::Display for JumpOutToEndOfTEX {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "JumpOutToEndOfTEX")
+    }
+}
+
 macro_rules! try_or_jump {
     ($val:expr, $jump_target:lifetime) => {
         match $val {
@@ -27,5 +32,26 @@ macro_rules! try_or_jump {
         }
     };
 }
+
+macro_rules! return_nojump {
+    () => {
+        return Ok(());
+    };
+    ($val: expr) => {
+        return Ok($val);
+    };
+}
+
+
+macro_rules! ok_nojump {
+    () => {
+        Ok::<_, crate::section_0081::JumpOutToEndOfTEX>(())
+    };
+    ($val: expr) => {
+        Ok::<_, crate::section_0081::JumpOutToEndOfTEX>($val)
+    };
+}
+
+use core::fmt;
 
 migration_complete!();

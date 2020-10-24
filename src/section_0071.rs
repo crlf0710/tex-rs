@@ -9,7 +9,7 @@
 //     end {prints a string and gets a line of input}
 /// prints a string and gets a line of input
 macro_rules! prompt_input {
-    ($globals:expr, $val:expr) => {
+    ($globals:expr, $val:expr) => {{
         wake_up_terminal($globals);
         print($globals, ($val).into());
         term_input($globals)?;
@@ -17,11 +17,18 @@ macro_rules! prompt_input {
         use crate::section_0034::wake_up_terminal;
         use crate::section_0059::print;
         use crate::section_0071::term_input;
-    };
+
+        ok_nojump!()
+    }};
 }
 
 // @p procedure term_input; {gets a line from the terminal}
 /// gets a line from the terminal
+#[cfg_attr(
+    feature = "trace",
+    tracing::instrument(level = "trace", err),
+    allow(unreachable_code)
+)]
 pub(crate) fn term_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // var k:0..buf_size; {index into |buffer|}
     // begin update_terminal; {now the user sees the prompt for sure}
@@ -37,6 +44,7 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfT
     // if last<>first then for k:=first to last-1 do print(buffer[k]);
     // print_ln; incr(selector); {restore previous status}
     // end;
+
     return_nojump!();
 }
 

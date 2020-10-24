@@ -14,12 +14,16 @@ macro_rules! Read_the_first_line_of_the_new_file {
             do_nothing!();
         }
         // firm_up_the_line;
+        firm_up_the_line($globals);
         // if end_line_char_inactive then decr(limit)
         // else  buffer[limit]:=end_line_char;
         // first:=limit+1; loc:=start;
+        $globals.first = (limit!($globals) + 1).into();
+        loc!($globals) = start!($globals);
         // end
 
         use crate::section_0031::input_ln;
         use crate::section_0004::TeXGlobalsIoView;
+        use crate::section_0363::firm_up_the_line;
     }
 }

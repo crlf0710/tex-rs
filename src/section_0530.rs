@@ -7,10 +7,17 @@
 //
 // @p procedure prompt_file_name(@!s,@!e:str_number);
 #[allow(unused_variables)]
-pub(crate) fn prompt_file_name(globals: &mut TeXGlobals, s: str_number, e: str_number) {
+pub(crate) fn prompt_file_name(
+    globals: &mut TeXGlobals,
+    s: str_number,
+    e: str_number,
+) -> Result<(), JumpOutToEndOfTEX> {
     // label done;
     // var k:0..buf_size; {index into |buffer|}
     // begin if interaction=scroll_mode then wake_up_terminal;
+    if globals.interaction == scroll_mode {
+        wake_up_terminal(globals);
+    }
     // if s="input file name" then print_err("I can't find file `")
     // @.I can't find file x@>
     // else print_err("I can't write on file `");
@@ -25,12 +32,20 @@ pub(crate) fn prompt_file_name(globals: &mut TeXGlobals, s: str_number, e: str_n
     //   fatal_error("*** (job aborted, file error in nonstop mode)");
     // @.job aborted, file error...@>
     // clear_terminal; prompt_input(": "); @<Scan file name in the buffer@>;
+    clear_terminal(globals);
+    prompt_input!(globals, strpool_str!(": "))?;
+    Scan_file_name_in_the_buffer!(globals);
     // if cur_ext="" then cur_ext:=e;
     // pack_cur_name;
     // end;
+    return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0034::clear_terminal;
 use crate::section_0038::str_number;
 use crate::section_0059::print;
 use crate::section_0062::print_nl;
+use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0034::wake_up_terminal;
+use crate::section_0073::scroll_mode;

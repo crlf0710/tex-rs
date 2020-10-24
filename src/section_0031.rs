@@ -40,8 +40,9 @@
 
 // @p function input_ln(var f:alpha_file;@!bypass_eoln:boolean):boolean;
 //   {inputs the next line or returns |false|}
-#[allow(unused_variables)]
 /// inputs the next line or returns `false`
+#[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn input_ln(
     globals_view: TeXGlobalsIoView<'_>,
     f: &mut alpha_file,

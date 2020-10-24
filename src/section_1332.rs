@@ -17,15 +17,13 @@ macro_rules! Check_the_constant_values_for_consistency {
 
 /// Main entry to TeX
 #[allow(unused_mut, unused_variables)]
-pub fn entry() {
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+pub fn entry(globals: &mut TeXGlobals) {
     workarounds!();
 
     // @p begin @!{|start_here|}
 
     /// start_here
-    let mut globals = TeXGlobals::default();
-    let globals = &mut globals;
-
     region_forward_label! {|'final_end|{
     region_forward_label! {|'end_of_TEX|{
     region_forward_label! {|'start_of_TEX|{
@@ -88,7 +86,7 @@ pub fn entry() {
     };
     Initialize_the_output_routines!(globals);
     // @<Get the first line of input and prepare to start@>;
-    Get_the_first_line_of_input_and_prepare_to_start!(globals, 'final_end);
+    Get_the_first_line_of_input_and_prepare_to_start!(globals, 'end_of_TEX, 'final_end);
     // history:=spotless; {ready to go!}
     /// ready to go!
     {

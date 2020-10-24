@@ -32,6 +32,8 @@ pub(crate) const car_ret: quarterword = 5;
 // @d sup_mark=7 {superscript ( \.{\char'136} )}
 // @d sub_mark=8 {subscript ( \.{\char'137} )}
 // @d ignore=9 {characters to ignore ( \.{\^\^@@} )}
+/// characters to ignore ( `^^@` )
+pub(crate) const ignore: quarterword = 9;
 // @d endv=9 {end of \<v_j> list in alignment template}
 // @d spacer=10 {characters equivalent to blank space ( \.{\ } )}
 /// characters equivalent to blank space ( ` ` )
@@ -44,6 +46,8 @@ pub(crate) const other_char: quarterword = 12;
 // @d par_end=13 {end of paragraph ( \.{\\par} )}
 // @d match=13 {match a macro parameter}
 // @d comment=14 {characters that introduce comments ( \.\% )}
+/// characters that introduce comments ( `%` )
+pub(crate) const comment: quarterword = 14;
 // @d end_match=14 {end of parameters to macro}
 // @d stop=14 {end of job ( \.{\\end}, \.{\\dump} )}
 /// end of job ( `\end`, `\dump` )

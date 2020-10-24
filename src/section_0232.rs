@@ -38,6 +38,8 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     }
     // cat_code(carriage_return):=car_ret; cat_code(" "):=spacer;
     // cat_code("\"):=escape; cat_code("%"):=comment;
+    cat_code!(globals, ASCII_code_literal!(b'\\')) = escape as _;
+    cat_code!(globals, ASCII_code_literal!(b'%')) = comment as _;
     // cat_code(invalid_code):=invalid_char; cat_code(null_code):=ignore;
     // for k:="0" to "9" do math_code(k):=hi(k+var_code);
     // for k:="A" to "Z" do
@@ -55,6 +57,9 @@ use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0018::ASCII_code;
 use crate::section_0113::halfword;
 use crate::section_0207::other_char;
+use crate::section_0207::escape;
+use crate::section_0207::comment;
+
 use linkme::distributed_slice;
 
 // Workaround https://github.com/rust-lang/rust/issues/47384

@@ -7,7 +7,7 @@
 
 // @<Get the first line...@>=
 macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
-    ($globals:expr, $lbl_final_end:lifetime) => {
+    ($globals:expr, $lbl_end_of_TEX:lifetime, $lbl_final_end:lifetime) => {
         // begin @<Initialize the input routines@>;
         Initialize_the_input_routines!($globals, $lbl_final_end);
         // if (format_ident=0)or(buffer[loc]="&") then
@@ -40,7 +40,7 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
         // if (loc<limit)and(cat_code(buffer[loc])<>escape) then start_input;
         if loc!($globals) < limit!($globals) &&
             cat_code!($globals, $globals.buffer[loc!($globals)]) != escape as halfword {
-            start_input($globals);
+            try_or_jump!(start_input($globals), $lbl_end_of_TEX);
             // {\.{\\input} assumed}
             /// `\input` assumed.
             const _: () = ();

@@ -5,6 +5,7 @@
 // @p procedure get_x_token; {sets |cur_cmd|, |cur_chr|, |cur_tok|,
 //   and expands macros}
 /// sets `cur_cmd`, `cur_chr`, `cur_tok`, and expands macros
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label restart,done;
     // begin restart: get_next;

@@ -25,3 +25,26 @@ macro_rules! ASCII_code_literal {
         ASCII_code(val as _)
     }};
 }
+
+impl From<integer> for ASCII_code {
+    fn from(val: integer) -> Self {
+        #[cfg(not(feature = "unicode_support"))]
+        {
+            assert!(val >=0 && val <= 255);
+            ASCII_code(val as _)
+        }
+        #[cfg(feature = "unicode_support")]
+        {
+            if val >= 0 && val <= 255
+            {
+                ASCII_code(val as _)
+            }
+            else
+            {
+                todo!();
+            }
+        }
+    }
+}
+
+use crate::pascal::integer;

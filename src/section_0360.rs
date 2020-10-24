@@ -58,14 +58,22 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 $globals.first = start!($globals).into();
                 // prompt_input("*"); {input on-line into |buffer|}
                 /// input on-line into `buffer`
-                prompt_input!($globals, strpool_str!("*"));
+                prompt_input!($globals, strpool_str!("*"))?;
                 // @.*\relax@>
-                //     limit:=last;
-                //     if end_line_char_inactive then decr(limit)
-                //     else  buffer[limit]:=end_line_char;
-                //     first:=limit+1;
-                //     loc:=start;
-                //     end
+                // limit:=last;
+                limit!($globals) = $globals.last.get();
+                // if end_line_char_inactive then decr(limit)
+                if end_line_char_inactive!($globals) {
+                    decr!(limit!($globals));
+                } else {
+                    // else  buffer[limit]:=end_line_char;
+                    $globals.buffer[limit!($globals)] = end_line_char!($globals).into();
+                }
+                // first:=limit+1;
+                $globals.first = (limit!($globals) + 1).into();
+                // loc:=start;
+                loc!($globals) = start!($globals);
+                // end
             } else {
                 //   else fatal_error("*** (job aborted, no legal \end found)");
                 // @.job aborted@>

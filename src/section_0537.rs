@@ -4,7 +4,7 @@
 // @p procedure start_input; {\TeX\ will \.{\\input} something}
 /// `TeX` will `\input` something
 #[allow(unused_variables)]
-pub(crate) fn start_input(globals: &mut TeXGlobals) {
+pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label done;
     // begin scan_file_name; {set |cur_name| to desired file name}
     /// set `cur_name` to desired file name
@@ -32,7 +32,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
         // end_file_reading; {remove the level that didn't work}
         /// remove the level that didn't work
         end_file_reading(globals);
-        prompt_file_name(globals, strpool_str!("input file name"),strpool_str!(".tex"));
+        prompt_file_name(globals, strpool_str!("input file name"),strpool_str!(".tex"))?;
         // end;
     }
     }
@@ -58,6 +58,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) {
     // @<Read the first line of the new file@>;
     Read_the_first_line_of_the_new_file!(globals);
     // end;
+    return_nojump!();
 }
 
 use crate::section_0004::{TeXGlobals, TeXGlobalsIoFilenameView};
@@ -70,3 +71,4 @@ use crate::section_0328::begin_file_reading;
 use crate::section_0329::end_file_reading;
 use crate::section_0027::a_open_in;
 use crate::section_0530::prompt_file_name;
+use crate::section_0081::JumpOutToEndOfTEX;

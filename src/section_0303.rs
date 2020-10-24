@@ -44,6 +44,8 @@
 /// `state` code when scanning a line of characters
 pub(crate) const mid_line: quarterword = 1;
 // @d skip_blanks=2+max_char_code {|state| code when ignoring blanks}
+/// `state` code when ignoring blanks
+pub(crate) const skip_blanks: quarterword = 2 + max_char_code;
 // @d new_line=3+max_char_code+max_char_code {|state| code at start of line}
 /// `state` code at start of line
 pub(crate) const new_line: quarterword = 3 + max_char_code + max_char_code;
