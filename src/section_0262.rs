@@ -1,4 +1,3 @@
-
 //! @ Single-character control sequences do not need to be looked up in a hash
 //! table, since we can use the character code itself as a direct address.
 //! The procedure |print_cs| prints the name of a control sequence, given

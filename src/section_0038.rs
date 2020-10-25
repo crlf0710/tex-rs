@@ -44,7 +44,7 @@
 //
 // @<Types...@>=
 // @!pool_pointer = 0..pool_size; {for variables that point into |str_pool|}
-#[derive(Copy, Clone, Default)]
+#[derive(Copy, Clone, Default, PartialEq, PartialOrd)]
 /// for variables that point into `str_pool`
 pub(crate) struct pool_pointer(pub(crate) u32_from_0_to_n<pool_size_TYPENUM>);
 
@@ -54,6 +54,9 @@ pub(crate) struct pool_pointer(pub(crate) u32_from_0_to_n<pool_size_TYPENUM>);
 pub(crate) struct str_number(pub(crate) u32_from_0_to_n<max_strings_TYPENUM>);
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
+/// elements of `str_pool` array
+#[derive(Copy, Clone, Debug, Default)]
+pub(crate) struct packed_ASCII_code(pub(crate) u8);
 
 use crate::pascal::{integer, u32_from_0_to_n};
 use crate::section_0011::max_strings_TYPENUM;
@@ -67,12 +70,36 @@ impl pool_pointer {
     pub(crate) fn is_zero(&self) -> bool {
         (self.0).get() == 0
     }
+    pub(crate) fn get(&self) -> u32 {
+        (self.0).get()
+    }
+}
+
+impl core::ops::Add<integer> for pool_pointer {
+    type Output = pool_pointer;
+    fn add(mut self, rhs: integer) -> Self::Output {
+        use core::ops::AddAssign;
+        self.add_assign(rhs);
+        self
+    }
+}
+
+impl core::ops::AddAssign<integer> for pool_pointer {
+    fn add_assign(&mut self, rhs: integer) {
+        self.0.add_assign(rhs as _);
+    }
 }
 
 impl core::ops::Sub<Self> for pool_pointer {
     type Output = integer;
     fn sub(self, rhs: Self) -> integer {
         (self.0.get() as integer) - (rhs.0.get() as integer)
+    }
+}
+
+impl core::ops::SubAssign<integer> for pool_pointer {
+    fn sub_assign(&mut self, rhs: integer) {
+        self.0.sub_assign(rhs as _);
     }
 }
 

@@ -24,7 +24,11 @@
 //! @:TeXbook}{\sl The \TeX book@>
 //! @^character set dependencies@>
 //! @^system dependencies@>
-//!
-//! @<Character |k| cannot be printed@>=
-//!   (k<" ")or(k>"~")
-//!
+//
+// @<Character |k| cannot be printed@>=
+macro_rules! Character_k_cannot_be_printed {
+    ($k:expr) => {
+        // NOTE: This is used for 256 single byte characters
+        $k < b' ' || $k > b'~'
+    }
+}

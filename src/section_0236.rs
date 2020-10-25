@@ -99,8 +99,7 @@ pub(crate) const dimen_base: word = dimen_base_TYPENUM::U32;
 macro_rules! int_par {
     ($globals:expr, $val:expr) => {
         $globals.eqtb[crate::section_0230::int_base as crate::section_0115::pointer
-            + $val as crate::section_0115::pointer]
-            [crate::section_0113::MEMORY_WORD_INT]
+            + $val as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
     };
 }
 // @d pretolerance==int_par(pretolerance_code)

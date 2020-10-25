@@ -9,7 +9,9 @@
 // @p function id_lookup(@!j,@!l:integer):pointer; {search the hash table}
 /// search the hash table
 #[allow(unused_variables, unreachable_code, unused_mut, unused_assignments)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> pointer {
+    debug_assert!(l > 1);
     // label found; {go here if you found it}
     // var h:integer; {hash code}
     /// hash code
@@ -50,7 +52,8 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
                 } else {
                     // else @<Insert a new control sequence after |p|, then make
                     //   |p| point to it@>;
-                    todo!();
+                    Insert_a_new_control_sequence_after_p_then_make_p_point_to_it!
+                        (globals, p, j, l);
                 }
                 // goto found;
                 goto_forward_label!('found);

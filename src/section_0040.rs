@@ -11,5 +11,5 @@ pub(crate) fn length(globals: &TeXGlobals, s: integer) -> integer {
     globals.str_start[(s + 1) as u32] - globals.str_start[s as u32]
 }
 
-use crate::TeXGlobals;
 use crate::pascal::integer;
+use crate::TeXGlobals;

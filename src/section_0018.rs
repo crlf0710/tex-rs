@@ -60,4 +60,11 @@ impl From<integer> for ASCII_code {
     }
 }
 
+#[cfg(feature = "unicode_support")]
+impl ASCII_code {
+    pub(crate) fn fss_utf_len(self) -> usize {
+        crate::unicode_support::len_fss_utf(self.0 as integer)
+    }
+}
+
 use crate::pascal::integer;

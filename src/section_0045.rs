@@ -25,6 +25,6 @@ pub(crate) fn str_eq_buf(globals: &mut TeXGlobals, s: str_number, k: integer) ->
     todo!();
 }
 
-use crate::pascal::{integer, boolean};
+use crate::pascal::{boolean, integer};
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;

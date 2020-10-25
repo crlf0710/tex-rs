@@ -114,6 +114,8 @@ pub(crate) fn chars_from_generalized_char(val: generalized_char) -> impl Iterato
     GraphemeRegistryItemIter::RegItem(item)
 }
 
+/// fss-utf handling code adapted from rust standard library utf-8 handling.
+
 #[derive(Copy, Clone)]
 pub(crate) struct FssUtfEncodedIP32 {
     bytes: [u8; 6],
@@ -132,11 +134,42 @@ const MAX_THREE_B: i32 = 0x10000;
 const MAX_FOUR_B: i32 = 0x20_0000;
 const MAX_FIVE_B: i32 = 0x400_0000;
 
+pub(crate) fn len_fss_utf(code: i32) -> usize {
+    assert!(code >= 0);
+    if code < MAX_ONE_B {
+        1
+    } else if code < MAX_TWO_B {
+        2
+    } else if code < MAX_THREE_B {
+        3
+    } else {
+        4
+    }
+}
+
+pub(crate) fn len_fss_utf_from_first_byte(v: u8) -> usize {
+    if v < 128 {
+        return 1;
+    } else if v & TAG_SIX_B == TAG_SIX_B {
+        return 6;
+    } else if v & TAG_FIVE_B == TAG_FIVE_B {
+        return 5;
+    } else if v & TAG_FOUR_B == TAG_FOUR_B {
+        return 4;
+    } else if v & TAG_THREE_B == TAG_THREE_B {
+        return 3;
+    } else if v & TAG_TWO_B == TAG_TWO_B {
+        return 2;
+    } else {
+        unreachable!()
+    }
+}
+
 impl FssUtfEncodedIP32 {
     pub(crate) fn new(code: i32) -> Self {
         assert!(code >= 0);
         let mut bytes = [0; 6];
-        let len = Self::len_fss_utf(code);
+        let len = len_fss_utf(code);
         match (len, &mut bytes[..]) {
             (1, [a, ..]) => {
                 *a = code as u8;
@@ -179,18 +212,6 @@ impl FssUtfEncodedIP32 {
             len: len as u8,
         }
     }
-    pub(crate) fn len_fss_utf(code: i32) -> usize {
-        assert!(code >= 0);
-        if code < MAX_ONE_B {
-            1
-        } else if code < MAX_TWO_B {
-            2
-        } else if code < MAX_THREE_B {
-            3
-        } else {
-            4
-        }
-    }
 }
 
 impl IntoIterator for FssUtfEncodedIP32 {
@@ -222,8 +243,50 @@ impl Iterator for FssUtfEncodedIP32Iter {
     }
 }
 
+const CONT_MASK: u8 = 0b0011_1111;
+pub(crate) struct GenericCharIter<'a> {
+    slice: &'a [crate::section_0038::packed_ASCII_code],
+}
 
+impl<'a> GenericCharIter<'a> {
+    pub(crate) fn new(slice: &'a [crate::section_0038::packed_ASCII_code]) -> Self {
+        GenericCharIter { slice }
+    }
+}
 
+#[inline]
+fn fss_utf_first_byte(byte: u8, width: u32) -> u32 {
+    (byte & (0x7F >> width)) as u32
+}
+
+#[inline]
+fn fss_utf_acc_cont_byte(ch: u32, byte: u8) -> u32 {
+    (ch << 6) | (byte & CONT_MASK) as u32
+}
+
+impl<'a> Iterator for GenericCharIter<'a> {
+    type Item = generalized_char;
+
+    fn next(&mut self) -> Option<generalized_char> {
+        if self.slice.is_empty() {
+            return None;
+        }
+        let byte1 = self.slice[0].0;
+        if byte1 < 128 {
+            self.slice = &self.slice[1..];
+            return Some(generalized_char::new(byte1 as _));
+        }
+        let byte_cnt = len_fss_utf_from_first_byte(byte1);
+        let mut val = fss_utf_first_byte(byte1, byte_cnt as _);
+        for packed_ASCII_code(byte) in self.slice[1..byte_cnt].iter().copied() {
+            val = fss_utf_acc_cont_byte(val, byte);
+        }
+        self.slice = &self.slice[byte_cnt..];
+        Some(generalized_char::new(val))
+    }
+}
+
+use crate::section_0038::packed_ASCII_code;
 use core::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
 use unicode_normalization::UnicodeNormalization;

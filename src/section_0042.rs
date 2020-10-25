@@ -7,14 +7,42 @@
 //! To test if there is room to append |l| more characters to |str_pool|,
 //! we shall write |str_room(l)|, which aborts \TeX\ and gives an
 //! apologetic error message if there isn't enough room.
-//!
-//! @d append_char(#) == {put |ASCII_code| \# at the end of |str_pool|}
-//! begin str_pool[pool_ptr]:=si(#); incr(pool_ptr);
-//! end
-//! @d flush_char == decr(pool_ptr) {forget the last character in the pool}
-//! @d str_room(#) == {make sure that the pool hasn't overflowed}
-//!   begin if pool_ptr+# > pool_size then
-//!   overflow("pool size",pool_size-init_pool_ptr);
-//! @:TeX capacity exceeded pool size}{\quad pool size@>
-//!   end
-//!
+//
+// @d append_char(#) == {put |ASCII_code| \# at the end of |str_pool|}
+/// put `ASCII_code` `#` at the end of `str_pool`
+pub(crate) fn append_char(globals: &mut TeXGlobals, val: ASCII_code) {
+    // begin str_pool[pool_ptr]:=si(#); incr(pool_ptr);
+    #[cfg(not(feature = "unicode_support"))]
+    {
+        globals.str_pool[globals.pool_ptr] = si(val);
+        incr!(globals.pool_ptr);
+    }
+    #[cfg(feature = "unicode_support")]
+    {
+        let encoded_iter = FssUtfEncodedIP32::new(val.0 as _).into_iter();
+        for byte in encoded_iter {
+            globals.str_pool[globals.pool_ptr] = packed_ASCII_code(byte);
+            incr!(globals.pool_ptr);
+        }
+        use crate::section_0038::packed_ASCII_code;
+        use crate::unicode_support::FssUtfEncodedIP32;
+    }
+    // end
+}
+
+// @d flush_char == decr(pool_ptr) {forget the last character in the pool}
+// @d str_room(#) == {make sure that the pool hasn't overflowed}
+/// make sure that the pool hasn't overflowed
+pub(crate) fn str_room(globals: &mut TeXGlobals, bytes_count: integer) {
+    // begin if pool_ptr+# > pool_size then
+    if globals.pool_ptr.get() + bytes_count as u32 > pool_size as u32 {
+        // overflow("pool size",pool_size-init_pool_ptr);
+        // @:TeX capacity exceeded pool size}{\quad pool size@>
+        // end
+    }
+}
+
+use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;
+use crate::section_0011::pool_size;
+use crate::section_0018::ASCII_code;

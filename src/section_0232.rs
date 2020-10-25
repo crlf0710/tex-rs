@@ -62,9 +62,8 @@ use crate::section_0018::ASCII_code;
 use crate::section_0113::halfword;
 use crate::section_0207::comment;
 use crate::section_0207::escape;
-use crate::section_0207::other_char;
 use crate::section_0207::letter;
-
+use crate::section_0207::other_char;
 
 use linkme::distributed_slice;
 

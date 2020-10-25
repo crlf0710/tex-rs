@@ -29,7 +29,7 @@ pub(crate) fn get_strings_started(globals: &mut TeXGlobals) -> boolean {
     // @<Read the other strings from the \.{TEX.POOL} file and return |true|,
     //   or give an error message and return |false|@>;
     Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_give_an_error_message_and_return_false!(
-        globals, get_strings_started);
+        globals, get_strings_started, g);
     // exit:end;
     // tini
     get_strings_started

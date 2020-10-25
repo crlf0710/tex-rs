@@ -21,20 +21,25 @@ pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword,
     else {
         /// we will move `s` into the (empty) `buffer`
         const _: () = ();
-        let k = globals.str_start[s];
-        let l_raw = globals.str_start[s + 1] - k;
-        let l;
+        let l: integer;
         // for j:=0 to l-1 do buffer[j]:=so(str_pool[k+j]);
         #[cfg(not(feature = "unicode_support"))]
         {
-            l = l_raw;
+            let k = globals.str_start[s];
+            let l_bytes = globals.str_start[s + 1] - k;
+            l = l_bytes;
             for j in 0..=(l - 1) {
-                buffer[j] = so(str_pool[k + j]);
+                globals.buffer[j] = so(str_pool[k + j]);
             }
         }
         #[cfg(feature = "unicode_support")]
         {
-            todo!();
+            let mut len = 0;
+            for ch in globals.str_pool.str_ascii_codes(&globals.str_start, s) {
+                globals.buffer[len] = xord(ch);
+                len = len + 1;
+            }
+            l = len as _;
         }
         // cur_val:=id_lookup(0,l); {|no_new_control_sequence| is |false|}
         /// `no_new_control_sequence` is `false`
@@ -52,11 +57,13 @@ pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword,
     // tini
 }
 
+use crate::pascal::integer;
+use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
+use crate::section_0020::xord;
 use crate::section_0038::str_number;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0221::level_one;
 use crate::section_0222::single_base;
 use crate::section_0259::id_lookup;
-use crate::pascal::word;

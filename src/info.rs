@@ -120,8 +120,9 @@ macro_rules! region_debug {
 
 macro_rules! strpool_str {
     ($s:expr) => {{
-        #[::linkme::distributed_slice(crate::string_pool::STRPL_STRS)]
+        #[::linkme::distributed_slice(crate::string_pool::STRPL_RAWSTRS)]
         static __: &'static str = $s;
+
         let v = crate::string_pool::string_pool_index($s);
         debug_assert!(v <= crate::pascal::char::MAX.0 as _);
         crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
@@ -133,6 +134,7 @@ macro_rules! workarounds {
         crate::section_0074::workaround_47384();
         crate::section_0232::workaround_47384();
         crate::section_0265::workaround_47384();
+        crate::section_1052::workaround_47384();
         crate::section_1301::workaround_47384();
     };
 }

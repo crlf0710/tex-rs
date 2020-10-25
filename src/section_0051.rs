@@ -17,16 +17,24 @@ macro_rules! bad_pool {
 
 // @<Read the other strings...@>=
 macro_rules! Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_give_an_error_message_and_return_false {
-    ($globals:expr, $get_strings_started:expr) => {
+    ($globals:expr, $get_strings_started:expr, $g:expr) => {
         // name_of_file:=pool_name; {we needn't set |name_length|}
         /// we needn't set `name_length`
         $globals.name_of_file.assign_str(pool_name);
         // if a_open_in(pool_file) then
         if a_open_in(make_globals_io_filename_view!($globals), &mut $globals.pool_file) {
             // begin c:=false;
+            let mut c = false;
             // repeat @<Read one string, but return |false| if the
             //   string memory space is getting too tight for comfort@>;
-            // until c;
+            loop {
+                Read_one_string_but_return_false_if_the_string_memory_space_is_getting_too_tight_for_comfort!
+                    ($globals, c, $g);
+                // until c;
+                if c {
+                    break;
+                }
+            }
             // a_close(pool_file); get_strings_started:=true;
             a_close(&mut $globals.pool_file);
             $get_strings_started = true;
