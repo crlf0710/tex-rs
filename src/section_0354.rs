@@ -74,8 +74,11 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         // found: cur_cmd:=eq_type(cur_cs); cur_chr:=equiv(cur_cs);
         'found <-
         }
+        trace_expr!("cur_cs = {}", $globals.cur_cs);
         $globals.cur_cmd = eq_type!($globals, $globals.cur_cs as u32);
+        trace_expr!("cur_cmd = {}", $globals.cur_cmd);
         $globals.cur_chr = ASCII_code::from(equiv!($globals, $globals.cur_cs as u32) as integer).into();
+        trace_expr!("cur_chr = {:?}", $globals.cur_chr);
         // if cur_cmd>=outer_call then check_outer_validity;
         if $globals.cur_cmd >= outer_call {
             check_outer_validity();

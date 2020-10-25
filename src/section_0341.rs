@@ -8,7 +8,7 @@
 // @p procedure get_next; {sets |cur_cmd|, |cur_chr|, |cur_cs| to next token}
 /// sets `cur_cmd`, `cur_chr`, `cur_cs` to next token
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn get_next(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     region_forward_label! {
     |'exit|

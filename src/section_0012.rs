@@ -14,6 +14,10 @@
 // @d mem_top==30000 {largest index in the |mem| array dumped by \.{INITEX};
 //   must be substantially larger than |mem_bot|
 //   and not greater than |mem_max|}
+/// largest index in the `mem` array dumped by `INITEX`;
+/// must be substantially larger than `mem_bot` and not
+/// greater than `mem_max`
+pub(crate) const mem_top: pointer = 30000;
 // @d font_base=0 {smallest internal font number; must not be less
 //   than |min_quarterword|}
 // @d hash_size=2100 {maximum number of control sequences; it should be at most
@@ -30,6 +34,7 @@ pub(crate) const hash_prime: integer = 1777;
 
 type U2100 = typenum::op!(U1000 + U1000 + U100);
 use crate::section_0113::halfword;
+use crate::section_0115::pointer;
 use crate::pascal::integer;
 use typenum::Unsigned;
 use typenum::{U100, U1000};

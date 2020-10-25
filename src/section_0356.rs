@@ -25,6 +25,7 @@ macro_rules! Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_
         if $k > loc!($globals) + 1 {
             // begin cur_cs:=id_lookup(loc,k-loc); loc:=k; goto found;
             $globals.cur_cs = id_lookup($globals, loc!($globals) as _, ($k - loc!($globals)) as _);
+            trace_expr!("cur_cs = {}", $globals.cur_cs);
             loc!($globals) = $k;
             goto_forward_label!($lbl_found);
             // end;

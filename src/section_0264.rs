@@ -7,7 +7,7 @@
 // @p @!init procedure primitive(@!s:str_number;@!c:quarterword;@!o:halfword);
 #[cfg(feature = "initex")]
 #[allow(unused_variables, unreachable_code)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword, o: halfword) {
     // var k:pool_pointer; {index into |str_pool|}
     // @!j:small_number; {index into |buffer|}
@@ -47,9 +47,16 @@ pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword,
             globals.cur_val = id_lookup(globals, 0, l) as _;
         }
         // flush_string; text(cur_val):=s; {we don't want to have the string twice}
+        /// we don't want to have the string twice
+        {
+            flush_string(globals);
+            text!(globals, globals.cur_val as pointer) = s.get() as _;
+            trace_expr!("text(cur_val) = text({}) = {}", globals.cur_val, s.get());
+        }
         // end;
     }
     // eq_level(cur_val):=level_one; eq_type(cur_val):=c; equiv(cur_val):=o;
+    trace_expr!("cur_val = {}", globals.cur_val);
     eq_level!(globals, globals.cur_val as u32) = level_one;
     eq_type!(globals, globals.cur_val as u32) = c;
     equiv!(globals, globals.cur_val as u32) = o;
@@ -62,8 +69,10 @@ use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
 use crate::section_0020::xord;
 use crate::section_0038::str_number;
+use crate::section_0044::flush_string;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
+use crate::section_0115::pointer;
 use crate::section_0221::level_one;
 use crate::section_0222::single_base;
 use crate::section_0259::id_lookup;

@@ -172,6 +172,133 @@ pub type u8_from_0_to_n<N> = u8_from_m_to_n<typenum::U0, N>;
 pub type u16_from_0_to_n<N> = u16_from_m_to_n<typenum::U0, N>;
 pub type u32_from_0_to_n<N> = u32_from_m_to_n<typenum::U0, N>;
 
+macro_rules! define_ranged_signed_integer {
+    ($v:vis $name:ident => $base_type:path; $typenum_const:ident) => {
+        // TODO: Implement this.
+        $v struct $name<MIN, MAX>($base_type, PhantomData<(MIN, MAX)>);
+
+        impl<MIN, MAX> $name<MIN, MAX> where MIN: typenum::Integer, MAX: typenum::Integer {
+            $v fn new(val: $base_type) -> Self {
+                //use static_assertions::const_assert;
+                assert!(val >= <MIN as typenum::Integer>::$typenum_const);
+                assert!(val <= <MAX as typenum::Integer>::$typenum_const);
+                //TODO: Add more checks here.
+                $name(val, PhantomData)
+            }
+
+            $v fn get(self) -> $base_type {
+                self.0
+            }
+        }
+
+        impl<MIN, MAX> From<$base_type> for $name<MIN, MAX> where MIN: typenum::Integer, MAX: typenum::Integer {
+            fn from(v: $base_type) -> Self {
+                $name::new(v)
+            }
+        }
+
+        impl<MIN, MAX> Clone for $name<MIN, MAX> {
+            fn clone(&self) -> Self {
+                $name(self.0.clone(), PhantomData)
+            }
+        }
+
+        impl<MIN, MAX> Copy for $name<MIN, MAX> {}
+
+        impl<MIN, MAX> Default for $name<MIN, MAX> where MIN: typenum::Integer, MAX: typenum::Integer {
+            fn default() -> Self {
+                let val;
+                if 0 >= <MIN as typenum::Integer>::$typenum_const &&
+                    0 <= <MAX as typenum::Integer>::$typenum_const {
+                    val = 0;
+                } else {
+                    val = <MIN as typenum::Integer>::$typenum_const;
+                }
+                debug_assert!(val >= <MIN as typenum::Integer>::$typenum_const);
+                debug_assert!(val <= <MAX as typenum::Integer>::$typenum_const);
+                $name(val, PhantomData)
+            }
+        }
+
+        impl<MIN, MAX> core::fmt::Debug for $name<MIN, MAX> {
+            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+                write!(f, "{}", self.0)?;
+                Ok(())
+            }
+        }
+
+        impl<MIN, MAX> PartialEq<$name<MIN, MAX>> for $name<MIN, MAX> {
+            fn eq(&self, rhs: &Self) -> bool {
+                self.0.eq(&rhs.0)
+            }
+        }
+
+        impl<MIN, MAX> PartialEq<$base_type> for $name<MIN, MAX> {
+            fn eq(&self, rhs: &$base_type) -> bool {
+                self.0.eq(rhs)
+            }
+        }
+
+        impl<MIN, MAX> PartialOrd<$name<MIN, MAX>> for $name<MIN, MAX> {
+            fn partial_cmp(&self, rhs: &Self) -> Option<core::cmp::Ordering> {
+                self.0.partial_cmp(&rhs.0)
+            }
+        }
+
+        impl<MIN, MAX> PartialOrd<$base_type> for $name<MIN, MAX> {
+            fn partial_cmp(&self, rhs: &$base_type) -> Option<core::cmp::Ordering> {
+                self.0.partial_cmp(rhs)
+            }
+        }
+
+        impl<MIN, MAX> core::ops::AddAssign<$base_type> for $name<MIN, MAX>
+        where MIN: typenum::Integer, MAX: typenum::Integer {
+            fn add_assign(&mut self, rhs: $base_type) {
+                let result = (self.0).checked_add(rhs).expect("overflowed");
+                if result > <MAX as typenum::Integer>::$typenum_const {
+                    panic!("overflowed");
+                }
+                self.0 = result;
+            }
+        }
+
+        impl<MIN, MAX> core::ops::SubAssign<$base_type> for $name<MIN, MAX>
+        where MIN: typenum::Integer, MAX: typenum::Integer {
+            fn sub_assign(&mut self, rhs: $base_type) {
+                let result = (self.0).checked_sub(rhs).expect("underflowed");
+                if result < <MIN as typenum::Integer>::$typenum_const {
+                    panic!("underflowed");
+                }
+                self.0 = result;
+            }
+        }
+
+        impl<MIN, MAX> core::ops::Add<$base_type> for $name<MIN, MAX>
+        where MIN: typenum::Integer, MAX: typenum::Integer {
+            type Output = Self;
+
+            fn add(mut self, rhs: $base_type) -> Self {
+                self += rhs;
+                self
+            }
+        }
+
+        impl<MIN, MAX> core::ops::Sub<$base_type> for $name<MIN, MAX>
+        where MIN: typenum::Integer, MAX: typenum::Integer {
+            type Output = Self;
+
+            fn sub(mut self, rhs: $base_type) -> Self {
+                self -= rhs;
+                self
+            }
+        }
+    };
+}
+
+define_ranged_signed_integer!(pub i8_from_m_to_n => i8; I8);
+define_ranged_signed_integer!(pub i16_from_m_to_n => i16; I16);
+define_ranged_signed_integer!(pub i32_from_m_to_n => i32; I32);
+
 /* // Rustc is not ready to accept this:
 macro_rules! define_array_keyed_with_ranged_unsigned_integer_from_0 {
     ($v:vis $name:ident => $base_type:path; $typenum_const:ident) => {

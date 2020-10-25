@@ -32,13 +32,16 @@ pub(crate) type stack_size_TYPENUM = U200;
 // @!max_in_open=6; {maximum number of input files and error insertions that
 //   can be going on simultaneously}
 /// maximum number of input files and error insertions that can be going on simultaneously
-pub(crate) type max_in_open_TYPENUM = U6;
 pub(crate) const max_in_open: u8 = max_in_open_TYPENUM::U8;
+pub(crate) type max_in_open_TYPENUM = U6;
 // @!font_max=75; {maximum internal font number; must not exceed |max_quarterword|
 //   and must be at most |font_base+256|}
 // @!font_mem_size=20000; {number of words of |font_info| for all fonts}
 // @!param_size=60; {maximum number of simultaneous macro parameters}
 // @!nest_size=40; {maximum number of semantic levels simultaneously active}
+/// maximum number of semantic levels simultaneously active
+pub(crate) const nest_size: u8 = nest_size_TYPENUM::U8;
+pub(crate) type nest_size_TYPENUM = U40;
 // @!max_strings=3000; {maximum number of strings; must not exceed |max_halfword|}
 
 /// maximum number of strings; must not exceed `max_halfword`

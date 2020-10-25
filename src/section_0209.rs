@@ -37,6 +37,11 @@
 // @d hyph_data=99 {hyphenation data ( \.{\\hyphenation}, \.{\\patterns} )}
 // @d set_interaction=100 {define level of interaction ( \.{\\batchmode}, etc.~)}
 // @d max_command=100 {the largest command code seen at |big_switch|}
-pub(crate) const max_command: quarterword = 100;
+/// the largest command code seen at `big_switch`
+pub(crate) const max_command: quarterword = max_command_TYPENUM::U8;
+pub(crate) type max_command_TYPENUM = U100;
+pub(crate) type max_command_POS_TYPENUM = P100;
 
 use crate::section_0113::quarterword;
+use typenum::Unsigned;
+use typenum::{P100, U100};

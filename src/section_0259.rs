@@ -33,11 +33,17 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
     region_forward_label!(
     |'found|
     {
+        let mut l_bytes = l;
+        #[cfg(feature = "unicode_support")]
+        {
+            l_bytes = buffer_range_bytes(globals, j, l);
+            use crate::section_0260::buffer_range_bytes;
+        }
         // loop@+begin if text(p)>0 then if length(text(p))=l then
         //     if str_eq_buf(text(p),j) then goto found;
         loop {
             if text!(globals, p) > 0 {
-                if length(globals, text!(globals, p) as _) == 1 {
+                if length(globals, text!(globals, p) as _) == l_bytes {
                     if str_eq_buf(globals, str_number::new(text!(globals, p) as _), j) {
                         goto_forward_label!('found);
                     }
@@ -48,6 +54,7 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
                 // begin if no_new_control_sequence then
                 if globals.no_new_control_sequence  {
                     // p:=undefined_control_sequence
+                    trace_expr!("p = undefined_cs = {}", undefined_control_sequence);
                     p = undefined_control_sequence;
                 } else {
                     // else @<Insert a new control sequence after |p|, then make
@@ -68,6 +75,7 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
     // found: id_lookup:=p;
     'found <-
     );
+    trace_expr!("final_p = {}", p);
     return p;
     // end;
 }

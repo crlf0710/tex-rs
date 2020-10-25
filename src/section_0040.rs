@@ -7,6 +7,7 @@
 //
 // @d length(#)==(str_start[#+1]-str_start[#]) {the number of characters
 //   in string number \#}
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn length(globals: &TeXGlobals, s: integer) -> integer {
     globals.str_start[(s + 1) as u32] - globals.str_start[s as u32]
 }

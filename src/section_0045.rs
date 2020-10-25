@@ -12,17 +12,45 @@ pub(crate) fn str_eq_buf(globals: &mut TeXGlobals, s: str_number, k: integer) ->
     // label not_found; {loop exit}
     // var j: pool_pointer; {running index}
     // @!result: boolean; {result of comparison}
-    // begin j:=str_start[s];
-    // while j<str_start[s+1] do
-    //   begin if so(str_pool[j])<>buffer[k] then
-    //     begin result:=false; goto not_found;
-    //     end;
-    //   incr(j); incr(k);
-    //   end;
-    // result:=true;
+    let result: boolean;
+    region_forward_label! {
+    |'not_found|
+    {
+        #[cfg(not(feature = "unicode_support"))]
+        {
+            todo!();
+            // begin j:=str_start[s];
+            // while j<str_start[s+1] do
+            //   begin if so(str_pool[j])<>buffer[k] then
+            //     begin result:=false; goto not_found;
+            //     end;
+            //   incr(j); incr(k);
+            //   end;
+        }
+        #[cfg(feature = "unicode_support")]
+        {
+            let stored_bytes_len = globals.str_start[s + 1] - globals.str_start[s];
+            let stored_bytes = (0..stored_bytes_len).map(|k|
+                globals.str_pool[globals.str_start[s] + k]);
+            let fss_utf_bytes = (k..).flat_map(|k|
+                FssUtfEncodedIP32::new(globals.buffer[k as u16].0 as i32).into_iter());
+            for (p1, p2) in stored_bytes.zip(fss_utf_bytes) {
+                if p1.0 != p2 {
+                    result = false;
+                    goto_forward_label!('not_found);
+                }
+            }
+
+            use crate::unicode_support::FssUtfEncodedIP32;
+        }
+        // result:=true;
+        result = true;
+    }
     // not_found: str_eq_buf:=result;
+    'not_found <-
+    }
+    return result;
     // end;
-    todo!();
 }
 
 use crate::pascal::{boolean, integer};

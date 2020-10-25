@@ -17,7 +17,7 @@ macro_rules! Check_the_constant_values_for_consistency {
 
 /// Main entry to TeX
 #[allow(unused_mut, unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub fn entry(globals: &mut TeXGlobals) {
     workarounds!();
 
