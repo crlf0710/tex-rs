@@ -21,10 +21,12 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
     // @!k:pointer; {index in |buffer| array}
     // begin @<Compute the hash code |h|@>;
     Compute_the_hash_code_h!(globals, h, j, l);
+    trace_expr!("hash = {}", h);
     // p:=h+hash_base; {we start searching here; note that |0<=h<hash_prime|}
     /// we start searching here; note that `0<=h<hash_prime`
     {
         p = (h as i32 + hash_base as i32) as pointer;
+        trace_expr!("initial_p = {}", p);
     }
     region_forward_label!(
     |'found|
@@ -42,14 +44,21 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
             // if next(p)=0 then
             if next!(globals, p) == 0 {
                 // begin if no_new_control_sequence then
-                //   p:=undefined_control_sequence
-                // else @<Insert a new control sequence after |p|, then make
-                //   |p| point to it@>;
+                if globals.no_new_control_sequence  {
+                    // p:=undefined_control_sequence
+                    p = undefined_control_sequence;
+                } else {
+                    // else @<Insert a new control sequence after |p|, then make
+                    //   |p| point to it@>;
+                    todo!();
+                }
                 // goto found;
+                goto_forward_label!('found);
                 // end;
             }
             // p:=next(p);
             p = next!(globals, p);
+            trace_expr!("new_p = {}", p);
             // end;
         }
     }
@@ -67,3 +76,4 @@ use crate::section_0045::str_eq_buf;
 use crate::section_0115::pointer;
 use crate::section_0038::str_number;
 use crate::section_0222::hash_base;
+use crate::section_0222::undefined_control_sequence;

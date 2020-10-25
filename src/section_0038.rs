@@ -49,7 +49,7 @@
 pub(crate) struct pool_pointer(pub(crate) u32_from_0_to_n<pool_size_TYPENUM>);
 
 // @!str_number = 0..max_strings; {for variables that point into |str_start|}
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 /// for variables that point into `str_start`
 pub(crate) struct str_number(pub(crate) u32_from_0_to_n<max_strings_TYPENUM>);
 

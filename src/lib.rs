@@ -389,7 +389,10 @@ reversing_order_items!(
         mod section_1031;
     }
 );
-mod section_1032_to_1054;
+mod section_1032_to_1051;
+mod section_1052;
+mod section_1053;
+mod section_1054;
 mod section_1055_to_1135;
 mod section_1136_to_1198;
 mod section_1199_to_1207;

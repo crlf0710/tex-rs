@@ -117,7 +117,7 @@ const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0o400;
 type cur_tok_type_repr = word;
 
 #[cfg(feature = "unicode_support")]
-const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0x4000000;
+const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0x0080_0000;
 
 #[derive(Copy, Clone, Default)]
 pub(crate) struct cur_tok_type(cur_tok_type_repr);

@@ -20,12 +20,12 @@ impl char {
 }
 
 #[cfg(feature = "unicode_support")]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialOrd, PartialEq)]
 pub(crate) struct char(pub(crate) u32, PhantomData<Rc<()>>);
 
 #[cfg(feature = "unicode_support")]
 impl char {
-    pub(crate) const MAX: char = char(0xFFFFFF, PhantomData);
+    pub(crate) const MAX: char = char(0x007F_FFFF, PhantomData);
     pub(crate) const fn new(v: u32) -> Self {
         char(v, PhantomData)
     }
@@ -34,7 +34,7 @@ impl char {
 #[cfg(feature = "unicode_support")]
 impl core::fmt::Debug for char {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        assert!(self.0 < 0xFFFFFF);
+        assert!(*self <= char::MAX);
         f.debug_list()
             .entries(crate::unicode_support::chars_from_generalized_char(*self))
             .finish()?;
@@ -80,6 +80,13 @@ macro_rules! define_ranged_unsigned_integer {
                 let val = <MIN as typenum::Unsigned>::$typenum_const;
                 debug_assert!(val <= <MAX as typenum::Unsigned>::$typenum_const);
                 $name(val, PhantomData)
+            }
+        }
+
+        impl<MIN, MAX> core::fmt::Debug for $name<MIN, MAX> {
+            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+                write!(f, "{}", self.0)?;
+                Ok(())
             }
         }
 

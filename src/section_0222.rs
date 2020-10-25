@@ -54,7 +54,7 @@ pub(crate) const frozen_null_font: word = frozen_null_font_TYPENUM::U32;
 // @d undefined_control_sequence=frozen_null_font+257 {dummy location}
 /// dummy location
 pub(crate) type undefined_control_sequence_TYPENUM = typenum::op!(frozen_null_font_TYPENUM + U257);
-pub(crate) const undefined_control_sequence: word = undefined_control_sequence_TYPENUM::U32;
+pub(crate) const undefined_control_sequence: pointer = undefined_control_sequence_TYPENUM::U16;
 // @d glue_base=undefined_control_sequence+1 {beginning of region 3}
 /// beginning of region 3
 pub(crate) type glue_base_TYPENUM = typenum::op!(undefined_control_sequence_TYPENUM + U1);
@@ -71,5 +71,6 @@ pub(crate) const glue_base: word = glue_base_TYPENUM::U32;
 use crate::pascal::word;
 use crate::section_0012::hash_size_TYPENUM;
 use crate::section_0113::halfword;
+use crate::section_0115::pointer;
 use typenum::Unsigned;
 use typenum::{U1, U10, U256, U257};

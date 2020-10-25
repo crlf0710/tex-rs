@@ -21,7 +21,7 @@
 #[cfg(not(feature = "unicode_support"))]
 pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0o7777);
 #[cfg(feature = "unicode_support")]
-pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0xFFFFFFFF);
+pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0x0FFF_FFFF);
 
 // @d left_brace_token=@'0400 {$2^8\cdot|left_brace|$}
 // @d left_brace_limit=@'1000 {$2^8\cdot(|left_brace|+1)$}
