@@ -3,6 +3,8 @@
 //! expanded by `\.{\\the}'.
 
 // @d char_num=16 {character specified numerically ( \.{\\char} )}
+/// character specified numerically ( `\char` )
+pub(crate) const char_num: quarterword = 16;
 // @d math_char_num=17 {explicit math code ( \.{\\mathchar} )}
 // @d mark=18 {mark definition ( \.{\\mark} )}
 // @d xray=19 {peek inside of \TeX\ ( \.{\\show}, \.{\\showbox}, etc.~)}
@@ -27,6 +29,8 @@
 // @d insert=37 {vlist inserted in box ( \.{\\insert} )}
 // @d vadjust=38 {vlist inserted in enclosing paragraph ( \.{\\vadjust} )}
 // @d ignore_spaces=39 {gobble |spacer| tokens ( \.{\\ignorespaces} )}
+/// gobble `spacer` tokens ( `\ignorespaces` )
+pub(crate) const ignore_spaces: quarterword = 39;
 // @d after_assignment=40 {save till assignment is done ( \.{\\afterassignment} )}
 // @d after_group=41 {save till group is done ( \.{\\aftergroup} )}
 // @d break_penalty=42 {additional badness ( \.{\\penalty} )}
@@ -55,10 +59,14 @@
 /// explicit space (`\ `)
 pub(crate) const ex_space: quarterword = 64;
 // @d no_boundary=65 {suppress boundary ligatures ( \.{\\noboundary} )}
+/// suppress boundary ligatures ( `\noboundary` )
+pub(crate) const no_boundary: quarterword = 65;
 // @d radical=66 {square root and similar signs ( \.{\\radical} )}
 // @d end_cs_name=67 {end control sequence ( \.{\\endcsname} )}
 // @d min_internal=68 {the smallest code that can follow \.{\\the}}
 // @d char_given=68 {character code defined by \.{\\chardef}}
+/// character code defined by `\chardef`
+pub(crate) const char_given: quarterword = 68;
 // @d math_given=69 {math code defined by \.{\\mathchardef}}
 // @d last_item=70 {most recent item ( \.{\\lastpenalty},
 //   \.{\\lastkern}, \.{\\lastskip} )}

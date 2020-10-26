@@ -10,6 +10,7 @@
 #[cfg(feature = "initex")]
 #[allow(unused_variables)]
 #[allow(unused_assignments)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn get_strings_started(globals: &mut TeXGlobals) -> boolean {
     let get_strings_started;
     // label done,exit;

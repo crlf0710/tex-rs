@@ -34,13 +34,15 @@
 //
 // @d vmode=1 {vertical mode}
 /// vertical mode
-pub(crate) type vmode_POS_TYPENUM = P1;
 pub(crate) const vmode: i16 = vmode_POS_TYPENUM::I16;
+pub(crate) type vmode_POS_TYPENUM = P1;
 // @d hmode=vmode+max_command+1 {horizontal mode}
 /// horizontal mode
+pub(crate) const hmode: i16 = hmode_POS_TYPENUM::I16;
 pub(crate) type hmode_POS_TYPENUM = typenum::op!(vmode_POS_TYPENUM + max_command_POS_TYPENUM + P1);
 // @d mmode=hmode+max_command+1 {math mode}
 /// math mode
+pub(crate) const mmode: i16 = mmode_POS_TYPENUM::I16;
 pub(crate) type mmode_POS_TYPENUM = typenum::op!(hmode_POS_TYPENUM + max_command_POS_TYPENUM + P1);
 
 pub(crate) type mmode_NEG_TYPENUM = typenum::op!(mmode_POS_TYPENUM * N1);

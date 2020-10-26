@@ -35,27 +35,64 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndO
     region_backward_label! {
     'reswitch <-
     {
+    region_forward_label! {
+    |'append_normal_space|
+    {
+    region_forward_label! {
+    |'main_loop|
+    {
     Give_diagnostic_information_if_requested!(globals, 'big_switch);
     // case abs(mode)+cur_cmd of
     let abs_mode_plus_cur_cmd = mode!(globals).get().abs() as u16 + globals.cur_cmd as u16;
     trace_expr!("abs(mode)+cur_cmd={}", abs_mode_plus_cur_cmd);
     // hmode+letter,hmode+other_char,hmode+char_given: goto main_loop;
+    if abs_mode_plus_cur_cmd == hmode as u16 + letter as u16 ||
+        abs_mode_plus_cur_cmd == hmode as u16 + other_char as u16 ||
+        abs_mode_plus_cur_cmd == hmode as u16 + char_given as u16 {
+        goto_forward_label!('main_loop);
+    }
     // hmode+char_num: begin scan_char_num; cur_chr:=cur_val; goto main_loop;@+end;
+    else if abs_mode_plus_cur_cmd == hmode as u16 + char_num as u16 {
+        todo!();
+    }
     // hmode+no_boundary: begin get_x_token;
-    //   if (cur_cmd=letter)or(cur_cmd=other_char)or(cur_cmd=char_given)or
-    //    (cur_cmd=char_num) then cancel_boundary:=true;
-    //   goto reswitch;
-    //   end;
+    else if abs_mode_plus_cur_cmd == hmode as u16 + no_boundary as u16 {
+        todo!();
+        // if (cur_cmd=letter)or(cur_cmd=other_char)or(cur_cmd=char_given)or
+        //  (cur_cmd=char_num) then cancel_boundary:=true;
+        // goto reswitch;
+        // end;
+    }
     // hmode+spacer: if space_factor=1000 then goto append_normal_space
-    //   else app_space;
+    else if abs_mode_plus_cur_cmd == hmode as u16 + spacer as u16 {
+        todo!();
+        // else app_space;
+    }
     // hmode+ex_space,mmode+ex_space: goto append_normal_space;
+    else if abs_mode_plus_cur_cmd == hmode as u16 + ex_space as u16 ||
+        abs_mode_plus_cur_cmd == mmode as u16 + ex_space as u16 {
+        todo!();
+    }
     // @t\4@>@<Cases of |main_control| that are not part of the inner loop@>@;
-    // end; {of the big |case| statement}
+    else {
+        Cases_of_main_control_that_are_not_part_of_the_inner_loop!(
+            globals, abs_mode_plus_cur_cmd
+        );
+        // end; {of the big |case| statement}
+    }
+    /// end of the big `case` statement
+    const _ : () = ();
     // goto big_switch;
     goto_backward_label!('big_switch);
+    }
+    'main_loop <-
+    }
     // main_loop:@<Append character |cur_chr| and the following characters (if~any)
     //   to the current hlist in the current font; |goto reswitch| when
     //   a non-character has been fetched@>;
+    }
+    'append_normal_space <-
+    }
     // append_normal_space:@<Append a normal inter-word space to the current list,
     //   then |goto big_switch|@>;
     }
@@ -67,5 +104,8 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndO
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0207::*;
+use crate::section_0208::*;
+use crate::section_0211::*;
 use crate::section_0380::get_x_token;
 use crate::section_0081::JumpOutToEndOfTEX;
