@@ -8,7 +8,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     // label done;
     // begin scan_file_name; {set |cur_name| to desired file name}
     /// set `cur_name` to desired file name
-    scan_file_name();
+    scan_file_name(globals)?;
     // if cur_ext="" then cur_ext:=".tex";
     // pack_cur_name;
     region_forward_label! {
