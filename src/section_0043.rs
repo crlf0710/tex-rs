@@ -7,7 +7,7 @@
 /// current string enters the pool
 pub(crate) fn make_string(globals: &mut TeXGlobals) -> str_number {
     // begin if str_ptr=max_strings then
-    if globals.str_ptr == max_strings as _ {
+    if globals.str_ptr.get() == max_strings as _ {
         //   overflow("number of strings",max_strings-init_str_ptr);
     }
     // @:TeX capacity exceeded number of strings}{\quad number of strings@>

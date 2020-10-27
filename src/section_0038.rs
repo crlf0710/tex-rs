@@ -49,7 +49,7 @@
 pub(crate) struct pool_pointer(pub(crate) u32_from_0_to_n<pool_size_TYPENUM>);
 
 // @!str_number = 0..max_strings; {for variables that point into |str_start|}
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 /// for variables that point into `str_start`
 pub(crate) struct str_number(pub(crate) u32_from_0_to_n<max_strings_TYPENUM>);
 
@@ -64,6 +64,9 @@ use crate::section_0011::pool_size_TYPENUM;
 use typenum::{U0, U1, U2147483648, U63};
 
 impl pool_pointer {
+    pub(crate) fn new(v: u32) -> Self {
+        pool_pointer(u32_from_0_to_n::new(v))
+    }
     pub(crate) fn new_zero() -> Self {
         pool_pointer(u32_from_0_to_n::new(0))
     }

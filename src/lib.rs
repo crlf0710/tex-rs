@@ -365,7 +365,9 @@ reversing_order_items!(
         mod section_0515;
         mod section_0516;
         mod section_0517;
-        mod section_0518_to_0525;
+        mod section_0518;
+        mod section_0519;
+        mod section_0520_to_0525;
         mod section_0526;
         mod section_0527;
         mod section_0528;

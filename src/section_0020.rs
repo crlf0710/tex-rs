@@ -18,5 +18,15 @@ pub(crate) fn xord(val: text_char) -> ASCII_code {
     ASCII_code(val.0)
 }
 
+#[cfg(not(feature = "unicode_support"))]
+pub(crate) fn xchr(val: ASCII_code) -> text_char {
+    todo!();
+}
+
+#[cfg(feature = "unicode_support")]
+pub(crate) fn xchr(val: ASCII_code) -> text_char {
+    text_char::new(val.0)
+}
+
 use crate::section_0018::ASCII_code;
 use crate::section_0019::text_char;

@@ -14,12 +14,19 @@ pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
     // else  begin str_room(1); append_char(c); {contribute |c| to the current string}
     else {
         /// contribute `c` to the current string
-        str_room(globals, c.fss_utf_len() as _);
+        str_room(globals, c.len_bytes() as _);
         append_char(globals, c);
         // if (c=">")or(c=":") then
-        //   begin area_delimiter:=cur_length; ext_delimiter:=0;
-        //   end
+        if c == ASCII_code_literal!(b'>') || c == ASCII_code_literal!(b':') {
+            // begin area_delimiter:=cur_length; ext_delimiter:=0;
+            globals.area_delimiter = pool_pointer::new(cur_length!(globals) as _);
+            globals.ext_delimiter = pool_pointer::new_zero();
+            // end
+        }
         // else if (c=".")and(ext_delimiter=0) then ext_delimiter:=cur_length;
+        else if c == ASCII_code_literal!(b'.') && globals.ext_delimiter.is_zero() {
+            globals.ext_delimiter = pool_pointer::new(cur_length!(globals) as _);
+        }
         // more_name:=true;
         return true;
         // end;
@@ -29,6 +36,7 @@ pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
+use crate::section_0038::pool_pointer;
 use crate::section_0042::str_room;
 use crate::section_0042::append_char;
 use crate::pascal::boolean;

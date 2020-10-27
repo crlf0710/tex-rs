@@ -49,7 +49,7 @@ macro_rules! Insert_a_new_control_sequence_after_p_then_make_p_point_to_it {
 pub(crate) fn buffer_range_bytes(globals: &TeXGlobals, j: integer, l: integer) -> integer {
     let mut result = 0;
     for k in 0..l {
-        result += globals.buffer[u16_from_0_to_n::new((j + k) as _)].fss_utf_len() as integer;
+        result += globals.buffer[u16_from_0_to_n::new((j + k) as _)].len_bytes() as integer;
     }
     result
 }

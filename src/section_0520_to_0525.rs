@@ -1,35 +1,3 @@
-//! @ Conversely, here is a routine that takes three strings and prints a file
-//! name that might have produced them. (The routine is system dependent, because
-//! some operating systems put the file area last instead of first.)
-//! @^system dependencies@>
-//!
-//! @<Basic printing...@>=
-//! procedure print_file_name(@!n,@!a,@!e:integer);
-//! begin slow_print(a); slow_print(n); slow_print(e);
-//! end;
-//!
-//! @ Another system-dependent routine is needed to convert three internal
-//! \TeX\ strings
-//! into the |name_of_file| value that is used to open files. The present code
-//! allows both lowercase and uppercase letters in the file name.
-//! @^system dependencies@>
-//!
-//! @d append_to_name(#)==begin c:=#; incr(k);
-//!   if k<=file_name_size then name_of_file[k]:=xchr[c];
-//!   end
-//!
-//! @p procedure pack_file_name(@!n,@!a,@!e:str_number);
-//! var k:integer; {number of positions filled in |name_of_file|}
-//! @!c: ASCII_code; {character being packed}
-//! @!j:pool_pointer; {index into |str_pool|}
-//! begin k:=0;
-//! for j:=str_start[a] to str_start[a+1]-1 do append_to_name(so(str_pool[j]));
-//! for j:=str_start[n] to str_start[n+1]-1 do append_to_name(so(str_pool[j]));
-//! for j:=str_start[e] to str_start[e+1]-1 do append_to_name(so(str_pool[j]));
-//! if k<=file_name_size then name_length:=k@+else name_length:=file_name_size;
-//! for k:=name_length+1 to file_name_size do name_of_file[k]:=' ';
-//! end;
-//!
 //! @ A messier routine is also needed, since format file names must be scanned
 //! before \TeX's string mechanism has been initialized. We shall use the
 //! global variable |TEX_format_default| to supply the text for default system areas

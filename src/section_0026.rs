@@ -33,7 +33,7 @@ use crate::section_0026::name_of_file_array;
 //   relevant in |name_of_file| (the rest are blank)}
 /// this many characters are actually relevant in `name_of_file` (the rest are blank)
 #[globals_struct_field(TeXGlobals)]
-static name_length: u16_from_0_to_n<file_name_size_TYPENUM> = u16_from_0_to_n::default();
+pub(crate) static name_length: u16_from_0_to_n<file_name_size_TYPENUM> = u16_from_0_to_n::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::u16_from_0_to_n;

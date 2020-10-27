@@ -10,7 +10,11 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     /// set `cur_name` to desired file name
     scan_file_name(globals)?;
     // if cur_ext="" then cur_ext:=".tex";
+    if globals.cur_ext == strpool_str!("") {
+        globals.cur_ext = strpool_str!(".tex");
+    }
     // pack_cur_name;
+    pack_cur_name(globals);
     region_forward_label! {
     |'done|
     {
@@ -70,5 +74,6 @@ use crate::section_0303::new_line;
 use crate::section_0328::begin_file_reading;
 use crate::section_0329::end_file_reading;
 use crate::section_0027::a_open_in;
+use crate::section_0529::pack_cur_name;
 use crate::section_0530::prompt_file_name;
 use crate::section_0081::JumpOutToEndOfTEX;
