@@ -25,6 +25,9 @@ pub(crate) type buf_size_TYPENUM = U500;
 // @!half_error_line=42; {width of first lines of contexts in terminal
 //   error messages; should be between 30 and |error_line-15|}
 // @!max_print_line=79; {width of longest text lines output; should be at least 60}
+/// width of longest text lines output; should be at least 60
+pub(crate) const max_print_line: u8 = max_print_line_TYPENUM::U8;
+pub(crate) type max_print_line_TYPENUM = U79;
 // @!stack_size=200; {maximum number of simultaneous input sources}
 /// maximum number of simultaneous input sources
 pub(crate) const stack_size: u16 = stack_size_TYPENUM::U16;
@@ -83,4 +86,4 @@ use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U1000, U10000, U2, U200, U3, U40, U500, U6};
+use typenum::{Unsigned, U1000, U10000, U2, U200, U3, U40, U500, U6, U79};

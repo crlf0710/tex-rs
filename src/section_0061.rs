@@ -8,11 +8,11 @@
 macro_rules! Initialize_the_output_routines {
     ($globals:expr) => {
         // wterm(banner);
-        wterm($globals, banner);
+        wterm(make_globals_io_view!($globals), banner);
 
         // if format_ident=0 then wterm_ln(' (no format preloaded)')
         if $globals.format_ident.is_zero() {
-            wterm_ln($globals, " (no format preloaded)");
+            wterm_ln(make_globals_io_view!($globals), " (no format preloaded)");
         } else {
             // else  begin slow_print(format_ident); print_ln;
             slow_print($globals, $globals.format_ident.into());

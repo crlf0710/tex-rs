@@ -13,6 +13,8 @@ pub(crate) fn print_ln(globals: &mut TeXGlobals) {
     // log_only: begin wlog_cr; file_offset:=0;
     //   end;
     // term_only: begin wterm_cr; term_offset:=0;
+    wterm_cr(make_globals_io_view!(globals));
+    globals.term_offset = 0.into();
     //   end;
     // no_print,pseudo,new_string: do_nothing;
     // othercases write_ln(write_file[selector])
@@ -21,3 +23,5 @@ pub(crate) fn print_ln(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0056::wterm_cr;

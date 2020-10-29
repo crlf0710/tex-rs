@@ -50,7 +50,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     // if term_offset+length(name)>max_print_line-2 then print_ln
     // else if (term_offset>0)or(file_offset>0) then print_char(" ");
     // print_char("("); incr(open_parens); slow_print(name); update_terminal;
-    print_char(globals, ASCII_code_literal!(b'('));
+    print_char(make_globals_io_view!(globals), ASCII_code_literal!(b'('));
     incr!(globals.open_parens);
     slow_print(globals, name!(globals).into());
     update_terminal(globals);

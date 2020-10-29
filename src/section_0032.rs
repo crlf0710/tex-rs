@@ -14,6 +14,7 @@ pub(crate) static term_in: alpha_file = alpha_file::default();
 // @!term_out:alpha_file; {the terminal as an output file}
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
 /// the terminal as an output file
 pub(crate) static term_out: alpha_file = alpha_file::default();
 

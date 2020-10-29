@@ -50,6 +50,7 @@
 // @!log_file : alpha_file; {transcript of \TeX\ session}
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
 /// transcript of \TeX\ session
 pub(crate) static log_file: alpha_file = alpha_file::default();
 
@@ -58,6 +59,14 @@ pub(crate) static log_file: alpha_file = alpha_file::default();
 // @!tally : integer; {the number of characters recently printed}
 // @!term_offset : 0..max_print_line;
 //   {the number of characters on the current terminal line}
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
+/// the number of characters on the current terminal line
+pub(crate) static term_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0011::max_print_line_TYPENUM;
+
 // @!file_offset : 0..max_print_line;
 //   {the number of characters on the current file line}
 // @!trick_buf:array[0..error_line] of ASCII_code; {circular buffer for
@@ -69,4 +78,4 @@ pub(crate) static log_file: alpha_file = alpha_file::default();
 #[globals_struct_use(TeXGlobals)]
 pub(crate) use crate::section_0025::alpha_file;
 
-use globals_struct::{globals_struct_field, globals_struct_use};
+use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};

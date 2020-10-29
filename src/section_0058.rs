@@ -6,7 +6,8 @@
 // procedure print_char(@!s:ASCII_code); {prints a single character}
 /// prints a single character
 #[allow(unused_variables)]
-pub(crate) fn print_char(globals: &mut TeXGlobals, s: ASCII_code) {
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+pub(crate) fn print_char(mut globals: TeXGlobalsIoView<'_>, s: ASCII_code) {
     // label exit;
     // begin if @<Character |s| is the current new-line character@> then
     //  if selector<pseudo then
@@ -14,6 +15,10 @@ pub(crate) fn print_char(globals: &mut TeXGlobals, s: ASCII_code) {
     //   end;
     // case selector of
     // term_and_log: begin wterm(xchr[s]); wlog(xchr[s]);
+    /*
+    wterm(globals.reborrow(), xchr(s));
+    wlog(globals.reborrow(), xchr(s));
+    */
     //   incr(term_offset); incr(file_offset);
     //   if term_offset=max_print_line then
     //     begin wterm_cr; term_offset:=0;
@@ -26,6 +31,8 @@ pub(crate) fn print_char(globals: &mut TeXGlobals, s: ASCII_code) {
     //   if file_offset=max_print_line then print_ln;
     //   end;
     // term_only: begin wterm(xchr[s]); incr(term_offset);
+    wterm(globals.reborrow(), xchr(s));
+    incr!(*globals.term_offset);
     //   if term_offset=max_print_line then print_ln;
     //   end;
     // no_print: do_nothing;
@@ -39,5 +46,8 @@ pub(crate) fn print_char(globals: &mut TeXGlobals, s: ASCII_code) {
     //
 }
 
-use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0018::ASCII_code;
+use crate::section_0020::xchr;
+use crate::section_0056::wlog;
+use crate::section_0056::wterm;

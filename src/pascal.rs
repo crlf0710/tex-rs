@@ -4,7 +4,7 @@ pub type word = u32;
 pub type boolean = bool;
 
 #[cfg(not(feature = "unicode_support"))]
-#[derive(Copy, Clone, Default, PartialOrd, PartialEq)]
+#[derive(Copy, Clone, Default, PartialOrd, PartialEq, Debug)]
 pub(crate) struct char(pub(crate) u8);
 
 #[cfg(not(feature = "unicode_support"))]
@@ -44,6 +44,17 @@ impl core::fmt::Debug for char {
         f.debug_list()
             .entries(crate::unicode_support::chars_from_generalized_char(*self))
             .finish()?;
+        Ok(())
+    }
+}
+
+#[cfg(feature = "unicode_support")]
+impl core::fmt::Display for char {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        assert!(*self <= char::MAX);
+        for ch in crate::unicode_support::chars_from_generalized_char(*self) {
+            write!(f, "{}", ch)?;
+        }
         Ok(())
     }
 }

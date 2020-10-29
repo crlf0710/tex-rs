@@ -50,7 +50,7 @@ pub fn entry(globals: &mut TeXGlobals) {
         // begin wterm_ln('Ouch---my internal constants have been clobbered!',
         //   '---case ',bad:1);
         // @.Ouch...clobbered@>
-        wterm_ln(globals, format!("{}{}{:1}","Ouch---my internal constants have been clobbered!",
+        wterm_ln(make_globals_io_view!(globals), format!("{}{}{:1}","Ouch---my internal constants have been clobbered!",
             "---case ", globals.bad));
         //   goto final_end;
         goto_forward_label!('final_end);
@@ -114,6 +114,7 @@ pub fn entry(globals: &mut TeXGlobals) {
 
 use crate::section_0004::initialize;
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0033::t_open_out;
 use crate::section_0047::get_strings_started;
 use crate::section_0076::history_kind::{fatal_error_stop, spotless};
