@@ -4,6 +4,7 @@
 // @p procedure start_input; {\TeX\ will \.{\\input} something}
 /// `TeX` will `\input` something
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label done;
     // begin scan_file_name; {set |cur_name| to desired file name}
@@ -43,6 +44,8 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     'done <-
     }
     // done: name:=a_make_name_string(cur_file);
+    name!(globals) = a_make_name_string(make_globals_io_filename_view!(globals), &mut cur_file!(globals)).get() as _;
+    trace_expr!("name = {}", name!(globals));
     // if job_name=0 then
     //   begin job_name:=cur_name; open_log_file;
     //   end; {|open_log_file| doesn't |show_context|, so |limit|
@@ -77,3 +80,4 @@ use crate::section_0027::a_open_in;
 use crate::section_0529::pack_cur_name;
 use crate::section_0530::prompt_file_name;
 use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0525::a_make_name_string;

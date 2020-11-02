@@ -24,6 +24,8 @@ pub(crate) const relax: quarterword = 0;
 // @d right_brace=2 {ending of a group ( \.\} )}
 // @d math_shift=3 {mathematics shift character ( \.\$ )}
 // @d tab_mark=4 {alignment delimiter ( \.\&, \.{\\span} )}
+/// alignment delimiter ( `&`, `\span` )
+pub(crate) const tab_mark: quarterword = 4;
 // @d car_ret=5 {end of line ( |carriage_return|, \.{\\cr}, \.{\\crcr} )}
 /// end of line ( `carriage_return`, `\cr`, `\crcr` )
 pub(crate) const car_ret: quarterword = 5;

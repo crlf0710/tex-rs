@@ -20,6 +20,9 @@ pub(crate) fn begin_file_reading(globals: &mut TeXGlobals) {
     start!(globals) = globals.first.get();
     state!(globals) = mid_line;
     // name:=0; {|terminal_input| is now |true|}
+    name!(globals) = 0;
+    /// `terminal_input` is now `true`
+    const _ : () = ();
     // end;
 }
 

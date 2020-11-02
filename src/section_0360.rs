@@ -27,6 +27,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
     ($globals:expr) => {
         // if name>17 then @<Read next line of file into |buffer|, or
         //   |goto restart| if the file has ended@>
+        trace_expr!("name = {}", name!($globals));
         if name!($globals) > 17 {
             todo!();
         } else {
@@ -46,7 +47,10 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
             //   if selector<log_only then open_log_file;
             //   if interaction>nonstop_mode then
             if $globals.interaction > nonstop_mode {
-                //     begin if end_line_char_inactive then incr(limit);
+                // begin if end_line_char_inactive then incr(limit);
+                if end_line_char_inactive!($globals) {
+                    incr!(limit!($globals));
+                }
                 // if limit=start then {previous line was empty}
                 //   print_nl("(Please type a command or say `\end')");
                 if limit!($globals) == start!($globals) {

@@ -183,15 +183,4 @@
 //!   else  begin print_esc("count"); print_int(chr_code-count_base);
 //!     end;
 //!
-//! @ The integer parameters should really be initialized by a macro package;
-//! the following initialization does the minimum to keep \TeX\ from
-//! complete failure.
-//! @^null delimiter@>
-//!
-//! @<Initialize table entries...@>=
-//! for k:=int_base to del_code_base-1 do eqtb[k].int:=0;
-//! mag:=1000; tolerance:=10000; hang_after:=1; max_dead_cycles:=25;
-//! escape_char:="\"; end_line_char:=carriage_return;
-//! for k:=0 to 255 do del_code(k):=-1;
-//! del_code("."):=0; {this null delimiter is used in error recovery}
-//!
+

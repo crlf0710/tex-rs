@@ -16,6 +16,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     'restart <-
     {
         get_next(globals)?;
+        trace_expr!("cur_cmd = {}", globals.cur_cmd);
         // @^inner loop@>
         // if cur_cmd<=max_command then goto done;
         if globals.cur_cmd <= max_command {
@@ -47,7 +48,8 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     } else {
         globals.cur_tok = cur_tok_type::from_cs(globals.cur_cs);
     }
-
+    trace_expr!("cur_tok = {:?}", globals.cur_tok);
+    
     return_nojump!();
 }
 

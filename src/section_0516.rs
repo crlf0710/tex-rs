@@ -6,6 +6,7 @@
 //
 // @p function more_name(@!c:ASCII_code):boolean;
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
     // begin if c=" " then more_name:=false
     if c == ASCII_code_literal!(b' ') {

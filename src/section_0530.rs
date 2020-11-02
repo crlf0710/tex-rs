@@ -7,6 +7,7 @@
 //
 // @p procedure prompt_file_name(@!s,@!e:str_number);
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn prompt_file_name(
     globals: &mut TeXGlobals,
     s: str_number,
@@ -36,7 +37,11 @@ pub(crate) fn prompt_file_name(
     prompt_input!(globals, strpool_str!(": "))?;
     Scan_file_name_in_the_buffer!(globals);
     // if cur_ext="" then cur_ext:=e;
+    if globals.cur_ext == strpool_str!("") {
+        globals.cur_ext = e;
+    }
     // pack_cur_name;
+    pack_cur_name(globals);
     // end;
     return_nojump!();
 }
@@ -49,3 +54,4 @@ use crate::section_0062::print_nl;
 use crate::section_0081::JumpOutToEndOfTEX;
 use crate::section_0034::wake_up_terminal;
 use crate::section_0073::scroll_mode;
+use crate::section_0529::pack_cur_name;

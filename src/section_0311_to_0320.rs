@@ -1,39 +1,3 @@
-//! @ The |param_stack| is an auxiliary array used to hold pointers to the token
-//! lists for parameters at the current level and subsidiary levels of input.
-//! This stack is maintained with convention (2), and it grows at a different
-//! rate from the others.
-//!
-//! @<Glob...@>=
-//! @!param_stack:array [0..param_size] of pointer;
-//!   {token list pointers for parameters}
-//! @!param_ptr:0..param_size; {first unused entry in |param_stack|}
-//! @!max_param_stack:integer;
-//!   {largest value of |param_ptr|, will be |<=param_size+9|}
-//!
-//! @ The input routines must also interact with the processing of
-//! \.{\\halign} and \.{\\valign}, since the appearance of tab marks and
-//! \.{\\cr} in certain places is supposed to trigger the beginning of special
-//! \<v_j> template text in the scanner. This magic is accomplished by an
-//! |align_state| variable that is increased by~1 when a `\.{\char'173}' is
-//! scanned and decreased by~1 when a `\.{\char'175}' is scanned. The |align_state|
-//! is nonzero during the \<u_j> template, after which it is set to zero; the
-//! \<v_j> template begins when a tab mark or \.{\\cr} occurs at a time that
-//! |align_state=0|.
-//!
-//! @<Glob...@>=
-//! @!align_state:integer; {group level with respect to current alignment}
-//!
-//! @ Thus, the ``current input state'' can be very complicated indeed; there
-//! can be many levels and each level can arise in a variety of ways. The
-//! |show_context| procedure, which is used by \TeX's error-reporting routine to
-//! print out the current input state on all levels down to the most recent
-//! line of characters from an input file, illustrates most of these conventions.
-//! The global variable |base_ptr| contains the lowest level that was
-//! displayed by this procedure.
-//!
-//! @<Glob...@>=
-//! @!base_ptr:0..stack_size; {shallowest level shown by |show_context|}
-//!
 //! @ The status at each level is indicated by printing two lines, where the first
 //! line indicates what was read so far and the second line shows what remains
 //! to be read. The context is cropped, if necessary, so that the first line

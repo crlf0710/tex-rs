@@ -70,12 +70,24 @@
 //! @^reference counts@>
 
 // @d token_list=0 {|state| code when scanning a token list}
+/// `state` code when scanning a token list
 pub(crate) const token_list: quarterword = 0;
 // @d token_type==index {type of current token list}
+/// type of current token list
+macro_rules! token_type {
+    ($globals:expr) => {index!($globals)}
+}
 // @d param_start==limit {base of macro parameters in |param_stack|}
+/// base of macro parameters in `param_stack`
+#[allow(unused_macros)]
+macro_rules! param_start {
+    ($globals:expr) => {limit!($globals)}
+}
 // @d parameter=0 {|token_type| code for parameter}
 // @d u_template=1 {|token_type| code for \<u_j> template}
 // @d v_template=2 {|token_type| code for \<v_j> template}
+/// `token_type` code for `<v_j>` template
+pub(crate) const v_template: quarterword = 2;
 // @d backed_up=3 {|token_type| code for text to be reread}
 // @d inserted=4 {|token_type| code for inserted texts}
 // @d macro=5 {|token_type| code for defined control sequences}

@@ -37,6 +37,8 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
         // end;
     }
     // cat_code(carriage_return):=car_ret; cat_code(" "):=spacer;
+    cat_code!(globals, ASCII_code_literal!(carriage_return)) = car_ret as _;
+    cat_code!(globals, ASCII_code_literal!(b' ')) = spacer as _;
     // cat_code("\"):=escape; cat_code("%"):=comment;
     cat_code!(globals, ASCII_code_literal!(b'\\')) = escape as _;
     cat_code!(globals, ASCII_code_literal!(b'%')) = comment as _;
@@ -64,6 +66,9 @@ use crate::section_0207::comment;
 use crate::section_0207::escape;
 use crate::section_0207::letter;
 use crate::section_0207::other_char;
+use crate::section_0207::spacer;
+use crate::section_0207::car_ret;
+use crate::section_0022::carriage_return;
 
 use linkme::distributed_slice;
 

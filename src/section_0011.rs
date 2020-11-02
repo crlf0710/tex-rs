@@ -8,9 +8,19 @@
 // @!mem_max=30000; {greatest index in \TeX's internal |mem| array;
 //   must be strictly less than |max_halfword|;
 //   must be equal to |mem_top| in \.{INITEX}, otherwise |>=mem_top|}
+/// greatest index in TeX's internal mem array; must be strictly less
+/// than `max_halfword`; must be equal to mem top in INITEX,
+/// otherwise `>= mem_top`
+pub(crate) const mem_max: u32 = mem_max_TYPENUM::U32;
+pub(crate) type mem_max_TYPENUM = U30000;
+
 // @!mem_min=0; {smallest index in \TeX's internal |mem| array;
 //   must be |min_halfword| or more;
 //   must be equal to |mem_bot| in \.{INITEX}, otherwise |<=mem_bot|}
+/// smallest index in TeX's internal `mem` array; must be `min_halfword`
+/// or more; must be equal to `mem_bot` in `INITEX`, otherwise `<=mem_bot`
+pub(crate) const mem_min: u32 = mem_max_TYPENUM::U32;
+pub(crate) type mem_min_TYPENUM = U0;
 
 // @!buf_size=500; {maximum number of characters simultaneously present in
 //   current lines of open files and in control sequences between
@@ -84,6 +94,7 @@ pub(crate) const pool_name: &'static str = "TeXformats:TEX.POOL                 
 
 use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
+type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U1000, U10000, U2, U200, U3, U40, U500, U6, U79};
+use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U500, U6, U79};

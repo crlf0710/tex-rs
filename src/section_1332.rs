@@ -20,6 +20,7 @@ macro_rules! Check_the_constant_values_for_consistency {
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub fn entry(globals: &mut TeXGlobals) {
     workarounds!();
+    
 
     // @p begin @!{|start_here|}
 

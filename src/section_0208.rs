@@ -55,6 +55,8 @@ pub(crate) const ignore_spaces: quarterword = 39;
 // @d begin_group=61 {begin local grouping ( \.{\\begingroup} )}
 // @d end_group=62 {end local grouping ( \.{\\endgroup} )}
 // @d omit=63 {omit alignment template ( \.{\\omit} )}
+/// omit alignment template ( `\omit` )
+pub(crate) const omit: quarterword = 63;
 // @d ex_space=64 {explicit space ( \.{\\\ } )}
 /// explicit space (`\ `)
 pub(crate) const ex_space: quarterword = 64;

@@ -64,6 +64,8 @@ pub(crate) const tracing_commands_code: halfword = 36;
 // @d global_defs_code=43 {override \.{\\global} specifications}
 // @d cur_fam_code=44 {current family}
 // @d escape_char_code=45 {escape character for token output}
+/// escape character for token output
+pub(crate) const escape_char_code: halfword = 45;
 // @d default_hyphen_char_code=46 {value of \.{\\hyphenchar} when a font is loaded}
 // @d default_skew_char_code=47 {value of \.{\\skewchar} when a font is loaded}
 // @d end_line_char_code=48 {character placed at the right end of the buffer}
@@ -173,6 +175,11 @@ macro_rules! tracing_commands {
 // @d global_defs==int_par(global_defs_code)
 // @d cur_fam==int_par(cur_fam_code)
 // @d escape_char==int_par(escape_char_code)
+macro_rules! escape_char {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::escape_char_code)
+    };
+}
 // @d default_hyphen_char==int_par(default_hyphen_char_code)
 // @d default_skew_char==int_par(default_skew_char_code)
 // @d end_line_char==int_par(end_line_char_code)

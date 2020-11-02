@@ -4,6 +4,7 @@
 //! file name in the input by calling |get_x_token| for the information.
 //
 // @p procedure scan_file_name;
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label done;
     // begin name_in_progress:=true; begin_name;
@@ -16,6 +17,7 @@ pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> Result<(), JumpOutToEn
     {
     // loop@+begin if (cur_cmd>other_char)or(cur_chr>255) then {not a character}
     loop {
+        trace_expr!("cur_cmd = {}", globals.cur_cmd);
         if globals.cur_cmd > other_char ||
             ASCII_code::from(globals.cur_chr).numeric_value() > 255 {
             /// not a character
@@ -26,6 +28,8 @@ pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> Result<(), JumpOutToEn
             }
             //   end;
         }
+        
+        trace_expr!("cur_chr = {:?}", globals.cur_chr);
         // if not more_name(cur_chr) then goto done;
         if !more_name(globals, ASCII_code::from(globals.cur_chr)) {
             goto_forward_label!('done);

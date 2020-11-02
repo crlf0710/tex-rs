@@ -29,6 +29,8 @@ pub(crate) const contrib_head: pointer = mem_top - 1;
 // @d align_head==mem_top-8 {head of preamble list for alignments}
 // @d end_span==mem_top-9 {tail of spanned-width lists}
 // @d omit_template==mem_top-10 {a constant token list}
+/// a constant token list
+pub(crate) const omit_template: pointer = mem_top - 10;
 // @d null_list==mem_top-11 {permanently empty list}
 // @d lig_trick==mem_top-12 {a ligature masquerading as a |char_node|}
 // @d garbage==mem_top-12 {used for scrap information}

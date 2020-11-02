@@ -102,7 +102,9 @@ reversing_order_items!(
 mod section_0019;
 mod section_0020;
 mod section_0021;
-mod section_0022_to_0024;
+mod section_0022;
+mod section_0023;
+mod section_0024;
 mod section_0025;
 mod section_0026;
 mod section_0027;
@@ -198,8 +200,12 @@ mod section_0112;
 mod section_0113;
 mod section_0114;
 mod section_0115;
-mod section_0116_to_0132;
-mod section_0133_to_0161;
+mod section_0116;
+mod section_0117_to_0132;
+mod section_0133;
+mod section_0134;
+mod section_0135;
+mod section_0136_to_0161;
 mod section_0162;
 mod section_0163_to_0164;
 mod section_0165;
@@ -238,7 +244,8 @@ reversing_order_items!(
         mod section_0233_to_0235;
         #[macro_use]
         mod section_0236;
-        mod section_0237_to_0240;
+        mod section_0237_to_0239;
+        mod section_0240;
         mod section_0241;
         mod section_0242_to_0246;
         mod section_0247;
@@ -282,8 +289,12 @@ reversing_order_items!(
         #[macro_use]
         mod section_0304;
         mod section_0305_to_0306;
+        #[macro_use]
         mod section_0307;
-        mod section_0308_to_0320;
+        mod section_0308;
+        mod section_0309;
+        mod section_0310;
+        mod section_0311_to_0320;
         #[macro_use]
         mod section_0321;
         #[macro_use]
@@ -367,7 +378,8 @@ reversing_order_items!(
         mod section_0517;
         mod section_0518;
         mod section_0519;
-        mod section_0520_to_0525;
+        mod section_0520_to_0524;
+        mod section_0525;
         mod section_0526;
         mod section_0527;
         mod section_0528;
@@ -408,7 +420,18 @@ reversing_order_items!(
         mod section_0680_to_0698;
         mod section_0699_to_0718;
         mod section_0719_to_0767;
-        mod section_0768_to_0812;
+        mod section_0768;
+    }
+    {
+        #[macro_use]
+        mod section_0769;
+        mod section_0770;
+        mod section_0771_to_0788;
+        #[macro_use]
+        mod section_0789;
+    }
+    {
+        mod section_0790_to_0812;
         mod section_0813_to_0861;
         mod section_0862_to_0890;
         mod section_0891_to_0899;
