@@ -30,8 +30,10 @@
 // @<Glob...@>=
 // @!mem : array[mem_min..mem_max] of memory_word; {the big dynamic storage area}
 /// the big dynamic storage area
+///
+/// Note: using explicit zeroed() to workaround large stack memory usage.
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static mem: mem_array<memory_word> = mem_array::default();
+pub(crate) static mem: mem_array<memory_word> = mem_array::default_zeroed();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0116::mem_array;
@@ -50,8 +52,16 @@ define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
 // @!hi_mem_min : pointer; {the smallest location of one-word memory in use}
 //
 
-use typenum::U1;
-use crate::section_0011::mem_min_TYPENUM;
-use crate::section_0011::mem_max_TYPENUM;
 use crate::pascal::u32_from_m_to_n;
+use crate::section_0011::mem_max_TYPENUM;
+use crate::section_0011::mem_min_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;
+
+use crate::section_0113::memory_word;
+
+impl mem_array<memory_word> {
+    pub(crate) fn default_zeroed() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}

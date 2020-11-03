@@ -6,6 +6,7 @@ macro_rules! pop_input {
     ($globals:expr) => {
         // begin decr(input_ptr); cur_input:=input_stack[input_ptr];
         decr!($globals.input_ptr);
+        trace_expr!("input_ptr = {:?}", $globals.input_ptr);
         $globals.cur_input = $globals.input_stack[$globals.input_ptr];
         // end
     };

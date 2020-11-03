@@ -48,6 +48,8 @@ pub(crate) const letter: quarterword = 11;
 pub(crate) const other_char: quarterword = 12;
 // @d active_char=13 {characters that invoke macros ( \.{\char`\~} )}
 // @d par_end=13 {end of paragraph ( \.{\\par} )}
+/// end of paragraph ( `\par` )
+pub(crate) const par_end: quarterword = 13;
 // @d match=13 {match a macro parameter}
 // @d comment=14 {characters that introduce comments ( \.\% )}
 /// characters that introduce comments ( `%` )

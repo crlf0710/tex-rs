@@ -693,6 +693,8 @@ pub(crate) trait PascalFile {
 
     fn error_state(&self) -> usize;
 
+    fn set_error_state(&mut self, error_state: usize);
+
     fn put_unit_to_target(&mut self, val: Self::Unit) {
         todo!();
     }
@@ -773,6 +775,10 @@ impl PascalFile for file_of_text_char {
     fn error_state(&self) -> usize {
         self.error_state
     }
+
+    fn set_error_state(&mut self, error_state: usize) {
+        self.error_state = error_state;
+    }
 }
 
 pub(crate) type packed_file_of_text_char = file_of_text_char;
@@ -827,6 +833,10 @@ impl<T> PascalFile for file_of<T> {
     fn error_state(&self) -> usize {
         self.error_state
     }
+
+    fn set_error_state(&mut self, error_state: usize) {
+        self.error_state = error_state;
+    }
 }
 
 pub(crate) type packed_file_of<T> = file_of<T>;
@@ -872,17 +882,41 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
 ) {
     let path = path.into();
     if F::is_text_file() {
+        let mut term_special_handling = false;
         let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
+            term_special_handling = true;
             Box::new(io::stdin())
         } else if path == crate::section_0011::pool_name {
             Box::new(crate::string_pool::pool_file())
         } else {
-            unimplemented!()
+            let path = path.trim_end_matches(' ');
+            let file = match std::fs::File::open(path) {
+                Ok(f) => f,
+                Err(e) => {
+                    *file.file_state_mut() = FileState::Undefined;
+                    file.set_error_state(1);
+                    return;
+                }
+            };
+            Box::new(io::BufReader::new(file))
         };
-        *file.file_state_mut() = FileState::LineInspectionMode {
-            read_target: new_read_target,
-            read_line_buffer: LineBufferState::UnknownState { initial_line: true },
-        };
+
+        if term_special_handling {
+            *file.file_state_mut() = FileState::LineInspectionMode {
+                read_target: new_read_target,
+                read_line_buffer: LineBufferState::AfterReadLine {
+                    line_buffer: vec![F::eoln_unit()],
+                    line_position: 0,
+                    line_no_more: false,
+                },
+            };
+        } else {
+            *file.file_state_mut() = FileState::LineInspectionMode {
+                read_target: new_read_target,
+                read_line_buffer: LineBufferState::UnknownState { initial_line: true },
+            };
+        }
+        file.set_error_state(0);
     } else {
         let new_read_target: Box<dyn Read> = if path == "TTY:" {
             Box::new(io::stdin())
@@ -893,6 +927,7 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
             read_target: new_read_target,
             read_block_buffer: BlockBufferState::UnknownState,
         };
+        file.set_error_state(0);
     }
 }
 

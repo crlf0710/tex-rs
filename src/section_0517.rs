@@ -21,7 +21,7 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
     if globals.ext_delimiter.is_zero() {
         // begin cur_ext:=""; cur_name:=make_string;
         globals.cur_ext = strpool_str!("");
-        globals.cur_name = make_string(globals);
+        globals.cur_name = make_string(make_globals_string_view!(globals));
         // end
     }
     // else  begin cur_name:=str_ptr;
@@ -34,5 +34,6 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
     // end;
 }
 
+use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0043::make_string;
 use crate::section_0004::TeXGlobals;

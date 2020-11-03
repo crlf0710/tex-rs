@@ -10,7 +10,7 @@
 //
 // @d append_char(#) == {put |ASCII_code| \# at the end of |str_pool|}
 /// put `ASCII_code` `#` at the end of `str_pool`
-pub(crate) fn append_char(globals: &mut TeXGlobals, val: ASCII_code) {
+pub(crate) fn append_char(globals: TeXGlobalsStringView<'_>, val: ASCII_code) {
     // begin str_pool[pool_ptr]:=si(#); incr(pool_ptr);
     #[cfg(not(feature = "unicode_support"))]
     {
@@ -21,8 +21,8 @@ pub(crate) fn append_char(globals: &mut TeXGlobals, val: ASCII_code) {
     {
         let encoded_iter = FssUtfEncodedIP32::new(val.0 as _).into_iter();
         for byte in encoded_iter {
-            globals.str_pool[globals.pool_ptr] = packed_ASCII_code(byte);
-            incr!(globals.pool_ptr);
+            (*globals.str_pool)[*globals.pool_ptr] = packed_ASCII_code(byte);
+            incr!(*globals.pool_ptr);
         }
         use crate::section_0038::packed_ASCII_code;
         use crate::unicode_support::FssUtfEncodedIP32;
@@ -44,5 +44,6 @@ pub(crate) fn str_room(globals: &mut TeXGlobals, bytes_count: integer) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::pool_size;
 use crate::section_0018::ASCII_code;

@@ -37,19 +37,22 @@ macro_rules! Read_one_string_but_return_false_if_the_string_memory_space_is_gett
                 #[cfg(feature = "unicode_support")]
                 assert!(xord(m).numeric_value() < 128);
                 // append_char(xord[m]);
-                append_char($globals, xord(m));
+                append_char(make_globals_string_view!($globals), xord(m));
                 // end;
             }
             // read_ln(pool_file); g:=make_string;
             read_ln(&mut $globals.pool_file);
-            $g = make_string($globals);
+            $g = make_string(make_globals_string_view!($globals));
             // end;
         }
         // end
         use crate::pascal::{read_onearg, read_ln};
         use crate::pascal::eoln;
         use crate::pascal::integer;
+        use crate::section_0004::TeXGlobalsStringView;
         use crate::section_0019::text_char;
         use crate::section_0020::xord;
+        use crate::section_0042::append_char;
+        use crate::section_0043::make_string;
     }
 }

@@ -76,6 +76,9 @@ impl pool_pointer {
     pub(crate) fn get(&self) -> u32 {
         (self.0).get()
     }
+    pub(crate) fn copied(&self) -> Self {
+        *self
+    }
 }
 
 impl core::ops::Add<integer> for pool_pointer {

@@ -1,7 +1,8 @@
 // @ @<Input from external file, |goto restart| if no input found@>=
 // @^inner loop@>
 macro_rules! Input_from_external_file__goto_restart_if_no_input_found {
-    ($globals:expr) => {
+    ($globals:expr) => {{
+        trace_span!("Input from external...");
         region_backward_label! {
         'switch <-
         {
@@ -48,5 +49,5 @@ macro_rules! Input_from_external_file__goto_restart_if_no_input_found {
         }
         // end
         use crate::section_0303::new_line;
-    }
+    }}
 }

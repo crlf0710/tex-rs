@@ -16,7 +16,7 @@ pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
     else {
         /// contribute `c` to the current string
         str_room(globals, c.len_bytes() as _);
-        append_char(globals, c);
+        append_char(make_globals_string_view!(globals), c);
         // if (c=">")or(c=":") then
         if c == ASCII_code_literal!(b'>') || c == ASCII_code_literal!(b':') {
             // begin area_delimiter:=cur_length; ext_delimiter:=0;
@@ -36,6 +36,7 @@ pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0018::ASCII_code;
 use crate::section_0038::pool_pointer;
 use crate::section_0042::str_room;

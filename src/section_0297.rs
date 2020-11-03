@@ -82,14 +82,19 @@ use crate::section_0115::pointer;
 use globals_struct::{globals_struct_field, globals_struct_use};
 
 #[cfg(not(feature = "unicode_support"))]
-#[derive(Copy, Clone, Default, Debug)]
-pub(crate) struct cur_chr_type(halfword);
+type cur_chr_type_repr = halfword;
 
 #[cfg(feature = "unicode_support")]
+type cur_chr_type_repr = word;
+
 #[derive(Copy, Clone, Default, Debug)]
-pub(crate) struct cur_chr_type(word);
+pub(crate) struct cur_chr_type(cur_chr_type_repr);
 
 impl cur_chr_type {
+    pub(crate) fn new(val: cur_chr_type_repr) -> Self {
+        cur_chr_type(val)
+    }
+    
     pub(crate) fn new_zero() -> Self {
         cur_chr_type(0)
     }

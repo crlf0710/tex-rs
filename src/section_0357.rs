@@ -3,7 +3,9 @@
 // @<Input from token list, |goto restart| if end of list or
 //   if a parameter needs to be expanded@>=
 macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_parameter_needs_to_be_expanded {
-    ($globals:expr, $lbl_restart:lifetime) => {
+    ($globals:expr, $lbl_restart:lifetime) => {{
+        trace_span!("Input from token list...");
+
         // if loc<>null then {list not exhausted}
         if loc!($globals) != null {
             /// list not exhausted
@@ -40,5 +42,5 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
 
         use crate::section_0324::end_token_list;
         use crate::section_0115::null;
-    }
+    }}
 }

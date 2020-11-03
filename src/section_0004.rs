@@ -33,6 +33,7 @@
 #[globals_struct]
 #[globals_struct_field_view(TeXGlobalsIoView, make_globals_io_view)]
 #[globals_struct_field_view(TeXGlobalsIoFilenameView, make_globals_io_filename_view)]
+#[globals_struct_field_view(TeXGlobalsStringView, make_globals_string_view)]
 pub mod TeXGlobals {
     include!("src/section_0013.rs");
     include!("src/section_0026.rs");
@@ -53,6 +54,7 @@ pub mod TeXGlobals {
     include!("src/section_0301.rs");
     include!("src/section_0304.rs");
     include!("src/section_0309.rs");
+    include!("src/section_0333.rs");
     include!("src/section_0410.rs");
     include!("src/section_0512.rs");
     include!("src/section_0513.rs");

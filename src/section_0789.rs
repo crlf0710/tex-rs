@@ -9,7 +9,8 @@
 //
 // @<Insert the \(v)\<v_j>...@>=
 macro_rules! Insert_the_v_j_template_and_goto_restart {
-    ($globals:expr, $lbl_restart:lifetime) => {
+    ($globals:expr, $lbl_restart:lifetime) => {{
+        trace_span!("Insert the v_j...");
         // begin if (scanner_status=aligning) or (cur_align=null) then
         //   fatal_error("(interwoven alignment preambles are not allowed)");
         // @.interwoven alignment preambles...@>
@@ -30,5 +31,5 @@ macro_rules! Insert_the_v_j_template_and_goto_restart {
         use crate::section_0162::omit_template;
         use crate::section_0208::omit;
         use crate::section_0323::begin_token_list;
-    }
+    }}
 }

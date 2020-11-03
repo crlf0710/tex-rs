@@ -5,9 +5,18 @@
 //! @^system dependencies@>
 //
 // @d append_to_name(#)==begin c:=#; incr(k);
-//   if k<=file_name_size then name_of_file[k]:=xchr[c];
-//   end
-//
+macro_rules! append_to_name {
+    ($globals:expr, $val:expr, $k:expr) => {{
+        let c = $val;
+        incr!($k);
+        // if k<=file_name_size then name_of_file[k]:=xchr[c];
+        if $k < file_name_size {
+            $globals.name_of_file[$k] = xchr(c);
+        }
+        // end
+    }}
+}
+
 // @p procedure pack_file_name(@!n,@!a,@!e:str_number);
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
@@ -16,10 +25,26 @@ pub(crate) fn pack_file_name(globals: &mut TeXGlobals, n: str_number, a: str_num
     // @!c: ASCII_code; {character being packed}
     // @!j:pool_pointer; {index into |str_pool|}
     // begin k:=0;
-    let k = 0;
-    // for j:=str_start[a] to str_start[a+1]-1 do append_to_name(so(str_pool[j]));
-    // for j:=str_start[n] to str_start[n+1]-1 do append_to_name(so(str_pool[j]));
-    // for j:=str_start[e] to str_start[e+1]-1 do append_to_name(so(str_pool[j]));
+    let mut k = 0;
+    #[cfg(not(feature = "unicode_support"))]
+    {
+        // for j:=str_start[a] to str_start[a+1]-1 do append_to_name(so(str_pool[j]));
+        // for j:=str_start[n] to str_start[n+1]-1 do append_to_name(so(str_pool[j]));
+        // for j:=str_start[e] to str_start[e+1]-1 do append_to_name(so(str_pool[j]));
+        todo!();
+    }
+    #[cfg(feature = "unicode_support")]
+    {
+        for ch in globals.str_pool.str_ascii_codes(&globals.str_start, a) {
+            append_to_name!(globals, xord(ch), k);
+        }
+        for ch in globals.str_pool.str_ascii_codes(&globals.str_start, n) {
+            append_to_name!(globals, xord(ch), k);
+        }
+        for ch in globals.str_pool.str_ascii_codes(&globals.str_start, e) {
+            append_to_name!(globals, xord(ch), k);
+        }
+    }
     // if k<=file_name_size then name_length:=k@+else name_length:=file_name_size;
     if k < file_name_size {
         globals.name_length = k.into();
@@ -37,3 +62,4 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0011::file_name_size;
 use crate::section_0020::xchr;
 use crate::section_0038::str_number;
+use crate::section_0020::xord;

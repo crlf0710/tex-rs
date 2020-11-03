@@ -136,6 +136,7 @@ macro_rules! workarounds {
         crate::section_0232::workaround_47384();
         crate::section_0240::workaround_47384();
         crate::section_0265::workaround_47384();
+        crate::section_0334::workaround_47384();
         crate::section_1052::workaround_47384();
         crate::section_1301::workaround_47384();
     };
@@ -157,6 +158,15 @@ macro_rules! impl_debug_with_literal {
                 Ok(())
             }
         }
+    };
+}
+
+macro_rules! trace_span {
+    ($span_info:expr) => {
+        #[cfg(feature = "trace")]
+        let span = ::tracing::span!(::tracing::Level::TRACE, $span_info);
+        #[cfg(feature = "trace")]
+        let __ = span.enter();
     };
 }
 
