@@ -16,7 +16,9 @@ macro_rules! Initialize_the_input_routines {
         $globals.line = 0;
         name!($globals) = 0;
         // force_eof:=false;
+        $globals.force_eof = false;
         // align_state:=1000000;@/
+        $globals.align_state = 1000000;
         // if not init_terminal then goto final_end;
         if !init_terminal($globals) {
             goto_forward_label!($lbl_final_end);

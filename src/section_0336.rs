@@ -4,7 +4,8 @@
 //! by |cur_cs|, which is zero at the end of a file.
 //
 // @p procedure check_outer_validity;
-pub(crate) fn check_outer_validity() {
+#[allow(unused_variables)]
+pub(crate) fn check_outer_validity(globals: &mut TeXGlobals) {
     // var p:pointer; {points to inserted token list}
     // @!q:pointer; {auxiliary pointer}
     // begin if scanner_status<>normal then
@@ -27,3 +28,5 @@ pub(crate) fn check_outer_validity() {
     //   end;
     // end;
 }
+
+use crate::section_0004::TeXGlobals;

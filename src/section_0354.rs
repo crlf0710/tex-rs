@@ -81,7 +81,7 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         trace_expr!("cur_chr = {:?}", $globals.cur_chr);
         // if cur_cmd>=outer_call then check_outer_validity;
         if $globals.cur_cmd >= outer_call {
-            check_outer_validity();
+            check_outer_validity($globals);
             // end
         }
         use crate::section_0113::halfword;

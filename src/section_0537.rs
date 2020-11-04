@@ -55,6 +55,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     // print_char("("); incr(open_parens); slow_print(name); update_terminal;
     print_char(make_globals_io_view!(globals), ASCII_code_literal!(b'('));
     incr!(globals.open_parens);
+    trace_expr!("open_parens = {:?}", globals.open_parens);
     slow_print(globals, name!(globals).into());
     update_terminal(globals);
     // state:=new_line;
