@@ -24,12 +24,12 @@ macro_rules! end_line_char_inactive {
 //
 // @<Move to next line of file, or |goto restart|...@>=
 macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_or_return_if_a_read_line_has_finished {
-    ($globals:expr) => {
+    ($globals:expr, $lbl_restart:lifetime) => {
         // if name>17 then @<Read next line of file into |buffer|, or
         //   |goto restart| if the file has ended@>
         trace_expr!("name = {}", name!($globals));
         if name!($globals) > 17 {
-            todo!();
+            Read_next_line_of_file_into_buffer_or_goto_restart_if_the_file_has_ended!($globals, $lbl_restart);
         } else {
             // else  begin if not terminal_input then {\.{\\read} line has ended}
             if !terminal_input($globals) {

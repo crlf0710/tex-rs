@@ -10,7 +10,11 @@ pub(crate) const char_num: quarterword = 16;
 // @d xray=19 {peek inside of \TeX\ ( \.{\\show}, \.{\\showbox}, etc.~)}
 // @d make_box=20 {make a box ( \.{\\box}, \.{\\copy}, \.{\\hbox}, etc.~)}
 // @d hmove=21 {horizontal motion ( \.{\\moveleft}, \.{\\moveright} )}
+/// horizontal motion ( `\moveleft`, `\moveright` )
+pub(crate) const hmove: quarterword = 21;
 // @d vmove=22 {vertical motion ( \.{\\raise}, \.{\\lower} )}
+/// vertical motion ( `\raise`, `\lower` )
+pub(crate) const vmove: quarterword = 22;
 // @d un_hbox=23 {unglue a box ( \.{\\unhbox}, \.{\\unhcopy} )}
 // @d un_vbox=24 {unglue a box ( \.{\\unvbox}, \.{\\unvcopy} )}
 // @d remove_item=25 {nullify last item ( \.{\\unpenalty},
@@ -72,6 +76,8 @@ pub(crate) const char_given: quarterword = 68;
 // @d math_given=69 {math code defined by \.{\\mathchardef}}
 // @d last_item=70 {most recent item ( \.{\\lastpenalty},
 //   \.{\\lastkern}, \.{\\lastskip} )}
+/// most recent item ( `\lastpenalty`, `\lastkern`, `\lastskip` )
+pub(crate) const last_item: quarterword = 70;
 // @d max_non_prefixed_command=70 {largest command code that can't be \.{\\global}}
 
 use crate::section_0113::quarterword;

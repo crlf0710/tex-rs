@@ -31,6 +31,8 @@ pub(crate) const tab_mark: quarterword = 4;
 pub(crate) const car_ret: quarterword = 5;
 // @d out_param=5 {output a macro parameter}
 // @d mac_param=6 {macro parameter symbol ( \.\# )}
+/// macro parameter symbol ( `#` )
+pub(crate) const mac_param: quarterword = 6;
 // @d sup_mark=7 {superscript ( \.{\char'136} )}
 // @d sub_mark=8 {subscript ( \.{\char'137} )}
 // @d ignore=9 {characters to ignore ( \.{\^\^@@} )}
@@ -59,6 +61,8 @@ pub(crate) const comment: quarterword = 14;
 /// end of job ( `\end`, `\dump` )
 pub(crate) const stop: quarterword = 14;
 // @d invalid_char=15 {characters that shouldn't appear ( \.{\^\^?} )}
+/// characters that shouldn't appear ( `^^?` )
+pub(crate) const invalid_char: quarterword = 15;
 // @d delim_num=15 {specify delimiter numerically ( \.{\\delimiter} )}
 // @d max_char_code=15 {largest catcode for individual characters}
 /// largest catcode for individual characters

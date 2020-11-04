@@ -34,7 +34,7 @@ pub(crate) fn get_next(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX
     // if state<>token_list then
     if state!(globals) != token_list {
         // @<Input from external file, |goto restart| if no input found@>
-        Input_from_external_file__goto_restart_if_no_input_found!(globals);
+        Input_from_external_file__goto_restart_if_no_input_found!(globals, 'restart);
     } else {
         // else @<Input from token list, |goto restart| if end of list or
         //   if a parameter needs to be expanded@>;

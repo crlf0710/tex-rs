@@ -43,6 +43,8 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     cat_code!(globals, ASCII_code_literal!(b'\\')) = escape as _;
     cat_code!(globals, ASCII_code_literal!(b'%')) = comment as _;
     // cat_code(invalid_code):=invalid_char; cat_code(null_code):=ignore;
+    cat_code!(globals, ASCII_code_literal!(invalid_code)) = invalid_char as _;
+    cat_code!(globals, ASCII_code_literal!(null_code)) = ignore as _;
     // for k:="0" to "9" do math_code(k):=hi(k+var_code);
     // for k:="A" to "Z" do
     for k_u8 in b'A'..=b'Z' {
@@ -68,7 +70,11 @@ use crate::section_0207::letter;
 use crate::section_0207::other_char;
 use crate::section_0207::spacer;
 use crate::section_0207::car_ret;
+use crate::section_0207::ignore;
+use crate::section_0207::invalid_char;
 use crate::section_0022::carriage_return;
+use crate::section_0022::null_code;
+use crate::section_0022::invalid_code;
 
 use linkme::distributed_slice;
 

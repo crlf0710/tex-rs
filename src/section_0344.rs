@@ -17,8 +17,10 @@ macro_rules! State_plus_cur_cmd_matches_any_case_plus {
 // @<Change state if necessary...@>=
 macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_should_be_ignored_or_goto_reswitch_if_the_current_character_changes_to_another {
     ($globals:expr, $lbl_switch:lifetime) => {{
+        trace_span!("Change state if...");
         // case state+cur_cmd of
         let state_plus_cur_cmd = state!($globals) + $globals.cur_cmd;
+        trace_expr!("state_plus_cur_cmd = {}", state_plus_cur_cmd);
         if State_plus_cur_cmd_matches_cases_where_character_is_ignored!(state_plus_cur_cmd) {
             // @<Cases where character is ignored@>: goto switch;
             goto_backward_label!($lbl_switch);
