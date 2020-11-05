@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Finish line, emit a \.{\\par}@>=
-macro_rules! Finish_line_emit_a_par {
+macro_rules! Finish_line__emit_a_par {
     ($globals:expr) => {
         // begin loc:=limit+1; cur_cs:=par_loc; cur_cmd:=eq_type(cur_cs);
         loc!($globals) = limit!($globals) + 1;

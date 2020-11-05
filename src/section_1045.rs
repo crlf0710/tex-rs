@@ -11,8 +11,21 @@ macro_rules! abs_mode_plus_cur_cmd_matches_any_mode {
 }
 
 macro_rules! Cases_of_main_control_that_build_boxes_and_lists {
-    ($abs_mode_plus_cur_cmd:expr) => {{
-        false
+    ($globals:expr, $abs_mode_plus_cur_cmd:expr) => {{
+        trace_span!("Cases of `main_control` that build...");
+        if Cases_of_main_control_that_build_boxes_and_lists_1090!(
+            $globals, $abs_mode_plus_cur_cmd) {
+            /// already processed
+            do_nothing!();
+            true
+        } else if Cases_of_main_control_that_build_boxes_and_lists_1094!(
+            $globals, $abs_mode_plus_cur_cmd) {
+            /// already processed
+            do_nothing!();
+            true
+        } else {
+            false
+        }
     }}
 }
 
@@ -66,7 +79,7 @@ macro_rules! Cases_of_main_control_that_are_not_part_of_the_inner_loop {
             insert_dollar_sign($globals);
         }
         // @t\4@>@<Cases of |main_control| that build boxes and lists@>@;
-        else if Cases_of_main_control_that_build_boxes_and_lists!($abs_mode_plus_cur_cmd) {
+        else if Cases_of_main_control_that_build_boxes_and_lists!($globals, $abs_mode_plus_cur_cmd) {
             /// already processed
             do_nothing!();
         }

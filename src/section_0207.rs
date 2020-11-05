@@ -18,11 +18,13 @@
 /// escape delimiter (called `\` in *The TEXbook*)
 pub(crate) const escape: quarterword = 0;
 // @d relax=0 {do nothing ( \.{\\relax} )}
-// do nothing ( `\relax` )
+/// do nothing ( `\relax` )
 pub(crate) const relax: quarterword = 0;
 // @d left_brace=1 {beginning of a group ( \.\{ )}
 // @d right_brace=2 {ending of a group ( \.\} )}
 // @d math_shift=3 {mathematics shift character ( \.\$ )}
+/// mathematics shift character ( `$` )
+pub(crate) const math_shift: quarterword = 3;
 // @d tab_mark=4 {alignment delimiter ( \.\&, \.{\\span} )}
 /// alignment delimiter ( `&`, `\span` )
 pub(crate) const tab_mark: quarterword = 4;

@@ -98,6 +98,10 @@ impl cur_chr_type {
     pub(crate) fn new_zero() -> Self {
         cur_chr_type(0)
     }
+
+    pub(crate) const fn is_zero(&self) -> bool {
+        self.0 == 0
+    }
 }
 
 impl From<ASCII_code> for cur_chr_type {

@@ -37,7 +37,8 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         // any_state_plus(invalid_char): @<Decry the invalid character and
         //   |goto restart|@>;
         // @t\4@>@<Handle situations involving spaces, braces, changes of state@>@;
-        else if Handle_situations_involving_spaces_braces_changes_of_state!($globals, state_plus_cur_cmd) {
+        else if Handle_situations_involving_spaces_braces_changes_of_state!(
+            $globals, state_plus_cur_cmd, $lbl_switch) {
             // already handled
         }
         else {
@@ -49,5 +50,7 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         use crate::section_0207::car_ret;
         use crate::section_0207::escape;
         use crate::section_0207::spacer;
+        use crate::section_0207::comment;
+        use crate::section_0303::skip_blanks;
     }}
 }
