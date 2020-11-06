@@ -61,16 +61,35 @@ pub(crate) type glue_base_TYPENUM = typenum::op!(undefined_control_sequence_TYPE
 pub(crate) const glue_base: word = glue_base_TYPENUM::U32;
 
 // @<Initialize table entries...@>=
-// eq_type(undefined_control_sequence):=undefined_cs;
-// equiv(undefined_control_sequence):=null;
-// eq_level(undefined_control_sequence):=level_zero;
-// for k:=active_base to undefined_control_sequence-1 do
-//   eqtb[k]:=eqtb[undefined_control_sequence];
-//
+#[distributed_slice(INIT_TBLENTRY)]
+#[allow(unused_variables)]
+pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut TeXGlobals) {
+    // eq_type(undefined_control_sequence):=undefined_cs;
+    eq_type!(globals, undefined_control_sequence) = undefined_cs;
+    // equiv(undefined_control_sequence):=null;
+    equiv!(globals, undefined_control_sequence) = null;
+    // eq_level(undefined_control_sequence):=level_zero;
+    eq_level!(globals, undefined_control_sequence) = level_zero;
+    // for k:=active_base to undefined_control_sequence-1 do
+    for k in active_base as u16..undefined_control_sequence {
+        // eqtb[k]:=eqtb[undefined_control_sequence];
+        globals.eqtb[k as u16] = globals.eqtb[undefined_control_sequence];
+    }
+}
 
 use crate::pascal::word;
 use crate::section_0012::hash_size_TYPENUM;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;
+use crate::section_0004::TeXGlobals;
+use crate::section_0008::INIT_TBLENTRY;
+use crate::section_0115::null;
+use crate::section_0210::undefined_cs;
+use crate::section_0221::level_zero;
 use typenum::Unsigned;
 use typenum::{U1, U10, U256, U257};
+
+use linkme::distributed_slice;
+
+// Workaround https://github.com/rust-lang/rust/issues/47384
+pub(crate) fn workaround_47384() {}

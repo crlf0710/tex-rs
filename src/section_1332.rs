@@ -15,6 +15,16 @@ macro_rules! Check_the_constant_values_for_consistency {
     };
 }
 
+macro_rules! Initialize_the_output_routines {
+    ($globals:expr) => {
+        Initialize_the_output_routines_0055!($globals);
+        Initialize_the_output_routines_0061!($globals);
+        //Initialize_the_output_routines_0528!($globals);
+        //Initialize_the_output_routines_053?!($globals);
+    };
+}
+
+
 /// Main entry to TeX
 #[allow(unused_mut, unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]

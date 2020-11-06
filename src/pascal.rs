@@ -3,6 +3,33 @@ pub type real = f32;
 pub type word = u32;
 pub type boolean = bool;
 
+pub(crate) trait IsOddOrEven {
+    fn is_odd(&self) -> boolean;
+    fn is_even(&self) -> boolean {
+        !self.is_odd()
+    }
+}
+
+macro_rules! impl_is_even_or_odd_for_primitive {
+    ($t:ty) => {
+        impl crate::pascal::IsOddOrEven for $t {
+            fn is_odd(&self) -> crate::pascal::boolean {
+                self % 2 != 0
+            }
+        }
+    }
+}
+
+impl_is_even_or_odd_for_primitive!(u8);
+impl_is_even_or_odd_for_primitive!(u16);
+impl_is_even_or_odd_for_primitive!(u32);
+impl_is_even_or_odd_for_primitive!(i8);
+impl_is_even_or_odd_for_primitive!(i16);
+impl_is_even_or_odd_for_primitive!(i32);
+
+
+
+
 #[cfg(not(feature = "unicode_support"))]
 #[derive(Copy, Clone, Default, PartialOrd, PartialEq, Debug)]
 pub(crate) struct char(pub(crate) u8);
@@ -170,6 +197,13 @@ macro_rules! define_ranged_unsigned_integer {
             fn sub(mut self, rhs: $base_type) -> Self {
                 self -= rhs;
                 self
+            }
+        }
+
+        impl<MIN, MAX> crate::pascal::IsOddOrEven for $name<MIN, MAX>
+        where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
+            fn is_odd(&self) -> crate::pascal::boolean {
+                self.get().is_odd()
             }
         }
     };

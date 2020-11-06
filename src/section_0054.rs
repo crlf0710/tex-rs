@@ -40,12 +40,19 @@
 //
 // @d no_print=16 {|selector| setting that makes data disappear}
 // @d term_only=17 {printing is destined for the terminal only}
+/// printing is destined for the terminal only
+pub(crate) const term_only: u8 = 17;
 // @d log_only=18 {printing is destined for the transcript file only}
+/// printing is destined for the transcript file only
+pub(crate) const log_only: u8 = 18;
 // @d term_and_log=19 {normal |selector| setting}
 // @d pseudo=20 {special |selector| setting for |show_context|}
 // @d new_string=21 {printing is deflected to the string pool}
 // @d max_selector=21 {highest selector setting}
-//
+/// highest selector setting
+pub(crate) const max_selector: u8 = max_selector_TYPENUM::U8;
+pub(crate) type max_selector_TYPENUM = U21;
+
 // @<Glob...@>=
 // @!log_file : alpha_file; {transcript of \TeX\ session}
 
@@ -55,8 +62,22 @@
 pub(crate) static log_file: alpha_file = alpha_file::default();
 
 // @!selector : 0..max_selector; {where to print a message}
+#[globals_struct_field(TeXGlobals)]
+/// where to print a message
+pub(crate) static selector: u8_from_0_to_n<max_selector_TYPENUM> = u8_from_0_to_n::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0054::max_selector_TYPENUM;
+
 // @!dig : array[0..22] of 0..15; {digits in a number being output}
 // @!tally : integer; {the number of characters recently printed}
+/// the number of characters recently printed
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static tally: integer = 0;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::integer;
+
 // @!term_offset : 0..max_print_line;
 //   {the number of characters on the current terminal line}
 #[globals_struct_field(TeXGlobals)]
@@ -69,6 +90,9 @@ use crate::section_0011::max_print_line_TYPENUM;
 
 // @!file_offset : 0..max_print_line;
 //   {the number of characters on the current file line}
+/// the number of characters on the current file line
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static file_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
 // @!trick_buf:array[0..error_line] of ASCII_code; {circular buffer for
 //   pseudoprinting}
 // @!trick_count: integer; {threshold for pseudoprinting, explained later}
@@ -79,3 +103,5 @@ use crate::section_0011::max_print_line_TYPENUM;
 pub(crate) use crate::section_0025::alpha_file;
 
 use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};
+use typenum::U21;
+use typenum::Unsigned;

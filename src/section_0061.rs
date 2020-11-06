@@ -5,7 +5,7 @@
 //! character positions.
 
 // @<Initialize the output...@>=
-macro_rules! Initialize_the_output_routines {
+macro_rules! Initialize_the_output_routines_0061 {
     ($globals:expr) => {
         // wterm(banner);
         wterm(make_globals_io_view!($globals), banner);

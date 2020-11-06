@@ -41,6 +41,9 @@ pub(crate) fn expand(globals: &mut TeXGlobals) {
     // begin cv_backup:=cur_val; cvl_backup:=cur_val_level; radix_backup:=radix;
     // co_backup:=cur_order; backup_backup:=link(backup_head);
     // if cur_cmd<call then @<Expand a nonmacro@>
+    if globals.cur_cmd < call {
+        Expand_a_nonmacro!(globals);
+    }
     // else if cur_cmd<end_template then macro_call
     // else @<Insert a token containing |frozen_endv|@>;
     // cur_val:=cv_backup; cur_val_level:=cvl_backup; radix:=radix_backup;
@@ -49,3 +52,4 @@ pub(crate) fn expand(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0210::call;

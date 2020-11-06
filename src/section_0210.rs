@@ -4,6 +4,8 @@
 //! The ``expandable'' commands come first.
 //
 // @d undefined_cs=max_command+1 {initial state of most |eq_type| fields}
+/// initial state of most `eq_type` fields
+pub(crate) const undefined_cs: quarterword = max_command + 1;
 // @d expand_after=max_command+2 {special expansion ( \.{\\expandafter} )}
 // @d no_expand=max_command+3 {special nonexpansion ( \.{\\noexpand} )}
 // @d input=max_command+4 {input a source file ( \.{\\input}, \.{\\endinput} )}
