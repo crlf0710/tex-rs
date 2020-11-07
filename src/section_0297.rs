@@ -126,16 +126,16 @@ impl From<cur_chr_type> for ASCII_code {
 }
 
 #[cfg(not(feature = "unicode_support"))]
-type cur_tok_type_repr = halfword;
+pub(crate) type cur_tok_type_repr = halfword;
 
 #[cfg(not(feature = "unicode_support"))]
-const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0o400;
+pub(crate) const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0o400;
 
 #[cfg(feature = "unicode_support")]
-type cur_tok_type_repr = word;
+pub(crate) type cur_tok_type_repr = word;
 
 #[cfg(feature = "unicode_support")]
-const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0x0080_0000;
+pub(crate) const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0x0080_0000;
 
 #[derive(Copy, Clone, Default, Debug)]
 pub(crate) struct cur_tok_type(cur_tok_type_repr);
@@ -160,6 +160,10 @@ impl cur_tok_type {
     pub(crate) fn from_cs(cs: pointer) -> Self {
         cur_tok_type(cs_token_flag.0 + cs as cur_tok_type_repr)
     }
+
+    pub(crate) const fn get(&self) -> cur_tok_type_repr {
+        self.0
+    }    
 }
 
 /*

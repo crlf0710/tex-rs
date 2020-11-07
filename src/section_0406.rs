@@ -11,6 +11,5 @@ macro_rules! Get_the_next_non_blank_non_call_token {
         }
         use crate::section_0380::get_x_token;
         use crate::section_0207::spacer;
-        ok_nojump!()
     }}
 }

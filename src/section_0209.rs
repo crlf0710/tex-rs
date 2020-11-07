@@ -27,6 +27,8 @@ pub(crate) const def_code: quarterword = 85;
 // @d def_font=88 {define a font file ( \.{\\font} )}
 // @d register=89 {internal register ( \.{\\count}, \.{\\dimen}, etc.~)}
 // @d max_internal=89 {the largest code that can follow \.{\\the}}
+/// the largest code that can follow `\the`
+pub(crate) const max_internal: quarterword = 89;
 // @d advance=90 {advance a register or parameter ( \.{\\advance} )}
 // @d multiply=91 {multiply a register or parameter ( \.{\\multiply} )}
 // @d divide=92 {divide a register or parameter ( \.{\\divide} )}

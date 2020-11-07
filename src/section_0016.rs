@@ -16,6 +16,12 @@ macro_rules! decr {
     };
 }
 // @d negate(#) == #:=-# {change the sign of a variable}
+/// change the sign of a variable
+macro_rules! negate {
+    ($val:expr) => {
+        $val = -$val
+    }
+}
 // @d loop == @+ while true do@+ {repeat over and over until a |goto| happens}
 // @f loop == xclause
 //   {\.{WEB}'s |xclause| acts like `\ignorespaces|while true do|\unskip'}

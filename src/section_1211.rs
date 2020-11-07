@@ -23,6 +23,7 @@ macro_rules! Assignments {
 // @t\4@>@<Declare subprocedures for |prefixed_command|@>@t@>@;@/
 // procedure prefixed_command;
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label done,exit;
     // var a:small_number; {accumulated prefix codes so far}

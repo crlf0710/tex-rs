@@ -11,7 +11,7 @@ pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> Result<(), JumpOutToEn
     globals.name_in_progress = true;
     begin_name(globals);
     // @<Get the next non-blank non-call...@>;
-    Get_the_next_non_blank_non_call_token!(globals)?;
+    Get_the_next_non_blank_non_call_token!(globals);
     region_forward_label! {
     |'done|
     {

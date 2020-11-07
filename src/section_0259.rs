@@ -12,6 +12,7 @@
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> pointer {
     debug_assert!(l > 1);
+    trace_expr!("id_lookup(j = {}, l = {})", j, l);
     // label found; {go here if you found it}
     // var h:integer; {hash code}
     /// hash code

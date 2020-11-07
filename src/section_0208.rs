@@ -92,6 +92,8 @@ pub(crate) const no_boundary: quarterword = 65;
 // @d radical=66 {square root and similar signs ( \.{\\radical} )}
 // @d end_cs_name=67 {end control sequence ( \.{\\endcsname} )}
 // @d min_internal=68 {the smallest code that can follow \.{\\the}}
+/// the smallest code that can follow `\the`
+pub(crate) const min_internal: quarterword = 68;
 // @d char_given=68 {character code defined by \.{\\chardef}}
 /// character code defined by `\chardef`
 pub(crate) const char_given: quarterword = 68;

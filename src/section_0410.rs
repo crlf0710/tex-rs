@@ -27,6 +27,8 @@
 //! Otherwise |cur_val| will contain the integer or scaled value in question.
 //
 // @d int_val=0 {integer values}
+/// integer values
+pub(crate) const int_val: u8 = 0;
 // @d dimen_val=1 {dimension values}
 // @d glue_val=2 {glue specifications}
 // @d mu_val=3 {math glue specifications}
@@ -45,3 +47,4 @@ use crate::pascal::integer;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
+use crate::section_0101::small_number;
