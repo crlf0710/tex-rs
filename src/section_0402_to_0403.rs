@@ -25,15 +25,3 @@
 //!   end;
 //! end;
 //!
-//! @ @<Get the next non-blank non-relax non-call token@>=
-//! repeat get_x_token;
-//! until (cur_cmd<>spacer)and(cur_cmd<>relax)
-//!
-//! @ The |scan_optional_equals| routine looks for an optional `\.=' sign preceded
-//! by optional spaces; `\.{\\relax}' is not ignored here.
-//!
-//! @p procedure scan_optional_equals;
-//! begin  @<Get the next non-blank non-call token@>;
-//! if cur_tok<>other_token+"=" then back_input;
-//! end;
-//!

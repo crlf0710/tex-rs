@@ -1,6 +1,7 @@
 // @ @<Scan ahead in the buffer...@>=
 macro_rules! Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_code_is_encountered_reduce_it_and_goto_start_cs__otherwise_if_a_multiletter_control_sequence_is_found_adjust_cur_cs_and_loc_and_goto_found {
-    ($globals:expr, $k:expr, $cat:expr, $lbl_start_cs:lifetime, $lbl_found:lifetime) => {
+    ($globals:expr, $k:expr, $cat:expr, $lbl_start_cs:lifetime, $lbl_found:lifetime) => {{
+        trace_span!("Scan ahead in the...");
         // begin repeat cur_chr:=buffer[k]; cat:=cat_code(cur_chr); incr(k);
         loop {
             $globals.cur_chr = $globals.buffer[$k].into();
@@ -32,5 +33,5 @@ macro_rules! Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_
         }
         // end
         use crate::section_0259::id_lookup;
-    }
+    }}
 }

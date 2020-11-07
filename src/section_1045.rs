@@ -30,13 +30,22 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists {
 }
 
 macro_rules! Cases_of_main_control_that_dont_depend_on_mode {
-    ($abs_mode_plus_cur_cmd:expr) => {{
-        false
+    ($globals:expr, $abs_mode_plus_cur_cmd:expr) => {{
+        trace_span!("Cases of `main_control` that don't...");
+        if Cases_of_main_control_that_dont_depend_on_mode_1210!(
+            $globals, $abs_mode_plus_cur_cmd) {
+            /// already processed
+            do_nothing!();
+            true
+        } else {
+            false
+        }
     }}
 }
 
 macro_rules! Cases_of_main_control_that_are_for_extensions_to_TeX {
-    ($abs_mode_plus_cur_cmd:expr) => {{
+    ($globals:expr, $abs_mode_plus_cur_cmd:expr) => {{
+        trace_span!("Cases of `main_control` that are for...");
         false
     }}
 }
@@ -84,17 +93,18 @@ macro_rules! Cases_of_main_control_that_are_not_part_of_the_inner_loop {
             do_nothing!();
         }
         // @t\4@>@<Cases of |main_control| that don't depend on |mode|@>@;
-        else if Cases_of_main_control_that_dont_depend_on_mode!($abs_mode_plus_cur_cmd) {
+        else if Cases_of_main_control_that_dont_depend_on_mode!($globals, $abs_mode_plus_cur_cmd) {
             /// already processed
             do_nothing!();
         }
         // @t\4@>@<Cases of |main_control| that are for extensions to \TeX@>@;
-        else if Cases_of_main_control_that_are_for_extensions_to_TeX!($abs_mode_plus_cur_cmd) {
+        else if Cases_of_main_control_that_are_for_extensions_to_TeX!($globals, $abs_mode_plus_cur_cmd) {
             /// already processed
             do_nothing!();
         } else {
             unreachable!();
         }
+        use crate::section_0209::*;
         use crate::section_1054::its_all_over;
         use crate::section_1047::insert_dollar_sign;
         use crate::section_1050::report_illegal_case;

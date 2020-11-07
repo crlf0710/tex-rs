@@ -17,7 +17,7 @@ macro_rules! impl_is_even_or_odd_for_primitive {
                 self % 2 != 0
             }
         }
-    }
+    };
 }
 
 impl_is_even_or_odd_for_primitive!(u8);
@@ -26,9 +26,6 @@ impl_is_even_or_odd_for_primitive!(u32);
 impl_is_even_or_odd_for_primitive!(i8);
 impl_is_even_or_odd_for_primitive!(i16);
 impl_is_even_or_odd_for_primitive!(i32);
-
-
-
 
 #[cfg(not(feature = "unicode_support"))]
 #[derive(Copy, Clone, Default, PartialOrd, PartialEq, Debug)]

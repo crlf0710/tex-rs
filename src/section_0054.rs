@@ -103,5 +103,5 @@ pub(crate) static file_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_
 pub(crate) use crate::section_0025::alpha_file;
 
 use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};
-use typenum::U21;
 use typenum::Unsigned;
+use typenum::U21;

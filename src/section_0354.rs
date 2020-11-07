@@ -15,7 +15,8 @@
 
 // @<Scan a control...@>=
 macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
-    ($globals:expr) => {
+    ($globals:expr) => {{
+        trace_span!("Scan a control...");
         region_forward_label! {
         |'found|
         {
@@ -77,7 +78,7 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         trace_expr!("cur_cs = {}", $globals.cur_cs);
         $globals.cur_cmd = eq_type!($globals, $globals.cur_cs as u32);
         trace_expr!("cur_cmd = {}", $globals.cur_cmd);
-        $globals.cur_chr = ASCII_code::from(equiv!($globals, $globals.cur_cs as u32) as integer).into();
+        $globals.cur_chr = cur_chr_type::new(equiv!($globals, $globals.cur_cs as u32) as _);
         trace_expr!("cur_chr = {:?}", $globals.cur_chr);
         // if cur_cmd>=outer_call then check_outer_validity;
         if $globals.cur_cmd >= outer_call {
@@ -88,6 +89,7 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         use crate::section_0113::quarterword;
         use crate::section_0222::null_cs;
         use crate::section_0222::single_base;
+        use crate::section_0297::cur_chr_type;
         use crate::section_0018::ASCII_code;
         use crate::section_0210::outer_call;
         use crate::section_0336::check_outer_validity;
@@ -96,5 +98,5 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         use crate::section_0303::skip_blanks;
         use crate::section_0303::mid_line;
         use crate::pascal::integer;
-    }
+    }}
 }

@@ -99,8 +99,17 @@ impl cur_chr_type {
         cur_chr_type(0)
     }
 
+    #[allow(non_snake_case)]
+    pub(crate) fn new_from_ASCII_code(v: ASCII_code) -> Self {
+        v.into()
+    }
+
     pub(crate) const fn is_zero(&self) -> bool {
         self.0 == 0
+    }
+
+    pub(crate) const fn get(&self) -> cur_chr_type_repr {
+        self.0
     }
 }
 

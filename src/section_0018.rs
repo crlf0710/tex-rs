@@ -54,7 +54,7 @@ impl From<integer> for ASCII_code {
             }
             else
             {
-                todo!();
+                todo!("{} is > 255", val);
             }
         }
     }

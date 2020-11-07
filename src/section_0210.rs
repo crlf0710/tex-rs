@@ -29,6 +29,8 @@ pub(crate) const outer_call: quarterword = max_command + 13;
 // @d shape_ref=max_command+18 {the equivalent points to a parshape specification}
 // @d box_ref=max_command+19 {the equivalent points to a box node, or is |null|}
 // @d data=max_command+20 {the equivalent is simply a halfword number}
+/// the equivalent is simply a halfword number
+pub(crate) const data: quarterword = max_command + 20;
 
 use crate::section_0113::quarterword;
 use crate::section_0209::max_command;

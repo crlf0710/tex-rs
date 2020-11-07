@@ -139,6 +139,7 @@ macro_rules! workarounds {
         crate::section_0265::workaround_47384();
         crate::section_0334::workaround_47384();
         crate::section_1052::workaround_47384();
+        crate::section_1230::workaround_47384();
         crate::section_1301::workaround_47384();
     };
 }

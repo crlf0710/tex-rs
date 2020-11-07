@@ -101,5 +101,7 @@ pub(crate) const char_given: quarterword = 68;
 /// most recent item ( `\lastpenalty`, `\lastkern`, `\lastskip` )
 pub(crate) const last_item: quarterword = 70;
 // @d max_non_prefixed_command=70 {largest command code that can't be \.{\\global}}
+/// largest command code that can't be `\global`
+pub(crate) const max_non_prefixed_command: quarterword = 70;
 
 use crate::section_0113::quarterword;

@@ -20,6 +20,8 @@
 // @d set_box_dimen=83 {change dimension of box ( \.{\\wd}, \.{\\ht}, \.{\\dp} )}
 // @d set_shape=84 {specify fancy paragraph shape ( \.{\\parshape} )}
 // @d def_code=85 {define a character code ( \.{\\catcode}, etc.~)}
+/// define a character code ( `\catcode`, etc. )
+pub(crate) const def_code: quarterword = 85;
 // @d def_family=86 {declare math fonts ( \.{\\textfont}, etc.~)}
 // @d set_font=87 {set current font ( font identifiers )}
 // @d def_font=88 {define a font file ( \.{\\font} )}
@@ -29,6 +31,8 @@
 // @d multiply=91 {multiply a register or parameter ( \.{\\multiply} )}
 // @d divide=92 {divide a register or parameter ( \.{\\divide} )}
 // @d prefix=93 {qualify a definition ( \.{\\global}, \.{\\long}, \.{\\outer} )}
+/// qualify a definition ( `\global`, `\long`, `\outer` )
+pub(crate) const prefix: quarterword = 93;
 // @d let=94 {assign a command code ( \.{\\let}, \.{\\futurelet} )}
 // @d shorthand_def=95 {code definition ( \.{\\chardef}, \.{\\countdef}, etc.~)}
 // @d read_to_cs=96 {read into a control sequence ( \.{\\read} )}

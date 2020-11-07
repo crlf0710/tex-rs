@@ -10,5 +10,5 @@ macro_rules! Initialize_the_output_routines_0055 {
         $globals.file_offset = 0.into();
 
         use crate::section_0054::term_only;
-    }}
+    }};
 }
