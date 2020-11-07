@@ -278,7 +278,13 @@ reversing_order_items!(
         mod section_0265;
         mod section_0266;
         mod section_0267;
-        mod section_0268_to_0276;
+        mod section_0268_to_0270;
+        mod section_0271;
+        mod section_0272;
+        mod section_0273;
+        mod section_0274;
+        mod section_0275;
+        mod section_0276;
         mod section_0277;
         mod section_0278;
         mod section_0279;
@@ -597,8 +603,16 @@ reversing_order_items!(
         #[macro_use]
         mod section_1233;
     }
+    {
+        mod section_1234_to_1275;
+        #[macro_use]
+        mod section_1276;
+    }
 );
-mod section_1234_to_1298;
+mod section_1277;
+mod section_1278;
+mod section_1279;
+mod section_1280_to_1298;
 mod section_1299;
 mod section_1300;
 mod section_1301;

@@ -76,6 +76,8 @@ pub(crate) const discretionary: quarterword = 47;
 // @d vcenter=56 {vertically center a vbox ( \.{\\vcenter} )}
 // @d case_shift=57 {force specific case ( \.{\\lowercase}, \.{\\uppercase}~)}
 // @d message=58 {send to user ( \.{\\message}, \.{\\errmessage} )}
+/// send to user ( `\message`, `\errmessage` )
+pub(crate) const message: quarterword = 58;
 // @d extension=59 {extensions to \TeX\ ( \.{\\write}, \.{\\special}, etc.~)}
 // @d in_stream=60 {files for reading ( \.{\\openin}, \.{\\closein} )}
 // @d begin_group=61 {begin local grouping ( \.{\\begingroup} )}

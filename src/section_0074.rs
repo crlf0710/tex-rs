@@ -1,4 +1,6 @@
-// @ @<Set init...@>=interaction:=error_stop_mode;
+//! ` `
+
+// @<Set init...@>=interaction:=error_stop_mode;
 #[distributed_slice(SET_INIT_KEYVAR)]
 fn set_initial_values_of_key_variables_0074(globals: &mut TeXGlobals) {
     globals.interaction = error_stop_mode.into();

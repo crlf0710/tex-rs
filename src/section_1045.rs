@@ -37,6 +37,11 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode {
             /// already processed
             do_nothing!();
             true
+        } else if Cases_of_main_control_that_dont_depend_on_mode_1276!(
+            $globals, $abs_mode_plus_cur_cmd) {
+            /// already processed
+            do_nothing!();
+            true
         } else {
             false
         }
