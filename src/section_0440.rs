@@ -8,6 +8,7 @@
 /// sets `cur_val` to an integer
 #[allow(unused_variables)]
 #[allow(unused_assignments, non_snake_case)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_int(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label done;
     // var negative:boolean; {should the answer be negated?}

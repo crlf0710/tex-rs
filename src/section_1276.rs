@@ -8,7 +8,7 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1276 {
         if false ||
             abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, message as u16) ||
             false {
-            issue_message($globals);
+            issue_message($globals)?;
             use crate::section_1279::issue_message;
             true
         } else {

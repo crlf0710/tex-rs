@@ -1,9 +1,3 @@
-//! @ @<Print string |s| on the terminal@>=
-//! begin if term_offset+length(s)>max_print_line-2 then print_ln
-//! else if (term_offset>0)or(file_offset>0) then print_char(" ");
-//! slow_print(s); update_terminal;
-//! end
-//!
 //! @ If \.{\\errmessage} occurs often in |scroll_mode|, without user-defined
 //! \.{\\errhelp}, we don't want to give a long help message each time. So we
 //! give a verbose explanation only once.

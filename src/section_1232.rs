@@ -13,9 +13,11 @@ macro_rules! Assignments_1232 {
             p = $globals.cur_chr.get() as _;
             scan_char_num($globals)?;
             p += $globals.cur_val;
+            trace_expr!("cur_val = {}", $globals.cur_val);
             scan_optional_equals($globals)?;
             // scan_int;
             scan_int($globals)?;
+            trace_expr!("cur_val = {}", $globals.cur_val);
             //   if ((cur_val<0)and(p<del_code_base))or(cur_val>n) then
             if ($globals.cur_val < 0 && p < del_code_base as _) || ($globals.cur_val > n as _) {
                 //     begin print_err("Invalid code ("); print_int(cur_val);

@@ -89,6 +89,8 @@ macro_rules! param_start {
 /// `token_type` code for `<v_j>` template
 pub(crate) const v_template: quarterword = 2;
 // @d backed_up=3 {|token_type| code for text to be reread}
+/// `token_type` code for text to be reread
+pub(crate) const backed_up: quarterword = 3;
 // @d inserted=4 {|token_type| code for inserted texts}
 // @d macro=5 {|token_type| code for defined control sequences}
 // @d output_text=6 {|token_type| code for output routines}

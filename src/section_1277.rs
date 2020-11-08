@@ -19,4 +19,3 @@ use linkme::distributed_slice;
 
 // Workaround https://github.com/rust-lang/rust/issues/47384
 pub(crate) fn workaround_47384() {}
-

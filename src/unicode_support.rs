@@ -1,5 +1,3 @@
-#![cfg(feature = "unicode_support")]
-
 thread_local! {
     static GRAPHE_REGISTRY: GraphemeRegistry = GraphemeRegistry::new();
 }
@@ -286,7 +284,47 @@ impl<'a> Iterator for GenericCharIter<'a> {
     }
 }
 
+pub(crate) const info_val_idx_max: usize = 255;
+
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static info_val_gallery: [cur_tok_type_repr; 256] = [0; 256];
+
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static info_val_count: usize = 0;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0297::cur_tok_type_repr;
+
+pub(crate) fn register_info_value(
+    globals: &mut TeXGlobals,
+    info_val: cur_tok_type_repr,
+) -> halfword {
+    for i in 0..globals.info_val_count {
+        if globals.info_val_gallery[i] == info_val {
+            return i as halfword;
+        }
+    }
+    if globals.info_val_count >= info_val_idx_max {
+        panic!("info idx used up");
+    }
+    let idx = globals.info_val_count;
+    globals.info_val_gallery[idx] = info_val;
+    globals.info_val_count += 1;
+    idx as halfword
+}
+
+pub(crate) fn info_value(globals: &mut TeXGlobals, idx: halfword) -> cur_tok_type_repr {
+    if idx as usize >= globals.info_val_count {
+        panic!("info idx out of bound");
+    }
+    globals.info_val_gallery[idx as usize]
+}
+
+use crate::section_0004::TeXGlobals;
 use crate::section_0038::packed_ASCII_code;
+use crate::section_0113::halfword;
+use crate::section_0297::cur_tok_type_repr;
 use core::cell::{Cell, RefCell};
+use globals_struct::{globals_struct_field, globals_struct_use};
 use std::collections::BTreeMap;
 use unicode_normalization::UnicodeNormalization;

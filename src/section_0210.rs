@@ -14,6 +14,8 @@ pub(crate) const undefined_cs: quarterword = max_command + 1;
 // @d cs_name=max_command+7 {make a control sequence from tokens ( \.{\\csname} )}
 // @d convert=max_command+8 {convert to text ( \.{\\number}, \.{\\string}, etc.~)}
 // @d the=max_command+9 {expand an internal quantity ( \.{\\the} )}
+/// expand an internal quantity ( `\the` )
+pub(crate) const the: quarterword = max_command + 9;
 // @d top_bot_mark=max_command+10 {inserted mark ( \.{\\topmark}, etc.~)}
 // @d call=max_command+11 {non-long, non-outer control sequence}
 /// non-long, non-outer control sequence

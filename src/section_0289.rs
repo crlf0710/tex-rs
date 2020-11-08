@@ -27,11 +27,15 @@ pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0x0FFF_FFFF);
 // @d left_brace_limit=@'1000 {$2^8\cdot(|left_brace|+1)$}
 // @d right_brace_token=@'1000 {$2^8\cdot|right_brace|$}
 // @d right_brace_limit=@'1400 {$2^8\cdot(|right_brace|+1)$}
+/// `cur_tok_type_cmd_multiplier`·(`right_brace` + 1)
+pub(crate) const right_brace_limit: cur_tok_type_repr = cur_tok_type_cmd_multiplier * (right_brace + 1) as cur_tok_type_repr;
 // @d math_shift_token=@'1400 {$2^8\cdot|math_shift|$}
 // @d tab_token=@'2000 {$2^8\cdot|tab_mark|$}
 // @d out_param_token=@'2400 {$2^8\cdot|out_param|$}
 // @d space_token=@'5040 {$2^8\cdot|spacer|+|" "|$}
 // @d letter_token=@'5400 {$2^8\cdot|letter|$}
+/// `cur_tok_type_cmd_multiplier`·`letter`
+pub(crate) const letter_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * letter as cur_tok_type_repr;
 // @d other_token=@'6000 {$2^8\cdot|other_char|$}
 /// `cur_tok_type_cmd_multiplier`·`other_char`
 pub(crate) const other_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * other_char as cur_tok_type_repr;
@@ -41,4 +45,6 @@ pub(crate) const other_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * 
 use crate::section_0297::cur_tok_type;
 use crate::section_0297::cur_tok_type_repr;
 use crate::section_0297::cur_tok_type_cmd_multiplier;
+use crate::section_0207::letter;
 use crate::section_0207::other_char;
+use crate::section_0207::right_brace;

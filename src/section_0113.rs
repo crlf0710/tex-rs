@@ -121,6 +121,21 @@ impl IndexMut<MEMORY_WORD_HH_RH> for memory_word {
     }
 }
 
+pub(crate) struct MEMORY_WORD_HH_LH;
+
+impl Index<MEMORY_WORD_HH_LH> for memory_word {
+    type Output = halfword;
+    fn index(&self, _: MEMORY_WORD_HH_LH) -> &halfword {
+        unsafe { &self.hh.lh_or_b01.lh }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_HH_LH> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_HH_LH) -> &mut halfword {
+        unsafe { &mut self.hh.lh_or_b01.lh }
+    }
+}
+
 pub(crate) struct MEMORY_WORD_HH_B1;
 
 impl Index<MEMORY_WORD_HH_B1> for memory_word {

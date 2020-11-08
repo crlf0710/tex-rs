@@ -49,8 +49,14 @@ define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
 );
 
 // @!lo_mem_max : pointer; {the largest location of variable-size memory in use}
+/// the largest location of variable-size memory in use
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static lo_mem_max: pointer = null;
+
 // @!hi_mem_min : pointer; {the smallest location of one-word memory in use}
-//
+/// the smallest location of one-word memory in use
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static hi_mem_min: pointer = null;
 
 use crate::pascal::u32_from_m_to_n;
 use crate::section_0011::mem_max_TYPENUM;
@@ -65,3 +71,19 @@ impl mem_array<memory_word> {
         unsafe { core::mem::zeroed() }
     }
 }
+
+impl<ELEMENT> core::ops::Index<pointer> for mem_array<ELEMENT> {
+    type Output = ELEMENT;
+
+    fn index(&self, index: pointer) -> &Self::Output {
+        &self[u32_from_m_to_n::<mem_min_TYPENUM, mem_max_TYPENUM>::new(index as _)]
+    }
+}
+
+impl<ELEMENT> core::ops::IndexMut<pointer> for mem_array<ELEMENT> {
+    fn index_mut(&mut self, index: pointer) -> &mut Self::Output {
+        &mut self[u32_from_m_to_n::<mem_min_TYPENUM, mem_max_TYPENUM>::new(index as _)]
+    }
+}
+
+use crate::section_0115::pointer;

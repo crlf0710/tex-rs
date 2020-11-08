@@ -48,6 +48,8 @@ pub(crate) const log_only: u8 = 18;
 // @d term_and_log=19 {normal |selector| setting}
 // @d pseudo=20 {special |selector| setting for |show_context|}
 // @d new_string=21 {printing is deflected to the string pool}
+/// printing is deflected to the string pool
+pub(crate) const new_string: u8 = 21;
 // @d max_selector=21 {highest selector setting}
 /// highest selector setting
 pub(crate) const max_selector: u8 = max_selector_TYPENUM::U8;

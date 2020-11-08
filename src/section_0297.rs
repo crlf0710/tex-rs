@@ -94,7 +94,7 @@ impl cur_chr_type {
     pub(crate) fn new(val: cur_chr_type_repr) -> Self {
         cur_chr_type(val)
     }
-    
+
     pub(crate) fn new_zero() -> Self {
         cur_chr_type(0)
     }
@@ -163,7 +163,38 @@ impl cur_tok_type {
 
     pub(crate) const fn get(&self) -> cur_tok_type_repr {
         self.0
-    }    
+    }
+
+    pub(crate) fn get_cmd_and_chr(&self) -> Option<(eight_bits, cur_chr_type)> {
+        if self.0 < cs_token_flag.0 {
+            Some((
+                (self.0 / cur_tok_type_cmd_multiplier) as eight_bits,
+                cur_chr_type::new((self.0 % cur_tok_type_cmd_multiplier) as _),
+            ))
+        } else {
+            None
+        }
+    }
+
+    pub(crate) const fn get_cs(&self) -> Option<pointer> {
+        if self.0 >= cs_token_flag.0 {
+            Some((self.0 - cs_token_flag.0) as pointer)
+        } else {
+            None
+        }
+    }
+}
+
+impl PartialEq<cur_tok_type_repr> for cur_tok_type {
+    fn eq(&self, other: &cur_tok_type_repr) -> bool {
+        self.0.eq(other)
+    }
+}
+
+impl PartialOrd<cur_tok_type_repr> for cur_tok_type {
+    fn partial_cmp(&self, other: &cur_tok_type_repr) -> Option<core::cmp::Ordering> {
+        self.0.partial_cmp(other)
+    }
 }
 
 /*

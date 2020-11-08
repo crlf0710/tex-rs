@@ -127,24 +127,3 @@
 //! @.BAD@>
 //! endcases
 //!
-//! @ Here's the way we sometimes want to display a token list, given a pointer
-//! to its reference count; the pointer may be null.
-//!
-//! @p procedure token_show(@!p:pointer);
-//! begin if p<>null then show_token_list(link(p),null,10000000);
-//! end;
-//!
-//! @ The |print_meaning| subroutine displays |cur_cmd| and |cur_chr| in
-//! symbolic form, including the expansion of a macro or mark.
-//!
-//! @p procedure print_meaning;
-//! begin print_cmd_chr(cur_cmd,cur_chr);
-//! if cur_cmd>=call then
-//!   begin print_char(":"); print_ln; token_show(cur_chr);
-//!   end
-//! else if cur_cmd=top_bot_mark then
-//!   begin print_char(":"); print_ln;
-//!   token_show(cur_mark[cur_chr]);
-//!   end;
-//! end;
-//!

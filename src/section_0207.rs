@@ -21,7 +21,11 @@ pub(crate) const escape: quarterword = 0;
 /// do nothing ( `\relax` )
 pub(crate) const relax: quarterword = 0;
 // @d left_brace=1 {beginning of a group ( \.\{ )}
+/// beginning of a group ( `{` )
+pub(crate) const left_brace: quarterword = 1;
 // @d right_brace=2 {ending of a group ( \.\} )}
+/// ending of a group ( `}` )
+pub(crate) const right_brace: quarterword = 2;
 // @d math_shift=3 {mathematics shift character ( \.\$ )}
 /// mathematics shift character ( `$` )
 pub(crate) const math_shift: quarterword = 3;
@@ -32,6 +36,8 @@ pub(crate) const tab_mark: quarterword = 4;
 /// end of line ( `carriage_return`, `\cr`, `\crcr` )
 pub(crate) const car_ret: quarterword = 5;
 // @d out_param=5 {output a macro parameter}
+/// output a macro parameter
+pub(crate) const out_param: quarterword = 5;
 // @d mac_param=6 {macro parameter symbol ( \.\# )}
 /// macro parameter symbol ( `#` )
 pub(crate) const mac_param: quarterword = 6;

@@ -1,15 +1,3 @@
-//! @ The |get_x_token| procedure is equivalent to two consecutive
-//! procedure calls: |get_next; x_token|.
-//!
-//! @p procedure x_token; {|get_x_token| without the initial |get_next|}
-//! begin while cur_cmd>max_command do
-//!   begin expand;
-//!   get_next;
-//!   end;
-//! if cur_cs=0 then cur_tok:=(cur_cmd*@'400)+cur_chr
-//! else cur_tok:=cs_token_flag+cur_cs;
-//! end;
-//!
 //! @ A control sequence that has been \.{\\def}'ed by the user is expanded by
 //! \TeX's |macro_call| procedure.
 //!

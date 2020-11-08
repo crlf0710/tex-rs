@@ -9,11 +9,13 @@
 
 // procedure new_graf(@!indented:boolean);
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) {
     // begin prev_graf:=0;
     // if (mode=vmode)or(head<>tail) then
     //   tail_append(new_param_glue(par_skip_code));
     // push_nest; mode:=hmode; space_factor:=1000; set_cur_lang; clang:=cur_lang;
+    mode!(globals) = hmode.into();
     // prev_graf:=(norm_min(left_hyphen_min)*@'100+norm_min(right_hyphen_min))
     //              *@'200000+cur_lang;
     // if indented then
@@ -23,6 +25,8 @@ pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) {
     // if nest_ptr=1 then build_page; {put |par_skip| glue on current page}
     // end;
 }
+
+use crate::section_0211::hmode;
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;

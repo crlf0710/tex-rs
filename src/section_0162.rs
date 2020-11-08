@@ -34,9 +34,13 @@ pub(crate) const omit_template: pointer = mem_top - 10;
 // @d null_list==mem_top-11 {permanently empty list}
 // @d lig_trick==mem_top-12 {a ligature masquerading as a |char_node|}
 // @d garbage==mem_top-12 {used for scrap information}
+/// used for scrap information
+pub(crate) const garbage: pointer = mem_top - 12;
 // @d backup_head==mem_top-13 {head of token list built by |scan_keyword|}
 // @d hi_mem_stat_min==mem_top-13 {smallest statically allocated word in
 //   the one-word |mem|}
+/// smallest statically allocated word in the one-word `mem`
+pub(crate) const hi_mem_stat_min: pointer = mem_top - 13;
 // @d hi_mem_stat_usage=14 {the number of one-word nodes always present}
 
 use crate::section_0012::mem_top;

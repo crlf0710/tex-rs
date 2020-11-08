@@ -46,6 +46,7 @@ pub mod TeXGlobals {
     include!("src/section_0076.rs");
     include!("src/section_0096.rs");
     include!("src/section_0116.rs");
+    include!("src/section_0118.rs");
     include!("src/section_0165.rs");
     include!("src/section_0213.rs");
     include!("src/section_0253.rs");
@@ -54,6 +55,7 @@ pub mod TeXGlobals {
     include!("src/section_0297.rs");
     include!("src/section_0301.rs");
     include!("src/section_0304.rs");
+    include!("src/section_0305.rs");
     include!("src/section_0309.rs");
     include!("src/section_0333.rs");
     include!("src/section_0361.rs");
@@ -65,6 +67,7 @@ pub mod TeXGlobals {
     include!("src/section_0770.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
+    include!("src/unicode_support.rs");
 }
 
 impl_debug_with_literal!(TeXGlobals, "TeXGlobals");

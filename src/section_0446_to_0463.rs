@@ -1,32 +1,3 @@
-//! @ @d infinity==@'17777777777 {the largest positive value that \TeX\ knows}
-//! @d zero_token=other_token+"0" {zero, the smallest digit}
-//! @d A_token=letter_token+"A" {the smallest special hex digit}
-//! @d other_A_token=other_token+"A" {special hex digit of type |other_char|}
-//!
-//! @<Accumulate the constant...@>=
-//! loop@+  begin if (cur_tok<zero_token+radix)and(cur_tok>=zero_token)and
-//!     (cur_tok<=zero_token+9) then d:=cur_tok-zero_token
-//!   else if radix=16 then
-//!     if (cur_tok<=A_token+5)and(cur_tok>=A_token) then d:=cur_tok-A_token+10
-//!     else if (cur_tok<=other_A_token+5)and(cur_tok>=other_A_token) then
-//!       d:=cur_tok-other_A_token+10
-//!     else goto done
-//!   else goto done;
-//!   vacuous:=false;
-//!   if (cur_val>=m)and((cur_val>m)or(d>7)or(radix<>10)) then
-//!     begin if OK_so_far then
-//!       begin print_err("Number too big");
-//! @.Number too big@>
-//!       help2("I can only go up to 2147483647='17777777777=""7FFFFFFF,")@/
-//!         ("so I'm using that number instead of yours.");
-//!       error; cur_val:=infinity; OK_so_far:=false;
-//!       end;
-//!     end
-//!   else cur_val:=cur_val*radix+d;
-//!   get_x_token;
-//!   end;
-//! done:
-//!
 //! @ @<Express astonishment...@>=
 //! begin print_err("Missing number, treated as zero");
 //! @.Missing number...@>
