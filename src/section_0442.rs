@@ -4,18 +4,40 @@
 // @<Scan an alphabetic character code into |cur_val|@>=
 macro_rules! Scan_an_alphabetic_character_code_into_cur_val {
     ($globals:expr) => {{
+        trace_span!("Scan an alphabetic character code...");
         // begin get_token; {suppress macro expansion}
         /// suppress macro expansion
         get_token($globals)?;
         // if cur_tok<cs_token_flag then
-        //   begin cur_val:=cur_chr;
-        //   if cur_cmd<=right_brace then
-        //     if cur_cmd=right_brace then incr(align_state)
-        //     else decr(align_state);
-        //   end
-        // else if cur_tok<cs_token_flag+single_base then
-        //   cur_val:=cur_tok-cs_token_flag-active_base
-        // else cur_val:=cur_tok-cs_token_flag-single_base;
+        match $globals.cur_tok.get_cs() {
+            None => {
+                // begin cur_val:=cur_chr;
+                $globals.cur_val = $globals.cur_chr.get() as _;
+                // if cur_cmd<=right_brace then
+                if $globals.cur_cmd <= right_brace {
+                    // if cur_cmd=right_brace then incr(align_state)
+                    if $globals.cur_cmd == right_brace {
+                        incr!($globals.align_state);
+                    }
+                    // else decr(align_state);
+                    else {
+                        decr!($globals.align_state);
+                    }
+                }
+                // end
+            },
+            Some(cs) => {
+                // else if cur_tok<cs_token_flag+single_base then
+                if cs < single_base as _ {
+                    // cur_val:=cur_tok-cs_token_flag-active_base
+                    $globals.cur_val = (cs - active_base as pointer) as _;
+                }
+                // else cur_val:=cur_tok-cs_token_flag-single_base;
+                else {
+                    $globals.cur_val = (cs - single_base as pointer) as _;
+                }
+            }
+        }
         // if cur_val>255 then
         //   begin print_err("Improper alphabetic constant");
         // @.Improper alphabetic constant@>
@@ -25,6 +47,11 @@ macro_rules! Scan_an_alphabetic_character_code_into_cur_val {
         //   end
         // else @<Scan an optional space@>;
         // end
+        trace_expr!("cur_val={}", $globals.cur_val);
+        use crate::section_0115::pointer;
+        use crate::section_0207::right_brace;
+        use crate::section_0222::single_base;
+        use crate::section_0222::active_base;
         use crate::section_0365::get_token;
     }}
 }

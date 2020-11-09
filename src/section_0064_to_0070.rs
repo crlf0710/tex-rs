@@ -1,14 +1,3 @@
-//! @ The procedure |print_esc| prints a string that is preceded by
-//! the user's escape character (which is usually a backslash).
-//!
-//! @<Basic print...@>=
-//! procedure print_esc(@!s:str_number); {prints escape character, then |s|}
-//! var c:integer; {the escape character code}
-//! begin  @<Set variable |c| to the current escape character@>;
-//! if c>=0 then if c<256 then print(c);
-//! slow_print(s);
-//! end;
-//!
 //! @ An array of digits in the range |0..15| is printed by |print_the_digs|.
 //!
 //! @<Basic print...@>=

@@ -25,6 +25,7 @@ pub(crate) fn string_pool_index(val: &'static str) -> usize {
     }
     for (idx, str) in (256usize..).zip(STRPOOL_ITEMS_FROM_256.iter().cloned()) {
         if val == str {
+            trace_expr!("string_pool[{}] = \"{}\"", idx, str);
             return idx;
         }
     }

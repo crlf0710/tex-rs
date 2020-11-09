@@ -2,14 +2,14 @@
 
 // @<Scan and build the body of the token list; |goto found| when finished@>=
 macro_rules! Scan_and_build_the_body_of_the_token_list__goto_found_when_finished {
-    ($globals:expr, $macro_def:expr, $xpand:expr, $unbalance:expr, $lbl_found:lifetime) => {
+    ($globals:expr, $macro_def:expr, $xpand:expr, $unbalance:expr, $p:expr, $q:expr, $lbl_found:lifetime) => {
         trace_span!("Scan and build the body of the token list...");
         // unbalance:=1;
         $unbalance = 1;
         // loop@+  begin if xpand then @<Expand the next part of the input@>
         loop {
             if $xpand {
-                Expand_the_next_part_of_the_input!($globals);
+                Expand_the_next_part_of_the_input!($globals, $p, $q);
             }
             // else get_token;
             else {
@@ -39,6 +39,7 @@ macro_rules! Scan_and_build_the_body_of_the_token_list__goto_found_when_finished
                 }
             }
             // store_new_token(cur_tok);
+            store_new_token!($globals, $globals.cur_tok.get(), $p, $q);
             // end
         }
 

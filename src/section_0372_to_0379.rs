@@ -1,14 +1,3 @@
-//! @ The |expand| procedure and some other routines that construct token
-//! lists find it convenient to use the following macros, which are valid only if
-//! the variables |p| and |q| are reserved for token-list building.
-//!
-//! @d store_new_token(#)==begin q:=get_avail; link(p):=q; info(q):=#;
-//!   p:=q; {|link(p)| is |null|}
-//!   end
-//! @d fast_store_new_token(#)==begin fast_get_avail(q); link(p):=q; info(q):=#;
-//!   p:=q; {|link(p)| is |null|}
-//!   end
-//!
 //! @ @<Manufacture a control...@>=
 //! begin r:=get_avail; p:=r; {head of the list of characters}
 //! repeat get_x_token;

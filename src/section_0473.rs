@@ -38,8 +38,10 @@ pub(crate) fn scan_toks(
     // @!s:halfword; {saved token}
     // @!p:pointer; {tail of the token list being built}
     /// tail of the token list being built
-    let p: pointer;
+    let mut p: pointer;
     // @!q:pointer; {new node being added to the token list via |store_new_token|}
+    /// new node being added to the token list via `store_new_token`
+    let mut q: pointer;
     // @!unbalance:halfword; {number of unmatched left braces}
     /// number of unmatched left braces
     let mut unbalance: halfword;
@@ -49,6 +51,9 @@ pub(crate) fn scan_toks(
     // begin if macro_def then scanner_status:=defining
     // @+else scanner_status:=absorbing;
     // warning_index:=cur_cs; def_ref:=get_avail; token_ref_count(def_ref):=null;
+    globals.warning_index = globals.cur_cs;
+    globals.def_ref = get_avail(globals);
+    token_ref_count!(globals, globals.def_ref) = null;
     // p:=def_ref; hash_brace:=0; t:=zero_token;
     p = globals.def_ref;
     hash_brace = 0;
@@ -66,7 +71,8 @@ pub(crate) fn scan_toks(
     |'found|
     {
         // @<Scan and build the body of the token list; |goto found| when finished@>;
-        Scan_and_build_the_body_of_the_token_list__goto_found_when_finished!(globals, macro_def, xpand, unbalance, 'found);        
+        Scan_and_build_the_body_of_the_token_list__goto_found_when_finished!(globals,
+            macro_def, xpand, unbalance, p, q, 'found);
     }
     // found: scanner_status:=normal;
     'found <-
@@ -74,7 +80,7 @@ pub(crate) fn scan_toks(
     globals.scanner_status = scanner_status_kind::normal;
     // if hash_brace<>0 then store_new_token(hash_brace);
     if hash_brace != 0 {
-        todo!();
+        store_new_token!(globals, hash_brace as _, p, q);
     }
     // scan_toks:=p;
     return_nojump!(p);
@@ -86,6 +92,8 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::JumpOutToEndOfTEX;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;
+use crate::section_0115::null;
+use crate::section_0120::get_avail;
 use crate::section_0305::scanner_status_kind;
 use crate::section_0403::scan_left_brace;
 use crate::section_0445::zero_token;

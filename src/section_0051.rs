@@ -18,6 +18,7 @@ macro_rules! bad_pool {
 // @<Read the other strings...@>=
 macro_rules! Read_the_other_strings_from_the_TEX_POOL_file_and_return_true_or_give_an_error_message_and_return_false {
     ($globals:expr, $get_strings_started:expr, $g:expr) => {
+        trace_span!("Read the other strings...");
         // name_of_file:=pool_name; {we needn't set |name_length|}
         /// we needn't set `name_length`
         $globals.name_of_file.assign_str(pool_name);

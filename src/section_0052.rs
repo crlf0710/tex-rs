@@ -1,6 +1,7 @@
 // @ @<Read one string...@>=
 macro_rules! Read_one_string_but_return_false_if_the_string_memory_space_is_getting_too_tight_for_comfort {
     ($globals:expr, $c:expr, $g:expr) => {
+        trace_span!("Read one string...");
         // begin if eof(pool_file) then bad_pool('! TEX.POOL has no check sum.');
         // @.TEX.POOL has no check sum@>
         // read(pool_file,m,n); {read two digits of string length}
@@ -23,6 +24,7 @@ macro_rules! Read_one_string_but_return_false_if_the_string_memory_space_is_gett
             let l = (xord(m).numeric_value() as integer) * 10 +
                 (xord(n).numeric_value() as integer) - (b'0' as integer) * 11;
             trace_expr!("l = {}", l);
+            trace_expr!("pool_ptr = {}", $globals.pool_ptr.get());
             // if pool_ptr+l+string_vacancies>pool_size then
             //   bad_pool('! You have to increase POOLSIZE.');
             // @.You have to increase POOLSIZE@>
@@ -43,6 +45,7 @@ macro_rules! Read_one_string_but_return_false_if_the_string_memory_space_is_gett
             // read_ln(pool_file); g:=make_string;
             read_ln(&mut $globals.pool_file);
             $g = make_string(make_globals_string_view!($globals));
+            trace_expr!("g = {}", $g.get());
             // end;
         }
         // end

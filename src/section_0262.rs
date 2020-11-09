@@ -9,22 +9,28 @@
 //
 // @<Basic printing...@>=
 // procedure print_cs(@!p:integer); {prints a purported control sequence}
-// begin if p<hash_base then {single character}
-//   if p>=single_base then
-//     if p=null_cs then
-//       begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
-//       end
-//     else  begin print_esc(p-single_base);
-//       if cat_code(p-single_base)=letter then print_char(" ");
-//       end
-//   else if p<active_base then print_esc("IMPOSSIBLE.")
-// @.IMPOSSIBLE@>
-//   else print(p-active_base)
-// else if p>=undefined_control_sequence then print_esc("IMPOSSIBLE.")
-// else if (text(p)<0)or(text(p)>=str_ptr) then print_esc("NONEXISTENT.")
-// @.NONEXISTENT@>
-// else  begin print_esc(text(p));
-//   print_char(" ");
-//   end;
-// end;
-//
+/// prints a purported control sequence
+#[allow(unused_variables)]
+pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
+    // begin if p<hash_base then {single character}
+    //   if p>=single_base then
+    //     if p=null_cs then
+    //       begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
+    //       end
+    //     else  begin print_esc(p-single_base);
+    //       if cat_code(p-single_base)=letter then print_char(" ");
+    //       end
+    //   else if p<active_base then print_esc("IMPOSSIBLE.")
+    // @.IMPOSSIBLE@>
+    //   else print(p-active_base)
+    // else if p>=undefined_control_sequence then print_esc("IMPOSSIBLE.")
+    // else if (text(p)<0)or(text(p)>=str_ptr) then print_esc("NONEXISTENT.")
+    // @.NONEXISTENT@>
+    // else  begin print_esc(text(p));
+    //   print_char(" ");
+    //   end;
+    // end;
+}
+
+use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;

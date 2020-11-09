@@ -65,12 +65,14 @@ use globals_struct::{globals_struct_field, globals_struct_use};
 
 #[cfg(feature = "unicode_support")]
 impl str_pool_array<packed_ASCII_code> {
+    #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(self, str_start)))]
     pub(crate) fn str_ascii_codes(
         &self,
         str_start: &str_start_array<pool_pointer>,
         s: str_number,
     ) -> crate::unicode_support::GenericCharIter<'_> {
         let slice = &self[str_start[s]..str_start[s + 1]];
+        trace_expr!("slice_len = {}", slice.len());
         crate::unicode_support::GenericCharIter::new(slice)
     }
 }

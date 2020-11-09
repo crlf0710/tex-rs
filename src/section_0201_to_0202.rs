@@ -1,23 +1,3 @@
-//! @* \[13] Destroying boxes.
-//! When we are done with a node list, we are obliged to return it to free
-//! storage, including all of its sublists. The recursive procedure
-//! |flush_node_list| does this for us.
-//!
-//! @ First, however, we shall consider two non-recursive procedures that do
-//! simpler tasks. The first of these, |delete_token_ref|, is called when
-//! a pointer to a token list's reference count is being removed. This means
-//! that the token list should disappear if the reference count was |null|,
-//! otherwise the count should be decreased by one.
-//! @^reference counts@>
-//!
-//! @d token_ref_count(#) == info(#) {reference count preceding a token list}
-//!
-//! @p procedure delete_token_ref(@!p:pointer); {|p| points to the reference count
-//!   of a token list that is losing one reference}
-//! begin if token_ref_count(p)=null then flush_list(p)
-//! else decr(token_ref_count(p));
-//! end;
-//!
 //! @ Similarly, |delete_glue_ref| is called when a pointer to a glue
 //! specification is being withdrawn.
 //! @^reference counts@>

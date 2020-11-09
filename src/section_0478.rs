@@ -3,7 +3,7 @@
 //
 // @<Expand the next part of the input@>=
 macro_rules! Expand_the_next_part_of_the_input {
-    ($globals:expr) => {{
+    ($globals:expr, $p:expr, $q:expr) => {{
         region_forward_label! {
         |'done2|
         {

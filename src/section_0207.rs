@@ -42,7 +42,11 @@ pub(crate) const out_param: quarterword = 5;
 /// macro parameter symbol ( `#` )
 pub(crate) const mac_param: quarterword = 6;
 // @d sup_mark=7 {superscript ( \.{\char'136} )}
+/// superscript ( `^` )
+pub(crate) const sup_mark: quarterword = 7;
 // @d sub_mark=8 {subscript ( \.{\char'137} )}
+/// subscript ( `_` )
+pub(crate) const sub_mark: quarterword = 8;
 // @d ignore=9 {characters to ignore ( \.{\^\^@@} )}
 /// characters to ignore ( `^^@` )
 pub(crate) const ignore: quarterword = 9;
