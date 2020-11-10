@@ -1,13 +1,3 @@
-//! @ @<Express astonishment...@>=
-//! begin print_err("Missing number, treated as zero");
-//! @.Missing number...@>
-//! help3("A number should have been here; I inserted `0'.")@/
-//!   ("(If you can't figure out why I needed to see a number,")@/
-//!   ("look up `weird error' in the index to The TeXbook.)");
-//! @:TeXbook}{\sl The \TeX book@>
-//! back_error;
-//! end
-//!
 //! @ The |scan_dimen| routine is similar to |scan_int|, but it sets |cur_val| to
 //! a |scaled| value, i.e., an integral number of sp. One of its main tasks
 //! is therefore to interpret the abbreviations for various kinds of units and

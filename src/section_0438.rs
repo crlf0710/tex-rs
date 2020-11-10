@@ -9,7 +9,11 @@
 //! otherwise |radix| is set to zero. An optional space follows a constant.
 //
 // @d octal_token=other_token+"'" {apostrophe, indicates an octal constant}
+/// apostrophe, indicates an octal constant
+pub(crate) const octal_token: cur_tok_type_repr = other_token + b'\'' as cur_tok_type_repr;
 // @d hex_token=other_token+"""" {double quote, indicates a hex constant}
+/// double quote, indicates a hex constant
+pub(crate) const hex_token: cur_tok_type_repr = other_token + b'\"' as cur_tok_type_repr;
 // @d alpha_token=other_token+"`" {reverse apostrophe, precedes alpha constants}
 /// reverse apostrophe, precedes alpha constants
 pub(crate) const alpha_token: cur_tok_type_repr = other_token + b'`' as cur_tok_type_repr;

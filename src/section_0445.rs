@@ -27,17 +27,25 @@ macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
                 }
                 //   else if radix=16 then
                 else if $globals.radix == 16 {
-                    todo!();
                     // if (cur_tok<=A_token+5)and(cur_tok>=A_token) then d:=cur_tok-A_token+10
+                    if $globals.cur_tok <= A_token + 5 && $globals.cur_tok >= A_token {
+                        $d = $globals.cur_tok.get() as integer - A_token as integer + 10;
+                    }
                     // else if (cur_tok<=other_A_token+5)and(cur_tok>=other_A_token) then
                     //   d:=cur_tok-other_A_token+10
+                    else if $globals.cur_tok <= other_A_token + 5 && $globals.cur_tok >= other_A_token {
+                        $d = $globals.cur_tok.get() as integer - other_A_token as integer + 10;
+                    }
                     // else goto done
+                    else {
+                        goto_forward_label!('done);
+                    }
                 }
                 // else goto done;
                 else {
                     goto_forward_label!('done);
                 }
-                //   vacuous:=false;
+                // vacuous:=false;
                 $vacuous = false;
                 //   if (cur_val>=m)and((cur_val>m)or(d>7)or(radix<>10)) then
                 if $globals.cur_val >= $m && ($globals.cur_val > $m || $d > 7 || $globals.radix != 10) {
@@ -66,6 +74,8 @@ macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
         use crate::section_0297::cur_tok_type_repr;
         use crate::section_0380::get_x_token;
         use crate::section_0445::zero_token;
+        use crate::section_0445::A_token;
+        use crate::section_0445::other_A_token;
     }}
 }
 
