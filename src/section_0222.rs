@@ -44,6 +44,8 @@ pub(crate) const frozen_control_sequence: word = frozen_control_sequence_TYPENUM
 // @d end_write=frozen_control_sequence+8 {permanent `\.{\\endwrite}'}
 // @d frozen_dont_expand=frozen_control_sequence+9
 //   {permanent `\.{\\notexpanded:}'}
+/// permanent `\notexpanded:`
+pub(crate) const frozen_dont_expand: word = frozen_control_sequence + 9;
 // @d frozen_null_font=frozen_control_sequence+10
 //   {permanent `\.{\\nullfont}'}
 /// permanent `\nullfont`

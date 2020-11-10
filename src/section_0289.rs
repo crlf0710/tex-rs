@@ -33,6 +33,8 @@ pub(crate) const right_brace_limit: cur_tok_type_repr = cur_tok_type_cmd_multipl
 // @d tab_token=@'2000 {$2^8\cdot|tab_mark|$}
 // @d out_param_token=@'2400 {$2^8\cdot|out_param|$}
 // @d space_token=@'5040 {$2^8\cdot|spacer|+|" "|$}
+/// `cur_tok_type_cmd_multiplier`·`spacer`+`" "`
+pub(crate) const space_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * spacer as cur_tok_type_repr + b' ' as cur_tok_type_repr;
 // @d letter_token=@'5400 {$2^8\cdot|letter|$}
 /// `cur_tok_type_cmd_multiplier`·`letter`
 pub(crate) const letter_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * letter as cur_tok_type_repr;
@@ -48,3 +50,4 @@ use crate::section_0297::cur_tok_type_cmd_multiplier;
 use crate::section_0207::letter;
 use crate::section_0207::other_char;
 use crate::section_0207::right_brace;
+use crate::section_0207::spacer;

@@ -18,6 +18,7 @@
 
 /// governs `TeX`'s activities
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label big_switch,reswitch,main_loop,main_loop_wrapup,
     //   main_loop_move,main_loop_move+1,main_loop_move+2,main_loop_move_lig,

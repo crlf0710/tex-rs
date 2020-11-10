@@ -10,6 +10,7 @@
 // function its_all_over:boolean; {do this when \.{\\end} or \.{\\dump} occurs}
 /// do this when `\end` or `\dump` occurs
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn its_all_over(globals: &mut TeXGlobals) -> boolean {
     // label exit;
     // begin if privileged then

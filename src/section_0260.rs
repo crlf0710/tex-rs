@@ -4,13 +4,24 @@ macro_rules! Insert_a_new_control_sequence_after_p_then_make_p_point_to_it {
         // begin if text(p)>0 then
         trace_expr!("p = {}", $p);
         if text!($globals, $p) > 0 {
-            todo!();
-            //   begin repeat if hash_is_full then overflow("hash size",hash_size);
-            // @:TeX capacity exceeded hash size}{\quad hash size@>
-            //   decr(hash_used);
-            //   until text(hash_used)=0; {search for an empty location in |hash|}
-            //   next(p):=hash_used; p:=hash_used;
-            //   end;
+            // begin repeat if hash_is_full then overflow("hash size",hash_size);
+            loop {
+                if hash_is_full!($globals) {
+                    todo!();
+                }
+                // @:TeX capacity exceeded hash size}{\quad hash size@>
+                // decr(hash_used);
+                decr!($globals.hash_used);
+                // until text(hash_used)=0; {search for an empty location in |hash|}
+                /// search for an empty location in |hash|
+                if text!($globals, $globals.hash_used) == 0 {
+                    break;
+                }
+            }
+            // next(p):=hash_used; p:=hash_used;
+            next!($globals, $p) = $globals.hash_used;
+            $p = $globals.hash_used;
+            // end;
         }
         #[cfg(not(feature = "unicode_support"))]
         let l = $l_raw;

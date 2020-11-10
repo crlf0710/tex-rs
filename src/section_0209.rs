@@ -39,6 +39,8 @@ pub(crate) const prefix: quarterword = 93;
 // @d shorthand_def=95 {code definition ( \.{\\chardef}, \.{\\countdef}, etc.~)}
 // @d read_to_cs=96 {read into a control sequence ( \.{\\read} )}
 // @d def=97 {macro definition ( \.{\\def}, \.{\\gdef}, \.{\\xdef}, \.{\\edef} )}
+/// macro definition ( `\def`, `\gdef`, `\xdef`, `\edef` )
+pub(crate) const def: quarterword = 97;
 // @d set_box=98 {set a box ( \.{\\setbox} )}
 // @d hyph_data=99 {hyphenation data ( \.{\\hyphenation}, \.{\\patterns} )}
 // @d set_interaction=100 {define level of interaction ( \.{\\batchmode}, etc.~)}

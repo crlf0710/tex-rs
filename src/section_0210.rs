@@ -27,6 +27,8 @@ pub(crate) const outer_call: quarterword = max_command + 13;
 // @d long_outer_call=max_command+14 {long, outer control sequence}
 // @d end_template=max_command+15 {end of an alignment template}
 // @d dont_expand=max_command+16 {the following token was marked by \.{\\noexpand}}
+/// the following token was marked by `\noexpand`
+pub(crate) const dont_expand: quarterword = max_command + 16;
 // @d glue_ref=max_command+17 {the equivalent points to a glue specification}
 // @d shape_ref=max_command+18 {the equivalent points to a parshape specification}
 // @d box_ref=max_command+19 {the equivalent points to a box node, or is |null|}

@@ -7,7 +7,12 @@ macro_rules! Assignments {
             unreachable!();
         /*} else if Assignments_xxx {
             todo!();
-        */} else if Assignments_1232!($globals, $cur_cmd, $a) {
+        */
+        } else if Assignments_1218!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
+        } else if Assignments_1232!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();
             true
@@ -50,6 +55,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> Result<(), JumpOutTo
             // end;
         }
     }
+    trace_expr!("cur_cmd={}", globals.cur_cmd);
     // @<Discard the prefixes \.{\\long} and \.{\\outer} if they are irrelevant@>;
     // @<Adjust \(f)for the setting of \.{\\globaldefs}@>;
     // case cur_cmd of

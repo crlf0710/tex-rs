@@ -38,6 +38,12 @@ macro_rules! text {
     };
 }
 // @d hash_is_full == (hash_used=hash_base) {test if all positions are occupied}
+/// test if all positions are occupied
+macro_rules! hash_is_full {
+    ($globals:expr) => {
+        $globals.hash_used == hash_base as _
+    }
+}
 // @d font_id_text(#) == text(font_id_base+#) {a frozen font identifier's name}
 //
 // @<Glob...@>=
@@ -63,11 +69,17 @@ use crate::section_0256::hash_array;
 use crate::section_0113::two_halves;
 
 // @!hash_used:pointer; {allocation pointer for |hash|}
+/// allocation pointer for |hash|
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static hash_used: pointer = null;
 // @!no_new_control_sequence:boolean; {are new identifiers legal?}
 /// are new identifiers legal?
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static no_new_control_sequence: boolean = true;
 // @!cs_count:integer; {total number of known identifiers}
+/// total number of known identifiers
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cs_count: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::boolean;

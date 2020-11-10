@@ -62,6 +62,8 @@ pub(crate) const tracing_commands_code: halfword = 36;
 // @d hang_after_code=41 {hanging indentation changes after this many lines}
 // @d floating_penalty_code=42 {penalty for insertions heldover after a split}
 // @d global_defs_code=43 {override \.{\\global} specifications}
+/// override `\global` specifications
+pub(crate) const global_defs_code: halfword = 43;
 // @d cur_fam_code=44 {current family}
 // @d escape_char_code=45 {escape character for token output}
 /// escape character for token output
@@ -173,6 +175,11 @@ macro_rules! tracing_commands {
 // @d hang_after==int_par(hang_after_code)
 // @d floating_penalty==int_par(floating_penalty_code)
 // @d global_defs==int_par(global_defs_code)
+macro_rules! global_defs {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::global_defs_code)
+    };
+}
 // @d cur_fam==int_par(cur_fam_code)
 // @d escape_char==int_par(escape_char_code)
 macro_rules! escape_char {
