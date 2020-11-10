@@ -25,10 +25,19 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
         }
         // if cur_cmd>=call then
         if globals.cur_cmd >= call {
-        //   if cur_cmd<end_template then macro_call
-        //   else  begin cur_cs:=frozen_endv; cur_cmd:=endv;
-        //     goto done; {|cur_chr=null_list|}
-        //     end
+            // if cur_cmd<end_template then macro_call
+            if globals.cur_cmd < end_template {
+                macro_call(globals);
+            }
+            // else  begin cur_cs:=frozen_endv; cur_cmd:=endv;
+            else {
+                globals.cur_cs = frozen_endv as _;
+                globals.cur_cmd = endv;
+                // goto done; {|cur_chr=null_list|}
+                /// `cur_chr=null_list`
+                goto_forward_label!('done);
+                // end
+            }
         } else {
             // else expand;
             expand(globals);
@@ -57,9 +66,13 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::JumpOutToEndOfTEX;
 use crate::section_0113::halfword;
+use crate::section_0207::endv;
 use crate::section_0209::max_command;
 use crate::section_0210::call;
+use crate::section_0210::end_template;
+use crate::section_0222::frozen_endv;
 use crate::section_0289::cs_token_flag;
 use crate::section_0297::cur_tok_type;
 use crate::section_0341::get_next;
 use crate::section_0366::expand;
+use crate::section_0389::macro_call;

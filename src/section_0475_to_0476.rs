@@ -1,17 +1,3 @@
-//! @ @<Scan and build the parameter part...@>=
-//! begin loop begin get_token; {set |cur_cmd|, |cur_chr|, |cur_tok|}
-//!   if cur_tok<right_brace_limit then goto done1;
-//!   if cur_cmd=mac_param then
-//!     @<If the next character is a parameter number, make |cur_tok|
-//!       a |match| token; but if it is a left brace, store
-//!       `|left_brace|, |end_match|', set |hash_brace|, and |goto done|@>;
-//!   store_new_token(cur_tok);
-//!   end;
-//! done1: store_new_token(end_match_token);
-//! if cur_cmd=right_brace then
-//!   @<Express shock at the missing left brace; |goto found|@>;
-//! done: end
-//!
 //! @ @<Express shock...@>=
 //! begin print_err("Missing { inserted"); incr(align_state);
 //! @.Missing \{ inserted@>

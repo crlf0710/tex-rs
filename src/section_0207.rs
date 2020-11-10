@@ -51,6 +51,8 @@ pub(crate) const sub_mark: quarterword = 8;
 /// characters to ignore ( `^^@` )
 pub(crate) const ignore: quarterword = 9;
 // @d endv=9 {end of \<v_j> list in alignment template}
+/// end of `v_j` list in alignment template
+pub(crate) const endv: quarterword = 9;
 // @d spacer=10 {characters equivalent to blank space ( \.{\ } )}
 /// characters equivalent to blank space ( ` ` )
 pub(crate) const spacer: quarterword = 10;
@@ -69,6 +71,8 @@ pub(crate) const par_end: quarterword = 13;
 /// characters that introduce comments ( `%` )
 pub(crate) const comment: quarterword = 14;
 // @d end_match=14 {end of parameters to macro}
+/// end of parameters to macro
+pub(crate) const end_match: quarterword = 14;
 // @d stop=14 {end of job ( \.{\\end}, \.{\\dump} )}
 /// end of job ( `\end`, `\dump` )
 pub(crate) const stop: quarterword = 14;

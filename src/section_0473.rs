@@ -60,7 +60,7 @@ pub(crate) fn scan_toks(
     t = zero_token as _;
     // if macro_def then @<Scan and build the parameter part of the macro definition@>
     if macro_def {
-        todo!();
+        Scan_and_build_the_parameter_part_of_the_macro_definition!(globals, p, q);
     }
     // else scan_left_brace; {remove the compulsory left brace}
     else {

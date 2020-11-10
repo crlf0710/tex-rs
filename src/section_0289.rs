@@ -43,6 +43,8 @@ pub(crate) const letter_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier *
 pub(crate) const other_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * other_char as cur_tok_type_repr;
 // @d match_token=@'6400 {$2^8\cdot|match|$}
 // @d end_match_token=@'7000 {$2^8\cdot|end_match|$}
+/// `cur_tok_type_cmd_multiplier`·`end_match`
+pub(crate) const end_match_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * end_match as cur_tok_type_repr;
 
 use crate::section_0297::cur_tok_type;
 use crate::section_0297::cur_tok_type_repr;
@@ -51,3 +53,4 @@ use crate::section_0207::letter;
 use crate::section_0207::other_char;
 use crate::section_0207::right_brace;
 use crate::section_0207::spacer;
+use crate::section_0207::end_match;

@@ -93,6 +93,8 @@ pub(crate) const v_template: quarterword = 2;
 pub(crate) const backed_up: quarterword = 3;
 // @d inserted=4 {|token_type| code for inserted texts}
 // @d macro=5 {|token_type| code for defined control sequences}
+/// `token_type` code for defined control sequences
+pub(crate) const r#macro: quarterword = 5;
 // @d output_text=6 {|token_type| code for output routines}
 // @d every_par_text=7 {|token_type| code for \.{\\everypar}}
 // @d every_math_text=8 {|token_type| code for \.{\\everymath}}
