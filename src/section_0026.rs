@@ -15,7 +15,7 @@
 //   {on some systems this may be a \&{record} variable}
 /// on some systems this may be a **record** variable
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static name_of_file: name_of_file_array<crate::pascal::char> =
     name_of_file_array::from_copied(crate::pascal::char::new(b' ' as _));
 
@@ -33,7 +33,7 @@ use crate::section_0026::name_of_file_array;
 //   relevant in |name_of_file| (the rest are blank)}
 /// this many characters are actually relevant in `name_of_file` (the rest are blank)
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static name_length: u16_from_0_to_n<file_name_size_TYPENUM> = u16_from_0_to_n::default();
 
 #[globals_struct_use(TeXGlobals)]

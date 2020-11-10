@@ -71,6 +71,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("parshape",set_shape,0);@/
     // @!@:par_shape_}{\.{\\parshape} primitive@>
     // primitive("penalty",break_penalty,0);@/
+    primitive(globals, strpool_str!("penalty"), break_penalty, 0);
     // primitive("prevgraf",set_prev_graf,0);@/
     // @!@:prev_graf_}{\.{\\prevgraf} primitive@>
     // primitive("radical",radical,0);@/

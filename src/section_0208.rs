@@ -30,8 +30,14 @@ pub(crate) const hskip: quarterword = 26;
 /// vertical glue ( `\vskip`, `\vfil`, etc. )
 pub(crate) const vskip: quarterword = 27;
 // @d mskip=28 {math glue ( \.{\\mskip} )}
+/// math glue ( `\mskip` )
+pub(crate) const mskip: quarterword = 28;
 // @d kern=29 {fixed space ( \.{\\kern})}
+/// fixed space ( `\kern`)
+pub(crate) const kern: quarterword = 29;
 // @d mkern=30 {math kern ( \.{\\mkern} )}
+/// math kern ( `\mkern` )
+pub(crate) const mkern: quarterword = 30;
 // @d leader_ship=31 {use a box ( \.{\\shipout}, \.{\\leaders}, etc.~)}
 // @d halign=32 {horizontal table alignment ( \.{\\halign} )}
 /// horizontal table alignment ( `\halign` )
@@ -54,6 +60,8 @@ pub(crate) const ignore_spaces: quarterword = 39;
 // @d after_assignment=40 {save till assignment is done ( \.{\\afterassignment} )}
 // @d after_group=41 {save till group is done ( \.{\\aftergroup} )}
 // @d break_penalty=42 {additional badness ( \.{\\penalty} )}
+/// additional badness ( `\penalty` )
+pub(crate) const break_penalty: quarterword = 42;
 // @d start_par=43 {begin paragraph ( \.{\\indent}, \.{\\noindent} )}
 /// begin paragraph ( `\indent`, `\noindent` )
 pub(crate) const start_par: quarterword = 43;

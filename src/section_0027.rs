@@ -40,7 +40,7 @@ macro_rules! rewrite_OK {
 //   {open a text file for input}
 /// open a text file for input
 #[allow(unused_variables)]
-pub(crate) fn a_open_in(globals: TeXGlobalsIoFilenameView<'_>, f: &mut alpha_file) -> boolean {
+pub(crate) fn a_open_in(globals: TeXGlobalsIoStringView<'_>, f: &mut alpha_file) -> boolean {
     // begin reset(f,name_of_file,'/O'); a_open_in:=reset_OK(f);
     reset(f, &*globals.name_of_file, "/O");
     return reset_OK!(f);
@@ -75,5 +75,5 @@ pub(crate) fn a_open_in(globals: TeXGlobalsIoFilenameView<'_>, f: &mut alpha_fil
 
 use crate::pascal::boolean;
 use crate::pascal::reset;
-use crate::section_0004::TeXGlobalsIoFilenameView;
+use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0025::alpha_file;

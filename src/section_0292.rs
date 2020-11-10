@@ -34,8 +34,9 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
     // @!match_chr:ASCII_code; {character used in a `|match|'}
     // @!n:ASCII_code; {the highest parameter number, as an ASCII digit}
     // begin match_chr:="#"; n:="0"; tally:=0;
+    globals.tally = 0;
     // while (p<>null) and (tally<l) do
-    while p != null as _ && globals.tally < 1 {
+    while p != null as _ && globals.tally < l {
         // begin if p=q then @<Do magic computation@>;
         // @<Display token |p|, and |return| if there are problems@>;
         Display_token_p__and_return_if_there_are_problems!(globals, p);

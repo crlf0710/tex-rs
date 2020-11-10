@@ -10,7 +10,7 @@
 //
 // @p function make_name_string:str_number;
 #[allow(unused_variables)]
-pub(crate) fn make_name_string(mut globals: TeXGlobalsIoFilenameView<'_>) -> str_number {
+pub(crate) fn make_name_string(mut globals: TeXGlobalsIoStringView<'_>) -> str_number {
     // var k:1..file_name_size; {index into |name_of_file|}
     // begin if (pool_ptr+name_length>pool_size)or(str_ptr=max_strings)or
     //  (cur_length>0) then
@@ -31,7 +31,7 @@ pub(crate) fn make_name_string(mut globals: TeXGlobalsIoFilenameView<'_>) -> str
 }
 
 // function a_make_name_string(var f:alpha_file):str_number;
-pub(crate) fn a_make_name_string(globals: TeXGlobalsIoFilenameView<'_>, _: &mut alpha_file) -> str_number {
+pub(crate) fn a_make_name_string(globals: TeXGlobalsIoStringView<'_>, _: &mut alpha_file) -> str_number {
     // begin a_make_name_string:=make_name_string;
     return make_name_string(globals);
     // end;
@@ -46,7 +46,7 @@ pub(crate) fn a_make_name_string(globals: TeXGlobalsIoFilenameView<'_>, _: &mut 
 //
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoFilenameView;
+use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0042::append_char;
 use crate::section_0004::alpha_file;

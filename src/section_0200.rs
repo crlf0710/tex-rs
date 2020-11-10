@@ -10,7 +10,7 @@
 macro_rules! token_ref_count {
     ($globals:expr, $val:expr) => {
         info!($globals, $val)
-    }
+    };
 }
 
 // @p procedure delete_token_ref(@!p:pointer); {|p| points to the reference count

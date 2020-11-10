@@ -58,7 +58,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 }
                 // @.Please type...@>
                 // print_ln; first:=start;
-                print_ln($globals);
+                print_ln(make_globals_io_view!($globals));
                 $globals.first = start!($globals).into();
                 // prompt_input("*"); {input on-line into |buffer|}
                 /// input on-line into `buffer`
@@ -87,6 +87,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
             }
         }
 
+        use crate::section_0004::TeXGlobalsIoView;
         use crate::section_0304::terminal_input;
         use crate::section_0297::cur_chr_type;
         use crate::section_0073::nonstop_mode;

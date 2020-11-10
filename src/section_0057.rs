@@ -5,7 +5,7 @@
 
 /// prints an end-of-line
 #[allow(unused_variables)]
-pub(crate) fn print_ln(globals: &mut TeXGlobals) {
+pub(crate) fn print_ln(mut globals: TeXGlobalsIoView<'_>) {
     // begin case selector of
     // term_and_log: begin wterm_cr; wlog_cr;
     //   term_offset:=0; file_offset:=0;
@@ -14,7 +14,7 @@ pub(crate) fn print_ln(globals: &mut TeXGlobals) {
     //   end;
     // term_only: begin wterm_cr; term_offset:=0;
     wterm_cr(make_globals_io_view!(globals));
-    globals.term_offset = 0.into();
+    *globals.term_offset = 0.into();
     //   end;
     // no_print,pseudo,new_string: do_nothing;
     // othercases write_ln(write_file[selector])

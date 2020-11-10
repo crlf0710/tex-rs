@@ -14,21 +14,25 @@
 
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 /// lines of characters being read
 pub(crate) static buffer: buf_size_array<ASCII_code> = buf_size_array::default();
 
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 /// the first unused position in `buffer`
 pub(crate) static first: u16_from_0_to_n<buf_size_TYPENUM> = u16_from_0_to_n::new(0);
 
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 /// end of the line just input to `buffer`
 pub(crate) static last: u16_from_0_to_n<buf_size_TYPENUM> = u16_from_0_to_n::new(0);
 
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 /// largest index used in `buffer`
 pub(crate) static max_buf_stack: u16_from_0_to_n<buf_size_TYPENUM> = u16_from_0_to_n::new(0);
 

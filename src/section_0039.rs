@@ -1,7 +1,7 @@
 //! @ @<Glob...@>=
 // @!str_pool:packed array[pool_pointer] of packed_ASCII_code; {the characters}
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsStringView)]
 pub(crate) static str_pool: str_pool_array<packed_ASCII_code> = str_pool_array::default();
 
@@ -18,7 +18,7 @@ use crate::section_0038::packed_ASCII_code;
 // @!str_start : array[str_number] of pool_pointer; {the starting pointers}
 /// the starting pointers
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsStringView)]
 pub(crate) static str_start: str_start_array<pool_pointer> = str_start_array::default();
 
@@ -32,13 +32,14 @@ use crate::section_0039::str_start_array;
 // @!pool_ptr : pool_pointer; {first unused position in |str_pool|}
 /// first unused position in `str_pool`
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsStringView)]
 pub(crate) static pool_ptr: pool_pointer = pool_pointer::new_zero();
 // @!str_ptr : str_number; {number of the current string being created}
 /// number of the current string being created
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoFilenameView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsStringView)]
 pub(crate) static str_ptr: str_number = str_number::new_zero();
 // @!init_pool_ptr : pool_pointer; {the starting value of |pool_ptr|}
@@ -65,7 +66,10 @@ use globals_struct::{globals_struct_field, globals_struct_use};
 
 #[cfg(feature = "unicode_support")]
 impl str_pool_array<packed_ASCII_code> {
-    #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(self, str_start)))]
+    #[cfg_attr(
+        feature = "trace",
+        tracing::instrument(level = "trace", skip(self, str_start))
+    )]
     pub(crate) fn str_ascii_codes(
         &self,
         str_start: &str_start_array<pool_pointer>,

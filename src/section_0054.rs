@@ -39,6 +39,8 @@
 //! terminal or to the transcript file, respectively.
 //
 // @d no_print=16 {|selector| setting that makes data disappear}
+/// `selector` setting that makes data disappear
+pub(crate) const no_print: u8 = 16;
 // @d term_only=17 {printing is destined for the terminal only}
 /// printing is destined for the terminal only
 pub(crate) const term_only: u8 = 17;
@@ -46,7 +48,11 @@ pub(crate) const term_only: u8 = 17;
 /// printing is destined for the transcript file only
 pub(crate) const log_only: u8 = 18;
 // @d term_and_log=19 {normal |selector| setting}
+/// normal `selector` setting
+pub(crate) const term_and_log: u8 = 19;
 // @d pseudo=20 {special |selector| setting for |show_context|}
+/// special `selector` setting for `show_context`
+pub(crate) const pseudo: u8 = 20;
 // @d new_string=21 {printing is deflected to the string pool}
 /// printing is deflected to the string pool
 pub(crate) const new_string: u8 = 21;
@@ -58,14 +64,17 @@ pub(crate) type max_selector_TYPENUM = U21;
 // @<Glob...@>=
 // @!log_file : alpha_file; {transcript of \TeX\ session}
 
+/// transcript of \TeX\ session
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
-/// transcript of \TeX\ session
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static log_file: alpha_file = alpha_file::default();
 
 // @!selector : 0..max_selector; {where to print a message}
-#[globals_struct_field(TeXGlobals)]
 /// where to print a message
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static selector: u8_from_0_to_n<max_selector_TYPENUM> = u8_from_0_to_n::default();
 
 #[globals_struct_use(TeXGlobals)]
@@ -75,6 +84,7 @@ use crate::section_0054::max_selector_TYPENUM;
 // @!tally : integer; {the number of characters recently printed}
 /// the number of characters recently printed
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static tally: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
@@ -84,6 +94,7 @@ use crate::pascal::integer;
 //   {the number of characters on the current terminal line}
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
 /// the number of characters on the current terminal line
 pub(crate) static term_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
 

@@ -24,13 +24,13 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
         /// set up `cur_file` and new level of input
         begin_file_reading(globals);
         // if a_open_in(cur_file) then goto done;
-        if a_open_in(make_globals_io_filename_view!(globals), &mut cur_file!(globals)) {
+        if a_open_in(make_globals_io_string_view!(globals), &mut cur_file!(globals)) {
             goto_forward_label!('done);
         }
         // if cur_area="" then
         //   begin pack_file_name(cur_name,TEX_area,cur_ext);
         //   if a_open_in(cur_file) then goto done;
-        if a_open_in(make_globals_io_filename_view!(globals), &mut cur_file!(globals)) {
+        if a_open_in(make_globals_io_string_view!(globals), &mut cur_file!(globals)) {
             goto_forward_label!('done);
         }
         //   end;
@@ -44,7 +44,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     'done <-
     }
     // done: name:=a_make_name_string(cur_file);
-    name!(globals) = a_make_name_string(make_globals_io_filename_view!(globals), &mut cur_file!(globals)).get() as _;
+    name!(globals) = a_make_name_string(make_globals_io_string_view!(globals), &mut cur_file!(globals)).get() as _;
     trace_expr!("name = {}", name!(globals));
     // if job_name=0 then
     //   begin job_name:=cur_name; open_log_file;
@@ -53,7 +53,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     // if term_offset+length(name)>max_print_line-2 then print_ln
     // else if (term_offset>0)or(file_offset>0) then print_char(" ");
     // print_char("("); incr(open_parens); slow_print(name); update_terminal;
-    print_char(make_globals_io_view!(globals), ASCII_code_literal!(b'('));
+    print_char(make_globals_io_string_view!(globals), ASCII_code_literal!(b'('));
     incr!(globals.open_parens);
     trace_expr!("open_parens = {:?}", globals.open_parens);
     slow_print(globals, name!(globals).into());
@@ -69,7 +69,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
     return_nojump!();
 }
 
-use crate::section_0004::{TeXGlobals, TeXGlobalsIoFilenameView};
+use crate::section_0004::{TeXGlobals, TeXGlobalsIoStringView};
 use crate::section_0034::update_terminal;
 use crate::section_0526::scan_file_name;
 use crate::section_0058::print_char;

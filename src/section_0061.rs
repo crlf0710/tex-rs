@@ -16,7 +16,7 @@ macro_rules! Initialize_the_output_routines_0061 {
         } else {
             // else  begin slow_print(format_ident); print_ln;
             slow_print($globals, $globals.format_ident.into());
-            print_ln($globals);
+            print_ln(make_globals_io_view!($globals));
             // end;
         }
 
