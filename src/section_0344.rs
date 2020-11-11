@@ -16,7 +16,7 @@ macro_rules! State_plus_cur_cmd_matches_any_case_plus {
 //
 // @<Change state if necessary...@>=
 macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_should_be_ignored_or_goto_reswitch_if_the_current_character_changes_to_another {
-    ($globals:expr, $lbl_switch:lifetime) => {{
+    ($globals:expr, $lbl_switch:lifetime, $lbl_reswitch:lifetime) => {{
         trace_span!("Change state if...");
         // case state+cur_cmd of
         let state_plus_cur_cmd = state!($globals) + $globals.cur_cmd;
@@ -31,9 +31,13 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         }
         // any_state_plus(active_char): @<Process an active-character control sequence
         //   and set |state:=mid_line|@>;
-        // any_state_plus(sup_mark): @<If this |sup_mark| starts an expanded character
-        //   like~\.{\^\^A} or~\.{\^\^df}, then |goto reswitch|,
-        //   otherwise set |state:=mid_line|@>;
+        else if State_plus_cur_cmd_matches_any_case_plus!(state_plus_cur_cmd, sup_mark) {
+            // any_state_plus(sup_mark): @<If this |sup_mark| starts an expanded character
+            //   like~\.{\^\^A} or~\.{\^\^df}, then |goto reswitch|,
+            //   otherwise set |state:=mid_line|@>;
+            If_this_sup_mark_starts_an_expanded_character_like___A__or__df__then_goto_reswitch__otherwise_set_state__mid_line!
+                ($globals, $lbl_reswitch);
+        }
         // any_state_plus(invalid_char): @<Decry the invalid character and
         //   |goto restart|@>;
         // @t\4@>@<Handle situations involving spaces, braces, changes of state@>@;
@@ -51,6 +55,7 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         use crate::section_0207::escape;
         use crate::section_0207::spacer;
         use crate::section_0207::comment;
+        use crate::section_0207::sup_mark;
         use crate::section_0303::skip_blanks;
     }}
 }

@@ -13,7 +13,7 @@ macro_rules! Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_
             }
         }
         // @<If an expanded...@>;
-        If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!($globals);
+        If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!($globals, $k, $cat, $lbl_start_cs);
         // if cat<>letter then decr(k);
         if $cat != letter {
             decr!($k);

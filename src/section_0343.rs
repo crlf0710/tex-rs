@@ -26,7 +26,7 @@ macro_rules! Input_from_external_file__goto_restart_if_no_input_found {
                     //   or |goto reswitch| if the current character
                     //   changes to another@>;
                     Change_state_if_necessary_and_goto_switch_if_the_current_character_should_be_ignored_or_goto_reswitch_if_the_current_character_changes_to_another!
-                        ($globals, 'switch);
+                        ($globals, 'switch, 'reswitch);
                     // end
                 }
                 |'reswitch|

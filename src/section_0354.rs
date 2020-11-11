@@ -56,7 +56,8 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
                         ($globals, k, cat, 'start_cs, 'found);
                 } else {
                     // else @<If an expanded code is present, reduce it and |goto start_cs|@>;
-                    If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!($globals);
+                    If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!
+                        ($globals, k, cat, 'start_cs);
                 }
                 // cur_cs:=single_base+buffer[loc]; incr(loc);
                 #[cfg(feature = "unicode_support")]

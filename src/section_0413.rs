@@ -17,6 +17,9 @@ pub(crate) fn scan_something_internal(globals: &mut TeXGlobals, level: small_num
     // begin m:=cur_chr;
     // case cur_cmd of
     // def_code: @<Fetch a character code from some table@>;
+    if globals.cur_cmd == def_code {
+        todo!();
+    }
     // toks_register,assign_toks,def_family,set_font,def_font: @<Fetch a token list or
     //   font identifier, provided that |level=tok_val|@>;
     // assign_int: scanned_result(eqtb[m].int)(int_val);
@@ -35,6 +38,9 @@ pub(crate) fn scan_something_internal(globals: &mut TeXGlobals, level: small_num
     // register: @<Fetch a register@>;
     // last_item: @<Fetch an item in the current node, if appropriate@>;
     // othercases @<Complain that \.{\\the} can't do this; give zero result@>
+    else {
+        todo!();
+    }
     // endcases;@/
     // while cur_val_level>level do @<Convert \(c)|cur_val| to a lower level@>;
     // @<Fix the reference count, if any, and negate |cur_val| if |negative|@>;
@@ -44,3 +50,4 @@ pub(crate) fn scan_something_internal(globals: &mut TeXGlobals, level: small_num
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
 use crate::section_0101::small_number;
+use crate::section_0209::def_code;

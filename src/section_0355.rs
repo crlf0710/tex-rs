@@ -7,25 +7,58 @@
 //
 // @<If an expanded...@>=
 macro_rules! If_an_expanded_code_is_present_reduce_it_and_goto_start_cs {
-    ($globals:expr) => {
+    ($globals:expr, $k:expr, $cat:expr, $lbl_start_cs:lifetime) => {
         // begin if buffer[k]=cur_chr then @+if cat=sup_mark then @+if k<limit then
-        //   begin c:=buffer[k+1]; @+if c<@'200 then {yes, one is indeed present}
-        //     begin d:=2;
-        //     if is_hex(c) then @+if k+2<=limit then
-        //       begin cc:=buffer[k+2]; @+if is_hex(cc) then incr(d);
-        //       end;
-        //     if d>2 then
-        //       begin hex_to_cur_chr; buffer[k-1]:=cur_chr;
-        //       end
-        //     else if c<@'100 then buffer[k-1]:=c+@'100
-        //     else buffer[k-1]:=c-@'100;
-        //     limit:=limit-d; first:=first-d;
-        //     while k<=limit do
-        //       begin buffer[k]:=buffer[k+d]; incr(k);
-        //       end;
-        //     goto start_cs;
-        //     end;
-        //   end;
+        if $globals.buffer[$k].numeric_value() == $globals.cur_chr.get() 
+            && $cat == sup_mark && $k < limit!($globals) {
+            // begin c:=buffer[k+1]; @+if c<@'200 then {yes, one is indeed present}
+            let c = $globals.buffer[$k + 1].numeric_value();
+            if c < 0o200 {
+                /// yes, one is indeed present
+                const _ : () = ();
+                // begin d:=2;
+                let mut d = 2;
+                let mut cc = 0;
+                // if is_hex(c) then @+if k+2<=limit then
+                if is_hex!(c) && $k + 2 <= limit!($globals) {
+                    // begin cc:=buffer[k+2]; @+if is_hex(cc) then incr(d);
+                    cc = $globals.buffer[$k + 2].numeric_value();
+                    if is_hex!(cc) {
+                        incr!(d);
+                    }
+                    // end;
+                }
+                // if d>2 then
+                if d > 2 {
+                    // begin hex_to_cur_chr; buffer[k-1]:=cur_chr;
+                    hex_to_cur_chr!($globals, c, cc);
+                    $globals.buffer[$k - 1] = $globals.cur_chr.into();
+                    // end
+                }
+                // else if c<@'100 then buffer[k-1]:=c+@'100
+                else if c < 0o100 {
+                    $globals.buffer[$k - 1] = ASCII_code::from(c as integer + 0o100);
+                }
+                // else buffer[k-1]:=c-@'100;
+                else {
+                    $globals.buffer[$k - 1] = ASCII_code::from(c as integer - 0o100);
+                }
+                // limit:=limit-d; first:=first-d;
+                limit!($globals) -= d;
+                $globals.first -= d;
+                // while k<=limit do
+                while $k <= limit!($globals) {
+                    // begin buffer[k]:=buffer[k+d]; incr(k);
+                    $globals.buffer[$k] = $globals.buffer[$k + d];
+                    incr!($k);
+                    // end;
+                }
+                // goto start_cs;
+                goto_backward_label!($lbl_start_cs);
+                // end;
+            }
+            // end;
+        }
         // end
     }
 }
