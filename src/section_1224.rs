@@ -23,7 +23,8 @@ macro_rules! Assignments_1224 {
             }
             // math_char_def_code: begin scan_fifteen_bit_int; define(p,math_given,cur_val);
             else if n == math_char_def_code as _ {
-                todo!();
+                scan_fifteen_bit_int($globals)?;
+                define!($globals, $a, p as _, math_given, $globals.cur_val as _);
                 // end;
             }
             // othercases begin scan_eight_bit_int;
@@ -42,8 +43,10 @@ macro_rules! Assignments_1224 {
             // end;
             use crate::section_0207::relax;
             use crate::section_0208::char_given;
+            use crate::section_0208::math_given;
             use crate::section_0405::scan_optional_equals;
             use crate::section_0434::scan_char_num;
+            use crate::section_0436::scan_fifteen_bit_int;
             use crate::section_1215::get_r_token;
             use crate::section_1222::char_def_code;
             use crate::section_1222::math_char_def_code;

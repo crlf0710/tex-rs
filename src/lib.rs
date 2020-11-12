@@ -476,7 +476,9 @@ reversing_order_items!(
         mod section_0414;
         mod section_0415_to_0433;
         mod section_0434;
-        mod section_0435_to_0437;
+        mod section_0435;
+        mod section_0436;
+        mod section_0437;
         mod section_0438;
         mod section_0439;
         reversing_order_items! (
@@ -698,7 +700,11 @@ reversing_order_items!(
         mod section_1233;
     }
     {
-        mod section_1234_to_1275;
+        mod section_1234;
+        #[macro_use]
+        mod section_1235;
+        mod section_1236;
+        mod section_1237_to_1275;
         #[macro_use]
         mod section_1276;
     }

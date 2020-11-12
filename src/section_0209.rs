@@ -26,12 +26,20 @@ pub(crate) const def_code: quarterword = 85;
 // @d set_font=87 {set current font ( font identifiers )}
 // @d def_font=88 {define a font file ( \.{\\font} )}
 // @d register=89 {internal register ( \.{\\count}, \.{\\dimen}, etc.~)}
+/// internal register ( `\count`, `\dimen`, etc.)
+pub(crate) const register: quarterword = 89;
 // @d max_internal=89 {the largest code that can follow \.{\\the}}
 /// the largest code that can follow `\the`
 pub(crate) const max_internal: quarterword = 89;
 // @d advance=90 {advance a register or parameter ( \.{\\advance} )}
+/// advance a register or parameter ( `\advance` )
+pub(crate) const advance: quarterword = 90;
 // @d multiply=91 {multiply a register or parameter ( \.{\\multiply} )}
+/// multiply a register or parameter ( `\multiply` )
+pub(crate) const multiply: quarterword = 91;
 // @d divide=92 {divide a register or parameter ( \.{\\divide} )}
+/// divide a register or parameter ( `\divide` )
+pub(crate) const divide: quarterword = 92;
 // @d prefix=93 {qualify a definition ( \.{\\global}, \.{\\long}, \.{\\outer} )}
 /// qualify a definition ( `\global`, `\long`, `\outer` )
 pub(crate) const prefix: quarterword = 93;

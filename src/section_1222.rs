@@ -12,6 +12,8 @@ pub(crate) const char_def_code: halfword = 0;
 /// `shorthand_def` for `\mathchardef`
 pub(crate) const math_char_def_code: halfword = 1;
 // @d count_def_code=2 {|shorthand_def| for \.{\\countdef}}
+/// `shorthand_def` for `\countdef`
+pub(crate) const count_def_code: halfword = 2;
 // @d dimen_def_code=3 {|shorthand_def| for \.{\\dimendef}}
 // @d skip_def_code=4 {|shorthand_def| for \.{\\skipdef}}
 // @d mu_skip_def_code=5 {|shorthand_def| for \.{\\muskipdef}}
@@ -28,6 +30,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1222(globals: &m
     primitive(globals, strpool_str!("mathchardef"), shorthand_def, math_char_def_code);
     // @!@:math_char_def_}{\.{\\mathchardef} primitive@>
     // primitive("countdef",shorthand_def,count_def_code);@/
+    primitive(globals, strpool_str!("countdef"), shorthand_def, count_def_code);
     // @!@:count_def_}{\.{\\countdef} primitive@>
     // primitive("dimendef",shorthand_def,dimen_def_code);@/
     // @!@:dimen_def_}{\.{\\dimendef} primitive@>
