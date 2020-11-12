@@ -108,6 +108,8 @@ pub(crate) const min_internal: quarterword = 68;
 /// character code defined by `\chardef`
 pub(crate) const char_given: quarterword = 68;
 // @d math_given=69 {math code defined by \.{\\mathchardef}}
+/// math code defined by `\mathchardef`
+pub(crate) const math_given: quarterword = 69;
 // @d last_item=70 {most recent item ( \.{\\lastpenalty},
 //   \.{\\lastkern}, \.{\\lastskip} )}
 /// most recent item ( `\lastpenalty`, `\lastkern`, `\lastskip` )

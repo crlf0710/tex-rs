@@ -6,6 +6,7 @@ macro_rules! Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_
         loop {
             $globals.cur_chr = $globals.buffer[$k].into();
             $cat = cat_code!($globals, ASCII_code::from($globals.cur_chr)) as _;
+            trace_expr!("cur_chr = {:?}, cat = {}", $globals.cur_chr, $cat);
             incr!($k);
             // until (cat<>letter)or(k>limit);
             if $cat != letter || $k > limit!($globals) {

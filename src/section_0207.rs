@@ -63,6 +63,8 @@ pub(crate) const letter: quarterword = 11;
 /// none of the special character types
 pub(crate) const other_char: quarterword = 12;
 // @d active_char=13 {characters that invoke macros ( \.{\char`\~} )}
+/// characters that invoke macros ( `~` )
+pub(crate) const active_char: quarterword = 13;
 // @d par_end=13 {end of paragraph ( \.{\\par} )}
 /// end of paragraph ( `\par` )
 pub(crate) const par_end: quarterword = 13;

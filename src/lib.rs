@@ -391,6 +391,7 @@ reversing_order_items!(
                 mod section_0351;
                 #[macro_use]
                 mod section_0352;
+                #[macro_use]
                 mod section_0353;
                 #[macro_use]
                 mod section_0354;
@@ -677,7 +678,14 @@ reversing_order_items!(
         mod section_1217;
         #[macro_use]
         mod section_1218;
-        mod section_1219_to_1229;
+        mod section_1219;
+        mod section_1220;
+        mod section_1221;
+        mod section_1222;
+        mod section_1223;
+        #[macro_use]
+        mod section_1224;
+        mod section_1225_to_1229;
         mod section_1230;
         mod section_1231;
     }

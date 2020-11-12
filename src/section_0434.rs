@@ -1,6 +1,7 @@
 //! ` `
 // @<Declare procedures that scan restricted classes of integers@>=
 // procedure scan_char_num;
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_char_num(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // begin scan_int;
     scan_int(globals)?;

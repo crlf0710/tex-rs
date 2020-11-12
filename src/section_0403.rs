@@ -5,6 +5,7 @@
 
 // @p procedure scan_left_brace; {reads a mandatory |left_brace|}
 /// reads a mandatory `left_brace`
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // begin @<Get the next non-blank non-relax non-call token@>;
     Get_the_next_non_blank_non_relax_non_call_token!(globals);

@@ -3,6 +3,7 @@
 //
 // @p procedure scan_optional_equals;
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_optional_equals(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // begin  @<Get the next non-blank non-call token@>;
     Get_the_next_non_blank_non_call_token!(globals);

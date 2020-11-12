@@ -7,6 +7,7 @@ macro_rules! Assignments_1218 {
     ($globals:expr, $cur_cmd:expr, $a:expr) => {{
         // def: begin if odd(cur_chr)and not global and(global_defs>=0) then a:=a+4;
         if $cur_cmd == def {
+            trace_span!("Assignments(def)");
             if $globals.cur_chr.get().is_odd() && !global!($a) && global_defs!($globals) >= 0 {
                 $a = $a + 4;
             }

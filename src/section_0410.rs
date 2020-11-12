@@ -27,13 +27,30 @@
 //! Otherwise |cur_val| will contain the integer or scaled value in question.
 //
 // @d int_val=0 {integer values}
-/// integer values
-pub(crate) const int_val: u8 = 0;
 // @d dimen_val=1 {dimension values}
 // @d glue_val=2 {glue specifications}
 // @d mu_val=3 {math glue specifications}
 // @d ident_val=4 {font identifier}
 // @d tok_val=5 {token lists}
+#[doc(hidden)]
+pub(crate) enum cur_val_level_kind {
+    /// integer values
+    int_val = 0,
+    /// dimension values
+    dimen_val = 1,
+    /// glue specifications
+    glue_val = 2,
+    /// math glue specifications
+    mu_val = 3,
+    /// font identifier
+    ident_val = 4,
+    /// token lists
+    tok_val = 5,
+}
+
+#[doc(inline)]
+pub(crate) use cur_val_level_kind::*;
+
 //
 // @<Glob...@>=
 // @!cur_val:integer; {value returned by numeric scanners}
@@ -41,6 +58,13 @@ pub(crate) const int_val: u8 = 0;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static cur_val: integer = 0;
 // @!cur_val_level:int_val..tok_val; {the ``level'' of this value}
+/// the "level" of this value
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_val_level: cur_val_level_kind = cur_val_level_kind::int_val;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0410::cur_val_level_kind;
+
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::integer;

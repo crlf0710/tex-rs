@@ -29,8 +29,11 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
             //   and set |state:=skip_blanks| or |mid_line|@>;
             Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line!($globals);
         }
-        // any_state_plus(active_char): @<Process an active-character control sequence
-        //   and set |state:=mid_line|@>;
+        else if State_plus_cur_cmd_matches_any_case_plus!(state_plus_cur_cmd, active_char) {
+            // any_state_plus(active_char): @<Process an active-character control sequence
+            //   and set |state:=mid_line|@>;
+            Process_an_active_character_control_sequence_and_set_state_mid_line!($globals);
+        }
         else if State_plus_cur_cmd_matches_any_case_plus!(state_plus_cur_cmd, sup_mark) {
             // any_state_plus(sup_mark): @<If this |sup_mark| starts an expanded character
             //   like~\.{\^\^A} or~\.{\^\^df}, then |goto reswitch|,
@@ -56,6 +59,11 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         use crate::section_0207::spacer;
         use crate::section_0207::comment;
         use crate::section_0207::sup_mark;
+        use crate::section_0207::active_char;
+        use crate::section_0210::outer_call;
+        use crate::section_0222::active_base;
+        use crate::section_0297::cur_chr_type;
         use crate::section_0303::skip_blanks;
+        use crate::section_0336::check_outer_validity;
     }}
 }

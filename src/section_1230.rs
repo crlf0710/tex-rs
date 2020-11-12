@@ -14,14 +14,44 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
     );
     // @!@:cat_code_}{\.{\\catcode} primitive@>
     // primitive("mathcode",def_code,math_code_base);
+    primitive(
+        globals,
+        strpool_str!("mathcode"),
+        def_code,
+        math_code_base as _,
+    );
     // @!@:math_code_}{\.{\\mathcode} primitive@>
     // primitive("lccode",def_code,lc_code_base);
+    primitive(
+        globals,
+        strpool_str!("lccode"),
+        def_code,
+        lc_code_base as _,
+    );
     // @!@:lc_code_}{\.{\\lccode} primitive@>
     // primitive("uccode",def_code,uc_code_base);
+    primitive(
+        globals,
+        strpool_str!("uccode"),
+        def_code,
+        uc_code_base as _,
+    );
     // @!@:uc_code_}{\.{\\uccode} primitive@>
     // primitive("sfcode",def_code,sf_code_base);
+    primitive(
+        globals,
+        strpool_str!("sfcode"),
+        def_code,
+        sf_code_base as _,
+    );
     // @!@:sf_code_}{\.{\\sfcode} primitive@>
     // primitive("delcode",def_code,del_code_base);
+    primitive(
+        globals,
+        strpool_str!("delcode"),
+        def_code,
+        del_code_base as _,
+    );
     // @!@:del_code_}{\.{\\delcode} primitive@>
     // primitive("textfont",def_family,math_font_base);
     // @!@:text_font_}{\.{\\textfont} primitive@>
@@ -34,6 +64,11 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
 use crate::section_0004::TeXGlobals;
 use crate::section_0209::*;
 use crate::section_0230::cat_code_base;
+use crate::section_0230::math_code_base;
+use crate::section_0230::lc_code_base;
+use crate::section_0230::uc_code_base;
+use crate::section_0230::sf_code_base;
+use crate::section_0236::del_code_base;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

@@ -7,7 +7,8 @@
 //
 // @<If an expanded...@>=
 macro_rules! If_an_expanded_code_is_present_reduce_it_and_goto_start_cs {
-    ($globals:expr, $k:expr, $cat:expr, $lbl_start_cs:lifetime) => {
+    ($globals:expr, $k:expr, $cat:expr, $lbl_start_cs:lifetime) => {{
+        trace_span!("If an expanded...");
         // begin if buffer[k]=cur_chr then @+if cat=sup_mark then @+if k<limit then
         if $globals.buffer[$k].numeric_value() == $globals.cur_chr.get() 
             && $cat == sup_mark && $k < limit!($globals) {
@@ -43,6 +44,8 @@ macro_rules! If_an_expanded_code_is_present_reduce_it_and_goto_start_cs {
                 else {
                     $globals.buffer[$k - 1] = ASCII_code::from(c as integer - 0o100);
                 }
+                trace_expr!("buffer[k - 1] = {}", $globals.buffer[$k - 1].numeric_value());
+                trace_expr!("d={}", d);
                 // limit:=limit-d; first:=first-d;
                 limit!($globals) -= d;
                 $globals.first -= d;
@@ -60,5 +63,5 @@ macro_rules! If_an_expanded_code_is_present_reduce_it_and_goto_start_cs {
             // end;
         }
         // end
-    }
+    }}
 }

@@ -37,6 +37,8 @@ pub(crate) const max_internal: quarterword = 89;
 pub(crate) const prefix: quarterword = 93;
 // @d let=94 {assign a command code ( \.{\\let}, \.{\\futurelet} )}
 // @d shorthand_def=95 {code definition ( \.{\\chardef}, \.{\\countdef}, etc.~)}
+/// code definition ( `\chardef`, `\countdef`, etc.)
+pub(crate) const shorthand_def: quarterword = 95;
 // @d read_to_cs=96 {read into a control sequence ( \.{\\read} )}
 // @d def=97 {macro definition ( \.{\\def}, \.{\\gdef}, \.{\\xdef}, \.{\\edef} )}
 /// macro definition ( `\def`, `\gdef`, `\xdef`, `\edef` )

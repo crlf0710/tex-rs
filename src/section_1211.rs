@@ -2,13 +2,18 @@
 //! silently accepted.
 
 macro_rules! Assignments {
-    ($globals:expr, $cur_cmd:expr, $a:expr) => {
+    ($globals:expr, $cur_cmd:expr, $a:expr) => {{
+        trace_span!("Assignments");
         if false {
             unreachable!();
         /*} else if Assignments_xxx {
             todo!();
         */
         } else if Assignments_1218!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
+        } else if Assignments_1224!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();
             true
@@ -21,14 +26,14 @@ macro_rules! Assignments {
         */} else {
             false
         }
-    };
+    }}
 }
 
 // @<Declare act...@>=
 // @t\4@>@<Declare subprocedures for |prefixed_command|@>@t@>@;@/
 // procedure prefixed_command;
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // label done,exit;
     // var a:small_number; {accumulated prefix codes so far}

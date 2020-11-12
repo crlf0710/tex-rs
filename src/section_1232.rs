@@ -6,6 +6,7 @@ macro_rules! Assignments_1232 {
     ($globals:expr, $cur_cmd:expr, $a:expr) => {
         // def_code: begin @<Let |n| be the largest legal code value, based on |cur_chr|@>;
         if $cur_cmd == def_code {
+            trace_span!("Assignments(def_code)");
             let n: integer;
             let mut p: integer;
             Let_n_be_the_largest_legal_code_value__based_on_cur_chr!($globals, n, $globals.cur_chr);

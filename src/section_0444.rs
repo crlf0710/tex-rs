@@ -3,6 +3,7 @@
 // @<Scan a numeric constant@>=
 macro_rules! Scan_a_numeric_constant {
     ($globals:expr) => {{
+        trace_span!("Scan a numeric constant");
         // begin radix:=10; m:=214748364;
         $globals.radix = 10.into();
         let mut m = 214748364;
