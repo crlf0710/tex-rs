@@ -62,7 +62,7 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         use crate::section_0207::active_char;
         use crate::section_0210::outer_call;
         use crate::section_0222::active_base;
-        use crate::section_0297::cur_chr_type;
+        use crate::section_0297::chr_code_type;
         use crate::section_0303::skip_blanks;
         use crate::section_0336::check_outer_validity;
     }}

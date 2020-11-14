@@ -37,7 +37,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 const _ : () = ();
                 // begin cur_cmd:=0; cur_chr:=0; return;
                 $globals.cur_cmd = 0;
-                $globals.cur_chr = cur_chr_type::new_zero();
+                $globals.cur_chr = chr_code_type::new_zero();
                 return_nojump!();
                 // end;
             }
@@ -89,7 +89,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
 
         use crate::section_0004::TeXGlobalsIoView;
         use crate::section_0304::terminal_input;
-        use crate::section_0297::cur_chr_type;
+        use crate::section_0297::chr_code_type;
         use crate::section_0073::nonstop_mode;
         use crate::section_0057::print_ln;
         use crate::section_0062::print_nl;

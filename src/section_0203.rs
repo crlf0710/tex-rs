@@ -18,7 +18,7 @@
 macro_rules! add_token_ref {
     ($globals:expr, $token:expr) => {
         incr!(token_ref_count!($globals, $token))
-    }
+    };
 }
 // @d add_glue_ref(#)==incr(glue_ref_count(#)) {new reference to a glue spec}
 /// new reference to a glue spec
@@ -26,5 +26,5 @@ macro_rules! add_token_ref {
 macro_rules! add_glue_ref {
     ($globals:expr, $glue:expr) => {
         incr!(glue_ref_count!($globals, $glue))
-    }
+    };
 }

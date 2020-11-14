@@ -18,14 +18,14 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
     if *globals.selector == term_and_log {
         wterm(make_globals_io_view!(globals), xchr(s));
         wlog(make_globals_io_view!(globals), xchr(s));
-        // incr(term_offset); incr(file_offset);
-        // if term_offset=max_print_line then
-        //   begin wterm_cr; term_offset:=0;
-        //   end;
-        // if file_offset=max_print_line then
-        //   begin wlog_cr; file_offset:=0;
-        //   end;
-        // end;
+    // incr(term_offset); incr(file_offset);
+    // if term_offset=max_print_line then
+    //   begin wterm_cr; term_offset:=0;
+    //   end;
+    // if file_offset=max_print_line then
+    //   begin wlog_cr; file_offset:=0;
+    //   end;
+    // end;
     }
     // log_only: begin wlog(xchr[s]); incr(file_offset);
     else if *globals.selector == log_only {
@@ -41,7 +41,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
         if *globals.term_offset == max_print_line {
             print_ln(make_globals_io_view!(globals));
         }
-        // end;
+    // end;
     }
     // no_print: do_nothing;
     else if *globals.selector == no_print {
@@ -74,8 +74,8 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
 use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsStringView;
-use crate::section_0011::pool_size;
 use crate::section_0011::max_print_line;
+use crate::section_0011::pool_size;
 use crate::section_0018::ASCII_code;
 use crate::section_0020::xchr;
 use crate::section_0042::append_char;

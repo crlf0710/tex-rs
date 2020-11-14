@@ -29,7 +29,7 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
                 $globals.cur_cs = cs;
                 // cur_cmd:=eq_type(cur_cs); cur_chr:=equiv(cur_cs);
                 $globals.cur_cmd = eq_type!($globals, $globals.cur_cs);
-                $globals.cur_chr = cur_chr_type::new(equiv!($globals, $globals.cur_cs) as _);
+                $globals.cur_chr = chr_code_type::new(equiv!($globals, $globals.cur_cs) as _);
                 // if cur_cmd>=outer_call then
                 if $globals.cur_cmd >= outer_call {
                     // if cur_cmd=dont_expand then
@@ -78,7 +78,7 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
         use crate::section_0210::outer_call;
         use crate::section_0289::cs_token_flag;
         use crate::section_0297::cur_tok_type;
-        use crate::section_0297::cur_chr_type;
+        use crate::section_0297::chr_code_type;
         use crate::section_0324::end_token_list;
         use crate::section_0115::null;
     }}

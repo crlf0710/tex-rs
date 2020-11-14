@@ -5,13 +5,20 @@
 // @p procedure eq_word_define(@!p:pointer;@!w:integer);
 #[allow(unused_variables)]
 pub(crate) fn eq_word_define(globals: &mut TeXGlobals, p:pointer, w:integer) {
-// begin if xeq_level[p]<>cur_level then
-//   begin eq_save(p,xeq_level[p]); xeq_level[p]:=cur_level;
-//   end;
-// eqtb[p].int:=w;
-// end;
+    // begin if xeq_level[p]<>cur_level then
+    if globals.xeq_level[p] != globals.cur_level {
+        // begin eq_save(p,xeq_level[p]); xeq_level[p]:=cur_level;
+        eq_save(globals, p, globals.xeq_level[p]);
+        globals.xeq_level[p] = globals.cur_level;
+        // end;
+    }
+    // eqtb[p].int:=w;
+    globals.eqtb[p][MEMORY_WORD_INT] = w;
+    // end;
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0113::MEMORY_WORD_INT;
 use crate::section_0115::pointer;
+use crate::section_0276::eq_save;

@@ -19,7 +19,7 @@
 // @d fatal_error_stop=3 {|history| value when termination was premature}
 
 #[doc(hidden)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 pub(crate) enum history_kind {
     /// `history` value when nothing has been amiss yet
     spotless = 0,

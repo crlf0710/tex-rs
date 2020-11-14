@@ -33,6 +33,8 @@ pub(crate) const assign_mu_glue: quarterword = 76;
 /// define a character code ( `\catcode`, etc. )
 pub(crate) const def_code: quarterword = 85;
 // @d def_family=86 {declare math fonts ( \.{\\textfont}, etc.~)}
+/// declare math fonts ( `\textfont`, etc. )
+pub(crate) const def_family: quarterword = 86;
 // @d set_font=87 {set current font ( font identifiers )}
 // @d def_font=88 {define a font file ( \.{\\font} )}
 // @d register=89 {internal register ( \.{\\count}, \.{\\dimen}, etc.~)}

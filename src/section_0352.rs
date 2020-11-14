@@ -12,19 +12,19 @@ macro_rules! hex_to_cur_chr {
     ($globals:expr, $c:expr, $cc:expr) => {{
         // if c<="9" then cur_chr:=c-"0" @+else cur_chr:=c-"a"+10;
         if $c <= b'9' as _ {
-            $globals.cur_chr = cur_chr_type::new($c - b'0' as cur_chr_type_repr);
+            $globals.cur_chr = chr_code_type::new($c - b'0' as chr_code_repr);
         } else {
-            $globals.cur_chr = cur_chr_type::new($c - b'a' as cur_chr_type_repr + 10);
+            $globals.cur_chr = chr_code_type::new($c - b'a' as chr_code_repr + 10);
         }
         // if cc<="9" then cur_chr:=16*cur_chr+cc-"0"
         if $cc <= b'9' as _ {
-            $globals.cur_chr = cur_chr_type::new(16 * $globals.cur_chr.get() + $cc - b'0' as cur_chr_type_repr)
+            $globals.cur_chr = chr_code_type::new(16 * $globals.cur_chr.get() + $cc - b'0' as chr_code_repr)
         }
         // else cur_chr:=16*cur_chr+cc-"a"+10
         else {
-            $globals.cur_chr = cur_chr_type::new(16 * $globals.cur_chr.get() - b'a' as cur_chr_type_repr + 10)
+            $globals.cur_chr = chr_code_type::new(16 * $globals.cur_chr.get() - b'a' as chr_code_repr + 10)
         }
-        use crate::section_0297::cur_chr_type_repr;
+        use crate::section_0297::chr_code_repr;
     }}
 }
 
@@ -62,9 +62,9 @@ macro_rules! If_this_sup_mark_starts_an_expanded_character_like___A__or__df__the
                     }
                     // if c<@'100 then cur_chr:=c+@'100 @+else cur_chr:=c-@'100;
                     if c < 0o100 {
-                        $globals.cur_chr = cur_chr_type::new(c + 0o100);
+                        $globals.cur_chr = chr_code_type::new(c + 0o100);
                     } else {
-                        $globals.cur_chr = cur_chr_type::new(c - 0o100);
+                        $globals.cur_chr = chr_code_type::new(c - 0o100);
                     }
                     // goto reswitch;
                     goto_backward_label!($lbl_reswitch);
@@ -76,7 +76,7 @@ macro_rules! If_this_sup_mark_starts_an_expanded_character_like___A__or__df__the
             state!($globals) = mid_line;
             // end
         }
-        use crate::section_0297::cur_chr_type;
+        use crate::section_0297::chr_code_type;
     }}
 }
 

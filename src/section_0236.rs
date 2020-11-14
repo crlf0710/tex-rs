@@ -46,6 +46,8 @@ pub(crate) const year_code: halfword = 23;
 // @d vbadness_code=27 {vboxes exceeding this badness will be shown by |vpack|}
 // @d pausing_code=28 {pause after each line is read from a file}
 // @d tracing_online_code=29 {show diagnostic output on terminal}
+/// show diagnostic output on terminal
+pub(crate) const tracing_online_code: halfword = 29;
 // @d tracing_macros_code=30 {show macros as they are being expanded}
 // @d tracing_stats_code=31 {show memory usage if \TeX\ knows it}
 // @d tracing_paragraphs_code=32 {show line-break calculations}
@@ -156,6 +158,11 @@ macro_rules! year {
 // @d vbadness==int_par(vbadness_code)
 // @d pausing==int_par(pausing_code)
 // @d tracing_online==int_par(tracing_online_code)
+macro_rules! tracing_online {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_online_code)
+    };
+}
 // @d tracing_macros==int_par(tracing_macros_code)
 // @d tracing_stats==int_par(tracing_stats_code)
 // @d tracing_paragraphs==int_par(tracing_paragraphs_code)

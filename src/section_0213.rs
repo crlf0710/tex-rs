@@ -50,6 +50,19 @@ pub(crate) static cur_list: list_state_record = list_state_record::default();
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0212::list_state_record;
 // @!shown_mode:-mmode..mmode; {most recent mode shown by \.{\\tracingcommands}}
+/// most recent mode shown by `\tracingcommands`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static shown_mode: i16_from_m_to_n<mmode_NEG_TYPENUM, mmode_POS_TYPENUM> =
+    i16_from_m_to_n::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::i16_from_m_to_n;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0211::mmode_NEG_TYPENUM;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0211::mmode_POS_TYPENUM;
 
 use crate::pascal::u8_from_0_to_n;
 use crate::section_0004::TeXGlobals;

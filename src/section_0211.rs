@@ -48,22 +48,51 @@ pub(crate) type mmode_POS_TYPENUM = typenum::op!(hmode_POS_TYPENUM + max_command
 pub(crate) type mmode_NEG_TYPENUM = typenum::op!(mmode_POS_TYPENUM * N1);
 
 // @p procedure print_mode(@!m:integer); {prints the mode represented by |m|}
-// begin if m>0 then
-//   case m div (max_command+1) of
-//   0:print("vertical");
-//   1:print("horizontal");
-//   2:print("display math");
-//   end
-// else if m=0 then print("no")
-// else  case (-m) div (max_command+1) of
-//   0:print("internal vertical");
-//   1:print("restricted horizontal");
-//   2:print("math");
-//   end;
-// print(" mode");
-// end;
-//
+/// prints the mode represented by `m`
+#[allow(unused_variables)]
+pub(crate) fn print_mode(globals: &mut TeXGlobals, m: integer) {
+    // begin if m>0 then
+    if m > 0 {
+        // case m div (max_command+1) of
+        match m / (max_command + 1) as integer {
+            // 0:print("vertical");
+            0 => print(globals, strpool_str!("vertical").get() as _),
+            // 1:print("horizontal");
+            1 => print(globals, strpool_str!("horizontal").get() as _),
+            // 2:print("display math");
+            2 => print(globals, strpool_str!("display math").get() as _),
+            _ => unreachable!(),
+        }
+        // end
+    }
+    // else if m=0 then print("no")
+    else if m == 0 {
+        print(globals, strpool_str!("no").get() as _);
+    }
+    // else  case (-m) div (max_command+1) of
+    else {
+        match (-m) / (max_command + 1) as integer {
+            // 0:print("internal vertical");
+            0 => print(globals, strpool_str!("internal vertical").get() as _),
+            // 1:print("restricted horizontal");
+            1 => print(globals, strpool_str!("restricted horizontal").get() as _),
+            // 2:print("math");
+            2 => print(globals, strpool_str!("math").get() as _),
+            _ => unreachable!(),
+        }
+        // end;
+    }
+    // print(" mode");
+    print(globals, strpool_str!(" mode").get() as _);
+    // end;
+}
 
+use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;
+use crate::section_0059::print;
 use crate::section_0209::max_command_POS_TYPENUM;
+use crate::section_0209::max_command;
 use typenum::Integer;
 use typenum::{N1, P1};
+
+migration_complete!();

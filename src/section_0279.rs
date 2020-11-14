@@ -19,13 +19,16 @@ todo!();
 /// global `eq_word_define`
 #[allow(unused_variables)]
 pub(crate) fn geq_word_define(globals: &mut TeXGlobals, p: pointer, w: integer) {
-// begin eqtb[p].int:=w; xeq_level[p]:=level_one;
-// end;
-    todo!("geq_word_define");
+    // begin eqtb[p].int:=w; xeq_level[p]:=level_one;
+    globals.eqtb[p][MEMORY_WORD_INT] = w;
+    globals.xeq_level[p] = level_one;
+    // end;
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
+use crate::section_0113::MEMORY_WORD_INT;
 use crate::section_0115::pointer;
+use crate::section_0221::level_one;

@@ -53,10 +53,10 @@ pub(crate) static cur_cmd: eight_bits = eight_bits::default();
 // @!cur_chr: halfword; {operand of current command}
 #[globals_struct_field(TeXGlobals)]
 /// operand of current command
-pub(crate) static cur_chr: cur_chr_type = cur_chr_type::default();
+pub(crate) static cur_chr: chr_code_type = chr_code_type::default();
 
 #[globals_struct_use(TeXGlobals)]
-use crate::section_0297::cur_chr_type;
+use crate::section_0297::chr_code_type;
 
 // @!cur_cs: pointer; {control sequence found here, zero if none found}
 #[globals_struct_field(TeXGlobals)]
@@ -82,21 +82,21 @@ use crate::section_0115::pointer;
 use globals_struct::{globals_struct_field, globals_struct_use};
 
 #[cfg(not(feature = "unicode_support"))]
-pub(crate) type cur_chr_type_repr = halfword;
+pub(crate) type chr_code_repr = halfword;
 
 #[cfg(feature = "unicode_support")]
-pub(crate) type cur_chr_type_repr = word;
+pub(crate) type chr_code_repr = word;
 
 #[derive(Copy, Clone, Default, Debug)]
-pub(crate) struct cur_chr_type(cur_chr_type_repr);
+pub(crate) struct chr_code_type(chr_code_repr);
 
-impl cur_chr_type {
-    pub(crate) fn new(val: cur_chr_type_repr) -> Self {
-        cur_chr_type(val)
+impl chr_code_type {
+    pub(crate) fn new(val: chr_code_repr) -> Self {
+        chr_code_type(val)
     }
 
     pub(crate) fn new_zero() -> Self {
-        cur_chr_type(0)
+        chr_code_type(0)
     }
 
     #[allow(non_snake_case)]
@@ -108,19 +108,19 @@ impl cur_chr_type {
         self.0 == 0
     }
 
-    pub(crate) const fn get(&self) -> cur_chr_type_repr {
+    pub(crate) const fn get(&self) -> chr_code_repr {
         self.0
     }
 }
 
-impl From<ASCII_code> for cur_chr_type {
+impl From<ASCII_code> for chr_code_type {
     fn from(v: ASCII_code) -> Self {
-        cur_chr_type(v.0 as _)
+        chr_code_type(v.0 as _)
     }
 }
 
-impl From<cur_chr_type> for ASCII_code {
-    fn from(v: cur_chr_type) -> Self {
+impl From<chr_code_type> for ASCII_code {
+    fn from(v: chr_code_type) -> Self {
         ASCII_code(v.0 as _)
     }
 }
@@ -151,7 +151,7 @@ impl cur_tok_type {
         cur_tok_type(val)
     }
 
-    pub(crate) fn from_cmd_and_chr(cmd: eight_bits, chr: cur_chr_type) -> Self {
+    pub(crate) fn from_cmd_and_chr(cmd: eight_bits, chr: chr_code_type) -> Self {
         cur_tok_type(
             cmd as cur_tok_type_repr * cur_tok_type_cmd_multiplier + chr.0 as cur_tok_type_repr,
         )
@@ -165,11 +165,11 @@ impl cur_tok_type {
         self.0
     }
 
-    pub(crate) fn get_cmd_and_chr(&self) -> Option<(eight_bits, cur_chr_type)> {
+    pub(crate) fn get_cmd_and_chr(&self) -> Option<(eight_bits, chr_code_type)> {
         if self.0 < cs_token_flag.0 {
             Some((
                 (self.0 / cur_tok_type_cmd_multiplier) as eight_bits,
-                cur_chr_type::new((self.0 % cur_tok_type_cmd_multiplier) as _),
+                chr_code_type::new((self.0 % cur_tok_type_cmd_multiplier) as _),
             ))
         } else {
             None
