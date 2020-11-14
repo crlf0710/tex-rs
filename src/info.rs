@@ -190,3 +190,14 @@ macro_rules! trace_expr {
         }
     };
 }
+
+#[allow(unused_macros)]
+macro_rules! trace_debug_expr {
+    ($($x:tt)*) => {
+        #[cfg(feature = "trace")]
+        {
+            tracing::debug!($($x)*);
+        }
+    };
+}
+

@@ -20,15 +20,29 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
     // begin @<Finish the extensions@>;
     // @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
     // wake_up_terminal; @<Finish the \.{DVI} file@>;
+    wake_up_terminal(globals);
+    Finish_the_DVI_file!(globals);
     // if log_opened then
-    //   begin wlog_cr; a_close(log_file); selector:=selector-2;
-    //   if selector=term_only then
-    //     begin print_nl("Transcript written on ");
-    // @.Transcript written...@>
-    //     slow_print(log_name); print_char(".");
-    //     end;
-    //   end;
+    if globals.log_opened {
+        // begin wlog_cr; a_close(log_file); selector:=selector-2;
+        wlog_cr(globals);
+        a_close(&mut globals.log_file);
+        globals.selector = globals.selector - 2;
+        // if selector=term_only then
+        if globals.selector == term_only {
+            todo!();
+            // begin print_nl("Transcript written on ");
+            // @.Transcript written...@>
+            // slow_print(log_name); print_char(".");
+            // end;
+        }
+        // end;
+    }
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0028::a_close;
+use crate::section_0034::wake_up_terminal;
+use crate::section_0054::term_only;
+use crate::section_0056::wlog_cr;
