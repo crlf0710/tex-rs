@@ -34,7 +34,7 @@ pub(crate) fn scan_toks(
     // label found,done,done1,done2;
     // var t:halfword; {token representing the highest parameter number}
     /// token representing the highest parameter number
-    let t: halfword;
+    let mut t: cur_tok_type_repr;
     // @!s:halfword; {saved token}
     // @!p:pointer; {tail of the token list being built}
     /// tail of the token list being built
@@ -47,7 +47,7 @@ pub(crate) fn scan_toks(
     let mut unbalance: halfword;
     // @!hash_brace:halfword; {possible `\.{\#\{}' token}
     /// possible `#{` token
-    let hash_brace: halfword;
+    let mut hash_brace: cur_tok_type_repr;
     // begin if macro_def then scanner_status:=defining
     // @+else scanner_status:=absorbing;
     // warning_index:=cur_cs; def_ref:=get_avail; token_ref_count(def_ref):=null;
@@ -58,9 +58,10 @@ pub(crate) fn scan_toks(
     p = globals.def_ref;
     hash_brace = 0;
     t = zero_token as _;
+    trace_expr!("t = zero_token = {}", t);
     // if macro_def then @<Scan and build the parameter part of the macro definition@>
     if macro_def {
-        Scan_and_build_the_parameter_part_of_the_macro_definition!(globals, p, q);
+        Scan_and_build_the_parameter_part_of_the_macro_definition!(globals, t, hash_brace, p, q);
     }
     // else scan_left_brace; {remove the compulsory left brace}
     else {
@@ -94,6 +95,8 @@ use crate::section_0113::halfword;
 use crate::section_0115::pointer;
 use crate::section_0115::null;
 use crate::section_0120::get_avail;
+use crate::section_0297::cur_tok_type_repr;
 use crate::section_0305::scanner_status_kind;
+use crate::section_0380::get_x_token;
 use crate::section_0403::scan_left_brace;
 use crate::section_0445::zero_token;

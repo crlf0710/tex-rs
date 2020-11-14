@@ -1,39 +1,3 @@
-//! @ Here we use the fact that the consecutive codes |int_val..mu_val| and
-//! |assign_int..assign_mu_glue| correspond to each other nicely.
-//!
-//! @<Compute the register location |l| and its type |p|...@>=
-//! begin if q<>register then
-//!   begin get_x_token;
-//!   if (cur_cmd>=assign_int)and(cur_cmd<=assign_mu_glue) then
-//!     begin l:=cur_chr; p:=cur_cmd-assign_int; goto found;
-//!     end;
-//!   if cur_cmd<>register then
-//!     begin print_err("You can't use `"); print_cmd_chr(cur_cmd,cur_chr);
-//! @.You can't use x after ...@>
-//!     print("' after "); print_cmd_chr(q,0);
-//!     help1("I'm forgetting what you said and not changing anything.");
-//!     error; return;
-//!     end;
-//!   end;
-//! p:=cur_chr; scan_eight_bit_int;
-//! case p of
-//! int_val: l:=cur_val+count_base;
-//! dimen_val: l:=cur_val+scaled_base;
-//! glue_val: l:=cur_val+skip_base;
-//! mu_val: l:=cur_val+mu_skip_base;
-//! end; {there are no other cases}
-//! end;
-//! found:
-//!
-//! @ @<Compute result of |register| or |advance|...@>=
-//! if p<glue_val then
-//!   begin if p=int_val then scan_int@+else scan_normal_dimen;
-//!   if q=advance then cur_val:=cur_val+eqtb[l].int;
-//!   end
-//! else  begin scan_glue(p);
-//!   if q=advance then @<Compute the sum of two glue specs@>;
-//!   end
-//!
 //! @ @<Compute the sum of two glue specs@>=
 //! begin q:=new_spec(cur_val); r:=equiv(l);
 //! delete_glue_ref(cur_val);

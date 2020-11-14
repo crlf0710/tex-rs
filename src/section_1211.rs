@@ -13,7 +13,15 @@ macro_rules! Assignments {
             /// already processed
             do_nothing!();
             true
+        } else if Assignments_1221!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
         } else if Assignments_1224!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
+        } else if Assignments_1228!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();
             true
@@ -91,4 +99,6 @@ use crate::section_0095::confusion;
 use crate::section_0209::*;
 use crate::section_0210::*;
 use crate::section_0208::max_non_prefixed_command;
+use crate::section_0405::scan_optional_equals;
+use crate::section_0440::scan_int;
 use crate::section_0081::JumpOutToEndOfTEX;

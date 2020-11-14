@@ -29,14 +29,33 @@ macro_rules! Assignments_1224 {
             }
             // othercases begin scan_eight_bit_int;
             else {
-                todo!();
+                scan_eight_bit_int($globals)?;
                 //   case n of
                 //   count_def_code: define(p,assign_int,count_base+cur_val);
+                if n == count_def_code as _ {
+                    define!($globals, $a, p as _, assign_int, (count_base as integer + $globals.cur_val) as _);
+                }
                 //   dimen_def_code: define(p,assign_dimen,scaled_base+cur_val);
+                else if n == dimen_def_code as _ {
+                    define!($globals, $a, p as _, assign_dimen, (scaled_base as integer + $globals.cur_val) as _);
+                }
                 //   skip_def_code: define(p,assign_glue,skip_base+cur_val);
+                else if n == skip_def_code as _ {
+                    define!($globals, $a, p as _, assign_glue, (skip_base as integer + $globals.cur_val) as _)
+                }
                 //   mu_skip_def_code: define(p,assign_mu_glue,mu_skip_base+cur_val);
+                else if n == mu_skip_def_code as _ {
+                    define!($globals, $a, p as _, assign_mu_glue, (mu_skip_base as integer + $globals.cur_val) as _)
+                }
                 //   toks_def_code: define(p,assign_toks,toks_base+cur_val);
+                else if n == toks_def_code as _ {
+                    define!($globals, $a, p as _, assign_toks, (toks_base as integer + $globals.cur_val) as _)
+                }
                 //   end; {there are no other cases}
+                else {
+                    /// there are no other cases
+                    unreachable!("1224");
+                }
                 //   end
                 // endcases;
             }
@@ -44,12 +63,23 @@ macro_rules! Assignments_1224 {
             use crate::section_0207::relax;
             use crate::section_0208::char_given;
             use crate::section_0208::math_given;
+            use crate::section_0224::skip_base;
+            use crate::section_0224::mu_skip_base;
+            use crate::section_0230::toks_base;
+            use crate::section_0236::count_base;
+            use crate::section_0247::scaled_base;
             use crate::section_0405::scan_optional_equals;
+            use crate::section_0433::scan_eight_bit_int;
             use crate::section_0434::scan_char_num;
             use crate::section_0436::scan_fifteen_bit_int;
             use crate::section_1215::get_r_token;
             use crate::section_1222::char_def_code;
             use crate::section_1222::math_char_def_code;
+            use crate::section_1222::count_def_code;
+            use crate::section_1222::dimen_def_code;
+            use crate::section_1222::skip_def_code;
+            use crate::section_1222::mu_skip_def_code;
+            use crate::section_1222::toks_def_code;
             true
         } else {
             false

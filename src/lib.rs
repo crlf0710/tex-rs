@@ -63,6 +63,7 @@
     unused_imports,
     unused_doc_comments
 )]
+#![allow(unreachable_code)]
 //! This is `TeX`, a document compiler intended to produce typesetting of high quality.
 
 #[macro_use]
@@ -227,7 +228,9 @@ mod section_0199;
 #[macro_use]
 mod section_0200;
 mod section_0201_to_0202;
-mod section_0203_to_0206;
+#[macro_use]
+mod section_0203;
+mod section_0204_to_0206;
 mod section_0207;
 mod section_0208;
 mod section_0209;
@@ -474,7 +477,8 @@ reversing_order_items!(
         mod section_0412;
         mod section_0413;
         mod section_0414;
-        mod section_0415_to_0433;
+        mod section_0415_to_0432;
+        mod section_0433;
         mod section_0434;
         mod section_0435;
         mod section_0436;
@@ -512,7 +516,9 @@ reversing_order_items!(
             {
                 #[macro_use]
                 mod section_0474;
-                mod section_0475_to_0476;
+                mod section_0475;
+                #[macro_use]
+                mod section_0476;
                 #[macro_use]
                 mod section_0477;
             }
@@ -520,8 +526,12 @@ reversing_order_items!(
                 #[macro_use]
                 mod section_0478;
             }
+            {
+                #[macro_use]
+                mod section_0479;        
+            }
         );
-        mod section_0479_to_0486;
+        mod section_0480_to_0486;
         mod section_0487_to_0510;
         mod section_0511;
         mod section_0512;
@@ -678,33 +688,47 @@ reversing_order_items!(
         mod section_1215;
         mod section_1216;
         mod section_1217;
-        #[macro_use]
-        mod section_1218;
-        mod section_1219;
-        mod section_1220;
-        mod section_1221;
-        mod section_1222;
-        mod section_1223;
-        #[macro_use]
-        mod section_1224;
-        mod section_1225_to_1229;
-        mod section_1230;
-        mod section_1231;
+        reversing_order_items!(
+            {
+                #[macro_use]
+                mod section_1218;
+                mod section_1219;
+                mod section_1220;
+                #[macro_use]
+                mod section_1221;
+                mod section_1222;
+                mod section_1223;
+                #[macro_use]
+                mod section_1224;
+                mod section_1225_to_1227;
+                #[macro_use]
+                mod section_1228;
+                mod section_1229;
+                mod section_1230;
+                mod section_1231;
+            }
+            {
+                #[macro_use]
+                mod section_1232;
+            }
+            {
+                #[macro_use]
+                mod section_1233;
+            }
+            {
+                mod section_1234;
+                #[macro_use]
+                mod section_1235;
+                mod section_1236;
+            }
+        );        
     }
     {
         #[macro_use]
-        mod section_1232;
-    }
-    {
+        mod section_1237;
         #[macro_use]
-        mod section_1233;
-    }
-    {
-        mod section_1234;
-        #[macro_use]
-        mod section_1235;
-        mod section_1236;
-        mod section_1237_to_1275;
+        mod section_1238;
+        mod section_1239_to_1275;
         #[macro_use]
         mod section_1276;
     }

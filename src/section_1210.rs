@@ -39,8 +39,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         if false ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, toks_register as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_toks as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_int as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_dimen as u16) ||
+        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_int as u16) ||
+        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_dimen as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_glue as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_mu_glue as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_font_dimen as u16) ||
@@ -60,8 +60,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, multiply as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, divide as u16) ||
         */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, prefix as u16) ||
-        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, r#let as u16) ||
-        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, shorthand_def as u16) ||
+        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, r#let as u16) ||
+        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, shorthand_def as u16) ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, read_to_cs as u16) ||
         */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def as u16) ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_box as u16) ||

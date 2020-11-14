@@ -69,6 +69,8 @@ pub(crate) const active_char: quarterword = 13;
 /// end of paragraph ( `\par` )
 pub(crate) const par_end: quarterword = 13;
 // @d match=13 {match a macro parameter}
+/// match a macro parameter
+pub(crate) const r#match: quarterword = 13;
 // @d comment=14 {characters that introduce comments ( \.\% )}
 /// characters that introduce comments ( `%` )
 pub(crate) const comment: quarterword = 14;

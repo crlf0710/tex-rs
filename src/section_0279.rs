@@ -21,7 +21,7 @@ todo!();
 pub(crate) fn geq_word_define(globals: &mut TeXGlobals, p: pointer, w: integer) {
 // begin eqtb[p].int:=w; xeq_level[p]:=level_one;
 // end;
-    todo!();
+    todo!("geq_word_define");
 }
 
 use crate::pascal::integer;

@@ -52,30 +52,3 @@
 //!   end;
 //! end
 //!
-//! @ Similar routines are used to assign values to the numeric parameters.
-//!
-//! @<Assignments@>=
-//! assign_int: begin p:=cur_chr; scan_optional_equals; scan_int;
-//!   word_define(p,cur_val);
-//!   end;
-//! assign_dimen: begin p:=cur_chr; scan_optional_equals;
-//!   scan_normal_dimen; word_define(p,cur_val);
-//!   end;
-//! assign_glue,assign_mu_glue: begin p:=cur_chr; n:=cur_cmd; scan_optional_equals;
-//!   if n=assign_mu_glue then scan_glue(mu_val)@+else scan_glue(glue_val);
-//!   trap_zero_glue;
-//!   define(p,glue_ref,cur_val);
-//!   end;
-//!
-//! @ When a glue register or parameter becomes zero, it will always point to
-//! |zero_glue| because of the following procedure. (Exception: The tabskip
-//! glue isn't trapped while preambles are being scanned.)
-//!
-//! @<Declare subprocedures for |prefixed_command|@>=
-//! procedure trap_zero_glue;
-//! begin if (width(cur_val)=0)and(stretch(cur_val)=0)and(shrink(cur_val)=0) then
-//!   begin add_glue_ref(zero_glue);
-//!   delete_glue_ref(cur_val); cur_val:=zero_glue;
-//!   end;
-//! end;
-//!

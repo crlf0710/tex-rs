@@ -224,14 +224,3 @@
 //! applications of |scan_int| that have already been made inside of
 //! |scan_something_internal|.
 //!
-//! @ @<Declare procedures that scan restricted classes of integers@>=
-//! procedure scan_eight_bit_int;
-//! begin scan_int;
-//! if (cur_val<0)or(cur_val>255) then
-//!   begin print_err("Bad register code");
-//! @.Bad register code@>
-//!   help2("A register number must be between 0 and 255.")@/
-//!     ("I changed this one to zero."); int_error(cur_val); cur_val:=0;
-//!   end;
-//! end;
-//!

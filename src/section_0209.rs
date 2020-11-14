@@ -5,10 +5,20 @@
 //
 // @d toks_register=71 {token list register ( \.{\\toks} )}
 // @d assign_toks=72 {special token list ( \.{\\output}, \.{\\everypar}, etc.~)}
+/// special token list ( `\output`, `\everypar`, etc.)
+pub(crate) const assign_toks: quarterword = 72;
 // @d assign_int=73 {user-defined integer ( \.{\\tolerance}, \.{\\day}, etc.~)}
+/// user-defined integer ( `\tolerance`, `\day`, etc.)
+pub(crate) const assign_int: quarterword = 73;
 // @d assign_dimen=74 {user-defined length ( \.{\\hsize}, etc.~)}
+/// user-defined length ( `\hsize`, etc.)
+pub(crate) const assign_dimen: quarterword = 74;
 // @d assign_glue=75 {user-defined glue ( \.{\\baselineskip}, etc.~)}
+/// user-defined glue ( `\baselineskip`, etc.)
+pub(crate) const assign_glue: quarterword = 75;
 // @d assign_mu_glue=76 {user-defined muglue ( \.{\\thinmuskip}, etc.~)}
+/// user-defined muglue ( `\thinmuskip`, etc.)
+pub(crate) const assign_mu_glue: quarterword = 76;
 // @d assign_font_dimen=77 {user-defined font dimension ( \.{\\fontdimen} )}
 // @d assign_font_int=78 {user-defined font integer ( \.{\\hyphenchar},
 //   \.{\\skewchar} )}
@@ -44,6 +54,8 @@ pub(crate) const divide: quarterword = 92;
 /// qualify a definition ( `\global`, `\long`, `\outer` )
 pub(crate) const prefix: quarterword = 93;
 // @d let=94 {assign a command code ( \.{\\let}, \.{\\futurelet} )}
+/// assign a command code ( `\let`, `\futurelet` )
+pub(crate) const r#let: quarterword = 94;
 // @d shorthand_def=95 {code definition ( \.{\\chardef}, \.{\\countdef}, etc.~)}
 /// code definition ( `\chardef`, `\countdef`, etc.)
 pub(crate) const shorthand_def: quarterword = 95;

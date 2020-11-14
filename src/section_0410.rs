@@ -33,6 +33,7 @@
 // @d ident_val=4 {font identifier}
 // @d tok_val=5 {token lists}
 #[doc(hidden)]
+#[derive(Copy, Clone, PartialEq, PartialOrd)]
 pub(crate) enum cur_val_level_kind {
     /// integer values
     int_val = 0,
@@ -46,6 +47,31 @@ pub(crate) enum cur_val_level_kind {
     ident_val = 4,
     /// token lists
     tok_val = 5,
+}
+
+impl From<u8> for cur_val_level_kind {
+    fn from(val: u8) -> Self {
+        use cur_val_level_kind::*;
+        if val == int_val as _ {
+            return int_val;
+        }
+        if val == dimen_val as _ {
+            return dimen_val;
+        }
+        if val == glue_val as _ {
+            return glue_val;
+        }
+        if val == mu_val as _ {
+            return mu_val;
+        }
+        if val == ident_val as _ {
+            return ident_val;
+        }
+        if val == tok_val as _ {
+            return tok_val;
+        }
+        unreachable!()
+    }
 }
 
 #[doc(inline)]

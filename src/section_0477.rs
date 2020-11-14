@@ -35,7 +35,7 @@ macro_rules! Scan_and_build_the_body_of_the_token_list__goto_found_when_finished
             else if $globals.cur_cmd == mac_param {
                 // if macro_def then @<Look for parameter number or \.{\#\#}@>;
                 if $macro_def {
-                    todo!();
+                    Look_for_parameter_number_or_sharpsharp!($globals, $xpand);
                 }
             }
             // store_new_token(cur_tok);

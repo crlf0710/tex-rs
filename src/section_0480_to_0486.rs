@@ -1,19 +1,3 @@
-//! @ @<Look for parameter number...@>=
-//! begin s:=cur_tok;
-//! if xpand then get_x_token else get_token;
-//! if cur_cmd<>mac_param then
-//!   if (cur_tok<=zero_token)or(cur_tok>t) then
-//!     begin print_err("Illegal parameter number in definition of ");
-//! @.Illegal parameter number...@>
-//!     sprint_cs(warning_index);
-//!     help3("You meant to type ## instead of #, right?")@/
-//!     ("Or maybe a } was forgotten somewhere earlier, and things")@/
-//!     ("are all screwed up? I'm going to assume that you meant ##.");
-//!     back_error; cur_tok:=s;
-//!     end
-//!   else cur_tok:=out_param_token-"0"+cur_chr;
-//! end
-//!
 //! @ Another way to create a token list is via the \.{\\read} command. The
 //! sixteen files potentially usable for reading appear in the following
 //! global variables. The value of |read_open[n]| will be |closed| if

@@ -15,10 +15,18 @@ pub(crate) const math_char_def_code: halfword = 1;
 /// `shorthand_def` for `\countdef`
 pub(crate) const count_def_code: halfword = 2;
 // @d dimen_def_code=3 {|shorthand_def| for \.{\\dimendef}}
+/// `shorthand_def` for `\dimendef`
+pub(crate) const dimen_def_code: halfword = 3;
 // @d skip_def_code=4 {|shorthand_def| for \.{\\skipdef}}
+/// `shorthand_def` for `\skipdef`
+pub(crate) const skip_def_code: halfword = 4;
 // @d mu_skip_def_code=5 {|shorthand_def| for \.{\\muskipdef}}
+/// `shorthand_def` for `\muskipdef`
+pub(crate) const mu_skip_def_code: halfword = 5;
 // @d toks_def_code=6 {|shorthand_def| for \.{\\toksdef}}
-//
+/// `shorthand_def` for `\toksdef`
+pub(crate) const toks_def_code: halfword = 6;
+
 // @<Put each...@>=
 #[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
@@ -33,12 +41,16 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1222(globals: &m
     primitive(globals, strpool_str!("countdef"), shorthand_def, count_def_code);
     // @!@:count_def_}{\.{\\countdef} primitive@>
     // primitive("dimendef",shorthand_def,dimen_def_code);@/
+    primitive(globals, strpool_str!("dimendef"), shorthand_def, dimen_def_code);
     // @!@:dimen_def_}{\.{\\dimendef} primitive@>
     // primitive("skipdef",shorthand_def,skip_def_code);@/
+    primitive(globals, strpool_str!("skipdef"), shorthand_def, skip_def_code);
     // @!@:skip_def_}{\.{\\skipdef} primitive@>
     // primitive("muskipdef",shorthand_def,mu_skip_def_code);@/
+    primitive(globals, strpool_str!("muskipdef"), shorthand_def, mu_skip_def_code);
     // @!@:mu_skip_def_}{\.{\\muskipdef} primitive@>
     // primitive("toksdef",shorthand_def,toks_def_code);@/
+    primitive(globals, strpool_str!("toksdef"), shorthand_def, toks_def_code);
     // @!@:toks_def_}{\.{\\toksdef} primitive@>
 }
 

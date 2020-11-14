@@ -38,4 +38,12 @@ pub(crate) const depth_offset: quarterword = 2;
 // @d glue_set(#) == mem[#+glue_offset].gr
 //   {a word of type |glue_ratio| for glue setting}
 
+#[derive(Copy, Clone)]
+pub(crate) enum let_kind {
+    /// `normal` value for `let`
+    normal = 0,
+    /// `futurelet` value for `futurelet`
+    futurelet = 1,
+}
+
 use crate::section_0113::quarterword;
