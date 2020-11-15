@@ -21,12 +21,16 @@ pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> 
         scan_optional_equals(globals)?;
     }
     // else if scan_keyword("by") then do_nothing; {optional `\.{by}'}
+    else if scan_keyword(globals, strpool_str!("by"))? {
+        /// optional `by`
+        do_nothing!();
+    }
     // @.by@>
     // arith_error:=false;
     // if q<multiply then @<Compute result of |register| or
     //     |advance|, put it in |cur_val|@>
     if q < multiply as _ {
-        Compute_result_of_register_or_advance_put_it_in_cur_val!(globals, p, q);
+        Compute_result_of_register_or_advance_put_it_in_cur_val!(globals, l, p, q);
     }
     // else @<Compute result of |multiply| or |divide|, put it in |cur_val|@>;
     else {
@@ -65,4 +69,5 @@ use crate::section_0115::pointer;
 use crate::section_0209::register;
 use crate::section_0209::multiply;
 use crate::section_0405::scan_optional_equals;
+use crate::section_0407::scan_keyword;
 use crate::section_0410::cur_val_level_kind;

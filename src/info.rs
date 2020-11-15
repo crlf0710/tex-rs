@@ -122,6 +122,15 @@ macro_rules! region_debug {
     };
 }
 
+macro_rules! region_stat {
+    ($($statements:tt)* ) => {
+        #[cfg(feature = "statistics")]
+        {
+            $($statements)*
+        }
+    };
+}
+
 macro_rules! strpool_str {
     ($s:expr) => {{
         #[::linkme::distributed_slice(crate::string_pool::STRPL_RAWSTRS)]

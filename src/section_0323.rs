@@ -3,6 +3,12 @@
 //! set |name| and |loc|.
 //
 // @d back_list(#)==begin_token_list(#,backed_up) {backs up a simple token list}
+/// backs up a simple token list
+macro_rules! back_list {
+    ($globals:expr, $val:expr) => {
+        crate::section_0323::begin_token_list($globals, $val, crate::section_0307::backed_up)
+    }
+}
 // @d ins_list(#)==begin_token_list(#,inserted) {inserts a simple token list}
 //
 // @p procedure begin_token_list(@!p:pointer;@!t:quarterword);

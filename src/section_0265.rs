@@ -14,6 +14,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("accent",accent,0);@/
     // @!@:accent_}{\.{\\accent} primitive@>
     // primitive("advance",advance,0);@/
+    primitive(globals, strpool_str!("advance"), advance, 0);
     // @!@:advance_}{\.{\\advance} primitive@>
     // primitive("afterassignment",after_assignment,0);@/
     // @!@:after_assignment_}{\.{\\afterassignment} primitive@>
@@ -100,6 +101,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0208::*;
+use crate::section_0209::*;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

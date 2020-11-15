@@ -39,6 +39,8 @@ pub(crate) const omit_template: pointer = mem_top - 10;
 /// used for scrap information
 pub(crate) const garbage: pointer = mem_top - 12;
 // @d backup_head==mem_top-13 {head of token list built by |scan_keyword|}
+/// head of token list built by `scan_keyword`
+pub(crate) const backup_head: pointer = mem_top - 13;
 // @d hi_mem_stat_min==mem_top-13 {smallest statically allocated word in
 //   the one-word |mem|}
 /// smallest statically allocated word in the one-word `mem`

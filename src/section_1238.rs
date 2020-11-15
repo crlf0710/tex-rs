@@ -2,7 +2,7 @@
 
 // @<Compute result of |register| or |advance|...@>=
 macro_rules! Compute_result_of_register_or_advance_put_it_in_cur_val {
-    ($globals:expr, $p:expr, $q:expr) => {{
+    ($globals:expr, $l:expr, $p:expr, $q:expr) => {{
         trace_span!("Compute result of `register` or `advance`...");
         // if p<glue_val then
         if $p < glue_val {
@@ -14,14 +14,16 @@ macro_rules! Compute_result_of_register_or_advance_put_it_in_cur_val {
             }
             // if q=advance then cur_val:=cur_val+eqtb[l].int;
             if $q == advance as _ {
-                todo!("advance");
+                $globals.cur_val += $globals.eqtb[$l][MEMORY_WORD_INT];
             }
             // end
         }
         // else  begin scan_glue(p);
         else {
+            todo!(">=glue_val");
             // if q=advance then @<Compute the sum of two glue specs@>;
             // end
         }
+        use crate::section_0113::MEMORY_WORD_INT;
     }}
 }

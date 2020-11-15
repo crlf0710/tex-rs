@@ -87,7 +87,7 @@ pub(crate) type chr_code_repr = halfword;
 #[cfg(feature = "unicode_support")]
 pub(crate) type chr_code_repr = word;
 
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub(crate) struct chr_code_type(chr_code_repr);
 
 impl chr_code_type {
