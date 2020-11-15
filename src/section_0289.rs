@@ -34,6 +34,8 @@ pub(crate) const right_brace_limit: cur_tok_type_repr = cur_tok_type_cmd_multipl
 // @d math_shift_token=@'1400 {$2^8\cdot|math_shift|$}
 // @d tab_token=@'2000 {$2^8\cdot|tab_mark|$}
 // @d out_param_token=@'2400 {$2^8\cdot|out_param|$}
+/// `cur_tok_type_cmd_multiplier`·`out_param`
+pub(crate) const out_param_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * out_param as cur_tok_type_repr;
 // @d space_token=@'5040 {$2^8\cdot|spacer|+|" "|$}
 /// `cur_tok_type_cmd_multiplier`·`spacer`+`" "`
 pub(crate) const space_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * spacer as cur_tok_type_repr + b' ' as cur_tok_type_repr;
@@ -60,3 +62,4 @@ use crate::section_0207::right_brace;
 use crate::section_0207::spacer;
 use crate::section_0207::end_match;
 use crate::section_0207::r#match;
+use crate::section_0207::out_param;

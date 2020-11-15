@@ -8,7 +8,9 @@ fn main() {
             .with_span_events(tracing_subscriber::fmt::format::FmtSpan::ACTIVE);
         #[cfg(not(feature = "debugging"))]
         let subscriber_builder = subscriber_builder.with_max_level(tracing::Level::TRACE);
-        subscriber_builder.init();
+        subscriber_builder
+            .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
+            .init();
     }
     let mut globals = tex::TeXGlobals::default();
     tex::entry(&mut globals);

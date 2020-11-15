@@ -10,6 +10,8 @@ pub(crate) const undefined_cs: quarterword = max_command + 1;
 // @d no_expand=max_command+3 {special nonexpansion ( \.{\\noexpand} )}
 // @d input=max_command+4 {input a source file ( \.{\\input}, \.{\\endinput} )}
 // @d if_test=max_command+5 {conditional text ( \.{\\if}, \.{\\ifcase}, etc.~)}
+/// conditional text ( `\if`, `\ifcase`, etc. )
+pub(crate) const if_test: quarterword = max_command + 5;
 // @d fi_or_else=max_command+6 {delimiters for conditionals ( \.{\\else}, etc.~)}
 // @d cs_name=max_command+7 {make a control sequence from tokens ( \.{\\csname} )}
 // @d convert=max_command+8 {convert to text ( \.{\\number}, \.{\\string}, etc.~)}

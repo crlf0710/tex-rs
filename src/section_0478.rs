@@ -16,7 +16,7 @@ macro_rules! Expand_the_next_part_of_the_input {
                 }
                 // if cur_cmd<>the then expand
                 if $globals.cur_cmd != the {
-                    expand($globals);
+                    expand($globals)?;
                 }
                 // else  begin q:=the_toks;
                 else {

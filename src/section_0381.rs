@@ -7,7 +7,7 @@ pub(crate) fn x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX>
     // begin while cur_cmd>max_command do
     while globals.cur_cmd > max_command {
         // begin expand;
-        expand(globals);
+        expand(globals)?;
         // get_next;
         get_next(globals)?;
         // end;

@@ -73,7 +73,7 @@ pub(crate) fn scan_toks(
     {
         // @<Scan and build the body of the token list; |goto found| when finished@>;
         Scan_and_build_the_body_of_the_token_list__goto_found_when_finished!(globals,
-            macro_def, xpand, unbalance, p, q, 'found);
+            macro_def, xpand, unbalance, t, p, q, 'found);
     }
     // found: scanner_status:=normal;
     'found <-

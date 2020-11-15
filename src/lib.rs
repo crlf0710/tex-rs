@@ -579,7 +579,12 @@ reversing_order_items!(
                             }
                         );
                         mod section_0480_to_0486;
-                        mod section_0487_to_0510;
+                        mod section_0487;
+                        #[macro_use]
+                        mod section_0488;
+                        mod section_0489_to_0497;
+                        mod section_0498;
+                        mod section_0499_to_0510;
                         mod section_0511;
                         mod section_0512;
                         mod section_0513;

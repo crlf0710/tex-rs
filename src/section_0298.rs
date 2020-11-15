@@ -31,6 +31,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives {
         } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0412!
             ($globals, $cmd, $chr_code) {
             true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488!
+            ($globals, $cmd, $chr_code) {
+            true
         } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1053!
             ($globals, $cmd, $chr_code) {
             true
@@ -100,4 +103,5 @@ use crate::section_0113::quarterword;
 use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0209::*;
+use crate::section_0210::*;
 use crate::section_0297::chr_code_type;

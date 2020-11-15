@@ -29,7 +29,7 @@ const _: () = ();
 
 // procedure expand;
 #[allow(unused_variables)]
-pub(crate) fn expand(globals: &mut TeXGlobals) {
+pub(crate) fn expand(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     // var t:halfword; {token that is being ``expanded after''}
     // @!p,@!q,@!r:pointer; {for list manipulation}
     // @!j:0..buf_size; {index into |buffer|}
@@ -45,11 +45,21 @@ pub(crate) fn expand(globals: &mut TeXGlobals) {
         Expand_a_nonmacro!(globals);
     }
     // else if cur_cmd<end_template then macro_call
+    else if globals.cur_cmd < end_template {
+        macro_call(globals)?;
+    }
     // else @<Insert a token containing |frozen_endv|@>;
+    else {
+        todo!();
+    }
     // cur_val:=cv_backup; cur_val_level:=cvl_backup; radix:=radix_backup;
     // cur_order:=co_backup; link(backup_head):=backup_backup;
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::JumpOutToEndOfTEX;
 use crate::section_0210::call;
+use crate::section_0210::end_template;
+use crate::section_0389::macro_call;

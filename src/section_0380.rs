@@ -40,7 +40,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
             }
         } else {
             // else expand;
-            expand(globals);
+            expand(globals)?;
         }
         // goto restart;
         goto_backward_label!('restart);

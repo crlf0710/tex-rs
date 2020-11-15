@@ -2,7 +2,7 @@
 
 // @<Scan and build the body of the token list; |goto found| when finished@>=
 macro_rules! Scan_and_build_the_body_of_the_token_list__goto_found_when_finished {
-    ($globals:expr, $macro_def:expr, $xpand:expr, $unbalance:expr, $p:expr, $q:expr, $lbl_found:lifetime) => {
+    ($globals:expr, $macro_def:expr, $xpand:expr, $unbalance:expr, $t:expr, $p:expr, $q:expr, $lbl_found:lifetime) => {
         trace_span!("Scan and build the body of the token list...");
         // unbalance:=1;
         $unbalance = 1;
@@ -35,7 +35,7 @@ macro_rules! Scan_and_build_the_body_of_the_token_list__goto_found_when_finished
             else if $globals.cur_cmd == mac_param {
                 // if macro_def then @<Look for parameter number or \.{\#\#}@>;
                 if $macro_def {
-                    Look_for_parameter_number_or_sharpsharp!($globals, $xpand);
+                    Look_for_parameter_number_or_sharpsharp!($globals, $xpand, $t);
                 }
             }
             // store_new_token(cur_tok);
