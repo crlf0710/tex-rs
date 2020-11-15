@@ -2,7 +2,7 @@
 
 // @<Display token |p|...@>=
 macro_rules! Display_token_p__and_return_if_there_are_problems {
-    ($globals:expr, $p:expr) => {{
+    ($globals:expr, $p:expr, $n:expr, $match_chr:expr) => {{
         // if (p<hi_mem_min) or (p>mem_end) then
         if ($p as pointer) < $globals.hi_mem_min || ($p as pointer) > $globals.mem_end {
             // begin print_esc("CLOBBERED."); return;
@@ -11,10 +11,7 @@ macro_rules! Display_token_p__and_return_if_there_are_problems {
             // @.CLOBBERED@>
             // end;
         }
-        #[cfg(not(feature = "unicode_support"))]
-        let info_p = cur_tok_type::new(info!($globals, $p));
-        #[cfg(feature = "unicode_support")]
-        let info_p = cur_tok_type::new(crate::unicode_support::info_value($globals, info!($globals, $p as pointer)));
+        let info_p = info_tok!($globals, $p as pointer);
         // if info(p)>=cs_token_flag then print_cs(info(p)-cs_token_flag)
         if let Some(cs) = info_p.get_cs() {
             print_cs($globals, cs as integer);
@@ -30,7 +27,7 @@ macro_rules! Display_token_p__and_return_if_there_are_problems {
             // @.BAD@>
             //   else @<Display the token $(|m|,|c|)$@>;
             else {
-                Display_the_token_m_c!($globals, m, c);
+                Display_the_token_m_c!($globals, m, c, $n, $match_chr);
             }
         // end
         }

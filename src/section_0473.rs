@@ -81,7 +81,7 @@ pub(crate) fn scan_toks(
     globals.scanner_status = scanner_status_kind::normal;
     // if hash_brace<>0 then store_new_token(hash_brace);
     if hash_brace != 0 {
-        store_new_token!(globals, hash_brace as _, p, q);
+        store_new_token!(globals, hash_brace, p, q);
     }
     // scan_toks:=p;
     return_nojump!(p);

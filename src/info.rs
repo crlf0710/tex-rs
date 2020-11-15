@@ -57,6 +57,10 @@ macro_rules! documentation_adjusted {
     () => {};
 }
 
+macro_rules! moved_to_inner_scope {
+    () => {};
+}
+
 macro_rules! reversing_order_items {
     () => {};
     ({$($inner_item:item)*}) => {$($inner_item)*};
@@ -201,3 +205,12 @@ macro_rules! trace_debug_expr {
     };
 }
 
+#[allow(unused_macros)]
+macro_rules! trace_error_expr {
+    ($($x:tt)*) => {
+        #[cfg(feature = "trace")]
+        {
+            tracing::error!($($x)*);
+        }
+    };
+}

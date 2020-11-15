@@ -49,6 +49,8 @@ pub(crate) const year_code: halfword = 23;
 /// show diagnostic output on terminal
 pub(crate) const tracing_online_code: halfword = 29;
 // @d tracing_macros_code=30 {show macros as they are being expanded}
+/// show macros as they are being expanded
+pub(crate) const tracing_macros_code: halfword = 30;
 // @d tracing_stats_code=31 {show memory usage if \TeX\ knows it}
 // @d tracing_paragraphs_code=32 {show line-break calculations}
 // @d tracing_pages_code=33 {show page-break calculations}
@@ -164,6 +166,11 @@ macro_rules! tracing_online {
     };
 }
 // @d tracing_macros==int_par(tracing_macros_code)
+macro_rules! tracing_macros {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_macros_code)
+    };
+}
 // @d tracing_stats==int_par(tracing_stats_code)
 // @d tracing_paragraphs==int_par(tracing_paragraphs_code)
 // @d tracing_pages==int_par(tracing_pages_code)

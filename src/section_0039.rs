@@ -5,8 +5,10 @@
 #[globals_struct_field_view(TeXGlobalsStringView)]
 pub(crate) static str_pool: str_pool_array<packed_ASCII_code> = str_pool_array::default();
 
+type str_pool_array_LENGTH_TYPENUM = typenum::op!(pool_size_TYPENUM + U1);
+
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
-    pub(crate) str_pool_array[pool_pointer] => u32; U32; pool_size_TYPENUM
+    pub(crate) str_pool_array[pool_pointer] => u32; U32; str_pool_array_LENGTH_TYPENUM
 );
 
 #[globals_struct_use(TeXGlobals)]
@@ -22,8 +24,10 @@ use crate::section_0038::packed_ASCII_code;
 #[globals_struct_field_view(TeXGlobalsStringView)]
 pub(crate) static str_start: str_start_array<pool_pointer> = str_start_array::default();
 
+type str_start_array_LENGTH_TYPENUM = typenum::op!(max_strings_TYPENUM + U1);
+
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
-    pub(crate) str_start_array[str_number] => u32; U32; max_strings_TYPENUM
+    pub(crate) str_start_array[str_number] => u32; U32; str_start_array_LENGTH_TYPENUM
 );
 
 #[globals_struct_use(TeXGlobals)]
@@ -63,6 +67,7 @@ use crate::section_0038::packed_ASCII_code;
 use crate::section_0038::pool_pointer;
 use crate::section_0038::str_number;
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;
 
 #[cfg(feature = "unicode_support")]
 impl str_pool_array<packed_ASCII_code> {

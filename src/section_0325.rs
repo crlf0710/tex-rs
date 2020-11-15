@@ -18,18 +18,18 @@ pub(crate) fn back_input(globals: &mut TeXGlobals) {
     //   end_token_list; {conserve stack space}
     // p:=get_avail; info(p):=cur_tok;
     p = get_avail(globals);
-    #[cfg(not(feature = "unicode_support"))]
-    {
-        info!(globals, p) = globals.cur_tok.get();
-    }
-    #[cfg(feature = "unicode_support")]
-    {
-        info!(globals, p) = crate::unicode_support::register_info_value(
-            globals, globals.cur_tok.get());
-    }
+    info_tok_assign!(globals, p, globals.cur_tok);
     // if cur_tok<right_brace_limit then
-    //   if cur_tok<left_brace_limit then decr(align_state)
-    //   else incr(align_state);
+    if globals.cur_tok < right_brace_limit {
+        // if cur_tok<left_brace_limit then decr(align_state)
+        if globals.cur_tok < left_brace_limit {
+            decr!(globals.align_state);
+        }
+        // else incr(align_state);
+        else {
+            incr!(globals.align_state);
+        }
+    }
     // push_input; state:=token_list; start:=p; token_type:=backed_up;
     push_input!(globals);
     state!(globals) = token_list;
@@ -45,5 +45,7 @@ pub(crate) fn back_input(globals: &mut TeXGlobals) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0115::pointer;
 use crate::section_0120::get_avail;
+use crate::section_0289::left_brace_limit;
+use crate::section_0289::right_brace_limit;
 use crate::section_0307::token_list;
 use crate::section_0307::backed_up;

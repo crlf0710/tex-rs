@@ -4,8 +4,10 @@
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static input_stack: input_stack_array<in_state_record> = input_stack_array::default();
 
+type input_stack_array_LENGTH_TYPENUM = typenum::op!(stack_size_TYPENUM + U1);
+
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
-    pub(crate) input_stack_array[u16_from_0_to_n<stack_size_TYPENUM>] => u16; U16; stack_size_TYPENUM
+    pub(crate) input_stack_array[u16_from_0_to_n<stack_size_TYPENUM>] => u16; U16; input_stack_array_LENGTH_TYPENUM
 );
 
 // @!input_ptr : 0..stack_size; {first unused location of |input_stack|}
@@ -35,3 +37,4 @@ use crate::section_0301::input_stack_array;
 use crate::pascal::u16_from_0_to_n;
 use crate::section_0011::stack_size_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;

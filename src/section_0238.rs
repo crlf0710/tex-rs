@@ -66,8 +66,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &m
     // primitive("pausing",assign_int,int_base+pausing_code);@/
     // @!@:pausing_}{\.{\\pausing} primitive@>
     // primitive("tracingonline",assign_int,int_base+tracing_online_code);@/
+    primitive(globals, strpool_str!("tracingonline"), assign_int, (int_base + tracing_online_code as word) as _);
     // @!@:tracing_online_}{\.{\\tracingonline} primitive@>
     // primitive("tracingmacros",assign_int,int_base+tracing_macros_code);@/
+    primitive(globals, strpool_str!("tracingmacros"), assign_int, (int_base + tracing_macros_code as word) as _);
     // @!@:tracing_macros_}{\.{\\tracingmacros} primitive@>
     // primitive("tracingstats",assign_int,int_base+tracing_stats_code);@/
     // @!@:tracing_stats_}{\.{\\tracingstats} primitive@>
@@ -125,6 +127,8 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0209::*;
 use crate::section_0230::int_base;
 use crate::section_0236::tracing_commands_code;
+use crate::section_0236::tracing_online_code;
+use crate::section_0236::tracing_macros_code;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

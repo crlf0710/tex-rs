@@ -27,7 +27,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
         if globals.cur_cmd >= call {
             // if cur_cmd<end_template then macro_call
             if globals.cur_cmd < end_template {
-                macro_call(globals);
+                macro_call(globals)?;
             }
             // else  begin cur_cs:=frozen_endv; cur_cmd:=endv;
             else {

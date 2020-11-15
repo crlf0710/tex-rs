@@ -36,8 +36,10 @@ pub(crate) static nest: nest_array<list_state_record> = nest_array::default();
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0213::nest_array;
 
+type nest_array_LENGTH_TYPENUM = typenum::op!(nest_size_TYPENUM + U1);
+
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
-    pub(crate) nest_array[u8_from_0_to_n<nest_size_TYPENUM>] => u8; U8; nest_size_TYPENUM
+    pub(crate) nest_array[u8_from_0_to_n<nest_size_TYPENUM>] => u8; U8; nest_array_LENGTH_TYPENUM
 );
 
 // @!nest_ptr:0..nest_size; {first unused location of |nest|}
@@ -67,4 +69,5 @@ use crate::section_0211::mmode_POS_TYPENUM;
 use crate::pascal::u8_from_0_to_n;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::nest_size_TYPENUM;
+use typenum::U1;
 use globals_struct::{globals_struct_field, globals_struct_use};

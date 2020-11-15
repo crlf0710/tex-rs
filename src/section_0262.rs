@@ -10,27 +10,54 @@
 // @<Basic printing...@>=
 // procedure print_cs(@!p:integer); {prints a purported control sequence}
 /// prints a purported control sequence
-#[allow(unused_variables)]
+#[allow(unused_comparisons)]
 pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
     // begin if p<hash_base then {single character}
-    //   if p>=single_base then
-    //     if p=null_cs then
-    //       begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
-    //       end
-    //     else  begin print_esc(p-single_base);
-    //       if cat_code(p-single_base)=letter then print_char(" ");
-    //       end
-    //   else if p<active_base then print_esc("IMPOSSIBLE.")
-    // @.IMPOSSIBLE@>
-    //   else print(p-active_base)
+    if p < hash_base as _ {
+        /// single character
+        const _: () = ();
+        todo!();
+        //   if p>=single_base then
+        //     if p=null_cs then
+        //       begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
+        //       end
+        //     else  begin print_esc(p-single_base);
+        //       if cat_code(p-single_base)=letter then print_char(" ");
+        //       end
+        //   else if p<active_base then print_esc("IMPOSSIBLE.")
+        // @.IMPOSSIBLE@>
+        //   else print(p-active_base)
+    }
     // else if p>=undefined_control_sequence then print_esc("IMPOSSIBLE.")
+    else if p >= undefined_control_sequence as _ {
+        print_esc(globals, strpool_str!("IMPOSSIBLE."));
+    }
     // else if (text(p)<0)or(text(p)>=str_ptr) then print_esc("NONEXISTENT.")
+    else if text!(globals, p as pointer) < 0
+        || text!(globals, p as pointer) >= globals.str_ptr.get() as _
+    {
+        print_esc(globals, strpool_str!("IMPOSSIBLE."));
+    }
     // @.NONEXISTENT@>
     // else  begin print_esc(text(p));
-    //   print_char(" ");
-    //   end;
+    else {
+        print_esc(globals, str_number::new(text!(globals, p as pointer) as _));
+        // print_char(" ");
+        print_char(
+            make_globals_io_string_view!(globals),
+            ASCII_code_literal!(b' '),
+        );
+        // end;
+    }
     // end;
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0038::str_number;
+use crate::section_0058::print_char;
+use crate::section_0063::print_esc;
+use crate::section_0115::pointer;
+use crate::section_0222::hash_base;
+use crate::section_0222::undefined_control_sequence;

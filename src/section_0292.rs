@@ -32,14 +32,23 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
     // label exit;
     // var m,@!c:integer; {pieces of a token}
     // @!match_chr:ASCII_code; {character used in a `|match|'}
+    /// character used in a `match`
+    let mut match_chr: ASCII_code;
     // @!n:ASCII_code; {the highest parameter number, as an ASCII digit}
+    /// the highest parameter number, as an ASCII digit
+    let mut n: ASCII_code;
     // begin match_chr:="#"; n:="0"; tally:=0;
+    match_chr = ASCII_code_literal!(b'#');
+    n = ASCII_code_literal!(b'0');
     globals.tally = 0;
     // while (p<>null) and (tally<l) do
     while p != null as _ && globals.tally < l {
         // begin if p=q then @<Do magic computation@>;
+        if p == q {
+            todo!();
+        }
         // @<Display token |p|, and |return| if there are problems@>;
-        Display_token_p__and_return_if_there_are_problems!(globals, p);
+        Display_token_p__and_return_if_there_are_problems!(globals, p, n, match_chr);
         // p:=link(p);
         p = link!(globals, p as pointer) as _;
         // end;
@@ -55,6 +64,7 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0018::ASCII_code;
 use crate::section_0063::print_esc;
 use crate::section_0115::null;
 use crate::section_0115::pointer;

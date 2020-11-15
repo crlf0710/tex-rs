@@ -9,7 +9,7 @@
 /// reference count preceding a token list
 macro_rules! token_ref_count {
     ($globals:expr, $val:expr) => {
-        info!($globals, $val)
+        info_inner!($globals, $val)
     };
 }
 

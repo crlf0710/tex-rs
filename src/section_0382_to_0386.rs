@@ -56,29 +56,3 @@
 //!   begin_token_list(cur_mark[cur_chr],mark_text);
 //! end
 //!
-//! @ Now let's consider |macro_call| itself, which is invoked when \TeX\ is
-//! scanning a control sequence whose |cur_cmd| is either |call|, |long_call|,
-//! |outer_call|, or |long_outer_call|.  The control sequence definition
-//! appears in the token list whose reference count is in location |cur_chr|
-//! of |mem|.
-//!
-//! The global variable |long_state| will be set to |call| or to |long_call|,
-//! depending on whether or not the control sequence disallows \.{\\par}
-//! in its parameters. The |get_next| routine will set |long_state| to
-//! |outer_call| and emit \.{\\par}, if a file ends or if an \.{\\outer}
-//! control sequence occurs in the midst of an argument.
-//!
-//! @<Glob...@>=
-//! @!long_state:call..long_outer_call; {governs the acceptance of \.{\\par}}
-//!
-//! @ The parameters, if any, must be scanned before the macro is expanded.
-//! Parameters are token lists without reference counts. They are placed on
-//! an auxiliary stack called |pstack| while they are being scanned, since
-//! the |param_stack| may be losing entries during the matching process.
-//! (Note that |param_stack| can't be gaining entries, since |macro_call| is
-//! the only routine that puts anything onto |param_stack|, and it
-//! is not recursive.)
-//!
-//! @<Glob...@>=
-//! @!pstack:array[0..8] of pointer; {arguments supplied to a macro}
-//!

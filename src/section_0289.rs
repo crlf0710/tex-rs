@@ -25,6 +25,8 @@ pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0x0FFF_FFFF);
 
 // @d left_brace_token=@'0400 {$2^8\cdot|left_brace|$}
 // @d left_brace_limit=@'1000 {$2^8\cdot(|left_brace|+1)$}
+/// `cur_tok_type_cmd_multiplier`·(`left_brace` + 1)
+pub(crate) const left_brace_limit: cur_tok_type_repr = cur_tok_type_cmd_multiplier * (left_brace + 1) as cur_tok_type_repr;
 // @d right_brace_token=@'1000 {$2^8\cdot|right_brace|$}
 // @d right_brace_limit=@'1400 {$2^8\cdot(|right_brace|+1)$}
 /// `cur_tok_type_cmd_multiplier`·(`right_brace` + 1)
@@ -53,6 +55,7 @@ use crate::section_0297::cur_tok_type_repr;
 use crate::section_0297::cur_tok_type_cmd_multiplier;
 use crate::section_0207::letter;
 use crate::section_0207::other_char;
+use crate::section_0207::left_brace;
 use crate::section_0207::right_brace;
 use crate::section_0207::spacer;
 use crate::section_0207::end_match;

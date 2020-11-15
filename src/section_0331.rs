@@ -7,6 +7,8 @@ macro_rules! Initialize_the_input_routines {
         // begin input_ptr:=0; max_in_stack:=0;
         // in_open:=0; open_parens:=0; max_buf_stack:=0;
         // param_ptr:=0; max_param_stack:=0;
+        $globals.param_ptr = 0.into();
+        $globals.max_param_stack = 0.into();
         // first:=buf_size; repeat buffer[first]:=0; decr(first); until first=0;
         // scanner_status:=normal; warning_index:=null; first:=1;
         // state:=new_line; start:=1; index:=0; line:=0; name:=0;

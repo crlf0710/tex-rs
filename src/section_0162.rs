@@ -23,6 +23,8 @@
 pub(crate) const contrib_head: pointer = mem_top - 1;
 // @d page_head==mem_top-2 {vlist for current page}
 // @d temp_head==mem_top-3 {head of a temporary list of some kind}
+/// head of a temporary list of some kind
+pub(crate) const temp_head: pointer = mem_top - 3;
 // @d hold_head==mem_top-4 {head of a temporary list of another kind}
 // @d adjust_head==mem_top-5 {head of adjustment list returned by |hpack|}
 // @d active==mem_top-7 {head of active list in |line_break|, needs two words}

@@ -12,10 +12,7 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
             const _ : () = ();
             // @^inner loop@>
             // begin t:=info(loc); loc:=link(loc); {move to next}
-            #[cfg(not(feature = "unicode_support"))]
-            let t: cur_tok_type = cur_tok_type::new(info!($globals, loc!($globals)));
-            #[cfg(feature = "unicode_support")]
-            let t: cur_tok_type = cur_tok_type::new(crate::unicode_support::info_value($globals, info!($globals, loc!($globals))));
+            let t: cur_tok_type = info_tok!($globals, loc!($globals));
             /// move to next
             {
                 loc!($globals) = link!($globals, loc!($globals));

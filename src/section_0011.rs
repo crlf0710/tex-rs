@@ -51,6 +51,9 @@ pub(crate) type max_in_open_TYPENUM = U6;
 //   and must be at most |font_base+256|}
 // @!font_mem_size=20000; {number of words of |font_info| for all fonts}
 // @!param_size=60; {maximum number of simultaneous macro parameters}
+/// maximum number of simultaneous macro parameters
+pub(crate) const param_size: u8 = param_size_TYPENUM::U8;
+pub(crate) type param_size_TYPENUM = U60;
 // @!nest_size=40; {maximum number of semantic levels simultaneously active}
 /// maximum number of semantic levels simultaneously active
 pub(crate) const nest_size: u8 = nest_size_TYPENUM::U8;
@@ -77,6 +80,10 @@ pub(crate) const pool_size: u16 = pool_size_TYPENUM::U16;
 pub(crate) type pool_size_TYPENUM = U32000;
 // @!save_size=600; {space for saving values outside of current group; must be
 //   at most |max_halfword|}
+/// space for saving values outside of current group; must be
+///   at most `max_halfword`
+pub(crate) const save_size: u16 = save_size_TYPENUM::U16;
+pub(crate) type save_size_TYPENUM = U600;
 // @!trie_size=8000; {space for hyphenation patterns; should be larger for
 //   \.{INITEX} than it is in production versions of \TeX}
 // @!trie_op_size=500; {space for ``opcodes'' in the hyphenation patterns}
@@ -97,4 +104,4 @@ type U3000 = ::typenum::op!(U1000 * U3);
 type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U500, U6, U79};
+use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U500, U6, U60, U600, U79};

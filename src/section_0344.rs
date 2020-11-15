@@ -60,6 +60,14 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         use crate::section_0207::comment;
         use crate::section_0207::sup_mark;
         use crate::section_0207::active_char;
+        use crate::section_0207::left_brace;
+        use crate::section_0207::right_brace;
+        use crate::section_0207::other_char;
+        use crate::section_0207::letter;
+        use crate::section_0207::sub_mark;
+        use crate::section_0207::tab_mark;
+        use crate::section_0207::mac_param;
+        use crate::section_0207::math_shift;
         use crate::section_0210::outer_call;
         use crate::section_0222::active_base;
         use crate::section_0297::chr_code_type;

@@ -51,11 +51,14 @@ use crate::section_0011::buf_size_TYPENUM;
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0030::buf_size_array;
 
+type buf_size_array_LENGTH_TYPENUM = typenum::op!(buf_size_TYPENUM + U1);
+
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
-    pub(crate) buf_size_array[u16_from_0_to_n<buf_size_TYPENUM>] => u16; U16; buf_size_TYPENUM
+    pub(crate) buf_size_array[u16_from_0_to_n<buf_size_TYPENUM>] => u16; U16; buf_size_array_LENGTH_TYPENUM
 );
 
 use crate::pascal::u16_from_0_to_n;
 use crate::section_0011::buf_size_TYPENUM;
+use typenum::U1;
 
 use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};

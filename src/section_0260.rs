@@ -40,7 +40,10 @@ macro_rules! Insert_a_new_control_sequence_after_p_then_make_p_point_to_it {
         }
         // for k:=j to j+l-1 do append_char(buffer[k]);
         for k in $j..=$j + l - 1 {
-            append_char(make_globals_string_view!($globals), $globals.buffer[k as u16]);
+            append_char(
+                make_globals_string_view!($globals),
+                $globals.buffer[k as u16],
+            );
         }
         // text(p):=make_string; pool_ptr:=pool_ptr+d;
         text!($globals, $p) = make_string(make_globals_string_view!($globals)).get() as _;
@@ -49,12 +52,12 @@ macro_rules! Insert_a_new_control_sequence_after_p_then_make_p_point_to_it {
         // @!stat incr(cs_count);@+tats@;@/
         // end
         use crate::section_0004::TeXGlobalsStringView;
-        use crate::section_0042::str_room;
         use crate::section_0042::append_char;
+        use crate::section_0042::str_room;
         use crate::section_0043::make_string;
         #[cfg(feature = "unicode_support")]
         use crate::section_0260::buffer_range_bytes;
-    }
+    };
 }
 
 #[cfg(feature = "unicode_support")]

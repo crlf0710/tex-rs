@@ -7,20 +7,14 @@ macro_rules! store_new_token {
     ($globals:expr, $val:expr, $p:expr, $q:expr) => {{
         $q = get_avail($globals);
         link!($globals, $p) = $q;
-        #[cfg(not(feature = "unicode_support"))]
-        {
-            info!($globals, $q) = $val;
-        }
-        #[cfg(feature = "unicode_support")]
-        {
-            info!($globals, $q) = crate::unicode_support::register_info_value($globals, $val);
-        }
+        info_tok_assign!($globals, $q, cur_tok_type::new($val as _));
         // p:=q; {|link(p)| is |null|}
         $p = $q;
         /// `link(p)` is `null`
         const _ : () = ();
         // end
         use crate::section_0120::get_avail;
+        use crate::section_0297::cur_tok_type;
     }}
 }
 

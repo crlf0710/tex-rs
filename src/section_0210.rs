@@ -20,13 +20,17 @@ pub(crate) const the: quarterword = max_command + 9;
 // @d call=max_command+11 {non-long, non-outer control sequence}
 /// non-long, non-outer control sequence
 pub(crate) const call: quarterword = max_command + 11;
+pub(crate) type call_TYPENUM = typenum::op!(max_command_TYPENUM + U11);
 // @d long_call=max_command+12 {long, non-outer control sequence}
+/// long, non-outer control sequence
+pub(crate) const long_call: quarterword = max_command + 12;
 // @d outer_call=max_command+13 {non-long, outer control sequence}
 /// non-long, outer control sequence
 pub(crate) const outer_call: quarterword = max_command + 13;
 // @d long_outer_call=max_command+14 {long, outer control sequence}
 /// long, outer control sequence
 pub(crate) const long_outer_call: quarterword = max_command + 14;
+pub(crate) type long_outer_call_TYPENUM = typenum::op!(max_command_TYPENUM + U14);
 // @d end_template=max_command+15 {end of an alignment template}
 /// end of an alignment template
 pub(crate) const end_template: quarterword = max_command + 15;
@@ -42,3 +46,5 @@ pub(crate) const data: quarterword = max_command + 20;
 
 use crate::section_0113::quarterword;
 use crate::section_0209::max_command;
+use crate::section_0209::max_command_TYPENUM;
+use typenum::{U11, U14};

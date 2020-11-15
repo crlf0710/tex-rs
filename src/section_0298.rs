@@ -25,6 +25,12 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives {
     ($globals:expr, $cmd:expr, $chr_code:expr) => {{
         if false {
             unreachable!();
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0335!
+            ($globals, $cmd, $chr_code) {
+            true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0412!
+            ($globals, $cmd, $chr_code) {
+            true
         } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1053!
             ($globals, $cmd, $chr_code) {
             true
@@ -66,6 +72,9 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
         chr_cmd!(globals, chr_code, strpool_str!("blank space "));
     }
     // letter: chr_cmd("the letter ");
+    else if cmd == letter {
+        chr_cmd!(globals, chr_code, strpool_str!("the letter "));
+    }
     // other_char: chr_cmd("the character ");
     else if cmd == other_char {
         chr_cmd!(globals, chr_code, strpool_str!("the character "));
@@ -77,6 +86,7 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
     }
     // othercases print("[unknown command code!]")
     else {
+        trace_error_expr!("cmd = {}", cmd);
         print(globals, strpool_str!("[unknown command code!]").get() as _);
     }
     // endcases;
