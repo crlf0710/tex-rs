@@ -9,7 +9,18 @@
 //! variety, some nodes are longer than others, and we must distinguish different
 //! kinds of nodes. We do this by putting a `|type|' field in the first word,
 //! together with the link and an optional `|subtype|'.
-//!
-//! @d type(#) == mem[#].hh.b0 {identifies what kind of node this is}
-//! @d subtype(#) == mem[#].hh.b1 {secondary identification in some cases}
-//!
+//
+// @d type(#) == mem[#].hh.b0 {identifies what kind of node this is}
+/// identifies what kind of node this is
+macro_rules! r#type {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B0]
+    }
+}
+// @d subtype(#) == mem[#].hh.b1 {secondary identification in some cases}
+/// secondary identification in some cases
+macro_rules! r#subtype {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B1]
+    }
+}

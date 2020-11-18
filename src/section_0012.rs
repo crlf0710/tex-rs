@@ -11,6 +11,9 @@
 
 // @d mem_bot=0 {smallest index in the |mem| array dumped by \.{INITEX};
 //   must not be less than |mem_min|}
+/// smallest index in the `mem` array dumped by `INITEX`;
+///   must not be less than |mem_min|
+pub(crate) const mem_bot: pointer = 0;
 // @d mem_top==30000 {largest index in the |mem| array dumped by \.{INITEX};
 //   must be substantially larger than |mem_bot|
 //   and not greater than |mem_max|}

@@ -9,7 +9,8 @@
 // @p @t\4@>@<Declare the procedure called |fire_up|@>@;@/
 // procedure build_page; {append contributions to the current page}
 /// append contributions to the current page
-pub(crate) fn build_page() {
+#[allow(unused_variables)]
+pub(crate) fn build_page(globals: &mut TeXGlobals) {
 // label exit,done,done1,continue,contribute,update_heights;
 // var p:pointer; {the node being appended}
 // @!q,@!r:pointer; {nodes being examined}
@@ -27,3 +28,5 @@ pub(crate) fn build_page() {
 // @<Make the contribution list empty by setting its tail to |contrib_head|@>;
 // exit:end;
 }
+
+use crate::section_0004::TeXGlobals;
