@@ -49,7 +49,12 @@ pub(crate) const max_in_open: u8 = max_in_open_TYPENUM::U8;
 pub(crate) type max_in_open_TYPENUM = U6;
 // @!font_max=75; {maximum internal font number; must not exceed |max_quarterword|
 //   and must be at most |font_base+256|}
+pub(crate) const font_max: u8 = font_max_TYPENUM::U8;
+pub(crate) type font_max_TYPENUM = U75;
 // @!font_mem_size=20000; {number of words of |font_info| for all fonts}
+/// number of words of `font_info` for all fonts
+pub(crate) const font_mem_size: u16 = font_mem_size_TYPENUM::U16;
+pub(crate) type font_mem_size_TYPENUM = U20000;
 // @!param_size=60; {maximum number of simultaneous macro parameters}
 /// maximum number of simultaneous macro parameters
 pub(crate) const param_size: u8 = param_size_TYPENUM::U8;
@@ -101,7 +106,8 @@ pub(crate) const pool_name: &'static str = "TeXformats:TEX.POOL                 
 
 use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
+type U20000 = ::typenum::op!(U10000 * U2);
 type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U500, U6, U60, U600, U79};
+use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U500, U6, U60, U600, U75, U79};

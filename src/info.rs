@@ -102,6 +102,55 @@ macro_rules! goto_backward_label {
     };
 }
 
+macro_rules! region_multipart {
+    (($lbl_block:lifetime, $part_idx:expr) {
+        $($part:pat => {$($s: stmt)*},)*
+    }) => {
+        $lbl_block: loop {
+            #[allow(unreachable_patterns)]
+            match $part_idx {
+                $($part => {
+                    $($s)*;
+                    continue $lbl_block;
+                })*
+                _ => {
+                    break $lbl_block;
+                }
+            }
+        }
+    }
+}
+
+macro_rules! goto_part_label {
+    ($lbl:lifetime, $status:expr, $label_val:expr) => {
+        $status = $label_val;
+        continue $lbl;
+    };
+}
+
+
+macro_rules! region_multipart_autoincr {
+    (($lbl_block:lifetime, $part_idx:expr) {
+        $($part:pat => {$($s: stmt)*},)*
+    }) => {
+        $lbl_block: loop {
+            #[allow(unreachable_patterns)]
+            match $part_idx {
+                $($part => {
+                    $($s)*;
+                    $part_idx += 1;
+                    continue $lbl_block;
+                })*
+                _ => {
+                    break $lbl_block;
+                }
+            }
+        }
+    }
+}
+
+
+
 macro_rules! region_initex {
     (($globals:expr) $($statements:tt)* ) => {
         #[cfg(feature = "initex")]

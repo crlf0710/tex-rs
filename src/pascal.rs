@@ -95,10 +95,16 @@ macro_rules! define_ranged_unsigned_integer {
                 assert!(val <= <MAX as typenum::Unsigned>::$typenum_const);
                 //TODO: Add more checks here.
                 $name(val, PhantomData)
-            }
+            }       
 
             $v fn get(self) -> $base_type {
                 self.0
+            }
+        }
+
+        impl<MIN, MAX> $name<MIN, MAX> {
+            $v const unsafe fn new_unchecked(val: $base_type) -> Self {
+                $name(val, PhantomData)
             }
         }
 

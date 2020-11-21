@@ -68,8 +68,11 @@ pub mod TeXGlobals {
     include!("src/section_0438.rs");
     include!("src/section_0512.rs");
     include!("src/section_0513.rs");
+    include!("src/section_0592.rs");
     include!("src/section_0527.rs");
     include!("src/section_0770.rs");
+    include!("src/section_0907.rs");
+    include!("src/section_1032.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
     include!("src/unicode_support.rs");

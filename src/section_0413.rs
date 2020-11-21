@@ -5,16 +5,12 @@
 //! |cur_cmd<min_internal| or |cur_cmd>max_internal|.
 //
 // @d scanned_result_end(#)==cur_val_level:=#;@+end
-macro_rules! scanned_result_end {
-    ($globals:expr, $level:expr) => {{
-        $globals.cur_val_level = $level;
-    }}
-}
+const _ : () = ();
 // @d scanned_result(#)==@+begin cur_val:=#;scanned_result_end
 macro_rules! scanned_result {
     ($globals:expr, $val:expr, $level:expr) => {{
         $globals.cur_val = $val;
-        scanned_result_end!($globals, $level);
+        $globals.cur_val_level = $level;
     }}
 }
 //

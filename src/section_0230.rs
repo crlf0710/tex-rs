@@ -70,6 +70,14 @@ pub(crate) const int_base: word = int_base_TYPENUM::U32;
 // @d toks(#)==equiv(toks_base+#)
 // @d box(#)==equiv(box_base+#)
 // @d cur_font==equiv(cur_font_loc)
+macro_rules! cur_font {
+    ($globals:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::cur_font_loc
+        )
+    };
+}
 // @d fam_fnt(#)==equiv(math_font_base+#)
 // @d cat_code(#)==equiv(cat_code_base+#)
 macro_rules! cat_code {

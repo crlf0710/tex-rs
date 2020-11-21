@@ -9,6 +9,7 @@
 //! possible.
 //
 // @d null_font==font_base
+pub(crate) const null_font: quarterword = font_base;
 // @d var_code==@'70000 {math code meaning ``use the current family''}
 //
 // @<Initialize table entries...@>=
@@ -22,6 +23,8 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     // box(0):=null; eq_type(box_base):=box_ref; eq_level(box_base):=level_one;
     // for k:=box_base+1 to box_base+255 do eqtb[k]:=eqtb[box_base];
     // cur_font:=null_font; eq_type(cur_font_loc):=data;
+    cur_font!(globals) = null_font as _;
+    eq_type!(globals, cur_font_loc) = data;
     // eq_level(cur_font_loc):=level_one;@/
     // for k:=math_font_base to math_font_base+47 do eqtb[k]:=eqtb[cur_font_loc];
     // equiv(cat_code_base):=0; eq_type(cat_code_base):=data;
@@ -62,8 +65,13 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
+use crate::section_0012::font_base;
 use crate::section_0018::ASCII_code;
+use crate::section_0022::carriage_return;
+use crate::section_0022::null_code;
+use crate::section_0022::invalid_code;
 use crate::section_0113::halfword;
+use crate::section_0113::quarterword;
 use crate::section_0207::comment;
 use crate::section_0207::escape;
 use crate::section_0207::letter;
@@ -72,9 +80,8 @@ use crate::section_0207::spacer;
 use crate::section_0207::car_ret;
 use crate::section_0207::ignore;
 use crate::section_0207::invalid_char;
-use crate::section_0022::carriage_return;
-use crate::section_0022::null_code;
-use crate::section_0022::invalid_code;
+use crate::section_0210::data;
+use crate::section_0230::cur_font_loc;
 
 use linkme::distributed_slice;
 

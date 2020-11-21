@@ -91,6 +91,8 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndO
     // main_loop:@<Append character |cur_chr| and the following characters (if~any)
     //   to the current hlist in the current font; |goto reswitch| when
     //   a non-character has been fetched@>;
+    Append_character_cur_chr_and_the_following_characters_if_any_to_the_current_hlist_in_the_current_font__goto_reswitch_when_a_non_character_has_been_fetched!
+        (globals, 'reswitch, 'big_switch);
     }
     'append_normal_space <-
     }
