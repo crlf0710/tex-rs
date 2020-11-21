@@ -19,19 +19,45 @@
 // @d hlist_node=0 {|type| of hlist nodes}
 // @d box_node_size=7 {number of words to allocate for a box node}
 // @d width_offset=1 {position of |width| field in a box node}
+/// position of `width` field in a box node
+pub(crate) const width_offset: quarterword = 1;
 // @d depth_offset=2 {position of |depth| field in a box node}
 /// position of `depth` field in a box node
 pub(crate) const depth_offset: quarterword = 2;
 // @d height_offset=3 {position of |height| field in a box node}
+/// position of `height` field in a box node
+pub(crate) const height_offset: quarterword = 3;
 // @d width(#) == mem[#+width_offset].sc {width of the box, in sp}
+/// width of the box, in sp
+macro_rules! width {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr + crate::section_0135::width_offset as pointer]
+            [crate::section_0113::MEMORY_WORD_SC]
+    }
+}
 // @d depth(#) == mem[#+depth_offset].sc {depth of the box, in sp}
+/// depth of the box, in sp
+#[allow(unused_macros)]
+macro_rules! depth {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr + depth_offset][crate::section_0113::MEMORY_WORD_SC]
+    }
+}
 // @d height(#) == mem[#+height_offset].sc {height of the box, in sp}
+/// height of the box, in sp
+#[allow(unused_macros)]
+macro_rules! depth {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr + height_offset][crate::section_0113::MEMORY_WORD_SC]
+    }
+}
 // @d shift_amount(#) == mem[#+4].sc {repositioning distance, in sp}
 // @d list_offset=5 {position of |list_ptr| field in a box node}
 // @d list_ptr(#) == link(#+list_offset) {beginning of the list inside the box}
 // @d glue_order(#) == subtype(#+list_offset) {applicable order of infinity}
 // @d glue_sign(#) == type(#+list_offset) {stretching or shrinking}
 // @d normal=0 {the most common case when several cases are named}
+const _ : () = ();
 // @d stretching = 1 {glue setting applies to the stretch components}
 // @d shrinking = 2 {glue setting applies to the shrink components}
 // @d glue_offset = 6 {position of |glue_set| in a box node}

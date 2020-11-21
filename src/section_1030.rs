@@ -66,8 +66,14 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndO
     }
     // hmode+spacer: if space_factor=1000 then goto append_normal_space
     else if abs_mode_plus_cur_cmd == hmode as u16 + spacer as u16 {
-        todo!();
-        // else app_space;
+        if space_factor!(globals) == 1000 {
+            goto_forward_label!('append_normal_space);
+        } else {
+            // else app_space;
+            app_space(globals);
+
+            use crate::section_1043::app_space;
+        }
     }
     // hmode+ex_space,mmode+ex_space: goto append_normal_space;
     else if abs_mode_plus_cur_cmd == hmode as u16 + ex_space as u16 ||
@@ -98,6 +104,8 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndO
     }
     // append_normal_space:@<Append a normal inter-word space to the current list,
     //   then |goto big_switch|@>;
+    Append_a_normal_inter_word_space_to_the_current_list__then_goto_big_switch!
+        (globals, 'big_switch);
     }
     |'reswitch|}
     }

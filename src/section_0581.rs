@@ -7,15 +7,19 @@
 #[allow(unused_variables)]
 pub(crate) fn char_warning(globals: &mut TeXGlobals, f: internal_font_number, c: ASCII_code) {
     // begin if tracing_lost_chars>0 then
-    //   begin begin_diagnostic;
-    //   print_nl("Missing character: There is no ");
-    // @.Missing character@>
-    //   print_ASCII(c); print(" in font ");
-    //   slow_print(font_name[f]); print_char("!"); end_diagnostic(false);
-    //   end;
+    if tracing_lost_chars!(globals) > 0 {
+        // begin begin_diagnostic;
+        // print_nl("Missing character: There is no ");
+        print_nl(globals, strpool_str!("Missing character: There is no "));
+        // @.Missing character@>
+        // print_ASCII(c); print(" in font ");
+        // slow_print(font_name[f]); print_char("!"); end_diagnostic(false);
+        // end;
+    }
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0062::print_nl;
 use crate::section_0548::internal_font_number;
 use crate::section_0018::ASCII_code;

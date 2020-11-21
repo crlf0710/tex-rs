@@ -34,8 +34,17 @@ pub(crate) static main_k: font_index = font_index::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0548::font_index;
+
 // @!main_p:pointer; {temporary register for list manipulation}
+/// temporary register for list manipulation
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static main_p: pointer = pointer::default();
+
 // @!main_s:integer; {space factor value}
+/// space factor value
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static main_s: integer = integer::default();
+
 // @!bchar:halfword; {right boundary character of current font, or |non_char|}
 // @!false_bchar:halfword; {nonexistent character matching |bchar|, or |non_char|}
 // @!cancel_boundary:boolean; {should the left boundary be ignored?}

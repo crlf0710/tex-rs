@@ -6,20 +6,40 @@
 //! The overall structure of the main loop is presented here. Some program labels
 //! are inside the individual sections.
 //! @^inner loop@>
-//
+
 // @d adjust_space_factor==@t@>@;@/
-//   main_s:=sf_code(cur_chr);
-//   if main_s=1000 then space_factor:=1000
-//   else if main_s<1000 then
-//     begin if main_s>0 then space_factor:=main_s;
-//     end
-//   else if space_factor<1000 then space_factor:=1000
-//   else space_factor:=main_s
+macro_rules! adjust_space_factor {
+    ($globals:expr) => {
+        // main_s:=sf_code(cur_chr);
+        $globals.main_s = sf_code!($globals, $globals.cur_chr.into()) as _;
+        // if main_s=1000 then space_factor:=1000
+        if $globals.main_s == 1000 {
+            space_factor!($globals) = 1000;
+        }
+        // else if main_s<1000 then
+        else if $globals.main_s < 1000 {
+            // begin if main_s>0 then space_factor:=main_s;
+            if $globals.main_s > 0 {
+                space_factor!($globals) = $globals.main_s as _;
+            }
+            // end
+        }
+        // else if space_factor<1000 then space_factor:=1000
+        else if space_factor!($globals) < 1000 {
+            space_factor!($globals) = 1000
+        }
+        // else space_factor:=main_s
+        else {
+            space_factor!($globals) = $globals.main_s as _;
+        }
+    }
+}
 
 // @<Append character |cur_chr|...@>=
 macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the_current_hlist_in_the_current_font__goto_reswitch_when_a_non_character_has_been_fetched {
     ($globals:expr, $lbl_reswitch:lifetime, $lbl_big_switch:lifetime) => {{
         // adjust_space_factor;@/
+        adjust_space_factor!($globals);
         // main_f:=cur_font;
         // bchar:=font_bchar[main_f]; false_bchar:=font_false_bchar[main_f];
         // if mode>0 then if language<>clang then fix_language;
@@ -80,8 +100,9 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
                 },
                 // main_lig_loop:@<If there's a ligature/kern command relevant to |cur_l| and
                 //   |cur_r|, adjust the text appropriately; exit to |main_loop_wrapup|@>;
-                main_loop_status_kind::main_lig_loop(part_idx) => {
-                    todo!("lig_loop");
+                main_loop_status_kind::main_lig_loop(mut part_idx) => {
+                    If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adjust_the_text_appropriately__exit_to_main_loop_wrapup!
+                        ($globals, part_idx);
                     unreachable!();
                 },
                 // main_loop_move_lig:@<Move the cursor past a pseudo-ligature, then

@@ -17,6 +17,8 @@
 // @d split_top_skip_code=10 {glue at top of split pages}
 // @d tab_skip_code=11 {glue between aligned entries}
 // @d space_skip_code=12 {glue between words (if not |zero_glue|)}
+/// glue between words (if not `zero_glue`)
+pub(crate) const space_skip_code: halfword = 12;
 // @d xspace_skip_code=13 {glue after sentences (if not |zero_glue|)}
 // @d par_fill_skip_code=14 {glue on last line of paragraph}
 // @d thin_mu_skip_code=15 {thin space in math formula}
@@ -42,6 +44,13 @@ pub(crate) const local_base: word = local_base_TYPENUM::U32;
 // @d skip(#)==equiv(skip_base+#) {|mem| location of glue specification}
 // @d mu_skip(#)==equiv(mu_skip_base+#) {|mem| location of math glue spec}
 // @d glue_par(#)==equiv(glue_base+#) {|mem| location of glue specification}
+/// |mem| location of glue specification
+macro_rules! glue_par {
+    ($globals:expr, $ptr:expr) => {
+        equiv!($globals, crate::section_0222::glue_base as crate::pascal::word +
+            $ptr as crate::pascal::word)
+    }
+}
 // @d line_skip==glue_par(line_skip_code)
 // @d baseline_skip==glue_par(baseline_skip_code)
 // @d par_skip==glue_par(par_skip_code)
@@ -55,6 +64,11 @@ pub(crate) const local_base: word = local_base_TYPENUM::U32;
 // @d split_top_skip==glue_par(split_top_skip_code)
 // @d tab_skip==glue_par(tab_skip_code)
 // @d space_skip==glue_par(space_skip_code)
+macro_rules! space_skip {
+    ($globals:expr) => {
+        glue_par!($globals, crate::section_0224::space_skip_code)
+    }
+}
 // @d xspace_skip==glue_par(xspace_skip_code)
 // @d par_fill_skip==glue_par(par_fill_skip_code)
 // @d thin_mu_skip==glue_par(thin_mu_skip_code)

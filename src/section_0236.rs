@@ -56,6 +56,8 @@ pub(crate) const tracing_macros_code: halfword = 30;
 // @d tracing_pages_code=33 {show page-break calculations}
 // @d tracing_output_code=34 {show boxes when they are shipped out}
 // @d tracing_lost_chars_code=35 {show characters that aren't in the font}
+/// show characters that aren't in the font
+pub(crate) const tracing_lost_chars_code: halfword = 35;
 // @d tracing_commands_code=36 {show command codes at |big_switch|}
 /// show command codes at `big_switch`
 pub(crate) const tracing_commands_code: halfword = 36;
@@ -176,6 +178,11 @@ macro_rules! tracing_macros {
 // @d tracing_pages==int_par(tracing_pages_code)
 // @d tracing_output==int_par(tracing_output_code)
 // @d tracing_lost_chars==int_par(tracing_lost_chars_code)
+macro_rules! tracing_lost_chars {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_lost_chars_code)
+    };
+}
 // @d tracing_commands==int_par(tracing_commands_code)
 macro_rules! tracing_commands {
     ($globals:expr) => {

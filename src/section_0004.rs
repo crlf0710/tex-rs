@@ -45,6 +45,7 @@ pub mod TeXGlobals {
     include!("src/section_0073.rs");
     include!("src/section_0076.rs");
     include!("src/section_0096.rs");
+    include!("src/section_0115.rs");
     include!("src/section_0116.rs");
     include!("src/section_0118.rs");
     include!("src/section_0124.rs");
@@ -68,6 +69,8 @@ pub mod TeXGlobals {
     include!("src/section_0438.rs");
     include!("src/section_0512.rs");
     include!("src/section_0513.rs");
+    include!("src/section_0549.rs");
+    include!("src/section_0550.rs");
     include!("src/section_0592.rs");
     include!("src/section_0527.rs");
     include!("src/section_0770.rs");

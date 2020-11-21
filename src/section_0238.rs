@@ -80,6 +80,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &m
     // primitive("tracingoutput",assign_int,int_base+tracing_output_code);@/
     // @!@:tracing_output_}{\.{\\tracingoutput} primitive@>
     // primitive("tracinglostchars",assign_int,int_base+tracing_lost_chars_code);@/
+    primitive(globals, strpool_str!("tracinglostchars"), assign_int, (int_base + tracing_lost_chars_code as word) as _);
     // @!@:tracing_lost_chars_}{\.{\\tracinglostchars} primitive@>
     // primitive("tracingcommands",assign_int,int_base+tracing_commands_code);@/
     primitive(globals, strpool_str!("tracingcommands"), assign_int, (int_base + tracing_commands_code as word) as _);
@@ -124,11 +125,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &m
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
-use crate::section_0209::*;
+use crate::section_0209::assign_int;
 use crate::section_0230::int_base;
-use crate::section_0236::tracing_commands_code;
-use crate::section_0236::tracing_online_code;
-use crate::section_0236::tracing_macros_code;
+use crate::section_0236::*;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

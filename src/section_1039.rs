@@ -37,6 +37,7 @@ macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adj
                     //   main_k:=main_k+qo(skip_byte(main_j))+1;
                     //   end;
                     // goto main_lig_loop+1
+                    goto_part_label!('main_lig_loop_inner, $cur_part_idx, 1);
                 },
             }
         }

@@ -193,12 +193,32 @@ macro_rules! define_ranged_unsigned_integer {
             }
         }
 
+        impl<MIN, MAX> core::ops::Add<$name<MIN, MAX>> for $name<MIN, MAX>
+        where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
+            type Output = Self;
+
+            fn add(mut self, rhs: $name<MIN, MAX>) -> Self {
+                self += rhs.get();
+                self
+            }
+        }        
+
         impl<MIN, MAX> core::ops::Sub<$base_type> for $name<MIN, MAX>
         where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
             type Output = Self;
 
             fn sub(mut self, rhs: $base_type) -> Self {
                 self -= rhs;
+                self
+            }
+        }
+
+        impl<MIN, MAX> core::ops::Sub<$name<MIN, MAX>> for $name<MIN, MAX>
+        where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
+            type Output = Self;
+
+            fn sub(mut self, rhs: $name<MIN, MAX>) -> Self {
+                self -= rhs.get();
                 self
             }
         }

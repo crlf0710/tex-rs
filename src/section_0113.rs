@@ -106,6 +106,21 @@ impl IndexMut<MEMORY_WORD_INT> for memory_word {
     }
 }
 
+pub(crate) struct MEMORY_WORD_SC;
+
+impl Index<MEMORY_WORD_SC> for memory_word {
+    type Output = scaled;
+    fn index(&self, _: MEMORY_WORD_SC) -> &scaled {
+        unsafe { &self.sc }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_SC> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_SC) -> &mut scaled {
+        unsafe { &mut self.sc }
+    }
+}
+
 pub(crate) struct MEMORY_WORD_HH_RH;
 
 impl Index<MEMORY_WORD_HH_RH> for memory_word {

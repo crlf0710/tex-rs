@@ -10,6 +10,8 @@
 //! harmless to let |lig_trick| and |garbage| share the same location of |mem|.
 //
 // @d zero_glue==mem_bot {specification for \.{0pt plus 0pt minus 0pt}}
+/// specification for `0pt plus 0pt minus 0pt`
+pub(crate) const zero_glue: pointer = mem_bot;
 // @d fil_glue==zero_glue+glue_spec_size {\.{0pt plus 1fil minus 0pt}}
 // @d fill_glue==fil_glue+glue_spec_size {\.{0pt plus 1fill minus 0pt}}
 // @d ss_glue==fill_glue+glue_spec_size {\.{0pt plus 1fil minus 1fil}}
@@ -48,4 +50,6 @@ pub(crate) const hi_mem_stat_min: pointer = mem_top - 13;
 // @d hi_mem_stat_usage=14 {the number of one-word nodes always present}
 
 use crate::section_0012::mem_top;
+use crate::section_0012::mem_bot;
+
 use crate::section_0115::pointer;

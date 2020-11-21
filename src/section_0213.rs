@@ -20,14 +20,27 @@ macro_rules! tail {
         $globals.cur_list.tail_field
     };
 }
+
 // @d prev_graf==cur_list.pg_field {number of paragraph lines accumulated}
 // @d aux==cur_list.aux_field {auxiliary data about the current list}
+/// auxiliary data about the current list
+macro_rules! aux {
+    ($globals:expr) => {
+        $globals.cur_list.aux_field
+    }
+}
 // @d prev_depth==aux.sc {the name of |aux| in vertical mode}
 // @d space_factor==aux.hh.lh {part of |aux| in horizontal mode}
+/// part of `aux` in horizontal mode
+macro_rules! space_factor {
+    ($globals:expr) => {
+        aux!($globals)[crate::section_0113::MEMORY_WORD_HH_LH]
+    }
+}
 // @d clang==aux.hh.rh {the other part of |aux| in horizontal mode}
 // @d incompleat_noad==aux.int {the name of |aux| in math mode}
 // @d mode_line==cur_list.ml_field {source file line number at beginning of list}
-//
+
 // @<Glob...@>=
 // @!nest:array[0..nest_size] of list_state_record;
 #[globals_struct_field(TeXGlobals)]
