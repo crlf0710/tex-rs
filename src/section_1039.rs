@@ -11,23 +11,33 @@
 // @<If there's a ligature/kern command...@>=
 #[allow(unused_macros)]
 macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adjust_the_text_appropriately__exit_to_main_loop_wrapup {
-    ($globals:expr, $cur_part_idx:expr) => {{
+    ($globals:expr, $cur_part_idx:expr, $lbl_main_loop_append:lifetime, $main_loop_status:expr) => {{
+        trace_span!("If there's a ligature/kern command...");
         region_multipart_autoincr! {
             ('main_lig_loop_inner, $cur_part_idx) {
                 0 =>
                 {
+                    trace_span!("main_lig_loop");
                     // if char_tag(main_i)<>lig_tag then goto main_loop_wrapup;
+                    if $globals.main_i.char_tag() != char_tag::lig_tag {
+                        goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_wrapup);
+                    }
                     // if cur_r=non_char then goto main_loop_wrapup;
+                    if $globals.cur_r == non_char {
+                        goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_wrapup);
+                    }
                     // main_k:=lig_kern_start(main_f)(main_i); main_j:=font_info[main_k].qqqq;
                     // if skip_byte(main_j)<=stop_flag then goto main_lig_loop+2;
                     // main_k:=lig_kern_restart(main_f)(main_j);
                 },
                 1 =>
                 {
+                    trace_span!("main_lig_loop + 1");
                     // main_lig_loop+1:main_j:=font_info[main_k].qqqq;
                 },
                 2 =>
                 {
+                    trace_span!("main_lig_loop + 2");
                     // main_lig_loop+2:if next_char(main_j)=cur_r then
                     //  if skip_byte(main_j)<=stop_flag then
                     //   @<Do ligature or kern command, returning to |main_lig_loop|
@@ -41,5 +51,6 @@ macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adj
                 },
             }
         }
+        use crate::section_0544::char_tag;
     }}
 }

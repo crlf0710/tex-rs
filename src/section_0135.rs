@@ -32,7 +32,7 @@ pub(crate) const height_offset: quarterword = 3;
 macro_rules! width {
     ($globals:expr, $ptr:expr) => {
         $globals.mem[$ptr + crate::section_0135::width_offset as pointer]
-            [crate::section_0113::MEMORY_WORD_SC]
+            [crate::section_0101::MEMORY_WORD_SC]
     }
 }
 // @d depth(#) == mem[#+depth_offset].sc {depth of the box, in sp}
@@ -40,7 +40,7 @@ macro_rules! width {
 #[allow(unused_macros)]
 macro_rules! depth {
     ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + depth_offset][crate::section_0113::MEMORY_WORD_SC]
+        $globals.mem[$ptr + depth_offset][crate::section_0101::MEMORY_WORD_SC]
     }
 }
 // @d height(#) == mem[#+height_offset].sc {height of the box, in sp}
@@ -48,7 +48,7 @@ macro_rules! depth {
 #[allow(unused_macros)]
 macro_rules! depth {
     ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + height_offset][crate::section_0113::MEMORY_WORD_SC]
+        $globals.mem[$ptr + height_offset][crate::section_0101::MEMORY_WORD_SC]
     }
 }
 // @d shift_amount(#) == mem[#+4].sc {repositioning distance, in sp}

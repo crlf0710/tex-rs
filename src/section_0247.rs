@@ -19,6 +19,8 @@
 // @d display_indent_code=15 {indentation of line for displayed equation}
 // @d overfull_rule_code=16 {width of rule that identifies overfull hboxes}
 // @d hang_indent_code=17 {amount of hanging indentation}
+/// amount of hanging indentation
+pub(crate) const hang_indent_code: quarterword = 17;
 // @d h_offset_code=18 {amount of horizontal offset when shipping pages out}
 // @d v_offset_code=19 {amount of vertical offset when shipping pages out}
 // @d emergency_stretch_code=20 {reduces badnesses on final pass of line-breaking}
@@ -38,6 +40,13 @@ pub(crate) const eqtb_size: word = eqtb_size_TYPENUM::U32;
 // @#
 // @d dimen(#)==eqtb[scaled_base+#].sc
 // @d dimen_par(#)==eqtb[dimen_base+#].sc {a scaled quantity}
+/// a scaled quantity
+macro_rules! dimen_par {
+    ($globals:expr, $val:expr) => {
+        $globals.eqtb[crate::section_0236::dimen_base as crate::section_0115::pointer
+            + $val as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
+    };
+}
 // @d par_indent==dimen_par(par_indent_code)
 // @d math_surround==dimen_par(math_surround_code)
 // @d line_skip_limit==dimen_par(line_skip_limit_code)
@@ -56,6 +65,11 @@ pub(crate) const eqtb_size: word = eqtb_size_TYPENUM::U32;
 // @d display_indent==dimen_par(display_indent_code)
 // @d overfull_rule==dimen_par(overfull_rule_code)
 // @d hang_indent==dimen_par(hang_indent_code)
+macro_rules! hang_indent {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::hang_indent_code)
+    };
+}
 // @d h_offset==dimen_par(h_offset_code)
 // @d v_offset==dimen_par(v_offset_code)
 // @d emergency_stretch==dimen_par(emergency_stretch_code)
@@ -89,6 +103,7 @@ pub(crate) const eqtb_size: word = eqtb_size_TYPENUM::U32;
 
 use crate::pascal::word;
 use crate::section_0113::halfword;
+use crate::section_0113::quarterword;
 use crate::section_0236::dimen_base_TYPENUM;
 use typenum::Unsigned;
 use typenum::{U21, U255};

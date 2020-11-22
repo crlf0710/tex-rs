@@ -13,6 +13,8 @@
 // @d ex_hyphen_penalty_code=4 {penalty for break after explicit hyphen}
 // @d club_penalty_code=5 {penalty for creating a club line}
 // @d widow_penalty_code=6 {penalty for creating a widow line}
+/// penalty for creating a widow line
+pub(crate) const widow_penalty_code: halfword = 6;
 // @d display_widow_penalty_code=7 {ditto, just before a display}
 // @d broken_penalty_code=8 {penalty for breaking a page at a broken line}
 // @d bin_op_penalty_code=9 {penalty for breaking after a binary operation}
@@ -28,6 +30,8 @@
 // @d mag_code=17 {magnification ratio}
 // @d delimiter_factor_code=18 {ratio for variable-size delimiters}
 // @d looseness_code=19 {change in number of lines for a paragraph}
+/// change in number of lines for a paragraph
+pub(crate) const looseness_code: halfword = 19;
 // @d time_code=20 {current time of day}
 /// current time of day
 pub(crate) const time_code: halfword = 20;
@@ -66,6 +70,8 @@ pub(crate) const tracing_commands_code: halfword = 36;
 // @d output_penalty_code=39 {penalty found at current page break}
 // @d max_dead_cycles_code=40 {bound on consecutive dead cycles of output}
 // @d hang_after_code=41 {hanging indentation changes after this many lines}
+/// hanging indentation changes after this many lines
+pub(crate) const hang_after_code: halfword = 41;
 // @d floating_penalty_code=42 {penalty for insertions heldover after a split}
 // @d global_defs_code=43 {override \.{\\global} specifications}
 /// override `\global` specifications
@@ -119,6 +125,11 @@ macro_rules! int_par {
 // @d ex_hyphen_penalty==int_par(ex_hyphen_penalty_code)
 // @d club_penalty==int_par(club_penalty_code)
 // @d widow_penalty==int_par(widow_penalty_code)
+macro_rules! widow_penalty {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::widow_penalty_code)
+    };
+}
 // @d display_widow_penalty==int_par(display_widow_penalty_code)
 // @d broken_penalty==int_par(broken_penalty_code)
 // @d bin_op_penalty==int_par(bin_op_penalty_code)
@@ -132,6 +143,11 @@ macro_rules! int_par {
 // @d mag==int_par(mag_code)
 // @d delimiter_factor==int_par(delimiter_factor_code)
 // @d looseness==int_par(looseness_code)
+macro_rules! looseness {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::looseness_code)
+    };
+}
 // @d time==int_par(time_code)
 macro_rules! time {
     ($globals:expr) => {
@@ -194,6 +210,11 @@ macro_rules! tracing_commands {
 // @d output_penalty==int_par(output_penalty_code)
 // @d max_dead_cycles==int_par(max_dead_cycles_code)
 // @d hang_after==int_par(hang_after_code)
+macro_rules! hang_after {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::hang_after_code)
+    };
+}
 // @d floating_penalty==int_par(floating_penalty_code)
 // @d global_defs==int_par(global_defs_code)
 macro_rules! global_defs {

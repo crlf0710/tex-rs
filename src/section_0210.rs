@@ -41,6 +41,8 @@ pub(crate) const end_template: quarterword = max_command + 15;
 pub(crate) const dont_expand: quarterword = max_command + 16;
 // @d glue_ref=max_command+17 {the equivalent points to a glue specification}
 // @d shape_ref=max_command+18 {the equivalent points to a parshape specification}
+/// the equivalent points to a parshape specification
+pub(crate) const shape_ref: quarterword = max_command + 18;
 // @d box_ref=max_command+19 {the equivalent points to a box node, or is |null|}
 // @d data=max_command+20 {the equivalent is simply a halfword number}
 /// the equivalent is simply a halfword number

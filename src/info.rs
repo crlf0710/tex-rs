@@ -128,7 +128,6 @@ macro_rules! goto_part_label {
     };
 }
 
-
 macro_rules! region_multipart_autoincr {
     (($lbl_block:lifetime, $part_idx:expr) {
         $($part:pat => {$($s: stmt)*},)*
@@ -148,8 +147,6 @@ macro_rules! region_multipart_autoincr {
         }
     }
 }
-
-
 
 macro_rules! region_initex {
     (($globals:expr) $($statements:tt)* ) => {

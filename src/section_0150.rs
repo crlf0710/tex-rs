@@ -26,14 +26,14 @@ macro_rules! glue_ref_count {
 /// the stretchability of this glob of glue
 macro_rules! stretch {
     ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 2][crate::section_0113::MEMORY_WORD_SC]
+        $globals.mem[$ptr + 2][crate::section_0101::MEMORY_WORD_SC]
     }
 }
 // @d shrink(#) == mem[#+3].sc {the shrinkability of this glob of glue}
 /// the shrinkability of this glob of glue
 macro_rules! shrink {
     ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 3][crate::section_0113::MEMORY_WORD_SC]
+        $globals.mem[$ptr + 3][crate::section_0101::MEMORY_WORD_SC]
     }
 }
 // @d stretch_order == type {order of infinity for stretching}

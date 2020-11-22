@@ -48,9 +48,16 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
         // character(lig_stack):=cur_l;@/
         // cur_q:=tail;
         // if cancel_boundary then
-        //   begin cancel_boundary:=false; main_k:=non_address;
-        //   end
+        if $globals.cancel_boundary {
+            // begin cancel_boundary:=false; main_k:=non_address;
+            $globals.cancel_boundary = false;
+            $globals.main_k = non_address;
+            // end
+        }
         // else main_k:=bchar_label[main_f];
+        else {
+            $globals.main_k = $globals.bchar_label[$globals.main_f];
+        }
         enum main_loop_status_kind {
             main_loop_wrapup,
             main_loop_move(usize),
@@ -102,7 +109,7 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
                 //   |cur_r|, adjust the text appropriately; exit to |main_loop_wrapup|@>;
                 main_loop_status_kind::main_lig_loop(mut part_idx) => {
                     If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adjust_the_text_appropriately__exit_to_main_loop_wrapup!
-                        ($globals, part_idx);
+                        ($globals, part_idx, 'main_loop_append, main_loop_status);
                     unreachable!();
                 },
                 // main_loop_move_lig:@<Move the cursor past a pseudo-ligature, then

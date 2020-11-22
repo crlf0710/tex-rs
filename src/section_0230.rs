@@ -6,6 +6,8 @@
 //! registers.
 
 // @d par_shape_loc=local_base {specifies paragraph shape}
+/// specifies paragraph shape
+pub(crate) const par_shape_loc: pointer = local_base as pointer;
 // @d output_routine_loc=local_base+1 {points to token list for \.{\\output}}
 // @d every_par_loc=local_base+2 {points to token list for \.{\\everypar}}
 // @d every_math_loc=local_base+3 {points to token list for \.{\\everymath}}
@@ -58,6 +60,14 @@ pub(crate) type int_base_TYPENUM = typenum::op!(math_code_base_TYPENUM + U256);
 pub(crate) const int_base: word = int_base_TYPENUM::U32;
 // @#
 // @d par_shape_ptr==equiv(par_shape_loc)
+macro_rules! par_shape_ptr {
+    ($globals:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::par_shape_loc
+        )
+    };
+}
 // @d output_routine==equiv(output_routine_loc)
 // @d every_par==equiv(every_par_loc)
 // @d every_math==equiv(every_math_loc)
@@ -141,6 +151,8 @@ macro_rules! math_code {
 // @!@:err_help_}{\.{\\errhelp} primitive@>
 
 use crate::pascal::word;
+use crate::section_0115::pointer;
+use crate::section_0224::local_base;
 use crate::section_0224::local_base_TYPENUM;
 
 #[allow(non_snake_case)]

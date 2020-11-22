@@ -37,8 +37,6 @@ use crate::section_0549::font_index_array;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static font_glue: internal_font_array<pointer> = internal_font_array::default();
 
-#[globals_struct_use(TeXGlobals)]
-use crate::section_0549::internal_font_array;
 // @!font_used:array[internal_font_number] of boolean;
 //   {has a character from this font actually appeared in the output?}
 // @!hyphen_char:array[internal_font_number] of integer;
@@ -48,10 +46,18 @@ use crate::section_0549::internal_font_array;
 // @!bchar_label:array[internal_font_number] of font_index;
 //   {start of |lig_kern| program for left boundary character,
 //   |non_address| if there is none}
+/// start of `lig_kern` program for left boundary character,
+/// `non_address` if there is none
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static bchar_label: internal_font_array<font_index> = internal_font_array::default();
+
 // @!font_bchar:array[internal_font_number] of min_quarterword..non_char;
 //   {right boundary character, |non_char| if there is none}
 // @!font_false_bchar:array[internal_font_number] of min_quarterword..non_char;
 //   {|font_bchar| if it doesn't exist in the font, otherwise |non_char|}
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0549::internal_font_array;
 
 type font_index_array_LENGTH_TYPENUM = typenum::op!(font_mem_size_TYPENUM - U0 + U1);
 
@@ -77,9 +83,9 @@ use crate::section_0548::font_index;
 use crate::section_0548::internal_font_number;
 use crate::section_0907::ASCII_code_or_non_char;
 
+use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U0;
 use typenum::U1;
-use globals_struct::{globals_struct_field, globals_struct_use};
 
 impl font_index_array<memory_word> {
     pub(crate) fn default_zeroed() -> Self {

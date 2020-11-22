@@ -26,6 +26,13 @@ pub(crate) static main_f: internal_font_number = internal_font_number::default()
 use crate::section_0548::internal_font_number;
 
 // @!main_i:four_quarters; {character information bytes for |cur_l|}
+/// character information bytes for `cur_l`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static main_i: char_info = char_info::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0554::char_info;
+
 // @!main_j:four_quarters; {ligature/kern command}
 // @!main_k:font_index; {index into |font_info|}
 /// index into `font_info`
@@ -48,6 +55,10 @@ pub(crate) static main_s: integer = integer::default();
 // @!bchar:halfword; {right boundary character of current font, or |non_char|}
 // @!false_bchar:halfword; {nonexistent character matching |bchar|, or |non_char|}
 // @!cancel_boundary:boolean; {should the left boundary be ignored?}
+/// should the left boundary be ignored?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cancel_boundary: boolean = boolean::default();
+
 // @!ins_disc:boolean; {should we insert a discretionary node?}
 
 use crate::section_0004::TeXGlobals;

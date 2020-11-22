@@ -54,7 +54,7 @@ union halfword_or_b01 {
 //   end;
 
 #[derive(Copy, Clone)]
-struct four_quarters {
+pub(crate) struct four_quarters {
     b: (quarterword, quarterword, quarterword, quarterword),
 }
 
@@ -69,7 +69,6 @@ struct four_quarters {
 #[derive(Copy, Clone)]
 pub(crate) union memory_word {
     int: integer,
-    sc: scaled,
     gr: glue_ratio,
     w: word,
     hh: two_halves,
@@ -103,21 +102,6 @@ impl Index<MEMORY_WORD_INT> for memory_word {
 impl IndexMut<MEMORY_WORD_INT> for memory_word {
     fn index_mut(&mut self, _: MEMORY_WORD_INT) -> &mut integer {
         unsafe { &mut self.int }
-    }
-}
-
-pub(crate) struct MEMORY_WORD_SC;
-
-impl Index<MEMORY_WORD_SC> for memory_word {
-    type Output = scaled;
-    fn index(&self, _: MEMORY_WORD_SC) -> &scaled {
-        unsafe { &self.sc }
-    }
-}
-
-impl IndexMut<MEMORY_WORD_SC> for memory_word {
-    fn index_mut(&mut self, _: MEMORY_WORD_SC) -> &mut scaled {
-        unsafe { &mut self.sc }
     }
 }
 
@@ -214,6 +198,21 @@ impl Index<TWO_HALVES_LH> for two_halves {
 impl IndexMut<TWO_HALVES_LH> for two_halves {
     fn index_mut(&mut self, _: TWO_HALVES_LH) -> &mut halfword {
         unsafe { &mut self.lh_or_b01.lh }
+    }
+}
+
+pub(crate) struct FOUR_QUARTERS_B2;
+
+impl Index<FOUR_QUARTERS_B2> for four_quarters {
+    type Output = quarterword;
+    fn index(&self, _: FOUR_QUARTERS_B2) -> &quarterword {
+        &self.b.2
+    }
+}
+
+impl IndexMut<FOUR_QUARTERS_B2> for four_quarters {
+    fn index_mut(&mut self, _: FOUR_QUARTERS_B2) -> &mut quarterword {
+        &mut self.b.2
     }
 }
 

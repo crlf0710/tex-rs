@@ -1,0 +1,15 @@
+//! @ Conversely, when \TeX\ is finished on the current level, the former
+//! state is restored by calling |pop_nest|. This routine will never be
+//! called at the lowest semantic level, nor will it be called unless |head|
+//! is a node that should be returned to free memory.
+//
+// @p procedure pop_nest; {leave a semantic level, re-enter the old}
+/// leave a semantic level, re-enter the old
+#[allow(unused_variables)]
+pub(crate) fn pop_nest(globals: &mut TeXGlobals) {
+    todo!("pop_nest");
+    // begin free_avail(head); decr(nest_ptr); cur_list:=nest[nest_ptr];
+    // end;
+}
+
+use crate::section_0004::TeXGlobals;
