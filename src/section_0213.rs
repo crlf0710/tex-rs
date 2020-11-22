@@ -40,6 +40,12 @@ macro_rules! space_factor {
 // @d clang==aux.hh.rh {the other part of |aux| in horizontal mode}
 // @d incompleat_noad==aux.int {the name of |aux| in math mode}
 // @d mode_line==cur_list.ml_field {source file line number at beginning of list}
+/// source file line number at beginning of list
+macro_rules! mode_line {
+    ($globals:expr) => {
+        $globals.cur_list.ml_field
+    }
+}
 
 // @<Glob...@>=
 // @!nest:array[0..nest_size] of list_state_record;

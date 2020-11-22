@@ -69,10 +69,11 @@ pub mod TeXGlobals {
     include!("src/section_0438.rs");
     include!("src/section_0512.rs");
     include!("src/section_0513.rs");
+    include!("src/section_0527.rs");
     include!("src/section_0549.rs");
     include!("src/section_0550.rs");
     include!("src/section_0592.rs");
-    include!("src/section_0527.rs");
+    include!("src/section_0661.rs");
     include!("src/section_0770.rs");
     include!("src/section_0907.rs");
     include!("src/section_0989.rs");
