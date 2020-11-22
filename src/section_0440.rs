@@ -32,7 +32,7 @@ pub(crate) fn scan_int(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX
     // else if (cur_cmd>=min_internal)and(cur_cmd<=max_internal) then
     else if globals.cur_cmd >= min_internal && globals.cur_cmd <= max_internal {
         // scan_something_internal(int_val,false)
-        scan_something_internal(globals, (int_val as u8).into(), false);
+        scan_something_internal(globals, (int_val as u8).into(), false)?;
     }
     // else @<Scan a numeric constant@>;
     else {

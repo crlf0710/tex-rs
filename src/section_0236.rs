@@ -110,6 +110,12 @@ pub(crate) const dimen_base: word = dimen_base_TYPENUM::U32;
 // @#
 // @d del_code(#)==eqtb[del_code_base+#].int
 // @d count(#)==eqtb[count_base+#].int
+macro_rules! count {
+    ($globals:expr, $val:expr) => {
+        $globals.eqtb[crate::section_0236::count_base as crate::section_0115::pointer
+            + $val as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
+    };
+}
 // @d int_par(#)==eqtb[int_base+#].int {an integer parameter}
 /// an integer parameter
 macro_rules! int_par {

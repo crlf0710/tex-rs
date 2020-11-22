@@ -5,23 +5,31 @@
 //! |cur_cmd<min_internal| or |cur_cmd>max_internal|.
 //
 // @d scanned_result_end(#)==cur_val_level:=#;@+end
-const _ : () = ();
+const _: () = ();
 // @d scanned_result(#)==@+begin cur_val:=#;scanned_result_end
 macro_rules! scanned_result {
     ($globals:expr, $val:expr, $level:expr) => {{
         $globals.cur_val = $val;
         $globals.cur_val_level = $level;
-    }}
+    }};
 }
 //
 // @p procedure scan_something_internal(@!level:small_number;@!negative:boolean);
 //   {fetch an internal parameter}
 /// fetch an internal parameter
 #[allow(unused_variables)]
-pub(crate) fn scan_something_internal(globals: &mut TeXGlobals, level: small_number, negative: boolean) {
+pub(crate) fn scan_something_internal(
+    globals: &mut TeXGlobals,
+    level: small_number,
+    negative: boolean,
+) -> Result<(), JumpOutToEndOfTEX> {
     // var m:halfword; {|chr_code| part of the operand token}
+    /// `chr_code` part of the operand token
+    let m: chr_code_type;
     // @!p:0..nest_size; {index into |nest|}
     // begin m:=cur_chr;
+    m = globals.cur_chr;
+    trace_expr!("cur_cmd = {}", globals.cur_cmd);
     // case cur_cmd of
     // def_code: @<Fetch a character code from some table@>;
     if globals.cur_cmd == def_code {
@@ -46,21 +54,28 @@ pub(crate) fn scan_something_internal(globals: &mut TeXGlobals, level: small_num
     // assign_font_dimen: @<Fetch a font dimension@>;
     // assign_font_int: @<Fetch a font integer@>;
     // register: @<Fetch a register@>;
+    else if globals.cur_cmd == register {
+        Fetch_a_register!(globals, m);
+    }
     // last_item: @<Fetch an item in the current node, if appropriate@>;
     // othercases @<Complain that \.{\\the} can't do this; give zero result@>
     else {
-        todo!();
+        todo!("scan othercases");
     }
     // endcases;@/
     // while cur_val_level>level do @<Convert \(c)|cur_val| to a lower level@>;
     // @<Fix the reference count, if any, and negate |cur_val| if |negative|@>;
     // end;
+    ok_nojump!()
 }
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::JumpOutToEndOfTEX;
 use crate::section_0101::small_number;
 use crate::section_0208::char_given;
 use crate::section_0208::math_given;
 use crate::section_0209::def_code;
+use crate::section_0209::register;
+use crate::section_0297::chr_code_type;
 use crate::section_0410::int_val;

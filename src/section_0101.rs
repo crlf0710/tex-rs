@@ -21,6 +21,9 @@ impl scaled {
     pub(crate) const fn zero() -> Self {
         scaled(0)
     }
+    pub(crate) const fn inner(&self) -> integer {
+        self.0
+    }
 }
 
 pub type nonnegative_integer = u32_from_m_to_n<U0, ::typenum::op!(U2147483648 - U1)>;

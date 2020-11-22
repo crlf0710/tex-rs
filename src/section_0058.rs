@@ -6,7 +6,6 @@
 // procedure print_char(@!s:ASCII_code); {prints a single character}
 /// prints a single character
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code) {
     // label exit;
     // begin if @<Character |s| is the current new-line character@> then

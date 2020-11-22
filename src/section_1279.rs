@@ -32,7 +32,7 @@ pub(crate) fn issue_message(globals: &mut TeXGlobals) -> Result<(), JumpOutToEnd
     }
     // else @<Print string |s| as an error message@>;
     else {
-        todo!();
+        Print_string_s_as_an_error_message!(globals, s.get() as _);
     }
     // flush_string;
     flush_string(globals);

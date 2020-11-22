@@ -42,9 +42,23 @@ pub(crate) type local_base_TYPENUM = typenum::op!(mu_skip_base_TYPENUM + U256);
 pub(crate) const local_base: word = local_base_TYPENUM::U32;
 // @#
 // @d skip(#)==equiv(skip_base+#) {|mem| location of glue specification}
+/// `mem` location of glue specification
+macro_rules! skip {
+    ($globals:expr, $ptr:expr) => {
+        equiv!($globals, crate::section_0224::skip_base as crate::pascal::word +
+            $ptr as crate::pascal::word)
+    }
+}
 // @d mu_skip(#)==equiv(mu_skip_base+#) {|mem| location of math glue spec}
+/// `mem` location of math glue spec
+macro_rules! mu_skip {
+    ($globals:expr, $ptr:expr) => {
+        equiv!($globals, crate::section_0224::mu_skip_base as crate::pascal::word +
+            $ptr as crate::pascal::word)
+    }
+}
 // @d glue_par(#)==equiv(glue_base+#) {|mem| location of glue specification}
-/// |mem| location of glue specification
+/// `mem` location of glue specification
 macro_rules! glue_par {
     ($globals:expr, $ptr:expr) => {
         equiv!($globals, crate::section_0222::glue_base as crate::pascal::word +

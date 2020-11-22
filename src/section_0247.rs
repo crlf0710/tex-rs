@@ -39,6 +39,12 @@ pub(crate) type eqtb_size_TYPENUM = typenum::op!(scaled_base_TYPENUM + U255);
 pub(crate) const eqtb_size: word = eqtb_size_TYPENUM::U32;
 // @#
 // @d dimen(#)==eqtb[scaled_base+#].sc
+macro_rules! dimen {
+    ($globals:expr, $val:expr) => {
+        $globals.eqtb[crate::section_0247::scaled_base as crate::section_0115::pointer
+            + $val as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
+    };
+}
 // @d dimen_par(#)==eqtb[dimen_base+#].sc {a scaled quantity}
 /// a scaled quantity
 macro_rules! dimen_par {

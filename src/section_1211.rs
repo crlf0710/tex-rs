@@ -68,7 +68,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> Result<(), JumpOutTo
         // if cur_cmd<=max_non_prefixed_command then
         if globals.cur_cmd <= max_non_prefixed_command {
             // @<Discard erroneous prefixes and |return|@>;
-            todo!();
+            Discard_erroneous_prefixes_and_return!(globals);
             // end;
         }
     }
