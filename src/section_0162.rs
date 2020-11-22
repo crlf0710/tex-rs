@@ -30,6 +30,8 @@ pub(crate) const temp_head: pointer = mem_top - 3;
 // @d hold_head==mem_top-4 {head of a temporary list of another kind}
 // @d adjust_head==mem_top-5 {head of adjustment list returned by |hpack|}
 // @d active==mem_top-7 {head of active list in |line_break|, needs two words}
+/// head of active list in `line_break`, needs two words
+pub(crate) const active: pointer = mem_top - 7;
 // @d align_head==mem_top-8 {head of preamble list for alignments}
 // @d end_span==mem_top-9 {tail of spanned-width lists}
 // @d omit_template==mem_top-10 {a constant token list}

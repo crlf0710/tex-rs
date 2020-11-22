@@ -716,8 +716,18 @@ reversing_order_items!(
                         mod section_0815;
                     }
                     {
-                        mod section_0816_to_0861;
-                        mod section_0862_to_0875;
+                        mod section_0816_to_0818;
+                        #[macro_use]
+                        mod section_0819;
+                        mod section_0820;
+                        mod section_0821;
+                        mod section_0822;
+                        mod section_0823;
+                        mod section_0824_to_0861;
+                        mod section_0862_to_0864;
+                        #[macro_use]
+                        mod section_0865;
+                        mod section_0866_to_0875;
                         #[macro_use]
                         mod section_0876;
                         mod section_0877;

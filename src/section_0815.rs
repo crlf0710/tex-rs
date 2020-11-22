@@ -20,6 +20,7 @@ pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer)
     Break_the_paragraph_at_the_chosen_breakpoints__justify_the_resulting_lines_to_the_correct_widths__and_append_them_to_the_current_vertical_list!
         (globals, final_widow_penalty);
     // @<Clean up the memory by removing the break nodes@>;
+    Clean_up_the_memory_by_removing_the_break_nodes!(globals);
     // pack_begin_line:=0;
     globals.pack_begin_line = 0;
     // end;
