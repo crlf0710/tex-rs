@@ -10,7 +10,7 @@
 //
 // @<Error hand...@>=
 // procedure jump_out;
-fn jump_out() -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn jump_out() -> Result<(), JumpOutToEndOfTEX> {
     // begin goto end_of_TEX;
     return Err(JumpOutToEndOfTEX);
     // end;

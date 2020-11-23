@@ -19,7 +19,7 @@
 // @d fatal_error_stop=3 {|history| value when termination was premature}
 
 #[doc(hidden)]
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, PartialOrd)]
 pub(crate) enum history_kind {
     /// `history` value when nothing has been amiss yet
     spotless = 0,
@@ -43,11 +43,22 @@ pub(crate) use history_kind::*;
 /// has the source input been clean so far?
 pub(crate) static history: history_kind = fatal_error_stop;
 
-// @!error_count:-1..100; {the number of scrolled errors since the
-//   last paragraph ended}
-//
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0076::history_kind;
 
 #[globals_struct_use(TeXGlobals)]
-use crate::section_0076::history_kind::{self, fatal_error_stop};
+use crate::section_0076::history_kind::fatal_error_stop;
+
+// @!error_count:-1..100; {the number of scrolled errors since the
+//   last paragraph ended}
+/// the number of scrolled errors since the last paragraph ended
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static error_count: i8_from_m_to_n<N1, P100> = i8_from_m_to_n::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::i8_from_m_to_n;
+
+#[globals_struct_use(TeXGlobals)]
+use typenum::{N1, P100};
 
 use globals_struct::{globals_struct_field, globals_struct_use};

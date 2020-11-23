@@ -13,7 +13,7 @@ macro_rules! Discard_erroneous_prefixes_and_return {
             ASCII_code_literal!(b'\''),
         );
         // help1("I'll pretend you didn't say \long or \outer or \global.");
-        todo!();
+        help1!($globals, strpool_str!("I'll pretend you didn't say \\long or \\outer or \\global."));
         // back_error; return;
         back_error($globals)?;
         return_nojump!();

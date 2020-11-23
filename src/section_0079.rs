@@ -10,6 +10,13 @@
 // @d hlp6(#)==help_line[5]:=#; hlp5
 // @d help0==help_ptr:=0 {sometimes there might be no help}
 // @d help1==@+begin help_ptr:=1; hlp1 {use this with one help line}
+/// use this with one help line
+macro_rules! help1 {
+    ($globals:expr, $val1:expr) => {{
+        $globals.help_ptr = 1.into();
+        $globals.help_line[0] = $val1;
+    }}
+}
 // @d help2==@+begin help_ptr:=2; hlp2 {use this with two help lines}
 // @d help3==@+begin help_ptr:=3; hlp3 {use this with three help lines}
 // @d help4==@+begin help_ptr:=4; hlp4 {use this with four help lines}
@@ -18,6 +25,32 @@
 //
 // @<Glob...@>=
 // @!help_line:array[0..5] of str_number; {helps for the next |error|}
+/// helps for the next `error`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static help_line: help_line_array<str_number> = help_line_array::default();
 // @!help_ptr:0..6; {the number of help lines present}
+/// the number of help lines present
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static help_ptr: u8_from_0_to_n<U6> = u8_from_0_to_n::default();
 // @!use_err_help:boolean; {should the |err_help| list be shown?}
-//
+/// should the `err_help` list be shown?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static use_err_help: boolean = boolean::default();
+
+#[globals_struct_use(TeXGlobals)]
+use typenum::U6;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0079::help_line_array;
+
+type help_line_array_LENGTH_TYPENUM = typenum::op!(U5 - U0 + U1);
+
+define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
+    pub(crate) help_line_array[u8_from_0_to_n<U5>] =>
+    u8; U8; U0; help_line_array_LENGTH_TYPENUM
+);
+
+use crate::pascal::u8_from_0_to_n;
+use crate::section_0004::TeXGlobals;
+use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::{U0, U1, U5};
