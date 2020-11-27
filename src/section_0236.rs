@@ -91,6 +91,8 @@ pub(crate) const end_line_char_code: halfword = 48;
 // @d right_hyphen_min_code=52 {minimum right hyphenation fragment size}
 // @d holding_inserts_code=53 {do not remove insertion nodes from \.{\\box255}}
 // @d error_context_lines_code=54 {maximum intermediate line pairs shown}
+/// maximum intermediate line pairs shown
+pub(crate) const error_context_lines_code: halfword = 54;
 // @d int_pars=55 {total number of integer parameters}
 /// total number of integer parameters
 pub(crate) type int_pars_TYPENUM = typenum::U55;
@@ -249,6 +251,11 @@ macro_rules! end_line_char {
 // @d right_hyphen_min==int_par(right_hyphen_min_code)
 // @d holding_inserts==int_par(holding_inserts_code)
 // @d error_context_lines==int_par(error_context_lines_code)
+macro_rules! error_context_lines {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::error_context_lines_code)
+    };
+}
 //
 // @<Assign the values |depth_threshold:=show_box_depth|...@>=
 // depth_threshold:=show_box_depth;

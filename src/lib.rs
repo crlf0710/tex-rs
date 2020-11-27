@@ -420,7 +420,16 @@ reversing_order_items!(
                         mod section_0308;
                         mod section_0309;
                         mod section_0310;
-                        mod section_0311_to_0320;
+                        reversing_order_items!(
+                            {
+                                mod section_0311;
+                            }
+                            {
+                                #[macro_use]
+                                mod section_0312;
+                            }
+                        );
+                        mod section_0313_to_0320;
                         #[macro_use]
                         mod section_0321;
                         #[macro_use]

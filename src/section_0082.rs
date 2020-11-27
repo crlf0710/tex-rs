@@ -18,7 +18,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
         make_globals_io_string_view!(globals),
         ASCII_code_literal!(b'.'),
     );
-    todo!("show_context");
+    show_context(globals);
     // if interaction=error_stop_mode then @<Get user's advice and |return|@>;
     if globals.interaction == error_stop_mode {
         todo!("get user's advice");
@@ -53,3 +53,4 @@ use crate::section_0076::history_kind::error_message_issued;
 use crate::section_0076::history_kind::fatal_error_stop;
 use crate::section_0081::jump_out;
 use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0311::show_context;
