@@ -21,7 +21,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
     show_context(globals);
     // if interaction=error_stop_mode then @<Get user's advice and |return|@>;
     if globals.interaction == error_stop_mode {
-        todo!("get user's advice");
+        Get_user_s_advice_and_return!(globals);
     }
     // incr(error_count);
     incr!(globals.error_count);

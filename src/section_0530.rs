@@ -34,7 +34,7 @@ pub(crate) fn prompt_file_name(
     // @.job aborted, file error...@>
     // clear_terminal; prompt_input(": "); @<Scan file name in the buffer@>;
     clear_terminal(globals);
-    prompt_input!(globals, strpool_str!(": "))?;
+    prompt_input!(globals, strpool_str!(": "));
     Scan_file_name_in_the_buffer!(globals);
     // if cur_ext="" then cur_ext:=e;
     if globals.cur_ext == strpool_str!("") {

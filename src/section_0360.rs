@@ -62,7 +62,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 $globals.first = start!($globals).into();
                 // prompt_input("*"); {input on-line into |buffer|}
                 /// input on-line into `buffer`
-                prompt_input!($globals, strpool_str!("*"))?;
+                prompt_input!($globals, strpool_str!("*"));
                 // @.*\relax@>
                 // limit:=last;
                 limit!($globals) = $globals.last.get();

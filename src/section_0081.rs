@@ -33,25 +33,6 @@ macro_rules! try_or_jump {
     };
 }
 
-macro_rules! return_nojump {
-    () => {
-        return Ok(());
-    };
-    ($val: expr) => {
-        return Ok($val);
-    };
-}
-
-
-macro_rules! ok_nojump {
-    () => {
-        Ok::<_, crate::section_0081::JumpOutToEndOfTEX>(())
-    };
-    ($val: expr) => {
-        Ok::<_, crate::section_0081::JumpOutToEndOfTEX>($val)
-    };
-}
-
 use core::fmt;
 
 migration_complete!();

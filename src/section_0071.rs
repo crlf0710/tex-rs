@@ -17,8 +17,6 @@ macro_rules! prompt_input {
         use crate::section_0034::wake_up_terminal;
         use crate::section_0059::print;
         use crate::section_0071::term_input;
-
-        ok_nojump!()
     }};
 }
 

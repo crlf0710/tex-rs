@@ -1,12 +1,3 @@
-//! @ @<Get user's advice...@>=
-//! loop@+begin continue: clear_for_error_prompt; prompt_input("? ");
-//! @.?\relax@>
-//!   if last=first then return;
-//!   c:=buffer[first];
-//!   if c>="a" then c:=c+"A"-"a"; {convert to uppercase}
-//!   @<Interpret code |c| and |return| if done@>;
-//!   end
-//!
 //! @ It is desirable to provide an `\.E' option here that gives the user
 //! an easy way to return from \TeX\ to the system editor, with the offending
 //! line ready to be edited. But such an extension requires some system
