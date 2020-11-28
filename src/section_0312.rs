@@ -3,6 +3,9 @@
 // @<Display the current context@>=
 macro_rules! Display_the_current_context {
     ($globals:expr, $nn:expr) => {{
+        /// length of descriptive information on line 1
+        let l: u8_from_0_to_n<half_error_line_TYPENUM>;
+
         // begin if (base_ptr=input_ptr) or (state<>token_list) or
         //    (token_type<>backed_up) or (loc<>null) then
         //     {we omit backed-up token lists that have already been read}
@@ -17,15 +20,17 @@ macro_rules! Display_the_current_context {
             $globals.old_setting = $globals.selector;
             // if state<>token_list then
             if state!($globals) != token_list {
-                todo!("pseudo print location")
                 // begin @<Print location of current line@>;
+                Print_location_of_current_line!($globals);
                 // @<Pseudoprint the line@>;
+                Pseudoprint_the_line!($globals, l);
                 // end
             }
             // else  begin @<Print type of token list@>;
             else {
-                todo!("pseudo print token list")
+                Print_type_of_token_list!($globals);
                 // @<Pseudoprint the token list@>;
+                Pseudoprint_the_token_list!($globals, l);
                 // end;
             }
             // selector:=old_setting; {stop pseudoprinting}
@@ -33,12 +38,14 @@ macro_rules! Display_the_current_context {
             const _ : () = ();
             $globals.selector = $globals.old_setting;
             // @<Print two lines using the tricky pseudoprinted information@>;
-            todo!("print two lines");
+            Print_two_lines_using_the_tricky_pseudoprinted_information!($globals, l);
             // incr(nn);
             incr!($nn);
             // end;
         }
         // end
+        use crate::pascal::u8_from_0_to_n;
+        use crate::section_0011::half_error_line_TYPENUM;
         use crate::section_0115::null;
         use crate::section_0307::backed_up;
     }}

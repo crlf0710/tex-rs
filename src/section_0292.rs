@@ -45,7 +45,7 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
     while p != null as _ && globals.tally < l {
         // begin if p=q then @<Do magic computation@>;
         if p == q {
-            todo!();
+            Do_magic_computation!(globals);
         }
         // @<Display token |p|, and |return| if there are problems@>;
         Display_token_p__and_return_if_there_are_problems!(globals, p, n, match_chr);

@@ -84,6 +84,8 @@ macro_rules! param_start {
     ($globals:expr) => {limit!($globals)}
 }
 // @d parameter=0 {|token_type| code for parameter}
+/// `token_type` code for parameter
+pub(crate) const parameter: quarterword = 0;
 // @d u_template=1 {|token_type| code for \<u_j> template}
 // @d v_template=2 {|token_type| code for \<v_j> template}
 /// `token_type` code for `<v_j>` template

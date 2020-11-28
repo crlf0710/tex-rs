@@ -108,13 +108,35 @@ use crate::section_0011::max_print_line_TYPENUM;
 pub(crate) static file_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
 // @!trick_buf:array[0..error_line] of ASCII_code; {circular buffer for
 //   pseudoprinting}
+/// circular buffer for pseudoprinting
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
+pub(crate) static trick_buf: trick_buf_array<ASCII_code> = trick_buf_array::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0054::trick_buf_array;
+
+type trick_buf_array_LENGTH_TYPENUM = typenum::op!(error_line_TYPENUM + U1);
+
+define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
+    pub(crate) trick_buf_array[u8_from_0_to_n<error_line_TYPENUM>] => u8; U8; trick_buf_array_LENGTH_TYPENUM
+);
+
 // @!trick_count: integer; {threshold for pseudoprinting, explained later}
+/// threshold for pseudoprinting, explained later
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringView)]
+pub(crate) static trick_count: integer = 0;
 // @!first_count: integer; {another variable for pseudoprinting}
-//
+/// another variable for pseudoprinting
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static first_count: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
 pub(crate) use crate::section_0025::alpha_file;
 
 use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};
+use crate::pascal::u8_from_0_to_n;
+use crate::section_0011::error_line_TYPENUM;
 use typenum::Unsigned;
-use typenum::U21;
+use typenum::{U1, U21};

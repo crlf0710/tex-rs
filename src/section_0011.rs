@@ -32,8 +32,16 @@ pub(crate) const buf_size: u16 = buf_size_TYPENUM::U16;
 pub(crate) type buf_size_TYPENUM = U500;
 
 // @!error_line=72; {width of context lines on terminal error messages}
+/// width of context lines on terminal error messages
+pub(crate) const error_line: u8 = error_line_TYPENUM::U8;
+pub(crate) type error_line_TYPENUM = U72;
+
 // @!half_error_line=42; {width of first lines of contexts in terminal
 //   error messages; should be between 30 and |error_line-15|}
+/// width of first lines of contexts in terminal error messages;
+/// should be between 30 and `error_line-15`
+pub(crate) const half_error_line: u8 = half_error_line_TYPENUM::U8;
+pub(crate) type half_error_line_TYPENUM = U42;
 // @!max_print_line=79; {width of longest text lines output; should be at least 60}
 /// width of longest text lines output; should be at least 60
 pub(crate) const max_print_line: u8 = max_print_line_TYPENUM::U8;
@@ -110,4 +118,4 @@ type U20000 = ::typenum::op!(U10000 * U2);
 type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U500, U6, U60, U600, U75, U79};
+use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79};

@@ -48,7 +48,9 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
     }
     // pseudo: if tally<trick_count then trick_buf[tally mod error_line]:=s;
     else if *globals.selector == pseudo {
-        todo!();
+        if globals.tally < globals.trick_count {
+            globals.trick_buf[(*globals.tally % error_line as integer) as u8] = s;
+        }
     }
     // new_string: begin if pool_ptr<pool_size then append_char(s);
     else if *globals.selector == new_string {
@@ -70,9 +72,11 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
     //
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsStringView;
+use crate::section_0011::error_line;
 use crate::section_0011::max_print_line;
 use crate::section_0011::pool_size;
 use crate::section_0018::ASCII_code;
