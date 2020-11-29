@@ -81,6 +81,13 @@ pub(crate) static selector: u8_from_0_to_n<max_selector_TYPENUM> = u8_from_0_to_
 use crate::section_0054::max_selector_TYPENUM;
 
 // @!dig : array[0..22] of 0..15; {digits in a number being output}
+/// digits in a number being output
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static dig: [u8_from_0_to_n<U15>; 22 + 1] = Default::default();
+
+#[globals_struct_use(TeXGlobals)]
+use typenum::U15;
+
 // @!tally : integer; {the number of characters recently printed}
 /// the number of characters recently printed
 #[globals_struct_field(TeXGlobals)]

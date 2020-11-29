@@ -15,50 +15,72 @@ macro_rules! chr_cmd {
     ($globals:expr, $chr_code:expr, $val:expr) => {{
         print($globals, $val.get() as _);
         print_ASCII($globals, $chr_code.get() as _);
-        
+
         use crate::section_0059::print;
         use crate::section_0068::print_ASCII;
-    }}
+    }};
 }
 
 macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives {
     ($globals:expr, $cmd:expr, $chr_code:expr) => {{
         if false {
             unreachable!();
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0239!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0335!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0412!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0335!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0412!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1053!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1059!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1053!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1209!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1059!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1223!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1209!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1231!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1220!(
+            $globals, $cmd, $chr_code
+        ) {
             true
-        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1278!
-            ($globals, $cmd, $chr_code) {
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1223!(
+            $globals, $cmd, $chr_code
+        ) {
+            true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1231!(
+            $globals, $cmd, $chr_code
+        ) {
+            true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1278!(
+            $globals, $cmd, $chr_code
+        ) {
+            true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1295!(
+            $globals, $cmd, $chr_code
+        ) {
             true
         } else {
             false
         }
-    }}
+    }};
 }
 
 // @<Declare the procedure called |print_cmd_chr|@>=
@@ -102,12 +124,17 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
     // end;
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0059::print;
 use crate::section_0063::print_esc;
+use crate::section_0065::print_int;
 use crate::section_0113::quarterword;
 use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0209::*;
 use crate::section_0210::*;
+use crate::section_0230::int_base;
+use crate::section_0236::count_base;
+use crate::section_0237::print_param;
 use crate::section_0297::chr_code_type;
