@@ -6,6 +6,7 @@
 // @p procedure conditional;
 #[allow(unused_variables)]
 pub(crate) fn conditional(globals: &mut TeXGlobals) {
+    trace_error_expr!("conditional");
     // label exit,common_ending;
     // var b:boolean; {is the condition true?}
     // @!r:"<"..">"; {relation to be evaluated}

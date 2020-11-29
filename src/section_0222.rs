@@ -38,11 +38,15 @@ pub(crate) const frozen_control_sequence: word = frozen_control_sequence_TYPENUM
 // @d frozen_end_group=frozen_control_sequence+2 {permanent `\.{\\endgroup}'}
 // @d frozen_right=frozen_control_sequence+3 {permanent `\.{\\right}'}
 // @d frozen_fi=frozen_control_sequence+4 {permanent `\.{\\fi}'}
+/// permanent `\fi`
+pub(crate) const frozen_fi: word = frozen_control_sequence + 4;
 // @d frozen_end_template=frozen_control_sequence+5 {permanent `\.{\\endtemplate}'}
 // @d frozen_endv=frozen_control_sequence+6 {second permanent `\.{\\endtemplate}'}
 /// second permanent `\endtemplate`
 pub(crate) const frozen_endv: word = frozen_control_sequence + 6;
 // @d frozen_relax=frozen_control_sequence+7 {permanent `\.{\\relax}'}
+/// permanent `\relax`
+pub(crate) const frozen_relax: word = frozen_control_sequence + 7;
 // @d end_write=frozen_control_sequence+8 {permanent `\.{\\endwrite}'}
 // @d frozen_dont_expand=frozen_control_sequence+9
 //   {permanent `\.{\\notexpanded:}'}

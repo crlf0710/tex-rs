@@ -81,8 +81,11 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("read",read_to_cs,0);@/
     // @!@:read_}{\.{\\read} primitive@>
     // primitive("relax",relax,256); {cf.\ |scan_file_name|}
+    primitive(globals, strpool_str!("relax"), relax, 256);
     // @!@:relax_}{\.{\\relax} primitive@>
     // text(frozen_relax):="relax"; eqtb[frozen_relax]:=eqtb[cur_val];@/
+    text!(globals, frozen_relax as pointer) = strpool_str!("relax").get() as _;
+    globals.eqtb[frozen_relax as pointer] = globals.eqtb[globals.cur_val as pointer];
     // primitive("setbox",set_box,0);@/
     // @!@:set_box_}{\.{\\setbox} primitive@>
     // primitive("the",the,0);@/
@@ -100,8 +103,11 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0115::pointer;
+use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0209::*;
+use crate::section_0222::frozen_relax;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

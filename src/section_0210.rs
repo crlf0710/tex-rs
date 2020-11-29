@@ -13,6 +13,8 @@ pub(crate) const undefined_cs: quarterword = max_command + 1;
 /// conditional text ( `\if`, `\ifcase`, etc. )
 pub(crate) const if_test: quarterword = max_command + 5;
 // @d fi_or_else=max_command+6 {delimiters for conditionals ( \.{\\else}, etc.~)}
+/// delimiters for conditionals ( `\else`, etc. )
+pub(crate) const fi_or_else: quarterword = max_command + 6;
 // @d cs_name=max_command+7 {make a control sequence from tokens ( \.{\\csname} )}
 // @d convert=max_command+8 {convert to text ( \.{\\number}, \.{\\string}, etc.~)}
 // @d the=max_command+9 {expand an internal quantity ( \.{\\the} )}

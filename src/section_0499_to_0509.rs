@@ -153,21 +153,3 @@
 //! return; {wait for \.{\\or}, \.{\\else}, or \.{\\fi}}
 //! end
 //!
-//! @ The processing of conditionals is complete except for the following
-//! code, which is actually part of |expand|. It comes into play when
-//! \.{\\or}, \.{\\else}, or \.{\\fi} is scanned.
-//!
-//! @<Terminate the current conditional and skip to \.{\\fi}@>=
-//! if cur_chr>if_limit then
-//!   if if_limit=if_code then insert_relax {condition not yet evaluated}
-//!   else  begin print_err("Extra "); print_cmd_chr(fi_or_else,cur_chr);
-//! @.Extra \\or@>
-//! @.Extra \\else@>
-//! @.Extra \\fi@>
-//!     help1("I'm ignoring this; it doesn't match any \if.");
-//!     error;
-//!     end
-//! else  begin while cur_chr<>fi_code do pass_text; {skip to \.{\\fi}}
-//!   @<Pop the condition stack@>;
-//!   end
-//!

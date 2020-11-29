@@ -94,6 +94,8 @@ pub(crate) const v_template: quarterword = 2;
 /// `token_type` code for text to be reread
 pub(crate) const backed_up: quarterword = 3;
 // @d inserted=4 {|token_type| code for inserted texts}
+/// `token_type` code for inserted texts
+pub(crate) const inserted: quarterword = 4;
 // @d macro=5 {|token_type| code for defined control sequences}
 /// `token_type` code for defined control sequences
 pub(crate) const r#macro: quarterword = 5;
