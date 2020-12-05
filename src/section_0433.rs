@@ -2,7 +2,7 @@
 
 // @<Declare procedures that scan restricted classes of integers@>=
 // procedure scan_eight_bit_int;
-pub(crate) fn scan_eight_bit_int(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn scan_eight_bit_int(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin scan_int;
     scan_int(globals)?;
     // if (cur_val<0)or(cur_val>255) then
@@ -16,5 +16,5 @@ pub(crate) fn scan_eight_bit_int(globals: &mut TeXGlobals) -> Result<(), JumpOut
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0440::scan_int;

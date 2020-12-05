@@ -4,7 +4,7 @@
 // procedure error; {completes the job of error reporting}
 /// completes the job of error reporting
 #[allow(unused_variables)]
-pub(crate) fn error(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label continue,exit;
     // var c:ASCII_code; {what the user types}
     // @!s1,@!s2,@!s3,@!s4:integer;
@@ -52,5 +52,5 @@ use crate::section_0073::error_stop_mode;
 use crate::section_0076::history_kind::error_message_issued;
 use crate::section_0076::history_kind::fatal_error_stop;
 use crate::section_0081::jump_out;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0311::show_context;

@@ -4,7 +4,7 @@
 // procedure overflow(@!s:str_number;@!n:integer); {stop due to finiteness}
 /// stop due to finiteness
 #[allow(unused_variables)]
-pub(crate) fn overflow(globals: &mut TeXGlobals, s: str_number, n: integer) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn overflow(globals: &mut TeXGlobals, s: str_number, n: integer) -> TeXResult<()> {
     // begin normalize_selector;
     // print_err("TeX capacity exceeded, sorry [");
     // @.TeX capacity exceeded ...@>
@@ -19,4 +19,4 @@ pub(crate) fn overflow(globals: &mut TeXGlobals, s: str_number, n: integer) -> R
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;

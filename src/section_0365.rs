@@ -4,7 +4,7 @@
 //
 // @p procedure get_token; {sets |cur_cmd|, |cur_chr|, |cur_tok|}
 /// sets `cur_cmd`, `cur_chr`, `cur_tok`
-pub(crate) fn get_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn get_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin no_new_control_sequence:=false; get_next; no_new_control_sequence:=true;
     globals.no_new_control_sequence = false;
     get_next(globals)?;
@@ -23,6 +23,6 @@ pub(crate) fn get_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTE
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0297::cur_tok_type;
 use crate::section_0341::get_next;

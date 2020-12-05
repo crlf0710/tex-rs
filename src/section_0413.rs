@@ -22,7 +22,7 @@ pub(crate) fn scan_something_internal(
     globals: &mut TeXGlobals,
     level: small_number,
     negative: boolean,
-) -> Result<(), JumpOutToEndOfTEX> {
+) -> TeXResult<()> {
     // var m:halfword; {|chr_code| part of the operand token}
     /// `chr_code` part of the operand token
     let m: chr_code_type;
@@ -71,7 +71,7 @@ pub(crate) fn scan_something_internal(
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0208::char_given;
 use crate::section_0208::math_given;

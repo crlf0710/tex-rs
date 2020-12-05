@@ -8,6 +8,8 @@ pub(crate) const char_num: quarterword = 16;
 // @d math_char_num=17 {explicit math code ( \.{\\mathchar} )}
 // @d mark=18 {mark definition ( \.{\\mark} )}
 // @d xray=19 {peek inside of \TeX\ ( \.{\\show}, \.{\\showbox}, etc.~)}
+/// peek inside of `TeX` ( `\show`, `\showbox`, etc. )
+pub(crate) const xray: quarterword = 19;
 // @d make_box=20 {make a box ( \.{\\box}, \.{\\copy}, \.{\\hbox}, etc.~)}
 // @d hmove=21 {horizontal motion ( \.{\\moveleft}, \.{\\moveright} )}
 /// horizontal motion ( `\moveleft`, `\moveright` )

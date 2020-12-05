@@ -9,7 +9,7 @@
 // @p function get_node(@!s:integer):pointer; {variable-size node allocation}
 /// variable-size node allocation
 #[allow(unused_variables)]
-pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> Result<pointer, JumpOutToEndOfTEX> {
+pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointer> {
     // label found,exit,restart;
     // var p:pointer; {the node currently under inspection}
     /// the node currently under inspection
@@ -94,7 +94,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0011::mem_max;
 use crate::section_0011::mem_min;
 use crate::section_0012::mem_bot;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0094::overflow;
 use crate::section_0110::max_halfword;
 use crate::section_0115::pointer;

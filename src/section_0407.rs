@@ -15,7 +15,7 @@
 //
 // @p function scan_keyword(@!s:str_number):boolean; {look for a given string}
 /// look for a given string
-pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> Result<boolean, JumpOutToEndOfTEX> {
+pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult<boolean> {
     // label exit;
     // var p:pointer; {tail of the backup list}
     /// tail of the backup list
@@ -92,7 +92,7 @@ use crate::section_0020::xchr;
 use crate::section_0020::xord;
 use crate::section_0038::pool_pointer;
 use crate::section_0038::str_number;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0123::flush_list;

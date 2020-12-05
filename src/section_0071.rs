@@ -27,7 +27,7 @@ macro_rules! prompt_input {
     tracing::instrument(level = "trace", err),
     allow(unreachable_code)
 )]
-pub(crate) fn term_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     // var k:0..buf_size; {index into |buffer|}
     // begin update_terminal; {now the user sees the prompt for sure}
     /// now the user sees the prompt for sure
@@ -50,5 +50,5 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0031::input_ln;
 use crate::section_0034::update_terminal;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0093::fatal_error;

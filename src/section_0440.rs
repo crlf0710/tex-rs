@@ -9,7 +9,7 @@
 #[allow(unused_variables)]
 #[allow(unused_assignments, non_snake_case)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn scan_int(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn scan_int(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done;
     // var negative:boolean; {should the answer be negated?}
     /// should the answer be negated?
@@ -47,7 +47,7 @@ pub(crate) fn scan_int(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::pascal::boolean;
 use crate::section_0208::min_internal;
 use crate::section_0209::max_internal;

@@ -9,7 +9,7 @@ enum glue_node_subtype {
 // @p function new_glue(@!q:pointer):pointer;
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn new_glue(globals: &mut TeXGlobals, q: pointer) -> Result<pointer, JumpOutToEndOfTEX> {
+pub(crate) fn new_glue(globals: &mut TeXGlobals, q: pointer) -> TeXResult<pointer> {
     // var p:pointer; {the new node}
     /// the new node
     let p: pointer;
@@ -27,7 +27,7 @@ pub(crate) fn new_glue(globals: &mut TeXGlobals, q: pointer) -> Result<pointer, 
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0115::null;
 use crate::section_0125::get_node;

@@ -5,7 +5,7 @@
 //
 // @p procedure scan_file_name;
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done;
     // begin name_in_progress:=true; begin_name;
     globals.name_in_progress = true;
@@ -56,4 +56,4 @@ use crate::section_0325::back_input;
 use crate::section_0207::other_char;
 use crate::section_0018::ASCII_code;
 use crate::section_0516::more_name;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;

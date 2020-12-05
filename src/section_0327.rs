@@ -6,7 +6,7 @@
 
 // @p procedure back_error; {back up one token and call |error|}
 /// back up one token and call `error`
-pub(crate) fn back_error(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn back_error(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin OK_to_interrupt:=false; back_input; OK_to_interrupt:=true; error;
     globals.OK_to_interrupt = false;
     back_input(globals);
@@ -24,7 +24,7 @@ pub(crate) fn back_error(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfT
 //
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0325::back_input;
 

@@ -9,6 +9,12 @@
 // @d hlp5(#)==help_line[4]:=#; hlp4
 // @d hlp6(#)==help_line[5]:=#; hlp5
 // @d help0==help_ptr:=0 {sometimes there might be no help}
+/// sometimes there might be no help
+macro_rules! help0 {
+    ($globals:expr) => {{
+        $globals.help_ptr = 0.into();
+    }}
+}
 // @d help1==@+begin help_ptr:=1; hlp1 {use this with one help line}
 /// use this with one help line
 macro_rules! help1 {

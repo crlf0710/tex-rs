@@ -5,7 +5,7 @@
 /// `TeX` will `\input` something
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn start_input(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done;
     // begin scan_file_name; {set |cur_name| to desired file name}
     /// set `cur_name` to desired file name
@@ -80,5 +80,5 @@ use crate::section_0329::end_file_reading;
 use crate::section_0027::a_open_in;
 use crate::section_0529::pack_cur_name;
 use crate::section_0530::prompt_file_name;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0525::a_make_name_string;

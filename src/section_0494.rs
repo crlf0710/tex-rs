@@ -6,7 +6,7 @@
 //
 // @p procedure pass_text;
 #[allow(unused_variables)]
-pub(crate) fn pass_text(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn pass_text(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done;
     // var l:integer; {level of $\.{\\if}\ldots\.{\\fi}$ nesting}
     /// level of `\if`...`\fi` nesting
@@ -55,7 +55,7 @@ pub(crate) fn pass_text(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTE
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0210::if_test;
 use crate::section_0210::fi_or_else;

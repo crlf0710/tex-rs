@@ -4,7 +4,7 @@
 //
 // @p function new_spec(@!p:pointer):pointer; {duplicates a glue specification}
 /// duplicates a glue specification
-pub(crate) fn new_spec(globals: &mut TeXGlobals, p: pointer) -> Result<pointer, JumpOutToEndOfTEX> {
+pub(crate) fn new_spec(globals: &mut TeXGlobals, p: pointer) -> TeXResult<pointer> {
     // var q:pointer; {the new spec}
     /// the new spec
     let q: pointer;
@@ -23,7 +23,7 @@ pub(crate) fn new_spec(globals: &mut TeXGlobals, p: pointer) -> Result<pointer, 
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0115::null;
 use crate::section_0125::get_node;

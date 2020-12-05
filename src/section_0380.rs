@@ -6,7 +6,7 @@
 //   and expands macros}
 /// sets `cur_cmd`, `cur_chr`, `cur_tok`, and expands macros
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label restart,done;
     // begin restart: get_next;
     region_forward_label! {
@@ -64,7 +64,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0113::halfword;
 use crate::section_0207::endv;
 use crate::section_0209::max_command;

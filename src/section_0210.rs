@@ -21,6 +21,8 @@ pub(crate) const fi_or_else: quarterword = max_command + 6;
 /// expand an internal quantity ( `\the` )
 pub(crate) const the: quarterword = max_command + 9;
 // @d top_bot_mark=max_command+10 {inserted mark ( \.{\\topmark}, etc.~)}
+/// inserted mark ( `\topmark`, etc. )
+pub(crate) const top_bot_mark: quarterword = max_command + 10;
 // @d call=max_command+11 {non-long, non-outer control sequence}
 /// non-long, non-outer control sequence
 pub(crate) const call: quarterword = max_command + 11;

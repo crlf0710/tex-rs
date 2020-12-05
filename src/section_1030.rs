@@ -19,7 +19,7 @@
 /// governs `TeX`'s activities
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn main_control(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label big_switch,reswitch,main_loop,main_loop_wrapup,
     //   main_loop_move,main_loop_move+1,main_loop_move+2,main_loop_move_lig,
     //   main_loop_lookahead,main_loop_lookahead+1,
@@ -119,4 +119,4 @@ use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0211::*;
 use crate::section_0380::get_x_token;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;

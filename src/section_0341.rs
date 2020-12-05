@@ -9,7 +9,7 @@
 /// sets `cur_cmd`, `cur_chr`, `cur_cs` to next token
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn get_next(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn get_next(globals: &mut TeXGlobals) -> TeXResult<()> {
     region_forward_label! {
     |'exit|
     {
@@ -57,4 +57,4 @@ pub(crate) fn get_next(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0307::token_list;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;

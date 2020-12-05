@@ -5,7 +5,7 @@
 //
 // @p procedure conditional;
 #[allow(unused_variables)]
-pub(crate) fn conditional(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn conditional(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label exit,common_ending;
     // var b:boolean; {is the condition true?}
     /// is the condition true?
@@ -63,7 +63,7 @@ pub(crate) fn conditional(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOf
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::pointer;
 use crate::section_0489::else_code;

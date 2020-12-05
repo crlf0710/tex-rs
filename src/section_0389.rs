@@ -17,7 +17,8 @@
 /// invokes a user-defined control sequence
 #[allow(unused_variables)]
 #[allow(unused_assignments)]
-pub(crate) fn macro_call(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+pub(crate) fn macro_call(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label exit, continue, done, done1, found;
     // var r:pointer; {current node in the macro's token list}
     /// current node in the macro's token list
@@ -94,7 +95,7 @@ pub(crate) fn macro_call(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfT
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0018::ASCII_code;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;

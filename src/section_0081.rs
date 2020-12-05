@@ -10,7 +10,7 @@
 //
 // @<Error hand...@>=
 // procedure jump_out;
-pub(crate) fn jump_out() -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn jump_out() -> TeXResult<()> {
     // begin goto end_of_TEX;
     return Err(JumpOutToEndOfTEX);
     // end;
@@ -23,6 +23,8 @@ impl fmt::Display for JumpOutToEndOfTEX {
         write!(f, "JumpOutToEndOfTEX")
     }
 }
+
+pub(crate) type TeXResult<T> = Result<T, JumpOutToEndOfTEX>;
 
 macro_rules! try_or_jump {
     ($val:expr, $jump_target:lifetime) => {

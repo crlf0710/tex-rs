@@ -3,7 +3,7 @@
 // @<Declare subprocedures for |prefixed_command|@>=
 // procedure do_register_command(@!a:small_number);
 #[allow(unused_variables)]
-pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> TeXResult<()> {
     // label found,exit;
     // var l,@!q,@!r,@!s:pointer; {for list manipulation}
     /// for list manipulation
@@ -63,7 +63,7 @@ pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> 
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::pointer;
 use crate::section_0209::register;

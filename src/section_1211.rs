@@ -46,7 +46,7 @@ macro_rules! Assignments {
 // procedure prefixed_command;
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done,exit;
     // var a:small_number; {accumulated prefix codes so far}
     // @!f:internal_font_number; {identifies a font}
@@ -67,6 +67,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> Result<(), JumpOutTo
         Get_the_next_non_blank_non_relax_non_call_token!(globals);
         // if cur_cmd<=max_non_prefixed_command then
         if globals.cur_cmd <= max_non_prefixed_command {
+            trace_error_expr!("cur_cmd={}", globals.cur_cmd);
             // @<Discard erroneous prefixes and |return|@>;
             Discard_erroneous_prefixes_and_return!(globals);
             // end;
@@ -101,4 +102,4 @@ use crate::section_0210::*;
 use crate::section_0208::max_non_prefixed_command;
 use crate::section_0405::scan_optional_equals;
 use crate::section_0440::scan_int;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;

@@ -14,7 +14,7 @@
 pub(crate) fn fatal_error(
     globals: &mut TeXGlobals,
     s: str_number,
-) -> Result<(), JumpOutToEndOfTEX> {
+) -> TeXResult<()> {
     // begin normalize_selector;@/
     // print_err("Emergency stop"); help1(s); succumb;
     // @.Emergency stop@>
@@ -24,4 +24,4 @@ pub(crate) fn fatal_error(
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;

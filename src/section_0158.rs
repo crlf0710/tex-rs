@@ -3,7 +3,7 @@
 //
 // @p function new_penalty(@!m:integer):pointer;
 #[allow(unused_variables)]
-pub(crate) fn new_penalty(globals: &mut TeXGlobals, m: integer) -> Result<pointer, JumpOutToEndOfTEX> {
+pub(crate) fn new_penalty(globals: &mut TeXGlobals, m: integer) -> TeXResult<pointer> {
     // var p:pointer; {the new node}
     /// the new node
     let p: pointer;
@@ -22,7 +22,7 @@ pub(crate) fn new_penalty(globals: &mut TeXGlobals, m: integer) -> Result<pointe
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
 use crate::section_0157::penalty_node;

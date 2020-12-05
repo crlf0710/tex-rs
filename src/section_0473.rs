@@ -30,7 +30,7 @@ pub(crate) fn scan_toks(
     globals: &mut TeXGlobals,
     macro_def: boolean,
     xpand: boolean,
-) -> Result<pointer, JumpOutToEndOfTEX> {
+) -> TeXResult<pointer> {
     // label found,done,done1,done2;
     // var t:halfword; {token representing the highest parameter number}
     /// token representing the highest parameter number
@@ -90,7 +90,7 @@ pub(crate) fn scan_toks(
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;
 use crate::section_0115::null;

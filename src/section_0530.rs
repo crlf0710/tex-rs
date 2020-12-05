@@ -12,7 +12,7 @@ pub(crate) fn prompt_file_name(
     globals: &mut TeXGlobals,
     s: str_number,
     e: str_number,
-) -> Result<(), JumpOutToEndOfTEX> {
+) -> TeXResult<()> {
     // label done;
     // var k:0..buf_size; {index into |buffer|}
     // begin if interaction=scroll_mode then wake_up_terminal;
@@ -51,7 +51,7 @@ use crate::section_0034::clear_terminal;
 use crate::section_0038::str_number;
 use crate::section_0059::print;
 use crate::section_0062::print_nl;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0034::wake_up_terminal;
 use crate::section_0073::scroll_mode;
 use crate::section_0529::pack_cur_name;

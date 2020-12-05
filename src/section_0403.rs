@@ -6,7 +6,7 @@
 // @p procedure scan_left_brace; {reads a mandatory |left_brace|}
 /// reads a mandatory `left_brace`
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin @<Get the next non-blank non-relax non-call token@>;
     Get_the_next_non_blank_non_relax_non_call_token!(globals);
     trace_expr!("cur_cmd = {}", globals.cur_cmd);
@@ -28,5 +28,5 @@ pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> Result<(), JumpOutToE
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0207::left_brace;

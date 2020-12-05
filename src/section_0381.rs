@@ -3,7 +3,7 @@
 //
 // @p procedure x_token; {|get_x_token| without the initial |get_next|}
 /// `get_x_token` without the initial `get_next`
-pub(crate) fn x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin while cur_cmd>max_command do
     while globals.cur_cmd > max_command {
         // begin expand;
@@ -25,7 +25,7 @@ pub(crate) fn x_token(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX>
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0209::max_command;
 use crate::section_0297::cur_tok_type;
 use crate::section_0341::get_next;

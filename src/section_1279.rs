@@ -3,7 +3,7 @@
 // @<Declare act...@>=
 // procedure issue_message;
 #[allow(unused_variables)]
-pub(crate) fn issue_message(globals: &mut TeXGlobals) -> Result<(), JumpOutToEndOfTEX> {
+pub(crate) fn issue_message(globals: &mut TeXGlobals) -> TeXResult<()> {
     // var old_setting:0..max_selector; {holds |selector| setting}
     /// holds `selector` setting
     let old_setting;
@@ -47,7 +47,7 @@ use crate::section_0038::str_number;
 use crate::section_0042::str_room;
 use crate::section_0043::make_string;
 use crate::section_0044::flush_string;
-use crate::section_0081::JumpOutToEndOfTEX;
+use crate::section_0081::TeXResult;
 use crate::section_0162::garbage;
 use crate::section_0295::token_show;
 use crate::section_0473::scan_toks;

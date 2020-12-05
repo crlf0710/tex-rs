@@ -6,6 +6,7 @@
 // @<Scan a parameter until its delimiter string has been found; or, ...@>=
 macro_rules! Scan_a_parameter_until_its_delimiter_string_has_been_found_or_if_s_null_simply_scan_the_delimiter_string {
     ($globals:expr, $match_chr:expr, $r:expr, $info_r:expr, $s:expr, $m:expr, $n:expr, $p:expr, $q:expr) => {{
+        trace_span!("Scan a parameter until its delimiter string has been found; or, ...");
         region_backward_label! {
             // continue: get_token; {set |cur_tok| to the next token of input}
             'continue_ <-
@@ -37,7 +38,7 @@ macro_rules! Scan_a_parameter_until_its_delimiter_string_has_been_found_or_if_s_
                     }
                     // else @<Report an extra right brace and |goto continue|@>
                     else {
-                        todo!();
+                        todo!("extra brace");
                     }
                 }
                 // else @<Store the current token, but |goto continue| if it is
