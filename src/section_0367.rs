@@ -19,7 +19,7 @@ macro_rules! Expand_a_nonmacro {
         // if_test:conditional; {this procedure is discussed in Part 28 below}
         else if $globals.cur_cmd == if_test {
             /// this procedure is discussed in Part 28 below
-            conditional($globals);
+            conditional($globals)?;
         }
         // fi_or_else:@<Terminate the current conditional and skip to \.{\\fi}@>;
         else if $globals.cur_cmd == fi_or_else {

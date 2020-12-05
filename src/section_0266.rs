@@ -48,6 +48,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         // radical: print_esc("radical");
         // read_to_cs: print_esc("read");
         // relax: print_esc("relax");
+        else if $cmd == relax {
+            print_esc($globals, strpool_str!("relax"));
+            true
+        }
         // set_box: print_esc("setbox");
         // set_prev_graf: print_esc("prevgraf");
         // set_shape: print_esc("parshape");

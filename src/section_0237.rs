@@ -2,6 +2,7 @@
 //
 
 // @p procedure print_param(@!n:integer);
+#[allow(unused_variables)]
 pub(crate) fn print_param(globals: &mut TeXGlobals, n: integer) {
     // begin case n of
     if false {

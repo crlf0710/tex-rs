@@ -7,6 +7,8 @@
 /// `\ifnum`
 pub(crate) const if_int_code: quarterword = 2;
 // @d if_dim_code=3 { `\.{\\ifdim}' }
+/// `\ifdim`
+pub(crate) const if_dim_code: quarterword = 3;
 // @d if_odd_code=4 { `\.{\\ifodd}' }
 // @d if_vmode_code=5 { `\.{\\ifvmode}' }
 // @d if_hmode_code=6 { `\.{\\ifhmode}' }
@@ -18,6 +20,8 @@ pub(crate) const if_int_code: quarterword = 2;
 // @d ifx_code=12 { `\.{\\ifx}' }
 // @d if_eof_code=13 { `\.{\\ifeof}' }
 // @d if_true_code=14 { `\.{\\iftrue}' }
+/// `\iftrue`
+pub(crate) const if_true_code: quarterword = 14;
 // @d if_false_code=15 { `\.{\\iffalse}' }
 // @d if_case_code=16 { `\.{\\ifcase}' }
 //

@@ -15,7 +15,14 @@
 //! corresponding |if_line|.
 //
 // @d if_node_size=2 {number of words in stack entry for conditionals}
+/// number of words in stack entry for conditionals
+pub(crate) const if_node_size: integer = 2;
 // @d if_line_field(#)==mem[#+1].int
+macro_rules! if_line_field {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr + 1][crate::section_0113::MEMORY_WORD_INT]
+    }
+}
 // @d if_code=1 {code for \.{\\if...} being evaluated}
 /// code for `\if...` being evaluated
 pub(crate) const if_code: quarterword = 1;
@@ -32,6 +39,10 @@ pub(crate) type or_code_TYPENUM = U4;
 
 // @<Glob...@>=
 // @!cond_ptr:pointer; {top of the condition stack}
+/// top of the condition stack
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cond_ptr: pointer = null;
+
 // @!if_limit:normal..or_code; {upper bound on |fi_or_else| codes}
 /// upper bound on `fi_or_else` codes
 #[globals_struct_field(TeXGlobals)]
@@ -41,9 +52,16 @@ pub(crate) static if_limit: u8_from_0_to_n<or_code_TYPENUM> = u8_from_0_to_n::de
 use crate::section_0489::or_code_TYPENUM;
 
 // @!cur_if:small_number; {type of conditional being worked on}
-// @!if_line:integer; {line where that conditional began}
-//
+/// type of conditional being worked on
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_if: small_number = small_number::default();
 
+// @!if_line:integer; {line where that conditional began}
+/// line where that conditional began
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static if_line: integer = integer::default();
+
+use crate::pascal::integer;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::quarterword;

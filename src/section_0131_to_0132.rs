@@ -1,25 +1,3 @@
-//! @ Here we delete node |p| from the ring, and let |rover| rove around.
-//!
-//! @<Allocate entire...@>=
-//! begin rover:=rlink(p); t:=llink(p);
-//! llink(rover):=t; rlink(t):=rover;
-//! goto found;
-//! end
-//!
-//! @ Conversely, when some variable-size node |p| of size |s| is no longer needed,
-//! the operation |free_node(p,s)| will make its words available, by inserting
-//! |p| as a new empty node just before where |rover| now points.
-//! @^inner loop@>
-//!
-//! @p procedure free_node(@!p:pointer; @!s:halfword); {variable-size node
-//!   liberation}
-//! var q:pointer; {|llink(rover)|}
-//! begin node_size(p):=s; link(p):=empty_flag;
-//! q:=llink(rover); llink(p):=q; rlink(p):=rover; {set both links}
-//! llink(rover):=p; rlink(q):=p; {insert |p| into the ring}
-//! @!stat var_used:=var_used-s;@+tats@;{maintain statistics}
-//! end;
-//!
 //! @ Just before \.{INITEX} writes out the memory, it sorts the doubly linked
 //! available space list. The list is probably very short at such times, so a
 //! simple insertion sort is used. The smallest available location will be

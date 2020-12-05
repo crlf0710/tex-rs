@@ -28,13 +28,19 @@ macro_rules! Terminate_the_current_conditional_and_skip_to_fi {
         }
         // else  begin while cur_chr<>fi_code do pass_text; {skip to \.{\\fi}}
         else {
-            todo!("else2");
+            /// skip to `\fi`
+            while $globals.cur_chr.get() != fi_code as _ {
+                pass_text($globals)?;
+            }
             // @<Pop the condition stack@>;
+            Pop_the_condition_stack!($globals);
             // end
         }
         use crate::section_0082::error;
         use crate::section_0298::print_cmd_chr;
         use crate::section_0379::insert_relax;
         use crate::section_0489::if_code;
+        use crate::section_0489::fi_code;
+        use crate::section_0494::pass_text;
     }}
 }
