@@ -44,6 +44,27 @@ macro_rules! shrink {
 //
 // @<Types...@>=
 // @!glue_ord=normal..filll; {infinity to the 0, 1, 2, or 3 power}
-//
+/// infinity to the 0, 1, 2, or 3 power
+pub(crate) enum glue_ord {
+    normal = 0,
+    /// first-order infinity
+    fil = 1,
+    /// second-order infinity
+    fill = 2,
+    /// third-order infinity
+    filll = 3,
+}
+
+impl From<u8> for glue_ord {
+    fn from(val: u8) -> glue_ord {
+        match val {
+            0 => glue_ord::normal,
+            1 => glue_ord::fil,
+            2 => glue_ord::fill,
+            3 => glue_ord::filll,
+            _ => unreachable!(),
+        }
+    }
+}
 
 use crate::section_0113::quarterword;

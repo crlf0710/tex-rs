@@ -1,14 +1,3 @@
-//! @ @<Fetch an internal dimension and |goto attach_sign|...@>=
-//! if mu then
-//!   begin scan_something_internal(mu_val,false);
-//!   @<Coerce glue to a dimension@>;
-//!   if cur_val_level=mu_val then goto attach_sign;
-//!   if cur_val_level<>int_val then mu_error;
-//!   end
-//! else  begin scan_something_internal(dimen_val,false);
-//!   if cur_val_level=dimen_val then goto attach_sign;
-//!   end
-//!
 //! @ @<Local variables for dimension calculations@>=
 //! @!num,@!denom:1..65536; {conversion ratio for the scanned units}
 //! @!k,@!kk:small_number; {number of digits in a decimal fraction}

@@ -11,7 +11,16 @@
 //!
 //! The order of infinity that was found in the case of infinite glue is returned
 //! in the global variable |cur_order|.
-//!
-//! @<Glob...@>=
-//! @!cur_order:glue_ord; {order of infinity found by |scan_dimen|}
-//!
+//
+// @<Glob...@>=
+// @!cur_order:glue_ord; {order of infinity found by |scan_dimen|}
+/// order of infinity found by `scan_dimen`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_order: glue_ord = glue_ord::normal;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0150::glue_ord;
+
+use crate::section_0004::TeXGlobals;
+use globals_struct::{globals_struct_field, globals_struct_use};
+

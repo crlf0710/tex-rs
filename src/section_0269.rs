@@ -10,7 +10,11 @@
 //! one that starts with \.{\\begingroup} should end with \.{\\endgroup}.
 //
 // @d bottom_level=0 {group code for the outside world}
+/// group code for the outside world
+pub(crate) const bottom_level: quarterword = 0;
 // @d simple_group=1 {group code for local structure only}
+/// group code for local structure only
+pub(crate) const simple_group: quarterword = 1;
 // @d hbox_group=2 {code for `\.{\\hbox}\grp'}
 // @d adjusted_hbox_group=3 {code for `\.{\\hbox}\grp' in vertical mode}
 // @d vbox_group=4 {code for `\.{\\vbox}\grp'}
@@ -36,5 +40,6 @@ pub(crate) type max_group_code_TYPENUM = U16;
 pub(crate) type group_code = u8_from_0_to_n<max_group_code_TYPENUM>;
 
 use crate::pascal::u8_from_0_to_n;
+use crate::section_0113::quarterword;
 use typenum::Unsigned;
 use typenum::U16;

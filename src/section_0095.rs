@@ -11,7 +11,7 @@
 //   {consistency check violated; |s| tells where}
 /// consistency check violated; `s` tells where
 #[allow(unused_variables)]
-pub(crate) fn confusion(s: str_number) {
+pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) {
     todo!();
     // begin normalize_selector;
     // if history<error_message_issued then
@@ -28,4 +28,5 @@ pub(crate) fn confusion(s: str_number) {
     // end;
 }
 
+use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;
