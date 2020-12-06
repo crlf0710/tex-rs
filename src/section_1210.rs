@@ -40,8 +40,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, toks_register as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_toks as u16) ||
         */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_int as u16) ||
-        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_dimen as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_glue as u16) ||
+        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_dimen as u16) ||
+        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_glue as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_mu_glue as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_font_dimen as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_font_int as u16) ||

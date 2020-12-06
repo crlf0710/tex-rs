@@ -13,7 +13,7 @@
 pub(crate) fn eq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) {
     // begin if eq_level(p)=cur_level then eq_destroy(eqtb[p])
     if eq_level!(globals, p) == globals.cur_level {
-        eq_destroy(globals.eqtb[p]);
+        eq_destroy(globals, globals.eqtb[p]);
     }
     // else if cur_level>level_one then eq_save(p,eq_level(p));
     else if globals.cur_level > level_one {

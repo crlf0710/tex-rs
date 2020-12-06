@@ -1,13 +1,3 @@
-//! @ @<Complain that \.{\\the} can't do this; give zero result@>=
-//! begin print_err("You can't use `"); print_cmd_chr(cur_cmd,cur_chr);
-//! @.You can't use x after ...@>
-//! print("' after "); print_esc("the");
-//! help1("I'm forgetting what you said and using zero instead.");
-//! error;
-//! if level<>tok_val then scanned_result(0)(dimen_val)
-//! else scanned_result(0)(int_val);
-//! end
-//!
 //! @ When a |glue_val| changes to a |dimen_val|, we use the width component
 //! of the glue; there is no need to decrease the reference count, since it
 //! has not yet been increased.  When a |dimen_val| changes to an |int_val|,

@@ -25,10 +25,10 @@ macro_rules! Look_for_parameter_number_or_sharpsharp {
                 //     back_error; cur_tok:=s;
                 //     end
             }
-        }
-        //   else cur_tok:=out_param_token-"0"+cur_chr;
-        else {
-            $globals.cur_tok = cur_tok_type::new(out_param_token - b'0' as cur_tok_type_repr + $globals.cur_chr.get() as cur_tok_type_repr);
+            //   else cur_tok:=out_param_token-"0"+cur_chr;
+            else {
+                $globals.cur_tok = cur_tok_type::new(out_param_token - b'0' as cur_tok_type_repr + $globals.cur_chr.get() as cur_tok_type_repr);
+            }
         }
         // end
         use crate::section_0289::out_param_token;

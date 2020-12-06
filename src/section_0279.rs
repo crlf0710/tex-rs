@@ -8,10 +8,13 @@
 /// global `eq_define`
 #[allow(unused_variables)]
 pub(crate) fn geq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) {
-// begin eq_destroy(eqtb[p]);
-// eq_level(p):=level_one; eq_type(p):=t; equiv(p):=e;
-// end;
-todo!();
+    // begin eq_destroy(eqtb[p]);
+    eq_destroy(globals, globals.eqtb[p]);
+    // eq_level(p):=level_one; eq_type(p):=t; equiv(p):=e;
+    eq_level!(globals, p) = level_one;
+    eq_type!(globals, p) = t;
+    equiv!(globals, p) = e;
+    // end;
 }
 
 // @#
@@ -32,3 +35,4 @@ use crate::section_0113::quarterword;
 use crate::section_0113::MEMORY_WORD_INT;
 use crate::section_0115::pointer;
 use crate::section_0221::level_one;
+use crate::section_0275::eq_destroy;

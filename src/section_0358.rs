@@ -12,8 +12,3 @@
 //!   end;
 //! end
 //!
-//! @ @<Insert macro parameter...@>=
-//! begin begin_token_list(param_stack[param_start+cur_chr-1],parameter);
-//! goto restart;
-//! end
-//!

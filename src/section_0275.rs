@@ -7,18 +7,40 @@
 // @p procedure eq_destroy(@!w:memory_word); {gets ready to forget |w|}
 /// gets ready to forget `w`
 #[allow(unused_variables)]
-pub(crate) fn eq_destroy(w: memory_word) {
+pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
     // var q:pointer; {|equiv| field of |w|}
+    let eq_type_field_w = eq_type_field!(w);
     // begin case eq_type_field(w) of
     // call,long_call,outer_call,long_outer_call: delete_token_ref(equiv_field(w));
+    if eq_type_field_w == call
+        || eq_type_field_w == long_call
+        || eq_type_field_w == outer_call
+        || eq_type_field_w == long_outer_call
+    {
+        todo!("macro");
+    }
     // glue_ref: delete_glue_ref(equiv_field(w));
+    else if eq_type_field_w == glue_ref {
+        todo!("glue_ref");
+    }
     // shape_ref: begin q:=equiv_field(w); {we need to free a \.{\\parshape} block}
-    //   if q<>null then free_node(q,info(q)+info(q)+1);
-    //   end; {such a block is |2n+1| words long, where |n=info(q)|}
+    else if eq_type_field_w == shape_ref {
+        todo!("shape_ref");
+        // if q<>null then free_node(q,info(q)+info(q)+1);
+        // end; {such a block is |2n+1| words long, where |n=info(q)|}
+    }
     // box_ref: flush_node_list(equiv_field(w));
+    else if eq_type_field_w == box_ref {
+        todo!("box_ref");
+    }
     // othercases do_nothing
+    else {
+        do_nothing!();
+    }
     // endcases;
     // end;
 }
 
+use crate::section_0004::TeXGlobals;
 use crate::section_0113::memory_word;
+use crate::section_0210::*;

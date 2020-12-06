@@ -29,6 +29,7 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
                 $globals.cur_chr = chr_code_type::new(equiv!($globals, $globals.cur_cs) as _);
                 // if cur_cmd>=outer_call then
                 if $globals.cur_cmd >= outer_call {
+                    todo!();
                     // if cur_cmd=dont_expand then
                     //   @<Get the next token, suppressing expansion@>
                     // else check_outer_validity;
@@ -49,7 +50,7 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
                     decr!($globals.align_state);
                 } else if $globals.cur_cmd == out_param {
                     // out_param: @<Insert macro parameter and |goto restart|@>;
-                    todo!();
+                    Insert_macro_parameter_and_goto_restart!($globals, $lbl_restart);
                 } else {
                     // othercases do_nothing
                     do_nothing!();

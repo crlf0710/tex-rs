@@ -38,6 +38,9 @@ pub(crate) fn scan_something_internal(
     // toks_register,assign_toks,def_family,set_font,def_font: @<Fetch a token list or
     //   font identifier, provided that |level=tok_val|@>;
     // assign_int: scanned_result(eqtb[m].int)(int_val);
+    else if globals.cur_cmd == assign_int {
+        scanned_result!(globals, globals.eqtb[m.get() as pointer][MEMORY_WORD_INT], cur_val_level_kind::int_val);
+    }
     // assign_dimen: scanned_result(eqtb[m].sc)(dimen_val);
     // assign_glue: scanned_result(equiv(m))(glue_val);
     // assign_mu_glue: scanned_result(equiv(m))(mu_val);
@@ -49,7 +52,7 @@ pub(crate) fn scan_something_internal(
     // set_box_dimen: @<Fetch a box dimension@>;
     // char_given,math_given: scanned_result(cur_chr)(int_val);
     else if globals.cur_cmd == char_given || globals.cur_cmd == math_given {
-        scanned_result!(globals, globals.cur_chr.get() as _, int_val);
+        scanned_result!(globals, globals.cur_chr.get() as _, cur_val_level_kind::int_val);
     }
     // assign_font_dimen: @<Fetch a font dimension@>;
     // assign_font_int: @<Fetch a font integer@>;
@@ -60,7 +63,7 @@ pub(crate) fn scan_something_internal(
     // last_item: @<Fetch an item in the current node, if appropriate@>;
     // othercases @<Complain that \.{\\the} can't do this; give zero result@>
     else {
-        todo!("scan othercases");
+        Complain_that_the_cant_do_this__give_zero_result!(globals, level);
     }
     // endcases;@/
     // while cur_val_level>level do @<Convert \(c)|cur_val| to a lower level@>;
@@ -73,9 +76,9 @@ use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
-use crate::section_0208::char_given;
-use crate::section_0208::math_given;
-use crate::section_0209::def_code;
-use crate::section_0209::register;
+use crate::section_0113::MEMORY_WORD_INT;
+use crate::section_0115::pointer;
+use crate::section_0208::*;
+use crate::section_0209::*;
 use crate::section_0297::chr_code_type;
-use crate::section_0410::int_val;
+use crate::section_0410::cur_val_level_kind;

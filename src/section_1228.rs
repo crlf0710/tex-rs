@@ -14,9 +14,12 @@ macro_rules! Assignments_1228 {
             true
         } else if $cur_cmd == assign_dimen {
             // assign_dimen: begin p:=cur_chr; scan_optional_equals;
+            let p = $globals.cur_chr.get();
+            scan_optional_equals($globals)?;
             //   scan_normal_dimen; word_define(p,cur_val);
+            scan_normal_dimen!($globals);
+            word_define!($globals, $a, p as _, $globals.cur_val);
             //   end;
-            todo!();
             true
         } else if $cur_cmd == assign_glue || $cur_cmd == assign_mu_glue {
             // assign_glue,assign_mu_glue: begin p:=cur_chr; n:=cur_cmd; scan_optional_equals;

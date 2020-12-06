@@ -122,7 +122,7 @@ macro_rules! Cases_of_main_control_that_are_not_part_of_the_inner_loop {
             /// already processed
             do_nothing!();
         } else {
-            unreachable!("abs(mode)+curcmd = {}", $abs_mode_plus_cur_cmd);
+            unreachable!("abs(mode) = {}, cur_cmd = {}", $abs_mode_plus_cur_cmd - $globals.cur_cmd as u16, $globals.cur_cmd);
         }
         use crate::section_0209::*;
         use crate::section_1054::its_all_over;

@@ -29,6 +29,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives {
             $globals, $cmd, $chr_code
         ) {
             true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0249!(
+            $globals, $cmd, $chr_code
+        ) {
+            true
         } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266!(
             $globals, $cmd, $chr_code
         ) {
