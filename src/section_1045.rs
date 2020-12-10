@@ -71,7 +71,14 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode {
 macro_rules! Cases_of_main_control_that_are_for_extensions_to_TeX {
     ($globals:expr, $abs_mode_plus_cur_cmd:expr) => {{
         trace_span!("Cases of `main_control` that are for...");
-        false
+        if Cases_of_main_control_that_are_for_extensions_to_TeX_1347!(
+            $globals, $abs_mode_plus_cur_cmd) {
+            /// already processed
+            do_nothing!();
+            true
+        } else {
+            false
+        }
     }}
 }
 

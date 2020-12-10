@@ -28,6 +28,7 @@ macro_rules! Expand_a_nonmacro {
         // input:@<Initiate or terminate input from a file@>;
         // othercases @<Complain about an undefined macro@>
         else {
+            trace_error_expr!("cur_cmd = {}", $globals.cur_cmd);
             Complain_about_an_undefined_macro!($globals);
         }
         // endcases;

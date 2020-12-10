@@ -89,6 +89,8 @@ pub(crate) const discretionary: quarterword = 47;
 /// send to user ( `\message`, `\errmessage` )
 pub(crate) const message: quarterword = 58;
 // @d extension=59 {extensions to \TeX\ ( \.{\\write}, \.{\\special}, etc.~)}
+/// extensions to `TeX` ( `\write`, `\special`, etc. )
+pub(crate) const extension: quarterword = 59;
 // @d in_stream=60 {files for reading ( \.{\\openin}, \.{\\closein} )}
 // @d begin_group=61 {begin local grouping ( \.{\\begingroup} )}
 // @d end_group=62 {end local grouping ( \.{\\endgroup} )}

@@ -105,6 +105,9 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
         chr_cmd!(globals, chr_code, strpool_str!("begin-group character "));
     }
     // right_brace: chr_cmd("end-group character ");
+    else if cmd == right_brace {
+        chr_cmd!(globals, chr_code, strpool_str!("end-group character "));
+    }
     // math_shift: chr_cmd("math shift character ");
     // mac_param: chr_cmd("macro parameter character ");
     // sup_mark: chr_cmd("superscript character ");
