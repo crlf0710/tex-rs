@@ -34,9 +34,15 @@
 //! \TeX\ adds the quantity |min_quarterword| to the actual code.
 //!
 //! Character nodes appear only in horizontal lists, never in vertical lists.
-//!
-//! @d is_char_node(#) == (#>=hi_mem_min)
-//!   {does the argument point to a |char_node|?}
-//! @d font == type {the font code in a |char_node|}
-//! @d character == subtype {the character code in a |char_node|}
-//!
+//
+// @d is_char_node(#) == (#>=hi_mem_min)
+//   {does the argument point to a |char_node|?}
+/// does the argument point to a `char_node`?
+macro_rules! is_char_node {
+    ($globals:expr, $ptr:expr) => {
+        $ptr >= $globals.hi_mem_min
+    }
+}
+// @d font == type {the font code in a |char_node|}
+// @d character == subtype {the character code in a |char_node|}
+//

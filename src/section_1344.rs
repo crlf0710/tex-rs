@@ -14,6 +14,8 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0334(globals: &m
     // primitive("openout",extension,open_node);@/
     // @!@:open_out_}{\.{\\openout} primitive@>
     // primitive("write",extension,write_node); write_loc:=cur_val;@/
+    primitive(globals, strpool_str!("write"), extension, write_node as _);
+    globals.write_loc = globals.cur_val as pointer;
     // @!@:write_}{\.{\\write} primitive@>
     // primitive("closeout",extension,close_node);@/
     // @!@:close_out_}{\.{\\closeout} primitive@>
@@ -28,9 +30,11 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0334(globals: &m
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::quarterword;
+use crate::section_0115::pointer;
 use crate::section_0208::extension;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
+use crate::section_1341::write_node;
 use linkme::distributed_slice;
 
 // Workaround https://github.com/rust-lang/rust/issues/47384

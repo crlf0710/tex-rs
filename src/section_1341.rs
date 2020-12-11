@@ -19,6 +19,8 @@
 // @d open_node_size=3 {number of words in an open/whatsit node}
 // @d open_node=0 {|subtype| in whatsits that represent files to \.{\\openout}}
 // @d write_node=1 {|subtype| in whatsits that represent things to \.{\\write}}
+/// `subtype` in whatsits that represent things to `\write`
+pub(crate) const write_node: quarterword = 1;
 // @d close_node=2 {|subtype| in whatsits that represent streams to \.{\\closeout}}
 /// `subtype` in whatsits that represent streams to `\closeout`
 pub(crate) const close_node: quarterword = 2;

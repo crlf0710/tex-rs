@@ -1,11 +1,36 @@
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! extension: case chr_code of
-//!   open_node:print_esc("openout");
-//!   write_node:print_esc("write");
-//!   close_node:print_esc("closeout");
-//!   special_node:print_esc("special");
-//!   immediate_code:print_esc("immediate");
-//!   set_language_code:print_esc("setlanguage");
-//!   othercases print("[unknown extension!]")
-//!   endcases;
-//!
+//! ` `
+
+// @<Cases of |print_cmd_chr|...@>=
+macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1346 {
+    ($globals:expr, $cmd:expr, $chr_code:expr) => {{
+        // extension: case chr_code of
+        if $cmd == extension {
+            if false {
+                unreachable!();
+            }
+            // open_node:print_esc("openout");
+            // write_node:print_esc("write");
+            else if $chr_code.get() == write_node as _ {
+                print_esc($globals, strpool_str!("write"));
+            }
+            // close_node:print_esc("closeout");
+            // special_node:print_esc("special");
+            // immediate_code:print_esc("immediate");
+            else if $chr_code.get() == immediate_code as _ {
+                print_esc($globals, strpool_str!("immediate"));
+            }
+            // set_language_code:print_esc("setlanguage");
+            // othercases print("[unknown extension!]")
+            else {
+                print($globals, strpool_str!("[unknown extension!]").get() as _);
+            }
+            // endcases;
+            use crate::section_1341::*;
+            use crate::section_1344::*;
+            true
+        } else {
+            false
+        }
+    }}
+}
+
