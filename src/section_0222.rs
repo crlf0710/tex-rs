@@ -48,6 +48,8 @@ pub(crate) const frozen_endv: word = frozen_control_sequence + 6;
 /// permanent `\relax`
 pub(crate) const frozen_relax: word = frozen_control_sequence + 7;
 // @d end_write=frozen_control_sequence+8 {permanent `\.{\\endwrite}'}
+/// permanent `\endwrite'
+pub(crate) const end_write: word = frozen_control_sequence + 8;
 // @d frozen_dont_expand=frozen_control_sequence+9
 //   {permanent `\.{\\notexpanded:}'}
 /// permanent `\notexpanded:`

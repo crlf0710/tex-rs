@@ -42,6 +42,13 @@ use crate::pascal::integer;
 // @!last_bop:integer; {location of previous |bop| in the \.{DVI} output}
 // @!dead_cycles:integer; {recent outputs that didn't ship anything out}
 // @!doing_leaders:boolean; {are we inside a leader box?}
+/// are we inside a leader box?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static doing_leaders: boolean = false;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::boolean;
+
 // @#
 // @!c,@!f:quarterword; {character and font in current |char_node|}
 // @!rule_ht,@!rule_dp,@!rule_wd:scaled; {size of current rule being output}

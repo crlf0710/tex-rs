@@ -9,6 +9,8 @@
 /// specifies paragraph shape
 pub(crate) const par_shape_loc: pointer = local_base as pointer;
 // @d output_routine_loc=local_base+1 {points to token list for \.{\\output}}
+/// points to token list for `\output`
+pub(crate) const output_routine_loc: pointer = local_base as pointer + 1;
 // @d every_par_loc=local_base+2 {points to token list for \.{\\everypar}}
 // @d every_math_loc=local_base+3 {points to token list for \.{\\everymath}}
 // @d every_display_loc=local_base+4 {points to token list for \.{\\everydisplay}}

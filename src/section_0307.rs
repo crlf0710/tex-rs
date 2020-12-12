@@ -100,6 +100,8 @@ pub(crate) const inserted: quarterword = 4;
 /// `token_type` code for defined control sequences
 pub(crate) const r#macro: quarterword = 5;
 // @d output_text=6 {|token_type| code for output routines}
+/// `token_type` code for output routines
+pub(crate) const output_text: quarterword = 6;
 // @d every_par_text=7 {|token_type| code for \.{\\everypar}}
 // @d every_math_text=8 {|token_type| code for \.{\\everymath}}
 // @d every_display_text=9 {|token_type| code for \.{\\everydisplay}}
@@ -108,6 +110,10 @@ pub(crate) const r#macro: quarterword = 5;
 // @d every_job_text=12 {|token_type| code for \.{\\everyjob}}
 // @d every_cr_text=13 {|token_type| code for \.{\\everycr}}
 // @d mark_text=14 {|token_type| code for \.{\\topmark}, etc.}
+/// `token_type` code for `\topmark`, etc.
+pub(crate) const mark_text: quarterword = 14;
 // @d write_text=15 {|token_type| code for \.{\\write}}
+/// `token_type` code for `\write`
+pub(crate) const write_text: quarterword = 15;
 
 use crate::section_0113::quarterword;

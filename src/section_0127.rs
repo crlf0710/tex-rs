@@ -15,11 +15,18 @@ macro_rules! Try_to_allocate_within_node_p_and_its_physical_successors_and_goto_
         /// merge node `p` with node `q`
         while is_empty!($globals, $q) {
             // begin t:=rlink(q);
+            $t = rlink!($globals, $q) as _;
             // if q=rover then rover:=t;
+            if $q == $globals.rover {
+                $globals.rover = $t as _;
+            }
             // llink(t):=llink(q); rlink(llink(q)):=t;@/
+            llink!($globals, $t as pointer) = llink!($globals, $q);
+            let llink_q = llink!($globals, $q);
+            rlink!($globals, llink_q) = $t as _;
             // q:=q+node_size(q);
+            $q = $q + node_size!($globals, $q);
             // end;
-            todo!("merge");
         }
         // r:=q-s;
         $r = $q as integer - $s;

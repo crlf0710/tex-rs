@@ -16,8 +16,14 @@
 //! to hold the string numbers for name, area, and extension.
 //
 // @d write_node_size=2 {number of words in a write/whatsit node}
+/// number of words in a write/whatsit node
+pub(crate) const write_node_size: quarterword = 2;
 // @d open_node_size=3 {number of words in an open/whatsit node}
+/// number of words in an open/whatsit node
+pub(crate) const open_node_size: quarterword = 3;
 // @d open_node=0 {|subtype| in whatsits that represent files to \.{\\openout}}
+/// `subtype` in whatsits that represent files to `\openout`
+pub(crate) const open_node: quarterword = 0;
 // @d write_node=1 {|subtype| in whatsits that represent things to \.{\\write}}
 /// `subtype` in whatsits that represent things to `\write`
 pub(crate) const write_node: quarterword = 1;
@@ -25,12 +31,28 @@ pub(crate) const write_node: quarterword = 1;
 /// `subtype` in whatsits that represent streams to `\closeout`
 pub(crate) const close_node: quarterword = 2;
 // @d special_node=3 {|subtype| in whatsits that represent \.{\\special} things}
+/// `subtype` in whatsits that represent `\special` things
+pub(crate) const special_node: quarterword = 3;
 // @d language_node=4 {|subtype| in whatsits that change the current language}
+/// `subtype` in whatsits that change the current language
+pub(crate) const language_node: quarterword = 4;
 // @d what_lang(#)==link(#+1) {language number, in the range |0..255|}
 // @d what_lhm(#)==type(#+1) {minimum left fragment, in the range |1..63|}
 // @d what_rhm(#)==subtype(#+1) {minimum right fragment, in the range |1..63|}
 // @d write_tokens(#) == link(#+1) {reference count of token list to write}
+/// reference count of token list to write
+macro_rules! write_tokens {
+    ($globals:expr, $ptr:expr) => {
+        link!($globals, $ptr + 1)
+    }
+}
 // @d write_stream(#) == info(#+1) {stream number (0 to 17)}
+/// stream number (0 to 17)
+macro_rules! write_stream {
+    ($globals:expr, $ptr:expr) => {
+        info_inner!($globals, $ptr + 1)
+    }
+}
 // @d open_name(#) == link(#+1) {string number of file name to open}
 // @d open_area(#) == info(#+2) {string number of file area for |open_name|}
 // @d open_ext(#) == link(#+2) {string number of file extension for |open_name|}

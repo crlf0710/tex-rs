@@ -87,6 +87,7 @@ pub mod TeXGlobals {
     include!("src/section_1032.rs");
     include!("src/section_1299.rs");
     include!("src/section_1331.rs");
+    include!("src/section_1342.rs");
     include!("src/section_1345.rs");
     include!("src/unicode_support.rs");
 }
