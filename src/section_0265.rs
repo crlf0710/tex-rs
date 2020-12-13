@@ -25,6 +25,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("char",char_num,0);@/
     // @!@:char_}{\.{\\char} primitive@>
     // primitive("csname",cs_name,0);@/
+    primitive(globals, strpool_str!("csname"), cs_name, 0);
     // @!@:cs_name_}{\.{\\csname} primitive@>
     // primitive("delimiter",delim_num,0);@/
     // @!@:delimiter_}{\.{\\delimiter} primitive@>
@@ -36,6 +37,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // @!@:end_group_}{\.{\\endgroup} primitive@>
     // text(frozen_end_group):="endgroup"; eqtb[frozen_end_group]:=eqtb[cur_val];@/
     // primitive("expandafter",expand_after,0);@/
+    primitive(globals, strpool_str!("expandafter"), expand_after, 0);
     // @!@:expand_after_}{\.{\\expandafter} primitive@>
     // primitive("font",def_font,0);@/
     // @!@:font_}{\.{\\font} primitive@>

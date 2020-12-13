@@ -102,6 +102,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &m
     // primitive("fam",assign_int,int_base+cur_fam_code);@/
     // @!@:fam_}{\.{\\fam} primitive@>
     // primitive("escapechar",assign_int,int_base+escape_char_code);@/
+    primitive(globals, strpool_str!("escapechar"), assign_int, (int_base + escape_char_code as word) as _);
     // @!@:escape_char_}{\.{\\escapechar} primitive@>
     // primitive("defaulthyphenchar",assign_int,int_base+default_hyphen_char_code);@/
     // @!@:default_hyphen_char_}{\.{\\defaulthyphenchar} primitive@>

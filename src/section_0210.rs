@@ -7,6 +7,8 @@
 /// initial state of most `eq_type` fields
 pub(crate) const undefined_cs: quarterword = max_command + 1;
 // @d expand_after=max_command+2 {special expansion ( \.{\\expandafter} )}
+/// special expansion ( `\expandafter` )
+pub(crate) const expand_after: quarterword = max_command + 2;
 // @d no_expand=max_command+3 {special nonexpansion ( \.{\\noexpand} )}
 // @d input=max_command+4 {input a source file ( \.{\\input}, \.{\\endinput} )}
 // @d if_test=max_command+5 {conditional text ( \.{\\if}, \.{\\ifcase}, etc.~)}
@@ -16,7 +18,11 @@ pub(crate) const if_test: quarterword = max_command + 5;
 /// delimiters for conditionals ( `\else`, etc. )
 pub(crate) const fi_or_else: quarterword = max_command + 6;
 // @d cs_name=max_command+7 {make a control sequence from tokens ( \.{\\csname} )}
+/// make a control sequence from tokens ( `\csname` )
+pub(crate) const cs_name: quarterword = max_command + 7;
 // @d convert=max_command+8 {convert to text ( \.{\\number}, \.{\\string}, etc.~)}
+/// convert to text ( `\number`, `\string`, etc. )
+pub(crate) const convert: quarterword = max_command + 8;
 // @d the=max_command+9 {expand an internal quantity ( \.{\\the} )}
 /// expand an internal quantity ( `\the` )
 pub(crate) const the: quarterword = max_command + 9;

@@ -78,6 +78,7 @@ use crate::section_0011::font_max_TYPENUM;
 use crate::section_0011::font_mem_size_TYPENUM;
 use crate::section_0012::font_base_TYPENUM;
 use crate::section_0018::ASCII_code;
+use crate::section_0038::str_number;
 use crate::section_0113::memory_word;
 use crate::section_0548::font_index;
 use crate::section_0548::internal_font_number;
@@ -91,6 +92,12 @@ impl font_index_array<memory_word> {
     pub(crate) fn default_zeroed() -> Self {
         unsafe { core::mem::zeroed() }
     }
+}
+
+#[allow(unused_variables)]
+pub(crate) fn font_name_str(globals: &mut TeXGlobals, font: internal_font_number) -> str_number {
+    // FIXME: implement this.
+    strpool_str!("<unknown font>")
 }
 
 #[allow(unused_variables)]

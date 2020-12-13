@@ -27,6 +27,7 @@ pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> 
     }
     // @.by@>
     // arith_error:=false;
+    globals.arith_error = false;
     // if q<multiply then @<Compute result of |register| or
     //     |advance|, put it in |cur_val|@>
     if q < multiply as _ {

@@ -34,10 +34,25 @@ macro_rules! word_define {
 }
 
 // @<Adjust \(f)for the setting of \.{\\globaldefs}@>=
-// if global_defs<>0 then
-//   if global_defs<0 then
-//     begin if global then a:=a-4;
-//     end
-//   else  begin if not global then a:=a+4;
-//     end
-//
+macro_rules! Adjust_f_for_the_setting_of_globaldefs {
+    ($globals:expr, $a:expr) => {{
+        // if global_defs<>0 then
+        if global_defs!($globals) != 0 {
+            // if global_defs<0 then
+            if global_defs!($globals) < 0 {
+                // begin if global then a:=a-4;
+                if global!($a) {
+                    $a = $a - 4;
+                }
+                // end
+            }
+            // else  begin if not global then a:=a+4;
+            else {
+                if !global!($a) {
+                    $a = $a + 4;
+                }
+                // end
+            }
+        }
+    }}
+}
