@@ -14,5 +14,10 @@
 //! appears in |mem[q+6].sc|. The |subtype| field of a delta node is not used.
 //
 // @d delta_node_size=7 {number of words in a delta node}
+/// number of words in a delta node
+pub(crate) const delta_node_size: quarterword = 7;
 // @d delta_node=2 {|type| field in a delta node}
-//
+/// `type` field in a delta node
+pub(crate) const delta_node: quarterword = 2;
+
+use crate::section_0113::quarterword;

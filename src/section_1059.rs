@@ -5,7 +5,7 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1059 {
     ($globals:expr, $cmd:expr, $chr_code:expr) => {{
         // hskip: case chr_code of
         if $cmd == hskip {
-            todo!();
+            todo!("hskip");
             // skip_code:print_esc("hskip");
             // fil_code:print_esc("hfil");
             // fill_code:print_esc("hfill");

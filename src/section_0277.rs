@@ -17,7 +17,7 @@ pub(crate) fn eq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e:
     }
     // else if cur_level>level_one then eq_save(p,eq_level(p));
     else if globals.cur_level > level_one {
-        todo!();
+        eq_save(globals, p, eq_level!(globals, p));
     }
     // eq_level(p):=cur_level; eq_type(p):=t; equiv(p):=e;
     eq_level!(globals, p) = globals.cur_level;
@@ -32,4 +32,6 @@ use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
 use crate::section_0221::level_one;
 use crate::section_0275::eq_destroy;
+use crate::section_0276::eq_save;
+
 

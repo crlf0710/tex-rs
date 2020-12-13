@@ -18,8 +18,12 @@ pub(crate) const hex_token: cur_tok_type_repr = other_token + b'\"' as cur_tok_t
 /// reverse apostrophe, precedes alpha constants
 pub(crate) const alpha_token: cur_tok_type_repr = other_token + b'`' as cur_tok_type_repr;
 // @d point_token=other_token+"." {decimal point}
+/// decimal point
+pub(crate) const point_token: cur_tok_type_repr = other_token + b'.' as cur_tok_type_repr;
 // @d continental_point_token=other_token+"," {decimal point, Eurostyle}
-//
+/// decimal point, Eurostyle
+pub(crate) const continental_point_token: cur_tok_type_repr = other_token + b',' as cur_tok_type_repr;
+
 // @<Glob...@>=
 // @!radix:small_number; {|scan_int| sets this to 8, 10, 16, or zero}
 /// `scan_int` sets this to 8, 10, 16, or zero

@@ -12,17 +12,35 @@
 //!
 //! We use the notation |saved(k)| to stand for an integer item that
 //! appears in location |save_ptr+k| of the save stack.
-//!
-//! @d saved(#)==save_stack[save_ptr+#].int
-//!
-//! @p procedure new_save_level(@!c:group_code); {begin a new level of grouping}
-//! begin check_full_save_stack;
-//! save_type(save_ptr):=level_boundary; save_level(save_ptr):=cur_group;
-//! save_index(save_ptr):=cur_boundary;
-//! if cur_level=max_quarterword then overflow("grouping levels",
-//! @:TeX capacity exceeded grouping levels}{\quad grouping levels@>
-//!   max_quarterword-min_quarterword);
-//!   {quit if |(cur_level+1)| is too big to be stored in |eqtb|}
-//! cur_boundary:=save_ptr; incr(cur_level); incr(save_ptr); cur_group:=c;
-//! end;
-//!
+//
+// @d saved(#)==save_stack[save_ptr+#].int
+//
+// @p procedure new_save_level(@!c:group_code); {begin a new level of grouping}
+/// begin a new level of grouping
+pub(crate) fn new_save_level(globals: &mut TeXGlobals, c: group_code) {
+    // begin check_full_save_stack;
+    check_full_save_stack!(globals);
+    // save_type(save_ptr):=level_boundary; save_level(save_ptr):=cur_group;
+    // save_index(save_ptr):=cur_boundary;
+    save_type!(globals, globals.save_ptr) = level_boundary;
+    save_level!(globals, globals.save_ptr) = globals.cur_group.get();
+    save_index!(globals, globals.save_ptr) = globals.cur_boundary.get();
+    // if cur_level=max_quarterword then overflow("grouping levels",
+    // @:TeX capacity exceeded grouping levels}{\quad grouping levels@>
+    //   max_quarterword-min_quarterword);
+    //   {quit if |(cur_level+1)| is too big to be stored in |eqtb|}
+    if globals.cur_level == max_quarterword {
+        todo!("overflow");
+    }
+    // cur_boundary:=save_ptr; incr(cur_level); incr(save_ptr); cur_group:=c;
+    globals.cur_boundary = globals.save_ptr;
+    incr!(globals.cur_level);
+    incr!(globals.save_ptr);
+    globals.cur_group = c;
+    // end;
+}
+
+use crate::section_0004::TeXGlobals;
+use crate::section_0110::max_quarterword;
+use crate::section_0268::level_boundary;
+use crate::section_0269::group_code;

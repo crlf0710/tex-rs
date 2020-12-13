@@ -1,8 +1,14 @@
 //! @ Here is a list of cases where the user has probably gotten into or out of math
 //! mode by mistake. \TeX\ will insert a dollar sign and rescan the current token.
-//
+
 // @d non_math(#)==vmode+#,hmode+#
-//
+macro_rules! abs_mode_plus_cur_cmd_matches_non_math_mode {
+    ($abs_mode_plus_cur_cmd:expr, $cur_cmd:expr) => {
+        $abs_mode_plus_cur_cmd == vmode as u16 + $cur_cmd
+            || $abs_mode_plus_cur_cmd == hmode as u16 + $cur_cmd
+    }
+}
+
 // @<Math-only cases in non-math modes...@>=
 macro_rules! Math_only_cases_in_non_math_modes_or_vice_versa {
     ($abs_mode_plus_cur_cmd:expr) => {

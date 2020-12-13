@@ -93,7 +93,11 @@ pub(crate) const message: quarterword = 58;
 pub(crate) const extension: quarterword = 59;
 // @d in_stream=60 {files for reading ( \.{\\openin}, \.{\\closein} )}
 // @d begin_group=61 {begin local grouping ( \.{\\begingroup} )}
+/// begin local grouping ( `\begingroup` )
+pub(crate) const begin_group: quarterword = 61;
 // @d end_group=62 {end local grouping ( \.{\\endgroup} )}
+/// end local grouping ( `\endgroup` )
+pub(crate) const end_group: quarterword = 62;
 // @d omit=63 {omit alignment template ( \.{\\omit} )}
 /// omit alignment template ( `\omit` )
 pub(crate) const omit: quarterword = 63;

@@ -37,7 +37,20 @@ macro_rules! shrink {
     }
 }
 // @d stretch_order == type {order of infinity for stretching}
+/// order of infinity for stretching
+macro_rules! stretch_order {
+    ($globals:expr, $ptr:expr) => {
+        r#type!($globals, $ptr)
+    }
+}
 // @d shrink_order == subtype {order of infinity for shrinking}
+/// order of infinity for shrinking
+macro_rules! shrink_order {
+    ($globals:expr, $ptr:expr) => {
+        subtype!($globals, $ptr)
+    }
+}
+
 // @d fil=1 {first-order infinity}
 // @d fill=2 {second-order infinity}
 // @d filll=3 {third-order infinity}
@@ -45,6 +58,7 @@ macro_rules! shrink {
 // @<Types...@>=
 // @!glue_ord=normal..filll; {infinity to the 0, 1, 2, or 3 power}
 /// infinity to the 0, 1, 2, or 3 power
+#[derive(Clone, Copy, PartialEq)]
 pub(crate) enum glue_ord {
     normal = 0,
     /// first-order infinity

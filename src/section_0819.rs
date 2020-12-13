@@ -25,6 +25,8 @@
 //! to each other.
 //
 // @d active_node_size=3 {number of words in active nodes}
+/// number of words in active nodes
+pub(crate) const active_node_size: quarterword = 3;
 // @d fitness==subtype {|very_loose_fit..tight_fit| on final line for this break}
 // @d break_node==rlink {pointer to the corresponding passive node}
 // @d line_number==llink {line that begins at this breakpoint}
@@ -38,3 +40,5 @@ macro_rules! last_active {
         active
     }
 }
+
+use crate::section_0113::quarterword;

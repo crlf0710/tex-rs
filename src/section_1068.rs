@@ -10,11 +10,12 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin case cur_group of
     // simple_group: unsave;
     if globals.cur_group == simple_group {
-        todo!("unsave");
+        unsave(globals);
     }
     // bottom_level: begin print_err("Too many }'s");
     // @.Too many \}'s@>
     else if globals.cur_group == bottom_level {
+        print_err!(globals, strpool_str!("Too many }'s"));
         // help2("You've closed more groups than you opened.")@/
         // ("Such booboos are generally harmless, so keep going."); error;
         help2!(
@@ -43,3 +44,4 @@ use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0095::confusion;
 use crate::section_0269::*;
+use crate::section_0281::unsave;

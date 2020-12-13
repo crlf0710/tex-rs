@@ -73,7 +73,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
             // end;
         }
     }
-    trace_expr!("cur_cmd={}", globals.cur_cmd);
+    trace_debug_expr!("cur_cmd={}", globals.cur_cmd);
     // @<Discard the prefixes \.{\\long} and \.{\\outer} if they are irrelevant@>;
     // @<Adjust \(f)for the setting of \.{\\globaldefs}@>;
     // case cur_cmd of

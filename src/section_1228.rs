@@ -23,11 +23,24 @@ macro_rules! Assignments_1228 {
             true
         } else if $cur_cmd == assign_glue || $cur_cmd == assign_mu_glue {
             // assign_glue,assign_mu_glue: begin p:=cur_chr; n:=cur_cmd; scan_optional_equals;
-            //   if n=assign_mu_glue then scan_glue(mu_val)@+else scan_glue(glue_val);
-            //   trap_zero_glue;
-            //   define(p,glue_ref,cur_val);
-            //   end;
-            todo!();
+            let p = $globals.cur_chr.get();
+            let n = $globals.cur_cmd;
+            scan_optional_equals($globals)?;
+            // if n=assign_mu_glue then scan_glue(mu_val)@+else scan_glue(glue_val);
+            if n == assign_mu_glue {
+                scan_glue($globals, small_number::new(cur_val_level_kind::mu_val as _))?;
+            } else {
+                scan_glue($globals, small_number::new(cur_val_level_kind::glue_val as _))?;
+            }
+            // trap_zero_glue;
+            trap_zero_glue($globals);
+            // define(p,glue_ref,cur_val);
+            define!($globals, $a, p as _, glue_ref, $globals.cur_val as _);
+            // end;
+            use crate::section_0101::small_number;
+            use crate::section_0410::cur_val_level_kind;
+            use crate::section_0461::scan_glue;
+            use crate::section_1229::trap_zero_glue;
             true
         } else {
             false

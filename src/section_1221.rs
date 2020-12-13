@@ -33,7 +33,7 @@ macro_rules! Assignments_1221 {
             }
             // else  begin get_token; q:=cur_tok; get_token; back_input;
             else {
-                todo!();
+                todo!("assign 1221");
                 // cur_tok:=q; back_input; {look ahead, then back up}
                 // end; {note that |back_input| doesn't affect |cur_cmd|, |cur_chr|}
             }

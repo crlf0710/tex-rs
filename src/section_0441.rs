@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Get the next non-blank non-sign token...@>=
-macro_rules! Set_the_next_non_blank_non_sign_token__set_negative_appropriately {
+macro_rules! Get_the_next_non_blank_non_sign_token__set_negative_appropriately {
     ($globals:expr, $negative:expr) => {{
         // negative:=false;
         $negative = false;

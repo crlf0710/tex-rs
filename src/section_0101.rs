@@ -4,16 +4,16 @@
 //
 // @d unity == @'200000 {$2^{16}$, represents 1.00000}
 /// `2^{16}`, represents 1.00000
-const unity: scaled = scaled(0o200000);
+pub(crate) const unity: scaled = scaled(0o200000);
 // @d two == @'400000 {$2^{17}$, represents 2.00000}
-const two: scaled = scaled(0o400000);
+pub(crate) const two: scaled = scaled(0o400000);
 //
 // @<Types...@>=
 // @!scaled = integer; {this type is used for scaled integers}
 // @!nonnegative_integer=0..@'17777777777; {$0\L x<2^{31}$}
 // @!small_number=0..63; {this type is self-explanatory}
 //
-#[derive(Copy, Clone, RefCast, PartialEq)]
+#[derive(Copy, Clone, RefCast, PartialEq, PartialOrd)]
 #[repr(transparent)]
 pub struct scaled(integer);
 
@@ -21,20 +21,33 @@ impl scaled {
     pub(crate) const fn zero() -> Self {
         scaled(0)
     }
+
+    pub(crate) const fn new_from_inner(v: integer) -> Self {
+        scaled(v)
+    }
+
     pub(crate) const fn inner(&self) -> integer {
         self.0
     }
 }
 
-pub type nonnegative_integer = u32_from_m_to_n<U0, ::typenum::op!(U2147483648 - U1)>;
+impl core::ops::Neg for scaled {
+    type Output = scaled;
+    fn neg(self) -> Self::Output {
+        scaled(-self.inner())
+    }
+}
+
+
+pub type nonnegative_integer = i32_from_m_to_n<Z0, ::typenum::op!(P2147483648 - P1)>;
 pub type small_number = u8_from_m_to_n<U0, U63>;
 
-use crate::pascal::{integer, u32_from_m_to_n, u8_from_m_to_n};
-use typenum::{U0, U1, U2147483648, U63};
-use ref_cast::RefCast;
+use crate::pascal::{i32_from_m_to_n, integer, u32_from_m_to_n, u8_from_m_to_n};
 use crate::section_0113::memory_word;
 use crate::section_0113::MEMORY_WORD_INT;
 use core::ops::{Index, IndexMut};
+use ref_cast::RefCast;
+use typenum::{P1, P2147483648, Z0, U0, U1, U63};
 
 pub(crate) struct MEMORY_WORD_SC;
 
@@ -50,4 +63,3 @@ impl IndexMut<MEMORY_WORD_SC> for memory_word {
         scaled::ref_cast_mut(&mut self[MEMORY_WORD_INT])
     }
 }
-

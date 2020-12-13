@@ -39,13 +39,19 @@ macro_rules! Scan_an_alphabetic_character_code_into_cur_val {
             }
         }
         // if cur_val>255 then
-        //   begin print_err("Improper alphabetic constant");
-        // @.Improper alphabetic constant@>
-        //   help2("A one-character control sequence belongs after a ` mark.")@/
-        //     ("So I'm essentially inserting \0 here.");
-        //   cur_val:="0"; back_error;
-        //   end
+        if $globals.cur_val > 255 {
+            todo!();
+            //   begin print_err("Improper alphabetic constant");
+            // @.Improper alphabetic constant@>
+            //   help2("A one-character control sequence belongs after a ` mark.")@/
+            //     ("So I'm essentially inserting \0 here.");
+            //   cur_val:="0"; back_error;
+            //   end
+        }
         // else @<Scan an optional space@>;
+        else {
+            Scan_an_optional_space!($globals);
+        }
         // end
         trace_expr!("cur_val={}", $globals.cur_val);
         use crate::section_0115::pointer;
