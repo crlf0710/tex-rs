@@ -7,7 +7,7 @@
 #[allow(unused_variables)]
 pub(crate) fn begin_diagnostic(globals: &mut TeXGlobals) {
     // begin old_setting:=selector;
-    globals.old_setting = globals.selector;
+    globals.diag_old_setting = globals.selector;
     // if (tracing_online<=0)and(selector=term_and_log) then
     if tracing_online!(globals) <= 0 && globals.selector == term_and_log {
         // begin decr(selector);
@@ -37,7 +37,7 @@ pub(crate) fn end_diagnostic(globals: &mut TeXGlobals, blank_line: boolean) {
         print_ln(make_globals_io_view!(globals));
     }
     // selector:=old_setting;
-    globals.selector = globals.old_setting;
+    globals.selector = globals.diag_old_setting;
     // end;
 }
 

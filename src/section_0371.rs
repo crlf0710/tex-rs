@@ -19,5 +19,15 @@ macro_rules! store_new_token {
 }
 
 // @d fast_store_new_token(#)==begin fast_get_avail(q); link(p):=q; info(q):=#;
-//   p:=q; {|link(p)| is |null|}
-//   end
+macro_rules! fast_store_new_token {
+    ($globals:expr, $val:expr, $p:expr, $q:expr) => {{
+        fast_get_avail!($globals, $q);
+        link!($globals, $p) = $q;
+        info_tok_assign!($globals, $q, $val);
+        // p:=q; {|link(p)| is |null|}
+        $p = $q;
+        /// `link(p)` is `null`
+        const _ : () = ();
+        // end
+    }}
+}

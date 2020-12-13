@@ -31,7 +31,7 @@ pub(crate) const height_offset: quarterword = 3;
 /// width of the box, in sp
 macro_rules! width {
     ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + crate::section_0135::width_offset as pointer]
+        $globals.mem[$ptr + crate::section_0135::width_offset as crate::section_0115::pointer]
             [crate::section_0101::MEMORY_WORD_SC]
     }
 }

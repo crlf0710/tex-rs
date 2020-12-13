@@ -89,6 +89,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("setbox",set_box,0);@/
     // @!@:set_box_}{\.{\\setbox} primitive@>
     // primitive("the",the,0);@/
+    primitive(globals, strpool_str!("the"), the, 0);
     // @!@:the_}{\.{\\the} primitive@>
     // primitive("toks",toks_register,0);@/
     // @!@:toks_}{\.{\\toks} primitive@>
@@ -107,6 +108,7 @@ use crate::section_0115::pointer;
 use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0209::*;
+use crate::section_0210::*;
 use crate::section_0222::frozen_relax;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;

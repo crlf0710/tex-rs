@@ -10,6 +10,8 @@
 pub(crate) fn show_context(globals: &mut TeXGlobals) {
     // label done;
     // var old_setting:0..max_selector; {saved |selector| setting}
+    /// saved `selector` setting
+    let mut old_setting;
     // @!nn:integer; {number of contexts shown so far, less one}
     /// number of contexts shown so far, less one
     let mut nn: integer;
@@ -46,7 +48,7 @@ pub(crate) fn show_context(globals: &mut TeXGlobals) {
             if globals.base_ptr == globals.input_ptr || bottom_line ||
                 nn < error_context_lines!(globals) {
                 // @<Display the current context@>
-                Display_the_current_context!(globals, nn);
+                Display_the_current_context!(globals, nn, old_setting);
             }
             // else if nn=error_context_lines then
             else if nn == error_context_lines!(globals) {

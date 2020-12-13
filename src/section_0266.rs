@@ -56,6 +56,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         // set_prev_graf: print_esc("prevgraf");
         // set_shape: print_esc("parshape");
         // the: print_esc("the");
+        else if $cmd == the {
+            print_esc($globals, strpool_str!("the"));
+            true
+        }
         // toks_register: print_esc("toks");
         // vadjust: print_esc("vadjust");
         // valign: print_esc("valign");

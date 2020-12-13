@@ -2,7 +2,7 @@
 
 // @<Display the current context@>=
 macro_rules! Display_the_current_context {
-    ($globals:expr, $nn:expr) => {{
+    ($globals:expr, $nn:expr, $old_setting:expr) => {{
         /// length of descriptive information on line 1
         let l: u8_from_0_to_n<half_error_line_TYPENUM>;
 
@@ -17,7 +17,7 @@ macro_rules! Display_the_current_context {
             const _ : () = ();
             $globals.tally = 0;
             // old_setting:=selector;
-            $globals.old_setting = $globals.selector;
+            $old_setting = $globals.selector;
             // if state<>token_list then
             if state!($globals) != token_list {
                 // begin @<Print location of current line@>;
@@ -36,7 +36,7 @@ macro_rules! Display_the_current_context {
             // selector:=old_setting; {stop pseudoprinting}
             /// stop pseudoprinting
             const _ : () = ();
-            $globals.selector = $globals.old_setting;
+            $globals.selector = $old_setting;
             // @<Print two lines using the tricky pseudoprinted information@>;
             Print_two_lines_using_the_tricky_pseudoprinted_information!($globals, l);
             // incr(nn);

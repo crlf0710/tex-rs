@@ -84,4 +84,13 @@ impl str_pool_array<packed_ASCII_code> {
         trace_expr!("slice_len = {}", slice.len());
         crate::unicode_support::GenericCharIter::new(slice)
     }
+
+    pub(crate) fn slice_ascii_codes(
+        &self,
+        range: core::ops::Range<pool_pointer>
+    ) -> crate::unicode_support::GenericCharIter<'_> {
+        let slice = &self[range];
+        trace_expr!("slice_len = {}", slice.len());
+        crate::unicode_support::GenericCharIter::new(slice)
+    }
 }

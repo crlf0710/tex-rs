@@ -4,7 +4,7 @@
 // @<Glob...@>=
 // @!old_setting:0..max_selector;
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static old_setting: u8_from_0_to_n<max_selector_TYPENUM> = u8_from_0_to_n::default();
+pub(crate) static diag_old_setting: u8_from_0_to_n<max_selector_TYPENUM> = u8_from_0_to_n::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0054::max_selector_TYPENUM;

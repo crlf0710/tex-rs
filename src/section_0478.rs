@@ -20,13 +20,17 @@ macro_rules! Expand_the_next_part_of_the_input {
                 }
                 // else  begin q:=the_toks;
                 else {
-                    todo!();
-                    //   if link(temp_head)<>null then
-                    //     begin link(p):=link(temp_head); p:=q;
-                    //     end;
-                    //   end;
+                    $q = the_toks($globals)?;
+                    // if link(temp_head)<>null then
+                    if link!($globals, temp_head) != null {
+                        // begin link(p):=link(temp_head); p:=q;
+                        link!($globals, $p) = link!($globals, temp_head);
+                        $p = $q;
+                        // end;
+                    }
                     // end;
                 }
+                // end;
             }
         }
         // done2: x_token
@@ -34,10 +38,12 @@ macro_rules! Expand_the_next_part_of_the_input {
         }
         x_token($globals)?;
         // end
+        use crate::section_0162::temp_head;
         use crate::section_0209::max_command;
         use crate::section_0210::the;
         use crate::section_0341::get_next;
         use crate::section_0366::expand;
         use crate::section_0381::x_token;
+        use crate::section_0465::the_toks;
     }}
 }
