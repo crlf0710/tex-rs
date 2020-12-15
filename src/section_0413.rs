@@ -42,6 +42,9 @@ pub(crate) fn scan_something_internal(
         scanned_result!(globals, globals.eqtb[m.get() as pointer][MEMORY_WORD_INT], cur_val_level_kind::int_val);
     }
     // assign_dimen: scanned_result(eqtb[m].sc)(dimen_val);
+    else if globals.cur_cmd == assign_dimen {
+        scanned_result!(globals, globals.eqtb[m.get() as pointer][MEMORY_WORD_SC].inner(), cur_val_level_kind::dimen_val);
+    }
     // assign_glue: scanned_result(equiv(m))(glue_val);
     else if globals.cur_cmd == assign_glue {
         scanned_result!(globals, equiv!(globals, m.get() as pointer) as _, cur_val_level_kind::glue_val);
@@ -79,6 +82,7 @@ use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
+use crate::section_0101::MEMORY_WORD_SC;
 use crate::section_0113::MEMORY_WORD_INT;
 use crate::section_0115::pointer;
 use crate::section_0208::*;

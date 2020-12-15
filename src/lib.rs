@@ -735,7 +735,12 @@ reversing_order_items!(
                                 mod section_0454;
                                 #[macro_use]
                                 mod section_0455;
-                                mod section_0456_to_0460;
+                                mod section_0456;
+                                mod section_0457;
+                                #[macro_use]
+                                mod section_0458;
+                                mod section_0459;
+                                mod section_0460;
                                 reversing_order_items!(
                                     {
                                         mod section_0461;

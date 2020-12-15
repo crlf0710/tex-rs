@@ -2,28 +2,68 @@
 //! here, and the 256 \.{\\dimen} registers.
 //
 // @d par_indent_code=0 {indentation of paragraphs}
+/// indentation of paragraphs
+pub(crate) const par_indent_code: quarterword = 0;
 // @d math_surround_code=1 {space around math in text}
+/// space around math in text
+pub(crate) const math_surround_code: quarterword = 1;
 // @d line_skip_limit_code=2 {threshold for |line_skip| instead of |baseline_skip|}
+/// threshold for `line_skip` instead of `baseline_skip`
+pub(crate) const line_skip_limit_code: quarterword = 2;
 // @d hsize_code=3 {line width in horizontal mode}
+/// line width in horizontal mode
+pub(crate) const hsize_code: quarterword = 3;
 // @d vsize_code=4 {page height in vertical mode}
+/// page height in vertical mode
+pub(crate) const vsize_code: quarterword = 4;
 // @d max_depth_code=5 {maximum depth of boxes on main pages}
+/// maximum depth of boxes on main pages
+pub(crate) const max_depth_code: quarterword = 5;
 // @d split_max_depth_code=6 {maximum depth of boxes on split pages}
+/// maximum depth of boxes on split pages
+pub(crate) const split_max_depth_code: quarterword = 6;
 // @d box_max_depth_code=7 {maximum depth of explicit vboxes}
+/// maximum depth of explicit vboxes
+pub(crate) const box_max_depth_code: quarterword = 7;
 // @d hfuzz_code=8 {tolerance for overfull hbox messages}
+/// tolerance for overfull hbox messages
+pub(crate) const hfuzz_code: quarterword = 8;
 // @d vfuzz_code=9 {tolerance for overfull vbox messages}
+/// tolerance for overfull vbox messages
+pub(crate) const vfuzz_code: quarterword = 9;
 // @d delimiter_shortfall_code=10 {maximum amount uncovered by variable delimiters}
+/// maximum amount uncovered by variable delimiters
+pub(crate) const delimiter_shortfall_code: quarterword = 10;
 // @d null_delimiter_space_code=11 {blank space in null delimiters}
+/// blank space in null delimiters
+pub(crate) const null_delimiter_space_code: quarterword = 11;
 // @d script_space_code=12 {extra space after subscript or superscript}
+/// extra space after subscript or superscript
+pub(crate) const script_space_code: quarterword = 12;
 // @d pre_display_size_code=13 {length of text preceding a display}
+/// length of text preceding a display
+pub(crate) const pre_display_size_code: quarterword = 13;
 // @d display_width_code=14 {length of line for displayed equation}
+/// length of line for displayed equation
+pub(crate) const display_width_code: quarterword = 14;
 // @d display_indent_code=15 {indentation of line for displayed equation}
+/// indentation of line for displayed equation
+pub(crate) const display_indent_code: quarterword = 15;
 // @d overfull_rule_code=16 {width of rule that identifies overfull hboxes}
+/// width of rule that identifies overfull hboxes
+pub(crate) const overfull_rule_code: quarterword = 16;
 // @d hang_indent_code=17 {amount of hanging indentation}
 /// amount of hanging indentation
 pub(crate) const hang_indent_code: quarterword = 17;
 // @d h_offset_code=18 {amount of horizontal offset when shipping pages out}
+/// amount of horizontal offset when shipping pages out
+pub(crate) const h_offset_code: quarterword = 18;
 // @d v_offset_code=19 {amount of vertical offset when shipping pages out}
+/// amount of vertical offset when shipping pages out
+pub(crate) const v_offset_code: quarterword = 19;
 // @d emergency_stretch_code=20 {reduces badnesses on final pass of line-breaking}
+/// reduces badnesses on final pass of line-breaking
+pub(crate) const emergency_stretch_code: quarterword = 20;
 // @d dimen_pars=21 {total number of dimension parameters}
 /// total number of dimension parameters
 pub(crate) type dimen_pars_TYPENUM = U21;
@@ -81,33 +121,49 @@ macro_rules! hang_indent {
 // @d emergency_stretch==dimen_par(emergency_stretch_code)
 //
 // @p procedure print_length_param(@!n:integer);
-// begin case n of
-// par_indent_code:print_esc("parindent");
-// math_surround_code:print_esc("mathsurround");
-// line_skip_limit_code:print_esc("lineskiplimit");
-// hsize_code:print_esc("hsize");
-// vsize_code:print_esc("vsize");
-// max_depth_code:print_esc("maxdepth");
-// split_max_depth_code:print_esc("splitmaxdepth");
-// box_max_depth_code:print_esc("boxmaxdepth");
-// hfuzz_code:print_esc("hfuzz");
-// vfuzz_code:print_esc("vfuzz");
-// delimiter_shortfall_code:print_esc("delimitershortfall");
-// null_delimiter_space_code:print_esc("nulldelimiterspace");
-// script_space_code:print_esc("scriptspace");
-// pre_display_size_code:print_esc("predisplaysize");
-// display_width_code:print_esc("displaywidth");
-// display_indent_code:print_esc("displayindent");
-// overfull_rule_code:print_esc("overfullrule");
-// hang_indent_code:print_esc("hangindent");
-// h_offset_code:print_esc("hoffset");
-// v_offset_code:print_esc("voffset");
-// emergency_stretch_code:print_esc("emergencystretch");
-// othercases print("[unknown dimen parameter!]")
-// endcases;
-// end;
+pub(crate) fn print_length_param(globals: &mut TeXGlobals, n: integer) {
+    // begin case n of
+    if false {
+        unreachable!();
+    }
+    // par_indent_code:print_esc("parindent");
+    // math_surround_code:print_esc("mathsurround");
+    // line_skip_limit_code:print_esc("lineskiplimit");
+    // hsize_code:print_esc("hsize");
+    // vsize_code:print_esc("vsize");
+    // max_depth_code:print_esc("maxdepth");
+    // split_max_depth_code:print_esc("splitmaxdepth");
+    // box_max_depth_code:print_esc("boxmaxdepth");
+    // hfuzz_code:print_esc("hfuzz");
+    else if n == hfuzz_code as _ {
+        print_esc(globals, strpool_str!("hfuzz"));
+    }
+    // vfuzz_code:print_esc("vfuzz");
+    // delimiter_shortfall_code:print_esc("delimitershortfall");
+    // null_delimiter_space_code:print_esc("nulldelimiterspace");
+    // script_space_code:print_esc("scriptspace");
+    // pre_display_size_code:print_esc("predisplaysize");
+    // display_width_code:print_esc("displaywidth");
+    // display_indent_code:print_esc("displayindent");
+    // overfull_rule_code:print_esc("overfullrule");
+    // hang_indent_code:print_esc("hangindent");
+    // h_offset_code:print_esc("hoffset");
+    // v_offset_code:print_esc("voffset");
+    // emergency_stretch_code:print_esc("emergencystretch");
+    // othercases print("[unknown dimen parameter!]")
+    else {
+        trace_error_expr!("n = {}", n);
+        print(globals, strpool_str!("[unknown dimen parameter!]").get() as _);
+    }
+    // endcases;
+    // end;
+}
 
 use crate::pascal::word;
+use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;
+use crate::section_0059::print;
+use crate::section_0063::print_esc;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0236::dimen_base_TYPENUM;

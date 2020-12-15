@@ -34,9 +34,10 @@ macro_rules! Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_
             goto_forward_label!('attach_fraction);
         }
         // @.pt@>
-        todo!("scan units");
         // @<Scan for \(a)all other units and adjust |cur_val| and |f| accordingly;
         //   |goto done| in the case of scaled points@>;
+        Scan_for_a_all_other_units_and_adjust_cur_val_and_f_accordingly__goto_done_in_the_case_of_scaled_points!
+            ($globals, $f);
         }
         // attach_fraction: if cur_val>=@'40000 then arith_error:=true
         'attach_fraction <-
