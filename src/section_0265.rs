@@ -7,8 +7,8 @@
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &mut TeXGlobals) {
     // primitive(" ",ex_space,0);@/
+    primitive(globals, strpool_str!(" "), ex_space, 0);
     // @!@:Single-character primitives /}{\quad\.{\\\ }@>
-    /* primitive(globals, strpool_str!(" "), ex_space, 0); */
     // primitive("/",ital_corr,0);@/
     // @!@:Single-character primitives /}{\quad\.{\\/}@>
     // primitive("accent",accent,0);@/

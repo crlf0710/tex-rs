@@ -72,7 +72,6 @@ pub(crate) static warning_index: pointer = null;
 pub(crate) static def_ref: pointer = pointer::default();
 
 
-
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
 

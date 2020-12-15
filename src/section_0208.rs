@@ -85,6 +85,8 @@ pub(crate) const discretionary: quarterword = 47;
 // @d non_script=55 {conditional math glue ( \.{\\nonscript} )}
 // @d vcenter=56 {vertically center a vbox ( \.{\\vcenter} )}
 // @d case_shift=57 {force specific case ( \.{\\lowercase}, \.{\\uppercase}~)}
+/// force specific case ( `\lowercase`, `\uppercase` )
+pub(crate) const case_shift: quarterword = 57;
 // @d message=58 {send to user ( \.{\\message}, \.{\\errmessage} )}
 /// send to user ( `\message`, `\errmessage` )
 pub(crate) const message: quarterword = 58;
