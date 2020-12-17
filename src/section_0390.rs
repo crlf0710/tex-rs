@@ -24,7 +24,7 @@ macro_rules! Feed_the_macro_body_and_its_parameters_to_the_scanner {
                 $globals.max_param_stack = ($globals.param_ptr.get() + $n.get()) as _;
                 // if max_param_stack>param_size then
                 if $globals.max_param_stack > param_size as _ {
-                    todo!();
+                    todo!("overflow");
                     //   overflow("parameter stack size",param_size);
                     // @:TeX capacity exceeded parameter stack size}{\quad parameter stack size@>
                 }

@@ -39,7 +39,7 @@ macro_rules! Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign_wit
         }
         // if mu then goto not_found;
         if $mu {
-            todo!("goto not_found");
+            goto_forward_label!('not_found);
         }
         // if scan_keyword("em") then v:=(@<The em width for |cur_font|@>)
         if scan_keyword($globals, strpool_str!("em"))? {

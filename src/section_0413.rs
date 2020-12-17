@@ -50,6 +50,9 @@ pub(crate) fn scan_something_internal(
         scanned_result!(globals, equiv!(globals, m.get() as pointer) as _, cur_val_level_kind::glue_val);
     }
     // assign_mu_glue: scanned_result(equiv(m))(mu_val);
+    else if globals.cur_cmd == assign_mu_glue {
+        scanned_result!(globals, equiv!(globals, m.get() as pointer) as _, cur_val_level_kind::mu_val);
+    }
     // set_aux: @<Fetch the |space_factor| or the |prev_depth|@>;
     // set_prev_graf: @<Fetch the |prev_graf|@>;
     // set_page_int:@<Fetch the |dead_cycles| or the |insert_penalties|@>;

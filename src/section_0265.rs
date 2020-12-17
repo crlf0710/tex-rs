@@ -111,7 +111,7 @@ use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0209::*;
 use crate::section_0210::*;
-use crate::section_0222::frozen_relax;
+use crate::section_0222::*;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

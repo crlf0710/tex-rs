@@ -22,7 +22,7 @@ macro_rules! Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_
             ($globals, $f, $mu, $lbl_attach_sign);
         // if mu then @<Scan for \(m)\.{mu} units and |goto attach_fraction|@>;
         if $mu {
-            todo!("scan for m mu units");
+            Scan_for_m_mu_units_and_goto_attach_fraction!($globals, 'attach_fraction);
         }
         // if scan_keyword("true") then @<Adjust \(f)for the magnification ratio@>;
         if scan_keyword($globals, strpool_str!("true"))? {
