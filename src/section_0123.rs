@@ -6,6 +6,7 @@
 //   available}
 /// makes list of single-word nodes available
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
     // var @!q,@!r:pointer; {list traversers}
     /// list traversers
@@ -30,6 +31,7 @@ pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
         // link(q):=avail; avail:=p;
         link!(globals, q) = globals.avail;
         globals.avail = p;
+        assert!(globals.avail == null || globals.avail > 10);
         // end;
     }
     // end;

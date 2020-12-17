@@ -14,7 +14,7 @@
 #[allow(unused_macros)]
 macro_rules! scan_normal_dimen {
     ($globals:expr) => {
-        crate::section_0448::scan_dimen($globals, false, false, false)?
+        crate::section_0448::scan_dimen($globals, false, false, false)
     };
 }
 

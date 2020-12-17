@@ -17,6 +17,7 @@ macro_rules! token_ref_count {
 //   of a token list that is losing one reference}
 
 /// `p` points to the reference count of a token list that is losing one reference
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn delete_token_ref(globals: &mut TeXGlobals, p: pointer) {
     // begin if token_ref_count(p)=null then flush_list(p)
     if token_ref_count!(globals, p) == null {

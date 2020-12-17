@@ -13,8 +13,7 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         if $this_if == if_int_code {
             scan_int($globals)?;
         } else {
-            todo!();
-            //scan_normal_dimen($globals);
+            scan_normal_dimen!($globals)?;
         }
         // n:=cur_val; @<Get the next non-blank non-call...@>;
         n = $globals.cur_val;
@@ -27,7 +26,7 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         }
         // else  begin print_err("Missing = inserted for ");
         else {
-            todo!();
+            todo!("print_err, {}", char::from(($globals.cur_tok.get() as isize - crate::section_0289::letter_token as isize) as u8));
             // @.Missing = inserted@>
             //   print_cmd_chr(if_test,this_if);
             //   help1("I was expecting to see `<', `=', or `>'. Didn't.");
@@ -38,8 +37,7 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         if $this_if == if_int_code {
             scan_int($globals)?;
         } else {
-            todo!();
-            //scan_normal_dimen($globals);
+            scan_normal_dimen!($globals)?;
         }
         // case r of
         // "<": b:=(n<cur_val);

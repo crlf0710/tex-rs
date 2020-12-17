@@ -13,11 +13,21 @@
 /// specification for `0pt plus 0pt minus 0pt`
 pub(crate) const zero_glue: pointer = mem_bot;
 // @d fil_glue==zero_glue+glue_spec_size {\.{0pt plus 1fil minus 0pt}}
+/// `0pt plus 1fil minus 0pt`
+pub(crate) const fil_glue: pointer = zero_glue + glue_spec_size as pointer;
 // @d fill_glue==fil_glue+glue_spec_size {\.{0pt plus 1fill minus 0pt}}
+/// `0pt plus 1fill minus 0pt`
+pub(crate) const fill_glue: pointer = fil_glue + glue_spec_size as pointer;
 // @d ss_glue==fill_glue+glue_spec_size {\.{0pt plus 1fil minus 1fil}}
+/// `0pt plus 1fil minus 1fil`
+pub(crate) const ss_glue: pointer = fill_glue + glue_spec_size as pointer;
 // @d fil_neg_glue==ss_glue+glue_spec_size {\.{0pt plus -1fil minus 0pt}}
+/// `0pt plus -1fil minus 0pt`
+pub(crate) const fil_neg_glue: pointer = ss_glue + glue_spec_size as pointer;
 // @d lo_mem_stat_max==fil_neg_glue+glue_spec_size-1 {largest statically
 //   allocated word in the variable-size |mem|}
+/// largest statically allocated word in the variable-size `mem`
+pub(crate) const lo_mem_stat_max: pointer = fil_neg_glue + glue_spec_size as pointer - 1;
 // @#
 // @d page_ins_head==mem_top {list of insertion data for current page}
 // @d contrib_head==mem_top-1 {vlist of items not yet on current page}
@@ -55,3 +65,4 @@ use crate::section_0012::mem_top;
 use crate::section_0012::mem_bot;
 
 use crate::section_0115::pointer;
+use crate::section_0150::glue_spec_size;

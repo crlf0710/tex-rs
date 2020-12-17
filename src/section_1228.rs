@@ -17,7 +17,7 @@ macro_rules! Assignments_1228 {
             let p = $globals.cur_chr.get();
             scan_optional_equals($globals)?;
             //   scan_normal_dimen; word_define(p,cur_val);
-            scan_normal_dimen!($globals);
+            scan_normal_dimen!($globals)?;
             word_define!($globals, $a, p as _, $globals.cur_val);
             //   end;
             true

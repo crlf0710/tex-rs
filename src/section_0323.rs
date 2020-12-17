@@ -24,6 +24,7 @@ pub(crate) fn begin_token_list(globals: &mut TeXGlobals, p: pointer, t: quarterw
     // begin push_input; state:=token_list; start:=p; token_type:=t;
     push_input!(globals);
     state!(globals) = token_list;
+    start!(globals) = p;
     token_type!(globals) = t;
     // if t>=macro then {the token list starts with a reference count}
     if t >= r#macro {

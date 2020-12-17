@@ -9,6 +9,7 @@
 //
 // @p function get_avail : pointer; {single-word node allocation}
 /// single-word node allocation
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     // var p:pointer; {the new node being got}
     /// the new node being got

@@ -19,9 +19,20 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     // shrink(ss_glue):=unity; shrink_order(ss_glue):=fil;@/
     // stretch(fil_neg_glue):=-unity; stretch_order(fil_neg_glue):=fil;@/
     // rover:=lo_mem_stat_max+1;
+    globals.rover = lo_mem_stat_max + 1;
     // link(rover):=empty_flag; {now initialize the dynamic memory}
+    /// now initialize the dynamic memory
+    {
+        link!(globals, globals.rover) = empty_flag;
+    }
     // node_size(rover):=1000; {which is a 1000-word available node}
+    /// which is a 1000-word available node
+    {
+        node_size!(globals, globals.rover) = 1000;
+    }
     // llink(rover):=rover; rlink(rover):=rover;@/
+    llink!(globals, globals.rover) = globals.rover;
+    rlink!(globals, globals.rover) = globals.rover;
     // lo_mem_max:=rover+1000; link(lo_mem_max):=null; info(lo_mem_max):=null;@/
     // for k:=hi_mem_stat_min to mem_top do
     //   mem[k]:=mem[lo_mem_max]; {clear list heads}
@@ -41,7 +52,9 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0012::mem_top;
 use crate::section_0115::null;
+use crate::section_0124::empty_flag;
 use crate::section_0162::hi_mem_stat_min;
+use crate::section_0162::lo_mem_stat_max;
 
 use linkme::distributed_slice;
 
