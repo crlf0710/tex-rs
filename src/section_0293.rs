@@ -5,6 +5,7 @@ macro_rules! Display_token_p__and_return_if_there_are_problems {
     ($globals:expr, $p:expr, $n:expr, $match_chr:expr) => {{
         // if (p<hi_mem_min) or (p>mem_end) then
         if ($p as pointer) < $globals.hi_mem_min || ($p as pointer) > $globals.mem_end {
+            trace_error_expr!("clobbered p = {}", $p as pointer);
             // begin print_esc("CLOBBERED."); return;
             print_esc($globals, strpool_str!("CLOBBERED."));
             return;

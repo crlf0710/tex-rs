@@ -87,6 +87,8 @@ macro_rules! param_start {
 /// `token_type` code for parameter
 pub(crate) const parameter: quarterword = 0;
 // @d u_template=1 {|token_type| code for \<u_j> template}
+/// `token_type` code for `<u_j>` template
+pub(crate) const u_template: quarterword = 1;
 // @d v_template=2 {|token_type| code for \<v_j> template}
 /// `token_type` code for `<v_j>` template
 pub(crate) const v_template: quarterword = 2;

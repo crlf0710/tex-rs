@@ -9,23 +9,58 @@
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn end_token_list(globals: &mut TeXGlobals) {
     // begin if token_type>=backed_up then {token list to be deleted}
-    //   begin if token_type<=inserted then flush_list(start)
-    //   else  begin delete_token_ref(start); {update reference count}
-    //     if token_type=macro then {parameters must be flushed}
-    //       while param_ptr>param_start do
-    //         begin decr(param_ptr);
-    //         flush_list(param_stack[param_ptr]);
-    //         end;
-    //     end;
-    //   end
+    if token_type!(globals) >= backed_up {
+        /// token list to be deleted
+        const _: () = ();
+        // begin if token_type<=inserted then flush_list(start)
+        if token_type!(globals) <= inserted {
+            flush_list(globals, start!(globals));
+        }
+        // else  begin delete_token_ref(start); {update reference count}
+        else {
+            /// update reference count
+            delete_token_ref(globals, start!(globals));
+            // if token_type=macro then {parameters must be flushed}
+            if token_type!(globals) == r#macro {
+                /// parameters must be flushed
+                const _: () = ();
+                // while param_ptr>param_start do
+                while globals.param_ptr.get() as halfword > param_start!(globals) {
+                    // begin decr(param_ptr);
+                    decr!(globals.param_ptr);
+                    // flush_list(param_stack[param_ptr]);
+                    flush_list(globals, globals.param_stack[globals.param_ptr]);
+                    // end;
+                }
+                // end;
+            }
+            // end
+        }
+    }
     // else if token_type=u_template then
-    //   if align_state>500000 then align_state:=0
-    //   else fatal_error("(interwoven alignment preambles are not allowed)");
+    else if token_type!(globals) == u_template {
+        // if align_state>500000 then align_state:=0
+        if globals.align_state > 500000 {
+            globals.align_state = 0;
+        }
+        // else fatal_error("(interwoven alignment preambles are not allowed)");
+        else {
+            todo!();
+        }
+    }
     // @.interwoven alignment preambles...@>
     // pop_input;
     pop_input!(globals);
     // check_interrupt;
+    check_interrupt!(globals);
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0113::halfword;
+use crate::section_0123::flush_list;
+use crate::section_0200::delete_token_ref;
+use crate::section_0307::backed_up;
+use crate::section_0307::inserted;
+use crate::section_0307::r#macro;
+use crate::section_0307::u_template;
