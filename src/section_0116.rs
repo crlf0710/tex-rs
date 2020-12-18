@@ -33,7 +33,7 @@
 ///
 /// Note: using explicit zeroed() to workaround large stack memory usage.
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static mem: mem_array<memory_word> = mem_array::default_zeroed();
+pub(crate) static mem: mem_array<memory_word> = mem_array::<memory_word>::default_zeroed();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0116::mem_array;
@@ -71,6 +71,13 @@ impl mem_array<memory_word> {
         unsafe { core::mem::zeroed() }
     }
 }
+
+impl mem_array<crate::pascal::boolean> {
+    pub(crate) fn default_zeroed() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+
 
 impl<ELEMENT> core::ops::Index<pointer> for mem_array<ELEMENT> {
     type Output = ELEMENT;

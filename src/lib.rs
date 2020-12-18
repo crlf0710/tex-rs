@@ -1190,7 +1190,8 @@ reversing_order_items!(
                         mod section_1337;
                     }
                 );
-                mod section_1338_to_1339;
+                mod section_1338;
+                mod section_1339;
                 mod section_1340;
                 #[macro_use]
                 mod section_1341;
