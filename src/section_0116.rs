@@ -33,7 +33,7 @@
 ///
 /// Note: using explicit zeroed() to workaround large stack memory usage.
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static mem: mem_array<memory_word> = mem_array::<memory_word>::default_zeroed();
+pub(crate) static mem: Box<mem_array<memory_word>> = Box::new(mem_array::<memory_word>::default_zeroed());
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0116::mem_array;

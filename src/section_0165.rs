@@ -13,14 +13,14 @@
 /// free cells
 #[cfg(feature = "debugging")]
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static free: mem_array<boolean> = mem_array::<boolean>::default_zeroed();
+pub(crate) static free: Box<mem_array<boolean>> = Box::new(mem_array::<boolean>::default_zeroed());
 // @t\hskip10pt@>@!was_free: packed array [mem_min..mem_max] of boolean;
 //   {previously free cells}
 
 /// previously free cells
 #[cfg(feature = "debugging")]
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static was_free: mem_array<boolean> = mem_array::<boolean>::default_zeroed();
+pub(crate) static was_free: Box<mem_array<boolean>> = Box::new(mem_array::<boolean>::default_zeroed());
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0116::mem_array;
