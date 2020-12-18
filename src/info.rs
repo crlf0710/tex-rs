@@ -249,6 +249,15 @@ macro_rules! trace_span {
     };
 }
 
+macro_rules! trace_debug_span {
+    ($span_info:expr) => {
+        #[cfg(feature = "trace")]
+        let span = ::tracing::span!(::tracing::Level::DEBUG, $span_info);
+        #[cfg(feature = "trace")]
+        let __ = span.enter();
+    };
+}
+
 macro_rules! trace_expr {
     ($($x:tt)*) => {
         #[cfg(feature = "trace")]

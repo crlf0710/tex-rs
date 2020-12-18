@@ -31,7 +31,6 @@ pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
         // link(q):=avail; avail:=p;
         link!(globals, q) = globals.avail;
         globals.avail = p;
-        assert!(globals.avail == null || globals.avail > 10);
         // end;
     }
     // end;
