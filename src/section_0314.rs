@@ -11,7 +11,15 @@ macro_rules! Print_type_of_token_list {
         }
         // u_template,v_template: print_nl("<template> ");
         // backed_up: if loc=null then print_nl("<recently read> ")
-        //   else print_nl("<to be read again> ");
+        else if token_type == backed_up {
+            if loc!($globals) == null {
+                print_nl($globals, strpool_str!("<recently read> "));
+            }
+            // else print_nl("<to be read again> ");
+            else {
+                print_nl($globals, strpool_str!("<to be read again> "));
+            }
+        }
         // inserted: print_nl("<inserted text> ");
         // macro: begin print_ln; print_cs(name);
         //   end;
@@ -27,6 +35,7 @@ macro_rules! Print_type_of_token_list {
         // write_text: print_nl("<write> ");
         // othercases print_nl("?") {this should never happen}
         else {
+            trace_error_expr!("token_type = {}", token_type);
             /// this should never happen
             print_nl($globals, strpool_str!("?"));
         }

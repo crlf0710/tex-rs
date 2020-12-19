@@ -21,7 +21,7 @@ pub(crate) const empty_flag: halfword = max_halfword;
 /// tests for empty node
 macro_rules! is_empty {
     ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr) == empty_flag
+        link!($globals, $ptr) == crate::section_0124::empty_flag
     }
 }
 // @d node_size == info {the size field in empty variable-size nodes}

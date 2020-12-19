@@ -26,12 +26,20 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         }
         // else  begin print_err("Missing = inserted for ");
         else {
-            todo!("print_err, {}", char::from(($globals.cur_tok.get() as isize - crate::section_0289::letter_token as isize) as u8));
+            print_err!($globals, strpool_str!("Missing = inserted for "));
             // @.Missing = inserted@>
-            //   print_cmd_chr(if_test,this_if);
-            //   help1("I was expecting to see `<', `=', or `>'. Didn't.");
-            //   back_error; r:="=";
-            //   end;
+            // print_cmd_chr(if_test,this_if);
+            print_cmd_chr($globals, if_test, chr_code_type::new($this_if.get() as _));
+            // help1("I was expecting to see `<', `=', or `>'. Didn't.");
+            help1!($globals, strpool_str!("I was expecting to see `<', `=', or `>'. Didn't."));
+            // back_error; r:="=";
+            back_error($globals)?;
+            #[allow(unused_assignments)]
+            {
+                r = b'=';
+            }
+            todo!("print_err, {}", char::from(($globals.cur_tok.get() as isize - crate::section_0289::letter_token as isize) as u8));
+            // end;
         }
         // if this_if=if_int_code then scan_int@+else scan_normal_dimen;
         if $this_if == if_int_code {
@@ -58,8 +66,12 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         }
         // end
         use crate::pascal::integer;
+        use crate::section_0210::if_test;
         use crate::section_0289::other_token;
         use crate::section_0297::cur_tok_type_repr;
+        use crate::section_0297::chr_code_type;
+        use crate::section_0298::print_cmd_chr;
+        use crate::section_0327::back_error;
         use crate::section_0440::scan_int;
     }}
 }
