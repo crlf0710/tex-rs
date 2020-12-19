@@ -172,7 +172,8 @@ reversing_order_items!(
     {
         mod section_0064;
         mod section_0065;
-        mod section_0066_to_0067;
+        mod section_0066;
+        mod section_0067;
         mod section_0068;
         mod section_0069;
         mod section_0070;

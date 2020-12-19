@@ -19,7 +19,7 @@ macro_rules! If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_t
             // end;
         }
         // if t=zero_token+9 then
-        if $t == (zero_token + 9) as _ {
+        if $t == (zero_token + 9) as cur_tok_type_repr {
             todo!();
             //   begin print_err("You already have nine parameters");
             // @.You already have nine...@>

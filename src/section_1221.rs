@@ -10,7 +10,7 @@ macro_rules! Assignments_1221 {
             get_r_token($globals)?;
             let p = $globals.cur_cs;
             // if n=normal then
-            if n == let_kind::normal as _ {
+            if n == let_kind::normal as chr_code_repr {
                 // begin repeat get_token;
                 loop {
                     get_token($globals)?;
@@ -49,6 +49,7 @@ macro_rules! Assignments_1221 {
             use crate::section_0207::spacer;
             use crate::section_0289::other_token;
             use crate::section_0297::cur_tok_type_repr;
+            use crate::section_0297::chr_code_repr;
             use crate::section_0365::get_token;
             use crate::section_1215::get_r_token;
             true

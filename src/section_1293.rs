@@ -10,17 +10,17 @@ pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     {
     // begin case cur_chr of
     // show_lists: begin begin_diagnostic; show_activities;
-    if globals.cur_chr.get() == show_lists as _ {
+    if globals.cur_chr.get() == show_lists as chr_code_repr {
         begin_diagnostic(globals);
         todo!("show_activities(globals);");
         // end;
     }
     // show_box_code: @<Show the current contents of a box@>;
-    else if globals.cur_chr.get() == show_box_code as _ {
+    else if globals.cur_chr.get() == show_box_code as chr_code_repr {
         todo!();
     }
     // show_code: @<Show the current meaning of a token, then |goto common_ending|@>;
-    else if globals.cur_chr.get() == show_code as _ {
+    else if globals.cur_chr.get() == show_code as chr_code_repr {
         Show_the_current_meaning_of_a_token__then_goto_common_ending!(globals, 'common_ending);
     }
     // othercases @<Show the current value of some parameter or register,
@@ -64,4 +64,5 @@ use crate::section_0073::error_stop_mode;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0245::begin_diagnostic;
+use crate::section_0297::chr_code_repr;
 use crate::section_1291::show_kind::*;

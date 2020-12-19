@@ -5,7 +5,7 @@
 macro_rules! Compute_the_register_location_l_and_its_type_p_but_return_if_invalid {
     ($globals:expr, $p:expr, $q:expr, $l:expr) => {{
         // begin if q<>register then
-        if $q != register as _ {
+        if $q != register as pointer {
             // begin get_x_token;
             get_x_token($globals)?;
             // if (cur_cmd>=assign_int)and(cur_cmd<=assign_mu_glue) then

@@ -17,7 +17,7 @@ pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> 
     // @<Compute the register location |l| and its type |p|; but |return| if invalid@>;
     Compute_the_register_location_l_and_its_type_p_but_return_if_invalid!(globals, p, q, l);
     // if q=register then scan_optional_equals
-    if q == register as _ {
+    if q == register as pointer {
         scan_optional_equals(globals)?;
     }
     // else if scan_keyword("by") then do_nothing; {optional `\.{by}'}

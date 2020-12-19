@@ -29,7 +29,7 @@ macro_rules! Terminate_the_current_conditional_and_skip_to_fi {
         // else  begin while cur_chr<>fi_code do pass_text; {skip to \.{\\fi}}
         else {
             /// skip to `\fi`
-            while $globals.cur_chr.get() != fi_code as _ {
+            while $globals.cur_chr.get() != fi_code as chr_code_repr {
                 pass_text($globals)?;
             }
             // @<Pop the condition stack@>;
@@ -37,6 +37,7 @@ macro_rules! Terminate_the_current_conditional_and_skip_to_fi {
             // end
         }
         use crate::section_0082::error;
+        use crate::section_0297::chr_code_repr;
         use crate::section_0298::print_cmd_chr;
         use crate::section_0379::insert_relax;
         use crate::section_0489::if_code;

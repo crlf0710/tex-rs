@@ -44,8 +44,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1223 {
         }
         // char_given: begin print_esc("char"); print_hex(chr_code);
         else if $cmd == char_given {
-            todo!("char");
+            print_esc($globals, strpool_str!("char"));
+            print_hex($globals, $chr_code.get() as _);
             // end;
+            use crate::section_0067::print_hex;
             true
         }
         // math_given: begin print_esc("mathchar"); print_hex(chr_code);
