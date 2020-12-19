@@ -206,7 +206,9 @@ reversing_order_items!(
                         mod section_0083;
                     }
                     {
-                        mod section_0084_to_0086;
+                        #[macro_use]
+                        mod section_0084;
+                        mod section_0085_to_0086;
                         mod section_0087;
                         mod section_0088;
                         mod section_0089;

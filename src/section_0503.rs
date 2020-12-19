@@ -34,11 +34,7 @@ macro_rules! Test_relation_between_integers_or_dimensions {
             help1!($globals, strpool_str!("I was expecting to see `<', `=', or `>'. Didn't."));
             // back_error; r:="=";
             back_error($globals)?;
-            #[allow(unused_assignments)]
-            {
-                r = b'=';
-            }
-            todo!("print_err, {}", char::from(($globals.cur_tok.get() as isize - crate::section_0289::letter_token as isize) as u8));
+            r = b'=';
             // end;
         }
         // if this_if=if_int_code then scan_int@+else scan_normal_dimen;

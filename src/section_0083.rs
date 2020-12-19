@@ -4,19 +4,31 @@ macro_rules! Get_user_s_advice_and_return {
     ($globals:expr) => {
         // loop@+begin continue: clear_for_error_prompt; prompt_input("? ");
         loop {
-            clear_for_error_prompt($globals);
-            prompt_input!($globals, strpool_str!("? "));
-            // @.?\relax@>
-            // if last=first then return;
-            if $globals.last == $globals.first {
-                return_nojump!();
-            }
-            // c:=buffer[first];
-            // if c>="a" then c:=c+"A"-"a"; {convert to uppercase}
-            // @<Interpret code |c| and |return| if done@>;
-            todo!("interpret");
-            // end
+            region_backward_label!(
+                'continue_ <-
+                {
+                    clear_for_error_prompt($globals);
+                    prompt_input!($globals, strpool_str!("? "));
+                    // @.?\relax@>
+                    // if last=first then return;
+                    if $globals.last == $globals.first {
+                        return_nojump!();
+                    }
+                    /// what the user types
+                    let mut c: ASCII_code = $globals.buffer[$globals.first];
+                    // if c>="a" then c:=c+"A"-"a"; {convert to uppercase}
+                    /// convert to uppercase
+                    if c >= ASCII_code_literal!(b'a') && c <= ASCII_code_literal!(b'z') {
+                        c = ASCII_code_literal!(c.numeric_value() as u8 + b'A' - b'a');
+                    }
+                    // @<Interpret code |c| and |return| if done@>;
+                    Interpret_code_c_and_return_if_done!($globals, c, 'continue_);
+                    // end
+                }
+                |'continue_|
+            );
         }
+        use crate::section_0018::ASCII_code;
         use crate::section_0330::clear_for_error_prompt;
     }
 }

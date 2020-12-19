@@ -30,23 +30,31 @@ pub(crate) fn debug_help(globals: &mut TeXGlobals) {
     // label breakpoint,exit;
     // var k,@!l,@!m,@!n:integer;
     // begin loop begin wake_up_terminal;
-    //   print_nl("debug # (-1 to exit):"); update_terminal;
-    // @.debug \#@>
-    //   read(term_in,m);
-    //   if m<0 then return
-    //   else if m=0 then
-    //     begin goto breakpoint;@\ {go to every label at least once}
-    //     breakpoint: m:=0; @{'BREAKPOINT'@}@\
-    //     end
-    //   else  begin read(term_in,n);
-    //     case m of
-    //     @t\4@>@<Numbered cases for |debug_help|@>@;
-    //     othercases print("?")
-    //     endcases;
-    //     end;
-    //   end;
+    loop {
+        wake_up_terminal(globals);
+        // print_nl("debug # (-1 to exit):"); update_terminal;
+        print_nl(globals, strpool_str!("debug # (-1 to exit):"));
+        update_terminal(globals);
+        // @.debug \#@>
+        // read(term_in,m);
+        // if m<0 then return
+        // else if m=0 then
+        //   begin goto breakpoint;@\ {go to every label at least once}
+        //   breakpoint: m:=0; @{'BREAKPOINT'@}@\
+        //   end
+        // else  begin read(term_in,n);
+        //   case m of
+        //   @t\4@>@<Numbered cases for |debug_help|@>@;
+        //   othercases print("?")
+        //   endcases;
+        //   end;
+        // end;
+    }
     // exit:end;
 }
 // gubed
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0034::wake_up_terminal;
+use crate::section_0034::update_terminal;
+use crate::section_0062::print_nl;
