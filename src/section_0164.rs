@@ -34,6 +34,9 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     llink!(globals, globals.rover) = globals.rover;
     rlink!(globals, globals.rover) = globals.rover;
     // lo_mem_max:=rover+1000; link(lo_mem_max):=null; info(lo_mem_max):=null;@/
+    globals.lo_mem_max = globals.rover + 1000;
+    link!(globals, globals.lo_mem_max) = null;
+    info_inner!(globals, globals.lo_mem_max) = null;
     // for k:=hi_mem_stat_min to mem_top do
     //   mem[k]:=mem[lo_mem_max]; {clear list heads}
     // @<Initialize the special list heads and constant nodes@>;
