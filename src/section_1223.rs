@@ -44,13 +44,13 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1223 {
         }
         // char_given: begin print_esc("char"); print_hex(chr_code);
         else if $cmd == char_given {
-            todo!();
+            todo!("char");
             // end;
             true
         }
         // math_given: begin print_esc("mathchar"); print_hex(chr_code);
         else if $cmd == math_given {
-            todo!();
+            todo!("mathchar");
             // end;
             true
         } else {

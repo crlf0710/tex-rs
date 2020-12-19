@@ -15,7 +15,14 @@ pub(crate) fn back_input(globals: &mut TeXGlobals) {
     /// a token list of length one
     let p: pointer;
     // begin while (state=token_list)and(loc=null)and(token_type<>v_template) do
-    //   end_token_list; {conserve stack space}
+    while state!(globals) == token_list
+        && loc!(globals) == null
+        && token_type!(globals) != v_template
+    {
+        // end_token_list; {conserve stack space}
+        /// conserve stack space
+        end_token_list(globals);
+    }
     // p:=get_avail; info(p):=cur_tok;
     p = get_avail(globals);
     info_tok_assign!(globals, p, globals.cur_tok);
@@ -38,14 +45,17 @@ pub(crate) fn back_input(globals: &mut TeXGlobals) {
     // loc:=p; {that was |back_list(p)|, without procedure overhead}
     loc!(globals) = p;
     /// that was `back_list(p)`, without procedure overhead
-    const _ : () = ();
+    const _: () = ();
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0115::pointer;
+use crate::section_0115::null;
 use crate::section_0120::get_avail;
 use crate::section_0289::left_brace_limit;
 use crate::section_0289::right_brace_limit;
-use crate::section_0307::token_list;
 use crate::section_0307::backed_up;
+use crate::section_0307::token_list;
+use crate::section_0307::v_template;
+use crate::section_0324::end_token_list;

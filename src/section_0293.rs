@@ -33,6 +33,8 @@ macro_rules! Display_token_p__and_return_if_there_are_problems {
         // end
         }
 
+        use crate::section_0018::ASCII_code;
+        use crate::section_0063::print_esc;
         use crate::section_0262::print_cs;
         use crate::section_0297::cur_tok_type;
     }}
