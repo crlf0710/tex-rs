@@ -13,20 +13,44 @@
 #[allow(unused_comparisons)]
 pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
     // begin if p<hash_base then {single character}
-    if p < hash_base as _ {
+    if p < hash_base as integer {
         /// single character
         const _: () = ();
-        todo!();
-        //   if p>=single_base then
-        //     if p=null_cs then
-        //       begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
-        //       end
-        //     else  begin print_esc(p-single_base);
-        //       if cat_code(p-single_base)=letter then print_char(" ");
-        //       end
-        //   else if p<active_base then print_esc("IMPOSSIBLE.")
+        // if p>=single_base then
+        if p >= single_base as integer {
+            // if p=null_cs then
+            if p == null_cs as integer {
+                // begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
+                print_esc(globals, strpool_str!("csname"));
+                print_esc(globals, strpool_str!("endcsname"));
+                print_char(
+                    make_globals_io_string_log_view!(globals),
+                    ASCII_code_literal!(b' '),
+                );
+            // end
+            }
+            // else  begin print_esc(p-single_base);
+            else {
+                print_esc(globals, str_number::new((p - single_base as integer) as _));
+                // if cat_code(p-single_base)=letter then print_char(" ");
+                if cat_code!(globals, ASCII_code::from(p - single_base as integer)) == letter as _ {
+                    print_char(
+                        make_globals_io_string_log_view!(globals),
+                        ASCII_code_literal!(b' '),
+                    );
+                }
+                // end
+            }
+        }
+        // else if p<active_base then print_esc("IMPOSSIBLE.")
+        else if p < active_base as integer {
+            print_esc(globals, strpool_str!("IMPOSSIBLE."));
+        }
         // @.IMPOSSIBLE@>
-        //   else print(p-active_base)
+        // else print(p-active_base)
+        else {
+            print(globals, p - active_base as integer);
+        }
     }
     // else if p>=undefined_control_sequence then print_esc("IMPOSSIBLE.")
     else if p >= undefined_control_sequence as _ {
@@ -55,9 +79,15 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0018::ASCII_code;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;
+use crate::section_0059::print;
 use crate::section_0063::print_esc;
 use crate::section_0115::pointer;
+use crate::section_0207::letter;
+use crate::section_0222::active_base;
 use crate::section_0222::hash_base;
+use crate::section_0222::null_cs;
+use crate::section_0222::single_base;
 use crate::section_0222::undefined_control_sequence;

@@ -970,7 +970,9 @@ reversing_order_items!(
                 #[macro_use]
                 mod section_0769;
                 mod section_0770;
-                mod section_0771_to_0788;
+                mod section_0771_to_0779;
+                mod section_0780;
+                mod section_0781_to_0788;
                 #[macro_use]
                 mod section_0789;
             }
