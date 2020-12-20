@@ -14,6 +14,7 @@ pub(crate) const other_A_token: cur_tok_type_repr = other_token + b'A' as cur_to
 // @<Accumulate the constant...@>=
 macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
     ($globals:expr, $d:expr, $m:expr, $vacuous:expr) => {{
+        trace_span!("Accumulate the constant...");
         region_forward_label! {
         |'done|
         {
@@ -49,21 +50,22 @@ macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
                 $vacuous = false;
                 //   if (cur_val>=m)and((cur_val>m)or(d>7)or(radix<>10)) then
                 if $globals.cur_val >= $m && ($globals.cur_val > $m || $d > 7 || $globals.radix != 10) {
-                //     begin if OK_so_far then
-                //       begin print_err("Number too big");
-                // @.Number too big@>
-                //       help2("I can only go up to 2147483647='17777777777=""7FFFFFFF,")@/
-                //         ("so I'm using that number instead of yours.");
-                //       error; cur_val:=infinity; OK_so_far:=false;
-                //       end;
-                //     end
+                    todo!();
+                    //     begin if OK_so_far then
+                    //       begin print_err("Number too big");
+                    // @.Number too big@>
+                    //       help2("I can only go up to 2147483647='17777777777=""7FFFFFFF,")@/
+                    //         ("so I'm using that number instead of yours.");
+                    //       error; cur_val:=infinity; OK_so_far:=false;
+                    //       end;
+                    //     end
                 }
                 // else cur_val:=cur_val*radix+d;
                 else {
                     $globals.cur_val = $globals.cur_val * $globals.radix.get() as integer + $d;
-                    // get_x_token;
-                    get_x_token($globals)?;
                 }
+                // get_x_token;
+                get_x_token($globals)?;
                 // end;
             }
         }

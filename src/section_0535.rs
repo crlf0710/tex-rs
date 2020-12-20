@@ -17,13 +17,3 @@
 //! prompt_file_name("transcript file name",".log");
 //! end
 //!
-//! @ @<Print the banner...@>=
-//! begin wlog(banner);
-//! slow_print(format_ident); print("  ");
-//! print_int(day); print_char(" ");
-//! months:='JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC';
-//! for k:=3*month-2 to 3*month do wlog(months[k]);
-//! print_char(" "); print_int(year); print_char(" ");
-//! print_two(time div 60); print_char(":"); print_two(time mod 60);
-//! end
-//!

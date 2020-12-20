@@ -15,6 +15,7 @@
 //   {on some systems this may be a \&{record} variable}
 /// on some systems this may be a **record** variable
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsFilenameView)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static name_of_file: name_of_file_array<crate::pascal::char> =
     name_of_file_array::from_copied(crate::pascal::char::new(b' ' as _));

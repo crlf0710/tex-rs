@@ -66,8 +66,8 @@ pub(crate) type max_selector_TYPENUM = U21;
 
 /// transcript of \TeX\ session
 #[globals_struct_field(TeXGlobals)]
-#[globals_struct_field_view(TeXGlobalsIoView)]
-#[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsLogView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static log_file: alpha_file = alpha_file::default();
 
 // @!selector : 0..max_selector; {where to print a message}
@@ -75,6 +75,7 @@ pub(crate) static log_file: alpha_file = alpha_file::default();
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static selector: u8_from_0_to_n<max_selector_TYPENUM> = u8_from_0_to_n::default();
 
 #[globals_struct_use(TeXGlobals)]
@@ -92,6 +93,7 @@ use typenum::U15;
 /// the number of characters recently printed
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static tally: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
@@ -102,6 +104,7 @@ use crate::pascal::integer;
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 /// the number of characters on the current terminal line
 pub(crate) static term_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
 
@@ -112,12 +115,14 @@ use crate::section_0011::max_print_line_TYPENUM;
 //   {the number of characters on the current file line}
 /// the number of characters on the current file line
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static file_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
 // @!trick_buf:array[0..error_line] of ASCII_code; {circular buffer for
 //   pseudoprinting}
 /// circular buffer for pseudoprinting
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static trick_buf: trick_buf_array<ASCII_code> = trick_buf_array::default();
 
 #[globals_struct_use(TeXGlobals)]
@@ -133,6 +138,7 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 /// threshold for pseudoprinting, explained later
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static trick_count: integer = 0;
 // @!first_count: integer; {another variable for pseudoprinting}
 /// another variable for pseudoprinting

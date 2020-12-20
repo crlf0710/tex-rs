@@ -6,6 +6,7 @@
 // @<Glob...@>=
 // @!eqtb:array[active_base..eqtb_size] of memory_word;
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static eqtb: Box<eqtb_range_array<memory_word>> = Box::new(eqtb_range_array::default());
 
 #[globals_struct_use(TeXGlobals)]

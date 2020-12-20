@@ -326,6 +326,11 @@ macro_rules! end_line_char {
     };
 }
 // @d new_line_char==int_par(new_line_char_code)
+macro_rules! new_line_char {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::new_line_char_code)
+    };
+}
 // @d language==int_par(language_code)
 // @d left_hyphen_min==int_par(left_hyphen_min_code)
 // @d right_hyphen_min==int_par(right_hyphen_min_code)

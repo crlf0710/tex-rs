@@ -43,7 +43,7 @@ macro_rules! Print_two_lines_using_the_tricky_pseudoprinted_information {
         // for q:=p to first_count-1 do print_char(trick_buf[q mod error_line]);
         for q in p ..= ($globals.first_count - 1) {
             let ch = $globals.trick_buf[(q % error_line as integer) as u8];
-            print_char(make_globals_io_string_view!($globals), ch);
+            print_char(make_globals_io_string_log_view!($globals), ch);
         }
         // print_ln;
         print_ln(make_globals_io_view!($globals));
@@ -51,7 +51,7 @@ macro_rules! Print_two_lines_using_the_tricky_pseudoprinted_information {
         /// print `n` spaces to begin line 2
         for _ in $globals.first_count ..= (p - 1) {
             let ch = ASCII_code_literal!(b' ');
-            print_char(make_globals_io_string_view!($globals), ch);
+            print_char(make_globals_io_string_log_view!($globals), ch);
         }
         // if m+n<=error_line then p:=first_count+m else p:=first_count+(error_line-n-3);
         if m + n.get() as integer <= error_line as _ {
@@ -62,7 +62,7 @@ macro_rules! Print_two_lines_using_the_tricky_pseudoprinted_information {
         // for q:=first_count to p-1 do print_char(trick_buf[q mod error_line]);
         for q in $globals.first_count ..= (p - 1) {
             let ch = $globals.trick_buf[(q % error_line as integer) as u8];
-            print_char(make_globals_io_string_view!($globals), ch);
+            print_char(make_globals_io_string_log_view!($globals), ch);
         }
         // if m+n>error_line then print("...")
         if m + n.get() as integer > error_line as _ {
@@ -70,7 +70,7 @@ macro_rules! Print_two_lines_using_the_tricky_pseudoprinted_information {
         }
         use crate::pascal::u8_from_0_to_n;
         use crate::section_0004::TeXGlobalsIoView;
-        use crate::section_0004::TeXGlobalsIoStringView;
+        use crate::section_0004::TeXGlobalsIoStringLogView;
         use crate::section_0011::half_error_line;
         use crate::section_0011::error_line_TYPENUM;
         use crate::section_0011::error_line;

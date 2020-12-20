@@ -45,6 +45,13 @@ macro_rules! hash_is_full {
     }
 }
 // @d font_id_text(#) == text(font_id_base+#) {a frozen font identifier's name}
+/// a frozen font identifier's name
+macro_rules! font_id_text {
+    ($globals:expr, $ptr:expr) => {
+        text!($globals, (crate::section_0222::font_id_base + $ptr) as crate::section_0115::pointer)
+    }
+}
+
 //
 // @<Glob...@>=
 // @!hash: array[hash_base..undefined_control_sequence-1] of two_halves;

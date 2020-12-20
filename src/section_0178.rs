@@ -6,7 +6,7 @@
 pub(crate) fn print_spec(globals: &mut TeXGlobals, p: integer, s: str_number) {
     // begin if (p<mem_min)or(p>=lo_mem_max) then print_char("*")
     if p < mem_min as integer || p >= globals.lo_mem_max as integer {
-        print_char(make_globals_io_string_view!(globals), ASCII_code_literal!(b'*'));
+        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'*'));
     }
     // @.*\relax@>
     // else  begin print_scaled(width(p));
@@ -30,7 +30,7 @@ pub(crate) fn print_spec(globals: &mut TeXGlobals, p: integer, s: str_number) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0011::mem_min;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;

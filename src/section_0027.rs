@@ -39,8 +39,7 @@ macro_rules! rewrite_OK {
 // @p function a_open_in(var f:alpha_file):boolean;
 //   {open a text file for input}
 /// open a text file for input
-#[allow(unused_variables)]
-pub(crate) fn a_open_in(globals: TeXGlobalsIoStringView<'_>, f: &mut alpha_file) -> boolean {
+pub(crate) fn a_open_in(globals: TeXGlobalsFilenameView<'_>, f: &mut alpha_file) -> boolean {
     // begin reset(f,name_of_file,'/O'); a_open_in:=reset_OK(f);
     reset(f, &*globals.name_of_file, "/O");
     return reset_OK!(f);
@@ -49,8 +48,13 @@ pub(crate) fn a_open_in(globals: TeXGlobalsIoStringView<'_>, f: &mut alpha_file)
 // @#
 // function a_open_out(var f:alpha_file):boolean;
 //   {open a text file for output}
-// begin rewrite(f,name_of_file,'/O'); a_open_out:=rewrite_OK(f);
-// end;
+/// open a text file for output
+pub(crate) fn a_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut alpha_file) -> boolean {
+    // begin rewrite(f,name_of_file,'/O'); a_open_out:=rewrite_OK(f);
+    rewrite(f, &*globals.name_of_file, "/O");
+    return rewrite_OK!(f);
+    // end;
+}
 // @#
 // function b_open_in(var f:byte_file):boolean;
 //   {open a binary file for input}
@@ -75,5 +79,6 @@ pub(crate) fn a_open_in(globals: TeXGlobalsIoStringView<'_>, f: &mut alpha_file)
 
 use crate::pascal::boolean;
 use crate::pascal::reset;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::pascal::rewrite;
+use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0025::alpha_file;

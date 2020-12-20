@@ -61,6 +61,8 @@ pub(crate) type frozen_null_font_TYPENUM = typenum::op!(frozen_control_sequence_
 pub(crate) const frozen_null_font: word = frozen_null_font_TYPENUM::U32;
 // @d font_id_base=frozen_null_font-font_base
 //   {begins table of 257 permanent font identifiers}
+/// begins table of 257 permanent font identifiers
+pub(crate) const font_id_base: word = frozen_null_font - font_base as word;
 // @d undefined_control_sequence=frozen_null_font+257 {dummy location}
 /// dummy location
 pub(crate) type undefined_control_sequence_TYPENUM = typenum::op!(frozen_null_font_TYPENUM + U257);
@@ -89,6 +91,7 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
 
 use crate::pascal::word;
 use crate::section_0012::hash_size_TYPENUM;
+use crate::section_0012::font_base;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;
 use crate::section_0004::TeXGlobals;

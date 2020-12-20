@@ -19,7 +19,7 @@ pub(crate) fn char_warning(globals: &mut TeXGlobals, f: internal_font_number, c:
         // slow_print(font_name[f]); print_char("!"); end_diagnostic(false);
         let font_name_str =  font_name_str(globals, f);
         slow_print(globals, font_name_str.get() as _);
-        print_char(make_globals_io_string_view!(globals), ASCII_code_literal!(b'!'));
+        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'!'));
         end_diagnostic(globals, false);
         // end;
     }
@@ -27,7 +27,7 @@ pub(crate) fn char_warning(globals: &mut TeXGlobals, f: internal_font_number, c:
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0018::ASCII_code;
 use crate::section_0058::print_char;
 use crate::section_0059::print;

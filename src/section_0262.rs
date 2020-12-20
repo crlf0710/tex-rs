@@ -44,7 +44,7 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
         print_esc(globals, str_number::new(text!(globals, p as pointer) as _));
         // print_char(" ");
         print_char(
-            make_globals_io_string_view!(globals),
+            make_globals_io_string_log_view!(globals),
             ASCII_code_literal!(b' '),
         );
         // end;
@@ -54,7 +54,7 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;
 use crate::section_0063::print_esc;

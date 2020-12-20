@@ -8,7 +8,7 @@ pub(crate) fn print_meaning(globals: &mut TeXGlobals) {
     // if cur_cmd>=call then
     if globals.cur_cmd >= call {
         // begin print_char(":"); print_ln; token_show(cur_chr);
-        print_char(make_globals_io_string_view!(globals), ASCII_code_literal!(b':'));
+        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b':'));
         print_ln(make_globals_io_view!(globals));
         token_show(globals, globals.cur_chr.get() as _);
         // end
@@ -25,7 +25,7 @@ pub(crate) fn print_meaning(globals: &mut TeXGlobals) {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0057::print_ln;
 use crate::section_0058::print_char;
 use crate::section_0210::call;

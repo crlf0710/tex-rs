@@ -17,16 +17,16 @@ pub(crate) fn wterm_cr(globals: TeXGlobalsIoView<'_>) {
     write_ln_noargs(globals.term_out);
 }
 // @d wlog(#)==write(log_file,#)
-pub(crate) fn wlog<T: Display>(globals: TeXGlobalsIoView<'_>, val: T) {
+pub(crate) fn wlog<T: Display>(globals: TeXGlobalsLogView<'_>, val: T) {
     write(globals.log_file, val);
 }
 // @d wlog_ln(#)==write_ln(log_file,#)
-pub(crate) fn wlog_ln<T: Display>(globals: &mut TeXGlobals, val: T) {
-    write_ln(&mut globals.log_file, val);
+pub(crate) fn wlog_ln<T: Display>(globals: TeXGlobalsLogView<'_>, val: T) {
+    write_ln(globals.log_file, val);
 }
 // @d wlog_cr==write_ln(log_file)
-pub(crate) fn wlog_cr(globals: &mut TeXGlobals) {
-    write_ln_noargs(&mut globals.log_file);
+pub(crate) fn wlog_cr(globals: TeXGlobalsLogView<'_>) {
+    write_ln_noargs(globals.log_file);
 }
 
 use crate::pascal::write;
@@ -34,4 +34,5 @@ use crate::pascal::write_ln;
 use crate::pascal::write_ln_noargs;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsLogView;
 use core::fmt::Display;

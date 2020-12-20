@@ -9,7 +9,7 @@ macro_rules! Print_string_s_on_the_terminal {
         }
         // else if (term_offset>0)or(file_offset>0) then print_char(" ");
         else if $globals.term_offset > 0 || $globals.file_offset > 0 {
-            print_char(make_globals_io_string_view!($globals), ASCII_code_literal!(b' '));
+            print_char(make_globals_io_string_log_view!($globals), ASCII_code_literal!(b' '));
         }
         // slow_print(s); update_terminal;
         slow_print($globals, $s.get() as _);
@@ -17,7 +17,7 @@ macro_rules! Print_string_s_on_the_terminal {
         // end
 
         use crate::pascal::integer;
-        use crate::section_0004::TeXGlobalsIoStringView;
+        use crate::section_0004::TeXGlobalsIoStringLogView;
         use crate::section_0004::TeXGlobalsIoView;
         use crate::section_0011::max_print_line;
         use crate::section_0034::update_terminal;        

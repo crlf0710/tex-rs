@@ -3,6 +3,7 @@
 // @<Insert macro parameter...@>=
 macro_rules! Insert_macro_parameter_and_goto_restart {
     ($globals:expr, $lbl_restart:lifetime) => {{
+        trace_span!("Insert macro parameter...");
         // begin begin_token_list(param_stack[param_start+cur_chr-1],parameter);
         begin_token_list(
             $globals,

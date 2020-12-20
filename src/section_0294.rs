@@ -23,12 +23,12 @@ macro_rules! Display_the_token_m_c {
             print($globals, $match_chr.numeric_value() as _);
             // if c<=9 then print_char(c+"0")
             if $c.get() <= 9 {
-                print_char(make_globals_io_string_view!($globals),
+                print_char(make_globals_io_string_log_view!($globals),
                     ASCII_code_literal!($c.get() as u8 + b'0'));
             }
             // else  begin print_char("!"); return;
             else {
-                print_char(make_globals_io_string_view!($globals),
+                print_char(make_globals_io_string_log_view!($globals),
                     ASCII_code_literal!(b'!'));
                 return;
                 // end;
@@ -40,7 +40,7 @@ macro_rules! Display_the_token_m_c {
             $match_chr = $c.into();
             print($globals, $c.get() as _);
             $n = ASCII_code::from(($n.numeric_value() + 1) as integer);
-            print_char(make_globals_io_string_view!($globals), $n);
+            print_char(make_globals_io_string_log_view!($globals), $n);
             // if n>"9" then return;
             if $n > ASCII_code_literal!(b'9') {
                 return;
@@ -58,7 +58,7 @@ macro_rules! Display_the_token_m_c {
             // @.BAD@>
         }
         // endcases
-        use crate::section_0004::TeXGlobalsIoStringView;
+        use crate::section_0004::TeXGlobalsIoStringLogView;
         use crate::section_0058::print_char;
         use crate::section_0059::print;
         use crate::section_0207::*;

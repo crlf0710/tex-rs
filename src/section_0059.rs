@@ -60,7 +60,7 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
             .str_ascii_codes(&globals.str_start, str_number::new(s as u32))
             .collect::<Vec<_>>();
         for ch in chars {
-            print_char(make_globals_io_string_view!(globals), xord(ch));
+            print_char(make_globals_io_string_log_view!(globals), xord(ch));
         }
     }
     // exit:end;
@@ -68,7 +68,7 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0020::xord;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;

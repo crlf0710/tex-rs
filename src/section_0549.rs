@@ -19,7 +19,15 @@ pub(crate) static font_info: font_index_array<memory_word> = font_index_array::d
 use crate::section_0549::font_index_array;
 
 // @!fmem_ptr:font_index; {first unused word of |font_info|}
+/// first unused word of `font_info`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static fmem_ptr: font_index = font_index::default();
+
 // @!font_ptr:internal_font_number; {largest internal font number in use}
+/// largest internal font number in use
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_ptr: internal_font_number = internal_font_number::default();
+
 // @!font_check:array[internal_font_number] of four_quarters; {check sum}
 // @!font_size:array[internal_font_number] of scaled; {``at'' size}
 // @!font_dsize:array[internal_font_number] of scaled; {``design'' size}

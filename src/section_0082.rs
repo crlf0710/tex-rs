@@ -15,7 +15,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // print_char("."); show_context;
     print_char(
-        make_globals_io_string_view!(globals),
+        make_globals_io_string_log_view!(globals),
         ASCII_code_literal!(b'.'),
     );
     show_context(globals);
@@ -45,7 +45,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0058::print_char;
 use crate::section_0062::print_nl;
 use crate::section_0073::error_stop_mode;

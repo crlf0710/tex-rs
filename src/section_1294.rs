@@ -14,7 +14,7 @@ macro_rules! Show_the_current_meaning_of_a_token__then_goto_common_ending {
             if $globals.cur_cs != 0 {
                 // begin sprint_cs(cur_cs); print_char("=");
                 sprint_cs($globals, $globals.cur_cs);
-                print_char(make_globals_io_string_view!($globals), ASCII_code_literal!(b'='));
+                print_char(make_globals_io_string_log_view!($globals), ASCII_code_literal!(b'='));
                 // end;
             }
             // print_meaning; goto common_ending;
@@ -24,7 +24,7 @@ macro_rules! Show_the_current_meaning_of_a_token__then_goto_common_ending {
         }
         
         
-        use crate::section_0004::TeXGlobalsIoStringView;
+        use crate::section_0004::TeXGlobalsIoStringLogView;
         use crate::section_0034::wake_up_terminal;
         use crate::section_0058::print_char;
         use crate::section_0062::print_nl;

@@ -6,31 +6,51 @@
 // procedure print_char(@!s:ASCII_code); {prints a single character}
 /// prints a single character
 #[allow(unused_variables)]
-pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code) {
+pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_code) {
     // label exit;
     // begin if @<Character |s| is the current new-line character@> then
-    //  if selector<pseudo then
-    //   begin print_ln; return;
-    //   end;
+    if Character_s_is_the_current_new_line_character!(globals, s) {
+        // if selector<pseudo then
+        if *globals.selector < pseudo {
+            // begin print_ln; return;
+            print_ln(make_globals_io_view!(globals));
+            return;
+            // end;
+        }
+    }
     // case selector of
     // term_and_log: begin wterm(xchr[s]); wlog(xchr[s]);
     if *globals.selector == term_and_log {
         wterm(make_globals_io_view!(globals), xchr(s));
-        wlog(make_globals_io_view!(globals), xchr(s));
-    // incr(term_offset); incr(file_offset);
-    // if term_offset=max_print_line then
-    //   begin wterm_cr; term_offset:=0;
-    //   end;
-    // if file_offset=max_print_line then
-    //   begin wlog_cr; file_offset:=0;
-    //   end;
-    // end;
+        wlog(make_globals_log_view!(globals), xchr(s));
+        // incr(term_offset); incr(file_offset);
+        incr!(*globals.term_offset);
+        incr!(*globals.file_offset);
+        // if term_offset=max_print_line then
+        if *globals.term_offset == max_print_line {
+            // begin wterm_cr; term_offset:=0;
+            wterm_cr(make_globals_io_view!(globals));
+            *globals.term_offset = 0.into();
+            // end;
+        }
+        // if file_offset=max_print_line then
+        if *globals.file_offset == max_print_line {
+            // begin wlog_cr; file_offset:=0;
+            wlog_cr(make_globals_log_view!(globals));
+            *globals.file_offset = 0.into();
+            // end;
+        }
+        // end;
     }
     // log_only: begin wlog(xchr[s]); incr(file_offset);
     else if *globals.selector == log_only {
-        todo!();
-    // if file_offset=max_print_line then print_ln;
-    // end;
+        wlog(make_globals_log_view!(globals), xchr(s));
+        incr!(*globals.file_offset);
+        // if file_offset=max_print_line then print_ln;
+        if *globals.file_offset == max_print_line {
+            print_ln(make_globals_io_view!(globals));
+        }
+        // end;
     }
     // term_only: begin wterm(xchr[s]); incr(term_offset);
     else if *globals.selector == term_only {
@@ -40,7 +60,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
         if *globals.term_offset == max_print_line {
             print_ln(make_globals_io_view!(globals));
         }
-    // end;
+        // end;
     }
     // no_print: do_nothing;
     else if *globals.selector == no_print {
@@ -69,12 +89,12 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringView<'_>, s: ASCII_code)
     // incr(tally);
     incr!(*globals.tally);
     // exit:end;
-    //
 }
 
 use crate::pascal::integer;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsLogView;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::error_line;
 use crate::section_0011::max_print_line;
@@ -89,6 +109,8 @@ use crate::section_0054::pseudo;
 use crate::section_0054::term_and_log;
 use crate::section_0054::term_only;
 use crate::section_0056::wlog;
+use crate::section_0056::wlog_cr;
 use crate::section_0056::wterm;
+use crate::section_0056::wterm_cr;
 use crate::section_0057::print_ln;
 use crate::section_0115::pointer;

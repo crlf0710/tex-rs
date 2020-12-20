@@ -31,9 +31,12 @@
 // var @<Global variables@>@/
 
 #[globals_struct]
+#[globals_struct_field_view(TeXGlobalsFilenameView, make_globals_filename_view)]
 #[globals_struct_field_view(TeXGlobalsIoView, make_globals_io_view)]
+#[globals_struct_field_view(TeXGlobalsLogView, make_globals_log_view)]
 #[globals_struct_field_view(TeXGlobalsStringView, make_globals_string_view)]
 #[globals_struct_field_view(TeXGlobalsIoStringView, make_globals_io_string_view)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView, make_globals_io_string_log_view)]
 pub mod TeXGlobals {
     include!("src/section_0013.rs");
     include!("src/section_0026.rs");
@@ -76,6 +79,8 @@ pub mod TeXGlobals {
     include!("src/section_0512.rs");
     include!("src/section_0513.rs");
     include!("src/section_0527.rs");
+    include!("src/section_0532.rs");
+    include!("src/section_0539.rs");
     include!("src/section_0549.rs");
     include!("src/section_0550.rs");
     include!("src/section_0592.rs");

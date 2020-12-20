@@ -904,7 +904,16 @@ pub(crate) fn rewrite<F: PascalFile, P: Into<String>>(file: &mut F, path: P, opt
     let new_write_target: Box<dyn Write> = if path == "TTY:" {
         Box::new(io::stdout())
     } else {
-        unimplemented!()
+        let path = path.trim_end_matches(' ');
+        let file = match std::fs::File::create(path) {
+            Ok(f) => f,
+            Err(e) => {
+                *file.file_state_mut() = FileState::Undefined;
+                file.set_error_state(1);
+                return;
+            }
+        };
+        Box::new(file)
     };
     *file.file_state_mut() = FileState::GenerationMode {
         write_target: new_write_target,

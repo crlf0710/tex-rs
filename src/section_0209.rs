@@ -36,7 +36,11 @@ pub(crate) const def_code: quarterword = 85;
 /// declare math fonts ( `\textfont`, etc. )
 pub(crate) const def_family: quarterword = 86;
 // @d set_font=87 {set current font ( font identifiers )}
+/// set current font ( font identifiers )
+pub(crate) const set_font: quarterword = 87;
 // @d def_font=88 {define a font file ( \.{\\font} )}
+/// define a font file ( `\font` )
+pub(crate) const def_font: quarterword = 88;
 // @d register=89 {internal register ( \.{\\count}, \.{\\dimen}, etc.~)}
 /// internal register ( `\count`, `\dimen`, etc.)
 pub(crate) const register: quarterword = 89;

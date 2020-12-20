@@ -16,6 +16,7 @@ pub(crate) static term_in: alpha_file = alpha_file::default();
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoView)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 /// the terminal as an output file
 pub(crate) static term_out: alpha_file = alpha_file::default();
 

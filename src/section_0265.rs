@@ -40,6 +40,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     primitive(globals, strpool_str!("expandafter"), expand_after, 0);
     // @!@:expand_after_}{\.{\\expandafter} primitive@>
     // primitive("font",def_font,0);@/
+    primitive(globals, strpool_str!("font"), def_font, 0);
     // @!@:font_}{\.{\\font} primitive@>
     // primitive("fontdimen",assign_font_dimen,0);@/
     // @!@:font_dimen_}{\.{\\fontdimen} primitive@>

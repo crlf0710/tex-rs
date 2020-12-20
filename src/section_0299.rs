@@ -16,14 +16,14 @@ pub(crate) fn show_cur_cmd_chr(globals: &mut TeXGlobals) {
     }
     // print_cmd_chr(cur_cmd,cur_chr); print_char("}");
     print_cmd_chr(globals, globals.cur_cmd, globals.cur_chr); 
-    print_char(make_globals_io_string_view!(globals), ASCII_code_literal!(b'}'));
+    print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'}'));
     // end_diagnostic(false);
     end_diagnostic(globals, false);
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0058::print_char;
 use crate::section_0059::print;
 use crate::section_0062::print_nl;

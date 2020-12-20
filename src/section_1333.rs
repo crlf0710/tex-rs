@@ -25,7 +25,7 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
     // if log_opened then
     if globals.log_opened {
         // begin wlog_cr; a_close(log_file); selector:=selector-2;
-        wlog_cr(globals);
+        wlog_cr(make_globals_log_view!(globals));
         a_close(&mut globals.log_file);
         globals.selector = globals.selector - 2;
         // if selector=term_only then
@@ -42,6 +42,7 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsLogView;
 use crate::section_0028::a_close;
 use crate::section_0034::wake_up_terminal;
 use crate::section_0054::term_only;

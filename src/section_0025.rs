@@ -43,6 +43,6 @@ pub(crate) type alpha_file = packed_file_of_text_char;
 
 // @!byte_file=packed file of eight_bits; {files that contain binary data}
 
-type byte_file = packed_file_of<eight_bits>;
+pub(crate) type byte_file = packed_file_of<eight_bits>;
 
 use crate::pascal::{packed_file_of, packed_file_of_text_char};

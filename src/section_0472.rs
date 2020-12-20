@@ -19,7 +19,7 @@ macro_rules! Print_the_result_of_command_c {
                 if $globals.cur_cs != 0 {
                     sprint_cs($globals, $globals.cur_cs);
                 } else {
-                    print_char(make_globals_io_string_view!($globals), $globals.cur_chr.into());
+                    print_char(make_globals_io_string_log_view!($globals), $globals.cur_chr.into());
                 }
             }
             // meaning_code: print_meaning;
@@ -41,7 +41,7 @@ macro_rules! Print_the_result_of_command_c {
             }
         }
         // end {there are no other cases}
-        use crate::section_0004::TeXGlobalsIoStringView;
+        use crate::section_0004::TeXGlobalsIoStringLogView;
         use crate::section_0058::print_char;
         use crate::section_0059::print;
         use crate::section_0065::print_int;

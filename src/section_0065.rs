@@ -18,7 +18,7 @@ pub(crate) fn print_int(globals: &mut TeXGlobals, mut n: integer) {
     // if n<0 then
     if n < 0 {
         // begin print_char("-");
-        print_char(make_globals_io_string_view!(globals), ASCII_code_literal!(b'-'));
+        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'-'));
         // if n>-100000000 then negate(n)
         if n > -100000000 {
             negate!(n);
@@ -50,6 +50,6 @@ pub(crate) fn print_int(globals: &mut TeXGlobals, mut n: integer) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0058::print_char;
 use crate::section_0064::print_the_digs;
