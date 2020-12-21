@@ -7,7 +7,7 @@
 /// current string enters the pool
 pub(crate) fn make_string(globals: TeXGlobalsStringView<'_>) -> str_number {
     // begin if str_ptr=max_strings then
-    if globals.str_ptr.get() == max_strings as _ {
+    if globals.str_ptr.get() == max_strings as str_number_repr {
         //   overflow("number of strings",max_strings-init_str_ptr);
     }
     // @:TeX capacity exceeded number of strings}{\quad number of strings@>
@@ -22,3 +22,4 @@ pub(crate) fn make_string(globals: TeXGlobalsStringView<'_>) -> str_number {
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::max_strings;
 use crate::section_0038::str_number;
+use crate::section_0038::str_number_repr;

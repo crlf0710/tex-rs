@@ -14,14 +14,21 @@ pub(crate) fn make_name_string(mut globals: TeXGlobalsIoStringView<'_>) -> str_n
     // var k:1..file_name_size; {index into |name_of_file|}
     // begin if (pool_ptr+name_length>pool_size)or(str_ptr=max_strings)or
     //  (cur_length>0) then
-    if globals.pool_ptr.get() + globals.name_length.get() as u32 > pool_size as _ || globals.str_ptr.get() == max_strings as _ || cur_length!(globals) > 0 {
+    if globals.pool_ptr.get() + globals.name_length.get() as pool_pointer_repr
+        > pool_size as pool_pointer_repr
+        || globals.str_ptr.get() == max_strings as str_number_repr
+        || cur_length!(globals) > 0
+    {
         // make_name_string:="?"
         return strpool_str!("?");
     }
     // else  begin for k:=1 to name_length do append_char(xord[name_of_file[k]]);
     else {
-        for k in 1 ..= globals.name_length.get() {
-            append_char(make_globals_string_view!(globals), xord(globals.name_of_file[k]));
+        for k in 1..=globals.name_length.get() {
+            append_char(
+                make_globals_string_view!(globals),
+                xord(globals.name_of_file[k]),
+            );
         }
         // make_name_string:=make_string;
         return make_string(make_globals_string_view!(globals));
@@ -31,7 +38,10 @@ pub(crate) fn make_name_string(mut globals: TeXGlobalsIoStringView<'_>) -> str_n
 }
 
 // function a_make_name_string(var f:alpha_file):str_number;
-pub(crate) fn a_make_name_string(globals: TeXGlobalsIoStringView<'_>, _: &mut alpha_file) -> str_number {
+pub(crate) fn a_make_name_string(
+    globals: TeXGlobalsIoStringView<'_>,
+    _: &mut alpha_file,
+) -> str_number {
     // begin a_make_name_string:=make_name_string;
     return make_name_string(globals);
     // end;
@@ -45,14 +55,15 @@ pub(crate) fn a_make_name_string(globals: TeXGlobalsIoStringView<'_>, _: &mut al
 // end;
 //
 
+use crate::section_0004::alpha_file;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsStringView;
-use crate::section_0042::append_char;
-use crate::section_0004::alpha_file;
-use crate::section_0020::xord;
-use crate::section_0043::make_string;
 use crate::section_0011::max_strings;
 use crate::section_0011::pool_size;
+use crate::section_0020::xord;
+use crate::section_0038::pool_pointer_repr;
 use crate::section_0038::str_number;
-
+use crate::section_0038::str_number_repr;
+use crate::section_0042::append_char;
+use crate::section_0043::make_string;

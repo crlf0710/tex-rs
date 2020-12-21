@@ -48,10 +48,14 @@
 /// for variables that point into `str_pool`
 pub(crate) struct pool_pointer(pub(crate) u32_from_0_to_n<pool_size_TYPENUM>);
 
+pub(crate) type pool_pointer_repr = u32;
+
 // @!str_number = 0..max_strings; {for variables that point into |str_start|}
 #[derive(Copy, Clone, Debug, PartialEq, Default)]
 /// for variables that point into `str_start`
 pub(crate) struct str_number(pub(crate) u32_from_0_to_n<max_strings_TYPENUM>);
+
+pub(crate) type str_number_repr = u32;
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
 /// elements of `str_pool` array

@@ -11,7 +11,7 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
             }
             // if_cat_code:print_esc("ifcat");
             // if_int_code:print_esc("ifnum");
-            else if chr_code == code::if_int_code as _ {
+            else if chr_code == code::if_int_code as chr_code_repr {
                 print_esc($globals, strpool_str!("ifnum"));
             }
             // if_dim_code:print_esc("ifdim");
@@ -33,6 +33,7 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
                 print_esc($globals, strpool_str!("if"));
             }
             // endcases;
+            use crate::section_0297::chr_code_repr;
             use crate::section_0487 as code;
             true
         } else {

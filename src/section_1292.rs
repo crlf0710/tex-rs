@@ -6,15 +6,15 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1292 {
         // xray: case chr_code of
         if $cmd == xray {
             // show_box_code:print_esc("showbox");
-            if $chr_code.get() == show_box_code as _ {
+            if $chr_code.get() == show_box_code as chr_code_repr {
                 print_esc($globals, strpool_str!("showbox"));
             }
             // show_the_code:print_esc("showthe");
-            else if $chr_code.get() == show_the_code as _ {
+            else if $chr_code.get() == show_the_code as chr_code_repr {
                 print_esc($globals, strpool_str!("showthe"));
             }
             // show_lists:print_esc("showlists");
-            else if $chr_code.get() == show_lists as _ {
+            else if $chr_code.get() == show_lists as chr_code_repr {
                 print_esc($globals, strpool_str!("showlists"));
             }
             // othercases print_esc("show")
@@ -22,6 +22,7 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1292 {
                 print_esc($globals, strpool_str!("show"));
             }
             // endcases;
+            use crate::section_0297::chr_code_repr;
             use crate::section_1291::show_kind::*;
             true
         } else {

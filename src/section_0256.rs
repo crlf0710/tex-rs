@@ -41,7 +41,7 @@ macro_rules! text {
 /// test if all positions are occupied
 macro_rules! hash_is_full {
     ($globals:expr) => {
-        $globals.hash_used == hash_base as _
+        $globals.hash_used == hash_base as pointer
     }
 }
 // @d font_id_text(#) == text(font_id_base+#) {a frozen font identifier's name}

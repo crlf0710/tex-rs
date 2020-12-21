@@ -6,7 +6,7 @@
 // procedure@?back_input; forward; @t\2@>
 // procedure unsave; {pops the top level off the save stack}
 /// pops the top level off the save stack
-pub(crate) fn unsave(globals: &mut TeXGlobals) {
+pub(crate) fn unsave(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done;
     // var p:pointer; {position to be restored}
     // @!l:quarterword; {saved level, if in fullword regions of |eqtb|}
@@ -21,12 +21,15 @@ pub(crate) fn unsave(globals: &mut TeXGlobals) {
     }
     // else confusion("curlevel"); {|unsave| is not used when |cur_group=bottom_level|}
     else {
-        confusion(globals, strpool_str!("curlevel"));
+        /// `unsave` is not used when `cur_group=bottom_level`
+        confusion(globals, strpool_str!("curlevel"))?;
     }
     // @:this can't happen curlevel}{\quad curlevel@>
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
 use crate::section_0221::level_one;

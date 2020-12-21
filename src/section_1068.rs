@@ -10,7 +10,7 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin case cur_group of
     // simple_group: unsave;
     if globals.cur_group == simple_group {
-        unsave(globals);
+        unsave(globals)?;
     }
     // bottom_level: begin print_err("Too many }'s");
     // @.Too many \}'s@>
@@ -31,7 +31,7 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     //   a delayed action@>@;
     // othercases confusion("rightbrace")
     else {
-        confusion(globals, strpool_str!("rightbrace"));
+        confusion(globals, strpool_str!("rightbrace"))?;
         // @:this can't happen rightbrace}{\quad rightbrace@>
         // endcases;
     }

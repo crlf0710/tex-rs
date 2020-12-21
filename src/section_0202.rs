@@ -5,7 +5,7 @@
 //
 // @p procedure flush_node_list(@!p:pointer); {erase list of nodes starting at |p|}
 /// erase list of nodes starting at `p`
-pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) {
+pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXResult<()> {
     // label done; {go here when node |p| has been freed}
     // var q:pointer; {successor to node |p|}
     // begin while p<>null do
@@ -56,7 +56,7 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) {
                 // othercases confusion("flushing")
                 else {
                     trace_error_expr!("type(p)={}", type_p);
-                    confusion(globals, strpool_str!("flushing"));
+                    confusion(globals, strpool_str!("flushing"))?;
                 }
                 // @:this can't happen flushing}{\quad flushing@>
                 // endcases;@/
@@ -72,9 +72,11 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) {
         // end;
     }
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
 use crate::section_0115::pointer;
 use crate::section_0115::null;

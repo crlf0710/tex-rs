@@ -42,7 +42,7 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
     n = ASCII_code_literal!(b'0');
     globals.tally = 0;
     // while (p<>null) and (tally<l) do
-    while p != null as _ && globals.tally < l {
+    while p != null as integer && globals.tally < l {
         // begin if p=q then @<Do magic computation@>;
         if p == q {
             Do_magic_computation!(globals);
@@ -54,7 +54,7 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
         // end;
     }
     // if p<>null then print_esc("ETC.");
-    if p != null as _ {
+    if p != null as integer {
         print_esc(globals, strpool_str!("ETC."));
     }
     // @.ETC@>

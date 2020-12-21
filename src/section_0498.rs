@@ -48,7 +48,7 @@ pub(crate) fn conditional(globals: &mut TeXGlobals) -> TeXResult<()> {
     // common_ending: if cur_chr=fi_code then @<Pop the condition stack@>
     'common_ending <-
     );
-    if globals.cur_chr.get() == fi_code as _ {
+    if globals.cur_chr.get() == fi_code as chr_code_repr {
         Pop_the_condition_stack!(globals);
     }
     // else if_limit:=fi_code; {wait for \.{\\fi}}
@@ -66,6 +66,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::pointer;
+use crate::section_0297::chr_code_repr;
 use crate::section_0489::else_code;
 use crate::section_0489::fi_code;
 use crate::section_0497::change_if_limit;

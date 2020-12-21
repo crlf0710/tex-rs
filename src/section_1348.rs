@@ -23,7 +23,7 @@ pub(crate) fn do_extension(globals: &mut TeXGlobals) -> TeXResult<()> {
     // set_language_code:@<Implement \.{\\setlanguage}@>;
     // othercases confusion("ext1")
     else {
-        confusion(globals, strpool_str!("ext1"));
+        confusion(globals, strpool_str!("ext1"))?;
     }
     // @:this can't happen ext1}{\quad ext1@>
     // endcases;

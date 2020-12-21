@@ -17,19 +17,19 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1059 {
         else if $cmd == vskip {
             let chr_code = $chr_code.get();
             // skip_code:print_esc("vskip");
-            if chr_code == skip_code as _ {
+            if chr_code == skip_code as chr_code_repr {
                 print_esc($globals, strpool_str!("vskip"));
             }
             // fil_code:print_esc("vfil");
-            else if chr_code == fil_code as _ {
+            else if chr_code == fil_code as chr_code_repr {
                 print_esc($globals, strpool_str!("vfil"));
             }
             // fill_code:print_esc("vfill");
-            else if chr_code == fill_code as _ {
+            else if chr_code == fill_code as chr_code_repr {
                 print_esc($globals, strpool_str!("vfill"));
             }
             // ss_code:print_esc("vss");
-            else if chr_code == ss_code as _ {
+            else if chr_code == ss_code as chr_code_repr {
                 print_esc($globals, strpool_str!("vss"));
             }
             // othercases print_esc("vfilneg")
@@ -37,6 +37,7 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1059 {
                 print_esc($globals, strpool_str!("vfilneg"));
             }
             // endcases;
+            use crate::section_0297::chr_code_repr;
             use crate::section_1058::*;
             true
         }

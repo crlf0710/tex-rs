@@ -33,7 +33,9 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
             else {
                 print_esc(globals, str_number::new((p - single_base as integer) as _));
                 // if cat_code(p-single_base)=letter then print_char(" ");
-                if cat_code!(globals, ASCII_code::from(p - single_base as integer)) == letter as _ {
+                if cat_code!(globals, ASCII_code::from(p - single_base as integer))
+                    == letter as halfword
+                {
                     print_char(
                         make_globals_io_string_log_view!(globals),
                         ASCII_code_literal!(b' '),
@@ -84,6 +86,7 @@ use crate::section_0038::str_number;
 use crate::section_0058::print_char;
 use crate::section_0059::print;
 use crate::section_0063::print_esc;
+use crate::section_0113::halfword;
 use crate::section_0115::pointer;
 use crate::section_0207::letter;
 use crate::section_0222::active_base;

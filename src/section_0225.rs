@@ -10,7 +10,7 @@ pub(crate) fn print_skip_param(globals: &mut TeXGlobals, n: integer) {
         unreachable!();
     }
     // line_skip_code: print_esc("lineskip");
-    else if n == line_skip_code as _ {
+    else if n == line_skip_code as integer {
         print_esc(globals, strpool_str!("lineskip"));
     }
     // baseline_skip_code: print_esc("baselineskip");

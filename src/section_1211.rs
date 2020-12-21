@@ -89,7 +89,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // othercases confusion("prefix")
     else {
-        confusion(globals, strpool_str!("prefix"));
+        confusion(globals, strpool_str!("prefix"))?;
         // @:this can't happen prefix}{\quad prefix@>
         // endcases;
     }

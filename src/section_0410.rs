@@ -52,22 +52,22 @@ pub(crate) enum cur_val_level_kind {
 impl From<u8> for cur_val_level_kind {
     fn from(val: u8) -> Self {
         use cur_val_level_kind::*;
-        if val == int_val as _ {
+        if val == int_val as u8 {
             return int_val;
         }
-        if val == dimen_val as _ {
+        if val == dimen_val as u8 {
             return dimen_val;
         }
-        if val == glue_val as _ {
+        if val == glue_val as u8 {
             return glue_val;
         }
-        if val == mu_val as _ {
+        if val == mu_val as u8 {
             return mu_val;
         }
-        if val == ident_val as _ {
+        if val == ident_val as u8 {
             return ident_val;
         }
-        if val == tok_val as _ {
+        if val == tok_val as u8 {
             return tok_val;
         }
         unreachable!()

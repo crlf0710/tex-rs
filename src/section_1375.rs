@@ -20,7 +20,7 @@ macro_rules! Implement_immediate {
             /// do the action immediately
             out_what($globals, tail!($globals))?;
             // flush_node_list(tail); tail:=p; link(p):=null;
-            flush_node_list($globals, tail!($globals));
+            flush_node_list($globals, tail!($globals))?;
             tail!($globals) = p;
             link!($globals, p) = null;
             // end

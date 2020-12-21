@@ -5,29 +5,24 @@
 // @!ASCII_code=0..255; {eight-bit numbers}
 //
 
-/// eight-bit numbers
 #[cfg(not(feature = "unicode_support"))]
-#[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
-pub struct ASCII_code(pub(crate) u8);
+pub(crate) type ASCII_code_repr = u8;
 
-#[cfg(not(feature = "unicode_support"))]
+#[cfg(feature = "unicode_support")]
+pub(crate) type ASCII_code_repr = u32;
+
+
+#[cfg_attr(not(feature = "unicode_support"), doc("eight-bit numbers"))]
+#[cfg_attr(feature = "unicode_support", doc("32-bit internal form character code, compatible with ascii"))]
+#[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
+pub struct ASCII_code(pub(crate) ASCII_code_repr);
+
 impl ASCII_code {
-    pub(crate) fn numeric_value(self) -> u8 {
+    pub(crate) fn numeric_value(self) -> ASCII_code_repr {
         self.0
     }
 }
 
-/// 32-bit internal form character code, compatible with ascii
-#[cfg(feature = "unicode_support")]
-#[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
-pub struct ASCII_code(pub(crate) u32);
-
-#[cfg(feature = "unicode_support")]
-impl ASCII_code {
-    pub(crate) fn numeric_value(self) -> u32 {
-        self.0
-    }
-}
 migration_complete!();
 
 macro_rules! ASCII_code_literal {

@@ -25,7 +25,7 @@ macro_rules! Wipe_out_the_whatsit_node_p_and_goto_done {
         }
         // othercases confusion("ext3")
         else {
-            confusion($globals, strpool_str!("ext3"));
+            confusion($globals, strpool_str!("ext3"))?;
         }
         // @:this can't happen ext3}{\quad ext3@>
         // endcases;@/

@@ -135,7 +135,7 @@ pub(crate) fn print_length_param(globals: &mut TeXGlobals, n: integer) {
     // split_max_depth_code:print_esc("splitmaxdepth");
     // box_max_depth_code:print_esc("boxmaxdepth");
     // hfuzz_code:print_esc("hfuzz");
-    else if n == hfuzz_code as _ {
+    else if n == hfuzz_code as integer {
         print_esc(globals, strpool_str!("hfuzz"));
     }
     // vfuzz_code:print_esc("vfuzz");

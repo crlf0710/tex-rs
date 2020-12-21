@@ -34,7 +34,7 @@ macro_rules! If_this_sup_mark_starts_an_expanded_character_like___A__or__df__the
         trace_span!("If this `sup_mark` starts an expanded character...");
         // begin if cur_chr=buffer[loc] then if loc<limit then
         trace_expr!("buffer[loc] = {}", $globals.buffer[loc!($globals)].numeric_value());
-        if $globals.cur_chr.get() == $globals.buffer[loc!($globals)].numeric_value() as _ {
+        if $globals.cur_chr.get() == $globals.buffer[loc!($globals)].numeric_value() as chr_code_repr {
             if loc!($globals) < limit!($globals) {
                 // begin c:=buffer[loc+1]; @+if c<@'200 then {yes we have an expanded char}
                 let c = $globals.buffer[loc!($globals) + 1].numeric_value();
@@ -77,6 +77,7 @@ macro_rules! If_this_sup_mark_starts_an_expanded_character_like___A__or__df__the
             // end
         }
         use crate::section_0297::chr_code_type;
+        use crate::section_0297::chr_code_repr;
     }}
 }
 

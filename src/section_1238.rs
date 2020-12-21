@@ -13,7 +13,7 @@ macro_rules! Compute_result_of_register_or_advance_put_it_in_cur_val {
                 todo!("not int_val");
             }
             // if q=advance then cur_val:=cur_val+eqtb[l].int;
-            if $q == advance as _ {
+            if $q == advance as pointer {
                 $globals.cur_val += $globals.eqtb[$l][MEMORY_WORD_INT];
             }
             // end

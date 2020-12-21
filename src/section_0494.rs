@@ -33,7 +33,7 @@ pub(crate) fn pass_text(globals: &mut TeXGlobals) -> TeXResult<()> {
                     goto_forward_label!('done);
                 }
                 // if cur_chr=fi_code then decr(l);
-                if globals.cur_chr.get() == fi_code as _ {
+                if globals.cur_chr.get() == fi_code as chr_code_repr {
                     decr!(l);
                 }
                 // end
@@ -59,6 +59,7 @@ use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0210::if_test;
 use crate::section_0210::fi_or_else;
+use crate::section_0297::chr_code_repr;
 use crate::section_0341::get_next;
 use crate::section_0305::scanner_status_kind;
 use crate::section_0489::fi_code;

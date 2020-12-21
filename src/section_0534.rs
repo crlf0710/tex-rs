@@ -43,7 +43,7 @@ pub(crate) fn open_log_file(globals: &mut TeXGlobals) {
     const _ : () = ();
     l = globals.input_stack[0].limit_field;
     // if buffer[l]=end_line_char then decr(l);
-    if globals.buffer[l].numeric_value() == end_line_char!(globals) as _ {
+    if globals.buffer[l].numeric_value() == end_line_char!(globals) as ASCII_code_repr {
         decr!(l);
     }
     // for k:=1 to l do print(buffer[k]);
@@ -68,6 +68,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0018::ASCII_code_repr;
 use crate::section_0027::a_open_out;
 use crate::section_0054::log_only;
 use crate::section_0057::print_ln;

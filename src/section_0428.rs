@@ -15,7 +15,7 @@ macro_rules! Complain_that_the_cant_do_this__give_zero_result {
         // error;
         error($globals)?;
         // if level<>tok_val then scanned_result(0)(dimen_val)
-        if $level.get() != cur_val_level_kind::tok_val as _ {
+        if $level.get() != cur_val_level_kind::tok_val as u8 {
             scanned_result!($globals, 0, cur_val_level_kind::dimen_val);
         }
         // else scanned_result(0)(int_val);

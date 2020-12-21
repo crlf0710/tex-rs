@@ -23,7 +23,7 @@ pub(crate) fn out_what(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     }
     // othercases confusion("ext4")
     else {
-        confusion(globals, strpool_str!("ext4"));
+        confusion(globals, strpool_str!("ext4"))?;
     }
     // @:this can't happen ext4}{\quad ext4@>
     // endcases;
