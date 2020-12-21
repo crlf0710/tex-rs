@@ -57,6 +57,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
             true
         }
         // set_box: print_esc("setbox");
+        else if $cmd == set_box {
+            print_esc($globals, strpool_str!("setbox"));
+            true
+        }
         // set_prev_graf: print_esc("prevgraf");
         // set_shape: print_esc("parshape");
         // the: print_esc("the");

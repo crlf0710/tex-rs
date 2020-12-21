@@ -4,6 +4,7 @@
 // @p procedure eq_save(@!p:pointer;@!l:quarterword); {saves |eqtb[p]|}
 /// saves `eqtb[p]`
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn eq_save(globals: &mut TeXGlobals, p:pointer, l:quarterword) {
     // begin check_full_save_stack;
     check_full_save_stack!(globals);

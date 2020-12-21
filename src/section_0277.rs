@@ -10,6 +10,7 @@
 //   {new data for |eqtb|}
 /// new data for `eqtb`
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn eq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) {
     // begin if eq_level(p)=cur_level then eq_destroy(eqtb[p])
     if eq_level!(globals, p) == globals.cur_level {

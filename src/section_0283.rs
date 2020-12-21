@@ -6,7 +6,7 @@
 //
 // @<Store \(s)|save...@>=
 macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global_value {
-    ($globals:expr, $p:expr) => {{
+    ($globals:expr, $p:expr, $l:expr) => {{
         // if p<int_base then
         if $p < int_base as pointer {
             // if eq_level(p)=level_one then
@@ -46,7 +46,7 @@ macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global
             // @!stat if tracing_restores>0 then restore_trace(p,"retaining");@+tats@;@/
             // end
         }
-
+        let _ = $l;
         use crate::section_0230::int_base;
         use crate::section_0275::eq_destroy;
     }}

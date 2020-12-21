@@ -70,6 +70,8 @@ pub(crate) const shorthand_def: quarterword = 95;
 /// macro definition ( `\def`, `\gdef`, `\xdef`, `\edef` )
 pub(crate) const def: quarterword = 97;
 // @d set_box=98 {set a box ( \.{\\setbox} )}
+/// set a box ( `\setbox` )
+pub(crate) const set_box: quarterword = 98;
 // @d hyph_data=99 {hyphenation data ( \.{\\hyphenation}, \.{\\patterns} )}
 // @d set_interaction=100 {define level of interaction ( \.{\\batchmode}, etc.~)}
 // @d max_command=100 {the largest command code seen at |big_switch|}

@@ -28,8 +28,14 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     // eq_level(cur_font_loc):=level_one;@/
     // for k:=math_font_base to math_font_base+47 do eqtb[k]:=eqtb[cur_font_loc];
     // equiv(cat_code_base):=0; eq_type(cat_code_base):=data;
+    equiv!(globals, cat_code_base) = 0;
+    eq_type!(globals, cat_code_base) = data;
     // eq_level(cat_code_base):=level_one;@/
+    eq_level!(globals, cat_code_base) = level_one;
     // for k:=cat_code_base+1 to int_base-1 do eqtb[k]:=eqtb[cat_code_base];
+    for k in cat_code_base + 1..= int_base - 1 {
+        globals.eqtb[k as pointer] = globals.eqtb[cat_code_base as pointer];
+    }
     // for k:=0 to 255 do
     for k_u8 in 0..=255u8 {
         let k = ASCII_code_literal!(k_u8);
@@ -72,6 +78,7 @@ use crate::section_0022::null_code;
 use crate::section_0022::invalid_code;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
+use crate::section_0115::pointer;
 use crate::section_0207::comment;
 use crate::section_0207::escape;
 use crate::section_0207::letter;
@@ -81,7 +88,10 @@ use crate::section_0207::car_ret;
 use crate::section_0207::ignore;
 use crate::section_0207::invalid_char;
 use crate::section_0210::data;
+use crate::section_0221::level_one;
 use crate::section_0230::cur_font_loc;
+use crate::section_0230::cat_code_base;
+use crate::section_0230::int_base;
 
 use linkme::distributed_slice;
 

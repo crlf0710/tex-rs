@@ -90,6 +90,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     text!(globals, frozen_relax as pointer) = strpool_str!("relax").get() as _;
     globals.eqtb[frozen_relax as pointer] = globals.eqtb[globals.cur_val as pointer];
     // primitive("setbox",set_box,0);@/
+    primitive(globals, strpool_str!("setbox"), set_box, 0);
     // @!@:set_box_}{\.{\\setbox} primitive@>
     // primitive("the",the,0);@/
     primitive(globals, strpool_str!("the"), the, 0);
