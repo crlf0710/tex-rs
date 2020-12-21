@@ -16,6 +16,8 @@
 /// distinct from `span_code` and from any character
 pub(crate) const cr_code: halfword = 257;
 // @d cr_cr_code=cr_code+1 {this distinguishes \.{\\crcr} from \.{\\cr}}
+/// this distinguishes `\crcr` from `\cr`
+pub(crate) const cr_cr_code: halfword = cr_code + 1;
 // @d end_template_token==cs_token_flag+frozen_end_template
 //
 // @<Put each of \TeX's primitives into the hash table@>=
@@ -28,7 +30,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0780(globals: &m
     primitive(globals, strpool_str!("cr"), car_ret, cr_code as _);
     // @!@:cr_}{\.{\\cr} primitive@>
     // text(frozen_cr):="cr"; eqtb[frozen_cr]:=eqtb[cur_val];@/
+    text!(globals, frozen_cr as pointer) = strpool_str!("cr").get() as _;
+    globals.eqtb[frozen_cr as pointer] = globals.eqtb[globals.cur_val as pointer];
     // primitive("crcr",car_ret,cr_cr_code);
+    primitive(globals, strpool_str!("crcr"), car_ret, cr_cr_code as _);
     // @!@:cr_cr_}{\.{\\crcr} primitive@>
     // text(frozen_end_template):="endtemplate"; text(frozen_endv):="endtemplate";
     // eq_type(frozen_endv):=endv; equiv(frozen_endv):=null_list;
@@ -39,7 +44,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0780(globals: &m
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
+use crate::section_0115::pointer;
 use crate::section_0207::*;
+use crate::section_0222::frozen_cr;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

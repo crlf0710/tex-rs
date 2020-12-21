@@ -1,6 +1,7 @@
 //! ` `
 
 // @<Check single-word...@>=
+#[allow(unused_macros)]
 macro_rules! Check_single_word_avail_list {
     ($globals:expr) => {{
         /// current locations of interest in `mem`

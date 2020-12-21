@@ -35,6 +35,8 @@ pub(crate) type frozen_control_sequence_TYPENUM =
 pub(crate) const frozen_control_sequence: word = frozen_control_sequence_TYPENUM::U32;
 // @d frozen_protection=frozen_control_sequence {inaccessible but definable}
 // @d frozen_cr=frozen_control_sequence+1 {permanent `\.{\\cr}'}
+/// permanent `\cr`
+pub(crate) const frozen_cr: word = frozen_control_sequence + 1;
 // @d frozen_end_group=frozen_control_sequence+2 {permanent `\.{\\endgroup}'}
 // @d frozen_right=frozen_control_sequence+3 {permanent `\.{\\right}'}
 // @d frozen_fi=frozen_control_sequence+4 {permanent `\.{\\fi}'}

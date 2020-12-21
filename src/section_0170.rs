@@ -1,6 +1,7 @@
 //! ` `
 
 // @<Check flags...@>=
+#[allow(unused_macros)]
 macro_rules! Check_flags_of_unavailable_nodes {
     ($globals:expr) => {{
         /// current locations of interest in `mem`

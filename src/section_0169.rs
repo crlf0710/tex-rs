@@ -1,6 +1,7 @@
 //! ` `
 
 // @<Check variable-size...@>=
+#[allow(unused_macros)]
 macro_rules! Check_variable_size_avail_list {
     ($globals:expr) => {{
         /// current locations of interest in `mem`

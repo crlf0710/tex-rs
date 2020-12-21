@@ -78,7 +78,7 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     // hmode+ex_space,mmode+ex_space: goto append_normal_space;
     else if abs_mode_plus_cur_cmd == hmode as u16 + ex_space as u16 ||
         abs_mode_plus_cur_cmd == mmode as u16 + ex_space as u16 {
-        todo!();
+        goto_forward_label!('append_normal_space);
     }
     // @t\4@>@<Cases of |main_control| that are not part of the inner loop@>@;
     else {
