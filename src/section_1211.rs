@@ -33,6 +33,10 @@ macro_rules! Assignments {
             /// already processed
             do_nothing!();
             true
+        } else if Assignments_1241!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
         } else if Assignments_1256!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();

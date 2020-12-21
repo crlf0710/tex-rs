@@ -11,6 +11,8 @@ pub(crate) const char_num: quarterword = 16;
 /// peek inside of `TeX` ( `\show`, `\showbox`, etc. )
 pub(crate) const xray: quarterword = 19;
 // @d make_box=20 {make a box ( \.{\\box}, \.{\\copy}, \.{\\hbox}, etc.~)}
+/// make a box ( `\box`, `\copy`, `\hbox`, etc. )
+pub(crate) const make_box: quarterword = 20;
 // @d hmove=21 {horizontal motion ( \.{\\moveleft}, \.{\\moveright} )}
 /// horizontal motion ( `\moveleft`, `\moveright` )
 pub(crate) const hmove: quarterword = 21;

@@ -37,6 +37,12 @@ pub(crate) use history_kind::*;
 // @<Glob...@>=
 // @!deletions_allowed:boolean; {is it safe for |error| to call |get_token|?}
 // @!set_box_allowed:boolean; {is it safe to do a \.{\\setbox} assignment?}
+/// is it safe to do a `\setbox` assignment?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static set_box_allowed: boolean = true;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::boolean;
 
 // @!history:spotless..fatal_error_stop; {has the source input been clean so far?}
 #[globals_struct_field(TeXGlobals)]
