@@ -9,7 +9,7 @@ pub(crate) fn show_cur_cmd_chr(globals: &mut TeXGlobals) {
     // if mode<>shown_mode then
     if mode!(globals) != globals.shown_mode.get() {
         // begin print_mode(mode); print(": "); shown_mode:=mode;
-        print_mode(globals, (mode!(globals).get() as u16).into());
+        print_mode(globals, (mode!(globals).get() as i16).into());
         print(globals, strpool_str!(": ").get() as _);
         globals.shown_mode = mode!(globals);
         // end;

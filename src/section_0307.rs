@@ -108,6 +108,8 @@ pub(crate) const output_text: quarterword = 6;
 // @d every_math_text=8 {|token_type| code for \.{\\everymath}}
 // @d every_display_text=9 {|token_type| code for \.{\\everydisplay}}
 // @d every_hbox_text=10 {|token_type| code for \.{\\everyhbox}}
+/// `token_type` code for `\everyhbox`
+pub(crate) const every_hbox_text: quarterword = 10;
 // @d every_vbox_text=11 {|token_type| code for \.{\\everyvbox}}
 // @d every_job_text=12 {|token_type| code for \.{\\everyjob}}
 // @d every_cr_text=13 {|token_type| code for \.{\\everycr}}

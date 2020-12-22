@@ -16,6 +16,8 @@ pub(crate) const bottom_level: quarterword = 0;
 /// group code for local structure only
 pub(crate) const simple_group: quarterword = 1;
 // @d hbox_group=2 {code for `\.{\\hbox}\grp'}
+/// code for `\hbox{...}`
+pub(crate) const hbox_group: quarterword = 2;
 // @d adjusted_hbox_group=3 {code for `\.{\\hbox}\grp' in vertical mode}
 // @d vbox_group=4 {code for `\.{\\vbox}\grp'}
 // @d vtop_group=5 {code for `\.{\\vtop}\grp'}

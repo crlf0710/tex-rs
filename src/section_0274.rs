@@ -14,6 +14,11 @@
 //! appears in location |save_ptr+k| of the save stack.
 //
 // @d saved(#)==save_stack[save_ptr+#].int
+macro_rules! saved {
+    ($globals:expr, $ptr:expr) => {
+        $globals.save_stack[$globals.save_ptr + $ptr][crate::section_0113::MEMORY_WORD_INT]
+    };
+}
 //
 // @p procedure new_save_level(@!c:group_code); {begin a new level of grouping}
 /// begin a new level of grouping

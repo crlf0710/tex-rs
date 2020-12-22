@@ -61,7 +61,10 @@ pub(crate) fn print_mode(globals: &mut TeXGlobals, m: integer) {
             1 => print(globals, strpool_str!("horizontal").get() as _),
             // 2:print("display math");
             2 => print(globals, strpool_str!("display math").get() as _),
-            _ => unreachable!(),
+            _ => {
+                trace_error_expr!("m = {}", m);
+                unreachable!()
+            },
         }
         // end
     }

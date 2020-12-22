@@ -295,7 +295,11 @@ reversing_order_items!(
                 mod section_0134;
                 #[macro_use]
                 mod section_0135;
-                mod section_0136_to_0140;
+                mod section_0136;
+                mod section_0137;
+                mod section_0138;
+                mod section_0139;
+                mod section_0140;
                 mod section_0141;
                 mod section_0142_to_0145;
                 mod section_0146;
@@ -449,6 +453,7 @@ reversing_order_items!(
         mod section_0272;
         #[macro_use]
         mod section_0273;
+        #[macro_use]
         mod section_0274;
         mod section_0275;
         mod section_0276;
@@ -958,7 +963,9 @@ reversing_order_items!(
                 #[macro_use]
                 mod section_0642;
                 mod section_0643;
-                mod section_0644_to_0660;
+                mod section_0644;
+                mod section_0645;
+                mod section_0646_to_0660;
                 mod section_0661;
                 mod section_0662_to_0679;
                 mod section_0680_to_0698;
@@ -1067,6 +1074,7 @@ reversing_order_items!(
                 mod section_1053;
                 mod section_1054;
                 mod section_1055;
+                #[macro_use]
                 mod section_1056;
                 #[macro_use]
                 mod section_1057;
@@ -1087,7 +1095,17 @@ reversing_order_items!(
                 mod section_1069;
                 mod section_1070;
                 mod section_1071;
-                mod section_1072_to_1083;
+                mod section_1072_to_1078;
+                reversing_order_items!(
+                    {
+                        mod section_1079;
+                    }
+                    {
+                        mod section_1080_to_1082;
+                        #[macro_use]
+                        mod section_1083;
+                    }
+                );
                 mod section_1084;
                 mod section_1085_to_1089;
                 #[macro_use]

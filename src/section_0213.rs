@@ -22,6 +22,13 @@ macro_rules! tail {
 }
 
 // @d prev_graf==cur_list.pg_field {number of paragraph lines accumulated}
+/// number of paragraph lines accumulated
+macro_rules! prev_graf {
+    ($globals:expr) => {
+        $globals.cur_list.pg_field
+    };
+}
+
 // @d aux==cur_list.aux_field {auxiliary data about the current list}
 /// auxiliary data about the current list
 macro_rules! aux {
@@ -30,6 +37,12 @@ macro_rules! aux {
     }
 }
 // @d prev_depth==aux.sc {the name of |aux| in vertical mode}
+/// the name of `aux` in vertical mode
+macro_rules! prev_depth {
+    ($globals:expr) => {
+        aux!($globals)[crate::section_0101::MEMORY_WORD_SC]
+    }
+}
 // @d space_factor==aux.hh.lh {part of |aux| in horizontal mode}
 /// part of `aux` in horizontal mode
 macro_rules! space_factor {
@@ -62,7 +75,18 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 );
 
 // @!nest_ptr:0..nest_size; {first unused location of |nest|}
+/// first unused location of `nest`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static nest_ptr: u8_from_0_to_n<nest_size_TYPENUM> = u8_from_0_to_n::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0011::nest_size_TYPENUM;
+
 // @!max_nest_stack:0..nest_size; {maximum of |nest_ptr| when pushing}
+/// maximum of `nest_ptr` when pushing
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static max_nest_stack: u8_from_0_to_n<nest_size_TYPENUM> = u8_from_0_to_n::default();
+
 // @!cur_list:list_state_record; {the ``top'' semantic state}
 /// the "top" semantic state
 #[globals_struct_field(TeXGlobals)]

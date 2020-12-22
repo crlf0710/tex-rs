@@ -15,6 +15,8 @@ pub(crate) const output_routine_loc: pointer = local_base as pointer + 1;
 // @d every_math_loc=local_base+3 {points to token list for \.{\\everymath}}
 // @d every_display_loc=local_base+4 {points to token list for \.{\\everydisplay}}
 // @d every_hbox_loc=local_base+5 {points to token list for \.{\\everyhbox}}
+/// points to token list for `\everyhbox`
+pub(crate) const every_hbox_loc: pointer = local_base as pointer + 5;
 // @d every_vbox_loc=local_base+6 {points to token list for \.{\\everyvbox}}
 // @d every_job_loc=local_base+7 {points to token list for \.{\\everyjob}}
 // @d every_cr_loc=local_base+8 {points to token list for \.{\\everycr}}
@@ -75,6 +77,14 @@ macro_rules! par_shape_ptr {
 // @d every_math==equiv(every_math_loc)
 // @d every_display==equiv(every_display_loc)
 // @d every_hbox==equiv(every_hbox_loc)
+macro_rules! every_hbox {
+    ($globals:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::every_hbox_loc
+        )
+    };
+}
 // @d every_vbox==equiv(every_vbox_loc)
 // @d every_job==equiv(every_job_loc)
 // @d every_cr==equiv(every_cr_loc)

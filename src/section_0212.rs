@@ -46,10 +46,12 @@
 //! be pushed onto |nest| if necessary.
 //
 // @d ignore_depth==-65536000 {|prev_depth| value that is ignored}
-//
+/// `prev_depth` value that is ignored
+pub(crate) const ignore_depth: scaled = scaled::new_from_inner(-65536000);
+
 // @<Types...@>=
 // @!list_state_record=record@!mode_field:-mmode..mmode;@+
-#[derive(Default)]
+#[derive(Clone, Copy, Default)]
 pub(crate) struct list_state_record {
     pub(crate) mode_field: i16_from_m_to_n<mmode_NEG_TYPENUM, mmode_POS_TYPENUM>,
     // @!head_field,@!tail_field: pointer;
@@ -65,6 +67,7 @@ pub(crate) struct list_state_record {
 
 use crate::pascal::i16_from_m_to_n;
 use crate::pascal::integer;
+use crate::section_0101::scaled;
 use crate::section_0113::memory_word;
 use crate::section_0115::pointer;
 use crate::section_0211::{mmode_NEG_TYPENUM, mmode_POS_TYPENUM};

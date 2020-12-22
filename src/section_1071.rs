@@ -37,9 +37,17 @@ pub(crate) const box_flag: integer = 0o10000000000;
 /// context code for `\leaders`
 pub(crate) const leader_flag: integer = box_flag + 513;
 // @d box_code=0 {|chr_code| for `\.{\\box}'}
+/// `chr_code` for `\box'
+pub(crate) const box_code: chr_code_repr = 0;
 // @d copy_code=1 {|chr_code| for `\.{\\copy}'}
+/// `chr_code` for `\copy`
+pub(crate) const copy_code: chr_code_repr = 1;
 // @d last_box_code=2 {|chr_code| for `\.{\\lastbox}'}
+/// `chr_code` for `\lastbox`
+pub(crate) const last_box_code: chr_code_repr = 2;
 // @d vsplit_code=3 {|chr_code| for `\.{\\vsplit}'}
+/// `chr_code` for `\vsplit`
+pub(crate) const vsplit_code: chr_code_repr = 3;
 // @d vtop_code=4 {|chr_code| for `\.{\\vtop}'}
 /// `chr_code` for `\vtop`
 pub(crate) const vtop_code: chr_code_repr = 4;
