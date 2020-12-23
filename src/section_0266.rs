@@ -73,6 +73,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         // valign: print_esc("valign");
         // vcenter: print_esc("vcenter");
         // vrule: print_esc("vrule");
+        else if $cmd == vrule {
+            print_esc($globals, strpool_str!("vrule"));
+            true
+        }
         else {
             false
         }

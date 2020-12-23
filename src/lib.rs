@@ -965,7 +965,9 @@ reversing_order_items!(
                 mod section_0643;
                 mod section_0644;
                 mod section_0645;
-                mod section_0646_to_0660;
+                mod section_0646_to_0648;
+                mod section_0649;
+                mod section_0650_to_0660;
                 mod section_0661;
                 mod section_0662_to_0679;
                 mod section_0680_to_0698;
@@ -1091,23 +1093,37 @@ reversing_order_items!(
                 mod section_1066;
                 #[macro_use]
                 mod section_1067;
-                mod section_1068;
-                mod section_1069;
-                mod section_1070;
-                mod section_1071;
-                mod section_1072_to_1078;
                 reversing_order_items!(
                     {
-                        mod section_1079;
+                        mod section_1068;
                     }
                     {
-                        mod section_1080_to_1082;
+                        mod section_1069;
+                        mod section_1070;
+                        mod section_1071;
                         #[macro_use]
-                        mod section_1083;
+                        mod section_1072;
+                        mod section_1073;
+                        mod section_1074;
+                        mod section_1075;
+                        mod section_1076_to_1078;
+                        reversing_order_items!(
+                            {
+                                mod section_1079;
+                            }
+                            {
+                                mod section_1080_to_1082;
+                                #[macro_use]
+                                mod section_1083;
+                            }
+                        );
+                        mod section_1084;
+                        #[macro_use]
+                        mod section_1085;
                     }
                 );
-                mod section_1084;
-                mod section_1085_to_1089;
+                mod section_1086;
+                mod section_1087_to_1089;
                 #[macro_use]
                 mod section_1090;
                 mod section_1091;

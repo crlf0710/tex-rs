@@ -101,6 +101,11 @@ macro_rules! dimen_par {
 // @d max_depth==dimen_par(max_depth_code)
 // @d split_max_depth==dimen_par(split_max_depth_code)
 // @d box_max_depth==dimen_par(box_max_depth_code)
+macro_rules! box_max_depth {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::box_max_depth_code)
+    };
+}
 // @d hfuzz==dimen_par(hfuzz_code)
 // @d vfuzz==dimen_par(vfuzz_code)
 // @d delimiter_shortfall==dimen_par(delimiter_shortfall_code)

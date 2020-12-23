@@ -33,6 +33,8 @@
 /// context code for `\setbox0`
 pub(crate) const box_flag: integer = 0o10000000000;
 // @d ship_out_flag==box_flag+512 {context code for `\.{\\shipout}'}
+/// context code for `\shipout`
+pub(crate) const ship_out_flag: integer = box_flag + 512;
 // @d leader_flag==box_flag+513 {context code for `\.{\\leaders}'}
 /// context code for `\leaders`
 pub(crate) const leader_flag: integer = box_flag + 513;

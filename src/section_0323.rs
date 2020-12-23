@@ -72,7 +72,7 @@ pub(crate) fn begin_token_list(globals: &mut TeXGlobals, p: pointer, t: quarterw
             }
             // end;
         }
-    // end
+        // end
     }
     // else loc:=p;
     else {

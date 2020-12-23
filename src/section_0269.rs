@@ -30,8 +30,14 @@ pub(crate) const hbox_group: quarterword = 2;
 // @d vcenter_group=12 {code for `\.{\\vcenter}\grp'}
 // @d math_choice_group=13 {code for `\.{\\mathchoice}\grp\grp\grp\grp'}
 // @d semi_simple_group=14 {code for `\.{\\begingroup...\\endgroup}'}
+/// code for `\begingroup...\endgroup`
+pub(crate) const semi_simple_group: quarterword = 14;
 // @d math_shift_group=15 {code for `\.{\$...\$}'}
+/// code for `$...$`
+pub(crate) const math_shift_group: quarterword = 15;
 // @d math_left_group=16 {code for `\.{\\left...\\right}'}
+/// code for `\left...\right`
+pub(crate) const math_left_group: quarterword = 16;
 // @d max_group_code=16
 pub(crate) const max_group_code: u8 = max_group_code_TYPENUM::U8;
 pub(crate) type max_group_code_TYPENUM = U16;

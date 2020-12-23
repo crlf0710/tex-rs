@@ -1,5 +1,18 @@
 //! ` `
 
+macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action {
+    ($globals:expr) => {
+        if false {
+            unreachable!();
+        } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1085!($globals) {
+            // already processed
+            true
+        } else {
+            false
+        }
+    };
+}
+
 // @<Declare the procedure called |handle_right_brace|@>=
 // procedure handle_right_brace;
 #[allow(unused_variables)]
@@ -27,8 +40,16 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // end;
     }
     // semi_simple_group,math_shift_group,math_left_group: extra_right_brace;
+    else if globals.cur_group == semi_simple_group || globals.cur_group == math_shift_group ||
+        globals.cur_group == math_left_group {
+        todo!("extra right brace");
+    }
     // @t\4@>@<Cases of |handle_right_brace| where a |right_brace| triggers
     //   a delayed action@>@;
+    else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action!(globals) {
+        /// already processed
+        const _: () = ();
+    }
     // othercases confusion("rightbrace")
     else {
         confusion(globals, strpool_str!("rightbrace"))?;

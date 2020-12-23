@@ -43,6 +43,8 @@ pub(crate) const kern: quarterword = 29;
 /// math kern ( `\mkern` )
 pub(crate) const mkern: quarterword = 30;
 // @d leader_ship=31 {use a box ( \.{\\shipout}, \.{\\leaders}, etc.~)}
+/// use a box ( `\shipout`, `\leaders`, etc. )
+pub(crate) const leader_ship: quarterword = 31;
 // @d halign=32 {horizontal table alignment ( \.{\\halign} )}
 /// horizontal table alignment ( `\halign` )
 pub(crate) const halign: quarterword = 32;
