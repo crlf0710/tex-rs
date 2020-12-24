@@ -3,14 +3,18 @@
 //
 // @<Tidy up the parameter just scanned, and tuck it away@>=
 macro_rules! Tidy_up_the_parameter_just_scanned__and_tuck_it_away {
-    ($globals:expr, $match_chr:expr, $m:expr, $n:expr, $p:expr, $q:expr) => {{
+    ($globals:expr, $match_chr:expr, $m:expr, $n:expr, $p:expr, $q:expr, $rbrace_ptr:expr) => {{
         trace_span!("Tidy up the parameter just scanned, and tuck it away");
         // begin if (m=1)and(info(p)<right_brace_limit)and(p<>temp_head) then
         if $m == 1 && info_tok!($globals, $p) < right_brace_limit && $p != temp_head {
             // begin link(rbrace_ptr):=null; free_avail(p);
+            link!($globals, $rbrace_ptr) = null;
+            free_avail!($globals, $p);
             // p:=link(temp_head); pstack[n]:=link(p); free_avail(p);
+            $p = link!($globals, temp_head);
+            $globals.pstack[$n.get()] = link!($globals, $p);
+            free_avail!($globals, $p);
             // end
-            todo!("tidy1")
         }
         // else pstack[n]:=link(temp_head);
         else {

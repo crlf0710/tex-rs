@@ -1,11 +1,3 @@
-//! @ It takes only a little shuffling to do what \TeX\ calls \.{\\expandafter}.
-//!
-//! @<Expand the token after...@>=
-//! begin get_token; t:=cur_tok; get_token;
-//! if cur_cmd>max_command then expand@+else back_input;
-//! cur_tok:=t; back_input;
-//! end
-//!
 //! @ The implementation of \.{\\noexpand} is a bit trickier, because it is
 //! necessary to insert a special `|dont_expand|' marker into \TeX's reading
 //! mechanism.  This special marker is processed by |get_next|, but it does

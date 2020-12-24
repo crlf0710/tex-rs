@@ -34,6 +34,7 @@ pub(crate) fn macro_call(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!t:pointer; {cycle pointer for backup recovery}
     // @!u,@!v:pointer; {auxiliary pointers for backup recovery}
     // @!rbrace_ptr:pointer; {one step before the last |right_brace| token}
+    const _ : () = ();
     // @!n:small_number; {the number of parameters scanned}
     /// the number of parameters scanned
     let mut n: small_number;

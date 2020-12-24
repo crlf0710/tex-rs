@@ -54,6 +54,9 @@ pub(crate) fn print_param(globals: &mut TeXGlobals, n: integer) {
     // global_defs_code:print_esc("globaldefs");
     // cur_fam_code:print_esc("fam");
     // escape_char_code:print_esc("escapechar");
+    else if n == escape_char_code as integer {
+        print_esc(globals, strpool_str!("escapechar"));
+    }
     // default_hyphen_char_code:print_esc("defaulthyphenchar");
     // default_skew_char_code:print_esc("defaultskewchar");
     // end_line_char_code:print_esc("endlinechar");
@@ -75,3 +78,5 @@ pub(crate) fn print_param(globals: &mut TeXGlobals, n: integer) {
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0059::print;
+use crate::section_0063::print_esc;
+use crate::section_0236::*;

@@ -13,7 +13,7 @@ macro_rules! Expand_a_nonmacro {
         // top_bot_mark:@<Insert the \(a)appropriate mark text into the scanner@>;
         // expand_after:@<Expand the token after the next token@>;
         else if $globals.cur_cmd == expand_after {
-            todo!("expand after");
+            Expand_the_token_after_the_next_token!($globals);
         }
         // no_expand:@<Suppress expansion of the next token@>;
         // cs_name:@<Manufacture a control sequence name@>;

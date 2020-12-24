@@ -34,6 +34,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
             true
         }
         // expand_after: print_esc("expandafter");
+        else if $cmd == expand_after {
+            print_esc($globals, strpool_str!("expandafter"));
+            true
+        }
         // halign: print_esc("halign");
         // hrule: print_esc("hrule");
         // ignore_spaces: print_esc("ignorespaces");

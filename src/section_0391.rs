@@ -13,7 +13,7 @@
 macro_rules! Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_return_if_an_illegal_par_is_detected {
     ($globals:expr, $match_chr:expr, $r:expr, $info_r:expr, $m:expr, $n:expr, $p:expr, $q:expr) => {{
         /// unmatched left braces in current parameter
-        let unbalance: halfword;
+        let mut unbalance: halfword;
         /// backup pointer for parameter matching
         let mut s:pointer;
 
@@ -47,7 +47,7 @@ macro_rules! Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_re
             // @<Scan a parameter until its delimiter string has been found; or, if |s=null|,
             //   simply scan the delimiter string@>;@/
             Scan_a_parameter_until_its_delimiter_string_has_been_found_or_if_s_null_simply_scan_the_delimiter_string!
-                ($globals, $match_chr, $r, $info_r, s, $m, $n, $p, $q);
+                ($globals, $match_chr, $r, $info_r, s, $m, $n, $p, $q, unbalance);
             // {now |info(r)| is a token whose command code is either |match| or |end_match|}
             // until info(r)=end_match_token;
             /// now `info(r)` is a token whose command code is either |match| or |end_match|
