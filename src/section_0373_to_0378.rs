@@ -1,17 +1,3 @@
-//! @ @<Manufacture a control...@>=
-//! begin r:=get_avail; p:=r; {head of the list of characters}
-//! repeat get_x_token;
-//! if cur_cs=0 then store_new_token(cur_tok);
-//! until cur_cs<>0;
-//! if cur_cmd<>end_cs_name then @<Complain about missing \.{\\endcsname}@>;
-//! @<Look up the characters of list |r| in the hash table, and set |cur_cs|@>;
-//! flush_list(r);
-//! if eq_type(cur_cs)=undefined_cs then
-//!   begin eq_define(cur_cs,relax,256); {N.B.: The |save_stack| might change}
-//!   end; {the control sequence will now match `\.{\\relax}'}
-//! cur_tok:=cur_cs+cs_token_flag; back_input;
-//! end
-//!
 //! @ @<Complain about missing \.{\\endcsname}@>=
 //! begin print_err("Missing "); print_esc("endcsname"); print(" inserted");
 //! @.Missing \\endcsname...@>

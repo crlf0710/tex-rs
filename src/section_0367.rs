@@ -18,7 +18,7 @@ macro_rules! Expand_a_nonmacro {
         // no_expand:@<Suppress expansion of the next token@>;
         // cs_name:@<Manufacture a control sequence name@>;
         else if $globals.cur_cmd == cs_name {
-            todo!("cs_name");
+            Manufacture_a_control_sequence_name!($globals);
         }
         // convert:conv_toks; {this procedure is discussed in Part 27 below}
         else if $globals.cur_cmd == convert {
