@@ -1,17 +1,3 @@
-//! @ A slightly subtle point arises here: When the parameter delimiter ends
-//! with `\.{\#\{}', the token list will have a left brace both before and
-//! after the |end_match|\kern-.4pt. Only one of these should affect the
-//! |align_state|, but both will be scanned, so we must make a correction.
-//!
-//! @<Advance \(r)|r|; |goto found| if the parameter delimiter has been fully...@>=
-//! begin r:=link(r);
-//! if (info(r)>=match_token)and(info(r)<=end_match_token) then
-//!   begin if cur_tok<left_brace_limit then decr(align_state);
-//!   goto found;
-//!   end
-//! else goto continue;
-//! end
-//!
 //! @ @<Report an extra right brace and |goto continue|@>=
 //! begin back_input; print_err("Argument of "); sprint_cs(warning_index);
 //! @.Argument of \\x has...@>

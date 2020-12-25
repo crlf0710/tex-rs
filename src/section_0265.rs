@@ -32,6 +32,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("divide",divide,0);@/
     // @!@:divide_}{\.{\\divide} primitive@>
     // primitive("endcsname",end_cs_name,0);@/
+    primitive(globals, strpool_str!("endcsname"), end_cs_name, 0);
     // @!@:end_cs_name_}{\.{\\endcsname} primitive@>
     // primitive("endgroup",end_group,0);
     // @!@:end_group_}{\.{\\endgroup} primitive@>

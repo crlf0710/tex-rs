@@ -26,17 +26,36 @@ macro_rules! Manufacture_a_control_sequence_name {
         if $globals.cur_cmd != end_cs_name {
             todo!("complain");
         }
-        todo!("manufacture");
         // @<Look up the characters of list |r| in the hash table, and set |cur_cs|@>;
+        Look_up_the_characters_of_list_r_in_the_hash_table__and_set_cur_cs!
+            ($globals, p, r);
         // flush_list(r);
+        flush_list($globals, r);
         // if eq_type(cur_cs)=undefined_cs then
-        //   begin eq_define(cur_cs,relax,256); {N.B.: The |save_stack| might change}
-        //   end; {the control sequence will now match `\.{\\relax}'}
+        if eq_type!($globals, $globals.cur_cs) == undefined_cs {
+            // begin eq_define(cur_cs,relax,256); {N.B.: The |save_stack| might change}
+            /// N.B.: The |save_stack| might change
+            const _: () = ();
+
+            eq_define($globals, $globals.cur_cs, relax, 256);
+            // end; {the control sequence will now match `\.{\\relax}'}
+            /// the control sequence will now match `\relax}`
+            const _ : () = ();
+        }
         // cur_tok:=cur_cs+cs_token_flag; back_input;
+        $globals.cur_tok = cur_tok_type::from_cs($globals.cur_cs);
+        back_input($globals);
+
         // end
         use crate::section_0115::pointer;
         use crate::section_0120::get_avail;
+        use crate::section_0123::flush_list;
+        use crate::section_0207::relax;
         use crate::section_0208::end_cs_name;
+        use crate::section_0210::undefined_cs;
+        use crate::section_0277::eq_define;
+        use crate::section_0297::cur_tok_type;
+        use crate::section_0325::back_input;
         use crate::section_0380::get_x_token;
     }}
 }

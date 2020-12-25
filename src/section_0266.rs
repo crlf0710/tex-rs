@@ -23,10 +23,18 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         }
         // char_num: print_esc("char");
         // cs_name: print_esc("csname");
+        else if $cmd == cs_name {
+            print_esc($globals, strpool_str!("csname"));
+            true
+        }
         // def_font: print_esc("font");
         // delim_num: print_esc("delimiter");
         // divide: print_esc("divide");
         // end_cs_name: print_esc("endcsname");
+        else if $cmd == end_cs_name {
+            print_esc($globals, strpool_str!("endcsname"));
+            true
+        }
         // end_group: print_esc("endgroup");
         // ex_space: print_esc(" ");
         else if $cmd == ex_space {

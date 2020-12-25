@@ -17,7 +17,7 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
         || eq_type_field_w == outer_call
         || eq_type_field_w == long_outer_call
     {
-        todo!("macro");
+        delete_token_ref(globals, eq_type_field_w.into());
     }
     // glue_ref: delete_glue_ref(equiv_field(w));
     else if eq_type_field_w == glue_ref {
@@ -43,4 +43,5 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::memory_word;
+use crate::section_0200::delete_token_ref;
 use crate::section_0210::*;

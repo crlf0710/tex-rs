@@ -1,29 +1,3 @@
-//! @ @<Complain about missing \.{\\endcsname}@>=
-//! begin print_err("Missing "); print_esc("endcsname"); print(" inserted");
-//! @.Missing \\endcsname...@>
-//! help2("The control sequence marked <to be read again> should")@/
-//!   ("not appear between \csname and \endcsname.");
-//! back_error;
-//! end
-//!
-//! @ @<Look up the characters of list |r| in the hash table...@>=
-//! j:=first; p:=link(r);
-//! while p<>null do
-//!   begin if j>=max_buf_stack then
-//!     begin max_buf_stack:=j+1;
-//!     if max_buf_stack=buf_size then
-//!       overflow("buffer size",buf_size);
-//! @:TeX capacity exceeded buffer size}{\quad buffer size@>
-//!     end;
-//!   buffer[j]:=info(p) mod @'400; incr(j); p:=link(p);
-//!   end;
-//! if j>first+1 then
-//!   begin no_new_control_sequence:=false; cur_cs:=id_lookup(first,j-first);
-//!   no_new_control_sequence:=true;
-//!   end
-//! else if j=first then cur_cs:=null_cs {the list is empty}
-//! else cur_cs:=single_base+buffer[first] {the list has length one}
-//!
 //! @ An |end_template| command is effectively changed to an |endv| command
 //! by the following code. (The reason for this is discussed below; the
 //! |frozen_end_template| at the end of the template has passed the
