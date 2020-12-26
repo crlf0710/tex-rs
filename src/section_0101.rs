@@ -44,6 +44,13 @@ impl core::ops::Add for scaled {
     }
 }
 
+impl core::ops::Sub for scaled {
+    type Output = scaled;
+    fn sub(self, rhs: scaled) -> scaled {
+        scaled(self.0 - rhs.0)
+    }
+}
+
 impl core::ops::Neg for scaled {
     type Output = scaled;
     fn neg(self) -> Self::Output {

@@ -37,21 +37,45 @@ pub(crate) fn scan_something_internal(
     }
     // toks_register,assign_toks,def_family,set_font,def_font: @<Fetch a token list or
     //   font identifier, provided that |level=tok_val|@>;
+    else if globals.cur_cmd == toks_register
+        || globals.cur_cmd == assign_toks
+        || globals.cur_cmd == def_family
+        || globals.cur_cmd == set_font
+        || globals.cur_cmd == def_font
+    {
+        Fetch_a_token_list_or_font_identifier__provided_that_level_is_tok_val!(globals);
+    }
     // assign_int: scanned_result(eqtb[m].int)(int_val);
     else if globals.cur_cmd == assign_int {
-        scanned_result!(globals, globals.eqtb[m.get() as pointer][MEMORY_WORD_INT], cur_val_level_kind::int_val);
+        scanned_result!(
+            globals,
+            globals.eqtb[m.get() as pointer][MEMORY_WORD_INT],
+            cur_val_level_kind::int_val
+        );
     }
     // assign_dimen: scanned_result(eqtb[m].sc)(dimen_val);
     else if globals.cur_cmd == assign_dimen {
-        scanned_result!(globals, globals.eqtb[m.get() as pointer][MEMORY_WORD_SC].inner(), cur_val_level_kind::dimen_val);
+        scanned_result!(
+            globals,
+            globals.eqtb[m.get() as pointer][MEMORY_WORD_SC].inner(),
+            cur_val_level_kind::dimen_val
+        );
     }
     // assign_glue: scanned_result(equiv(m))(glue_val);
     else if globals.cur_cmd == assign_glue {
-        scanned_result!(globals, equiv!(globals, m.get() as pointer) as _, cur_val_level_kind::glue_val);
+        scanned_result!(
+            globals,
+            equiv!(globals, m.get() as pointer) as _,
+            cur_val_level_kind::glue_val
+        );
     }
     // assign_mu_glue: scanned_result(equiv(m))(mu_val);
     else if globals.cur_cmd == assign_mu_glue {
-        scanned_result!(globals, equiv!(globals, m.get() as pointer) as _, cur_val_level_kind::mu_val);
+        scanned_result!(
+            globals,
+            equiv!(globals, m.get() as pointer) as _,
+            cur_val_level_kind::mu_val
+        );
     }
     // set_aux: @<Fetch the |space_factor| or the |prev_depth|@>;
     // set_prev_graf: @<Fetch the |prev_graf|@>;
@@ -59,9 +83,16 @@ pub(crate) fn scan_something_internal(
     // set_page_dimen: @<Fetch something on the |page_so_far|@>;
     // set_shape: @<Fetch the |par_shape| size@>;
     // set_box_dimen: @<Fetch a box dimension@>;
+    else if globals.cur_cmd == set_box_dimen {
+        Fetch_a_box_dimension!(globals, m);
+    }
     // char_given,math_given: scanned_result(cur_chr)(int_val);
     else if globals.cur_cmd == char_given || globals.cur_cmd == math_given {
-        scanned_result!(globals, globals.cur_chr.get() as _, cur_val_level_kind::int_val);
+        scanned_result!(
+            globals,
+            globals.cur_chr.get() as _,
+            cur_val_level_kind::int_val
+        );
     }
     // assign_font_dimen: @<Fetch a font dimension@>;
     // assign_font_int: @<Fetch a font integer@>;

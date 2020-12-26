@@ -91,6 +91,14 @@ macro_rules! every_hbox {
 // @d err_help==equiv(err_help_loc)
 // @d toks(#)==equiv(toks_base+#)
 // @d box(#)==equiv(box_base+#)
+macro_rules! r#box {
+    ($globals:expr, $ptr:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::box_base as pointer + $ptr as pointer
+        )
+    };
+}
 // @d cur_font==equiv(cur_font_loc)
 macro_rules! cur_font {
     ($globals:expr) => {

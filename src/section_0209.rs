@@ -4,6 +4,8 @@
 //! that might be expanded by `\.{\\the}'.
 //
 // @d toks_register=71 {token list register ( \.{\\toks} )}
+/// token list register ( `\toks` )
+pub(crate) const toks_register: quarterword = 71;
 // @d assign_toks=72 {special token list ( \.{\\output}, \.{\\everypar}, etc.~)}
 /// special token list ( `\output`, `\everypar`, etc.)
 pub(crate) const assign_toks: quarterword = 72;
@@ -23,11 +25,21 @@ pub(crate) const assign_mu_glue: quarterword = 76;
 // @d assign_font_int=78 {user-defined font integer ( \.{\\hyphenchar},
 //   \.{\\skewchar} )}
 // @d set_aux=79 {specify state info ( \.{\\spacefactor}, \.{\\prevdepth} )}
+/// specify state info ( `\spacefactor`, `\prevdepth` )
+pub(crate) const set_aux: quarterword = 79;
 // @d set_prev_graf=80 {specify state info ( \.{\\prevgraf} )}
+/// specify state info ( `\prevgraf` )
+pub(crate) const set_prev_graf: quarterword = 80;
 // @d set_page_dimen=81 {specify state info ( \.{\\pagegoal}, etc.~)}
+/// specify state info ( `\pagegoal`, etc. )
+pub(crate) const set_page_dimen: quarterword = 81;
 // @d set_page_int=82 {specify state info ( \.{\\deadcycles},
 //   \.{\\insertpenalties} )}
+/// specify state info ( `\deadcycles`, `\insertpenalties` )
+pub(crate) const set_page_int: quarterword = 82;
 // @d set_box_dimen=83 {change dimension of box ( \.{\\wd}, \.{\\ht}, \.{\\dp} )}
+/// change dimension of box ( `\wd`, `\ht`, `\dp` )
+pub(crate) const set_box_dimen: quarterword = 83;
 // @d set_shape=84 {specify fancy paragraph shape ( \.{\\parshape} )}
 // @d def_code=85 {define a character code ( \.{\\catcode}, etc.~)}
 /// define a character code ( `\catcode`, etc. )

@@ -51,7 +51,8 @@ pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> 
     }
     // else  begin trap_zero_glue; define(l,glue_ref,cur_val);
     else {
-        todo!("glue_val or more");
+        trap_zero_glue(globals);
+        define!(globals, a, l, glue_ref, globals.cur_val as _);
         // end;
     }
     // exit: end;
@@ -69,6 +70,8 @@ use crate::section_0101::small_number;
 use crate::section_0115::pointer;
 use crate::section_0209::register;
 use crate::section_0209::multiply;
+use crate::section_0210::glue_ref;
 use crate::section_0405::scan_optional_equals;
 use crate::section_0407::scan_keyword;
 use crate::section_0410::cur_val_level_kind;
+use crate::section_1229::trap_zero_glue;

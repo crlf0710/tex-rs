@@ -104,6 +104,20 @@ impl IndexMut<MEMORY_WORD_INT> for memory_word {
         unsafe { &mut self.int }
     }
 }
+pub(crate) struct MEMORY_WORD_GR;
+
+impl Index<MEMORY_WORD_GR> for memory_word {
+    type Output = glue_ratio;
+    fn index(&self, _: MEMORY_WORD_GR) -> &glue_ratio {
+        unsafe { &self.gr }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_GR> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_GR) -> &mut glue_ratio {
+        unsafe { &mut self.gr }
+    }
+}
 
 pub(crate) struct MEMORY_WORD_HH_RH;
 

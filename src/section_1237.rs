@@ -4,14 +4,20 @@
 // @<Compute the register location |l| and its type |p|...@>=
 macro_rules! Compute_the_register_location_l_and_its_type_p_but_return_if_invalid {
     ($globals:expr, $p:expr, $q:expr, $l:expr) => {{
+        region_forward_label!(
+        |'found|
+        {
         // begin if q<>register then
         if $q != register as pointer {
             // begin get_x_token;
             get_x_token($globals)?;
             // if (cur_cmd>=assign_int)and(cur_cmd<=assign_mu_glue) then
             if $globals.cur_cmd >= assign_int && $globals.cur_cmd <= assign_mu_glue {
-                todo!("update l and p");
                 // begin l:=cur_chr; p:=cur_cmd-assign_int; goto found;
+                $l = $globals.cur_chr.get() as pointer;
+                $p = ($globals.cur_cmd - assign_int).into();
+                goto_forward_label!('found);
+                todo!("update l and p");
                 // end;
             }
             // if cur_cmd<>register then
@@ -51,7 +57,10 @@ macro_rules! Compute_the_register_location_l_and_its_type_p_but_return_if_invali
             }
         }
         // end;
+        }
         // found:
+        'found <-
+        );
         use crate::pascal::integer;
         use crate::section_0209::assign_int;
         use crate::section_0209::assign_mu_glue;

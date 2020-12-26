@@ -12,7 +12,7 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) {
     }
     // else if box_context<ship_out_flag then @<Store \(c)|cur_box| in a box register@>
     else if box_context < ship_out_flag {
-        todo!("store in register");
+        Store_cur_box_in_a_box_register!(globals, box_context);
     }
     // else if cur_box<>null then
     else if globals.cur_box != null {

@@ -2,7 +2,7 @@
 //
 // @p function hpack(@!p:pointer;@!w:scaled;@!m:small_number):pointer;
 #[allow(unused_variables)]
-pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, w: scaled, m: small_number) -> TeXResult<pointer> {
+pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: small_number) -> TeXResult<pointer> {
     // label reswitch, common_ending, exit;
     // var r:pointer; {the box node that will be returned}
     /// the box node that will be returned
@@ -48,11 +48,14 @@ pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, w: scaled, m: smal
     depth!(globals, r) = d;
     // @<Determine the value of |width(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
+    Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!
+        (globals, m, r, w, x);
     // common_ending: @<Finish issuing a diagnostic message
     //       for an overfull or underfull hbox@>;
+    Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_hbox!(globals);
     // exit: hpack:=r;
     todo!("hpack");
-    return ok_nojump!(r);
+    return_nojump!(r);
     // end;
 }
 

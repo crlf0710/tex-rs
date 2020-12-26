@@ -10,6 +10,9 @@
 macro_rules! Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_x_sp_per_unit__goto_attach_sign_if_the_units_are_internal {
     ($globals:expr, $mu:expr, $inf:expr, $f:expr, $lbl_attach_sign:lifetime) => {{
         region_forward_label!(
+        |'done|
+        {
+        region_forward_label!(
         |'attach_fraction|
         {
         // if inf then @<Scan for \(f)\.{fil} units; |goto attach_fraction| if found@>;
@@ -37,7 +40,7 @@ macro_rules! Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_
         // @<Scan for \(a)all other units and adjust |cur_val| and |f| accordingly;
         //   |goto done| in the case of scaled points@>;
         Scan_for_a_all_other_units_and_adjust_cur_val_and_f_accordingly__goto_done_in_the_case_of_scaled_points!
-            ($globals, $f);
+            ($globals, $f, 'done);
         }
         // attach_fraction: if cur_val>=@'40000 then arith_error:=true
         'attach_fraction <-
@@ -49,7 +52,10 @@ macro_rules! Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_
         else {
             $globals.cur_val = $globals.cur_val * unity.inner() + $f;
         }
+        }
         // done:
+        'done <-
+        );
         use crate::section_0101::unity;
         use crate::section_0407::scan_keyword;
     }}

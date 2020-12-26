@@ -10,7 +10,7 @@ macro_rules! Compute_result_of_register_or_advance_put_it_in_cur_val {
             if $p == int_val {
                 scan_int($globals)?;
             } else {
-                todo!("not int_val");
+                scan_normal_dimen!($globals)?;
             }
             // if q=advance then cur_val:=cur_val+eqtb[l].int;
             if $q == advance as pointer {
@@ -20,10 +20,14 @@ macro_rules! Compute_result_of_register_or_advance_put_it_in_cur_val {
         }
         // else  begin scan_glue(p);
         else {
-            todo!(">=glue_val");
+            scan_glue($globals, small_number::new($p as _))?;
             // if q=advance then @<Compute the sum of two glue specs@>;
+            if $q == advance as pointer {
+                todo!("Compute sum");
+            }
             // end
         }
         use crate::section_0113::MEMORY_WORD_INT;
+        use crate::section_0461::scan_glue;
     }}
 }

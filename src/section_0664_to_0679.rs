@@ -1,21 +1,3 @@
-//! @ @<Set init...@>=
-//! pack_begin_line:=0;
-//!
-//! @ @<Finish issuing a diagnostic message for an overfull or underfull hbox@>=
-//! if output_active then print(") has occurred while \output is active")
-//! else  begin if pack_begin_line<>0 then
-//!     begin if pack_begin_line>0 then print(") in paragraph at lines ")
-//!     else print(") in alignment at lines ");
-//!     print_int(abs(pack_begin_line));
-//!     print("--");
-//!     end
-//!   else print(") detected at line ");
-//!   print_int(line);
-//!   end;
-//! print_ln;@/
-//! font_in_short_display:=null_font; short_display(list_ptr(r)); print_ln;@/
-//! begin_diagnostic; show_box(r); end_diagnostic(true)
-//!
 //! @ @<Determine horizontal glue shrink setting...@>=
 //! begin @<Determine the shrink order@>;
 //! glue_order(r):=o; glue_sign(r):=shrinking;

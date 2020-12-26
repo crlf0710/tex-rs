@@ -59,8 +59,7 @@ macro_rules! height {
 /// repositioning distance, in sp
 macro_rules! shift_amount {
     ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 4]
-            [crate::section_0101::MEMORY_WORD_SC]
+        $globals.mem[$ptr + 4][crate::section_0101::MEMORY_WORD_SC]
     };
 }
 // @d list_offset=5 {position of |list_ptr| field in a box node}
@@ -68,13 +67,44 @@ macro_rules! shift_amount {
 pub(crate) const list_offset: quarterword = 5;
 // @d list_ptr(#) == link(#+list_offset) {beginning of the list inside the box}
 // @d glue_order(#) == subtype(#+list_offset) {applicable order of infinity}
+/// applicable order of infinity
+macro_rules! glue_order {
+    ($globals:expr, $ptr:expr) => {
+        subtype!($globals, $ptr + list_offset as pointer)
+    };
+}
 // @d glue_sign(#) == type(#+list_offset) {stretching or shrinking}
+/// stretching or shrinking
+macro_rules! glue_sign {
+    ($globals:expr, $ptr:expr) => {
+        r#type!($globals, $ptr + list_offset as pointer)
+    };
+}
 // @d normal=0 {the most common case when several cases are named}
 // @d stretching = 1 {glue setting applies to the stretch components}
 // @d shrinking = 2 {glue setting applies to the shrink components}
+
+pub(crate) enum glue_sign {
+    /// the most common case when several cases are named
+    normal = 0,
+    /// glue setting applies to the stretch components
+    stretching = 1,
+    /// glue setting applies to the shrink components
+    shrinking = 2,
+}
+
 // @d glue_offset = 6 {position of |glue_set| in a box node}
+/// position of `glue_set` in a box node
+pub(crate) const glue_offset: quarterword = 6;
 // @d glue_set(#) == mem[#+glue_offset].gr
 //   {a word of type |glue_ratio| for glue setting}
+/// a word of type `glue_ratio` for glue setting
+macro_rules! glue_set {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr + crate::section_0135::glue_offset as pointer]
+            [crate::section_0113::MEMORY_WORD_GR]
+    };
+}
 
 #[derive(Copy, Clone)]
 pub(crate) enum let_kind {

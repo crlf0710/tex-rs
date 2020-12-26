@@ -7,8 +7,10 @@
 /// leave a semantic level, re-enter the old
 #[allow(unused_variables)]
 pub(crate) fn pop_nest(globals: &mut TeXGlobals) {
-    todo!("pop_nest");
     // begin free_avail(head); decr(nest_ptr); cur_list:=nest[nest_ptr];
+    free_avail!(globals, head!(globals));
+    decr!(globals.nest_ptr);
+    globals.cur_list = globals.nest[globals.nest_ptr];
     // end;
 }
 

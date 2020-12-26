@@ -25,15 +25,22 @@ pub(crate) fn scan_glue(globals: &mut TeXGlobals, level: small_number) -> TeXRes
     Get_the_next_non_blank_non_sign_token__set_negative_appropriately!(globals, negative);
     // if (cur_cmd>=min_internal)and(cur_cmd<=max_internal) then
     if globals.cur_cmd >= min_internal && globals.cur_cmd <= max_internal {
-        todo!("1");
         // begin scan_something_internal(level,negative);
+        scan_something_internal(globals, level, negative)?;
         // if cur_val_level>=glue_val then
-        //   begin if cur_val_level<>level then mu_error;
-        //   return;
-        //   end;
+        if globals.cur_val_level >= cur_val_level_kind::glue_val {
+            // begin if cur_val_level<>level then mu_error;
+            if globals.cur_val_level as quarterword != level.get() {
+                todo!("mu_error");
+            }
+            // return;
+            return_nojump!();
+            // end;
+        }
         // if cur_val_level=int_val then scan_dimen(mu,false,true)
         // else if level=mu_val then mu_error;
         // end
+        todo!("1");
     }
     // else  begin back_input; scan_dimen(mu,false,false);
     else {
@@ -56,8 +63,10 @@ use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
+use crate::section_0113::quarterword;
 use crate::section_0208::min_internal;
 use crate::section_0209::max_internal;
 use crate::section_0325::back_input;
 use crate::section_0410::cur_val_level_kind;
+use crate::section_0413::scan_something_internal;
 use crate::section_0448::scan_dimen;

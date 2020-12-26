@@ -15,7 +15,20 @@
 //! @^system dependencies@>
 //
 // @d set_glue_ratio_zero(#) == #:=0.0 {store the representation of zero ratio}
+/// store the representation of zero ratio
+macro_rules! set_glue_ratio_zero {
+    ($val:expr) => {
+        $val = 0.0;
+    }
+}
 // @d set_glue_ratio_one(#) == #:=1.0 {store the representation of unit ratio}
+/// store the representation of unit ratio
+#[allow(unused_macros)]
+macro_rules! set_glue_ratio_one {
+    ($val:expr) => {
+        $val = 1.0;
+    }
+}
 // @d float(#) == # {convert from |glue_ratio| to type |real|}
 // @d unfloat(#) == # {convert from |real| to type |glue_ratio|}
 // @d float_constant(#) == #.0 {convert |integer| constant to |real|}

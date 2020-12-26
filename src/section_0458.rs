@@ -16,7 +16,7 @@ macro_rules! set_conversion {
 //
 // @<Scan for \(a)all other units and adjust |cur_val| and |f|...@>=
 macro_rules! Scan_for_a_all_other_units_and_adjust_cur_val_and_f_accordingly__goto_done_in_the_case_of_scaled_points {
-    ($globals:expr, $f:expr) => {{
+    ($globals:expr, $f:expr, $lbl_done:lifetime) => {{
         /// conversion ratio for the scanned units
         let (num, denom);
         // if scan_keyword("in") then set_conversion(7227)(100)
@@ -25,18 +25,39 @@ macro_rules! Scan_for_a_all_other_units_and_adjust_cur_val_and_f_accordingly__go
         }
         // @.in@>
         // else if scan_keyword("pc") then set_conversion(12)(1)
+        else if scan_keyword($globals, strpool_str!("pc"))? {
+            set_conversion!(num = 12, denom = 1);
+        }
         // @.pc@>
         // else if scan_keyword("cm") then set_conversion(7227)(254)
+        else if scan_keyword($globals, strpool_str!("cm"))? {
+            set_conversion!(num = 7227, denom = 254);
+        }
         // @.cm@>
         // else if scan_keyword("mm") then set_conversion(7227)(2540)
+        else if scan_keyword($globals, strpool_str!("mm"))? {
+            set_conversion!(num = 7227, denom = 2540);
+        }
         // @.mm@>
         // else if scan_keyword("bp") then set_conversion(7227)(7200)
+        else if scan_keyword($globals, strpool_str!("bp"))? {
+            set_conversion!(num = 7227, denom = 7200);
+        }
         // @.bp@>
         // else if scan_keyword("dd") then set_conversion(1238)(1157)
+        else if scan_keyword($globals, strpool_str!("dd"))? {
+            set_conversion!(num = 1238, denom = 1157);
+        }
         // @.dd@>
         // else if scan_keyword("cc") then set_conversion(14856)(1157)
+        else if scan_keyword($globals, strpool_str!("cc"))? {
+            set_conversion!(num = 14856, denom = 1157);
+        }
         // @.cc@>
         // else if scan_keyword("sp") then goto done
+        else if scan_keyword($globals, strpool_str!("sp"))? {
+            goto_forward_label!($lbl_done);
+        }
         // @.sp@>
         // else @<Complain about unknown unit and |goto done2|@>;
         else {

@@ -38,8 +38,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         // any_mode(set_interaction):prefixed_command;
         if false ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, toks_register as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_toks as u16) ||
-        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_int as u16) ||
+        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_toks as u16) ||
+        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_int as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_dimen as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_glue as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, assign_mu_glue as u16) ||
@@ -49,8 +49,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_prev_graf as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_page_dimen as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_page_int as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_box_dimen as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_shape as u16) ||
+        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_box_dimen as u16) ||
+        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_shape as u16) ||
         */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def_code as u16) ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def_family as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_font as u16) ||
