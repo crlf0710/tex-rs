@@ -11,6 +11,8 @@ pub(crate) const undefined_cs: quarterword = max_command + 1;
 pub(crate) const expand_after: quarterword = max_command + 2;
 // @d no_expand=max_command+3 {special nonexpansion ( \.{\\noexpand} )}
 // @d input=max_command+4 {input a source file ( \.{\\input}, \.{\\endinput} )}
+/// input a source file ( `\input`, `\endinput` )
+pub(crate) const input: quarterword = max_command + 4;
 // @d if_test=max_command+5 {conditional text ( \.{\\if}, \.{\\ifcase}, etc.~)}
 /// conditional text ( `\if`, `\ifcase`, etc. )
 pub(crate) const if_test: quarterword = max_command + 5;

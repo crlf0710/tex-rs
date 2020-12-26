@@ -36,6 +36,9 @@ macro_rules! Expand_a_nonmacro {
             Terminate_the_current_conditional_and_skip_to_fi!($globals);
         }
         // input:@<Initiate or terminate input from a file@>;
+        else if $globals.cur_cmd == input {
+            Initiate_or_terminate_input_from_a_file!($globals);
+        }
         // othercases @<Complain about an undefined macro@>
         else {
             trace_error_expr!("cur_cmd = {}", $globals.cur_cmd);
@@ -48,6 +51,7 @@ macro_rules! Expand_a_nonmacro {
         use crate::section_0210::fi_or_else;
         use crate::section_0210::if_test;
         use crate::section_0210::cs_name;
+        use crate::section_0210::input;
         use crate::section_0299::show_cur_cmd_chr;
         use crate::section_0470::conv_toks;
         use crate::section_0498::conditional;
