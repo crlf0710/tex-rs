@@ -17,7 +17,11 @@
 //! |fil|, |fill|, or |filll|). The |subtype| field is not used.
 //
 // @d hlist_node=0 {|type| of hlist nodes}
+/// `type` of hlist nodes
+pub(crate) const hlist_node: quarterword = 0;
 // @d box_node_size=7 {number of words to allocate for a box node}
+/// number of words to allocate for a box node
+pub(crate) const box_node_size: quarterword = 7;
 // @d width_offset=1 {position of |width| field in a box node}
 /// position of `width` field in a box node
 pub(crate) const width_offset: quarterword = 1;
@@ -37,7 +41,6 @@ macro_rules! width {
 }
 // @d depth(#) == mem[#+depth_offset].sc {depth of the box, in sp}
 /// depth of the box, in sp
-#[allow(unused_macros)]
 macro_rules! depth {
     ($globals:expr, $ptr:expr) => {
         $globals.mem[$ptr + crate::section_0135::depth_offset as crate::section_0115::pointer]
@@ -46,7 +49,6 @@ macro_rules! depth {
 }
 // @d height(#) == mem[#+height_offset].sc {height of the box, in sp}
 /// height of the box, in sp
-#[allow(unused_macros)]
 macro_rules! height {
     ($globals:expr, $ptr:expr) => {
         $globals.mem[$ptr + crate::section_0135::height_offset as crate::section_0115::pointer]
@@ -54,7 +56,16 @@ macro_rules! height {
     };
 }
 // @d shift_amount(#) == mem[#+4].sc {repositioning distance, in sp}
+/// repositioning distance, in sp
+macro_rules! shift_amount {
+    ($globals:expr, $ptr:expr) => {
+        $globals.mem[$ptr + 4]
+            [crate::section_0101::MEMORY_WORD_SC]
+    };
+}
 // @d list_offset=5 {position of |list_ptr| field in a box node}
+/// position of `list_ptr` field in a box node
+pub(crate) const list_offset: quarterword = 5;
 // @d list_ptr(#) == link(#+list_offset) {beginning of the list inside the box}
 // @d glue_order(#) == subtype(#+list_offset) {applicable order of infinity}
 // @d glue_sign(#) == type(#+list_offset) {stretching or shrinking}

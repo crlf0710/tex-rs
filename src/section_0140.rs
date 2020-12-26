@@ -11,8 +11,12 @@
 //! |ins_ptr|, which points to the beginning of the vlist for the insertion.
 //
 // @d ins_node=3 {|type| of insertion nodes}
+/// `type` of insertion nodes
+pub(crate) const ins_node: quarterword = 3;
 // @d ins_node_size=5 {number of words to allocate for an insertion}
 // @d float_cost(#)==mem[#+1].int {the |floating_penalty| to be used}
 // @d ins_ptr(#)==info(#+4) {the vertical list to be inserted}
 // @d split_top_ptr(#)==link(#+4) {the |split_top_skip| to be used}
 //
+
+use crate::section_0113::quarterword;

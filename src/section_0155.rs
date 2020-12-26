@@ -8,9 +8,12 @@
 //! (for kerns inserted from \.{\\kern} and \.{\\/} commands) or |acc_kern|
 //! (for kerns inserted from non-math accents) or |mu_glue| (for kerns
 //! inserted from \.{\\mkern} specifications in math formulas).
-//!
-//! @d kern_node=11 {|type| of a kern node}
-//! @d explicit=1 {|subtype| of kern nodes from \.{\\kern} and \.{\\/}}
-//! @d acc_kern=2 {|subtype| of kern nodes from accents}
-//!
+//
+// @d kern_node=11 {|type| of a kern node}
+/// `type` of a kern node
+pub(crate) const kern_node: quarterword = 11;
+// @d explicit=1 {|subtype| of kern nodes from \.{\\kern} and \.{\\/}}
+// @d acc_kern=2 {|subtype| of kern nodes from accents}
+//
 
+use crate::section_0113::quarterword;

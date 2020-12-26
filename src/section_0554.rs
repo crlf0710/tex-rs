@@ -33,36 +33,83 @@ pub(crate) struct char_info(four_quarters);
 
 // @d char_info_end(#)==#].qqqq
 // @d char_info(#)==font_info[char_base[#]+char_info_end
+macro_rules! char_info {
+    ($globals:expr, $f:expr, $c:expr) => {
+        $globals.font_info[$globals.char_base[$f] as pointer + $c as pointer][crate::section_0554::MEMORY_WORD_CHAR_INFO]
+    };
+}
 // @d char_width_end(#)==#.b0].sc
 // @d char_width(#)==font_info[width_base[#]+char_width_end
+macro_rules! char_width {
+    ($globals:expr, $f:expr, $c:expr) => {
+        $globals.font_info[$globals.width_base[$f] as pointer + $c.width() as pointer][crate::section_0101::MEMORY_WORD_SC]
+    };
+}
 // @d char_exists(#)==(#.b0>min_quarterword)
 // @d char_italic_end(#)==(qo(#.b2)) div 4].sc
 // @d char_italic(#)==font_info[italic_base[#]+char_italic_end
 // @d height_depth(#)==qo(#.b1)
+impl char_info {
+    pub(crate) fn width(self) -> eight_bits {
+        qo!(self.0[FOUR_QUARTERS_B0])
+    }
+    pub(crate) fn height_depth(self) -> eight_bits {
+        qo!(self.0[FOUR_QUARTERS_B1])
+    }
+}
 // @d char_height_end(#)==(#) div 16].sc
 // @d char_height(#)==font_info[height_base[#]+char_height_end
+macro_rules! char_height {
+    ($globals:expr, $f:expr, $c:expr) => {
+        $globals.font_info[$globals.height_base[$f] as pointer + ($c / 16) as pointer]
+            [crate::section_0101::MEMORY_WORD_SC]
+    };
+}
 // @d char_depth_end(#)==(#) mod 16].sc
 // @d char_depth(#)==font_info[depth_base[#]+char_depth_end
+macro_rules! char_depth {
+    ($globals:expr, $f:expr, $c:expr) => {
+        $globals.font_info[$globals.depth_base[$f] as pointer + ($c % 16) as pointer]
+            [crate::section_0101::MEMORY_WORD_SC]
+    };
+}
 // @d char_tag(#)==((qo(#.b2)) mod 4)
 
 impl char_info {
     pub(crate) fn char_tag(&self) -> char_tag {
-        unsafe {
-            let b2 = qo!((self.0)[FOUR_QUARTERS_B2]);
-            core::mem::transmute(b2 % 4)
-        }
+        let b2 = qo!((self.0)[FOUR_QUARTERS_B2]);
+        (b2 % 4).into()
     }
 }
-
-use crate::section_0113::four_quarters;
-use crate::section_0544::char_tag;
-use crate::section_0113::FOUR_QUARTERS_B2;
-use ref_cast::RefCast;
 
 impl Default for char_info {
     fn default() -> Self {
-        unsafe {
-            std::mem::zeroed()
-        }
+        unsafe { std::mem::zeroed() }
     }
 }
+
+pub(crate) struct MEMORY_WORD_CHAR_INFO;
+
+impl Index<MEMORY_WORD_CHAR_INFO> for memory_word {
+    type Output = char_info;
+    fn index(&self, _: MEMORY_WORD_CHAR_INFO) -> &char_info {
+        char_info::ref_cast(&self[MEMORY_WORD_QQQQ])
+    }
+}
+
+impl IndexMut<MEMORY_WORD_CHAR_INFO> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_CHAR_INFO) -> &mut char_info {
+        char_info::ref_cast_mut(&mut self[MEMORY_WORD_QQQQ])
+    }
+}
+
+use crate::section_0025::eight_bits;
+use crate::section_0113::four_quarters;
+use crate::section_0113::memory_word;
+use crate::section_0113::FOUR_QUARTERS_B0;
+use crate::section_0113::FOUR_QUARTERS_B1;
+use crate::section_0113::FOUR_QUARTERS_B2;
+use crate::section_0113::MEMORY_WORD_QQQQ;
+use crate::section_0544::char_tag;
+use core::ops::{Index, IndexMut};
+use ref_cast::RefCast;

@@ -284,10 +284,13 @@ impl<'a> Iterator for GenericCharIter<'a> {
     }
 }
 
-pub(crate) const info_val_idx_max: usize = 255;
+pub(crate) const info_val_count_limit: usize = 65536;
 
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static info_val_gallery: [cur_tok_type_repr; 256] = [0; 256];
+pub(crate) static info_val_gallery: Box<[cur_tok_type_repr]> = vec![0; info_val_count_limit].into();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::unicode_support::info_val_count_limit;
 
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static info_val_count: usize = 0;
@@ -304,7 +307,7 @@ pub(crate) fn register_info_value(
             return i as halfword;
         }
     }
-    if globals.info_val_count >= info_val_idx_max {
+    if globals.info_val_count + 1 >= info_val_count_limit {
         panic!("info idx used up");
     }
     let idx = globals.info_val_count;
@@ -320,9 +323,49 @@ pub(crate) fn info_value(globals: &mut TeXGlobals, idx: halfword) -> cur_tok_typ
     globals.info_val_gallery[idx as usize]
 }
 
+pub(crate) const fontchar_val_count_limit: usize = 65536;
+
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static fontchar_val_gallery: Box<[font_and_character]> = vec![font_and_character::default(); fontchar_val_count_limit].into();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::unicode_support::fontchar_val_count_limit;
+
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static fontchar_val_count: usize = 0;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0134::font_and_character;
+
+pub(crate) fn register_fontchar_value(
+    globals: &mut TeXGlobals,
+    fontchar_val: font_and_character,
+) -> halfword {
+    for i in 0..globals.fontchar_val_count {
+        if globals.fontchar_val_gallery[i] == fontchar_val {
+            return i as halfword;
+        }
+    }
+    if globals.fontchar_val_count + 1 >= fontchar_val_count_limit {
+        panic!("fontchar idx used up");
+    }
+    let idx = globals.fontchar_val_count;
+    globals.fontchar_val_gallery[idx] = fontchar_val;
+    globals.fontchar_val_count += 1;
+    idx as halfword
+}
+
+pub(crate) fn fontchar_value(globals: &mut TeXGlobals, idx: halfword) -> font_and_character {
+    if idx as usize >= globals.fontchar_val_count {
+        panic!("fontchar idx out of bound");
+    }
+    globals.fontchar_val_gallery[idx as usize]
+}
+
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::packed_ASCII_code;
 use crate::section_0113::halfword;
+use crate::section_0134::font_and_character;
 use crate::section_0297::cur_tok_type_repr;
 use core::cell::{Cell, RefCell};
 use globals_struct::{globals_struct_field, globals_struct_use};

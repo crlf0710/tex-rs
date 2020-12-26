@@ -11,9 +11,13 @@
 //! The |subtype| field is called |span_count|; an unset box typically
 //! contains the data for |qo(span_count)+1| columns.
 //! Unset nodes will be changed to box nodes when alignment is completed.
-//!
-//! @d unset_node=13 {|type| for an unset node}
-//! @d glue_stretch(#)==mem[#+glue_offset].sc {total stretch in an unset node}
-//! @d glue_shrink==shift_amount {total shrink in an unset node}
-//! @d span_count==subtype {indicates the number of spanned columns}
-//!
+//
+// @d unset_node=13 {|type| for an unset node}
+/// `type` for an unset node
+pub(crate) const unset_node: quarterword = 13;
+// @d glue_stretch(#)==mem[#+glue_offset].sc {total stretch in an unset node}
+// @d glue_shrink==shift_amount {total shrink in an unset node}
+// @d span_count==subtype {indicates the number of spanned columns}
+//
+
+use crate::section_0113::quarterword;

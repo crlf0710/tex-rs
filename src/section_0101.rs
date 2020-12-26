@@ -31,6 +31,19 @@ impl scaled {
     }
 }
 
+impl Default for scaled {
+    fn default() -> Self {
+        scaled::zero()
+    }
+}
+
+impl core::ops::Add for scaled {
+    type Output = scaled;
+    fn add(self, rhs: scaled) -> scaled {
+        scaled(self.0 + rhs.0)
+    }
+}
+
 impl core::ops::Neg for scaled {
     type Output = scaled;
     fn neg(self) -> Self::Output {

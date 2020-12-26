@@ -20,7 +20,7 @@ pub(crate) fn package(globals: &mut TeXGlobals, c: small_number) -> TeXResult<()
             link!(globals, head!(globals)),
             scaled::new_from_inner(saved!(globals, 2)),
             small_number::new(saved!(globals, 1) as _),
-        );
+        )?;
     }
     // else  begin cur_box:=vpackage(link(head),saved(2),saved(1),d);
     else {

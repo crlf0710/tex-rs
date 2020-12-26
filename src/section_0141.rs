@@ -5,6 +5,8 @@
 //! use the full word than to risk leaving garbage in the unused half.
 //
 // @d mark_node=4 {|type| of a mark node}
+/// `type` of a mark node
+pub(crate) const mark_node: quarterword = 4;
 // @d small_node_size=2 {number of words to allocate for most node types}
 /// number of words to allocate for most node types
 pub(crate) const small_node_size: quarterword = 2;

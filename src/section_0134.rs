@@ -41,8 +41,69 @@
 macro_rules! is_char_node {
     ($globals:expr, $ptr:expr) => {
         $ptr >= $globals.hi_mem_min
+    };
+}
+
+// @d font == type {the font code in a |char_node|}
+/// the font code in a `char_node`
+#[cfg(not(feature = "unicode_support"))]
+macro_rules! font {
+    ($globals:expr, $f:expr) => {
+        r#type!($globals, $f)
+    };
+}
+
+/// the font code in a `char_node`
+#[cfg(feature = "unicode_support")]
+macro_rules! font {
+    ($globals:expr, $f:expr) => {
+        crate::unicode_support::fontchar_value(
+            $globals,
+            $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH],
+        )
+        .font
+    };
+}
+
+// @d character == subtype {the character code in a |char_node|}
+
+/// the font code in a `char_node`
+#[cfg(not(feature = "unicode_support"))]
+macro_rules! character {
+    ($globals:expr, $f:expr) => {
+        subtype!($globals, $f)
+    };
+}
+
+/// the font code in a `char_node`
+#[cfg(feature = "unicode_support")]
+macro_rules! character {
+    ($globals:expr, $f:expr) => {
+        crate::unicode_support::fontchar_value(
+            $globals,
+            $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH],
+        )
+        .character
+    };
+}
+
+#[cfg(feature = "unicode_support")]
+#[derive(Copy, Clone, PartialEq)]
+pub(crate) struct font_and_character {
+    pub(crate) font: internal_font_number,
+    pub(crate) character: ASCII_code,
+}
+
+#[cfg(feature = "unicode_support")]
+impl Default for font_and_character {
+    fn default() -> Self {
+        font_and_character {
+            font: internal_font_number::new(font_base as _),
+            character: ASCII_code_literal!(b' '),
+        }
     }
 }
-// @d font == type {the font code in a |char_node|}
-// @d character == subtype {the character code in a |char_node|}
-//
+
+use crate::section_0548::internal_font_number;
+use crate::section_0012::font_base;
+use crate::section_0018::ASCII_code;

@@ -165,6 +165,21 @@ impl IndexMut<MEMORY_WORD_HH_B0> for memory_word {
     }
 }
 
+pub(crate) struct MEMORY_WORD_QQQQ;
+
+impl Index<MEMORY_WORD_QQQQ> for memory_word {
+    type Output = four_quarters;
+    fn index(&self, _: MEMORY_WORD_QQQQ) -> &four_quarters {
+        unsafe { &self.qqqq }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_QQQQ> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_QQQQ) -> &mut four_quarters {
+        unsafe { &mut self.qqqq }
+    }
+}
+
 impl Default for two_halves {
     fn default() -> Self {
         unsafe { core::mem::zeroed() }
@@ -200,6 +215,36 @@ impl IndexMut<TWO_HALVES_LH> for two_halves {
         unsafe { &mut self.lh_or_b01.lh }
     }
 }
+pub(crate) struct FOUR_QUARTERS_B0;
+
+impl Index<FOUR_QUARTERS_B0> for four_quarters {
+    type Output = quarterword;
+    fn index(&self, _: FOUR_QUARTERS_B0) -> &quarterword {
+        &self.b.0
+    }
+}
+
+impl IndexMut<FOUR_QUARTERS_B0> for four_quarters {
+    fn index_mut(&mut self, _: FOUR_QUARTERS_B0) -> &mut quarterword {
+        &mut self.b.0
+    }
+}
+
+
+pub(crate) struct FOUR_QUARTERS_B1;
+
+impl Index<FOUR_QUARTERS_B1> for four_quarters {
+    type Output = quarterword;
+    fn index(&self, _: FOUR_QUARTERS_B1) -> &quarterword {
+        &self.b.1
+    }
+}
+
+impl IndexMut<FOUR_QUARTERS_B1> for four_quarters {
+    fn index_mut(&mut self, _: FOUR_QUARTERS_B1) -> &mut quarterword {
+        &mut self.b.1
+    }
+}
 
 pub(crate) struct FOUR_QUARTERS_B2;
 
@@ -213,6 +258,21 @@ impl Index<FOUR_QUARTERS_B2> for four_quarters {
 impl IndexMut<FOUR_QUARTERS_B2> for four_quarters {
     fn index_mut(&mut self, _: FOUR_QUARTERS_B2) -> &mut quarterword {
         &mut self.b.2
+    }
+}
+
+pub(crate) struct FOUR_QUARTERS_B3;
+
+impl Index<FOUR_QUARTERS_B3> for four_quarters {
+    type Output = quarterword;
+    fn index(&self, _: FOUR_QUARTERS_B3) -> &quarterword {
+        &self.b.3
+    }
+}
+
+impl IndexMut<FOUR_QUARTERS_B3> for four_quarters {
+    fn index_mut(&mut self, _: FOUR_QUARTERS_B3) -> &mut quarterword {
+        &mut self.b.3
     }
 }
 

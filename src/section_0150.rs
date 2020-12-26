@@ -69,6 +69,15 @@ pub(crate) enum glue_ord {
     filll = 3,
 }
 
+pub(crate) type normal_TYPENUM = U0;
+pub(crate) type filll_TYPENUM = U3;
+
+impl glue_ord {
+    pub(crate) fn get(self) -> u8 {
+        self as u8
+    }
+}
+
 impl From<u8> for glue_ord {
     fn from(val: u8) -> glue_ord {
         match val {
@@ -82,3 +91,4 @@ impl From<u8> for glue_ord {
 }
 
 use crate::section_0113::quarterword;
+use typenum::{U0, U3};

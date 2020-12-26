@@ -10,12 +10,24 @@
 // @<Glob...@>=
 // @!char_base:array[internal_font_number] of integer;
 //   {base addresses for |char_info|}
+/// base addresses for `char_info`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static char_base: internal_font_array<integer> = internal_font_array::default();
 // @!width_base:array[internal_font_number] of integer;
 //   {base addresses for widths}
+/// base addresses for widths
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static width_base: internal_font_array<integer> = internal_font_array::default();
 // @!height_base:array[internal_font_number] of integer;
 //   {base addresses for heights}
+/// base addresses for heights
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static height_base: internal_font_array<integer> = internal_font_array::default();
 // @!depth_base:array[internal_font_number] of integer;
 //   {base addresses for depths}
+/// base addresses for depths
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static depth_base: internal_font_array<integer> = internal_font_array::default();
 // @!italic_base:array[internal_font_number] of integer;
 //   {base addresses for italic corrections}
 // @!lig_kern_base:array[internal_font_number] of integer;

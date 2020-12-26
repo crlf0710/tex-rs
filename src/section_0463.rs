@@ -25,7 +25,7 @@ pub(crate) fn scan_rule_spec(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     // else  begin height(q):=default_rule; depth(q):=0;
     else {
         height!(globals, q) = default_rule;
-        depth!(globals, q) = scaled::new_from_inner(0);
+        depth!(globals, q) = scaled::zero();
         // end;
     }
     // reswitch: if scan_keyword("width") then

@@ -34,3 +34,15 @@ pub(crate) enum char_tag {
     /// character is extensible
     ext_tag = 3,
 }
+
+impl From<u8> for char_tag {
+    fn from(v: u8) -> Self {
+        match v {
+            0 => char_tag::no_tag,
+            1 => char_tag::lig_tag,
+            2 => char_tag::list_tag,
+            3 => char_tag::ext_tag,
+            _ => unreachable!()
+        }
+    }
+}
