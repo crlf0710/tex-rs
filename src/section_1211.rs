@@ -2,7 +2,7 @@
 //! silently accepted.
 
 macro_rules! Assignments {
-    ($globals:expr, $cur_cmd:expr, $a:expr) => {{
+    ($globals:expr, $cur_cmd:expr, $a:expr, $lbl_done:lifetime) => {{
         trace_span!("Assignments");
         if false {
             unreachable!();
@@ -42,6 +42,10 @@ macro_rules! Assignments {
             do_nothing!();
             true
         } else if Assignments_1242!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
+        } else if Assignments_1252!($globals, $cur_cmd, $a, $lbl_done) {
             /// already processed
             do_nothing!();
             true
@@ -91,11 +95,15 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     trace_debug_expr!("cur_cmd={}", globals.cur_cmd);
     // @<Discard the prefixes \.{\\long} and \.{\\outer} if they are irrelevant@>;
+    Discard_the_prefixes_long_and_outer_if_they_are_irrelevant!(globals, a);
+    region_forward_label!(
+    |'done|
+    {
     // @<Adjust \(f)for the setting of \.{\\globaldefs}@>;
     Adjust_f_for_the_setting_of_globaldefs!(globals, a);
     // case cur_cmd of
     // @t\4@>@<Assignments@>@;
-    if Assignments!(globals, globals.cur_cmd, a) {
+    if Assignments!(globals, globals.cur_cmd, a, 'done) {
         /// already processed
         do_nothing!();
     }
@@ -106,6 +114,10 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
         // endcases;
     }
     // done: @<Insert a token saved by \.{\\afterassignment}, if any@>;
+    }
+    'done <-
+    );
+    Insert_a_token_saved_by_afterassignment__if_any!(globals);
     // exit:end;
     ok_nojump!()
 }

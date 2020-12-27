@@ -43,9 +43,7 @@ macro_rules! Initialize_whatever_TeX_might_access {
         Set_initial_values_of_key_variables!($globals);
         // @!init @<Initialize table entries (done by \.{INITEX} only)@>@;@+tini
         region_initex! {
-            ($globals) {
-                Initialize_table_entries_done_by_INITEX_only!($globals);
-            }
+            Initialize_table_entries_done_by_INITEX_only!($globals);
         }
     }
 }

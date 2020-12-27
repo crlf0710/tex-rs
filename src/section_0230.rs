@@ -122,6 +122,17 @@ macro_rules! cat_code {
     };
 }
 // @d lc_code(#)==equiv(lc_code_base+#)
+macro_rules! lc_code {
+    ($globals:expr, $val:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::index_offset_with_ASCII_code(
+                crate::section_0230::lc_code_base,
+                $val
+            )
+        )
+    };
+}
 // @d uc_code(#)==equiv(uc_code_base+#)
 // @d sf_code(#)==equiv(sf_code_base+#)
 macro_rules! sf_code {

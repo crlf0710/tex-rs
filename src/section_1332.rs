@@ -72,7 +72,6 @@ pub fn entry(globals: &mut TeXGlobals) {
     initialize(globals);
     // @!init if not get_strings_started then goto final_end;
     region_initex! {
-    (globals) {
         if !get_strings_started(globals) {
             goto_forward_label!('final_end);
         }
@@ -84,7 +83,6 @@ pub fn entry(globals: &mut TeXGlobals) {
         globals.init_pool_ptr = globals.pool_ptr;
         fix_date_and_time(globals);
         // tini@/
-    }
     };
     /// ready_already:=314159;
     {

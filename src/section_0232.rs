@@ -57,15 +57,17 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     // for k:="0" to "9" do math_code(k):=hi(k+var_code);
     // for k:="A" to "Z" do
     for k_u8 in b'A'..=b'Z' {
-        //   begin cat_code(k):=letter; cat_code(k+"a"-"A"):=letter;@/
+        // begin cat_code(k):=letter; cat_code(k+"a"-"A"):=letter;@/
         cat_code!(globals, ASCII_code_literal!(k_u8)) = letter as _;
         cat_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) = letter as _;
-        //   math_code(k):=hi(k+var_code+@"100);
-        //   math_code(k+"a"-"A"):=hi(k+"a"-"A"+var_code+@"100);@/
-        //   lc_code(k):=k+"a"-"A"; lc_code(k+"a"-"A"):=k+"a"-"A";@/
-        //   uc_code(k):=k; uc_code(k+"a"-"A"):=k;@/
-        //   sf_code(k):=999;
-        //   end;
+        // math_code(k):=hi(k+var_code+@"100);
+        // math_code(k+"a"-"A"):=hi(k+"a"-"A"+var_code+@"100);@/
+        // lc_code(k):=k+"a"-"A"; lc_code(k+"a"-"A"):=k+"a"-"A";@/
+        lc_code!(globals, ASCII_code_literal!(k_u8)) = (k_u8 + b'a' - b'A') as _;
+        lc_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) = (k_u8 + b'a' - b'A') as _;
+        // uc_code(k):=k; uc_code(k+"a"-"A"):=k;@/
+        // sf_code(k):=999;
+        // end;
     }
 }
 

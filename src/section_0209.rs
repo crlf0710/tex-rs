@@ -85,6 +85,8 @@ pub(crate) const def: quarterword = 97;
 /// set a box ( `\setbox` )
 pub(crate) const set_box: quarterword = 98;
 // @d hyph_data=99 {hyphenation data ( \.{\\hyphenation}, \.{\\patterns} )}
+/// hyphenation data ( `\hyphenation`, `\patterns` )
+pub(crate) const hyph_data: quarterword = 99;
 // @d set_interaction=100 {define level of interaction ( \.{\\batchmode}, etc.~)}
 // @d max_command=100 {the largest command code seen at |big_switch|}
 /// the largest command code seen at `big_switch`

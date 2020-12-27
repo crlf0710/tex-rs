@@ -65,8 +65,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, read_to_cs as u16) ||
         */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_box as u16) ||
-        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, hyph_data as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_interaction as u16) ||
+        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, hyph_data as u16) ||
+        /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_interaction as u16) ||
         */false {
             prefixed_command($globals)?;
 

@@ -99,7 +99,17 @@ pub(crate) const save_size: u16 = save_size_TYPENUM::U16;
 pub(crate) type save_size_TYPENUM = U600;
 // @!trie_size=8000; {space for hyphenation patterns; should be larger for
 //   \.{INITEX} than it is in production versions of \TeX}
+/// space for hyphenation patterns; should be larger for `INITEX`
+/// than it is in production versions of `TeX`
+pub(crate) const trie_size: u16 = trie_size_TYPENUM::U16;
+pub(crate) type trie_size_TYPENUM = U8000;
 // @!trie_op_size=500; {space for ``opcodes'' in the hyphenation patterns}
+/// space for "opcodes" in the hyphenation patterns
+pub(crate) const trie_op_size: u16 = trie_op_size_TYPENUM::U16;
+pub(crate) type trie_op_size_TYPENUM = U500;
+pub(crate) type trie_op_size_POS_TYPENUM = P500;
+pub(crate) type trie_op_size_NEG_TYPENUM = N500;
+
 // @!dvi_buf_size=800; {size of the output buffer; must be a multiple of 8}
 // @!file_name_size=40; {file names shouldn't be longer than this}
 /// file names shouldn't be longer than this
@@ -114,8 +124,12 @@ pub(crate) const pool_name: &'static str = "TeXformats:TEX.POOL                 
 
 use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
+type U8000 = ::typenum::op!(U1000 * U8);
 type U20000 = ::typenum::op!(U10000 * U2);
 type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
-use typenum::{Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79};
+use typenum::{
+    Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79, U8
+};
+use typenum::{N500, P500};

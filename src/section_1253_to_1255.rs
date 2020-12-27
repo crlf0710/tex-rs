@@ -1,19 +1,3 @@
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! hyph_data: if chr_code=1 then print_esc("patterns")
-//!   else print_esc("hyphenation");
-//!
-//! @ @<Assignments@>=
-//! hyph_data: if cur_chr=1 then
-//!     begin @!init new_patterns; goto done;@;@+tini@/
-//!     print_err("Patterns can be loaded only by INITEX");
-//! @.Patterns can be...@>
-//!     help0; error;
-//!     repeat get_token; until cur_cmd=right_brace; {flush the patterns}
-//!     return;
-//!     end
-//!   else  begin new_hyph_exceptions; goto done;
-//!     end;
-//!
 //! @ All of \TeX's parameters are kept in |eqtb| except the font information,
 //! the interaction mode, and the hyphenation tables; these are strictly global.
 //!

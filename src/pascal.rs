@@ -95,7 +95,7 @@ macro_rules! define_ranged_unsigned_integer {
                 assert!(val <= <MAX as typenum::Unsigned>::$typenum_const);
                 //TODO: Add more checks here.
                 $name(val, PhantomData)
-            }       
+            }
 
             $v fn get(self) -> $base_type {
                 self.0
@@ -201,7 +201,7 @@ macro_rules! define_ranged_unsigned_integer {
                 self += rhs.get();
                 self
             }
-        }        
+        }
 
         impl<MIN, MAX> core::ops::Sub<$base_type> for $name<MIN, MAX>
         where MIN: typenum::Unsigned, MAX: typenum::Unsigned {
@@ -538,7 +538,7 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
 
         impl<ELEMENT: core::fmt::Debug> core::fmt::Debug for $name<ELEMENT> {
             fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-                let start_k = <$length_typenum as typenum::Unsigned>::$typenum_const as usize;
+                let start_k = <$start_typenum as typenum::Unsigned>::$typenum_const as usize;
                 let mut debug_map = f.debug_map();
                 debug_map.entries((start_k..).zip(self.0.iter()));
                 debug_map.finish()?;
@@ -596,6 +596,89 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
                 let end = range.end.get() as usize -
                     <$start_typenum as typenum::Unsigned>::$typenum_const as usize;
                 &mut (self.0)[start..end]
+            }
+        }
+    };
+}
+
+macro_rules! define_array_keyed_with_ranged_signed_integer_with_fixed_start_and_length {
+    ($v:vis $name:ident[$index_type:path] => $base_index_type:path; $typenum_start_const:ident;
+        $typenum_length_const:ident; $start_typenum:path; $length_typenum:path) => {
+        
+        $v struct $name<ELEMENT>
+        ([ELEMENT; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize]);
+
+        impl<ELEMENT> $name<ELEMENT> {
+            $v fn iter(&self) -> core::slice::Iter<'_, ELEMENT> {
+                (self.0)[..].iter()
+            }
+        }
+
+        impl<ELEMENT> $name<ELEMENT>
+        where
+            ELEMENT: Copy {
+            $v fn from_copied(val: ELEMENT) -> Self {
+                $name(make_copied_array!(ELEMENT; val; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize ))
+            }
+        }
+
+        impl<ELEMENT> Clone for $name<ELEMENT>
+        where
+            [ELEMENT; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize]: Clone {
+            fn clone(&self) -> Self {
+                $name(self.0.clone())
+            }
+        }
+
+        impl<ELEMENT> Copy for $name<ELEMENT>
+        where
+            [ELEMENT; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize]: Copy {}
+
+        impl<ELEMENT> Default for $name<ELEMENT>
+        where
+            ELEMENT: Default {
+            fn default() -> Self {
+                $name(make_default_array!(ELEMENT;<$length_typenum as typenum::Unsigned>::$typenum_length_const as usize ))
+            }
+        }
+
+        impl<ELEMENT: core::fmt::Debug> core::fmt::Debug for $name<ELEMENT> {
+            fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+                let start_k = <$start_typenum as typenum::Integer>::$typenum_start_const as usize;
+                let mut debug_map = f.debug_map();
+                debug_map.entries((start_k..).zip(self.0.iter()));
+                debug_map.finish()?;
+                Ok(())
+            }
+        }
+
+        impl<ELEMENT> core::ops::Index<$index_type> for $name<ELEMENT>
+        {
+            type Output = ELEMENT;
+            fn index(&self, idx: $index_type) -> &ELEMENT {
+                &(self.0)[(idx.get() - <$start_typenum as typenum::Integer>::$typenum_start_const) as usize]
+            }
+        }
+
+        impl<ELEMENT> core::ops::IndexMut<$index_type> for $name<ELEMENT>
+        {
+            fn index_mut(&mut self, idx: $index_type) -> &mut ELEMENT {
+                &mut (self.0)[(idx.get() - <$start_typenum as typenum::Integer>::$typenum_start_const) as usize]
+            }
+        }
+
+        impl<ELEMENT> core::ops::Index<$base_index_type> for $name<ELEMENT>
+        {
+            type Output = ELEMENT;
+            fn index(&self, idx: $base_index_type) -> &ELEMENT {
+                &(self.0)[(idx as isize - <$start_typenum as typenum::Integer>::$typenum_start_const as isize) as usize]
+            }
+        }
+
+        impl<ELEMENT> core::ops::IndexMut<$base_index_type> for $name<ELEMENT>
+        {
+            fn index_mut(&mut self, idx: $base_index_type) -> &mut ELEMENT {
+                &mut (self.0)[(idx as isize - <$start_typenum as typenum::Integer>::$typenum_start_const as isize) as usize]
             }
         }
     };

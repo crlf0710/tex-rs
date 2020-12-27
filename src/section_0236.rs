@@ -332,6 +332,11 @@ macro_rules! new_line_char {
     };
 }
 // @d language==int_par(language_code)
+macro_rules! language {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::language_code)
+    };
+}
 // @d left_hyphen_min==int_par(left_hyphen_min_code)
 // @d right_hyphen_min==int_par(right_hyphen_min_code)
 // @d holding_inserts==int_par(holding_inserts_code)
