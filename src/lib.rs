@@ -1095,7 +1095,11 @@ reversing_order_items!(
                 #[macro_use]
                 mod section_0943;
                 mod section_0944;
-                mod section_0945_to_0949;
+                mod section_0945;
+                mod section_0946;
+                #[macro_use]
+                mod section_0947;
+                mod section_0948_to_0949;
                 mod section_0950;
                 mod section_0951_to_0959;
                 mod section_0960;
@@ -1111,6 +1115,7 @@ reversing_order_items!(
                 mod section_0963;
             }
             {
+                #[macro_use]
                 mod section_0964;
                 #[macro_use]
                 mod section_0965;
