@@ -20,7 +20,7 @@ macro_rules! set_cur_lang {
             $globals.cur_lang = ASCII_code::from(language!($globals));
         }
         use crate::section_0018::ASCII_code;
-    }}
+    }};
 }
 
 // @p procedure new_hyph_exceptions; {enters new exceptions}
@@ -37,14 +37,16 @@ pub(crate) fn new_hyph_exceptions(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!u,@!v:pool_pointer; {indices into |str_pool|}
     // begin scan_left_brace; {a left brace must follow \.{\\hyphenation}}
     /// a left brace must follow `\hyphenation`
-    const _ : () = ();
+    const _: () = ();
 
     scan_left_brace(globals)?;
     // set_cur_lang;
     set_cur_lang!(globals);
     // @<Enter as many hyphenation exceptions as are listed,
     // until coming to a right brace; then |return|@>;
-    todo!("new_hyph_exceptions");
+    Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to_a_right_brace__then_return!(
+        globals
+    );
     // exit:end;
     ok_nojump!()
 }

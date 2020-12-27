@@ -1,32 +1,3 @@
-//! @ @<Give improper \.{\\hyph...@>=
-//! begin print_err("Improper "); print_esc("hyphenation");
-//! @.Improper \\hyphenation...@>
-//!   print(" will be flushed");
-//! help2("Hyphenation exceptions must contain only letters")@/
-//!   ("and hyphens. But continue; I'll forgive and forget.");
-//! error;
-//! end
-//!
-//! @ @<Append a new letter or hyphen@>=
-//! if cur_chr="-" then @<Append the value |n| to list |p|@>
-//! else  begin if lc_code(cur_chr)=0 then
-//!     begin print_err("Not a letter");
-//! @.Not a letter@>
-//!     help2("Letters in \hyphenation words must have \lccode>0.")@/
-//!       ("Proceed; I'll ignore the character I just read.");
-//!     error;
-//!     end
-//!   else if n<63 then
-//!     begin incr(n); hc[n]:=lc_code(cur_chr);
-//!     end;
-//!   end
-//!
-//! @ @<Append the value |n| to list |p|@>=
-//! begin if n<63 then
-//!   begin q:=get_avail; link(q):=p; info(q):=n; p:=q;
-//!   end;
-//! end
-//!
 //! @ @<Enter a hyphenation exception@>=
 //! begin incr(n); hc[n]:=cur_lang; str_room(n); h:=0;
 //! for j:=1 to n do
