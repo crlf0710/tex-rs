@@ -30,7 +30,7 @@ macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to
                 // spacer,right_brace: begin if n>1 then @<Enter a hyphenation exception@>;
                 else if $globals.cur_cmd == spacer || $globals.cur_cmd == right_brace {
                     if n > 1 {
-                        todo!("enter");
+                        Enter_a_hyphenation_exception!($globals, n, p);
                     }
                     // if cur_cmd=right_brace then return;
                     if $globals.cur_cmd == right_brace {

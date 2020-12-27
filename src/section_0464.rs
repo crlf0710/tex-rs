@@ -24,7 +24,7 @@ pub(crate) fn str_toks(globals: &mut TeXGlobals, b: pool_pointer) -> pointer {
     // @!t:halfword; {token being appended}
     // @!k:pool_pointer; {index into |str_pool|}
     // begin str_room(1);
-    str_room(globals, 1);
+    str_room(globals, 1 * character_max_room);
     // p:=temp_head; link(p):=null; k:=b;
     p = temp_head;
     link!(globals, p) = null;
@@ -72,6 +72,7 @@ use crate::section_0018::ASCII_code;
 use crate::section_0020::xord;
 use crate::section_0038::pool_pointer;
 use crate::section_0042::str_room;
+use crate::section_0042::character_max_room;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0162::temp_head;

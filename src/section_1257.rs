@@ -54,7 +54,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
         globals.selector = old_setting;
         // @.FONTx@>
         // str_room(1); t:=make_string;
-        str_room(globals, 1);
+        str_room(globals, 1 * character_max_room);
         t = make_string(make_globals_string_view!(globals));
         // end;
     }
@@ -83,6 +83,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0038::str_number;
 use crate::section_0042::str_room;
+use crate::section_0042::character_max_room;
 use crate::section_0043::make_string;
 use crate::section_0054::new_string;
 use crate::section_0059::print;

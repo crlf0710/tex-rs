@@ -24,7 +24,8 @@ pub(crate) fn issue_message(globals: &mut TeXGlobals) -> TeXResult<()> {
     globals.selector = old_setting;
     // flush_list(def_ref);
     // str_room(1); s:=make_string;
-    str_room(globals, 1);
+    flush_list(globals, globals.def_ref);
+    str_room(globals, 1 * character_max_room);
     s = make_string(make_globals_string_view!(globals));
     // if c=0 then @<Print string |s| on the terminal@>
     if c == 0 {
@@ -42,12 +43,14 @@ pub(crate) fn issue_message(globals: &mut TeXGlobals) -> TeXResult<()> {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
+use crate::section_0042::character_max_room;
 use crate::section_0054::new_string;
 use crate::section_0038::str_number;
 use crate::section_0042::str_room;
 use crate::section_0043::make_string;
 use crate::section_0044::flush_string;
 use crate::section_0081::TeXResult;
+use crate::section_0123::flush_list;
 use crate::section_0162::garbage;
 use crate::section_0295::token_show;
 use crate::section_0473::scan_toks;

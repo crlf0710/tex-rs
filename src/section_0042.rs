@@ -36,11 +36,18 @@ pub(crate) fn append_char(globals: TeXGlobalsStringView<'_>, val: ASCII_code) {
 pub(crate) fn str_room(globals: &mut TeXGlobals, bytes_count: integer) {
     // begin if pool_ptr+# > pool_size then
     if globals.pool_ptr.get() + bytes_count as u32 > pool_size as u32 {
+        todo!("overflow");
         // overflow("pool size",pool_size-init_pool_ptr);
         // @:TeX capacity exceeded pool size}{\quad pool size@>
         // end
     }
 }
+
+#[cfg(not(feature = "unicode_support"))]
+pub(crate) const character_max_room: integer = 1;
+
+#[cfg(feature = "unicode_support")]
+pub(crate) const character_max_room: integer = 6;
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;

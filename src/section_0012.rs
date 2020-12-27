@@ -35,6 +35,9 @@ pub(crate) type hash_size_TYPENUM = U2100;
 /// a prime number equal to about 85% of `hash_size`
 pub(crate) const hash_prime: integer = 1777;
 // @d hyph_size=307 {another prime; the number of \.{\\hyphenation} exceptions}
+/// another prime; the number of `\hyphenation` exceptions
+pub(crate) const hyph_size: integer = hyph_size_TYPENUM::U16 as _;
+pub(crate) type hyph_size_TYPENUM = U307;
 // @^system dependencies@>
 //
 
@@ -44,4 +47,4 @@ use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
 use crate::pascal::integer;
 use typenum::Unsigned;
-use typenum::{U0, U100, U1000};
+use typenum::{U0, U100, U307, U1000};
