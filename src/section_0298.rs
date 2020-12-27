@@ -29,6 +29,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives {
             $globals, $cmd, $chr_code
         ) {
             true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0231!(
+            $globals, $cmd, $chr_code
+        ) {
+            true
         } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0239!(
             $globals, $cmd, $chr_code
         ) {
@@ -42,6 +46,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives {
         ) {
             true
         } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0335!(
+            $globals, $cmd, $chr_code
+        ) {
+            true
+        } else if Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0377!(
             $globals, $cmd, $chr_code
         ) {
             true

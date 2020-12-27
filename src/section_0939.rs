@@ -3,6 +3,7 @@
 // @<Enter a hyphenation exception@>=
 macro_rules! Enter_a_hyphenation_exception {
     ($globals:expr, $n:expr, $p:expr) => {{
+        trace_span!("Enter a hyphenation exception");
         // begin incr(n); hc[n]:=cur_lang; str_room(n); h:=0;
         incr!($n);
         $globals.hc[$n.get() as usize] = $globals.cur_lang;

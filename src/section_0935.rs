@@ -3,6 +3,7 @@
 // @<Enter as many...@>=
 macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to_a_right_brace__then_return {
     ($globals:expr) => {{
+        trace_span!("Enter as many...");
         /// length of current word; not always a `small_number`
         let mut n: u8_from_0_to_n<U64>;
         /// head of a list of hyphen positions

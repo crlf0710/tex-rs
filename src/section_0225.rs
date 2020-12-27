@@ -14,6 +14,9 @@ pub(crate) fn print_skip_param(globals: &mut TeXGlobals, n: integer) {
         print_esc(globals, strpool_str!("lineskip"));
     }
     // baseline_skip_code: print_esc("baselineskip");
+    else if n == baseline_skip_code as integer {
+        print_esc(globals, strpool_str!("baselineskip"));
+    }
     // par_skip_code: print_esc("parskip");
     // above_display_skip_code: print_esc("abovedisplayskip");
     // below_display_skip_code: print_esc("belowdisplayskip");
@@ -32,6 +35,7 @@ pub(crate) fn print_skip_param(globals: &mut TeXGlobals, n: integer) {
     // thick_mu_skip_code: print_esc("thickmuskip");
     // othercases print("[unknown glue parameter!]")
     else {
+        trace_error_expr!("n = {}", n);
         print(globals, strpool_str!("[unknown glue parameter!]").get() as _);
     }
     // endcases;
@@ -42,4 +46,4 @@ use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0059::print;
 use crate::section_0063::print_esc;
-use crate::section_0224::line_skip_code;
+use crate::section_0224::*;

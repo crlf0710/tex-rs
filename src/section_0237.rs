@@ -63,7 +63,13 @@ pub(crate) fn print_param(globals: &mut TeXGlobals, n: integer) {
     // new_line_char_code:print_esc("newlinechar");
     // language_code:print_esc("language");
     // left_hyphen_min_code:print_esc("lefthyphenmin");
+    else if n == left_hyphen_min_code as integer {
+        print_esc(globals, strpool_str!("lefthyphenmin"));
+    }
     // right_hyphen_min_code:print_esc("righthyphenmin");
+    else if n == right_hyphen_min_code as integer {
+        print_esc(globals, strpool_str!("righthyphenmin"));
+    }
     // holding_inserts_code:print_esc("holdinginserts");
     // error_context_lines_code:print_esc("errorcontextlines");
     // othercases print("[unknown integer parameter!]")

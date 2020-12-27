@@ -3,6 +3,7 @@
 // @<Insert the \(p)pair |(s,p)|...@>=
 macro_rules! Insert_the_pair_s_p_into_the_exception_table {
     ($globals:expr, $h:expr, $s:expr, $p:expr) => {{
+        trace_span!("Insert the pair `(s,p)`...");
         // if hyph_count=hyph_size then overflow("exception dictionary",hyph_size);
         if $globals.hyph_count.get() as integer == hyph_size {
             todo!("overflow");

@@ -134,6 +134,9 @@ pub(crate) fn print_length_param(globals: &mut TeXGlobals, n: integer) {
     // par_indent_code:print_esc("parindent");
     // math_surround_code:print_esc("mathsurround");
     // line_skip_limit_code:print_esc("lineskiplimit");
+    else if n == line_skip_limit_code as integer {
+        print_esc(globals, strpool_str!("lineskiplimit"));
+    }
     // hsize_code:print_esc("hsize");
     // vsize_code:print_esc("vsize");
     // max_depth_code:print_esc("maxdepth");
