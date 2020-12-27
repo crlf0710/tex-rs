@@ -69,7 +69,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     If_this_font_has_already_been_loaded_set_f_to_the_internal_font_number_and_goto_common_ending!
         (globals, s);
     // f:=read_font_info(u,cur_name,cur_area,s);
-    f = read_font_info(globals, u, globals.cur_name, globals.cur_area, s);
+    f = read_font_info(globals, u, globals.cur_name, globals.cur_area, s)?;
     // common_ending: equiv(u):=f; eqtb[font_id_base+f]:=eqtb[u]; font_id_text(f):=t;
     equiv!(globals, u) = f.get();
     globals.eqtb[(font_id_base + f.get() as word) as pointer] = globals.eqtb[u];

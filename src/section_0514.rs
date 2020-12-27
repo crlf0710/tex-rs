@@ -4,9 +4,19 @@
 //! |TEX_font_area|.  These system area names will, of course, vary from place
 //! to place.
 //! @^system dependencies@>
-//!
-//! @d TEX_area=="TeXinputs:"
-//! @.TeXinputs@>
-//! @d TEX_font_area=="TeXfonts:"
-//! @.TeXfonts@>
-//!
+//
+// @d TEX_area=="TeXinputs:"
+macro_rules! TEX_area {
+    () => {
+        strpool_str!("TeXinputs:")
+    };
+}
+// @.TeXinputs@>
+// @d TEX_font_area=="TeXfonts:"
+macro_rules! TEX_font_area {
+    () => {
+        strpool_str!("TeXfonts:")
+    };
+}
+// @.TeXfonts@>
+//

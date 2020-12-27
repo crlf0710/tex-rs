@@ -28,12 +28,15 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
             goto_forward_label!('done);
         }
         // if cur_area="" then
-        //   begin pack_file_name(cur_name,TEX_area,cur_ext);
-        //   if a_open_in(cur_file) then goto done;
-        if a_open_in(make_globals_filename_view!(globals), &mut cur_file!(globals)) {
-            goto_forward_label!('done);
+        if globals.cur_area == strpool_str!("") {
+            // begin pack_file_name(cur_name,TEX_area,cur_ext);
+            pack_file_name(globals, globals.cur_name, TEX_area!(), globals.cur_ext);
+            // if a_open_in(cur_file) then goto done;
+            if a_open_in(make_globals_filename_view!(globals), &mut cur_file!(globals)) {
+                goto_forward_label!('done);
+            }
+            // end;
         }
-        //   end;
         // end_file_reading; {remove the level that didn't work}
         /// remove the level that didn't work
         end_file_reading(globals);
@@ -70,15 +73,16 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
 }
 
 use crate::section_0004::{TeXGlobals, TeXGlobalsFilenameView, TeXGlobalsIoStringView, TeXGlobalsIoStringLogView};
+use crate::section_0027::a_open_in;
 use crate::section_0034::update_terminal;
-use crate::section_0526::scan_file_name;
 use crate::section_0058::print_char;
 use crate::section_0060::slow_print;
+use crate::section_0081::TeXResult;
 use crate::section_0303::new_line;
 use crate::section_0328::begin_file_reading;
 use crate::section_0329::end_file_reading;
-use crate::section_0027::a_open_in;
+use crate::section_0519::pack_file_name;
+use crate::section_0525::a_make_name_string;
+use crate::section_0526::scan_file_name;
 use crate::section_0529::pack_cur_name;
 use crate::section_0530::prompt_file_name;
-use crate::section_0081::TeXResult;
-use crate::section_0525::a_make_name_string;

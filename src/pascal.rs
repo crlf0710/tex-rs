@@ -1070,7 +1070,17 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
         let new_read_target: Box<dyn Read> = if path == "TTY:" {
             Box::new(io::stdin())
         } else {
-            unimplemented!()
+            let mut path = path.trim_end_matches(' ');
+            path = path.trim_start_matches("TeXfonts:");
+            let file = match std::fs::File::open(path) {
+                Ok(f) => f,
+                Err(e) => {
+                    *file.file_state_mut() = FileState::Undefined;
+                    file.set_error_state(1);
+                    return;
+                }
+            };
+            Box::new(io::BufReader::new(file))
         };
         *file.file_state_mut() = FileState::BlockInspectionMode {
             read_target: new_read_target,

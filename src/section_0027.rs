@@ -58,8 +58,13 @@ pub(crate) fn a_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut alpha_file
 // @#
 // function b_open_in(var f:byte_file):boolean;
 //   {open a binary file for input}
-// begin reset(f,name_of_file,'/O'); b_open_in:=reset_OK(f);
-// end;
+/// open a binary file for input
+pub(crate) fn b_open_in(globals: TeXGlobalsFilenameView<'_>, f: &mut byte_file) -> boolean {
+    // begin reset(f,name_of_file,'/O'); b_open_in:=reset_OK(f);
+    reset(f, &*globals.name_of_file, "/O");
+    return reset_OK!(f);
+    // end;
+}
 // @#
 // function b_open_out(var f:byte_file):boolean;
 //   {open a binary file for output}
@@ -82,3 +87,4 @@ use crate::pascal::reset;
 use crate::pascal::rewrite;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0025::alpha_file;
+use crate::section_0025::byte_file;
