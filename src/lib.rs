@@ -1013,10 +1013,16 @@ reversing_order_items!(
                         mod section_0568;
                         #[macro_use]
                         mod section_0569;
+                        mod section_0570;
+                        #[macro_use]
+                        mod section_0571;
+                        #[macro_use]
+                        mod section_0572;
                     }
                 );
-                mod section_0570;
-                mod section_0571_to_0575;
+                mod section_0573;
+                mod section_0574;
+                mod section_0575;
                 mod section_0576;
                 mod section_0577;
                 mod section_0578_to_0580;

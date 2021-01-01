@@ -9,6 +9,9 @@ macro_rules! Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__i
         /// the new font's number
         let f: internal_font_number;
 
+        /// the design size or the "at" size
+        let mut z: scaled;
+
         // @<Open |tfm_file| for input@>;
         Open_tfm_file_for_input!($globals, $nom, $aire, $file_opened, $lbl_bad_tfm);
         // @<Read the {\.{TFM}} size fields@>;
@@ -16,15 +19,16 @@ macro_rules! Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__i
         // @<Use size fields to allocate font information@>;
         Use_size_fields_to_allocate_font_information!($globals, f, lf, lh, bc, ec, nw, nh, nd, ni, nl, nk, ne, np);
         // @<Read the {\.{TFM}} header@>;
-        Read_the_TFM_header!($globals, f, $s, lh, $lbl_bad_tfm);
+        Read_the_TFM_header!($globals, f, $s, z, lh, $lbl_bad_tfm);
         // @<Read character data@>;
         Read_character_data!($globals, f, nw, nh, nd, ni, nl, ne, $lbl_bad_tfm);
         // @<Read box dimensions@>;
+        Read_box_dimensions!($globals, f, z, $lbl_bad_tfm);
         // @<Read ligature/kern program@>;
         // @<Read extensible character recipes@>;
         // @<Read font parameters@>;
         // @<Make final adjustments and |goto done|@>
-        todo!();
+        todo!("finish tfm loading");
         use crate::section_0113::halfword;
     }}
 }

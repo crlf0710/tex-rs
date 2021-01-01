@@ -2,10 +2,7 @@
 //
 // @<Read the {\.{TFM}} header@>=
 macro_rules! Read_the_TFM_header {
-    ($globals:expr, $f:expr, $s:expr, $lh:expr, $lbl_bad_tfm:lifetime) => {{
-        /// the design size or the "at" size
-        let mut z: scaled;
-
+    ($globals:expr, $f:expr, $s:expr, $z:expr, $lh:expr, $lbl_bad_tfm:lifetime) => {{
         // begin if lh<2 then abort;
         if $lh < 2 {
             goto_forward_label!($lbl_bad_tfm);
@@ -24,9 +21,9 @@ macro_rules! Read_the_TFM_header {
         z0 = z0 * 0o400 + fbyte!($globals) as integer;
         fget!($globals);
         z0 = z0 * 0o20 + (fbyte!($globals) / 0o20) as integer;
-        z = scaled::new_from_inner(z0);
+        $z = scaled::new_from_inner(z0);
         // if z<unity then abort;
-        if z < unity {
+        if $z < unity {
             goto_forward_label!($lbl_bad_tfm);
         }
         // while lh>2 do
@@ -42,20 +39,20 @@ macro_rules! Read_the_TFM_header {
             // end;
         }
         // font_dsize[f]:=z;
-        $globals.font_dsize[$f] = z;
+        $globals.font_dsize[$f] = $z;
         // if s<>-1000 then
         if $s.inner() != -1000 {
             // if s>=0 then z:=s
             if $s.inner() >= 0 {
-                z = $s;
+                $z = $s;
             }
             // else z:=xn_over_d(z,-s,1000);
             else {
-                z = xn_over_d($globals, z, -$s.inner(), 1000);
+                $z = xn_over_d($globals, $z, -$s.inner(), 1000);
             }
         }
         // font_size[f]:=z;
-        $globals.font_size[$f] = z;
+        $globals.font_size[$f] = $z;
         // end
 
         use crate::pascal::integer;
