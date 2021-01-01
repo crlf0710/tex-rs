@@ -290,4 +290,21 @@ impl IndexMut<FOUR_QUARTERS_B3> for four_quarters {
     }
 }
 
+impl FromStorageBytes for memory_word {
+    fn from_storage_bytes(data: &[u8]) -> Self {
+        use core::mem::transmute;
+        assert!(data.len() == 4);
+        memory_word {
+            int: i32::from_le_bytes([
+                data[0],
+                data[1],
+                data[2],
+                data[3],
+            ])
+        }
+    }
+}
+
 use core::ops::{Index, IndexMut};
+use crate::pascal::FromStorageBytes;
+

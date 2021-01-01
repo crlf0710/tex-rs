@@ -604,7 +604,7 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
 macro_rules! define_array_keyed_with_ranged_signed_integer_with_fixed_start_and_length {
     ($v:vis $name:ident[$index_type:path] => $base_index_type:path; $typenum_start_const:ident;
         $typenum_length_const:ident; $start_typenum:path; $length_typenum:path) => {
-        
+
         $v struct $name<ELEMENT>
         ([ELEMENT; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize]);
 
@@ -724,7 +724,7 @@ pub(crate) enum BlockBufferState<T> {
         bytes_buffer: Box<[u8]>,
         bytes_avail_length: usize,
         bytes_position: usize,
-        bytes_caret: Option<(T, usize)>,
+        bytes_caret: Option<T>,
     },
     Eof,
 }
@@ -803,8 +803,56 @@ impl<T> FileState<T> {
                 }
                 _ => unreachable!(),
             },
-            FileState::BlockInspectionMode { .. } => {
-                todo!();
+            FileState::BlockInspectionMode {
+                read_block_buffer,
+                read_target,
+            } => {
+                const IDEAL_BUFSIZE: usize = 512;
+                let size_of_t = core::mem::size_of::<T>();
+                assert!(size_of_t > 0);
+                if matches!(read_block_buffer, BlockBufferState::UnknownState) {
+                    let dest_size = ((IDEAL_BUFSIZE / size_of_t) + 1) * size_of_t;
+                    *read_block_buffer = BlockBufferState::AfterReadBlock {
+                        bytes_buffer: vec![0u8; dest_size].into_boxed_slice(),
+                        bytes_avail_length: dest_size,
+                        bytes_position: dest_size - size_of_t,
+                        bytes_caret: None,
+                    }
+                }
+                match read_block_buffer {
+                    BlockBufferState::AfterReadBlock {
+                        bytes_buffer,
+                        bytes_avail_length,
+                        bytes_position,
+                        bytes_caret,
+                    } => {
+                        let bytes_position_end = *bytes_position + size_of_t;
+                        let mut remaining_range = bytes_position_end..*bytes_avail_length;
+                        if remaining_range.start > 0 {
+                            if remaining_range.len() > 0 {
+                                bytes_buffer.copy_within(remaining_range.clone(), 0);
+                                remaining_range = 0..remaining_range.len();
+                            } else {
+                                remaining_range = 0..0;
+                            }
+                        }
+                        *bytes_avail_length = remaining_range.end;
+                        *bytes_position = 0;
+                        *bytes_caret = None;
+                        while *bytes_avail_length < size_of_t {
+                            let fillable_range = *bytes_avail_length..bytes_buffer.len();
+                            let newly_read_len = read_target
+                                .read(&mut bytes_buffer[fillable_range])
+                                .expect("read block failure");
+                            if newly_read_len == 0 {
+                                *read_block_buffer = BlockBufferState::Eof;
+                                return;
+                            }
+                            *bytes_avail_length += newly_read_len;
+                        }
+                    }
+                    _ => unreachable!(),
+                }
             }
             _ => {
                 panic!("file not in inspection mode!");
@@ -826,6 +874,8 @@ pub(crate) trait PascalFile {
     fn convert_line_string_crlf_to_lf(input: &mut String);
 
     fn convert_line_string_to_units(input: &str, units: &mut Vec<Self::Unit>);
+
+    fn convert_storage_repr_to_unit(input: &[u8]) -> Self::Unit;
 
     fn file_state(&self) -> &FileState<Self::Unit>;
 
@@ -904,6 +954,10 @@ impl PascalFile for file_of_text_char {
         }
     }
 
+    fn convert_storage_repr_to_unit(_: &[u8]) -> Self::Unit {
+        unreachable!();
+    }
+
     fn file_state(&self) -> &FileState<text_char> {
         &self.file_state
     }
@@ -939,7 +993,11 @@ impl<T> Default for file_of<T> {
     }
 }
 
-impl<T> PascalFile for file_of<T> {
+pub(crate) trait FromStorageBytes {
+    fn from_storage_bytes(data: &[u8]) -> Self;
+}
+
+impl<T: FromStorageBytes> PascalFile for file_of<T> {
     type Unit = T;
 
     fn is_text_file() -> bool {
@@ -960,6 +1018,10 @@ impl<T> PascalFile for file_of<T> {
 
     fn convert_line_string_to_units(_: &str, _: &mut Vec<Self::Unit>) {
         unreachable!()
+    }
+
+    fn convert_storage_repr_to_unit(input: &[u8]) -> Self::Unit {
+        T::from_storage_bytes(input)
     }
 
     fn file_state(&self) -> &FileState<T> {
@@ -1091,6 +1153,7 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
 }
 
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(file)))]
 pub(crate) fn get<F: PascalFile>(file: &mut F) {
     loop {
         match file.file_state_mut() {
@@ -1122,9 +1185,34 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                     }
                 }
             },
-            FileState::BlockInspectionMode { .. } => {
-                todo!();
-            }
+            FileState::BlockInspectionMode {
+                read_block_buffer, ..
+            } => match read_block_buffer {
+                BlockBufferState::Eof => {
+                    panic!("file eof reached");
+                }
+                BlockBufferState::UnknownState => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                BlockBufferState::AfterReadBlock {
+                    bytes_buffer,
+                    bytes_avail_length,
+                    bytes_position,
+                    bytes_caret,
+                } => {
+                    let size_of_t = core::mem::size_of::<F::Unit>();
+                    assert!(size_of_t > 0);
+                    let bytes_position_end = *bytes_position + size_of_t;
+                    let new_bytes_position_end = bytes_position_end + size_of_t;
+                    if new_bytes_position_end > *bytes_avail_length {
+                        file.file_state_mut().refill::<F>();
+                        continue;
+                    }
+                    *bytes_caret = None;
+                    *bytes_position = bytes_position_end;
+                }
+            },
             _ => {
                 panic!("file not in inspection mode");
             }
@@ -1134,12 +1222,13 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
 }
 
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(file)))]
 pub(crate) fn buffer_variable<F: PascalFile>(file: &mut F) -> F::Unit
 where
     F::Unit: Clone,
 {
     loop {
-        match file.file_state() {
+        match file.file_state_mut() {
             FileState::LineInspectionMode {
                 read_line_buffer,
                 read_target,
@@ -1162,9 +1251,35 @@ where
             FileState::BlockInspectionMode {
                 read_block_buffer,
                 read_target,
-            } => {
-                todo!();
-            }
+            } => match read_block_buffer {
+                BlockBufferState::Eof => {
+                    panic!("file eof reached");
+                }
+                BlockBufferState::UnknownState => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                BlockBufferState::AfterReadBlock {
+                    bytes_caret,
+                    bytes_buffer,
+                    bytes_position,
+                    ..
+                } => match bytes_caret {
+                    None => {
+                        let size_of_t = core::mem::size_of::<F::Unit>();
+                        assert!(size_of_t > 0);
+                        let bytes_position_end = *bytes_position + size_of_t;
+                        let v = F::convert_storage_repr_to_unit(
+                            &bytes_buffer[*bytes_position..bytes_position_end],
+                        );
+                        *bytes_caret = Some(v.clone());
+                        return v;
+                    }
+                    Some(v) => {
+                        return v.clone();
+                    }
+                },
+            },
             _ => panic!("file not in inspection mode"),
         }
     }
@@ -1187,9 +1302,20 @@ pub(crate) fn eof<F: PascalFile>(file: &mut F) -> bool {
                     return false;
                 }
             },
-            FileState::BlockInspectionMode { .. } => {
-                todo!();
-            }
+            FileState::BlockInspectionMode {
+                read_block_buffer, ..
+            } => match read_block_buffer {
+                BlockBufferState::Eof => {
+                    return true;
+                }
+                BlockBufferState::UnknownState { .. } => {
+                    file.file_state_mut().refill::<F>();
+                    continue;
+                }
+                BlockBufferState::AfterReadBlock { .. } => {
+                    return false;
+                }
+            },
             FileState::GenerationMode { .. } => {
                 return true;
             }
@@ -1295,6 +1421,7 @@ pub(crate) fn close<F: PascalFile>(file: &mut F) {
 }
 
 use crate::section_0019::text_char;
+use core::cell::Cell;
 use core::fmt::{self, Display};
 use core::marker::PhantomData;
 use std::io::{self, Read, Write};

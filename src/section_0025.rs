@@ -45,4 +45,12 @@ pub(crate) type alpha_file = packed_file_of_text_char;
 
 pub(crate) type byte_file = packed_file_of<eight_bits>;
 
+impl FromStorageBytes for eight_bits {
+    fn from_storage_bytes(data: &[u8]) -> Self {
+        assert!(data.len() == 1);
+        data[0]
+    }
+}
+
 use crate::pascal::{packed_file_of, packed_file_of_text_char};
+use crate::pascal::FromStorageBytes;

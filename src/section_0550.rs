@@ -30,12 +30,24 @@ pub(crate) static height_base: internal_font_array<integer> = internal_font_arra
 pub(crate) static depth_base: internal_font_array<integer> = internal_font_array::default();
 // @!italic_base:array[internal_font_number] of integer;
 //   {base addresses for italic corrections}
+/// base addresses for italic corrections
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static italic_base: internal_font_array<integer> = internal_font_array::default();
 // @!lig_kern_base:array[internal_font_number] of integer;
 //   {base addresses for ligature/kerning programs}
+/// base addresses for ligature/kerning programs
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static lig_kern_base: internal_font_array<integer> = internal_font_array::default();
 // @!kern_base:array[internal_font_number] of integer;
 //   {base addresses for kerns}
+/// base addresses for kerns
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static kern_base: internal_font_array<integer> = internal_font_array::default();
 // @!exten_base:array[internal_font_number] of integer;
 //   {base addresses for extensible recipes}
+/// base addresses for extensible recipes
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static exten_base: internal_font_array<integer> = internal_font_array::default();
 // @!param_base:array[internal_font_number] of integer;
 //   {base addresses for font parameters}
 /// base addresses for font parameters
