@@ -326,7 +326,8 @@ pub(crate) fn info_value(globals: &mut TeXGlobals, idx: halfword) -> cur_tok_typ
 pub(crate) const fontchar_val_count_limit: usize = 65536;
 
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static fontchar_val_gallery: Box<[font_and_character]> = vec![font_and_character::default(); fontchar_val_count_limit].into();
+pub(crate) static fontchar_val_gallery: Box<[font_and_character]> =
+    vec![font_and_character::default(); fontchar_val_count_limit].into();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::unicode_support::fontchar_val_count_limit;

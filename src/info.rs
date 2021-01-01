@@ -299,7 +299,6 @@ macro_rules! trace_error_expr {
     };
 }
 
-
 macro_rules! return_nojump {
     () => {
         return Ok(());
@@ -308,7 +307,6 @@ macro_rules! return_nojump {
         return Ok($val);
     };
 }
-
 
 macro_rules! ok_nojump {
     () => {

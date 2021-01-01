@@ -46,6 +46,11 @@ macro_rules! char_width {
     };
 }
 // @d char_exists(#)==(#.b0>min_quarterword)
+impl char_info {
+    pub(crate) fn char_exists(self) -> bool {
+        self.0[FOUR_QUARTERS_B0] > min_quarterword
+    }
+}
 // @d char_italic_end(#)==(qo(#.b2)) div 4].sc
 // @d char_italic(#)==font_info[italic_base[#]+char_italic_end
 // @d height_depth(#)==qo(#.b1)
@@ -104,6 +109,7 @@ impl IndexMut<MEMORY_WORD_CHAR_INFO> for memory_word {
 }
 
 use crate::section_0025::eight_bits;
+use crate::section_0110::min_quarterword;
 use crate::section_0113::four_quarters;
 use crate::section_0113::memory_word;
 use crate::section_0113::FOUR_QUARTERS_B0;

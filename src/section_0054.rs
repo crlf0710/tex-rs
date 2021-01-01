@@ -148,8 +148,8 @@ pub(crate) static first_count: integer = 0;
 #[globals_struct_use(TeXGlobals)]
 pub(crate) use crate::section_0025::alpha_file;
 
-use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};
 use crate::pascal::u8_from_0_to_n;
 use crate::section_0011::error_line_TYPENUM;
+use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};
 use typenum::Unsigned;
 use typenum::{U1, U21};

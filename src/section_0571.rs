@@ -54,11 +54,9 @@ macro_rules! store_scaled {
 //
 // @<Read box dimensions@>=
 macro_rules! Read_box_dimensions {
-    ($globals:expr, $f:expr, $z:expr, $lbl_bad_tfm:lifetime) => {{
-        /// auxiliary quantities used in fixed-point multiplication
-        let (mut alpha, beta): (integer, u8);
+    ($globals:expr, $f:expr, $z:expr, $alpha:expr, $beta:expr, $lbl_bad_tfm:lifetime) => {{
         // begin @<Replace |z| by $|z|^\prime$ and compute $\alpha,\beta$@>;
-        Replace_z_by_z_prime_and_compute_alpha_beta!($globals, $z, alpha, beta);
+        Replace_z_by_z_prime_and_compute_alpha_beta!($globals, $z, $alpha, $beta);
         // for k:=width_base[f] to lig_kern_base[f]-1 do
         for k in $globals.width_base[$f]..=$globals.lig_kern_base[$f] - 1 {
             let k = k as pointer;
@@ -67,8 +65,8 @@ macro_rules! Read_box_dimensions {
                 $globals,
                 $globals.font_info[k][MEMORY_WORD_SC],
                 $z.inner(),
-                alpha,
-                beta,
+                $alpha,
+                $beta,
                 $lbl_bad_tfm
             );
         }

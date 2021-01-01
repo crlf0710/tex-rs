@@ -52,5 +52,5 @@ impl FromStorageBytes for eight_bits {
     }
 }
 
-use crate::pascal::{packed_file_of, packed_file_of_text_char};
 use crate::pascal::FromStorageBytes;
+use crate::pascal::{packed_file_of, packed_file_of_text_char};
