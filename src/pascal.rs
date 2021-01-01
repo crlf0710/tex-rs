@@ -1165,7 +1165,7 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                 }
                 LineBufferState::UnknownState { .. } => {
                     file.file_state_mut().refill::<F>();
-                    continue;
+                    return;
                 }
                 LineBufferState::AfterReadLine {
                     line_buffer,
@@ -1193,7 +1193,7 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                 }
                 BlockBufferState::UnknownState => {
                     file.file_state_mut().refill::<F>();
-                    continue;
+                    return;
                 }
                 BlockBufferState::AfterReadBlock {
                     bytes_buffer,
@@ -1207,7 +1207,7 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                     let new_bytes_position_end = bytes_position_end + size_of_t;
                     if new_bytes_position_end > *bytes_avail_length {
                         file.file_state_mut().refill::<F>();
-                        continue;
+                        return;
                     }
                     *bytes_caret = None;
                     *bytes_position = bytes_position_end;

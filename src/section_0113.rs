@@ -53,7 +53,7 @@ union halfword_or_b01 {
 //   @!b3:quarterword;
 //   end;
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub(crate) struct four_quarters {
     b: (quarterword, quarterword, quarterword, quarterword),
 }
