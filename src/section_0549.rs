@@ -29,8 +29,26 @@ pub(crate) static fmem_ptr: font_index = font_index::default();
 pub(crate) static font_ptr: internal_font_number = internal_font_number::default();
 
 // @!font_check:array[internal_font_number] of four_quarters; {check sum}
+/// check sum
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_check: internal_font_array<four_quarters> = internal_font_array::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0113::four_quarters;
+
 // @!font_size:array[internal_font_number] of scaled; {``at'' size}
+/// "at" size
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_size: internal_font_array<scaled> = internal_font_array::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0101::scaled;
+
 // @!font_dsize:array[internal_font_number] of scaled; {``design'' size}
+/// "design" size
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_dsize: internal_font_array<scaled> = internal_font_array::default();
+
 // @!font_params:array[internal_font_number] of font_index; {how many font
 //   parameters are present}
 // @!font_name:array[internal_font_number] of str_number; {name of the font}

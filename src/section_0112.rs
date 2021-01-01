@@ -10,6 +10,12 @@
 //
 // @d qi(#)==#+min_quarterword
 //   {to put an |eight_bits| item into a quarterword}
+/// to put an `eight_bits` item into a quarterword
+macro_rules! qi {
+    ($val:expr) => {
+        $val + crate::section_0110::min_quarterword
+    }
+}
 // @d qo(#)==#-min_quarterword
 //   {to take an |eight_bits| item out of a quarterword}
 /// to take an `eight_bits` item out of a quarterword

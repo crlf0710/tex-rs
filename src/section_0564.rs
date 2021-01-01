@@ -32,10 +32,39 @@ macro_rules! read_sixteen {
         // end
     }
 }
+
 // @d store_four_quarters(#)==begin fget; a:=fbyte; qw.b0:=qi(a);
-//   fget; b:=fbyte; qw.b1:=qi(b);
-//   fget; c:=fbyte; qw.b2:=qi(c);
-//   fget; d:=fbyte; qw.b3:=qi(d);
-//   #:=qw;
-//   end
-//
+macro_rules! store_four_quarters {
+    ($globals:expr, $val:expr) => {{
+        /// byte variables
+        let (a, b, c, d): (eight_bits, eight_bits, eight_bits, eight_bits);
+        /// accumulators
+        let mut qw: four_quarters = four_quarters::default();
+
+        fget!($globals);
+        a = fbyte!($globals);
+        qw[FOUR_QUARTERS_B0] = qi!(a);
+        // fget; b:=fbyte; qw.b1:=qi(b);
+        fget!($globals);
+        b = fbyte!($globals);
+        qw[FOUR_QUARTERS_B1] = qi!(b);
+        // fget; c:=fbyte; qw.b2:=qi(c);
+        fget!($globals);
+        c = fbyte!($globals);
+        qw[FOUR_QUARTERS_B2] = qi!(c);
+        // fget; d:=fbyte; qw.b3:=qi(d);
+        fget!($globals);
+        d = fbyte!($globals);
+        qw[FOUR_QUARTERS_B3] = qi!(d);
+        // #:=qw;
+        $val = qw;
+        // end
+
+        use crate::section_0025::eight_bits;
+        use crate::section_0113::four_quarters;
+        use crate::section_0113::FOUR_QUARTERS_B0;
+        use crate::section_0113::FOUR_QUARTERS_B1;
+        use crate::section_0113::FOUR_QUARTERS_B2;
+        use crate::section_0113::FOUR_QUARTERS_B3;
+    }}
+}

@@ -58,7 +58,7 @@ pub(crate) fn read_font_info(
     //   malformed; if there's no room for this font, say so and |goto
     //   done|; otherwise |incr(font_ptr)| and |goto done|@>;
     Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__if_there_s_no_room_for_this_font__say_so_and_goto_done__otherwise_incr_font_ptr_and_goto_done!
-        (globals, nom, aire, file_opened, 'bad_tfm);
+        (globals, s, nom, aire, file_opened, 'bad_tfm);
     // bad_tfm: @<Report that the font won't be loaded@>;
     }
     'bad_tfm <-

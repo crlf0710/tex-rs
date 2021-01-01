@@ -58,6 +58,12 @@ pub(crate) struct four_quarters {
     b: (quarterword, quarterword, quarterword, quarterword),
 }
 
+impl Default for four_quarters {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }  
+}
+
 // @!memory_word = record@;@/
 //   case four_choices of
 //   1: (@!int:integer);
