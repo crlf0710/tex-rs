@@ -1,11 +1,3 @@
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! set_font:begin print("select font "); slow_print(font_name[chr_code]);
-//!   if font_size[chr_code]<>font_dsize[chr_code] then
-//!     begin print(" at "); print_scaled(font_size[chr_code]);
-//!     print("pt");
-//!     end;
-//!   end;
-//!
 //! @ @<Put each...@>=
 //! primitive("batchmode",set_interaction,batch_mode);
 //! @!@:batch_mode_}{\.{\\batchmode} primitive@>
