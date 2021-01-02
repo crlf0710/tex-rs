@@ -20,8 +20,11 @@ pub(crate) fn scan_font_ident(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // else if cur_cmd=def_family then
     else if globals.cur_cmd == def_family {
-        todo!("def_family");
+        let m: integer;
         // begin m:=cur_chr; scan_four_bit_int; f:=equiv(m+cur_val);
+        m = globals.cur_chr.get() as _;
+        scan_four_bit_int(globals)?;
+        f = equiv!(globals, m + globals.cur_val).into();
         // end
     }
     // else  begin print_err("Missing font identifier");
@@ -39,7 +42,10 @@ pub(crate) fn scan_font_ident(globals: &mut TeXGlobals) -> TeXResult<()> {
     ok_nojump!()
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0113::halfword;
 use crate::section_0209::*;
+use crate::section_0435::scan_four_bit_int;
 use crate::section_0548::internal_font_number;

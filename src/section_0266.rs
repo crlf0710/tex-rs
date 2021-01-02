@@ -28,6 +28,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
             true
         }
         // def_font: print_esc("font");
+        else if $cmd == def_font {
+            print_esc($globals, strpool_str!("font"));
+            true
+        }
         // delim_num: print_esc("delimiter");
         // divide: print_esc("divide");
         // end_cs_name: print_esc("endcsname");

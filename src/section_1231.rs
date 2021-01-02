@@ -34,7 +34,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1231 {
             true
         } else if $cmd == def_family {
             // def_family: print_size(chr_code-math_font_base);
-            todo!("def_family");
+            print_size($globals, $chr_code.get() as integer - math_font_base as integer);
+            use crate::section_0699::print_size;
+            use crate::section_0230::math_font_base;
             true
         } else {
             false

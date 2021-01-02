@@ -17,13 +17,26 @@ pub(crate) const script_size: quarterword = 16;
 // @d script_script_size=32 {size code for the smallest size in a family}
 /// size code for the smallest size in a family
 pub(crate) const script_script_size: quarterword = 32;
-//
+
 // @<Basic printing procedures@>=
 // procedure print_size(@!s:integer);
-// begin if s=text_size then print_esc("textfont")
-// else if s=script_size then print_esc("scriptfont")
-// else print_esc("scriptscriptfont");
-// end;
-//
+pub(crate) fn print_size(globals: &mut TeXGlobals, s: integer) {
+    // begin if s=text_size then print_esc("textfont")
+    if s == text_size as integer {
+        print_esc(globals, strpool_str!("textfont"));
+    }
+    // else if s=script_size then print_esc("scriptfont")
+    else if s == script_size as integer {
+        print_esc(globals, strpool_str!("scriptfont"));
+    }
+    // else print_esc("scriptscriptfont");
+    else {
+        print_esc(globals, strpool_str!("scriptscriptfont"));
+    }
+    // end;
+}
 
+use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;
+use crate::section_0063::print_esc;
 use crate::section_0113::quarterword;
