@@ -12,13 +12,13 @@ pub(crate) fn clear_for_error_prompt(globals: &mut TeXGlobals) {
         end_file_reading(globals);
     }
     // print_ln; clear_terminal;
-    print_ln(make_globals_io_view!(globals));
+    print_ln(make_globals_io_string_log_view!(globals));
     clear_terminal(globals);
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0034::clear_terminal;
 use crate::section_0057::print_ln;
 use crate::section_0304::terminal_input;

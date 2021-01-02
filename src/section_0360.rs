@@ -41,11 +41,20 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 return_nojump!();
                 // end;
             }
-            //   if input_ptr>0 then {text was inserted during error recovery}
-            //     begin end_file_reading; goto restart; {resume previous level}
-            //     end;
-            //   if selector<log_only then open_log_file;
-            //   if interaction>nonstop_mode then
+            // if input_ptr>0 then {text was inserted during error recovery}
+            if $globals.input_ptr > 0 {
+                /// text was inserted during error recovery
+                const _ : () = ();
+                // begin end_file_reading; goto restart; {resume previous level}
+                end_file_reading($globals);
+                goto_backward_label!($lbl_restart);
+                // end;
+            }
+            // if selector<log_only then open_log_file;
+            if $globals.selector < log_only {
+                open_log_file($globals);
+            }
+            // if interaction>nonstop_mode then
             if $globals.interaction > nonstop_mode {
                 // begin if end_line_char_inactive then incr(limit);
                 if end_line_char_inactive!($globals) {
@@ -58,7 +67,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 }
                 // @.Please type...@>
                 // print_ln; first:=start;
-                print_ln(make_globals_io_view!($globals));
+                print_ln(make_globals_io_string_log_view!($globals));
                 $globals.first = start!($globals).into();
                 // prompt_input("*"); {input on-line into |buffer|}
                 /// input on-line into `buffer`
@@ -79,6 +88,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 loc!($globals) = start!($globals);
                 // end
             } else {
+                todo!();
                 //   else fatal_error("*** (job aborted, no legal \end found)");
                 // @.job aborted@>
                 //     {nonstop mode, which is intended for overnight batch processing,
@@ -87,11 +97,14 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
             }
         }
 
-        use crate::section_0004::TeXGlobalsIoView;
-        use crate::section_0304::terminal_input;
-        use crate::section_0297::chr_code_type;
-        use crate::section_0073::nonstop_mode;
+        use crate::section_0004::TeXGlobalsIoStringLogView;
+        use crate::section_0054::log_only;
         use crate::section_0057::print_ln;
         use crate::section_0062::print_nl;
+        use crate::section_0073::nonstop_mode;
+        use crate::section_0297::chr_code_type;
+        use crate::section_0304::terminal_input;
+        use crate::section_0329::end_file_reading;
+        use crate::section_0534::open_log_file;
     }
 }

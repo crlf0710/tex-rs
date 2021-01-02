@@ -124,6 +124,7 @@ pub fn entry(globals: &mut TeXGlobals) {
 use crate::section_0004::initialize;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0033::t_open_out;
 use crate::section_0047::get_strings_started;
 use crate::section_0076::history_kind::{fatal_error_stop, spotless};

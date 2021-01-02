@@ -53,8 +53,8 @@ macro_rules! Cases_of_main_control_that_dont_depend_on_mode_1210 {
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_shape as u16) ||
         */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def_code as u16) ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def_family as u16) ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_font as u16) ||
-        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def_font as u16) ||
+        */abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, set_font as u16) ||
+        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, def_font as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, register as u16) ||
         /*abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, advance as u16) ||
         abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, multiply as u16) ||

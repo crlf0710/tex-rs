@@ -5,7 +5,7 @@ macro_rules! Show_the_text_of_the_macro_being_expanded {
     ($globals:expr, $ref_count:expr) => {{
         // begin begin_diagnostic; print_ln; print_cs(warning_index);
         begin_diagnostic($globals);
-        print_ln(make_globals_io_view!($globals));
+        print_ln(make_globals_io_string_log_view!($globals));
         print_cs($globals, $globals.warning_index as _);
         // token_show(ref_count); end_diagnostic(false);
         token_show($globals, $ref_count);

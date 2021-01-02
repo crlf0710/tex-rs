@@ -9,6 +9,10 @@ macro_rules! Assignments {
         /*} else if Assignments_xxx {
             todo!();
         */
+        } else if Assignments_1217!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
         } else if Assignments_1218!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();

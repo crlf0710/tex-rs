@@ -10,6 +10,7 @@
 // @!write_open:array[0..17] of boolean;
 
 #[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static write_file: write_file_array<alpha_file> = write_file_array::default();
 
 #[globals_struct_use(TeXGlobals)]

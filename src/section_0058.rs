@@ -13,7 +13,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
         // if selector<pseudo then
         if *globals.selector < pseudo {
             // begin print_ln; return;
-            print_ln(make_globals_io_view!(globals));
+            print_ln(globals);
             return;
             // end;
         }
@@ -48,7 +48,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
         incr!(*globals.file_offset);
         // if file_offset=max_print_line then print_ln;
         if *globals.file_offset == max_print_line {
-            print_ln(make_globals_io_view!(globals));
+            print_ln(globals.reborrow());
         }
         // end;
     }
@@ -58,7 +58,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
         incr!(*globals.term_offset);
         // if term_offset=max_print_line then print_ln;
         if *globals.term_offset == max_print_line {
-            print_ln(make_globals_io_view!(globals));
+            print_ln(globals.reborrow());
         }
         // end;
     }

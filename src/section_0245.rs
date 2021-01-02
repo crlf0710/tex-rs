@@ -34,7 +34,7 @@ pub(crate) fn end_diagnostic(globals: &mut TeXGlobals, blank_line: boolean) {
     print_nl(globals, strpool_str!(""));
     // if blank_line then print_ln;
     if blank_line {
-        print_ln(make_globals_io_view!(globals));
+        print_ln(make_globals_io_string_log_view!(globals));
     }
     // selector:=old_setting;
     globals.selector = globals.diag_old_setting;
@@ -43,6 +43,6 @@ pub(crate) fn end_diagnostic(globals: &mut TeXGlobals, blank_line: boolean) {
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0057::print_ln;
 use crate::section_0062::print_nl;

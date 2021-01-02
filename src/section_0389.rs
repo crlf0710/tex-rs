@@ -94,7 +94,7 @@ pub(crate) fn macro_call(globals: &mut TeXGlobals) -> TeXResult<()> {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0018::ASCII_code;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;

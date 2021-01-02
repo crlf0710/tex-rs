@@ -5,7 +5,7 @@ macro_rules! Print_string_s_on_the_terminal {
         // begin if term_offset+length(s)>max_print_line-2 then print_ln
         if $globals.term_offset.get() as integer + length($globals, $s.get() as _) > 
             max_print_line as integer - 2 {
-            print_ln(make_globals_io_view!($globals));
+            print_ln(make_globals_io_string_log_view!($globals));
         }
         // else if (term_offset>0)or(file_offset>0) then print_char(" ");
         else if $globals.term_offset > 0 || $globals.file_offset > 0 {

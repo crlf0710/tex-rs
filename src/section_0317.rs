@@ -46,7 +46,7 @@ macro_rules! Print_two_lines_using_the_tricky_pseudoprinted_information {
             print_char(make_globals_io_string_log_view!($globals), ch);
         }
         // print_ln;
-        print_ln(make_globals_io_view!($globals));
+        print_ln(make_globals_io_string_log_view!($globals));
         // for q:=1 to n do print_char(" "); {print |n| spaces to begin line~2}
         /// print `n` spaces to begin line 2
         for _ in $globals.first_count ..= (p - 1) {

@@ -11,7 +11,7 @@ pub(crate) fn print_nl(globals: &mut TeXGlobals, s: str_number) {
     if globals.term_offset > 0 && globals.selector.is_odd()
         || globals.file_offset > 0 && globals.selector >= log_only
     {
-        print_ln(make_globals_io_view!(globals));
+        print_ln(make_globals_io_string_log_view!(globals));
     }
     // print(s);
     print(globals, s.into());
@@ -20,7 +20,7 @@ pub(crate) fn print_nl(globals: &mut TeXGlobals, s: str_number) {
 
 use crate::pascal::IsOddOrEven;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0038::str_number;
 use crate::section_0054::log_only;
 use crate::section_0057::print_ln;

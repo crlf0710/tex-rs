@@ -34,7 +34,7 @@ pub(crate) fn write_out(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     }
     // token_show(def_ref); print_ln;
     token_show(globals, globals.def_ref);
-    print_ln(make_globals_io_view!(globals));
+    print_ln(make_globals_io_string_log_view!(globals));
     // flush_list(def_ref); selector:=old_setting;
     flush_list(globals, globals.def_ref);
     globals.selector = old_settings;
@@ -43,7 +43,7 @@ pub(crate) fn write_out(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0054::term_and_log;
 use crate::section_0054::log_only;
 use crate::section_0057::print_ln;

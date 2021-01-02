@@ -10,13 +10,3 @@
 //!   if n=0 then hyphen_char[f]:=cur_val@+else skew_char[f]:=cur_val;
 //!   end;
 //!
-//! @ @<Put each...@>=
-//! primitive("hyphenchar",assign_font_int,0);
-//! @!@:hyphen_char_}{\.{\\hyphenchar} primitive@>
-//! primitive("skewchar",assign_font_int,1);
-//! @!@:skew_char_}{\.{\\skewchar} primitive@>
-//!
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! assign_font_int: if chr_code=0 then print_esc("hyphenchar")
-//!   else print_esc("skewchar");
-//!
