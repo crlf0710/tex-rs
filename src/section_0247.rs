@@ -132,32 +132,89 @@ pub(crate) fn print_length_param(globals: &mut TeXGlobals, n: integer) {
         unreachable!();
     }
     // par_indent_code:print_esc("parindent");
+    else if n == par_indent_code as integer {
+        print_esc(globals, strpool_str!("parindent"));
+    }
     // math_surround_code:print_esc("mathsurround");
+    else if n == math_surround_code as integer {
+        print_esc(globals, strpool_str!("mathsurround"));
+    }
     // line_skip_limit_code:print_esc("lineskiplimit");
     else if n == line_skip_limit_code as integer {
         print_esc(globals, strpool_str!("lineskiplimit"));
     }
     // hsize_code:print_esc("hsize");
+    else if n == hsize_code as integer {
+        print_esc(globals, strpool_str!("hsize"));
+    }
     // vsize_code:print_esc("vsize");
+    else if n == vsize_code as integer {
+        print_esc(globals, strpool_str!("vsize"));
+    }
     // max_depth_code:print_esc("maxdepth");
+    else if n == max_depth_code as integer {
+        print_esc(globals, strpool_str!("maxdepth"));
+    }
     // split_max_depth_code:print_esc("splitmaxdepth");
+    else if n == split_max_depth_code as integer {
+        print_esc(globals, strpool_str!("splitmaxdepth"));
+    }
     // box_max_depth_code:print_esc("boxmaxdepth");
+    else if n == box_max_depth_code as integer {
+        print_esc(globals, strpool_str!("boxmaxdepth"));
+    }
     // hfuzz_code:print_esc("hfuzz");
     else if n == hfuzz_code as integer {
         print_esc(globals, strpool_str!("hfuzz"));
     }
     // vfuzz_code:print_esc("vfuzz");
+    else if n == vfuzz_code as integer {
+        print_esc(globals, strpool_str!("vfuzz"));
+    }
     // delimiter_shortfall_code:print_esc("delimitershortfall");
+    else if n == delimiter_shortfall_code as integer {
+        print_esc(globals, strpool_str!("delimitershortfall"));
+    }
     // null_delimiter_space_code:print_esc("nulldelimiterspace");
+    else if n == null_delimiter_space_code as integer {
+        print_esc(globals, strpool_str!("nulldelimiterspace"));
+    }
     // script_space_code:print_esc("scriptspace");
+    else if n == script_space_code as integer {
+        print_esc(globals, strpool_str!("scriptspace"));
+    }
     // pre_display_size_code:print_esc("predisplaysize");
+    else if n == pre_display_size_code as integer {
+        print_esc(globals, strpool_str!("predisplaysize"));
+    }
     // display_width_code:print_esc("displaywidth");
+    else if n == display_width_code as integer {
+        print_esc(globals, strpool_str!("displaywidth"));
+    }
     // display_indent_code:print_esc("displayindent");
+    else if n == display_indent_code as integer {
+        print_esc(globals, strpool_str!("displayindent"));
+    }
     // overfull_rule_code:print_esc("overfullrule");
+    else if n == overfull_rule_code as integer {
+        print_esc(globals, strpool_str!("overfullrule"));
+    }
     // hang_indent_code:print_esc("hangindent");
+    else if n == hang_indent_code as integer {
+        print_esc(globals, strpool_str!("hangindent"));
+    }
     // h_offset_code:print_esc("hoffset");
+    else if n == h_offset_code as integer {
+        print_esc(globals, strpool_str!("hoffset"));
+    }
     // v_offset_code:print_esc("voffset");
+    else if n == v_offset_code as integer {
+        print_esc(globals, strpool_str!("voffset"));
+    }
     // emergency_stretch_code:print_esc("emergencystretch");
+    else if n == emergency_stretch_code as integer {
+        print_esc(globals, strpool_str!("emergencystretch"));
+    }
     // othercases print("[unknown dimen parameter!]")
     else {
         trace_error_expr!("n = {}", n);
