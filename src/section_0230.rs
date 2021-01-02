@@ -12,15 +12,29 @@ pub(crate) const par_shape_loc: pointer = local_base as pointer;
 /// points to token list for `\output`
 pub(crate) const output_routine_loc: pointer = local_base as pointer + 1;
 // @d every_par_loc=local_base+2 {points to token list for \.{\\everypar}}
+/// points to token list for `\everypar`
+pub(crate) const every_par_loc: pointer = local_base as pointer + 2;
 // @d every_math_loc=local_base+3 {points to token list for \.{\\everymath}}
+/// points to token list for `\everymath`
+pub(crate) const every_math_loc: pointer = local_base as pointer + 3;
 // @d every_display_loc=local_base+4 {points to token list for \.{\\everydisplay}}
+/// points to token list for `\everydisplay`
+pub(crate) const every_display_loc: pointer = local_base as pointer + 4;
 // @d every_hbox_loc=local_base+5 {points to token list for \.{\\everyhbox}}
 /// points to token list for `\everyhbox`
 pub(crate) const every_hbox_loc: pointer = local_base as pointer + 5;
 // @d every_vbox_loc=local_base+6 {points to token list for \.{\\everyvbox}}
+/// points to token list for `\everyvbox`
+pub(crate) const every_vbox_loc: pointer = local_base as pointer + 6;
 // @d every_job_loc=local_base+7 {points to token list for \.{\\everyjob}}
+/// points to token list for `\everyjob`
+pub(crate) const every_job_loc: pointer = local_base as pointer + 7;
 // @d every_cr_loc=local_base+8 {points to token list for \.{\\everycr}}
+/// points to token list for `\everycr`
+pub(crate) const every_cr_loc: pointer = local_base as pointer + 8;
 // @d err_help_loc=local_base+9 {points to token list for \.{\\errhelp}}
+/// points to token list for `\errhelp`
+pub(crate) const err_help_loc: pointer = local_base as pointer + 9;
 // @d toks_base=local_base+10 {table of 256 token list registers}
 /// table of 256 token list registers
 pub(crate) type toks_base_TYPENUM = typenum::op!(local_base_TYPENUM + U10);
@@ -160,28 +174,50 @@ macro_rules! math_code {
         )
     };
 }
-//
+
 // @<Put each...@>=
-// primitive("output",assign_toks,output_routine_loc);
-// @!@:output_}{\.{\\output} primitive@>
-// primitive("everypar",assign_toks,every_par_loc);
-// @!@:every_par_}{\.{\\everypar} primitive@>
-// primitive("everymath",assign_toks,every_math_loc);
-// @!@:every_math_}{\.{\\everymath} primitive@>
-// primitive("everydisplay",assign_toks,every_display_loc);
-// @!@:every_display_}{\.{\\everydisplay} primitive@>
-// primitive("everyhbox",assign_toks,every_hbox_loc);
-// @!@:every_hbox_}{\.{\\everyhbox} primitive@>
-// primitive("everyvbox",assign_toks,every_vbox_loc);
-// @!@:every_vbox_}{\.{\\everyvbox} primitive@>
-// primitive("everyjob",assign_toks,every_job_loc);
-// @!@:every_job_}{\.{\\everyjob} primitive@>
-// primitive("everycr",assign_toks,every_cr_loc);
-// @!@:every_cr_}{\.{\\everycr} primitive@>
-// primitive("errhelp",assign_toks,err_help_loc);
-// @!@:err_help_}{\.{\\errhelp} primitive@>
+#[distributed_slice(PRIM2HT)]
+#[allow(unused_variables)]
+pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &mut TeXGlobals) {
+    // primitive("output",assign_toks,output_routine_loc);
+    primitive(globals, strpool_str!("output"), assign_toks, output_routine_loc as _);
+    // @!@:output_}{\.{\\output} primitive@>
+    // primitive("everypar",assign_toks,every_par_loc);
+    primitive(globals, strpool_str!("everypar"), assign_toks, every_par_loc as _);
+    // @!@:every_par_}{\.{\\everypar} primitive@>
+    // primitive("everymath",assign_toks,every_math_loc);
+    primitive(globals, strpool_str!("everymath"), assign_toks, every_math_loc as _);
+    // @!@:every_math_}{\.{\\everymath} primitive@>
+    // primitive("everydisplay",assign_toks,every_display_loc);
+    primitive(globals, strpool_str!("everydisplay"), assign_toks, every_display_loc as _);
+    // @!@:every_display_}{\.{\\everydisplay} primitive@>
+    // primitive("everyhbox",assign_toks,every_hbox_loc);
+    primitive(globals, strpool_str!("everyhbox"), assign_toks, every_hbox_loc as _);
+    // @!@:every_hbox_}{\.{\\everyhbox} primitive@>
+    // primitive("everyvbox",assign_toks,every_vbox_loc);
+    primitive(globals, strpool_str!("everyvbox"), assign_toks, every_vbox_loc as _);
+    // @!@:every_vbox_}{\.{\\everyvbox} primitive@>
+    // primitive("everyjob",assign_toks,every_job_loc);
+    primitive(globals, strpool_str!("everyjob"), assign_toks, every_job_loc as _);
+    // @!@:every_job_}{\.{\\everyjob} primitive@>
+    // primitive("everycr",assign_toks,every_cr_loc);
+    primitive(globals, strpool_str!("everycr"), assign_toks, every_cr_loc as _);
+    // @!@:every_cr_}{\.{\\everycr} primitive@>
+    // primitive("errhelp",assign_toks,err_help_loc);
+    primitive(globals, strpool_str!("errhelp"), assign_toks, err_help_loc as _);
+    // @!@:err_help_}{\.{\\errhelp} primitive@>
+}
 
 use crate::pascal::word;
+use crate::section_0004::TeXGlobals;
+use crate::section_0209::assign_toks;
+use crate::section_0264::primitive;
+use crate::section_1336::PRIM2HT;
+use linkme::distributed_slice;
+
+// Workaround https://github.com/rust-lang/rust/issues/47384
+pub(crate) fn workaround_47384() {}
+
 use crate::section_0115::pointer;
 use crate::section_0224::local_base;
 use crate::section_0224::local_base_TYPENUM;
