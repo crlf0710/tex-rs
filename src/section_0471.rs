@@ -20,7 +20,7 @@ macro_rules! Scan_the_argument_for_command_c {
             }
             // font_name_code: scan_font_ident;
             convert_code_kind::font_name_code => {
-                scan_font_ident($globals);
+                scan_font_ident($globals)?;
             }
             // job_name_code: if job_name=0 then open_log_file;
             convert_code_kind::job_name_code => {

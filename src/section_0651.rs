@@ -17,9 +17,9 @@ macro_rules! Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_di
             let type_p = r#type!($globals, $p);
             // hlist_node,vlist_node,rule_node,unset_node:
             if type_p == hlist_node || type_p == vlist_node || type_p == rule_node || type_p == unset_node {
-                todo!("incorporate box");
                 // @<Incorporate box dimensions into the dimensions of
                 //   the hbox that will contain~it@>;
+                Incorporate_box_dimensions_into_the_dimensions_of_the_hbox_that_will_contain_it!($globals, $p, $h, $d, $x);
             }
             // ins_node,mark_node,adjust_node: if adjust_tail<>null then
             else if type_p == ins_node || type_p == mark_node || type_p == adjust_node {

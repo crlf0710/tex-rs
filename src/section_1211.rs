@@ -37,6 +37,10 @@ macro_rules! Assignments {
             /// already processed
             do_nothing!();
             true
+        } else if Assignments_1234!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
         } else if Assignments_1235!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();
@@ -50,6 +54,10 @@ macro_rules! Assignments {
             do_nothing!();
             true
         } else if Assignments_1252!($globals, $cur_cmd, $a, $lbl_done) {
+            /// already processed
+            do_nothing!();
+            true
+        } else if Assignments_1253!($globals, $cur_cmd, $a) {
             /// already processed
             do_nothing!();
             true

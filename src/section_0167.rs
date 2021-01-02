@@ -15,7 +15,7 @@ pub(crate) fn check_mem(globals: &mut TeXGlobals, print_locs: boolean) {
         globals.free[p] = false;
     }
     // for p:=hi_mem_min to mem_end do free[p]:=false; {ditto}
-    /// ditto
+    /// you can probably do this faster
     for p in globals.hi_mem_min..=globals.mem_end {
         globals.free[p] = false;
     }

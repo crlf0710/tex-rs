@@ -28,7 +28,7 @@ pub(crate) const club_penalty_code: quarterword = 5;
 /// penalty for creating a widow line
 pub(crate) const widow_penalty_code: quarterword = 6;
 // @d display_widow_penalty_code=7 {ditto, just before a display}
-/// ditto, just before a display
+/// penalty for creating a widow line before a display
 pub(crate) const display_widow_penalty_code: quarterword = 7;
 // @d broken_penalty_code=8 {penalty for breaking a page at a broken line}
 /// penalty for breaking a page at a broken line

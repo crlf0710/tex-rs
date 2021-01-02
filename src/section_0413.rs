@@ -96,6 +96,9 @@ pub(crate) fn scan_something_internal(
     }
     // assign_font_dimen: @<Fetch a font dimension@>;
     // assign_font_int: @<Fetch a font integer@>;
+    else if globals.cur_cmd == assign_font_int {
+        Fetch_a_font_integer!(globals, m);
+    }
     // register: @<Fetch a register@>;
     else if globals.cur_cmd == register {
         Fetch_a_register!(globals, m);

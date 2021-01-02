@@ -59,9 +59,4 @@
 //! scanned_result(font_info[cur_val].sc)(dimen_val);
 //! end
 //!
-//! @ @<Fetch a font integer@>=
-//! begin scan_font_ident;
-//! if m=0 then scanned_result(hyphen_char[cur_val])(int_val)
-//! else scanned_result(skew_char[cur_val])(int_val);
-//! end
-//!
+

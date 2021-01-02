@@ -22,8 +22,12 @@ pub(crate) const assign_glue: quarterword = 75;
 /// user-defined muglue ( `\thinmuskip`, etc.)
 pub(crate) const assign_mu_glue: quarterword = 76;
 // @d assign_font_dimen=77 {user-defined font dimension ( \.{\\fontdimen} )}
+/// user-defined font dimension ( `\fontdimen` )
+pub(crate) const assign_font_dimen: quarterword = 77;
 // @d assign_font_int=78 {user-defined font integer ( \.{\\hyphenchar},
 //   \.{\\skewchar} )}
+/// user-defined font integer ( `\hyphenchar`, `\skewchar` )
+pub(crate) const assign_font_int: quarterword = 78;
 // @d set_aux=79 {specify state info ( \.{\\spacefactor}, \.{\\prevdepth} )}
 /// specify state info ( `\spacefactor`, `\prevdepth` )
 pub(crate) const set_aux: quarterword = 79;

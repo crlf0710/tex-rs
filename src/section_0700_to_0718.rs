@@ -1,24 +1,3 @@
-//! @* \[35] Subroutines for math mode.
-//! In order to convert mlists to hlists, i.e., noads to nodes, we need several
-//! subroutines that are conveniently dealt with now.
-//!
-//! Let us first introduce the macros that make it easy to get at the parameters and
-//! other font information. A size code, which is a multiple of 16, is added to a
-//! family number to get an index into the table of internal font numbers
-//! for each combination of family and size.  (Be alert: Size codes get
-//! larger as the type gets smaller.)
-//!
-//! @d text_size=0 {size code for the largest size in a family}
-//! @d script_size=16 {size code for the medium size in a family}
-//! @d script_script_size=32 {size code for the smallest size in a family}
-//!
-//! @<Basic printing procedures@>=
-//! procedure print_size(@!s:integer);
-//! begin if s=text_size then print_esc("textfont")
-//! else if s=script_size then print_esc("scriptfont")
-//! else print_esc("scriptscriptfont");
-//! end;
-//!
 //! @ Before an mlist is converted to an hlist, \TeX\ makes sure that
 //! the fonts in family~2 have enough parameters to be math-symbol
 //! fonts, and that the fonts in family~3 have enough parameters to be
