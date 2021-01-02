@@ -318,7 +318,17 @@ macro_rules! escape_char {
     };
 }
 // @d default_hyphen_char==int_par(default_hyphen_char_code)
+macro_rules! default_hyphen_char {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::default_hyphen_char_code)
+    };
+}
 // @d default_skew_char==int_par(default_skew_char_code)
+macro_rules! default_skew_char {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::default_skew_char_code)
+    };
+}
 // @d end_line_char==int_par(end_line_char_code)
 macro_rules! end_line_char {
     ($globals:expr) => {

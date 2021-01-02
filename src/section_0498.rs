@@ -24,24 +24,24 @@ pub(crate) fn conditional(globals: &mut TeXGlobals) -> TeXResult<()> {
     Push_the_condition_stack!(globals);
     save_cond_ptr = globals.cond_ptr;
     this_if = (globals.cur_chr.get() as u8).into();
-    // @<Either process \.{\\ifcase} or set |b| to the value of a boolean condition@>;
-    Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition!(globals, this_if, b);
-    // if tracing_commands>1 then @<Display the value of |b|@>;
-    if tracing_commands!(globals) > 1 {
-        Display_the_value_of_b!(globals, b);
-    }
-    // if b then
-    if b {
-        // begin change_if_limit(else_code,save_cond_ptr);
-        change_if_limit(globals, else_code.into(), save_cond_ptr);
-        // return; {wait for \.{\\else} or \.{\\fi}}
-        /// wait for `\else` or `\fi`
-        return_nojump!();
-        // end;
-    }
     region_forward_label!(
     |'common_ending|
     {
+        // @<Either process \.{\\ifcase} or set |b| to the value of a boolean condition@>;
+        Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition!(globals, this_if, b, save_cond_ptr, 'common_ending);
+        // if tracing_commands>1 then @<Display the value of |b|@>;
+        if tracing_commands!(globals) > 1 {
+            Display_the_value_of_b!(globals, b);
+        }
+        // if b then
+        if b {
+            // begin change_if_limit(else_code,save_cond_ptr);
+            change_if_limit(globals, else_code.into(), save_cond_ptr);
+            // return; {wait for \.{\\else} or \.{\\fi}}
+            /// wait for `\else` or `\fi`
+            return_nojump!();
+            // end;
+        }
         // @<Skip to \.{\\else} or \.{\\fi}, then |goto common_ending|@>;
         Skip_to_else_or_fi__then_goto_common_ending!(globals, save_cond_ptr, 'common_ending);
     }

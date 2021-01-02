@@ -2,7 +2,7 @@
 
 // @<Read character data@>=
 macro_rules! Read_character_data {
-    ($globals:expr, $f:expr, $nw:expr, $nh:expr, $nd:expr, $ni:expr, $nl:expr, $ne:expr, $lbl_bad_tfm:lifetime) => {{
+    ($globals:expr, $f:expr, $bc:expr, $ec:expr, $nw:expr, $nh:expr, $nd:expr, $ni:expr, $nl:expr, $ne:expr, $lbl_bad_tfm:lifetime) => {{
         // for k:=fmem_ptr to width_base[f]-1 do
         for k in $globals.fmem_ptr.get() as integer..=$globals.width_base[$f] - 1 {
             let k: pointer = k as pointer;
@@ -36,7 +36,7 @@ macro_rules! Read_character_data {
             }
             // list_tag: @<Check for charlist cycle@>;
             else if c_mod_4 == char_tag::list_tag {
-                todo!("Check for");
+                Check_for_charlist_cycle!($globals, $f, k, qqqq[FOUR_QUARTERS_B3], $bc, $ec, $lbl_bad_tfm);
             }
             // othercases do_nothing {|no_tag|}
             else {

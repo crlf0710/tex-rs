@@ -13,15 +13,19 @@ macro_rules! Scan_the_font_size_specification {
         }
         // else if scan_keyword("scaled") then
         else if scan_keyword($globals, strpool_str!("scaled"))? {
-            todo!("scaled");
             // @.scaled@>
             // begin scan_int; s:=-cur_val;
+            scan_int($globals)?;
+            $s = scaled::new_from_inner(-$globals.cur_val);
             // if (cur_val<=0)or(cur_val>32768) then
-            //   begin print_err("Illegal magnification has been changed to 1000");@/
-            // @.Illegal magnification...@>
-            //   help1("The magnification ratio must be between 1 and 32768.");
-            //   int_error(cur_val); s:=-1000;
-            //   end;
+            if $globals.cur_val <= 0 || $globals.cur_val > 32768 {
+                todo!("scaled err");
+                //   begin print_err("Illegal magnification has been changed to 1000");@/
+                // @.Illegal magnification...@>
+                //   help1("The magnification ratio must be between 1 and 32768.");
+                //   int_error(cur_val); s:=-1000;
+                //   end;
+            }
             // end
         }
         // else s:=-1000;
@@ -31,5 +35,6 @@ macro_rules! Scan_the_font_size_specification {
         // name_in_progress:=false
         $globals.name_in_progress = false;
         use crate::section_0407::scan_keyword;
+        use crate::section_0440::scan_int;
     }}
 }

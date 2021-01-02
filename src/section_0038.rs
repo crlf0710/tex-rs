@@ -59,7 +59,7 @@ pub(crate) type str_number_repr = u32;
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
 /// elements of `str_pool` array
-#[derive(Copy, Clone, Debug, Default)]
+#[derive(Copy, Clone, Debug, Default, PartialEq)]
 pub(crate) struct packed_ASCII_code(pub(crate) u8);
 
 use crate::pascal::{integer, u32_from_0_to_n};

@@ -13,7 +13,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     let s: scaled;
     // @!f:internal_font_number; {runs through existing fonts}
     /// runs through existing fonts
-    let f: internal_font_number;
+    let mut f: internal_font_number;
     // @!t:str_number; {name for the frozen font identifier}
     /// name for the frozen font identifier
     let t: str_number;
@@ -64,13 +64,19 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     scan_file_name(globals)?;
     // @<Scan the font size specification@>;
     Scan_the_font_size_specification!(globals, s);
+    region_forward_label!(
+    |'common_ending|
+    {
     // @<If this font has already been loaded, set |f| to the internal
     //   font number and |goto common_ending|@>;
     If_this_font_has_already_been_loaded_set_f_to_the_internal_font_number_and_goto_common_ending!
-        (globals, s);
+        (globals, f, s, 'common_ending);
     // f:=read_font_info(u,cur_name,cur_area,s);
     f = read_font_info(globals, u, globals.cur_name, globals.cur_area, s)?;
     // common_ending: equiv(u):=f; eqtb[font_id_base+f]:=eqtb[u]; font_id_text(f):=t;
+    }
+    'common_ending <-
+    );
     equiv!(globals, u) = f.get();
     globals.eqtb[(font_id_base + f.get() as word) as pointer] = globals.eqtb[u];
     font_id_text!(globals, f.get() as word) = t.get() as _;

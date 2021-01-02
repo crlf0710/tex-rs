@@ -1,7 +1,7 @@
 //! ` `
 // @<Read and check...@>=
 macro_rules! Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__if_there_s_no_room_for_this_font__say_so_and_goto_done__otherwise_incr_font_ptr_and_goto_done {
-    ($globals:expr, $s:expr, $nom:expr, $aire:expr, $file_opened:expr, $lbl_bad_tfm:lifetime) => {{
+    ($globals:expr, $s:expr, $g:expr, $nom:expr, $aire:expr, $file_opened:expr, $lbl_bad_tfm:lifetime, $lbl_done:lifetime) => {{
         /// sizes of subfiles
         #[rustfmt::skip]
         let (mut lf, mut lh, mut bc, mut ec, mut nw, mut nh, mut nd, mut ni, mut nl, mut nk, mut ne, mut np):
@@ -36,7 +36,7 @@ macro_rules! Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__i
         // @<Read the {\.{TFM}} header@>;
         Read_the_TFM_header!($globals, f, $s, z, lh, $lbl_bad_tfm);
         // @<Read character data@>;
-        Read_character_data!($globals, f, nw, nh, nd, ni, nl, ne, $lbl_bad_tfm);
+        Read_character_data!($globals, f, bc, ec, nw, nh, nd, ni, nl, ne, $lbl_bad_tfm);
         // @<Read box dimensions@>;
         Read_box_dimensions!($globals, f, z, alpha, beta, $lbl_bad_tfm);
         // @<Read ligature/kern program@>;
@@ -44,8 +44,9 @@ macro_rules! Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__i
         // @<Read extensible character recipes@>;
         Read_extensible_character_recipes!($globals, f, bc, ec, $lbl_bad_tfm);
         // @<Read font parameters@>;
+        Read_font_parameters!($globals, f, z, alpha, beta, np, $lbl_bad_tfm);
         // @<Make final adjustments and |goto done|@>
-        todo!("finish tfm loading");
+        Make_final_adjustments_and_goto_done!($globals, f, $g, bch_label, bchar, lf, bc, ec, nl, np, $nom, $aire, $lbl_done);
 
         use crate::pascal::integer;
         use crate::section_0113::halfword;

@@ -26,7 +26,9 @@ pub(crate) const if_true_code: quarterword = 14;
 ///  `\iffalse`
 pub(crate) const if_false_code: quarterword = 15;
 // @d if_case_code=16 { `\.{\\ifcase}' }
-//
+/// `\ifcase`
+pub(crate) const if_case_code: quarterword = 16;
+
 // @<Put each...@>=
 #[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
@@ -67,6 +69,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &m
     primitive(globals, strpool_str!("iftrue"), if_test, if_false_code as _);
     // @!@:if_false_}{\.{\\iffalse} primitive@>
     // primitive("ifcase",if_test,if_case_code);
+    primitive(globals, strpool_str!("ifcase"), if_test, if_case_code as _);
     // @!@:if_case_}{\.{\\ifcase} primitive@>
 }
 

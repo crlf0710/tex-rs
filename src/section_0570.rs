@@ -12,15 +12,44 @@ macro_rules! check_byte_range {
     }}
 }
 // @d current_character_being_worked_on==k+bc-fmem_ptr
-//
+macro_rules! current_character_being_worked_on {
+    ($globals:expr, $k:expr, $bc:expr) => {
+        ($k + $bc - $globals.fmem_ptr.get()) as crate::section_0113::quarterword
+    }
+}
+
 // @<Check for charlist cycle@>=
-// begin check_byte_range(d);
-// while d<current_character_being_worked_on do
-//   begin qw:=char_info(f)(d);
-//   {N.B.: not |qi(d)|, since |char_base[f]| hasn't been adjusted yet}
-//   if char_tag(qw)<>list_tag then goto not_found;
-//   d:=qo(rem_byte(qw)); {next character on the list}
-//   end;
-// if d=current_character_being_worked_on then abort; {yes, there's a cycle}
-// not_found:end
-//
+macro_rules! Check_for_charlist_cycle {
+    ($globals:expr, $f:expr, $k:expr, $val:expr, $bc:expr, $ec:expr, $lbl_bad_tfm:lifetime) => {{
+        let mut d = $val;
+        // begin check_byte_range(d);
+        check_byte_range!($globals, d, $bc, $ec, $lbl_bad_tfm);
+        region_forward_label!(
+            |'not_found|
+            {
+                // while d<current_character_being_worked_on do
+                while d < current_character_being_worked_on!($globals, $k, $bc) {
+                    // begin qw:=char_info(f)(d);
+                    // {N.B.: not |qi(d)|, since |char_base[f]| hasn't been adjusted yet}
+                    /// N.B.: not `qi(d)`, since `char_base[f]` hasn't been adjusted yet
+                    let i = char_info!($globals, $f, d);
+                    // if char_tag(qw)<>list_tag then goto not_found;
+                    if i.char_tag() != char_tag::list_tag {
+                        goto_forward_label!('not_found);
+                    }
+                    // d:=qo(rem_byte(qw)); {next character on the list}
+                    d = qo!(i.rem_byte());
+                    // end;
+                }
+                // if d=current_character_being_worked_on then abort; {yes, there's a cycle}
+                if d == current_character_being_worked_on!($globals, $k, $bc) {
+                    /// yes, there's a cycle
+                    goto_forward_label!($lbl_bad_tfm);
+                }
+            }
+            // not_found:end
+            'not_found <-
+        );
+        use crate::section_0544::char_tag;
+    }}
+}

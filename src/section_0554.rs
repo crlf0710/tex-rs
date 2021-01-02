@@ -81,9 +81,13 @@ macro_rules! char_depth {
 // @d char_tag(#)==((qo(#.b2)) mod 4)
 
 impl char_info {
-    pub(crate) fn char_tag(&self) -> char_tag {
+    pub(crate) fn char_tag(self) -> char_tag {
         let b2 = qo!((self.0)[FOUR_QUARTERS_B2]);
         (b2 % 4).into()
+    }
+
+    pub(crate) fn rem_byte(self) -> quarterword {
+        self.0[FOUR_QUARTERS_B3]
     }
 }
 
@@ -110,11 +114,13 @@ impl IndexMut<MEMORY_WORD_CHAR_INFO> for memory_word {
 
 use crate::section_0025::eight_bits;
 use crate::section_0110::min_quarterword;
+use crate::section_0113::quarterword;
 use crate::section_0113::four_quarters;
 use crate::section_0113::memory_word;
 use crate::section_0113::FOUR_QUARTERS_B0;
 use crate::section_0113::FOUR_QUARTERS_B1;
 use crate::section_0113::FOUR_QUARTERS_B2;
+use crate::section_0113::FOUR_QUARTERS_B3;
 use crate::section_0113::MEMORY_WORD_QQQQ;
 use crate::section_0544::char_tag;
 use core::ops::{Index, IndexMut};

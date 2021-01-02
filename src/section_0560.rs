@@ -21,6 +21,7 @@
 //   @!s:scaled):internal_font_number; {input a \.{TFM} file}
 /// input a `TFM` file
 #[allow(unused_variables, unused_assignments)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn read_font_info(
     globals: &mut TeXGlobals,
     u: pointer,
@@ -38,7 +39,7 @@ pub(crate) fn read_font_info(
     // @!f:internal_font_number; {the new font's number}
     // @!g:internal_font_number; {the number to return}
     /// the number to return
-    let g: internal_font_number;
+    let mut g: internal_font_number;
     // @!a,@!b,@!c,@!d:eight_bits; {byte variables}
     // @!qw:four_quarters;@!sw:scaled; {accumulators}
     // @!bch_label:integer; {left boundary start location, or infinity}
@@ -58,7 +59,7 @@ pub(crate) fn read_font_info(
     //   malformed; if there's no room for this font, say so and |goto
     //   done|; otherwise |incr(font_ptr)| and |goto done|@>;
     Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__if_there_s_no_room_for_this_font__say_so_and_goto_done__otherwise_incr_font_ptr_and_goto_done!
-        (globals, s, nom, aire, file_opened, 'bad_tfm);
+        (globals, s, g, nom, aire, file_opened, 'bad_tfm, 'done);
     // bad_tfm: @<Report that the font won't be loaded@>;
     }
     'bad_tfm <-

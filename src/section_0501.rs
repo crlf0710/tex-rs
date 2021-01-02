@@ -2,7 +2,7 @@
 
 // @<Either process \.{\\ifcase} or set |b|...@>=
 macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition {
-    ($globals:expr, $this_if:expr, $b:expr) => {{
+    ($globals:expr, $this_if:expr, $b:expr, $save_cond_ptr:expr, $lbl_common_ending:lifetime) => {{
         // case this_if of
         if false {
             unreachable!();
@@ -28,6 +28,9 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
         // if_false_code: b:=false;
         // if_case_code: @<Select the appropriate case
         //   and |return| or |goto common_ending|@>;
+        else if $this_if == if_case_code {
+            Select_the_appropriate_case_and_return_or_goto_common_ending!($globals, $save_cond_ptr, $lbl_common_ending);
+        }
         // end {there are no other cases}
         else {
             trace_error_expr!("this_if = {}", $this_if.get());

@@ -51,12 +51,32 @@ pub(crate) static font_dsize: internal_font_array<scaled> = internal_font_array:
 
 // @!font_params:array[internal_font_number] of font_index; {how many font
 //   parameters are present}
+/// how many font parameters are present
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_params: internal_font_array<font_index> = internal_font_array::default();
+
 // @!font_name:array[internal_font_number] of str_number; {name of the font}
+/// name of the font
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_name: internal_font_array<str_number> = internal_font_array::default();
+
 // @!font_area:array[internal_font_number] of str_number; {area of the font}
+/// area of the font
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_area: internal_font_array<str_number> = internal_font_array::default();
+
 // @!font_bc:array[internal_font_number] of eight_bits;
 //   {beginning (smallest) character code}
+/// beginning (smallest) character code
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_bc: internal_font_array<ASCII_code> = internal_font_array::default();
+
 // @!font_ec:array[internal_font_number] of eight_bits;
 //   {ending (largest) character code}
+/// ending (largest) character code
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_ec: internal_font_array<ASCII_code> = internal_font_array::default();
+
 // @!font_glue:array[internal_font_number] of pointer;
 //   {glue specification for interword space, |null| if not allocated}
 /// glue specification for interword space, |null| if not allocated
@@ -67,8 +87,16 @@ pub(crate) static font_glue: internal_font_array<pointer> = internal_font_array:
 //   {has a character from this font actually appeared in the output?}
 // @!hyphen_char:array[internal_font_number] of integer;
 //   {current \.{\\hyphenchar} values}
+/// current `\hyphenchar` values
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static hyphen_char: internal_font_array<integer> = internal_font_array::default();
+
 // @!skew_char:array[internal_font_number] of integer;
 //   {current \.{\\skewchar} values}
+/// current `\skewchar` values
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static skew_char: internal_font_array<integer> = internal_font_array::default();
+
 // @!bchar_label:array[internal_font_number] of font_index;
 //   {start of |lig_kern| program for left boundary character,
 //   |non_address| if there is none}
@@ -79,8 +107,14 @@ pub(crate) static bchar_label: internal_font_array<font_index> = internal_font_a
 
 // @!font_bchar:array[internal_font_number] of min_quarterword..non_char;
 //   {right boundary character, |non_char| if there is none}
+/// right boundary character, `non_char` if there is none
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_bchar: internal_font_array<ASCII_code_or_non_char> = internal_font_array::default();
 // @!font_false_bchar:array[internal_font_number] of min_quarterword..non_char;
 //   {|font_bchar| if it doesn't exist in the font, otherwise |non_char|}
+/// `font_bchar` if it doesn't exist in the font, otherwise `non_char`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_false_bchar: internal_font_array<ASCII_code_or_non_char> = internal_font_array::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0549::internal_font_array;

@@ -13,7 +13,7 @@ pub(crate) const two: scaled = scaled(0o400000);
 // @!nonnegative_integer=0..@'17777777777; {$0\L x<2^{31}$}
 // @!small_number=0..63; {this type is self-explanatory}
 //
-#[derive(Copy, Clone, RefCast, PartialEq, PartialOrd)]
+#[derive(Copy, Clone, RefCast, PartialEq, PartialOrd, Debug)]
 #[repr(transparent)]
 pub struct scaled(integer);
 

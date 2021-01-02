@@ -71,20 +71,3 @@
 //!   end;
 //! end
 //!
-//! @ @<Select the appropriate case and |return| or |goto common_ending|@>=
-//! begin scan_int; n:=cur_val; {|n| is the number of cases to pass}
-//! if tracing_commands>1 then
-//!   begin begin_diagnostic; print("{case "); print_int(n); print_char("}");
-//!   end_diagnostic(false);
-//!   end;
-//! while n<>0 do
-//!   begin pass_text;
-//!   if cond_ptr=save_cond_ptr then
-//!     if cur_chr=or_code then decr(n)
-//!     else goto common_ending
-//!   else if cur_chr=fi_code then @<Pop the condition stack@>;
-//!   end;
-//! change_if_limit(or_code,save_cond_ptr);
-//! return; {wait for \.{\\or}, \.{\\else}, or \.{\\fi}}
-//! end
-//!

@@ -47,11 +47,11 @@
 //! If such an instruction is encountered during
 //! normal program execution, it denotes an unconditional halt; no ligature
 //! or kerning command is performed.
-//!
-//! @d stop_flag==qi(128) {value indicating `\.{STOP}' in a lig/kern program}
-//! @d kern_flag==qi(128) {op code for a kern step}
-//! @d skip_byte(#)==#.b0
-//! @d next_char(#)==#.b1
-//! @d op_byte(#)==#.b2
-//! @d rem_byte(#)==#.b3
-//!
+//
+// @d stop_flag==qi(128) {value indicating `\.{STOP}' in a lig/kern program}
+// @d kern_flag==qi(128) {op code for a kern step}
+// @d skip_byte(#)==#.b0
+// @d next_char(#)==#.b1
+// @d op_byte(#)==#.b2
+// @d rem_byte(#)==#.b3
+//
