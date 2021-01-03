@@ -17,7 +17,7 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
         || eq_type_field_w == outer_call
         || eq_type_field_w == long_outer_call
     {
-        delete_token_ref(globals, eq_type_field_w.into());
+        delete_token_ref(globals, equiv_field!(w));
     }
     // glue_ref: delete_glue_ref(equiv_field(w));
     else if eq_type_field_w == glue_ref {
