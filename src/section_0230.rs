@@ -101,6 +101,14 @@ macro_rules! every_hbox {
 }
 // @d every_vbox==equiv(every_vbox_loc)
 // @d every_job==equiv(every_job_loc)
+macro_rules! every_job {
+    ($globals:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::every_job_loc
+        )
+    }
+}
 // @d every_cr==equiv(every_cr_loc)
 // @d err_help==equiv(err_help_loc)
 // @d toks(#)==equiv(toks_base+#)

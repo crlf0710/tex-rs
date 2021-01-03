@@ -18,7 +18,13 @@
 pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
     // var k:integer; {all-purpose index}
     // begin @<Finish the extensions@>;
+    Finish_the_extensions!(globals);
     // @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
+    region_stat! {
+        if tracing_stats!(globals) > 0 {
+            todo!("output");
+        }
+    }
     // wake_up_terminal; @<Finish the \.{DVI} file@>;
     wake_up_terminal(globals);
     Finish_the_DVI_file!(globals);
@@ -30,10 +36,12 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
         globals.selector = globals.selector - 2;
         // if selector=term_only then
         if globals.selector == term_only {
-            todo!();
             // begin print_nl("Transcript written on ");
+            print_nl(globals, strpool_str!("Transcript written on "));
             // @.Transcript written...@>
             // slow_print(log_name); print_char(".");
+            slow_print(globals, globals.log_name.get() as _);
+            print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'.'));
             // end;
         }
         // end;
@@ -43,7 +51,11 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsLogView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0028::a_close;
 use crate::section_0034::wake_up_terminal;
 use crate::section_0054::term_only;
 use crate::section_0056::wlog_cr;
+use crate::section_0058::print_char;
+use crate::section_0060::slow_print;
+use crate::section_0062::print_nl;

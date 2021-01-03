@@ -105,7 +105,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
             // end;
         }
     }
-    trace_debug_expr!("cur_cmd={}", globals.cur_cmd);
+    trace_expr!("cur_cmd={}", globals.cur_cmd);
     // @<Discard the prefixes \.{\\long} and \.{\\outer} if they are irrelevant@>;
     Discard_the_prefixes_long_and_outer_if_they_are_irrelevant!(globals, a);
     region_forward_label!(

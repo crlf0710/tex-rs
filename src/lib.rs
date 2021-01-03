@@ -39,21 +39,12 @@
 // DEALINGS IN THE SOFTWARE.
 
 // -------------------------------------------------------
-// `TeX-rs` is a port of the `TeX` program to Rust.
-// The original `TeX` program is copyright (C) 1982
-// by D. E. Knuth; all rights are reserved.
+// `TeX-rs` originates from the `TeX` program, which was
+// created by Donald Knuth and released under his usual license:
+// http://www.ctan.org/license/knuth.
 
 // TeX is a trademark of the American Mathematical Society.
 // METAFONT is a trademark of Addison-Wesley Publishing Company.
-
-// Notes from the original author:
-//
-// Although considerable effort has been expended to make the TeX program
-// correct and reliable, no warranty is implied; the author disclaims any
-// obligation or liability for damages, including but not limited to
-// special, indirect, or consequential damages arising out of or in
-// connection with the use or performance of this software. This work has
-// been a ``labor of love'' and the author hopes that users enjoy it.
 
 #![deny(warnings, missing_docs, missing_debug_implementations)]
 #![allow(
@@ -64,7 +55,7 @@
     unused_doc_comments
 )]
 #![allow(unreachable_code)]
-//! This is `TeX`, a document compiler intended to produce typesetting of high quality.
+//! This is `TeX`-rs, a document compiler intended to produce typesetting of high quality.
 
 #[macro_use]
 mod info;
@@ -1496,7 +1487,11 @@ reversing_order_items!(
                         mod section_1332;
                     }
                     {
-                        mod section_1333;
+                        macro_rules! forward_mod_e {
+                            () => {
+                                mod section_1333;
+                            }
+                        }
                         mod section_1334;
                         mod section_1335;
                         mod section_1336;
@@ -1562,7 +1557,9 @@ reversing_order_items!(
 );
 mod section_1376;
 mod section_1377;
+#[macro_use]
 mod section_1378;
+forward_mod_e!();
 mod section_1379;
 mod section_1380;
 

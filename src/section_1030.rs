@@ -27,6 +27,9 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     //   append_normal_space,exit;
     // var@!t:integer; {general-purpose temporary variable}
     // begin if every_job<>null then begin_token_list(every_job,every_job_text);
+    if every_job!(globals) != null {
+        begin_token_list(globals, every_job!(globals), every_job_text);
+    }
     // big_switch: get_x_token;@/
     region_backward_label! {
     'big_switch <-
@@ -115,8 +118,11 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
+use crate::section_0115::null;
 use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0211::*;
+use crate::section_0307::every_job_text;
+use crate::section_0323::begin_token_list;
 use crate::section_0380::get_x_token;
-use crate::section_0081::TeXResult;
