@@ -14,22 +14,25 @@ pub(crate) fn print_ln(mut globals: TeXGlobalsIoStringLogView<'_>) {
         // term_offset:=0; file_offset:=0;
         *globals.term_offset = 0.into();
         *globals.file_offset = 0.into();
-        // end;
+    // end;
     }
     // log_only: begin wlog_cr; file_offset:=0;
     else if *globals.selector == log_only {
         wlog_cr(make_globals_log_view!(globals));
         *globals.file_offset = 0.into();
-        // end;
+    // end;
     }
     // term_only: begin wterm_cr; term_offset:=0;
     else if *globals.selector == term_only {
         wterm_cr(make_globals_io_view!(globals));
         *globals.term_offset = 0.into();
-        //   end;
+    //   end;
     }
     // no_print,pseudo,new_string: do_nothing;
-    else if *globals.selector == no_print || *globals.selector == pseudo || *globals.selector == new_string {
+    else if *globals.selector == no_print
+        || *globals.selector == pseudo
+        || *globals.selector == new_string
+    {
         do_nothing!();
     }
     // othercases write_ln(write_file[selector])
@@ -39,7 +42,7 @@ pub(crate) fn print_ln(mut globals: TeXGlobalsIoStringLogView<'_>) {
     // endcases;@/
     // end; {|tally| is not affected}
     /// `tally` is not affected
-    const _ : () = ();
+    const _: () = ();
 }
 
 use crate::pascal::write_ln_noargs;
@@ -48,5 +51,5 @@ use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsLogView;
 use crate::section_0054::*;
-use crate::section_0056::wterm_cr;
 use crate::section_0056::wlog_cr;
+use crate::section_0056::wterm_cr;

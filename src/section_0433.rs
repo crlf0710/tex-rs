@@ -6,11 +6,14 @@ pub(crate) fn scan_eight_bit_int(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin scan_int;
     scan_int(globals)?;
     // if (cur_val<0)or(cur_val>255) then
-    //   begin print_err("Bad register code");
-    // @.Bad register code@>
-    //   help2("A register number must be between 0 and 255.")@/
-    //     ("I changed this one to zero."); int_error(cur_val); cur_val:=0;
-    //   end;
+    if globals.cur_val < 0 || globals.cur_val > 255 {
+        todo!("err");
+        //   begin print_err("Bad register code");
+        // @.Bad register code@>
+        //   help2("A register number must be between 0 and 255.")@/
+        //     ("I changed this one to zero."); int_error(cur_val); cur_val:=0;
+        //   end;
+    }
     // end;
     ok_nojump!()
 }

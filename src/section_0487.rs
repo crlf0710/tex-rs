@@ -18,6 +18,8 @@ pub(crate) const if_dim_code: quarterword = 3;
 // @d if_hbox_code=10 { `\.{\\ifhbox}' }
 // @d if_vbox_code=11 { `\.{\\ifvbox}' }
 // @d ifx_code=12 { `\.{\\ifx}' }
+/// `\ifx`
+pub(crate) const ifx_code: quarterword = 12;
 // @d if_eof_code=13 { `\.{\\ifeof}' }
 // @d if_true_code=14 { `\.{\\iftrue}' }
 /// `\iftrue`
@@ -59,6 +61,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &m
     // primitive("ifvbox",if_test,if_vbox_code);
     // @!@:if_vbox_}{\.{\\ifvbox} primitive@>
     // primitive("ifx",if_test,ifx_code);
+    primitive(globals, strpool_str!("ifx"), if_test, ifx_code as _);
     // @!@:ifx_}{\.{\\ifx} primitive@>
     // primitive("ifeof",if_test,if_eof_code);
     // @!@:if_eof_}{\.{\\ifeof} primitive@>

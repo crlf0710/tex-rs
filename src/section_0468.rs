@@ -43,6 +43,7 @@ impl From<u8> for convert_code_kind {
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0468(globals: &mut TeXGlobals) {
     // primitive("number",convert,number_code);@/
+    primitive(globals, strpool_str!("number"), convert, convert_code_kind::number_code as _);
     // @!@:number_}{\.{\\number} primitive@>
     // primitive("romannumeral",convert,roman_numeral_code);@/
     // @!@:roman_numeral_}{\.{\\romannumeral} primitive@>

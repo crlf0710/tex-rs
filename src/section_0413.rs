@@ -33,7 +33,7 @@ pub(crate) fn scan_something_internal(
     // case cur_cmd of
     // def_code: @<Fetch a character code from some table@>;
     if globals.cur_cmd == def_code {
-        todo!();
+        Fetch_a_character_code_from_some_table!(globals, m);
     }
     // toks_register,assign_toks,def_family,set_font,def_font: @<Fetch a token list or
     //   font identifier, provided that |level=tok_val|@>;

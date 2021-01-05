@@ -54,8 +54,25 @@ macro_rules! write_stream {
     }
 }
 // @d open_name(#) == link(#+1) {string number of file name to open}
+/// string number of file name to open
+macro_rules! open_name {
+    ($globals:expr, $ptr:expr) => {
+        link!($globals, $ptr + 1)
+    }
+}
 // @d open_area(#) == info(#+2) {string number of file area for |open_name|}
+/// string number of file area for `open_name`
+macro_rules! open_area {
+    ($globals:expr, $ptr:expr) => {
+        info_inner!($globals, $ptr + 2)
+    }
+}
 // @d open_ext(#) == link(#+2) {string number of file extension for |open_name|}
-//
+/// string number of file extension for `open_name`
+macro_rules! open_ext {
+    ($globals:expr, $ptr:expr) => {
+        link!($globals, $ptr + 2)
+    }
+}
 
 use crate::section_0113::quarterword;

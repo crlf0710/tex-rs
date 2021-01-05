@@ -47,6 +47,6 @@ pub(crate) fn str_eq_str(globals: &mut TeXGlobals, s: str_number, t: str_number)
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
-use crate::section_0038::str_number;
 use crate::section_0038::pool_pointer;
+use crate::section_0038::str_number;
 use crate::section_0040::length;

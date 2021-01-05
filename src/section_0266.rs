@@ -40,6 +40,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
             true
         }
         // end_group: print_esc("endgroup");
+        else if $cmd == end_group {
+            print_esc($globals, strpool_str!("endgroup"));
+            true
+        }
         // ex_space: print_esc(" ");
         else if $cmd == ex_space {
             print_esc($globals, strpool_str!(" "));

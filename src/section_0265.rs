@@ -19,8 +19,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("afterassignment",after_assignment,0);@/
     // @!@:after_assignment_}{\.{\\afterassignment} primitive@>
     // primitive("aftergroup",after_group,0);@/
+    primitive(globals, strpool_str!("aftergroup"), after_group, 0);
     // @!@:after_group_}{\.{\\aftergroup} primitive@>
     // primitive("begingroup",begin_group,0);@/
+    primitive(globals, strpool_str!("begingroup"), begin_group, 0);
     // @!@:begin_group_}{\.{\\begingroup} primitive@>
     // primitive("char",char_num,0);@/
     // @!@:char_}{\.{\\char} primitive@>
@@ -30,13 +32,17 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("delimiter",delim_num,0);@/
     // @!@:delimiter_}{\.{\\delimiter} primitive@>
     // primitive("divide",divide,0);@/
+    primitive(globals, strpool_str!("divide"), divide, 0);
     // @!@:divide_}{\.{\\divide} primitive@>
     // primitive("endcsname",end_cs_name,0);@/
     primitive(globals, strpool_str!("endcsname"), end_cs_name, 0);
     // @!@:end_cs_name_}{\.{\\endcsname} primitive@>
     // primitive("endgroup",end_group,0);
+    primitive(globals, strpool_str!("endgroup"), end_group, 0);
     // @!@:end_group_}{\.{\\endgroup} primitive@>
     // text(frozen_end_group):="endgroup"; eqtb[frozen_end_group]:=eqtb[cur_val];@/
+    text!(globals, frozen_end_group as u16) = strpool_str!("endgroup").get() as _;
+    globals.eqtb[frozen_end_group as u16] = globals.eqtb[globals.cur_val as u16];
     // primitive("expandafter",expand_after,0);@/
     primitive(globals, strpool_str!("expandafter"), expand_after, 0);
     // @!@:expand_after_}{\.{\\expandafter} primitive@>
@@ -62,6 +68,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("mathchoice",math_choice,0);@/
     // @!@:math_choice_}{\.{\\mathchoice} primitive@>
     // primitive("multiply",multiply,0);@/
+    primitive(globals, strpool_str!("multiply"), multiply, 0);
     // @!@:multiply_}{\.{\\multiply} primitive@>
     // primitive("noalign",no_align,0);@/
     // @!@:no_align_}{\.{\\noalign} primitive@>

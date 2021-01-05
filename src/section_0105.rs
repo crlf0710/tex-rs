@@ -15,7 +15,18 @@ macro_rules! nx_plus_y {
     };
 }
 // @d mult_integers(#)==mult_and_add(#,0,@'17777777777)
-//
+macro_rules! mult_integers {
+    ($globals:expr, $x:expr, $y:expr) => {
+        crate::section_0105::mult_and_add(
+            $globals,
+            $x,
+            crate::section_0101::scaled::new_from_inner($y),
+            crate::section_0101::scaled::zero(),
+            crate::section_0101::scaled::new_from_inner(0o17777777777),
+        ).inner()
+    }
+}
+
 // @p function mult_and_add(@!n:integer;@!x,@!y,@!max_answer:scaled):scaled;
 pub(crate) fn mult_and_add(
     globals: &mut TeXGlobals,

@@ -83,7 +83,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
     }
     // othercases write(write_file[selector],xchr[s])
     else {
-        todo!();
+        write(&mut globals.write_file[globals.selector.get()], xchr(s));
     }
     // endcases;@/
     // incr(tally);
@@ -92,6 +92,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
 }
 
 use crate::pascal::integer;
+use crate::pascal::write;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsLogView;

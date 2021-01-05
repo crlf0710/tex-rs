@@ -35,16 +35,19 @@ pub(crate) fn do_register_command(globals: &mut TeXGlobals, a: small_number) -> 
     }
     // else @<Compute result of |multiply| or |divide|, put it in |cur_val|@>;
     else {
-        todo!("multiply or more");
+        Compute_result_of_multiply_or_divide__put_it_in_cur_val!(globals, l, p, q);
     }
     // if arith_error then
-    //   begin print_err("Arithmetic overflow");
-    // @.Arithmetic overflow@>
-    //   help2("I can't carry out that multiplication or division,")@/
-    //     ("since the result is out of range.");
-    //   if p>=glue_val then delete_glue_ref(cur_val);
-    //   error; return;
-    //   end;
+    if globals.arith_error {
+        todo!("error arith");
+        //   begin print_err("Arithmetic overflow");
+        // @.Arithmetic overflow@>
+        //   help2("I can't carry out that multiplication or division,")@/
+        //     ("since the result is out of range.");
+        //   if p>=glue_val then delete_glue_ref(cur_val);
+        //   error; return;
+        //   end;
+    }
     // if p<glue_val then word_define(l,cur_val)
     if p < glue_val {
         word_define!(globals, a, l, globals.cur_val);

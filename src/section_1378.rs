@@ -8,5 +8,5 @@ macro_rules! Finish_the_extensions {
                 a_close(&mut $globals.write_file[k])
             }
         }
-    }}
+    }};
 }

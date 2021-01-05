@@ -26,6 +26,10 @@ macro_rules! Expand_a_nonmacro {
             conv_toks($globals)?;
         }
         // the:ins_the_toks; {this procedure is discussed in Part 27 below}
+        else if $globals.cur_cmd == the {
+            /// this procedure is discussed in Part 27 below
+            ins_the_toks($globals)?;
+        }
         // if_test:conditional; {this procedure is discussed in Part 28 below}
         else if $globals.cur_cmd == if_test {
             /// this procedure is discussed in Part 28 below
@@ -52,7 +56,9 @@ macro_rules! Expand_a_nonmacro {
         use crate::section_0210::if_test;
         use crate::section_0210::cs_name;
         use crate::section_0210::input;
+        use crate::section_0210::the;
         use crate::section_0299::show_cur_cmd_chr;
+        use crate::section_0467::ins_the_toks;
         use crate::section_0470::conv_toks;
         use crate::section_0498::conditional;
     }};

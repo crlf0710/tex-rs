@@ -10,11 +10,17 @@ pub(crate) fn do_extension(globals: &mut TeXGlobals) -> TeXResult<()> {
         unreachable!()
     }
     // open_node:@<Implement \.{\\openout}@>;
+    else if globals.cur_chr.get() == open_node as chr_code_repr {
+        Implement_openout!(globals);
+    }
     // write_node:@<Implement \.{\\write}@>;
     else if globals.cur_chr.get() == write_node as chr_code_repr {
         Implement_write!(globals);
     }
     // close_node:@<Implement \.{\\closeout}@>;
+    else if globals.cur_chr.get() == close_node as chr_code_repr {
+        Implement_closeout!(globals);
+    }
     // special_node:@<Implement \.{\\special}@>;
     // immediate_code:@<Implement \.{\\immediate}@>;
     else if globals.cur_chr.get() == immediate_code as chr_code_repr {
@@ -35,5 +41,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
 use crate::section_0297::chr_code_repr;
+use crate::section_1341::close_node;
+use crate::section_1341::open_node;
 use crate::section_1341::write_node;
 use crate::section_1344::immediate_code;

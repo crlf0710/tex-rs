@@ -22,18 +22,26 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
         // begin cur_ext:=""; cur_name:=make_string;
         globals.cur_ext = strpool_str!("");
         globals.cur_name = make_string(make_globals_string_view!(globals));
-        // end
+    // end
     }
     // else  begin cur_name:=str_ptr;
     else {
-        todo!();
+        globals.cur_name = globals.str_ptr;
         // str_start[str_ptr+1]:=str_start[str_ptr]+ext_delimiter-area_delimiter-1;
+        globals.str_start[globals.str_ptr + 1] = pool_pointer::new(
+            globals.str_start[globals.str_ptr].get() + globals.ext_delimiter.get()
+                - globals.area_delimiter.get()
+                - 1,
+        );
         // incr(str_ptr); cur_ext:=make_string;
+        incr!(globals.str_ptr);
+        globals.cur_ext = make_string(make_globals_string_view!(globals));
         // end;
     }
     // end;
 }
 
-use crate::section_0004::TeXGlobalsStringView;
-use crate::section_0043::make_string;
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsStringView;
+use crate::section_0038::pool_pointer;
+use crate::section_0043::make_string;

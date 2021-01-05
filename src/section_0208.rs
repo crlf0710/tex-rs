@@ -65,6 +65,8 @@ pub(crate) const hrule: quarterword = 36;
 pub(crate) const ignore_spaces: quarterword = 39;
 // @d after_assignment=40 {save till assignment is done ( \.{\\afterassignment} )}
 // @d after_group=41 {save till group is done ( \.{\\aftergroup} )}
+/// save till group is done ( `\aftergroup` )
+pub(crate) const after_group: quarterword = 41;
 // @d break_penalty=42 {additional badness ( \.{\\penalty} )}
 /// additional badness ( `\penalty` )
 pub(crate) const break_penalty: quarterword = 42;
@@ -98,6 +100,8 @@ pub(crate) const message: quarterword = 58;
 /// extensions to `TeX` ( `\write`, `\special`, etc. )
 pub(crate) const extension: quarterword = 59;
 // @d in_stream=60 {files for reading ( \.{\\openin}, \.{\\closein} )}
+/// files for reading ( `\openin`, `\closein` )
+pub(crate) const in_stream: quarterword = 60;
 // @d begin_group=61 {begin local grouping ( \.{\\begingroup} )}
 /// begin local grouping ( `\begingroup` )
 pub(crate) const begin_group: quarterword = 61;

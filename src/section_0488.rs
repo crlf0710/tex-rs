@@ -24,6 +24,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
             // if_hbox_code:print_esc("ifhbox");
             // if_vbox_code:print_esc("ifvbox");
             // ifx_code:print_esc("ifx");
+            else if chr_code == code::ifx_code as chr_code_repr {
+                print_esc($globals, strpool_str!("ifx"));
+            }
             // if_eof_code:print_esc("ifeof");
             // if_true_code:print_esc("iftrue");
             // if_false_code:print_esc("iffalse");

@@ -15,13 +15,22 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1063 {
         }
         // any_mode(begin_group): new_save_level(semi_simple_group);
         else if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, begin_group as u16) {
-            todo!();
+            new_save_level($globals, semi_simple_group.into());
+            use crate::section_0269::semi_simple_group;
+            use crate::section_0274::new_save_level;
             true
         }
         // any_mode(end_group): if cur_group=semi_simple_group then unsave
         //   else off_save;
         else if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, end_group as u16) {
-            todo!();
+            if $globals.cur_group == semi_simple_group {
+                unsave($globals)?;
+            } else {
+                off_save($globals);
+            }
+            use crate::section_0269::semi_simple_group;
+            use crate::section_0281::unsave;
+            use crate::section_1064::off_save;
             true
         }
         else {

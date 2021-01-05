@@ -38,6 +38,8 @@ pub(crate) const frozen_control_sequence: word = frozen_control_sequence_TYPENUM
 /// permanent `\cr`
 pub(crate) const frozen_cr: word = frozen_control_sequence + 1;
 // @d frozen_end_group=frozen_control_sequence+2 {permanent `\.{\\endgroup}'}
+/// permanent `\endgroup`
+pub(crate) const frozen_end_group: word = frozen_control_sequence + 2;
 // @d frozen_right=frozen_control_sequence+3 {permanent `\.{\\right}'}
 // @d frozen_fi=frozen_control_sequence+4 {permanent `\.{\\fi}'}
 /// permanent `\fi`

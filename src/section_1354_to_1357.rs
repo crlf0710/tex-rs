@@ -1,8 +1,3 @@
-
-//! @ @<Implement \.{\\closeout}@>=
-//! begin new_write_whatsit(write_node_size); write_tokens(tail):=null;
-//! end
-//!
 //! @ When `\.{\\special\{...\}}' appears, we expand the macros in the token
 //! list as in \.{\\xdef} and \.{\\mark}.
 //!

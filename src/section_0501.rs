@@ -19,6 +19,9 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
         // if_inner_code: b:=(mode<0);
         // if_void_code, if_hbox_code, if_vbox_code: @<Test box register status@>;
         // ifx_code: @<Test if two tokens match@>;
+        else if $this_if == ifx_code {
+            Test_if_two_tokens_match!($globals, $b);
+        }
         // if_eof_code: begin scan_four_bit_int; b:=(read_open[cur_val]=closed);
         //   end;
         // if_true_code: b:=true;
