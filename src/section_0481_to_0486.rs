@@ -1,17 +1,3 @@
-//! @ Another way to create a token list is via the \.{\\read} command. The
-//! sixteen files potentially usable for reading appear in the following
-//! global variables. The value of |read_open[n]| will be |closed| if
-//! stream number |n| has not been opened or if it has been fully read;
-//! |just_open| if an \.{\\openin} but not a \.{\\read} has been done;
-//! and |normal| if it is open and ready to read the next line.
-//!
-//! @d closed=2 {not open, or at end of file}
-//! @d just_open=1 {newly opened, first line not yet read}
-//!
-//! @<Glob...@>=
-//! @!read_file:array[0..15] of alpha_file; {used for \.{\\read}}
-//! @!read_open:array[0..16] of normal..closed; {state of |read_file[n]|}
-//!
 //! @ @<Set init...@>=
 //! for k:=0 to 16 do read_open[k]:=closed;
 //!

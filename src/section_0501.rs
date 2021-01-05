@@ -23,7 +23,13 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
             Test_if_two_tokens_match!($globals, $b);
         }
         // if_eof_code: begin scan_four_bit_int; b:=(read_open[cur_val]=closed);
-        //   end;
+        else if $this_if == if_eof_code {
+            scan_four_bit_int($globals)?;
+            $b = $globals.read_open[$globals.cur_val as u8] == read_open_kind::closed;
+            use crate::section_0435::scan_four_bit_int;
+            use crate::section_0480::read_open_kind;
+            // end;
+        }
         // if_true_code: b:=true;
         else if $this_if == if_true_code {
             $b = true;

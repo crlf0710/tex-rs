@@ -3,6 +3,10 @@
 // @<Clear off...@>=
 macro_rules! Clear_off_top_level_from_save_stack {
     ($globals:expr) => {{
+        /// saved level, if in fullword regions of `eqtb`
+        let mut l: quarterword = 0;
+        // NOTE: this variables is not always updated. Is this a bug?
+
         region_forward_label!(
             |'done|
             {
@@ -24,9 +28,6 @@ macro_rules! Clear_off_top_level_from_save_stack {
                     }
                     // else  begin if save_type(save_ptr)=restore_old_value then
                     else {
-                        /// saved level, if in fullword regions of `eqtb`
-                        let l: quarterword;
-
                         if save_type!($globals, $globals.save_ptr) == restore_old_value {
                             // begin l:=save_level(save_ptr); decr(save_ptr);
                             l = save_level!($globals, $globals.save_ptr);

@@ -35,9 +35,13 @@ macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global
         }
         // else if xeq_level[p]<>level_one then
         else if $globals.xeq_level[$p] != level_one {
-            todo!("store 2");
             // begin eqtb[p]:=save_stack[save_ptr]; xeq_level[p]:=l;
+            $globals.eqtb[$p] = $globals.save_stack[$globals.save_ptr];
+            $globals.xeq_level[$p] = $l;
             // @!stat if tracing_restores>0 then restore_trace(p,"restoring");@+tats@;@/
+            region_stat! {
+                todo!("");
+            }
             // end
         }
         // else  begin
@@ -46,7 +50,6 @@ macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global
             // @!stat if tracing_restores>0 then restore_trace(p,"retaining");@+tats@;@/
             // end
         }
-        let _ = $l;
         use crate::section_0230::int_base;
         use crate::section_0275::eq_destroy;
     }}

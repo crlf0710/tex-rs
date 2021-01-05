@@ -74,6 +74,7 @@ pub mod TeXGlobals {
     include!("src/section_0410.rs");
     include!("src/section_0438.rs");
     include!("src/section_0447.rs");
+    include!("src/section_0480.rs");
     include!("src/section_0489.rs");
     include!("src/section_0493.rs");
     include!("src/section_0512.rs");

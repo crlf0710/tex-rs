@@ -13,11 +13,11 @@
 #[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 pub(crate) static write_file: write_file_array<alpha_file> = write_file_array::default();
 
-#[globals_struct_use(TeXGlobals)]
-use crate::section_1342::write_file_array;
-
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static write_open: write_open_array<boolean> = write_open_array::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_1342::write_file_array;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_1342::write_open_array;

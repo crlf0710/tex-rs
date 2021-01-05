@@ -5,6 +5,7 @@
 // @<Display the token ...@>=
 macro_rules! Display_the_token_m_c {
     ($globals:expr, $m:expr, $c:expr, $n:expr, $match_chr:expr) => {{
+        trace_span!("Display the token ...");
         // case m of
         // left_brace,right_brace,math_shift,tab_mark,sup_mark,sub_mark,spacer,
         //   letter,other_char: print(c);

@@ -13,8 +13,11 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
     }
     // else  begin cur_area:=str_ptr;
     else {
-        todo!();
+        globals.cur_area = globals.str_ptr;
         // str_start[str_ptr+1]:=str_start[str_ptr]+area_delimiter; incr(str_ptr);
+        globals.str_start[globals.str_ptr + 1] =
+            globals.str_start[globals.str_ptr] + globals.area_delimiter.get() as integer;
+        incr!(globals.str_ptr);
         // end;
     }
     // if ext_delimiter=0 then
@@ -41,6 +44,7 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
     // end;
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0038::pool_pointer;

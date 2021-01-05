@@ -870,7 +870,8 @@ reversing_order_items!({
                             mod section_0479;
                         }
                     );
-                    mod section_0480_to_0486;
+                    mod section_0480;
+                    mod section_0481_to_0486;
                     mod section_0487;
                     #[macro_use]
                     mod section_0488;
