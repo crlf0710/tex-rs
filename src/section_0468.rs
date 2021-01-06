@@ -51,6 +51,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0468(globals: &m
     primitive(globals, strpool_str!("string"), convert, convert_code_kind::string_code as _);
     // @!@:string_}{\.{\\string} primitive@>
     // primitive("meaning",convert,meaning_code);@/
+    primitive(globals, strpool_str!("meaning"), convert, convert_code_kind::meaning_code as _);
     // @!@:meaning_}{\.{\\meaning} primitive@>
     // primitive("fontname",convert,font_name_code);@/
     // @!@:font_name_}{\.{\\fontname} primitive@>

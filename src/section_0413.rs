@@ -95,6 +95,9 @@ pub(crate) fn scan_something_internal(
         );
     }
     // assign_font_dimen: @<Fetch a font dimension@>;
+    else if globals.cur_cmd == assign_font_dimen {
+        Fetch_a_font_dimension!(globals);
+    }
     // assign_font_int: @<Fetch a font integer@>;
     else if globals.cur_cmd == assign_font_int {
         Fetch_a_font_integer!(globals, m);
@@ -104,6 +107,9 @@ pub(crate) fn scan_something_internal(
         Fetch_a_register!(globals, m);
     }
     // last_item: @<Fetch an item in the current node, if appropriate@>;
+    else if globals.cur_cmd == last_item {
+        Fetch_an_item_in_the_current_node__if_appropriate!(globals);
+    }
     // othercases @<Complain that \.{\\the} can't do this; give zero result@>
     else {
         Complain_that_the_cant_do_this__give_zero_result!(globals, level);
