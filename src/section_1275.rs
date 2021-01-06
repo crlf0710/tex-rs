@@ -32,6 +32,12 @@ pub(crate) fn open_or_close_in(globals: &mut TeXGlobals) -> TeXResult<()> {
         // pack_cur_name;
         pack_cur_name(globals);
         // if a_open_in(read_file[n]) then read_open[n]:=just_open;
+        if a_open_in(
+            make_globals_filename_view!(globals),
+            &mut globals.read_file[n.get()],
+        ) {
+            globals.read_open[n.get()] = read_open_kind::just_open;
+        }
         // end;
     }
     // end;
@@ -40,6 +46,8 @@ pub(crate) fn open_or_close_in(globals: &mut TeXGlobals) -> TeXResult<()> {
 
 use crate::pascal::u8_from_0_to_n;
 use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsFilenameView;
+use crate::section_0027::a_open_in;
 use crate::section_0028::a_close;
 use crate::section_0081::TeXResult;
 use crate::section_0405::scan_optional_equals;

@@ -82,6 +82,8 @@ pub(crate) const r#let: quarterword = 94;
 /// code definition ( `\chardef`, `\countdef`, etc.)
 pub(crate) const shorthand_def: quarterword = 95;
 // @d read_to_cs=96 {read into a control sequence ( \.{\\read} )}
+/// read into a control sequence ( `\read` )
+pub(crate) const read_to_cs: quarterword = 96;
 // @d def=97 {macro definition ( \.{\\def}, \.{\\gdef}, \.{\\xdef}, \.{\\edef} )}
 /// macro definition ( `\def`, `\gdef`, `\xdef`, `\edef` )
 pub(crate) const def: quarterword = 97;

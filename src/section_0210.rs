@@ -10,6 +10,8 @@ pub(crate) const undefined_cs: quarterword = max_command + 1;
 /// special expansion ( `\expandafter` )
 pub(crate) const expand_after: quarterword = max_command + 2;
 // @d no_expand=max_command+3 {special nonexpansion ( \.{\\noexpand} )}
+/// special nonexpansion ( `\noexpand` )
+pub(crate) const no_expand: quarterword = max_command + 3;
 // @d input=max_command+4 {input a source file ( \.{\\input}, \.{\\endinput} )}
 /// input a source file ( `\input`, `\endinput` )
 pub(crate) const input: quarterword = max_command + 4;

@@ -12,10 +12,18 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         }
         // accent: print_esc("accent");
         // advance: print_esc("advance");
+        else if $cmd == advance {
+            print_esc($globals, strpool_str!("advance"));
+            true
+        }
         // after_assignment: print_esc("afterassignment");
         // after_group: print_esc("aftergroup");
         // assign_font_dimen: print_esc("fontdimen");
         // begin_group: print_esc("begingroup");
+        else if $cmd == begin_group {
+            print_esc($globals, strpool_str!("begingroup"));
+            true
+        }
         // break_penalty: print_esc("penalty");
         else if $cmd == break_penalty {
             print_esc($globals, strpool_str!("penalty"));
@@ -34,6 +42,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         }
         // delim_num: print_esc("delimiter");
         // divide: print_esc("divide");
+        else if $cmd == divide {
+            print_esc($globals, strpool_str!("divide"));
+            true
+        }
         // end_cs_name: print_esc("endcsname");
         else if $cmd == end_cs_name {
             print_esc($globals, strpool_str!("endcsname"));
@@ -64,13 +76,25 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         // math_char_num: print_esc("mathchar");
         // math_choice: print_esc("mathchoice");
         // multiply: print_esc("multiply");
+        else if $cmd == multiply {
+            print_esc($globals, strpool_str!("multiply"));
+            true
+        }
         // no_align: print_esc("noalign");
         // no_boundary:print_esc("noboundary");
         // no_expand: print_esc("noexpand");
+        else if $cmd == no_expand {
+            print_esc($globals, strpool_str!("noexpand"));
+            true
+        }
         // non_script: print_esc("nonscript");
         // omit: print_esc("omit");
         // radical: print_esc("radical");
         // read_to_cs: print_esc("read");
+        else if $cmd == read_to_cs {
+            print_esc($globals, strpool_str!("read"));
+            true
+        }
         // relax: print_esc("relax");
         else if $cmd == relax {
             print_esc($globals, strpool_str!("relax"));

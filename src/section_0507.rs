@@ -9,7 +9,7 @@
 macro_rules! Test_if_two_tokens_match {
     ($globals:expr, $b:expr) => {{
         /// to be tested against the second operand
-        let (_n, p, q);
+        let (n, p, q);
         
         /// `scanner_status` upon entry
         let save_scanner_status;
@@ -18,7 +18,7 @@ macro_rules! Test_if_two_tokens_match {
         $globals.scanner_status = scanner_status_kind::normal;
         // get_next; n:=cur_cs; p:=cur_cmd; q:=cur_chr;
         get_next($globals)?;
-        _n = $globals.cur_cs;
+        n = $globals.cur_cs;
         p = $globals.cur_cmd;
         q = $globals.cur_chr;
         // get_next; if cur_cmd<>p then b:=false
@@ -32,7 +32,7 @@ macro_rules! Test_if_two_tokens_match {
         }
         // else @<Test if two macro texts match@>;
         else {
-            todo!("Test if two macro texts match");
+            Test_if_two_macro_texts_match!($globals, $b, n);
         }
         // scanner_status:=save_scanner_status;
         $globals.scanner_status = save_scanner_status;

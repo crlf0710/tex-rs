@@ -29,10 +29,15 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
                 $globals.cur_chr = chr_code_type::new(equiv!($globals, $globals.cur_cs) as _);
                 // if cur_cmd>=outer_call then
                 if $globals.cur_cmd >= outer_call {
-                    todo!();
                     // if cur_cmd=dont_expand then
-                    //   @<Get the next token, suppressing expansion@>
+                    if $globals.cur_cmd == dont_expand {
+                        // @<Get the next token, suppressing expansion@>
+                        Get_the_next_token__suppressing_expansion!($globals);
+                    }
                     // else check_outer_validity;
+                    else {
+                        check_outer_validity($globals);
+                    }
                 }
                 // end
             }
@@ -74,10 +79,12 @@ macro_rules! Input_from_token_list__goto_restart_if_end_of_list_or_if_a_paramete
         use crate::section_0207::right_brace;
         use crate::section_0207::out_param;
         use crate::section_0210::outer_call;
+        use crate::section_0210::dont_expand;
         use crate::section_0289::cs_token_flag;
         use crate::section_0297::cur_tok_type;
         use crate::section_0297::chr_code_type;
         use crate::section_0324::end_token_list;
+        use crate::section_0336::check_outer_validity;
         use crate::section_0115::null;
     }}
 }

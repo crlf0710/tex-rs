@@ -75,6 +75,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("noboundary",no_boundary,0);@/
     // @!@:no_boundary_}{\.{\\noboundary} primitive@>
     // primitive("noexpand",no_expand,0);@/
+    primitive(globals, strpool_str!("noexpand"), no_expand, 0);
     // @!@:no_expand_}{\.{\\noexpand} primitive@>
     // primitive("nonscript",non_script,0);@/
     // @!@:non_script_}{\.{\\nonscript} primitive@>
@@ -90,6 +91,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // @!@:radical_}{\.{\\radical} primitive@>
     // @!@:penalty_}{\.{\\penalty} primitive@>
     // primitive("read",read_to_cs,0);@/
+    primitive(globals, strpool_str!("read"), read_to_cs, 0);
     // @!@:read_}{\.{\\read} primitive@>
     // primitive("relax",relax,256); {cf.\ |scan_file_name|}
     primitive(globals, strpool_str!("relax"), relax, 256);

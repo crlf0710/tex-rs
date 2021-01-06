@@ -16,6 +16,9 @@ macro_rules! Expand_a_nonmacro {
             Expand_the_token_after_the_next_token!($globals);
         }
         // no_expand:@<Suppress expansion of the next token@>;
+        else if $globals.cur_cmd == no_expand {
+            Suppress_expansion_of_the_next_token!($globals);
+        }
         // cs_name:@<Manufacture a control sequence name@>;
         else if $globals.cur_cmd == cs_name {
             Manufacture_a_control_sequence_name!($globals);
@@ -57,6 +60,7 @@ macro_rules! Expand_a_nonmacro {
         use crate::section_0210::cs_name;
         use crate::section_0210::input;
         use crate::section_0210::the;
+        use crate::section_0210::no_expand;
         use crate::section_0299::show_cur_cmd_chr;
         use crate::section_0467::ins_the_toks;
         use crate::section_0470::conv_toks;
