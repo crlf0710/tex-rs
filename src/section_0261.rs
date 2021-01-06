@@ -24,7 +24,7 @@ macro_rules! Compute_the_hash_code_h {
         }
         #[cfg(feature = "unicode_support")]
         {
-            let mut fss_utf_bytes = ($j + 1 ..= $j + $l - 1).flat_map(|k|
+            let mut fss_utf_bytes = ($j ..= $j + $l - 1).flat_map(|k|
                 FssUtfEncodedIP32::new($globals.buffer[k as u16].0 as i32).into_iter());
             // h:=buffer[j];
             $h = fss_utf_bytes.next().unwrap() as integer;
