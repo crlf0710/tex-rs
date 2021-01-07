@@ -2,7 +2,11 @@
 //! We consider now the way \TeX\ handles various kinds of \.{\\if} commands.
 //
 // @d if_char_code=0 { `\.{\\if}' }
+/// `\if`
+pub(crate) const if_char_code: quarterword = 0;
 // @d if_cat_code=1 { `\.{\\ifcat}' }
+/// `\ifcat`
+pub(crate) const if_cat_code: quarterword = 1;
 // @d if_int_code=2 { `\.{\\ifnum}' }
 /// `\ifnum`
 pub(crate) const if_int_code: quarterword = 2;
@@ -38,6 +42,7 @@ pub(crate) const if_case_code: quarterword = 16;
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &mut TeXGlobals) {
     // primitive("if",if_test,if_char_code);
+    primitive(globals, strpool_str!("if"), if_test, if_char_code as _);
     // @!@:if_char_}{\.{\\if} primitive@>
     // primitive("ifcat",if_test,if_cat_code);
     // @!@:if_cat_code_}{\.{\\ifcat} primitive@>

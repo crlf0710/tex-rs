@@ -2,6 +2,7 @@
 //! @<Expand a nonmacro@>=
 macro_rules! Expand_a_nonmacro {
     ($globals:expr) => {{
+        trace_span!("Expand a nonmacro");
         // begin if tracing_commands>1 then show_cur_cmd_chr;
         if tracing_commands!($globals) > 1 {
             show_cur_cmd_chr($globals);

@@ -8,6 +8,9 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
             unreachable!();
         }
         // if_char_code, if_cat_code: @<Test if two characters match@>;
+        else if $this_if == if_char_code || $this_if == if_cat_code {
+            Test_if_two_characters_match!($globals, $this_if, $b);
+        }
         // if_int_code, if_dim_code: @<Test relation between integers or dimensions@>;
         else if $this_if == if_int_code || $this_if == if_dim_code {
             Test_relation_between_integers_or_dimensions!($globals, $this_if, $b);
