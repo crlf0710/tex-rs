@@ -10,7 +10,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     let u: pointer;
     // @!s:scaled; {stated ``at'' size, or negative of scaled magnification}
     /// stated "at" size, or negative of scaled magnification
-    let s: scaled;
+    let mut s: scaled;
     // @!f:internal_font_number; {runs through existing fonts}
     /// runs through existing fonts
     let mut f: internal_font_number;

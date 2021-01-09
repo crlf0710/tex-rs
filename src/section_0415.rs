@@ -36,12 +36,21 @@ macro_rules! Fetch_a_token_list_or_font_identifier__provided_that_level_is_tok_v
         }
         // else  begin back_input; scan_font_ident;
         else {
-            todo!("fetch 3");
+            back_input($globals);
+            scan_font_ident($globals)?;
             // scanned_result(font_id_base+cur_val)(ident_val);
+            scanned_result!(
+                $globals,
+                (font_id_base as integer + $globals.cur_val as integer) as _,
+                cur_val_level_kind::ident_val
+            );
             // end
         }
         use crate::pascal::integer;
+        use crate::section_0222::font_id_base;
         use crate::section_0230::toks_base;
+        use crate::section_0325::back_input;
         use crate::section_0433::scan_eight_bit_int;
+        use crate::section_0577::scan_font_ident;
     }}
 }

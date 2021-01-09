@@ -22,10 +22,10 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
             // if not load_fmt_file then
             //   begin w_close(fmt_file); goto final_end;
             //   end;
+            // w_close(fmt_file);
+            // while (loc<limit)and(buffer[loc]=" ") do incr(loc);
+            // end;
         }
-        //   w_close(fmt_file);
-        //   while (loc<limit)and(buffer[loc]=" ") do incr(loc);
-        //   end;
         // if end_line_char_inactive then decr(limit)
         if end_line_char_inactive!($globals) {
             decr!(limit!($globals));
@@ -37,6 +37,7 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
         fix_date_and_time($globals);
         // @<Compute the magic offset@>;
         // @<Initialize the print |selector|...@>;
+        Initialize_the_print_selector_based_on_interaction!($globals);
         // if (loc<limit)and(cat_code(buffer[loc])<>escape) then start_input;
         if loc!($globals) < limit!($globals) &&
             cat_code!($globals, $globals.buffer[loc!($globals)]) != escape as halfword {

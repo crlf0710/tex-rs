@@ -3,16 +3,42 @@
 // @<Put help message on the transcript file@>=
 macro_rules! Put_help_message_on_the_transcript_file {
     ($globals:expr) => {{
-        todo!("put help message");
         // if interaction>batch_mode then decr(selector); {avoid terminal output}
+        if $globals.interaction > batch_mode {
+            /// avoid terminal output
+            const _ : () = ();
+
+            decr!($globals.selector);
+        }
         // if use_err_help then
-        //   begin print_ln; give_err_help;
-        //   end
+        if $globals.use_err_help {
+            // begin print_ln; give_err_help;
+            print_ln(make_globals_io_string_log_view!($globals));
+            give_err_help($globals);
+            // end
+        }
         // else while help_ptr>0 do
-        //   begin decr(help_ptr); print_nl(help_line[help_ptr]);
-        //   end;
+        else {
+            while $globals.help_ptr > 0 {
+                // begin decr(help_ptr); print_nl(help_line[help_ptr]);
+                decr!($globals.help_ptr);
+                print_nl($globals, $globals.help_line[$globals.help_ptr.get()]);
+                // end;
+            }
+        }
         // print_ln;
+        print_ln(make_globals_io_string_log_view!($globals));
         // if interaction>batch_mode then incr(selector); {re-enable terminal output}
+        if $globals.interaction > batch_mode {
+            /// re-enable terminal output
+            const _ : () = ();
+            incr!($globals.selector);
+        }
         // print_ln
+        print_ln(make_globals_io_string_log_view!($globals));
+
+        use crate::section_0057::print_ln;
+        use crate::section_0073::batch_mode;
+        use crate::section_1284::give_err_help;
     }}
 }

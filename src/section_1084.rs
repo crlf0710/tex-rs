@@ -23,13 +23,17 @@ pub(crate) fn scan_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRes
     }
     // else  begin@t@>@;@/
     else {
-        todo!("report error");
-        //   print_err("A <box> was supposed to be here");@/
+        // print_err("A <box> was supposed to be here");@/
+        print_err!(globals, strpool_str!("A <box> was supposed to be here"));
         // @.A <box> was supposed to...@>
-        //   help3("I was expecting to see \hbox or \vbox or \copy or \box or")@/
-        //   ("something like that. So you might find something missing in")@/
-        //   ("your output. But keep trying; you can fix this later."); back_error;
-        //   end;
+        // help3("I was expecting to see \hbox or \vbox or \copy or \box or")@/
+        // ("something like that. So you might find something missing in")@/
+        // ("your output. But keep trying; you can fix this later."); back_error;
+        help3!(globals, strpool_str!("I was expecting to see \\hbox or \\vbox or \\copy or \\box or"),
+            strpool_str!("something like that. So you might find something missing in"),
+            strpool_str!("your output. But keep trying; you can fix this later."));
+        back_error(globals)?;
+        // end;
     }
     // end;
     ok_nojump!()
@@ -41,5 +45,6 @@ use crate::section_0081::TeXResult;
 use crate::section_0208::hrule;
 use crate::section_0208::vrule;
 use crate::section_0208::make_box;
+use crate::section_0327::back_error;
 use crate::section_1071::leader_flag;
 use crate::section_1079::begin_box;

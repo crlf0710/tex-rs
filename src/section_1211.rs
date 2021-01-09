@@ -69,6 +69,10 @@ macro_rules! Assignments {
             /// already processed
             do_nothing!();
             true
+        } else if Assignments_1264!($globals, $cur_cmd, $a) {
+            /// already processed
+            do_nothing!();
+            true
         /*} else if Assignments_xxx {
             todo!();
         */} else {

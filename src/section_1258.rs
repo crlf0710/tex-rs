@@ -8,7 +8,7 @@ macro_rules! Scan_the_font_size_specification {
         $globals.name_in_progress = true;
         // if scan_keyword("at") then @<Put the \(p)(positive) `at' size into |s|@>
         if scan_keyword($globals, strpool_str!("at"))? {
-            todo!("at");
+            Put_the_positive_at_size_into_s!($globals, $s);
             // @.at@>
         }
         // else if scan_keyword("scaled") then
@@ -19,12 +19,15 @@ macro_rules! Scan_the_font_size_specification {
             $s = scaled::new_from_inner(-$globals.cur_val);
             // if (cur_val<=0)or(cur_val>32768) then
             if $globals.cur_val <= 0 || $globals.cur_val > 32768 {
-                todo!("scaled err");
-                //   begin print_err("Illegal magnification has been changed to 1000");@/
+                // begin print_err("Illegal magnification has been changed to 1000");@/
+                print_err!($globals, strpool_str!("Illegal magnification has been changed to 1000"));
                 // @.Illegal magnification...@>
-                //   help1("The magnification ratio must be between 1 and 32768.");
-                //   int_error(cur_val); s:=-1000;
-                //   end;
+                // help1("The magnification ratio must be between 1 and 32768.");
+                help1!($globals, strpool_str!("The magnification ratio must be between 1 and 32768."));
+                // int_error(cur_val); s:=-1000;
+                int_error($globals, $globals.cur_val)?;
+                $s = scaled::new_from_inner(-1000);
+                // end;
             }
             // end
         }
@@ -34,7 +37,8 @@ macro_rules! Scan_the_font_size_specification {
         }
         // name_in_progress:=false
         $globals.name_in_progress = false;
+        use crate::section_0091::int_error;
         use crate::section_0407::scan_keyword;
-        use crate::section_0440::scan_int;
+        use crate::section_0440::scan_int;  
     }}
 }

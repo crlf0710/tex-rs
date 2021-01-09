@@ -29,10 +29,19 @@ macro_rules! help2 {
     ($globals:expr, $val1:expr, $val2:expr) => {{
         $globals.help_ptr = 2.into();
         $globals.help_line[0] = $val1;
-        $globals.help_line[0] = $val2;
+        $globals.help_line[1] = $val2;
     }}
 }
 // @d help3==@+begin help_ptr:=3; hlp3 {use this with three help lines}
+/// use this with three help lines
+macro_rules! help3 {
+    ($globals:expr, $val1:expr, $val2:expr, $val3:expr) => {{
+        $globals.help_ptr = 3.into();
+        $globals.help_line[0] = $val1;
+        $globals.help_line[1] = $val2;
+        $globals.help_line[2] = $val3;
+    }}
+}
 // @d help4==@+begin help_ptr:=4; hlp4 {use this with four help lines}
 // @d help5==@+begin help_ptr:=5; hlp5 {use this with five help lines}
 // @d help6==@+begin help_ptr:=6; hlp6 {use this with six help lines}

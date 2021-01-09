@@ -80,10 +80,7 @@ pub(crate) const int_base: word = int_base_TYPENUM::U32;
 // @d par_shape_ptr==equiv(par_shape_loc)
 macro_rules! par_shape_ptr {
     ($globals:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::par_shape_loc
-        )
+        equiv!($globals, crate::section_0230::par_shape_loc)
     };
 }
 // @d output_routine==equiv(output_routine_loc)
@@ -93,24 +90,27 @@ macro_rules! par_shape_ptr {
 // @d every_hbox==equiv(every_hbox_loc)
 macro_rules! every_hbox {
     ($globals:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::every_hbox_loc
-        )
+        equiv!($globals, crate::section_0230::every_hbox_loc)
     };
 }
 // @d every_vbox==equiv(every_vbox_loc)
 // @d every_job==equiv(every_job_loc)
 macro_rules! every_job {
     ($globals:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::every_job_loc
-        )
-    }
+        equiv!($globals, crate::section_0230::every_job_loc)
+    };
 }
 // @d every_cr==equiv(every_cr_loc)
 // @d err_help==equiv(err_help_loc)
+macro_rules! err_help {
+    ($globals:expr) => {
+        equiv!(
+            $globals,
+            crate::section_0230::box_base as crate::section_0115::pointer
+                + crate::section_0230::err_help_loc as crate::section_0115::pointer
+        )
+    };
+}
 // @d toks(#)==equiv(toks_base+#)
 // @d box(#)==equiv(box_base+#)
 macro_rules! r#box {
@@ -124,10 +124,7 @@ macro_rules! r#box {
 // @d cur_font==equiv(cur_font_loc)
 macro_rules! cur_font {
     ($globals:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::cur_font_loc
-        )
+        equiv!($globals, crate::section_0230::cur_font_loc)
     };
 }
 // @d fam_fnt(#)==equiv(math_font_base+#)
@@ -187,31 +184,76 @@ macro_rules! math_code {
 #[distributed_slice(PRIM2HT)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &mut TeXGlobals) {
     // primitive("output",assign_toks,output_routine_loc);
-    primitive(globals, strpool_str!("output"), assign_toks, output_routine_loc as _);
+    primitive(
+        globals,
+        strpool_str!("output"),
+        assign_toks,
+        output_routine_loc as _,
+    );
     // @!@:output_}{\.{\\output} primitive@>
     // primitive("everypar",assign_toks,every_par_loc);
-    primitive(globals, strpool_str!("everypar"), assign_toks, every_par_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everypar"),
+        assign_toks,
+        every_par_loc as _,
+    );
     // @!@:every_par_}{\.{\\everypar} primitive@>
     // primitive("everymath",assign_toks,every_math_loc);
-    primitive(globals, strpool_str!("everymath"), assign_toks, every_math_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everymath"),
+        assign_toks,
+        every_math_loc as _,
+    );
     // @!@:every_math_}{\.{\\everymath} primitive@>
     // primitive("everydisplay",assign_toks,every_display_loc);
-    primitive(globals, strpool_str!("everydisplay"), assign_toks, every_display_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everydisplay"),
+        assign_toks,
+        every_display_loc as _,
+    );
     // @!@:every_display_}{\.{\\everydisplay} primitive@>
     // primitive("everyhbox",assign_toks,every_hbox_loc);
-    primitive(globals, strpool_str!("everyhbox"), assign_toks, every_hbox_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everyhbox"),
+        assign_toks,
+        every_hbox_loc as _,
+    );
     // @!@:every_hbox_}{\.{\\everyhbox} primitive@>
     // primitive("everyvbox",assign_toks,every_vbox_loc);
-    primitive(globals, strpool_str!("everyvbox"), assign_toks, every_vbox_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everyvbox"),
+        assign_toks,
+        every_vbox_loc as _,
+    );
     // @!@:every_vbox_}{\.{\\everyvbox} primitive@>
     // primitive("everyjob",assign_toks,every_job_loc);
-    primitive(globals, strpool_str!("everyjob"), assign_toks, every_job_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everyjob"),
+        assign_toks,
+        every_job_loc as _,
+    );
     // @!@:every_job_}{\.{\\everyjob} primitive@>
     // primitive("everycr",assign_toks,every_cr_loc);
-    primitive(globals, strpool_str!("everycr"), assign_toks, every_cr_loc as _);
+    primitive(
+        globals,
+        strpool_str!("everycr"),
+        assign_toks,
+        every_cr_loc as _,
+    );
     // @!@:every_cr_}{\.{\\everycr} primitive@>
     // primitive("errhelp",assign_toks,err_help_loc);
-    primitive(globals, strpool_str!("errhelp"), assign_toks, err_help_loc as _);
+    primitive(
+        globals,
+        strpool_str!("errhelp"),
+        assign_toks,
+        err_help_loc as _,
+    );
     // @!@:err_help_}{\.{\\errhelp} primitive@>
 }
 
