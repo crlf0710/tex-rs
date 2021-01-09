@@ -33,6 +33,7 @@
 pub(crate) const space_code: quarterword = 2;
 // @d space_stretch_code=3
 // @d space_shrink_code=4
+pub(crate) const space_shrink_code: quarterword = 4;
 // @d x_height_code=5
 // @d quad_code=6
 // @d extra_space_code=7

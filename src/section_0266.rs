@@ -19,6 +19,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         // after_assignment: print_esc("afterassignment");
         // after_group: print_esc("aftergroup");
         // assign_font_dimen: print_esc("fontdimen");
+        else if $cmd == assign_font_dimen {
+            print_esc($globals, strpool_str!("fontdimen"));
+            true
+        }
         // begin_group: print_esc("begingroup");
         else if $cmd == begin_group {
             print_esc($globals, strpool_str!("begingroup"));

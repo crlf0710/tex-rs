@@ -20,6 +20,7 @@ ref-cast = "1.0.3"
 [features]
 initex = []
 unicode_support = ['unicode-segmentation', 'unicode-normalization']
+latex_support = []
 debugging = []
 trace = ['tracing', 'tracing-subscriber']
-default = ['initex', 'unicode_support']
+default = ['initex', 'unicode_support', 'latex_support']

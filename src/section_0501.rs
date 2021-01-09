@@ -17,8 +17,14 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
         }
         // if_odd_code: @<Test if an integer is odd@>;
         // if_vmode_code: b:=(abs(mode)=vmode);
+        else if $this_if == if_vmode_code {
+            $b = mode!($globals).get().abs() == vmode;
+        }
         // if_hmode_code: b:=(abs(mode)=hmode);
         // if_mmode_code: b:=(abs(mode)=mmode);
+        else if $this_if == if_mmode_code {
+            $b = mode!($globals).get().abs() == mmode;
+        }
         // if_inner_code: b:=(mode<0);
         // if_void_code, if_hbox_code, if_vbox_code: @<Test box register status@>;
         // ifx_code: @<Test if two tokens match@>;
@@ -38,6 +44,9 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
             $b = true;
         }
         // if_false_code: b:=false;
+        else if $this_if == if_false_code {
+            $b = false;
+        }
         // if_case_code: @<Select the appropriate case
         //   and |return| or |goto common_ending|@>;
         else if $this_if == if_case_code {
@@ -49,6 +58,8 @@ macro_rules! Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condition 
             /// there are no other cases
             unreachable!();
         }
+        use crate::section_0211::mmode;
+        use crate::section_0211::vmode;
         use crate::section_0487::*;
     }}
 }

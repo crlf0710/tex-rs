@@ -6,9 +6,12 @@ macro_rules! Assignments_1221 {
         if $cur_cmd == r#let {
             // let:  begin n:=cur_chr;
             let n = $globals.cur_chr.get();
+
+            /// for temporary short-term use
+            let p;
             //   get_r_token; p:=cur_cs;
             get_r_token($globals)?;
-            let p = $globals.cur_cs;
+            p = $globals.cur_cs;
             // if n=normal then
             if n == let_kind::normal as chr_code_repr {
                 // begin repeat get_token;
@@ -33,9 +36,21 @@ macro_rules! Assignments_1221 {
             }
             // else  begin get_token; q:=cur_tok; get_token; back_input;
             else {
-                todo!("assign 1221");
+                /// for temporary short-term use
+                let q;
+                
+                get_token($globals)?;
+                q = $globals.cur_tok;
+                get_token($globals)?;
+                back_input($globals);
                 // cur_tok:=q; back_input; {look ahead, then back up}
+                $globals.cur_tok = q;
+                back_input($globals);
+                /// look ahead, then back up
+                const _ : () = ();
                 // end; {note that |back_input| doesn't affect |cur_cmd|, |cur_chr|}
+                /// note that `back_input` doesn't affect `cur_cmd`, `cur_chr`
+                const _ : () = ();
             }
             // if cur_cmd>=call then add_token_ref(cur_chr);
             if $globals.cur_cmd >= call {
@@ -50,6 +65,7 @@ macro_rules! Assignments_1221 {
             use crate::section_0289::other_token;
             use crate::section_0297::cur_tok_type_repr;
             use crate::section_0297::chr_code_repr;
+            use crate::section_0325::back_input;
             use crate::section_0365::get_token;
             use crate::section_1215::get_r_token;
             true

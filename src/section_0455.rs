@@ -30,7 +30,8 @@ macro_rules! Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign_wit
             }
             // else scan_something_internal(dimen_val,false);
             else {
-                todo!("scan_something_internal");
+                scan_something_internal($globals, 
+                    small_number::new(cur_val_level_kind::dimen_val as _), false)?;
             }
             // v:=cur_val; goto found;
             v = $globals.cur_val;
@@ -61,8 +62,9 @@ macro_rules! Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign_wit
         'found <-
         );
         // found:cur_val:=nx_plus_y(save_cur_val,v,xn_over_d(v,f,@'200000));
-        $globals.cur_val = nx_plus_y!($globals, save_cur_val, scaled::new_from_inner(v), 
-            xn_over_d($globals, scaled::new_from_inner(v), $f, 0o200000)).inner();
+        let x = xn_over_d($globals, scaled::new_from_inner(v), $f, 0o200000);
+        $globals.cur_val = nx_plus_y!($globals, save_cur_val, scaled::new_from_inner(v),
+            x).inner();
         // goto attach_sign;
         goto_forward_label!($lbl_attach_sign);
         }
@@ -70,6 +72,9 @@ macro_rules! Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign_wit
         'not_found <-
         );
         use crate::section_0101::scaled;
+        use crate::section_0101::small_number;
         use crate::section_0107::xn_over_d;
+        use crate::section_0410::cur_val_level_kind;
+        use crate::section_0413::scan_something_internal;
     }}
 }

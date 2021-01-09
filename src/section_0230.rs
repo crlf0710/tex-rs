@@ -185,7 +185,6 @@ macro_rules! math_code {
 
 // @<Put each...@>=
 #[distributed_slice(PRIM2HT)]
-#[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &mut TeXGlobals) {
     // primitive("output",assign_toks,output_routine_loc);
     primitive(globals, strpool_str!("output"), assign_toks, output_routine_loc as _);

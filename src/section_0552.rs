@@ -1,6 +1,3 @@
-//! @ @<Set init...@>=
-//! for k:=font_base to font_max do font_used[k]:=false;
-//!
 //! @ \TeX\ always knows at least one font, namely the null font. It has no
 //! characters, and its seven parameters are all equal to zero.
 //!
@@ -20,8 +17,4 @@
 //! param_base[null_font]:=-1;
 //! for k:=0 to 6 do font_info[k].sc:=0;
 //!
-//! @ @<Put each...@>=
-//! primitive("nullfont",set_font,null_font);
-//! @!@:null_font_}{\.{\\nullfont} primitive@>
-//! text(frozen_null_font):="nullfont"; eqtb[frozen_null_font]:=eqtb[cur_val];
-//!
+

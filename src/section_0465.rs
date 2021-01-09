@@ -24,7 +24,7 @@ pub(crate) fn the_toks(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     let the_toks;
     // if cur_val_level>=ident_val then @<Copy the token list@>
     if globals.cur_val_level >= cur_val_level_kind::ident_val {
-        todo!("the toks 1");
+        Copy_the_token_list!(globals, the_toks);
     }
     // else begin old_setting:=selector; selector:=new_string; b:=pool_ptr;
     else {

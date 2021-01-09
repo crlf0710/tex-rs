@@ -6,9 +6,19 @@ macro_rules! Assignments_1253 {
     ($globals:expr, $cur_cmd:expr, $a:expr) => {{
         // assign_font_dimen: begin find_font_dimen(true); k:=cur_val;
         if $cur_cmd == assign_font_dimen {
-            todo!("assign_font_dimen");
+            /// index into `font_info`
+            let k: font_index;
+            find_font_dimen($globals, true)?;
+            k = font_index::new($globals.cur_val as _);
             // scan_optional_equals; scan_normal_dimen; font_info[k].sc:=cur_val;
+            scan_optional_equals($globals)?;
+            scan_normal_dimen!($globals)?;
+            $globals.font_info[k][MEMORY_WORD_SC] = scaled::new_from_inner($globals.cur_val);
             // end;
+            use crate::section_0101::scaled;
+            use crate::section_0101::MEMORY_WORD_SC;
+            use crate::section_0548::font_index;
+            use crate::section_0578::find_font_dimen;
             true
         }
         // assign_font_int: begin n:=cur_chr; scan_font_ident; f:=cur_val;

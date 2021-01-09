@@ -25,7 +25,7 @@ pub(crate) fn scan_something_internal(
 ) -> TeXResult<()> {
     // var m:halfword; {|chr_code| part of the operand token}
     /// `chr_code` part of the operand token
-    let m: chr_code_type;
+    let mut m: chr_code_type;
     // @!p:0..nest_size; {index into |nest|}
     // begin m:=cur_chr;
     m = globals.cur_chr;
@@ -43,7 +43,7 @@ pub(crate) fn scan_something_internal(
         || globals.cur_cmd == set_font
         || globals.cur_cmd == def_font
     {
-        Fetch_a_token_list_or_font_identifier__provided_that_level_is_tok_val!(globals);
+        Fetch_a_token_list_or_font_identifier__provided_that_level_is_tok_val!(globals, level, m);
     }
     // assign_int: scanned_result(eqtb[m].int)(int_val);
     else if globals.cur_cmd == assign_int {

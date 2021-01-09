@@ -63,6 +63,12 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     );
     // @!@:input_line_no_}{\.{\\inputlineno} primitive@>
     // primitive("badness",last_item,badness_code);
+    primitive(
+        globals,
+        strpool_str!("badness"),
+        last_item,
+        last_item_command_kind::badness_code as _,
+    );
     // @!@:badness_}{\.{\\badness} primitive@>
 }
 

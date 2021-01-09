@@ -2,7 +2,6 @@
 //
 // @<Put each...@>=
 #[distributed_slice(PRIM2HT)]
-#[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &mut TeXGlobals) {
     // primitive("pretolerance",assign_int,int_base+pretolerance_code);@/
     primitive(globals, strpool_str!("pretolerance"), assign_int, (int_base + pretolerance_code as word) as _);

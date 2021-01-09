@@ -208,22 +208,26 @@ macro_rules! workarounds {
         crate::section_0468::workaround_47384();
         crate::section_0487::workaround_47384();
         crate::section_0491::workaround_47384();
+        crate::section_0553::workaround_47384();
         crate::section_0780::workaround_47384();
         crate::section_1052::workaround_47384();
         crate::section_1058::workaround_47384();
         crate::section_1071::workaround_47384();
+        crate::section_1088::workaround_47384();
         crate::section_1208::workaround_47384();
         crate::section_1219::workaround_47384();
         crate::section_1222::workaround_47384();
         crate::section_1230::workaround_47384();
         crate::section_1250::workaround_47384();
         crate::section_1254::workaround_47384();
+        crate::section_1262::workaround_47384();
         crate::section_1272::workaround_47384();
         crate::section_1277::workaround_47384();
         crate::section_1286::workaround_47384();
         crate::section_1291::workaround_47384();
         crate::section_1301::workaround_47384();
         crate::section_1344::workaround_47384();
+        crate::latex_support::workaround_47384();
     };
 }
 

@@ -15,8 +15,12 @@ pub(crate) const if_int_code: quarterword = 2;
 pub(crate) const if_dim_code: quarterword = 3;
 // @d if_odd_code=4 { `\.{\\ifodd}' }
 // @d if_vmode_code=5 { `\.{\\ifvmode}' }
+/// `\ifvmode`
+pub(crate) const if_vmode_code: quarterword = 5;
 // @d if_hmode_code=6 { `\.{\\ifhmode}' }
 // @d if_mmode_code=7 { `\.{\\ifmmode}' }
+/// `\ifmmode`
+pub(crate) const if_mmode_code: quarterword = 7;
 // @d if_inner_code=8 { `\.{\\ifinner}' }
 // @d if_void_code=9 { `\.{\\ifvoid}' }
 // @d if_hbox_code=10 { `\.{\\ifhbox}' }
@@ -50,14 +54,17 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &m
     primitive(globals, strpool_str!("ifnum"), if_test, if_int_code as _);
     // @!@:if_int_}{\.{\\ifnum} primitive@>
     // primitive("ifdim",if_test,if_dim_code);
+    primitive(globals, strpool_str!("ifdim"), if_test, if_dim_code as _);
     // @!@:if_dim_}{\.{\\ifdim} primitive@>
     // primitive("ifodd",if_test,if_odd_code);
     // @!@:if_odd_}{\.{\\ifodd} primitive@>
     // primitive("ifvmode",if_test,if_vmode_code);
+    primitive(globals, strpool_str!("ifvmode"), if_test, if_vmode_code as _);
     // @!@:if_vmode_}{\.{\\ifvmode} primitive@>
     // primitive("ifhmode",if_test,if_hmode_code);
     // @!@:if_hmode_}{\.{\\ifhmode} primitive@>
     // primitive("ifmmode",if_test,if_mmode_code);
+    primitive(globals, strpool_str!("ifmmode"), if_test, if_mmode_code as _);
     // @!@:if_mmode_}{\.{\\ifmmode} primitive@>
     // primitive("ifinner",if_test,if_inner_code);
     // @!@:if_inner_}{\.{\\ifinner} primitive@>
@@ -77,7 +84,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &m
     primitive(globals, strpool_str!("iftrue"), if_test, if_true_code as _);
     // @!@:if_true_}{\.{\\iftrue} primitive@>
     // primitive("iffalse",if_test,if_false_code);
-    primitive(globals, strpool_str!("iftrue"), if_test, if_false_code as _);
+    primitive(globals, strpool_str!("iffalse"), if_test, if_false_code as _);
     // @!@:if_false_}{\.{\\iffalse} primitive@>
     // primitive("ifcase",if_test,if_case_code);
     primitive(globals, strpool_str!("ifcase"), if_test, if_case_code as _);
