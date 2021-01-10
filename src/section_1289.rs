@@ -40,8 +40,8 @@ macro_rules! Change_the_case_of_the_token_in_p_if_a_change_is_appropriate {
                         $globals,
                         $p,
                         cur_tok_type::new(
-                            t.get() - c as cur_tok_type_repr
-                                + equiv!($globals, $b + c as pointer) as cur_tok_type_repr
+                            t.get() - c as cur_tok_repr
+                                + equiv!($globals, $b + c as pointer) as cur_tok_repr
                         )
                     );
                 }
@@ -49,7 +49,7 @@ macro_rules! Change_the_case_of_the_token_in_p_if_a_change_is_appropriate {
 
             use crate::section_0222::single_base;
             use crate::section_0297::cur_tok_type;
-            use crate::section_0297::cur_tok_type_repr;
+            use crate::section_0297::cur_tok_repr;
         }
     };
 }

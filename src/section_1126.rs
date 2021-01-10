@@ -12,7 +12,8 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1126 {
         // any_mode(car_ret), any_mode(tab_mark): align_error;
         if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, car_ret as u16) || 
             abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, tab_mark as u16) {
-            todo!("align_error");
+            align_error($globals)?;
+            use crate::section_1127::align_error;
             true
         }
         // any_mode(no_align): no_align_error;

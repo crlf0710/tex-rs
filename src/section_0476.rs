@@ -19,7 +19,7 @@ macro_rules! If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_t
             // end;
         }
         // if t=zero_token+9 then
-        if $t == (zero_token + 9) as cur_tok_type_repr {
+        if $t == (zero_token + 9) as cur_tok_repr {
             todo!();
             //   begin print_err("You already have nine parameters");
             // @.You already have nine...@>
@@ -32,7 +32,7 @@ macro_rules! If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_t
             // if cur_tok<>t then
             trace_expr!("cur_tok = {}", $globals.cur_tok.get());
             trace_expr!("t = {}", $t);
-            if $globals.cur_tok.get() != $t as cur_tok_type_repr {
+            if $globals.cur_tok.get() != $t as cur_tok_repr {
                 todo!("numbering");
                 // begin print_err("Parameters must be numbered consecutively");
                 // @.Parameters...consecutively@>

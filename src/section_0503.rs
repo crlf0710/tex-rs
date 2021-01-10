@@ -19,8 +19,8 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         n = $globals.cur_val;
         Get_the_next_non_blank_non_call_token!($globals);
         // if (cur_tok>=other_token+"<")and(cur_tok<=other_token+">") then
-        if $globals.cur_tok >= other_token + b'<' as cur_tok_type_repr &&
-            $globals.cur_tok <= other_token + b'>' as cur_tok_type_repr {
+        if $globals.cur_tok >= other_token + b'<' as cur_tok_repr &&
+            $globals.cur_tok <= other_token + b'>' as cur_tok_repr {
             // r:=cur_tok-other_token
             r = ($globals.cur_tok.get() - other_token) as u8;
         }
@@ -64,7 +64,7 @@ macro_rules! Test_relation_between_integers_or_dimensions {
         use crate::pascal::integer;
         use crate::section_0210::if_test;
         use crate::section_0289::other_token;
-        use crate::section_0297::cur_tok_type_repr;
+        use crate::section_0297::cur_tok_repr;
         use crate::section_0297::chr_code_type;
         use crate::section_0298::print_cmd_chr;
         use crate::section_0327::back_error;

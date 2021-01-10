@@ -25,7 +25,7 @@ macro_rules! Expand_macros_in_the_token_list_and_make_link_def_ref_point_to_the_
         info_tok_assign!(
             globals,
             q,
-            cur_tok_type::new(right_brace_token + b'}' as cur_tok_type_repr)
+            cur_tok_type::new(right_brace_token + b'}' as cur_tok_repr)
         );
         // r:=get_avail; link(q):=r; info(r):=end_write_token; ins_list(q);@/
         r = get_avail(globals);
@@ -36,7 +36,7 @@ macro_rules! Expand_macros_in_the_token_list_and_make_link_def_ref_point_to_the_
         begin_token_list(globals, write_tokens!(globals, p), write_text);
         // q:=get_avail; info(q):=left_brace_token+"{"; ins_list(q);
         q = get_avail(globals);
-        info_tok_assign!(globals, q, cur_tok_type::new(left_brace_token + b'{' as cur_tok_type_repr));
+        info_tok_assign!(globals, q, cur_tok_type::new(left_brace_token + b'{' as cur_tok_repr));
         ins_list!(globals, q);
         // {now we're ready to scan
         //   `\.\{$\langle\,$token list$\,\rangle$\.{\} \\endwrite}'}
@@ -74,7 +74,7 @@ macro_rules! Expand_macros_in_the_token_list_and_make_link_def_ref_point_to_the_
         use crate::section_0289::left_brace_token;
         use crate::section_0289::right_brace_token;
         use crate::section_0297::cur_tok_type;
-        use crate::section_0297::cur_tok_type_repr;
+        use crate::section_0297::cur_tok_repr;
         use crate::section_0307::write_text;
         use crate::section_0323::begin_token_list;
         use crate::section_0324::end_token_list;

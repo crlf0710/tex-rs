@@ -126,19 +126,19 @@ impl From<chr_code_type> for ASCII_code {
 }
 
 #[cfg(not(feature = "unicode_support"))]
-pub(crate) type cur_tok_type_repr = halfword;
+pub(crate) type cur_tok_repr = halfword;
 
 #[cfg(not(feature = "unicode_support"))]
-pub(crate) const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0o400;
+pub(crate) const cur_tok_type_cmd_multiplier: cur_tok_repr = 0o400;
 
 #[cfg(feature = "unicode_support")]
-pub(crate) type cur_tok_type_repr = word;
+pub(crate) type cur_tok_repr = word;
 
 #[cfg(feature = "unicode_support")]
-pub(crate) const cur_tok_type_cmd_multiplier: cur_tok_type_repr = 0x0080_0000;
+pub(crate) const cur_tok_type_cmd_multiplier: cur_tok_repr = 0x0080_0000;
 
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
-pub(crate) struct cur_tok_type(cur_tok_type_repr);
+pub(crate) struct cur_tok_type(cur_tok_repr);
 
 impl cur_tok_type {
     #[cfg(not(feature = "unicode_support"))]
@@ -153,15 +153,15 @@ impl cur_tok_type {
 
     pub(crate) fn from_cmd_and_chr(cmd: eight_bits, chr: chr_code_type) -> Self {
         cur_tok_type(
-            cmd as cur_tok_type_repr * cur_tok_type_cmd_multiplier + chr.0 as cur_tok_type_repr,
+            cmd as cur_tok_repr * cur_tok_type_cmd_multiplier + chr.0 as cur_tok_repr,
         )
     }
 
     pub(crate) fn from_cs(cs: pointer) -> Self {
-        cur_tok_type(cs_token_flag.0 + cs as cur_tok_type_repr)
+        cur_tok_type(cs_token_flag.0 + cs as cur_tok_repr)
     }
 
-    pub(crate) const fn get(&self) -> cur_tok_type_repr {
+    pub(crate) const fn get(&self) -> cur_tok_repr {
         self.0
     }
 
@@ -185,14 +185,14 @@ impl cur_tok_type {
     }
 }
 
-impl PartialEq<cur_tok_type_repr> for cur_tok_type {
-    fn eq(&self, other: &cur_tok_type_repr) -> bool {
+impl PartialEq<cur_tok_repr> for cur_tok_type {
+    fn eq(&self, other: &cur_tok_repr) -> bool {
         self.0.eq(other)
     }
 }
 
-impl PartialOrd<cur_tok_type_repr> for cur_tok_type {
-    fn partial_cmp(&self, other: &cur_tok_type_repr) -> Option<core::cmp::Ordering> {
+impl PartialOrd<cur_tok_repr> for cur_tok_type {
+    fn partial_cmp(&self, other: &cur_tok_repr) -> Option<core::cmp::Ordering> {
         self.0.partial_cmp(other)
     }
 }

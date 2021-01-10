@@ -25,45 +25,56 @@ pub(crate) const cs_token_flag: cur_tok_type = cur_tok_type::new(0x0FFF_FFFF);
 
 // @d left_brace_token=@'0400 {$2^8\cdot|left_brace|$}
 /// `cur_tok_type_cmd_multiplier`·`left_brace`
-pub(crate) const left_brace_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * left_brace as cur_tok_type_repr;
+pub(crate) const left_brace_token: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * left_brace as cur_tok_repr;
 // @d left_brace_limit=@'1000 {$2^8\cdot(|left_brace|+1)$}
 /// `cur_tok_type_cmd_multiplier`·(`left_brace` + 1)
-pub(crate) const left_brace_limit: cur_tok_type_repr = cur_tok_type_cmd_multiplier * (left_brace + 1) as cur_tok_type_repr;
+pub(crate) const left_brace_limit: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * (left_brace + 1) as cur_tok_repr;
 // @d right_brace_token=@'1000 {$2^8\cdot|right_brace|$}
 /// `cur_tok_type_cmd_multiplier`·`right_brace`
-pub(crate) const right_brace_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * right_brace as cur_tok_type_repr;
+pub(crate) const right_brace_token: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * right_brace as cur_tok_repr;
 // @d right_brace_limit=@'1400 {$2^8\cdot(|right_brace|+1)$}
 /// `cur_tok_type_cmd_multiplier`·(`right_brace` + 1)
-pub(crate) const right_brace_limit: cur_tok_type_repr = cur_tok_type_cmd_multiplier * (right_brace + 1) as cur_tok_type_repr;
+pub(crate) const right_brace_limit: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * (right_brace + 1) as cur_tok_repr;
 // @d math_shift_token=@'1400 {$2^8\cdot|math_shift|$}
 // @d tab_token=@'2000 {$2^8\cdot|tab_mark|$}
+/// `cur_tok_type_cmd_multiplier`·`tab_mark`
+pub(crate) const tab_token: cur_tok_repr = cur_tok_type_cmd_multiplier * tab_mark as cur_tok_repr;
 // @d out_param_token=@'2400 {$2^8\cdot|out_param|$}
 /// `cur_tok_type_cmd_multiplier`·`out_param`
-pub(crate) const out_param_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * out_param as cur_tok_type_repr;
+pub(crate) const out_param_token: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * out_param as cur_tok_repr;
 // @d space_token=@'5040 {$2^8\cdot|spacer|+|" "|$}
 /// `cur_tok_type_cmd_multiplier`·`spacer`+`" "`
-pub(crate) const space_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * spacer as cur_tok_type_repr + b' ' as cur_tok_type_repr;
+pub(crate) const space_token: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * spacer as cur_tok_repr + b' ' as cur_tok_repr;
 // @d letter_token=@'5400 {$2^8\cdot|letter|$}
 /// `cur_tok_type_cmd_multiplier`·`letter`
-pub(crate) const letter_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * letter as cur_tok_type_repr;
+pub(crate) const letter_token: cur_tok_repr = cur_tok_type_cmd_multiplier * letter as cur_tok_repr;
 // @d other_token=@'6000 {$2^8\cdot|other_char|$}
 /// `cur_tok_type_cmd_multiplier`·`other_char`
-pub(crate) const other_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * other_char as cur_tok_type_repr;
+pub(crate) const other_token: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * other_char as cur_tok_repr;
 // @d match_token=@'6400 {$2^8\cdot|match|$}
 /// `cur_tok_type_cmd_multiplier`·`match`
-pub(crate) const match_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * r#match as cur_tok_type_repr;
+pub(crate) const match_token: cur_tok_repr = cur_tok_type_cmd_multiplier * r#match as cur_tok_repr;
 // @d end_match_token=@'7000 {$2^8\cdot|end_match|$}
 /// `cur_tok_type_cmd_multiplier`·`end_match`
-pub(crate) const end_match_token: cur_tok_type_repr = cur_tok_type_cmd_multiplier * end_match as cur_tok_type_repr;
+pub(crate) const end_match_token: cur_tok_repr =
+    cur_tok_type_cmd_multiplier * end_match as cur_tok_repr;
 
-use crate::section_0297::cur_tok_type;
-use crate::section_0297::cur_tok_type_repr;
-use crate::section_0297::cur_tok_type_cmd_multiplier;
+use crate::section_0207::end_match;
+use crate::section_0207::left_brace;
 use crate::section_0207::letter;
 use crate::section_0207::other_char;
-use crate::section_0207::left_brace;
+use crate::section_0207::out_param;
+use crate::section_0207::r#match;
 use crate::section_0207::right_brace;
 use crate::section_0207::spacer;
-use crate::section_0207::end_match;
-use crate::section_0207::r#match;
-use crate::section_0207::out_param;
+use crate::section_0207::tab_mark;
+use crate::section_0297::cur_tok_repr;
+use crate::section_0297::cur_tok_type;
+use crate::section_0297::cur_tok_type_cmd_multiplier;

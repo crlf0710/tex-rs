@@ -287,7 +287,7 @@ impl<'a> Iterator for GenericCharIter<'a> {
 pub(crate) const info_val_count_limit: usize = 65536;
 
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static info_val_gallery: Box<[cur_tok_type_repr]> = vec![0; info_val_count_limit].into();
+pub(crate) static info_val_gallery: Box<[cur_tok_repr]> = vec![0; info_val_count_limit].into();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::unicode_support::info_val_count_limit;
@@ -296,11 +296,11 @@ use crate::unicode_support::info_val_count_limit;
 pub(crate) static info_val_count: usize = 0;
 
 #[globals_struct_use(TeXGlobals)]
-use crate::section_0297::cur_tok_type_repr;
+use crate::section_0297::cur_tok_repr;
 
 pub(crate) fn register_info_value(
     globals: &mut TeXGlobals,
-    info_val: cur_tok_type_repr,
+    info_val: cur_tok_repr,
 ) -> halfword {
     for i in 0..globals.info_val_count {
         if globals.info_val_gallery[i] == info_val {
@@ -316,7 +316,7 @@ pub(crate) fn register_info_value(
     idx as halfword
 }
 
-pub(crate) fn info_value(globals: &mut TeXGlobals, idx: halfword) -> cur_tok_type_repr {
+pub(crate) fn info_value(globals: &mut TeXGlobals, idx: halfword) -> cur_tok_repr {
     if idx as usize >= globals.info_val_count {
         panic!("info idx out of bound");
     }
@@ -367,7 +367,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0038::packed_ASCII_code;
 use crate::section_0113::halfword;
 use crate::section_0134::font_and_character;
-use crate::section_0297::cur_tok_type_repr;
+use crate::section_0297::cur_tok_repr;
 use core::cell::{Cell, RefCell};
 use globals_struct::{globals_struct_field, globals_struct_use};
 use std::collections::BTreeMap;

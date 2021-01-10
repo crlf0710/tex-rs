@@ -23,7 +23,7 @@ macro_rules! Assignments_1221 {
                     }
                 }
                 // if cur_tok=other_token+"=" then
-                if $globals.cur_tok == other_token + b'=' as cur_tok_type_repr {
+                if $globals.cur_tok == other_token + b'=' as cur_tok_repr {
                     // begin get_token;
                     get_token($globals)?;
                     // if cur_cmd=spacer then get_token;
@@ -63,7 +63,7 @@ macro_rules! Assignments_1221 {
             use crate::section_0135::let_kind;
             use crate::section_0207::spacer;
             use crate::section_0289::other_token;
-            use crate::section_0297::cur_tok_type_repr;
+            use crate::section_0297::cur_tok_repr;
             use crate::section_0297::chr_code_repr;
             use crate::section_0325::back_input;
             use crate::section_0365::get_token;

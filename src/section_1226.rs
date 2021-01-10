@@ -54,10 +54,10 @@ macro_rules! Assignments_1226 {
                     link!($globals, q) = get_avail($globals);
                     q = link!($globals, q);
                     // info(q):=right_brace_token+"}";
-                    info_tok_assign!($globals, q, cur_tok_type::new(right_brace_token + b'}' as cur_tok_type_repr));
+                    info_tok_assign!($globals, q, cur_tok_type::new(right_brace_token + b'}' as cur_tok_repr));
                     // q:=get_avail; info(q):=left_brace_token+"{";
                     q = get_avail($globals);
-                    info_tok_assign!($globals, q, cur_tok_type::new(left_brace_token + b'{' as cur_tok_type_repr));
+                    info_tok_assign!($globals, q, cur_tok_type::new(left_brace_token + b'{' as cur_tok_repr));
                     // link(q):=link(def_ref); link(def_ref):=q;
                     link!($globals, q) = link!($globals, $globals.def_ref);
                     link!($globals, $globals.def_ref) = q;
@@ -76,7 +76,7 @@ macro_rules! Assignments_1226 {
             use crate::section_0289::left_brace_token;
             use crate::section_0289::right_brace_token;
             use crate::section_0297::cur_tok_type;
-            use crate::section_0297::cur_tok_type_repr;
+            use crate::section_0297::cur_tok_repr;
             use crate::section_0325::back_input;
             use crate::section_0473::scan_toks;
             true

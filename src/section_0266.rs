@@ -118,6 +118,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         }
         // toks_register: print_esc("toks");
         // vadjust: print_esc("vadjust");
+        else if $cmd == vadjust {
+            print_esc($globals, strpool_str!("vadjust"));
+            true
+        }
         // valign: print_esc("valign");
         // vcenter: print_esc("vcenter");
         // vrule: print_esc("vrule");

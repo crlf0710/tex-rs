@@ -3,13 +3,13 @@
 // @d infinity==@'17777777777 {the largest positive value that \TeX\ knows}
 // @d zero_token=other_token+"0" {zero, the smallest digit}
 /// zero, the smallest digit
-pub(crate) const zero_token: cur_tok_type_repr = other_token + b'0' as cur_tok_type_repr;
+pub(crate) const zero_token: cur_tok_repr = other_token + b'0' as cur_tok_repr;
 // @d A_token=letter_token+"A" {the smallest special hex digit}
 /// the smallest special hex digit
-pub(crate) const A_token: cur_tok_type_repr = letter_token + b'A' as cur_tok_type_repr;
+pub(crate) const A_token: cur_tok_repr = letter_token + b'A' as cur_tok_repr;
 // @d other_A_token=other_token+"A" {special hex digit of type |other_char|}
 /// special hex digit of type `other_char`
-pub(crate) const other_A_token: cur_tok_type_repr = other_token + b'A' as cur_tok_type_repr;
+pub(crate) const other_A_token: cur_tok_repr = other_token + b'A' as cur_tok_repr;
 
 // @<Accumulate the constant...@>=
 macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
@@ -21,7 +21,7 @@ macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
             // loop@+  begin if (cur_tok<zero_token+radix)and(cur_tok>=zero_token)and
             //     (cur_tok<=zero_token+9) then d:=cur_tok-zero_token
             loop {
-                if $globals.cur_tok < zero_token + $globals.radix.get() as cur_tok_type_repr &&
+                if $globals.cur_tok < zero_token + $globals.radix.get() as cur_tok_repr &&
                     $globals.cur_tok >= zero_token &&
                     $globals.cur_tok <= zero_token + 9 {
                     $d = $globals.cur_tok.get() as integer - zero_token as integer;
@@ -73,7 +73,7 @@ macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
         'done <-
         }
         use crate::pascal::integer;
-        use crate::section_0297::cur_tok_type_repr;
+        use crate::section_0297::cur_tok_repr;
         use crate::section_0380::get_x_token;
         use crate::section_0445::zero_token;
         use crate::section_0445::A_token;
@@ -83,4 +83,4 @@ macro_rules! Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit {
 
 use crate::section_0289::letter_token;
 use crate::section_0289::other_token;
-use crate::section_0297::cur_tok_type_repr;
+use crate::section_0297::cur_tok_repr;

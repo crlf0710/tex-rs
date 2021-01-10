@@ -62,6 +62,8 @@ pub(crate) const vrule: quarterword = 35;
 pub(crate) const hrule: quarterword = 36;
 // @d insert=37 {vlist inserted in box ( \.{\\insert} )}
 // @d vadjust=38 {vlist inserted in enclosing paragraph ( \.{\\vadjust} )}
+/// vlist inserted in enclosing paragraph ( `\vadjust` )
+pub(crate) const vadjust: quarterword = 38;
 // @d ignore_spaces=39 {gobble |spacer| tokens ( \.{\\ignorespaces} )}
 /// gobble `spacer` tokens ( `\ignorespaces` )
 pub(crate) const ignore_spaces: quarterword = 39;

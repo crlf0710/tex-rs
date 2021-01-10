@@ -54,7 +54,31 @@ macro_rules! help4 {
     }}
 }
 // @d help5==@+begin help_ptr:=5; hlp5 {use this with five help lines}
+/// use this with five help lines
+macro_rules! help5 {
+    ($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr, $val5:expr) => {{
+        $globals.help_ptr = 5.into();
+        $globals.help_line[0] = $val1;
+        $globals.help_line[1] = $val2;
+        $globals.help_line[2] = $val3;
+        $globals.help_line[3] = $val4;
+        $globals.help_line[4] = $val5;
+    }}
+}
 // @d help6==@+begin help_ptr:=6; hlp6 {use this with six help lines}
+/// use this with six help lines
+macro_rules! help6 {
+    ($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr, $val5:expr, $val6:expr) => {{
+        $globals.help_ptr = 6.into();
+        $globals.help_line[0] = $val1;
+        $globals.help_line[1] = $val2;
+        $globals.help_line[2] = $val3;
+        $globals.help_line[3] = $val4;
+        $globals.help_line[4] = $val5;
+        $globals.help_line[5] = $val6;
+    }}
+}
+
 //
 // @<Glob...@>=
 // @!help_line:array[0..5] of str_number; {helps for the next |error|}

@@ -10,19 +10,19 @@
 //
 // @d octal_token=other_token+"'" {apostrophe, indicates an octal constant}
 /// apostrophe, indicates an octal constant
-pub(crate) const octal_token: cur_tok_type_repr = other_token + b'\'' as cur_tok_type_repr;
+pub(crate) const octal_token: cur_tok_repr = other_token + b'\'' as cur_tok_repr;
 // @d hex_token=other_token+"""" {double quote, indicates a hex constant}
 /// double quote, indicates a hex constant
-pub(crate) const hex_token: cur_tok_type_repr = other_token + b'\"' as cur_tok_type_repr;
+pub(crate) const hex_token: cur_tok_repr = other_token + b'\"' as cur_tok_repr;
 // @d alpha_token=other_token+"`" {reverse apostrophe, precedes alpha constants}
 /// reverse apostrophe, precedes alpha constants
-pub(crate) const alpha_token: cur_tok_type_repr = other_token + b'`' as cur_tok_type_repr;
+pub(crate) const alpha_token: cur_tok_repr = other_token + b'`' as cur_tok_repr;
 // @d point_token=other_token+"." {decimal point}
 /// decimal point
-pub(crate) const point_token: cur_tok_type_repr = other_token + b'.' as cur_tok_type_repr;
+pub(crate) const point_token: cur_tok_repr = other_token + b'.' as cur_tok_repr;
 // @d continental_point_token=other_token+"," {decimal point, Eurostyle}
 /// decimal point, Eurostyle
-pub(crate) const continental_point_token: cur_tok_type_repr = other_token + b',' as cur_tok_type_repr;
+pub(crate) const continental_point_token: cur_tok_repr = other_token + b',' as cur_tok_repr;
 
 // @<Glob...@>=
 // @!radix:small_number; {|scan_int| sets this to 8, 10, 16, or zero}
@@ -35,6 +35,6 @@ use crate::section_0101::small_number;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
-use crate::section_0297::cur_tok_type_repr;
+use crate::section_0297::cur_tok_repr;
 use crate::section_0289::other_token;
 
