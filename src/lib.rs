@@ -1371,7 +1371,10 @@ reversing_order_items!(
                 #[macro_use]
                 mod section_1102;
                 mod section_1103;
-                mod section_1104_to_1135;
+                mod section_1104_to_1125;
+                #[macro_use]
+                mod section_1126;
+                mod section_1127_to_1135;
                 mod section_1136_to_1198;
                 mod section_1199_to_1207;
                 mod section_1208;

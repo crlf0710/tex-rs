@@ -162,6 +162,9 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
     }
     // math_shift: chr_cmd("math shift character ");
     // mac_param: chr_cmd("macro parameter character ");
+    else if cmd == mac_param {
+        chr_cmd!(globals, chr_code, strpool_str!("macro parameter character "));
+    }
     // sup_mark: chr_cmd("superscript character ");
     // sub_mark: chr_cmd("subscript character ");
     // endv: print("end of alignment template");

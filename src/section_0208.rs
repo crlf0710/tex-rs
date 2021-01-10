@@ -52,6 +52,8 @@ pub(crate) const halign: quarterword = 32;
 /// vertical table alignment ( `\valign` )
 pub(crate) const valign: quarterword = 33;
 // @d no_align=34 {temporary escape from alignment ( \.{\\noalign} )}
+/// temporary escape from alignment ( `\noalign` )
+pub(crate) const no_align: quarterword = 34;
 // @d vrule=35 {vertical rule ( \.{\\vrule} )}
 /// vertical rule ( `\vrule` )
 pub(crate) const vrule: quarterword = 35;
