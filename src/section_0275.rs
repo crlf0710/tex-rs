@@ -21,7 +21,7 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
     }
     // glue_ref: delete_glue_ref(equiv_field(w));
     else if eq_type_field_w == glue_ref {
-        todo!("glue_ref");
+        delete_glue_ref(globals, equiv_field!(w));
     }
     // shape_ref: begin q:=equiv_field(w); {we need to free a \.{\\parshape} block}
     else if eq_type_field_w == shape_ref {
@@ -44,4 +44,5 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::memory_word;
 use crate::section_0200::delete_token_ref;
+use crate::section_0201::delete_glue_ref;
 use crate::section_0210::*;

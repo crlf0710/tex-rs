@@ -14,13 +14,16 @@ macro_rules! Append_a_new_letter_or_hyphen {
                 ASCII_code::from($globals.cur_chr.get() as integer)
             ) == 0
             {
-                todo!("error not a letter");
-            // begin print_err("Not a letter");
-            // @.Not a letter@>
-            // help2("Letters in \hyphenation words must have \lccode>0.")@/
-            //   ("Proceed; I'll ignore the character I just read.");
-            // error;
-            // end
+                // begin print_err("Not a letter");
+                print_err!($globals, strpool_str!("Not a letter"));
+                // @.Not a letter@>
+                // help2("Letters in \hyphenation words must have \lccode>0.")@/
+                //   ("Proceed; I'll ignore the character I just read.");
+                help2!($globals, strpool_str!("Letters in \\hyphenation words must have \\lccode>0."),
+                    strpool_str!("Proceed; I'll ignore the character I just read."));
+                // error;
+                error($globals)?;
+                // end
             }
             // else if n<63 then
             else if $n < 63 {
@@ -36,6 +39,7 @@ macro_rules! Append_a_new_letter_or_hyphen {
         }
         use crate::pascal::integer;
         use crate::section_0018::ASCII_code;
+        use crate::section_0082::error;
         use crate::section_0297::chr_code_repr;
     }};
 }

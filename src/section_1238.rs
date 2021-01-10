@@ -23,7 +23,7 @@ macro_rules! Compute_result_of_register_or_advance_put_it_in_cur_val {
             scan_glue($globals, small_number::new($p as _))?;
             // if q=advance then @<Compute the sum of two glue specs@>;
             if $q == advance as pointer {
-                todo!("Compute sum");
+                Compute_the_sum_of_two_glue_specs!($globals, $l);
             }
             // end
         }

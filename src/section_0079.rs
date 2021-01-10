@@ -43,6 +43,16 @@ macro_rules! help3 {
     }}
 }
 // @d help4==@+begin help_ptr:=4; hlp4 {use this with four help lines}
+/// use this with four help lines
+macro_rules! help4 {
+    ($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr) => {{
+        $globals.help_ptr = 4.into();
+        $globals.help_line[0] = $val1;
+        $globals.help_line[1] = $val2;
+        $globals.help_line[2] = $val3;
+        $globals.help_line[3] = $val4;
+    }}
+}
 // @d help5==@+begin help_ptr:=5; hlp5 {use this with five help lines}
 // @d help6==@+begin help_ptr:=6; hlp6 {use this with six help lines}
 //

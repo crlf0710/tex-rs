@@ -133,7 +133,7 @@ macro_rules! Cases_of_main_control_that_are_not_part_of_the_inner_loop {
         else if Forbidden_cases_detected_in_main_control!($abs_mode_plus_cur_cmd) || 
             abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, mac_param as u16)
         {
-            report_illegal_case($globals);
+            report_illegal_case($globals)?;
         }
         // @<Math-only cases in non-math modes, or vice versa@>: insert_dollar_sign;
         else if Math_only_cases_in_non_math_modes_or_vice_versa!($abs_mode_plus_cur_cmd) {

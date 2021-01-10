@@ -38,9 +38,14 @@ pub(crate) fn scan_glue(globals: &mut TeXGlobals, level: small_number) -> TeXRes
             // end;
         }
         // if cur_val_level=int_val then scan_dimen(mu,false,true)
+        if globals.cur_val_level == cur_val_level_kind::int_val {
+            scan_dimen(globals, mu, false, true)?;
+        }
         // else if level=mu_val then mu_error;
+        else if level == cur_val_level_kind::mu_val as u8 {
+            todo!("mu_error");
+        }
         // end
-        todo!("1");
     }
     // else  begin back_input; scan_dimen(mu,false,false);
     else {
