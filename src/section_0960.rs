@@ -28,9 +28,14 @@ pub(crate) fn new_patterns(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // else begin print_err("Too late for "); print_esc("patterns");
     else {
-        todo!("error");
+        print_err!(globals, strpool_str!("Too late for "));
+        print_esc(globals, strpool_str!("patterns"));
         // help1("All patterns must be given before typesetting begins.");
+        help1!(globals, strpool_str!("All patterns must be given before typesetting begins."));
         // error; link(garbage):=scan_toks(false,false); flush_list(def_ref);
+        error(globals)?;
+        link!(globals, garbage) = scan_toks(globals, false, false)?;
+        flush_list(globals, globals.def_ref);
         // end;
     }
     // end;
@@ -38,5 +43,10 @@ pub(crate) fn new_patterns(globals: &mut TeXGlobals) -> TeXResult<()> {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0063::print_esc;
 use crate::section_0081::TeXResult;
+use crate::section_0082::error;
+use crate::section_0123::flush_list;
+use crate::section_0162::garbage;
 use crate::section_0403::scan_left_brace;
+use crate::section_0473::scan_toks;

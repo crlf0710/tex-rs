@@ -44,10 +44,13 @@ macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_rig
             }
             // othercases begin print_err("Bad "); print_esc("patterns");
             else {
-                todo!("error");
+                print_err!($globals, strpool_str!("Bad "));
+                print_esc($globals, strpool_str!("patterns"));
                 // @.Bad \\patterns@>
-                //   help1("(See Appendix H.)"); error;
-                //   end
+                // help1("(See Appendix H.)"); error;
+                help1!($globals, strpool_str!("(See Appendix H.)"));
+                error($globals)?;
+                // end
             }
             // endcases;
             // end;

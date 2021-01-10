@@ -20,10 +20,12 @@ macro_rules! Append_a_new_letter_or_a_hyphen_level {
                     chr_code_type::new(lc_code!($globals, $globals.cur_chr.into()) as _);
                 // if cur_chr=0 then
                 if $globals.cur_chr.get() == 0 as chr_code_repr {
-                    todo!("error");
                     // begin print_err("Nonletter");
+                    print_err!($globals, strpool_str!("Nonletter"));
                     // @.Nonletter@>
                     // help1("(See Appendix H.)"); error;
+                    help1!($globals, strpool_str!("(See Appendix H.)"));
+                    error($globals)?;
                     // end;
                 }
                 // end;

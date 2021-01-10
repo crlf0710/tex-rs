@@ -49,11 +49,13 @@ macro_rules! Insert_a_new_pattern_into_the_linked_trie {
         }
         // if trie_o[q]<>min_quarterword then
         if $globals.trie_o[q] != min_quarterword {
-            todo!("error duplicate pattern");
-            //   begin print_err("Duplicate pattern");
+            // begin print_err("Duplicate pattern");
+            print_err!($globals, strpool_str!("Duplicate pattern"));
             // @.Duplicate pattern@>
-            //   help1("(See Appendix H.)"); error;
-            //   end;
+            // help1("(See Appendix H.)"); error;
+            help1!($globals, strpool_str!("(See Appendix H.)"));
+            error($globals)?;
+            // end;
         }
         // trie_o[q]:=v;
         $globals.trie_o[q] = v;
