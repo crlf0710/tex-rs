@@ -44,10 +44,22 @@ impl core::ops::Add for scaled {
     }
 }
 
+impl core::ops::AddAssign for scaled {
+    fn add_assign(&mut self, rhs: Self) {
+        self.0 += rhs.0;
+    }
+}
+
 impl core::ops::Sub for scaled {
     type Output = scaled;
     fn sub(self, rhs: scaled) -> scaled {
         scaled(self.0 - rhs.0)
+    }
+}
+
+impl core::ops::SubAssign for scaled {
+    fn sub_assign(&mut self, rhs: Self) {
+        self.0 -= rhs.0;
     }
 }
 

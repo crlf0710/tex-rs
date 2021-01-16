@@ -37,7 +37,7 @@ macro_rules! Manufacture_a_control_sequence_name {
             /// N.B.: The |save_stack| might change
             const _: () = ();
 
-            eq_define($globals, $globals.cur_cs, relax, 256);
+            eq_define($globals, $globals.cur_cs, relax, 256)?;
             // end; {the control sequence will now match `\.{\\relax}'}
             /// the control sequence will now match `\relax}`
             const _ : () = ();

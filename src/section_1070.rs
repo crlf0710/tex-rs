@@ -4,7 +4,7 @@
 // @<Declare act...@>=
 // procedure normal_paragraph;
 #[allow(unused_variables)]
-pub(crate) fn normal_paragraph(globals: &mut TeXGlobals) {
+pub(crate) fn normal_paragraph(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin if looseness<>0 then eq_word_define(int_base+looseness_code,0);
     if looseness!(globals) != 0 {
         eq_word_define(globals, int_base as pointer + looseness_code as pointer, 0);
@@ -19,12 +19,14 @@ pub(crate) fn normal_paragraph(globals: &mut TeXGlobals) {
     }
     // if par_shape_ptr<>null then eq_define(par_shape_loc,shape_ref,null);
     if par_shape_ptr!(globals) != null {
-        eq_define(globals, par_shape_loc, shape_ref, null);
+        eq_define(globals, par_shape_loc, shape_ref, null)?;
     }
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
 use crate::section_0115::pointer;
 use crate::section_0115::null;

@@ -34,7 +34,7 @@ macro_rules! Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_di
             }
             // glue_node:@<Incorporate glue into the horizontal totals@>;
             else if type_p == glue_node {
-                todo!("glue");
+                Incorporate_glue_into_the_horizontal_totals!($globals, $p, $h, $d, $x);
             }
             // kern_node,math_node: x:=x+width(p);
             else if type_p == kern_node || type_p == math_node {

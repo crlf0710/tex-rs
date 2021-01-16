@@ -3,7 +3,7 @@
 //
 // @<Declare act...@>=
 // procedure box_end(@!box_context:integer);
-pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) {
+pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) -> TeXResult<()> {
     // var p:pointer; {|ord_noad| for new box in math mode}
     // begin if box_context<box_flag then @<Append box |cur_box| to the current list,
     //     shifted by |box_context|@>
@@ -22,10 +22,12 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) {
         // else ship_out(cur_box);
     }
     // end;
+    ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_1071::box_flag;
 use crate::section_1071::ship_out_flag;

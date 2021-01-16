@@ -7,7 +7,7 @@
 // @p procedure eq_destroy(@!w:memory_word); {gets ready to forget |w|}
 /// gets ready to forget `w`
 #[allow(unused_variables)]
-pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
+pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) -> TeXResult<()> {
     // var q:pointer; {|equiv| field of |w|}
     let eq_type_field_w = eq_type_field!(w);
     // begin case eq_type_field(w) of
@@ -31,7 +31,7 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
     }
     // box_ref: flush_node_list(equiv_field(w));
     else if eq_type_field_w == box_ref {
-        todo!("box_ref");
+        flush_node_list(globals, equiv_field!(w))?;
     }
     // othercases do_nothing
     else {
@@ -39,10 +39,13 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) {
     }
     // endcases;
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0113::memory_word;
 use crate::section_0200::delete_token_ref;
 use crate::section_0201::delete_glue_ref;
+use crate::section_0202::flush_node_list;
 use crate::section_0210::*;

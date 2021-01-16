@@ -19,7 +19,7 @@ macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global
             // else  begin eq_destroy(eqtb[p]); {destroy the current value}
             else {
                 /// destroy the current value
-                eq_destroy($globals, $globals.eqtb[$p]);
+                eq_destroy($globals, $globals.eqtb[$p])?;
                 // eqtb[p]:=save_stack[save_ptr]; {restore the saved value}
                 /// restore the saved value
                 const _ : () = ();

@@ -7,14 +7,15 @@
 //   {global |eq_define|}
 /// global `eq_define`
 #[allow(unused_variables)]
-pub(crate) fn geq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) {
+pub(crate) fn geq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) -> TeXResult<()> {
     // begin eq_destroy(eqtb[p]);
-    eq_destroy(globals, globals.eqtb[p]);
+    eq_destroy(globals, globals.eqtb[p])?;
     // eq_level(p):=level_one; eq_type(p):=t; equiv(p):=e;
     eq_level!(globals, p) = level_one;
     eq_type!(globals, p) = t;
     equiv!(globals, p) = e;
     // end;
+    ok_nojump!()
 }
 
 // @#
@@ -30,6 +31,7 @@ pub(crate) fn geq_word_define(globals: &mut TeXGlobals, p: pointer, w: integer) 
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0113::MEMORY_WORD_INT;

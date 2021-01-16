@@ -11,10 +11,10 @@
 /// new data for `eqtb`
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn eq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) {
+pub(crate) fn eq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) -> TeXResult<()> {
     // begin if eq_level(p)=cur_level then eq_destroy(eqtb[p])
     if eq_level!(globals, p) == globals.cur_level {
-        eq_destroy(globals, globals.eqtb[p]);
+        eq_destroy(globals, globals.eqtb[p])?;
     }
     // else if cur_level>level_one then eq_save(p,eq_level(p));
     else if globals.cur_level > level_one {
@@ -25,9 +25,11 @@ pub(crate) fn eq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e:
     eq_type!(globals, p) = t;
     equiv!(globals, p) = e;
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0115::pointer;

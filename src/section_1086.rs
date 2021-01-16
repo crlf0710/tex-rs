@@ -31,7 +31,7 @@ pub(crate) fn package(globals: &mut TeXGlobals, c: small_number) -> TeXResult<()
     }
     // pop_nest; box_end(saved(0));
     pop_nest(globals);
-    box_end(globals, saved!(globals, 0));
+    box_end(globals, saved!(globals, 0))?;
     // end;
     ok_nojump!()
 }

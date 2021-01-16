@@ -13,10 +13,10 @@ macro_rules! define {
     ($globals:expr, $a:expr, $p:expr, $t:expr, $v:expr) => {
         if global!($a) {
             use crate::section_0279::geq_define;
-            geq_define($globals, $p, $t, $v)
+            geq_define($globals, $p, $t, $v)?;
         } else {
             use crate::section_0277::eq_define;
-            eq_define($globals, $p, $t, $v)
+            eq_define($globals, $p, $t, $v)?;
         }
     }
 }

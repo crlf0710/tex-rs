@@ -8,7 +8,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1094 {
         trace_span!("Cases of `main_control` that build...1094");
         // vmode+par_end: begin normal_paragraph;
         if $abs_mode_plus_cur_cmd == vmode as u16 + par_end as u16 {
-            normal_paragraph($globals);
+            normal_paragraph($globals)?;
             // if mode>0 then build_page;
             if mode!($globals) > 0 {
                 build_page($globals);
