@@ -210,6 +210,7 @@ macro_rules! workarounds {
         crate::section_0491::workaround_47384();
         crate::section_0553::workaround_47384();
         crate::section_0780::workaround_47384();
+        crate::section_0983::workaround_47384();
         crate::section_1052::workaround_47384();
         crate::section_1058::workaround_47384();
         crate::section_1071::workaround_47384();

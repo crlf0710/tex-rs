@@ -45,6 +45,8 @@ pub(crate) const set_page_int: quarterword = 82;
 /// change dimension of box ( `\wd`, `\ht`, `\dp` )
 pub(crate) const set_box_dimen: quarterword = 83;
 // @d set_shape=84 {specify fancy paragraph shape ( \.{\\parshape} )}
+/// specify fancy paragraph shape ( `\parshape` )
+pub(crate) const set_shape: quarterword = 84;
 // @d def_code=85 {define a character code ( \.{\\catcode}, etc.~)}
 /// define a character code ( `\catcode`, etc. )
 pub(crate) const def_code: quarterword = 85;
