@@ -86,6 +86,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         }
         // no_align: print_esc("noalign");
         // no_boundary:print_esc("noboundary");
+        else if $cmd == no_boundary {
+            print_esc($globals, strpool_str!("noboundary"));
+            true
+        }
         // no_expand: print_esc("noexpand");
         else if $cmd == no_expand {
             print_esc($globals, strpool_str!("noexpand"));

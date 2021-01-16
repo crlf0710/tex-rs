@@ -74,6 +74,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("noalign",no_align,0);@/
     // @!@:no_align_}{\.{\\noalign} primitive@>
     // primitive("noboundary",no_boundary,0);@/
+    primitive(globals, strpool_str!("noboundary"), no_boundary, 0);
     // @!@:no_boundary_}{\.{\\noboundary} primitive@>
     // primitive("noexpand",no_expand,0);@/
     primitive(globals, strpool_str!("noexpand"), no_expand, 0);

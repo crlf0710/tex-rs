@@ -1152,8 +1152,6 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
     }
 }
 
-#[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(file)))]
 pub(crate) fn get<F: PascalFile>(file: &mut F) {
     loop {
         match file.file_state_mut() {
@@ -1196,10 +1194,10 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                     return;
                 }
                 BlockBufferState::AfterReadBlock {
-                    bytes_buffer,
                     bytes_avail_length,
                     bytes_position,
                     bytes_caret,
+                    ..
                 } => {
                     let size_of_t = core::mem::size_of::<F::Unit>();
                     assert!(size_of_t > 0);
@@ -1221,8 +1219,6 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
     }
 }
 
-#[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(file)))]
 pub(crate) fn buffer_variable<F: PascalFile>(file: &mut F) -> F::Unit
 where
     F::Unit: Clone,
@@ -1231,7 +1227,7 @@ where
         match file.file_state_mut() {
             FileState::LineInspectionMode {
                 read_line_buffer,
-                read_target,
+                ..
             } => match read_line_buffer {
                 LineBufferState::Eof => {
                     panic!("file eof reached");
@@ -1250,7 +1246,7 @@ where
             },
             FileState::BlockInspectionMode {
                 read_block_buffer,
-                read_target,
+                ..
             } => match read_block_buffer {
                 BlockBufferState::Eof => {
                     panic!("file eof reached");

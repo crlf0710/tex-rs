@@ -61,10 +61,15 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // hmode+no_boundary: begin get_x_token;
     else if abs_mode_plus_cur_cmd == hmode as u16 + no_boundary as u16 {
-        todo!();
+        get_x_token(globals)?;
         // if (cur_cmd=letter)or(cur_cmd=other_char)or(cur_cmd=char_given)or
         //  (cur_cmd=char_num) then cancel_boundary:=true;
+        if globals.cur_cmd == letter || globals.cur_cmd == other_char || globals.cur_cmd == char_given ||
+            globals.cur_cmd == char_num {
+            globals.cancel_boundary = true;
+        }
         // goto reswitch;
+        goto_backward_label!('reswitch);
         // end;
     }
     // hmode+spacer: if space_factor=1000 then goto append_normal_space
