@@ -261,7 +261,17 @@ macro_rules! year {
     };
 }
 // @d show_box_breadth==int_par(show_box_breadth_code)
+macro_rules! show_box_breadth {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::show_box_breadth_code)
+    };
+}
 // @d show_box_depth==int_par(show_box_depth_code)
+macro_rules! show_box_depth {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::show_box_depth_code)
+    };
+}
 // @d hbadness==int_par(hbadness_code)
 // @d vbadness==int_par(vbadness_code)
 // @d pausing==int_par(pausing_code)
@@ -358,8 +368,14 @@ macro_rules! error_context_lines {
 }
 //
 // @<Assign the values |depth_threshold:=show_box_depth|...@>=
-// depth_threshold:=show_box_depth;
-// breadth_max:=show_box_breadth
+macro_rules! Assign_the_values_depth_threshold_from_show_box_depth_and_breadth_max_show_box_breadth {
+    ($globals:expr) => {{
+        // depth_threshold:=show_box_depth;
+        $globals.depth_threshold = show_box_depth!($globals);
+        // breadth_max:=show_box_breadth
+        $globals.breadth_max = show_box_breadth!($globals);
+    }}
+}
 
 use crate::pascal::word;
 use crate::section_0113::halfword;

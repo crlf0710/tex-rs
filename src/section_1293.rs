@@ -12,7 +12,7 @@ pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     // show_lists: begin begin_diagnostic; show_activities;
     if globals.cur_chr.get() == show_lists as chr_code_repr {
         begin_diagnostic(globals);
-        todo!("show_activities(globals);");
+        show_activities(globals);
         // end;
     }
     // show_box_code: @<Show the current contents of a box@>;
@@ -68,6 +68,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0073::error_stop_mode;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;
+use crate::section_0218::show_activities;
 use crate::section_0245::begin_diagnostic;
 use crate::section_0297::chr_code_repr;
 use crate::section_1291::show_kind::*;
