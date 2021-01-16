@@ -36,6 +36,7 @@ pub(crate) fn debug_help(globals: &mut TeXGlobals) {
         print_nl(globals, strpool_str!("debug # (-1 to exit):"));
         update_terminal(globals);
         // @.debug \#@>
+        todo!();
         // read(term_in,m);
         // if m<0 then return
         // else if m=0 then

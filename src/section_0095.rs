@@ -27,11 +27,13 @@ pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) -> TeXResult<()
     }
     // else  begin print_err("I can't go on meeting you like this");
     else {
-        todo!("print_err");
+        print_err!(globals, strpool_str!("I can't go on meeting you like this"));
         // @.I can't go on...@>
-        //   help2("One of your faux pas seems to have wounded me deeply...")@/
-        //     ("in fact, I'm barely conscious. Please fix it and try again.");
-        //   end;
+        // help2("One of your faux pas seems to have wounded me deeply...")@/
+        //   ("in fact, I'm barely conscious. Please fix it and try again.");
+        help2!(globals, strpool_str!("One of your faux pas seems to have wounded me deeply..."),
+            strpool_str!("in fact, I'm barely conscious. Please fix it and try again."));
+        // end;
     }
     // succumb;
     succumb(globals)?;
