@@ -17,7 +17,7 @@ pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // show_box_code: @<Show the current contents of a box@>;
     else if globals.cur_chr.get() == show_box_code as chr_code_repr {
-        todo!();
+        Show_the_current_contents_of_a_box!(globals);
     }
     // show_code: @<Show the current meaning of a token, then |goto common_ending|@>;
     else if globals.cur_chr.get() == show_code as chr_code_repr {

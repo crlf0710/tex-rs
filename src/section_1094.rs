@@ -46,7 +46,9 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1094 {
             $abs_mode_plus_cur_cmd == hmode as u16 + hrule as u16 ||
             $abs_mode_plus_cur_cmd == hmode as u16 + un_vbox as u16 ||
             $abs_mode_plus_cur_cmd == hmode as u16 + halign as u16 {
-            todo!("head_for");
+            head_for_vmode($globals);
+            use crate::section_1095::head_for_vmode;
+            true
         } else {
             false
         }

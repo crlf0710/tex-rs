@@ -66,11 +66,17 @@ macro_rules! shift_amount {
 /// position of `list_ptr` field in a box node
 pub(crate) const list_offset: quarterword = 5;
 // @d list_ptr(#) == link(#+list_offset) {beginning of the list inside the box}
+/// beginning of the list inside the box
+macro_rules! list_ptr {
+    ($globals:expr, $ptr:expr) => {
+        link!($globals, $ptr + crate::section_0135::list_offset as pointer)
+    }
+}
 // @d glue_order(#) == subtype(#+list_offset) {applicable order of infinity}
 /// applicable order of infinity
 macro_rules! glue_order {
     ($globals:expr, $ptr:expr) => {
-        subtype!($globals, $ptr + list_offset as pointer)
+        subtype!($globals, $ptr + crate::section_0135::list_offset as pointer)
     };
 }
 // @d glue_sign(#) == type(#+list_offset) {stretching or shrinking}

@@ -359,6 +359,7 @@ reversing_order_items!(
                 mod section_0199;
                 #[macro_use]
                 mod section_0200;
+                #[macro_use]
                 mod section_0201;
                 macro_rules! forward_mod_a {
                     () => {
@@ -1597,6 +1598,7 @@ reversing_order_items!(
                         mod section_1294;
                         #[macro_use]
                         mod section_1295;
+                        #[macro_use]
                         mod section_1296;
                         #[macro_use]
                         mod section_1297;

@@ -117,7 +117,8 @@ macro_rules! r#box {
     ($globals:expr, $ptr:expr) => {
         equiv!(
             $globals,
-            crate::section_0230::box_base as pointer + $ptr as pointer
+            crate::section_0230::box_base as crate::section_0115::pointer
+                + $ptr as crate::section_0115::pointer
         )
     };
 }
