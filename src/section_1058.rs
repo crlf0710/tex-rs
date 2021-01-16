@@ -36,6 +36,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1058(globals: &m
     // primitive("hfilneg",hskip,fil_neg_code);@/
     // @!@:hfil_neg_}{\.{\\hfilneg} primitive@>
     // primitive("vskip",vskip,skip_code);@/
+    primitive(globals, strpool_str!("vskip"), vskip, skip_code);
     // @!@:vskip_}{\.{\\vskip} primitive@>
     // primitive("vfil",vskip,fil_code);
     // @!@:vfil_}{\.{\\vfil} primitive@>

@@ -78,6 +78,12 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1071(globals: &m
     // primitive("vtop",make_box,vtop_code);@/
     // @!@:vtop_}{\.{\\vtop} primitive@>
     // primitive("vbox",make_box,vtop_code+vmode);
+    primitive(
+        globals,
+        strpool_str!("vbox"),
+        make_box,
+        (vtop_code as chr_code_repr + vmode as chr_code_repr) as _,
+    );
     // @!@:vbox_}{\.{\\vbox} primitive@>
     // primitive("hbox",make_box,vtop_code+hmode);@/
     primitive(
@@ -101,6 +107,7 @@ use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0208::make_box;
 use crate::section_0211::hmode;
+use crate::section_0211::vmode;
 use crate::section_0264::primitive;
 use crate::section_0297::chr_code_repr;
 use crate::section_1336::PRIM2HT;

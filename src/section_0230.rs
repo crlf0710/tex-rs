@@ -94,6 +94,11 @@ macro_rules! every_hbox {
     };
 }
 // @d every_vbox==equiv(every_vbox_loc)
+macro_rules! every_vbox {
+    ($globals:expr) => {
+        equiv!($globals, crate::section_0230::every_vbox_loc)
+    };
+}
 // @d every_job==equiv(every_job_loc)
 macro_rules! every_job {
     ($globals:expr) => {
@@ -101,6 +106,11 @@ macro_rules! every_job {
     };
 }
 // @d every_cr==equiv(every_cr_loc)
+macro_rules! every_cr {
+    ($globals:expr) => {
+        equiv!($globals, crate::section_0230::every_cr_loc)
+    };
+}
 // @d err_help==equiv(err_help_loc)
 macro_rules! err_help {
     ($globals:expr) => {

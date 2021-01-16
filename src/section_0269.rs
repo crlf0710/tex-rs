@@ -20,8 +20,14 @@ pub(crate) const simple_group: quarterword = 1;
 pub(crate) const hbox_group: quarterword = 2;
 // @d adjusted_hbox_group=3 {code for `\.{\\hbox}\grp' in vertical mode}
 // @d vbox_group=4 {code for `\.{\\vbox}\grp'}
+/// code for `\vbox{...}'
+pub(crate) const vbox_group: quarterword = 4;
 // @d vtop_group=5 {code for `\.{\\vtop}\grp'}
+/// code for `\vtop{...}'
+pub(crate) const vtop_group: quarterword = 5;
 // @d align_group=6 {code for `\.{\\halign}\grp', `\.{\\valign}\grp'}
+/// code for `\halign{...}', `\valign{...}'
+pub(crate) const align_group: quarterword = 6;
 // @d no_align_group=7 {code for `\.{\\noalign}\grp'}
 // @d output_group=8 {code for output routine}
 // @d math_group=9 {code for, e.g., `\.{\char'136}\grp'}

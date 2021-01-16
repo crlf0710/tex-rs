@@ -16,13 +16,43 @@
 //! |align_ptr| points to the topmost such node.
 //
 // @d preamble==link(align_head) {the current preamble list}
+/// the current preamble list
+macro_rules! preamble {
+    ($globals:expr) => {
+        link!($globals, crate::section_0162::align_head)
+    }
+}
 // @d align_stack_node_size=5 {number of |mem| words to save alignment states}
-//
+/// number of `mem` words to save alignment states
+pub(crate) const align_stack_node_size: quarterword = 5;
+
 // @<Glob...@>=
 // @!cur_align:pointer; {current position in preamble list}
 /// current position in preamble list
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static cur_align: pointer = null;
+
+// @!cur_span:pointer; {start of currently spanned columns in preamble list}
+/// start of currently spanned columns in preamble list
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_span: pointer = null;
+// @!cur_loop:pointer; {place to copy when extending a periodic preamble}
+/// place to copy when extending a periodic preamble
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_loop: pointer = null;
+// @!align_ptr:pointer; {most recently pushed-down alignment stack node}
+/// most recently pushed-down alignment stack node
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static align_ptr: pointer = null;
+
+// @!cur_head,@!cur_tail:pointer; {adjustment list pointers}
+/// adjustment list pointers
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_head: pointer = null;
+
+/// adjustment list pointers
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_tail: pointer = null;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::pointer;
@@ -30,9 +60,5 @@ use crate::section_0115::pointer;
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::null;
 
-// @!cur_span:pointer; {start of currently spanned columns in preamble list}
-// @!cur_loop:pointer; {place to copy when extending a periodic preamble}
-// @!align_ptr:pointer; {most recently pushed-down alignment stack node}
-// @!cur_head,@!cur_tail:pointer; {adjustment list pointers}
-
 use globals_struct::{globals_struct_field, globals_struct_use};
+use crate::section_0113::quarterword;

@@ -45,6 +45,8 @@ pub(crate) const temp_head: pointer = mem_top - 3;
 /// head of active list in `line_break`, needs two words
 pub(crate) const active: pointer = mem_top - 7;
 // @d align_head==mem_top-8 {head of preamble list for alignments}
+/// head of preamble list for alignments
+pub(crate) const align_head: pointer = mem_top - 8;
 // @d end_span==mem_top-9 {tail of spanned-width lists}
 // @d omit_template==mem_top-10 {a constant token list}
 /// a constant token list

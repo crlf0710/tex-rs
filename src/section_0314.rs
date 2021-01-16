@@ -21,6 +21,9 @@ macro_rules! Print_type_of_token_list {
             }
         }
         // inserted: print_nl("<inserted text> ");
+        else if token_type == inserted {
+            print_nl($globals, strpool_str!("<inserted text> "));
+        }
         // macro: begin print_ln; print_cs(name);
         //   end;
         // output_text: print_nl("<output> ");

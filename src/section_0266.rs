@@ -72,6 +72,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
         }
         // halign: print_esc("halign");
         // hrule: print_esc("hrule");
+        else if $cmd == hrule {
+            print_esc($globals, strpool_str!("hrule"));
+            true
+        }
         // ignore_spaces: print_esc("ignorespaces");
         // insert: print_esc("insert");
         // ital_corr: print_esc("/");
@@ -127,6 +131,10 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266 {
             true
         }
         // valign: print_esc("valign");
+        else if $cmd == valign {
+            print_esc($globals, strpool_str!("valign"));
+            true
+        }
         // vcenter: print_esc("vcenter");
         // vrule: print_esc("vrule");
         else if $cmd == vrule {

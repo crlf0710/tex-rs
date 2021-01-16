@@ -55,6 +55,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     // primitive("halign",halign,0);@/
     // @!@:halign_}{\.{\\halign} primitive@>
     // primitive("hrule",hrule,0);@/
+    primitive(globals, strpool_str!("hrule"), hrule, 0);
     // @!@:hrule_}{\.{\\hrule} primitive@>
     // primitive("ignorespaces",ignore_spaces,0);@/
     // @!@:ignore_spaces_}{\.{\\ignorespaces} primitive@>
@@ -113,6 +114,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     primitive(globals, strpool_str!("vadjust"), vadjust, 0);
     // @!@:vadjust_}{\.{\\vadjust} primitive@>
     // primitive("valign",valign,0);@/
+    primitive(globals, strpool_str!("valign"), valign, 0);
     // @!@:valign_}{\.{\\valign} primitive@>
     // primitive("vcenter",vcenter,0);@/
     // @!@:vcenter_}{\.{\\vcenter} primitive@>

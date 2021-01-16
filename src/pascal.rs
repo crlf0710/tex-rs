@@ -319,6 +319,15 @@ macro_rules! define_ranged_signed_integer {
             }
         }
 
+        impl<MIN, MAX> core::ops::Neg for $name<MIN, MAX>
+        where MIN: typenum::Integer, MAX: typenum::Integer {
+            type Output = Self;
+            
+            fn neg(self) -> Self {
+                Self::new(-self.0)
+            }
+        }
+
         impl<MIN, MAX> core::ops::AddAssign<$base_type> for $name<MIN, MAX>
         where MIN: typenum::Integer, MAX: typenum::Integer {
             fn add_assign(&mut self, rhs: $base_type) {

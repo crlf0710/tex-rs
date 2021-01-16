@@ -1,30 +1,3 @@
-//! @ The help messages here contain a little white lie, since \.{\\noalign}
-//! and \.{\\omit} are allowed also after `\.{\\noalign\{...\}}'.
-//!
-//! @<Declare act...@>=
-//! procedure no_align_error;
-//! begin print_err("Misplaced "); print_esc("noalign");
-//! @.Misplaced \\noalign@>
-//! help2("I expect to see \noalign only after the \cr of")@/
-//!   ("an alignment. Proceed, and I'll ignore this case."); error;
-//! end;
-//! procedure omit_error;
-//! begin print_err("Misplaced "); print_esc("omit");
-//! @.Misplaced \\omit@>
-//! help2("I expect to see \omit only after tab marks or the \cr of")@/
-//!   ("an alignment. Proceed, and I'll ignore this case."); error;
-//! end;
-//!
-//! @ We've now covered most of the abuses of \.{\\halign} and \.{\\valign}.
-//! Let's take a look at what happens when they are used correctly.
-//!
-//! @<Cases of |main_control| that build...@>=
-//! vmode+halign,hmode+valign:init_align;
-//! mmode+halign: if privileged then
-//!   if cur_group=math_shift_group then init_align
-//!   else off_save;
-//! vmode+endv,hmode+endv: do_endv;
-//!
 //! @ An |align_group| code is supposed to remain on the |save_stack|
 //! during an entire alignment, until |fin_align| removes it.
 //!
