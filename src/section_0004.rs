@@ -100,6 +100,8 @@ pub mod TeXGlobals {
     include!("src/section_0943.rs");
     include!("src/section_0947.rs");
     include!("src/section_0950.rs");
+    include!("src/section_0980.rs");
+    include!("src/section_0982.rs");
     include!("src/section_0989.rs");
     include!("src/section_1032.rs");
     include!("src/section_1074.rs");

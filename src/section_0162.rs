@@ -34,6 +34,8 @@ pub(crate) const lo_mem_stat_max: pointer = fil_neg_glue + glue_spec_size as poi
 /// vlist of items not yet on current page
 pub(crate) const contrib_head: pointer = mem_top - 1;
 // @d page_head==mem_top-2 {vlist for current page}
+/// vlist for current page
+pub(crate) const page_head: pointer = mem_top - 2;
 // @d temp_head==mem_top-3 {head of a temporary list of some kind}
 /// head of a temporary list of some kind
 pub(crate) const temp_head: pointer = mem_top - 3;

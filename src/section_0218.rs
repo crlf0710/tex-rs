@@ -32,11 +32,17 @@ pub(crate) fn show_activities(globals: &mut TeXGlobals) {
         print_int(globals, globals.nest[p].ml_field.abs());
         // if m=hmode then if nest[p].pg_field <> @'40600000 then
         if m == hmode && globals.nest[p].pg_field != 0o40600000 {
-            todo!("hmode");
             // begin print(" (language"); print_int(nest[p].pg_field mod @'200000);
+            print(globals, strpool_str!(" (language").get() as _);
+            print_int(globals, globals.nest[p].pg_field % 0o200000);
             // print(":hyphenmin"); print_int(nest[p].pg_field div @'20000000);
+            print(globals, strpool_str!(":hyphenmin").get() as _);
+            print_int(globals, globals.nest[p].pg_field / 0o20000000);
             // print_char(","); print_int((nest[p].pg_field div @'200000) mod @'100);
+            print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b','));
+            print_int(globals, (globals.nest[p].pg_field / 200000) % 0o100);
             // print_char(")");
+            print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b')'));
             // end;
         }
         // if nest[p].ml_field<0 then print(" (\output routine)");
@@ -45,10 +51,12 @@ pub(crate) fn show_activities(globals: &mut TeXGlobals) {
         }
         // if p=0 then
         if p == 0 {
-            todo!("p == 0");
             // begin @<Show the status of the current page@>;
+            Show_the_status_of_the_current_page!(globals);
             // if link(contrib_head)<>null then
-            //   print_nl("### recent contributions:");
+            if link!(globals, contrib_head) != null {
+                // print_nl("### recent contributions:");
+            }
             // end;
         }
         // show_box(link(nest[p].head_field));
@@ -63,9 +71,12 @@ pub(crate) fn show_activities(globals: &mut TeXGlobals) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0057::print_ln;
+use crate::section_0058::print_char;
 use crate::section_0059::print;
 use crate::section_0062::print_nl;
 use crate::section_0065::print_int;
+use crate::section_0115::null;
+use crate::section_0162::contrib_head;
 use crate::section_0198::show_box;
 use crate::section_0211::hmode;
 use crate::section_0211::print_mode;

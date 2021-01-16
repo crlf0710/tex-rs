@@ -1,15 +1,3 @@
-//! @ @<Set init...@>=
-//! output_active:=false; insert_penalties:=0;
-//!
-//! @ The page builder is ready to start a fresh page if we initialize
-//! the following state variables. (However, the page insertion list is initialized
-//! elsewhere.)
-//!
-//! @<Start a new current page@>=
-//! page_contents:=empty; page_tail:=page_head; link(page_head):=null;@/
-//! last_glue:=max_halfword; last_penalty:=0; last_kern:=0;
-//! page_depth:=0; page_max_depth:=0
-//!
 //! @ At certain times box 255 is supposed to be void (i.e., |null|),
 //! or an insertion box is supposed to be ready to accept a vertical list.
 //! If not, an error message is printed, and the following subroutine

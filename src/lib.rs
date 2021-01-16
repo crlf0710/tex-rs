@@ -385,15 +385,13 @@ reversing_order_items!(
                 }
                 mod section_0216;
                 mod section_0217;
-                reversing_order_items!(
-                    {
+                macro_rules! forward_mod_c {
+                    () => {
                         mod section_0218;
                     }
-                    {
-                        #[macro_use]
-                        mod section_0219;
-                    }
-                );
+                }
+                #[macro_use]
+                mod section_0219;
                 mod section_0220;
                 #[macro_use]
                 mod section_0221;
@@ -515,7 +513,7 @@ reversing_order_items!({
             mod section_0295;
             mod section_0296;
             mod section_0297;
-            macro_rules! forward_mod_c {
+            macro_rules! forward_mod_d {
                 () => {
                     mod section_0298;
                 }
@@ -841,7 +839,7 @@ reversing_order_items!({
                             mod section_0451;
                             #[macro_use]
                             mod section_0452;
-                            macro_rules! forward_mod_d {
+                            macro_rules! forward_mod_e {
                                 () => {
                                     #[macro_use]
                                     mod section_0453;
@@ -856,7 +854,7 @@ reversing_order_items!({
                             mod section_0457;
                             #[macro_use]
                             mod section_0458;
-                            forward_mod_d!();
+                            forward_mod_e!();
                         }
                     );
                     reversing_order_items! (
@@ -1271,9 +1269,21 @@ reversing_order_items!({
             mod section_0965;
             mod section_0966;
             mod section_0967_to_0979;
-            mod section_0980_to_0988;
+            mod section_0980;
+            mod section_0981;
+            #[macro_use]
+            mod section_0982;
+            mod section_0983_to_0985;
+            #[macro_use]
+            mod section_0986;
+            forward_mod_c!();
+            mod section_0987;
+            mod section_0988;
             mod section_0989;
-            mod section_0990_to_0993;
+            mod section_0990;
+            #[macro_use]
+            mod section_0991;
+            mod section_0992_to_0993;
             mod section_0994;
             #[macro_use]
             mod section_0995;
@@ -1604,7 +1614,7 @@ reversing_order_items!(
                         mod section_1332;
                     }
                     {
-                        macro_rules! forward_mod_e {
+                        macro_rules! forward_mod_f {
                             () => {
                                 mod section_1333;
                             }
@@ -1627,7 +1637,7 @@ reversing_order_items!(
                 mod section_1345;
                 #[macro_use]
                 mod section_1346;
-                forward_mod_c!();
+                forward_mod_d!();
                 #[macro_use]
                 mod section_1347;
             }
@@ -1679,7 +1689,7 @@ mod section_1376;
 mod section_1377;
 #[macro_use]
 mod section_1378;
-forward_mod_e!();
+forward_mod_f!();
 mod section_1379;
 mod section_1380;
 
