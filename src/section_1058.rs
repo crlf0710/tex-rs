@@ -26,6 +26,7 @@ pub(crate) const mskip_code: halfword = 5;
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1058(globals: &mut TeXGlobals) {
     // primitive("hskip",hskip,skip_code);@/
+    primitive(globals, strpool_str!("hskip"), hskip, skip_code);
     // @!@:hskip_}{\.{\\hskip} primitive@>
     // primitive("hfil",hskip,fil_code);
     // @!@:hfil_}{\.{\\hfil} primitive@>

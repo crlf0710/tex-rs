@@ -26,14 +26,24 @@ macro_rules! If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_re
                     if !font_code_range_contains_char($globals, $globals.main_f, chr) {
                         // begin char_warning(main_f,cur_chr); free_avail(lig_stack); goto big_switch;
                         char_warning($globals, $globals.main_f, chr);
+                        free_avail!($globals, $globals.lig_stack);
                         goto_backward_label!($lbl_big_switch);
                         // end;
                     }
                     // main_i:=char_info(main_f)(cur_l);
+                    $globals.main_i = char_info!($globals, $globals.main_f, $globals.cur_l);
                     // if not char_exists(main_i) then
-                    //   begin char_warning(main_f,cur_chr); free_avail(lig_stack); goto big_switch;
-                    //   end;
+                    if !$globals.main_i.char_exists() {
+                        // begin char_warning(main_f,cur_chr); free_avail(lig_stack); goto big_switch;
+                        char_warning($globals, $globals.main_f, chr);
+                        free_avail!($globals, $globals.lig_stack);
+                        goto_backward_label!($lbl_big_switch);
+                        // end;
+                    }
                     // link(tail):=lig_stack; tail:=lig_stack {|main_loop_lookahead| is next}
+                    link!($globals, tail!($globals)) = $globals.lig_stack;
+                    tail!($globals) = $globals.lig_stack;
+                    /// `main_loop_lookahead` is next
                     goto_part_label!($lbl_main_loop_append, $status, main_loop_lookahead);
                 },
             }

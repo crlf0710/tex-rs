@@ -25,6 +25,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     primitive(globals, strpool_str!("begingroup"), begin_group, 0);
     // @!@:begin_group_}{\.{\\begingroup} primitive@>
     // primitive("char",char_num,0);@/
+    primitive(globals, strpool_str!("char"), char_num, 0);
     // @!@:char_}{\.{\\char} primitive@>
     // primitive("csname",cs_name,0);@/
     primitive(globals, strpool_str!("csname"), cs_name, 0);

@@ -109,12 +109,14 @@ pub(crate) static bchar_label: internal_font_array<font_index> = internal_font_a
 //   {right boundary character, |non_char| if there is none}
 /// right boundary character, `non_char` if there is none
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static font_bchar: internal_font_array<ASCII_code_or_non_char> = internal_font_array::default();
+pub(crate) static font_bchar: internal_font_array<ASCII_code_or_non_char> =
+    internal_font_array::default();
 // @!font_false_bchar:array[internal_font_number] of min_quarterword..non_char;
 //   {|font_bchar| if it doesn't exist in the font, otherwise |non_char|}
 /// `font_bchar` if it doesn't exist in the font, otherwise `non_char`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static font_false_bchar: internal_font_array<ASCII_code_or_non_char> = internal_font_array::default();
+pub(crate) static font_false_bchar: internal_font_array<ASCII_code_or_non_char> =
+    internal_font_array::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0549::internal_font_array;
@@ -156,8 +158,7 @@ impl font_index_array<memory_word> {
 
 #[allow(unused_variables)]
 pub(crate) fn font_name_str(globals: &mut TeXGlobals, font: internal_font_number) -> str_number {
-    // FIXME: implement this.
-    strpool_str!("<unknown font>")
+    globals.font_name[font]
 }
 
 #[allow(unused_variables)]
@@ -166,6 +167,5 @@ pub(crate) fn font_code_range_contains_char(
     font: internal_font_number,
     chr: ASCII_code,
 ) -> boolean {
-    // FIXME: check with font_bc and font_ec
-    false
+    chr >= globals.font_bc[font] && chr <= globals.font_ec[font]
 }

@@ -5,13 +5,31 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1059 {
     ($globals:expr, $cmd:expr, $chr_code:expr) => {{
         // hskip: case chr_code of
         if $cmd == hskip {
-            todo!("hskip");
+            let chr_code = $chr_code.get();
             // skip_code:print_esc("hskip");
+            if chr_code == skip_code as chr_code_repr {
+                print_esc($globals, strpool_str!("hskip"));
+            }
             // fil_code:print_esc("hfil");
+            else if chr_code == fil_code as chr_code_repr {
+                print_esc($globals, strpool_str!("hfil"));
+            }
             // fill_code:print_esc("hfill");
+            else if chr_code == fill_code as chr_code_repr {
+                print_esc($globals, strpool_str!("hfill"));
+            }
             // ss_code:print_esc("hss");
+            else if chr_code == ss_code as chr_code_repr {
+                print_esc($globals, strpool_str!("hss"));
+            }
             // othercases print_esc("hfilneg")
+            else {
+                print_esc($globals, strpool_str!("hfilneg"));
+            }
             // endcases;
+            use crate::section_0297::chr_code_repr;
+            use crate::section_1058::*;
+            true
         }
         // vskip: case chr_code of
         else if $cmd == vskip {

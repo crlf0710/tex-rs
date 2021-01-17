@@ -24,8 +24,11 @@ macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to
                 }
                 // char_num: begin scan_char_num; cur_chr:=cur_val; cur_cmd:=char_given;
                 else if $globals.cur_cmd == char_num {
-                    todo!("scan_char_num");
+                    scan_char_num($globals)?;
+                    $globals.cur_chr = chr_code_type::new($globals.cur_val as _);
+                    $globals.cur_cmd = char_given;
                     // goto reswitch;
+                    goto_backward_label!('reswitch);
                     // end;
                 }
                 // spacer,right_brace: begin if n>1 then @<Enter a hyphenation exception@>;
@@ -61,7 +64,9 @@ macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to
         use crate::section_0207::right_brace;
         use crate::section_0208::char_num;
         use crate::section_0208::char_given;
+        use crate::section_0297::chr_code_type;
         use crate::section_0380::get_x_token;
+        use crate::section_0434::scan_char_num;
         use typenum::U64;
     }}
 }
