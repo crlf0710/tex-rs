@@ -358,7 +358,17 @@ macro_rules! language {
     };
 }
 // @d left_hyphen_min==int_par(left_hyphen_min_code)
+macro_rules! left_hyphen_min {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::left_hyphen_min_code)
+    };
+}
 // @d right_hyphen_min==int_par(right_hyphen_min_code)
+macro_rules! right_hyphen_min {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::right_hyphen_min_code)
+    };
+}
 // @d holding_inserts==int_par(holding_inserts_code)
 // @d error_context_lines==int_par(error_context_lines_code)
 macro_rules! error_context_lines {

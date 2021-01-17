@@ -6,7 +6,9 @@
 /// command modifier for `\immediate`
 pub(crate) const immediate_code: quarterword = 4;
 // @d set_language_code=5 {command modifier for \.{\\setlanguage}}
-//
+/// command modifier for `\setlanguage`
+pub(crate) const set_language_code: quarterword = 5;
+
 // @<Put each...@>=
 #[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
@@ -27,6 +29,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0334(globals: &m
     primitive(globals, strpool_str!("immediate"), extension, immediate_code as _);
     // @!@:immediate_}{\.{\\immediate} primitive@>
     // primitive("setlanguage",extension,set_language_code);@/
+    primitive(globals, strpool_str!("setlanguage"), extension, set_language_code as _);
     // @!@:set_language_}{\.{\\setlanguage} primitive@>
 }
 

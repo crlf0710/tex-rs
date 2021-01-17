@@ -51,6 +51,12 @@ macro_rules! space_factor {
     }
 }
 // @d clang==aux.hh.rh {the other part of |aux| in horizontal mode}
+/// the other part of `aux` in horizontal mode
+macro_rules! clang {
+    ($globals:expr) => {
+        aux!($globals)[crate::section_0113::MEMORY_WORD_HH_RH]
+    }
+}
 // @d incompleat_noad==aux.int {the name of |aux| in math mode}
 /// the name of `aux` in math mode
 macro_rules! incompleat_noad {

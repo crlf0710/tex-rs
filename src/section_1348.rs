@@ -27,6 +27,9 @@ pub(crate) fn do_extension(globals: &mut TeXGlobals) -> TeXResult<()> {
         Implement_immediate!(globals);
     }
     // set_language_code:@<Implement \.{\\setlanguage}@>;
+    else if globals.cur_chr.get() == set_language_code as chr_code_repr {
+        Implement_setlanguage!(globals);
+    }
     // othercases confusion("ext1")
     else {
         confusion(globals, strpool_str!("ext1"))?;
@@ -45,3 +48,5 @@ use crate::section_1341::close_node;
 use crate::section_1341::open_node;
 use crate::section_1341::write_node;
 use crate::section_1344::immediate_code;
+use crate::section_1344::set_language_code;
+

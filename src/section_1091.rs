@@ -2,9 +2,19 @@
 
 // @<Declare act...@>=
 // function norm_min(@!h:integer):small_number;
-// begin if h<=0 then norm_min:=1@+else if h>=63 then norm_min:=63@+
-// else norm_min:=h;
-// end;
+pub(crate) fn norm_min(h: integer) -> small_number {
+    // begin if h<=0 then norm_min:=1@+else if h>=63 then norm_min:=63@+
+    if h <= 0 {
+        return 1.into();
+    } else if h >= 63 {
+        return 63.into();
+    }
+    // else norm_min:=h;
+    else {
+        return small_number::new(h as _);
+    }
+    // end;
+}
 // @#
 
 // procedure new_graf(@!indented:boolean);
@@ -29,4 +39,6 @@ pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) {
 use crate::section_0211::hmode;
 
 use crate::pascal::boolean;
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0101::small_number;

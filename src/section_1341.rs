@@ -37,8 +37,26 @@ pub(crate) const special_node: quarterword = 3;
 /// `subtype` in whatsits that change the current language
 pub(crate) const language_node: quarterword = 4;
 // @d what_lang(#)==link(#+1) {language number, in the range |0..255|}
+/// language number, in the range `0..255`
+macro_rules! what_lang {
+    ($globals:expr, $ptr:expr) => {
+        link!($globals, $ptr + 1)
+    }
+}
 // @d what_lhm(#)==type(#+1) {minimum left fragment, in the range |1..63|}
+/// minimum left fragment, in the range `1..63`
+macro_rules! what_lhm {
+    ($globals:expr, $ptr:expr) => {
+        r#type!($globals, $ptr + 1)
+    }
+}
 // @d what_rhm(#)==subtype(#+1) {minimum right fragment, in the range |1..63|}
+/// minimum right fragment, in the range `1..63`
+macro_rules! what_rhm {
+    ($globals:expr, $ptr:expr) => {
+        subtype!($globals, $ptr + 1)
+    }
+}
 // @d write_tokens(#) == link(#+1) {reference count of token list to write}
 /// reference count of token list to write
 macro_rules! write_tokens {

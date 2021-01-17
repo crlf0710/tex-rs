@@ -20,6 +20,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1346 {
                 print_esc($globals, strpool_str!("immediate"));
             }
             // set_language_code:print_esc("setlanguage");
+            else if $chr_code.get() == set_language_code as chr_code_repr {
+                print_esc($globals, strpool_str!("setlanguage"));
+            }
             // othercases print("[unknown extension!]")
             else {
                 print($globals, strpool_str!("[unknown extension!]").get() as _);
