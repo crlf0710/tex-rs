@@ -27,6 +27,8 @@ pub(crate) const un_hbox: quarterword = 23;
 pub(crate) const un_vbox: quarterword = 24;
 // @d remove_item=25 {nullify last item ( \.{\\unpenalty},
 //   \.{\\unkern}, \.{\\unskip} )}
+/// nullify last item ( `\unpenalty`, `\unkern`, `\unskip` )
+pub(crate) const remove_item: quarterword = 25;
 // @d hskip=26 {horizontal glue ( \.{\\hskip}, \.{\\hfil}, etc.~)}
 /// horizontal glue ( `\hskip`, `\hfil`, etc. )
 pub(crate) const hskip: quarterword = 26;

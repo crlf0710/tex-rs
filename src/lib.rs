@@ -1441,6 +1441,7 @@ reversing_order_items!(
                 mod section_1105;
                 mod section_1106;
                 mod section_1107;
+                #[macro_use]
                 mod section_1108;
                 #[macro_use]
                 mod section_1109;
