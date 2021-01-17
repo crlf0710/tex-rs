@@ -24,9 +24,18 @@ pub(crate) fn package(globals: &mut TeXGlobals, c: small_number) -> TeXResult<()
     }
     // else  begin cur_box:=vpackage(link(head),saved(2),saved(1),d);
     else {
-        todo!("not -hmode")
+        globals.cur_box = vpackage(
+            globals,
+            link!(globals, head!(globals)),
+            scaled::new_from_inner(saved!(globals, 2)),
+            small_number::new(saved!(globals, 1) as _),
+            d
+        )?;
         // if c=vtop_code then @<Readjust the height and depth of |cur_box|,
         //   for \.{\\vtop}@>;
+        if c.get() as integer == vtop_code as integer {
+            Readjust_the_height_and_depth_of_cur_box_for_vtop!(globals);
+        }
         // end;
     }
     // pop_nest; box_end(saved(0));
@@ -36,6 +45,7 @@ pub(crate) fn package(globals: &mut TeXGlobals, c: small_number) -> TeXResult<()
     ok_nojump!()
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
@@ -44,4 +54,6 @@ use crate::section_0211::hmode;
 use crate::section_0217::pop_nest;
 use crate::section_0281::unsave;
 use crate::section_0649::hpack;
+use crate::section_0668::vpackage;
+use crate::section_1071::vtop_code;
 use crate::section_1075::box_end;

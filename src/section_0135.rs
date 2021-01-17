@@ -69,21 +69,27 @@ pub(crate) const list_offset: quarterword = 5;
 /// beginning of the list inside the box
 macro_rules! list_ptr {
     ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr + crate::section_0135::list_offset as pointer)
-    }
+        link!(
+            $globals,
+            $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
+        )
+    };
 }
 // @d glue_order(#) == subtype(#+list_offset) {applicable order of infinity}
 /// applicable order of infinity
 macro_rules! glue_order {
     ($globals:expr, $ptr:expr) => {
-        subtype!($globals, $ptr + crate::section_0135::list_offset as pointer)
+        subtype!(
+            $globals,
+            $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
+        )
     };
 }
 // @d glue_sign(#) == type(#+list_offset) {stretching or shrinking}
 /// stretching or shrinking
 macro_rules! glue_sign {
     ($globals:expr, $ptr:expr) => {
-        r#type!($globals, $ptr + list_offset as pointer)
+        r#type!($globals, $ptr + list_offset as crate::section_0115::pointer)
     };
 }
 // @d normal=0 {the most common case when several cases are named}

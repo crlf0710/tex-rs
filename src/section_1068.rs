@@ -52,6 +52,7 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // othercases confusion("rightbrace")
     else {
+        trace_error_expr!("cur_group = {}", globals.cur_group.get());
         confusion(globals, strpool_str!("rightbrace"))?;
         // @:this can't happen rightbrace}{\quad rightbrace@>
         // endcases;

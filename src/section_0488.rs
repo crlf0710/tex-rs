@@ -15,6 +15,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
                 print_esc($globals, strpool_str!("ifnum"));
             }
             // if_dim_code:print_esc("ifdim");
+            else if chr_code == code::if_dim_code as chr_code_repr {
+                print_esc($globals, strpool_str!("ifdim"));
+            }
             // if_odd_code:print_esc("ifodd");
             // if_vmode_code:print_esc("ifvmode");
             // if_hmode_code:print_esc("ifhmode");
