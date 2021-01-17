@@ -1,9 +1,3 @@
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! tab_mark: if chr_code=span_code then print_esc("span")
-//!   else chr_cmd("alignment tab character ");
-//! car_ret: if chr_code=cr_code then print_esc("cr")
-//!   else print_esc("crcr");
-//!
 //! @ The preamble is copied directly, except that \.{\\tabskip} causes a change
 //! to the tabskip glue, thereby possibly expanding macros that immediately
 //! follow it. An appearance of \.{\\span} also causes such an expansion.

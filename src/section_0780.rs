@@ -12,6 +12,8 @@
 //! as its command code.
 //
 // @d span_code=256 {distinct from any character}
+/// distinct from any character
+pub(crate) const span_code: halfword = 256;
 // @d cr_code=257 {distinct from |span_code| and from any character}
 /// distinct from `span_code` and from any character
 pub(crate) const cr_code: halfword = 257;

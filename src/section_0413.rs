@@ -82,7 +82,7 @@ pub(crate) fn scan_something_internal(
     // set_page_int:@<Fetch the |dead_cycles| or the |insert_penalties|@>;
     // set_page_dimen: @<Fetch something on the |page_so_far|@>;
     else if globals.cur_cmd == set_page_dimen {
-        todo!("fetch something on the page_so_far");
+        Fetch_something_on_the_page_so_far!(globals, m);
     }
     // set_shape: @<Fetch the |par_shape| size@>;
     // set_box_dimen: @<Fetch a box dimension@>;
