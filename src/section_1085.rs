@@ -13,6 +13,10 @@ macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_
         }
         // adjusted_hbox_group: begin adjust_tail:=adjust_head; package(0);
         //   end;
+        else if $globals.cur_group == adjusted_hbox_group {
+            todo!("adjusted_hbox_group");
+            true
+        }
         // vbox_group: begin end_graf; package(0);
         else if $globals.cur_group == vbox_group {
             end_graf($globals);
@@ -23,6 +27,10 @@ macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_
             true
         }
         // vtop_group: begin end_graf; package(vtop_code);
+        else if $globals.cur_group == vtop_group {
+            todo!("vtop_group");
+            true
+        }
         //   end;
         else {
             false

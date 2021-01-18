@@ -31,7 +31,8 @@ macro_rules! Assignments_1242 {
         }
         // set_box_dimen:alter_box_dimen;
         else if $cur_cmd == set_box_dimen {
-            todo!("");
+            alter_box_dimen($globals)?;
+            use crate::section_1247::alter_box_dimen;
             true
         } else {
             false

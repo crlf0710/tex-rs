@@ -49,35 +49,4 @@
 //! else insert_penalties:=cur_val;
 //! end;
 //!
-//! @ @<Declare subprocedures for |prefixed_command|@>=
-//! procedure alter_box_dimen;
-//! var c:small_number; {|width_offset| or |height_offset| or |depth_offset|}
-//! @!b:eight_bits; {box number}
-//! begin c:=cur_chr; scan_eight_bit_int; b:=cur_val; scan_optional_equals;
-//! scan_normal_dimen;
-//! if box(b)<>null then mem[box(b)+c].sc:=cur_val;
-//! end;
-//!
-//! @ Paragraph shapes are set up in the obvious way.
-//!
-//! @<Assignments@>=
-//! set_shape: begin scan_optional_equals; scan_int; n:=cur_val;
-//!   if n<=0 then p:=null
-//!   else  begin p:=get_node(2*n+1); info(p):=n;
-//!     for j:=1 to n do
-//!       begin scan_normal_dimen;
-//!       mem[p+2*j-1].sc:=cur_val; {indentation}
-//!       scan_normal_dimen;
-//!       mem[p+2*j].sc:=cur_val; {width}
-//!       end;
-//!     end;
-//!   define(par_shape_loc,shape_ref,p);
-//!   end;
-//!
-//! @ Here's something that isn't quite so obvious. It guarantees that
-//! |info(par_shape_ptr)| can hold any positive~|n| for which |get_node(2*n+1)|
-//! doesn't overflow the memory capacity.
-//!
-//! @<Check the ``constant''...@>=
-//! if 2*max_halfword<mem_top-mem_min then bad:=41;
-//!
+

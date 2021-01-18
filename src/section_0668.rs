@@ -12,8 +12,8 @@
 #[allow(unused_variables, unused_assignments)]
 pub(crate) fn vpackage(
     globals: &mut TeXGlobals,
-    p: pointer,
-    h: scaled,
+    mut p: pointer,
+    mut h: scaled,
     m: small_number,
     l: scaled,
 ) -> TeXResult<pointer> {
@@ -23,7 +23,7 @@ pub(crate) fn vpackage(
     let r: pointer;
     // @!w,@!d,@!x:scaled; {width, depth, and natural height}
     /// width, depth, and natural height
-    let (w, d, mut x): (scaled, scaled, scaled);
+    let (mut w, mut d, mut x): (scaled, scaled, scaled);
     // @!s:scaled; {shift amount}
     // @!g:pointer; {points to a glue specification}
     // @!o:glue_ord; {order of infinity}
@@ -42,7 +42,8 @@ pub(crate) fn vpackage(
     // while p<>null do @<Examine node |p| in the vlist, taking account of its effect
     //   on the dimensions of the new box; then advance |p| to the next node@>;
     while p != null {
-        todo!("examine and advance");
+        Examine_node_p_in_the_vlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__then_advance_p_to_the_next_node!
+            (globals, p, w, d, x);
     }
     // width(r):=w;
     width!(globals, r) = w;
@@ -60,7 +61,7 @@ pub(crate) fn vpackage(
     // @<Determine the value of |height(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
     Determine_the_value_of_height_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!(
-        globals
+        globals, r, m, h, x
     );
     // common_ending: @<Finish issuing a diagnostic message
     //       for an overfull or underfull vbox@>;

@@ -7,6 +7,9 @@ macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_
         } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1085!($globals) {
             // already processed
             true
+        } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1132!($globals) {
+            // already processed
+            true
         } else {
             false
         }

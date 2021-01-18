@@ -89,7 +89,10 @@ macro_rules! glue_order {
 /// stretching or shrinking
 macro_rules! glue_sign {
     ($globals:expr, $ptr:expr) => {
-        r#type!($globals, $ptr + list_offset as crate::section_0115::pointer)
+        r#type!(
+            $globals,
+            $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
+        )
     };
 }
 // @d normal=0 {the most common case when several cases are named}
