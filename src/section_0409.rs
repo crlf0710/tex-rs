@@ -1,13 +1,3 @@
-//! @ Here is a procedure that sounds an alarm when mu and non-mu units
-//! are being switched.
-//!
-//! @p procedure mu_error;
-//! begin print_err("Incompatible glue units");
-//! @.Incompatible glue units@>
-//! help1("I'm going to assume that 1mu=1pt when they're mixed.");
-//! error;
-//! end;
-//!
 //! @ The next routine `|scan_something_internal|' is used to fetch internal
 //! numeric quantities like `\.{\\hsize}', and also to handle the `\.{\\the}'
 //! when expanding constructions like `\.{\\the\\toks0}' and

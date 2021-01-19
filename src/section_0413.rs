@@ -119,12 +119,17 @@ pub(crate) fn scan_something_internal(
     }
     // endcases;@/
     // while cur_val_level>level do @<Convert \(c)|cur_val| to a lower level@>;
+    while globals.cur_val_level as integer > level.get() as integer {
+        Convert_cur_val_to_a_lower_level!(globals);
+    }
     // @<Fix the reference count, if any, and negate |cur_val| if |negative|@>;
+    Fix_the_reference_count__if_any__and_negate_cur_val_if_negative!(globals, negative);
     // end;
     ok_nojump!()
 }
 
 use crate::pascal::boolean;
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
