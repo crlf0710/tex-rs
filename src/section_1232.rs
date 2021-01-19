@@ -12,7 +12,7 @@ macro_rules! Assignments_1232 {
             Let_n_be_the_largest_legal_code_value__based_on_cur_chr!($globals, n, $globals.cur_chr);
             //   p:=cur_chr; scan_char_num; p:=p+cur_val; scan_optional_equals;
             p = $globals.cur_chr.get() as _;
-            scan_char_num($globals)?;
+            scan_char_num($globals, $globals.allow_big_char_code)?;
             p += $globals.cur_val;
             trace_expr!("cur_val = {}", $globals.cur_val);
             scan_optional_equals($globals)?;

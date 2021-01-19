@@ -17,7 +17,7 @@ macro_rules! Assignments_1224 {
             // case n of
             // char_def_code: begin scan_char_num; define(p,char_given,cur_val);
             if n == char_def_code as chr_code_repr {
-                scan_char_num($globals)?;
+                scan_char_num($globals, $globals.allow_big_char_code)?;
                 define!($globals, $a, p as _, char_given, $globals.cur_val as _);
                 // end;
             }

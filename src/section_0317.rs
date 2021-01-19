@@ -49,7 +49,7 @@ macro_rules! Print_two_lines_using_the_tricky_pseudoprinted_information {
         print_ln(make_globals_io_string_log_view!($globals));
         // for q:=1 to n do print_char(" "); {print |n| spaces to begin line~2}
         /// print `n` spaces to begin line 2
-        for _ in $globals.first_count ..= (p - 1) {
+        for _ in 1 ..= n.get() {
             let ch = ASCII_code_literal!(b' ');
             print_char(make_globals_io_string_log_view!($globals), ch);
         }

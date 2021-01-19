@@ -24,7 +24,7 @@ macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to
                 }
                 // char_num: begin scan_char_num; cur_chr:=cur_val; cur_cmd:=char_given;
                 else if $globals.cur_cmd == char_num {
-                    scan_char_num($globals)?;
+                    scan_char_num($globals, true)?;
                     $globals.cur_chr = chr_code_type::new($globals.cur_val as _);
                     $globals.cur_cmd = char_given;
                     // goto reswitch;

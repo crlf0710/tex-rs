@@ -4,7 +4,7 @@
 macro_rules! Fetch_a_character_code_from_some_table {
     ($globals:expr, $m:expr) => {{
         // begin scan_char_num;
-        scan_char_num($globals)?;
+        scan_char_num($globals, true)?;
         // if m=math_code_base then scanned_result(ho(math_code(cur_val)))(int_val)
         if $m.get() as integer == math_code_base as integer {
             todo!("a");

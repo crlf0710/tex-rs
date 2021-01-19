@@ -363,6 +363,10 @@ pub(crate) fn fontchar_value(globals: &mut TeXGlobals, idx: halfword) -> font_an
     globals.fontchar_val_gallery[idx as usize]
 }
 
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static allow_big_char_code: boolean = false;
+
+
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::packed_ASCII_code;
 use crate::section_0113::halfword;

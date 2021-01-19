@@ -19,6 +19,7 @@ macro_rules! Print_location_of_current_line {
             }
             // else  begin print_nl("<read ");
             else {
+                print_nl($globals, strpool_str!("<read "));
                 // if name=17 then print_char("*")@+else print_int(name-1);
                 if name!($globals) == 17 {
                     print_char(make_globals_io_string_log_view!($globals), ASCII_code_literal!(b'*'));
