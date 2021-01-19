@@ -47,16 +47,41 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     'done <-
     }
     // done: name:=a_make_name_string(cur_file);
-    name!(globals) = a_make_name_string(make_globals_io_string_view!(globals), &mut cur_file!(globals)).get() as _;
+    name!(globals) = a_make_name_string(
+        make_globals_io_string_view!(globals),
+        &mut cur_file!(globals),
+    )
+    .get() as _;
     trace_expr!("name = {}", name!(globals));
     // if job_name=0 then
-    //   begin job_name:=cur_name; open_log_file;
-    //   end; {|open_log_file| doesn't |show_context|, so |limit|
-    //     and |loc| needn't be set to meaningful values yet}
+    if globals.job_name == 0 {
+        // begin job_name:=cur_name; open_log_file;
+        globals.job_name = globals.cur_name;
+        open_log_file(globals);
+        // end; {|open_log_file| doesn't |show_context|, so |limit|
+        //   and |loc| needn't be set to meaningful values yet}
+        /// `open_log_file` doesn't `show_context`, so `limit`
+        /// and `loc` needn't be set to meaningful values yet
+        const _: () = ();
+    }
     // if term_offset+length(name)>max_print_line-2 then print_ln
+    if globals.term_offset.get() as integer + length(globals, name!(globals) as _)
+        > max_print_line as integer - 2
+    {
+        print_ln(make_globals_io_string_log_view!(globals));
+    }
     // else if (term_offset>0)or(file_offset>0) then print_char(" ");
+    else if globals.term_offset > 0 || globals.file_offset > 0 {
+        print_char(
+            make_globals_io_string_log_view!(globals),
+            ASCII_code_literal!(b' '),
+        );
+    }
     // print_char("("); incr(open_parens); slow_print(name); update_terminal;
-    print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'('));
+    print_char(
+        make_globals_io_string_log_view!(globals),
+        ASCII_code_literal!(b'('),
+    );
     incr!(globals.open_parens);
     trace_expr!("open_parens = {:?}", globals.open_parens);
     slow_print(globals, name!(globals).into());
@@ -72,9 +97,16 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     return_nojump!();
 }
 
-use crate::section_0004::{TeXGlobals, TeXGlobalsFilenameView, TeXGlobalsIoStringView, TeXGlobalsIoStringLogView};
+use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;
+use crate::section_0004::TeXGlobalsFilenameView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0011::max_print_line;
 use crate::section_0027::a_open_in;
 use crate::section_0034::update_terminal;
+use crate::section_0040::length;
+use crate::section_0057::print_ln;
 use crate::section_0058::print_char;
 use crate::section_0060::slow_print;
 use crate::section_0081::TeXResult;
@@ -86,3 +118,4 @@ use crate::section_0525::a_make_name_string;
 use crate::section_0526::scan_file_name;
 use crate::section_0529::pack_cur_name;
 use crate::section_0530::prompt_file_name;
+use crate::section_0534::open_log_file;
