@@ -5,12 +5,28 @@
 macro_rules! Initialize_the_input_routines {
     ($globals:expr, $lbl_final_end:lifetime) => {
         // begin input_ptr:=0; max_in_stack:=0;
+        $globals.input_ptr = 0.into();
+        $globals.max_in_stack = 0.into();
         // in_open:=0; open_parens:=0; max_buf_stack:=0;
+        $globals.in_open = 0.into();
+        $globals.open_parens = 0.into();
+        $globals.max_buf_stack = 0.into();
         // param_ptr:=0; max_param_stack:=0;
         $globals.param_ptr = 0.into();
         $globals.max_param_stack = 0.into();
         // first:=buf_size; repeat buffer[first]:=0; decr(first); until first=0;
+        $globals.first = buf_size.into();
+        loop {
+            $globals.buffer[$globals.first] = 0.into();
+            decr!($globals.first);
+            if $globals.first == 0 {
+                break;
+            }
+        }
         // scanner_status:=normal; warning_index:=null; first:=1;
+        $globals.scanner_status = scanner_status_kind::normal;
+        $globals.warning_index = null;
+        $globals.first = 1.into();
         // state:=new_line; start:=1; index:=0; line:=0; name:=0;
         state!($globals) = new_line;
         start!($globals) = 1;
@@ -27,11 +43,13 @@ macro_rules! Initialize_the_input_routines {
         }
         // limit:=last; first:=last+1; {|init_terminal| has set |loc| and |last|}
         /// `init_terminal` has set `loc` and `last`
-        {
-            limit!($globals) = $globals.last.get();
-            $globals.first = $globals.last + 1;
-        }
+        const _ : () = ();
+        limit!($globals) = $globals.last.get();
+        $globals.first = $globals.last + 1;
         // end
+        use crate::section_0011::buf_size;
+        use crate::section_0115::null;
         use crate::section_0303::new_line;
+        use crate::section_0305::scanner_status_kind;
     };
 }
