@@ -15,6 +15,7 @@
 //
 // @p function scan_keyword(@!s:str_number):boolean; {look for a given string}
 /// look for a given string
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult<boolean> {
     // label exit;
     // var p:pointer; {tail of the backup list}

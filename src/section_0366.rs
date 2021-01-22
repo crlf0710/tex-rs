@@ -34,12 +34,23 @@ pub(crate) fn expand(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!p,@!q,@!r:pointer; {for list manipulation}
     // @!j:0..buf_size; {index into |buffer|}
     // @!cv_backup:integer; {to save the global quantity |cur_val|}
+    /// to save the global quantity `cur_val`
+    let cv_backup;
     // @!cvl_backup,@!radix_backup,@!co_backup:small_number;
     //   {to save |cur_val_level|, etc.}
+    /// to save |cur_val_level|, etc.
+    let (cvl_backup, radix_backup, co_backup);
     // @!backup_backup:pointer; {to save |link(backup_head)|}
+    /// to save `link(backup_head)`
+    let backup_backup;
     // @!save_scanner_status:small_number; {temporary storage of |scanner_status|}
     // begin cv_backup:=cur_val; cvl_backup:=cur_val_level; radix_backup:=radix;
+    cv_backup = globals.cur_val;
+    cvl_backup = globals.cur_val_level;
+    radix_backup = globals.radix;
     // co_backup:=cur_order; backup_backup:=link(backup_head);
+    co_backup = globals.cur_order;
+    backup_backup = link!(globals, backup_head);
     // if cur_cmd<call then @<Expand a nonmacro@>
     if globals.cur_cmd < call {
         Expand_a_nonmacro!(globals);
@@ -53,13 +64,19 @@ pub(crate) fn expand(globals: &mut TeXGlobals) -> TeXResult<()> {
         todo!();
     }
     // cur_val:=cv_backup; cur_val_level:=cvl_backup; radix:=radix_backup;
+    globals.cur_val = cv_backup;
+    globals.cur_val_level = cvl_backup;
+    globals.radix = radix_backup;
     // cur_order:=co_backup; link(backup_head):=backup_backup;
+    globals.cur_order = co_backup;
+    link!(globals, backup_head) = backup_backup;
     // end;
     ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0162::backup_head;
 use crate::section_0210::call;
 use crate::section_0210::end_template;
 use crate::section_0389::macro_call;

@@ -1169,8 +1169,11 @@ reversing_order_items!({
                         {
                             #[macro_use]
                             mod section_0669;
+                        }
+                        {
                             #[macro_use]
                             mod section_0670;
+                            #[macro_use]
                             mod section_0671;
                             #[macro_use]
                             mod section_0672;

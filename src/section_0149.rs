@@ -29,6 +29,8 @@
 pub(crate) const glue_node: quarterword = 10;
 // @d cond_math_glue=98 {special |subtype| to suppress glue in the next node}
 // @d mu_glue=99 {|subtype| for math glue}
+/// `subtype` for math glue
+pub(crate) const mu_glue: quarterword = 99;
 // @d a_leaders=100 {|subtype| for aligned leaders}
 /// `subtype` for aligned leaders
 pub(crate) const a_leaders: quarterword = 100;

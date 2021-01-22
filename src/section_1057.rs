@@ -11,7 +11,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1057 {
             $abs_mode_plus_cur_cmd == hmode as u16 + hskip as u16 ||
             $abs_mode_plus_cur_cmd == mmode as u16 + hskip as u16 ||
             $abs_mode_plus_cur_cmd == mmode as u16 + mskip as u16 {
-            append_glue($globals);
+            append_glue($globals)?;
 
             use crate::section_1060::append_glue;
             true

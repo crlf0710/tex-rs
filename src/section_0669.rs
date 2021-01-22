@@ -28,7 +28,9 @@ macro_rules! Examine_node_p_in_the_vlist__taking_account_of_its_effect_on_the_di
             }
             // glue_node: @<Incorporate glue into the vertical totals@>;
             else if type_p == glue_node {
-                todo!("incorporate 3");
+                Incorporate_glue_into_the_vertical_totals!(
+                    $globals, $p, $w, $d, $x
+                );
             }
             // kern_node: begin x:=x+d+width(p); d:=0;
             else if type_p == kern_node {
