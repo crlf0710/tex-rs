@@ -66,7 +66,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // if term_offset+length(name)>max_print_line-2 then print_ln
     if globals.term_offset.get() as integer + length(globals, name!(globals) as _)
-        > max_print_line as integer - 2
+        > globals.max_print_line as integer - 2
     {
         print_ln(make_globals_io_string_log_view!(globals));
     }
@@ -102,7 +102,6 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoStringView;
-use crate::section_0011::max_print_line;
 use crate::section_0027::a_open_in;
 use crate::section_0034::update_terminal;
 use crate::section_0040::length;

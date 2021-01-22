@@ -4,7 +4,7 @@
 macro_rules! Display_the_current_context {
     ($globals:expr, $nn:expr, $old_setting:expr) => {{
         /// length of descriptive information on line 1
-        let l: u8_from_0_to_n<half_error_line_TYPENUM>;
+        let l: u8_from_0_to_n<U255>;
 
         // begin if (base_ptr=input_ptr) or (state<>token_list) or
         //    (token_type<>backed_up) or (loc<>null) then
@@ -45,8 +45,8 @@ macro_rules! Display_the_current_context {
         }
         // end
         use crate::pascal::u8_from_0_to_n;
-        use crate::section_0011::half_error_line_TYPENUM;
         use crate::section_0115::null;
         use crate::section_0307::backed_up;
+        use typenum::U255;
     }}
 }

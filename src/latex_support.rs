@@ -5,6 +5,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_latex_support(
     globals: &mut TeXGlobals,
 ) {
     primitive(globals, strpool_str!("ifcsname"), if_test, unimplemented_code as _);
+
+    globals.error_line = 79;
+    globals.half_error_line = 50;
+    globals.max_print_line = 79;
 }
 
 use crate::pascal::word;

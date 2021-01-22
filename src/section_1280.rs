@@ -4,7 +4,7 @@ macro_rules! Print_string_s_on_the_terminal {
     ($globals:expr, $s:expr) => {{
         // begin if term_offset+length(s)>max_print_line-2 then print_ln
         if $globals.term_offset.get() as integer + length($globals, $s.get() as _) > 
-            max_print_line as integer - 2 {
+            $globals.max_print_line as integer - 2 {
             print_ln(make_globals_io_string_log_view!($globals));
         }
         // else if (term_offset>0)or(file_offset>0) then print_char(" ");
@@ -19,7 +19,6 @@ macro_rules! Print_string_s_on_the_terminal {
         use crate::pascal::integer;
         use crate::section_0004::TeXGlobalsIoStringLogView;
         use crate::section_0004::TeXGlobalsIoView;
-        use crate::section_0011::max_print_line;
         use crate::section_0034::update_terminal;        
         use crate::section_0040::length;
         use crate::section_0057::print_ln;

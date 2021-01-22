@@ -106,17 +106,14 @@ use crate::pascal::integer;
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsIoStringLogView)]
 /// the number of characters on the current terminal line
-pub(crate) static term_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
-
-#[globals_struct_use(TeXGlobals)]
-use crate::section_0011::max_print_line_TYPENUM;
+pub(crate) static term_offset: u8_from_0_to_n<U255> = u8_from_0_to_n::default();
 
 // @!file_offset : 0..max_print_line;
 //   {the number of characters on the current file line}
 /// the number of characters on the current file line
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoStringLogView)]
-pub(crate) static file_offset: u8_from_0_to_n<max_print_line_TYPENUM> = u8_from_0_to_n::default();
+pub(crate) static file_offset: u8_from_0_to_n<U255> = u8_from_0_to_n::default();
 // @!trick_buf:array[0..error_line] of ASCII_code; {circular buffer for
 //   pseudoprinting}
 /// circular buffer for pseudoprinting
@@ -128,10 +125,10 @@ pub(crate) static trick_buf: trick_buf_array<ASCII_code> = trick_buf_array::defa
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0054::trick_buf_array;
 
-type trick_buf_array_LENGTH_TYPENUM = typenum::op!(error_line_TYPENUM + U1);
+type trick_buf_array_LENGTH_TYPENUM = typenum::op!(U255 + U1);
 
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
-    pub(crate) trick_buf_array[u8_from_0_to_n<error_line_TYPENUM>] => u8; U8; trick_buf_array_LENGTH_TYPENUM
+    pub(crate) trick_buf_array[u8_from_0_to_n<U255>] => u8; U16; trick_buf_array_LENGTH_TYPENUM
 );
 
 // @!trick_count: integer; {threshold for pseudoprinting, explained later}
@@ -146,10 +143,12 @@ pub(crate) static trick_count: integer = 0;
 pub(crate) static first_count: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
-pub(crate) use crate::section_0025::alpha_file;
+use crate::section_0025::alpha_file;
+
+#[globals_struct_use(TeXGlobals)]
+use typenum::U255;
 
 use crate::pascal::u8_from_0_to_n;
-use crate::section_0011::error_line_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_field_view, globals_struct_use};
 use typenum::Unsigned;
-use typenum::{U1, U21};
+use typenum::{U1, U21, U255};

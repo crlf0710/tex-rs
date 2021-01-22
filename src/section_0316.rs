@@ -13,7 +13,7 @@ macro_rules! begin_pseudoprint {
         // end
 
         use crate::section_0054::pseudo;
-    }}
+    }};
 }
 
 // @d set_trick_count==
@@ -22,13 +22,12 @@ macro_rules! set_trick_count {
         // begin first_count:=tally;
         $globals.first_count = $globals.tally;
         // trick_count:=tally+1+error_line-half_error_line;
-        $globals.trick_count = $globals.tally + 1 + error_line as integer - half_error_line as integer;
+        $globals.trick_count = $globals.tally + 1 + $globals.error_line as integer
+            - $globals.half_error_line as integer;
         // if trick_count<error_line then trick_count:=error_line;
-        if $globals.trick_count < error_line as _ {
-            $globals.trick_count = error_line as _;
+        if $globals.trick_count < $globals.error_line as _ {
+            $globals.trick_count = $globals.error_line as _;
         }
         // end
-        use crate::section_0011::half_error_line;
-        use crate::section_0011::error_line;
-    }}
+    }};
 }

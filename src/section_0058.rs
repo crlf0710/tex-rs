@@ -28,14 +28,14 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
         incr!(*globals.term_offset);
         incr!(*globals.file_offset);
         // if term_offset=max_print_line then
-        if *globals.term_offset == max_print_line {
+        if *globals.term_offset == *globals.max_print_line {
             // begin wterm_cr; term_offset:=0;
             wterm_cr(make_globals_io_view!(globals));
             *globals.term_offset = 0.into();
             // end;
         }
         // if file_offset=max_print_line then
-        if *globals.file_offset == max_print_line {
+        if *globals.file_offset == *globals.max_print_line {
             // begin wlog_cr; file_offset:=0;
             wlog_cr(make_globals_log_view!(globals));
             *globals.file_offset = 0.into();
@@ -48,7 +48,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
         wlog(make_globals_log_view!(globals), xchr(s));
         incr!(*globals.file_offset);
         // if file_offset=max_print_line then print_ln;
-        if *globals.file_offset == max_print_line {
+        if *globals.file_offset == *globals.max_print_line {
             print_ln(globals.reborrow());
         }
         // end;
@@ -58,7 +58,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
         wterm(make_globals_io_view!(globals), xchr(s));
         incr!(*globals.term_offset);
         // if term_offset=max_print_line then print_ln;
-        if *globals.term_offset == max_print_line {
+        if *globals.term_offset == *globals.max_print_line {
             print_ln(globals.reborrow());
         }
         // end;
@@ -70,7 +70,7 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
     // pseudo: if tally<trick_count then trick_buf[tally mod error_line]:=s;
     else if *globals.selector == pseudo {
         if globals.tally < globals.trick_count {
-            globals.trick_buf[(*globals.tally % error_line as integer) as u8] = s;
+            globals.trick_buf[(*globals.tally % *globals.error_line as integer) as u8] = s;
         }
     }
     // new_string: begin if pool_ptr<pool_size then append_char(s);
@@ -98,8 +98,6 @@ use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsLogView;
 use crate::section_0004::TeXGlobalsStringView;
-use crate::section_0011::error_line;
-use crate::section_0011::max_print_line;
 use crate::section_0011::pool_size;
 use crate::section_0018::ASCII_code;
 use crate::section_0020::xchr;

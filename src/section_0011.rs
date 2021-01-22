@@ -33,19 +33,22 @@ pub(crate) type buf_size_TYPENUM = U500;
 
 // @!error_line=72; {width of context lines on terminal error messages}
 /// width of context lines on terminal error messages
-pub(crate) const error_line: u8 = error_line_TYPENUM::U8;
-pub(crate) type error_line_TYPENUM = U72;
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
+pub(crate) static error_line: quarterword = 72;
 
 // @!half_error_line=42; {width of first lines of contexts in terminal
 //   error messages; should be between 30 and |error_line-15|}
 /// width of first lines of contexts in terminal error messages;
 /// should be between 30 and `error_line-15`
-pub(crate) const half_error_line: u8 = half_error_line_TYPENUM::U8;
-pub(crate) type half_error_line_TYPENUM = U42;
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
+pub(crate) static half_error_line: quarterword = 42;
 // @!max_print_line=79; {width of longest text lines output; should be at least 60}
 /// width of longest text lines output; should be at least 60
-pub(crate) const max_print_line: u8 = max_print_line_TYPENUM::U8;
-pub(crate) type max_print_line_TYPENUM = U79;
+#[globals_struct_field(TeXGlobals)]
+#[globals_struct_field_view(TeXGlobalsIoStringLogView)]
+pub(crate) static max_print_line: quarterword = 79;
 // @!stack_size=200; {maximum number of simultaneous input sources}
 /// maximum number of simultaneous input sources
 pub(crate) const stack_size: u16 = stack_size_TYPENUM::U16;
@@ -122,6 +125,9 @@ pub(crate) const pool_name: &'static str = "TeXformats:TEX.POOL                 
 // @.TeXformats@>
 //
 
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0113::quarterword;
+
 use crate::section_0110::max_halfword;
 type U3000 = ::typenum::op!(U1000 * U3);
 type U8000 = ::typenum::op!(U1000 * U8);
@@ -133,3 +139,4 @@ use typenum::{
     Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79, U8
 };
 use typenum::{N500, P500};
+use globals_struct::{globals_struct_field, globals_struct_use};

@@ -38,6 +38,7 @@
 #[globals_struct_field_view(TeXGlobalsIoStringView, make_globals_io_string_view)]
 #[globals_struct_field_view(TeXGlobalsIoStringLogView, make_globals_io_string_log_view)]
 pub mod TeXGlobals {
+    include!("src/section_0011.rs");
     include!("src/section_0013.rs");
     include!("src/section_0026.rs");
     include!("src/section_0030.rs");
