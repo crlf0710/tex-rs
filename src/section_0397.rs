@@ -21,7 +21,7 @@ macro_rules! Contribute_the_recently_matched_tokens_to_the_current_parameter__an
         if $s != $r {
             // if s=null then @<Report an improper use of the macro and abort@>
             if $s == null {
-                todo!("report an improper");
+                Report_an_improper_use_of_the_macro_and_abort!($globals);
             }
             // else  begin t:=s;
             else {

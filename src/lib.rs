@@ -731,9 +731,10 @@ reversing_order_items!({
                                     mod section_0395_to_0396;
                                     #[macro_use]
                                     mod section_0397;
-                                    mod section_0398;
                                 }
                                 {
+                                    #[macro_use]
+                                    mod section_0398;
                                     #[macro_use]
                                     mod section_0399;
                                     #[macro_use]
