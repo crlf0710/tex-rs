@@ -62,7 +62,7 @@ pub(crate) fn show_activities(globals: &mut TeXGlobals) {
         // show_box(link(nest[p].head_field));
         show_box(globals, link!(globals, globals.nest[p].head_field));
         // @<Show the auxiliary field, |a|@>;
-        Show_the_auxiliary_field__a!(globals, m, a);
+        Show_the_auxiliary_field__a!(globals, m, a, p);
         // end;
     }
     // end;

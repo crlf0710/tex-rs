@@ -1,19 +1,27 @@
 //! ` `
 // @<Show the auxiliary...@>=
 macro_rules! Show_the_auxiliary_field__a {
-    ($globals:expr, $m:expr, $a:expr) => {{
+    ($globals:expr, $m:expr, $a:expr, $p:expr) => {{
         // case abs(m) div (max_command+1) of
         match $m.get().abs() as integer / (max_command as integer + 1) {
             // 0: begin print_nl("prevdepth ");
             0 => {
-                todo!("abs(m) div (mc + 1) == 0");
+                print_nl($globals, strpool_str!("prevdepth "));
                 // if a.sc<=ignore_depth then print("ignored")
-                // else print_scaled(a.sc);
+                if $a[MEMORY_WORD_SC] <= ignore_depth {
+                    print($globals, strpool_str!("ignored").get() as _);
+                } else {
+                    // else print_scaled(a.sc);
+                    print_scaled($globals, $a[MEMORY_WORD_SC]);
+                }
                 // if nest[p].pg_field<>0 then
-                //   begin print(", prevgraf ");
-                //   print_int(nest[p].pg_field); print(" line");
-                //   if nest[p].pg_field<>1 then print_char("s");
-                //   end;
+                if $globals.nest[$p].pg_field != 0 {
+                    todo!("pg_field != 0");
+                    // begin print(", prevgraf ");
+                    // print_int(nest[p].pg_field); print(" line");
+                    // if nest[p].pg_field<>1 then print_char("s");
+                    // end;
+                }
                 // end;
             }
             // 1: begin print_nl("spacefactor "); print_int(a.hh.lh);
@@ -45,10 +53,13 @@ macro_rules! Show_the_auxiliary_field__a {
             }
         }
         use crate::pascal::integer;
+        use crate::section_0101::MEMORY_WORD_SC;
+        use crate::section_0103::print_scaled;
         use crate::section_0113::MEMORY_WORD_INT;
         use crate::section_0113::MEMORY_WORD_HH_LH;
         use crate::section_0113::MEMORY_WORD_HH_RH;
         use crate::section_0115::null;
         use crate::section_0209::max_command;
+        use crate::section_0212::ignore_depth;
     }}
 }
