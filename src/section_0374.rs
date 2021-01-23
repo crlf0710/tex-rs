@@ -10,7 +10,7 @@ macro_rules! Look_up_the_characters_of_list_r_in_the_hash_table__and_set_cur_cs 
         j = $globals.first;
         $p = link!($globals, $r);
         // while p<>null do
-        while $p == null {
+        while $p != null {
             // begin if j>=max_buf_stack then
             if j >= $globals.max_buf_stack {
                 // begin max_buf_stack:=j+1;
@@ -32,30 +32,41 @@ macro_rules! Look_up_the_characters_of_list_r_in_the_hash_table__and_set_cur_cs 
 
         // if j>first+1 then
         if j > $globals.first + 1 {
-            todo!("lookup");
             // begin no_new_control_sequence:=false; cur_cs:=id_lookup(first,j-first);
+            $globals.no_new_control_sequence = false;
+            $globals.cur_cs = id_lookup(
+                $globals,
+                $globals.first.get() as integer,
+                j.get() as integer - $globals.first.get() as integer,
+            );
             // no_new_control_sequence:=true;
-            // end
+            $globals.no_new_control_sequence = true;
+        // end
         }
         // else if j=first then cur_cs:=null_cs {the list is empty}
         else if j == $globals.first {
+            /// the list is empty
+            const _: () = ();
             $globals.cur_cs = null_cs;
         }
         // else cur_cs:=single_base+buffer[first] {the list has length one}
         else {
             /// the list has length one
-            const _ : () = ();
+            const _: () = ();
             if $globals.buffer[$globals.first].numeric_value() > 255 {
                 todo!();
             }
-            $globals.cur_cs = (single_base + $globals.buffer[$globals.first].numeric_value()) as pointer;
+            $globals.cur_cs =
+                (single_base + $globals.buffer[$globals.first].numeric_value()) as pointer;
         }
 
+        use crate::pascal::integer;
         use crate::pascal::u16_from_0_to_n;
-        use crate::section_0011::buf_size_TYPENUM;
         use crate::section_0011::buf_size;
+        use crate::section_0011::buf_size_TYPENUM;
         use crate::section_0115::null;
         use crate::section_0222::null_cs;
         use crate::section_0222::single_base;
-    }}
+        use crate::section_0259::id_lookup;
+    }};
 }

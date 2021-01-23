@@ -3,6 +3,7 @@
 // @<Manufacture a control...@>=
 macro_rules! Manufacture_a_control_sequence_name {
     ($globals:expr) => {{
+        trace_span!("Manufacture a control...");
         /// for list manipulation
         let (mut p, mut q, r): (pointer, pointer, pointer);
         // begin r:=get_avail; p:=r; {head of the list of characters}
