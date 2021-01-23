@@ -33,7 +33,7 @@
 // @d ident_val=4 {font identifier}
 // @d tok_val=5 {token lists}
 #[doc(hidden)]
-#[derive(Copy, Clone, PartialEq, PartialOrd)]
+#[derive(Copy, Clone, PartialEq, PartialOrd, Debug)]
 pub(crate) enum cur_val_level_kind {
     /// integer values
     int_val = 0,

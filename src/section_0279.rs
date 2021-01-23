@@ -7,6 +7,7 @@
 //   {global |eq_define|}
 /// global `eq_define`
 #[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn geq_define(globals: &mut TeXGlobals, p: pointer, t: quarterword, e: halfword) -> TeXResult<()> {
     // begin eq_destroy(eqtb[p]);
     eq_destroy(globals, globals.eqtb[p])?;

@@ -17,7 +17,7 @@ macro_rules! scanned_result {
 // @p procedure scan_something_internal(@!level:small_number;@!negative:boolean);
 //   {fetch an internal parameter}
 /// fetch an internal parameter
-#[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_something_internal(
     globals: &mut TeXGlobals,
     level: small_number,

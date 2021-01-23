@@ -3,6 +3,7 @@
 // @p procedure print_spec(@!p:integer;@!s:str_number);
 //   {prints a glue specification}
 /// prints a glue specification
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn print_spec(globals: &mut TeXGlobals, p: integer, s: str_number) {
     // begin if (p<mem_min)or(p>=lo_mem_max) then print_char("*")
     if p < mem_min as integer || p >= globals.lo_mem_max as integer {

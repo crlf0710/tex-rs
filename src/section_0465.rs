@@ -6,6 +6,7 @@
 //! containing something like `\.{-3.0pt minus 0.5fill}'.
 //
 // @p function the_toks:pointer;
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn the_toks(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     // var old_setting:0..max_selector; {holds |selector| setting}
     /// holds `selector` setting

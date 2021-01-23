@@ -5,6 +5,7 @@
 // @<Enter all of the patterns into a linked trie...@>=
 macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_right_brace {
     ($globals:expr) => {{
+        trace_span!("Enter all of the patterns into a linked trie...");
         /// indices into `hc` and `hyf`; not always in `small_number` range
         let (mut k, mut l): (u8_from_0_to_n<U64>, u8_from_0_to_n<U64>);
 

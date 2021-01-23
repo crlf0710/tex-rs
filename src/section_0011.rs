@@ -19,7 +19,7 @@ pub(crate) type mem_max_TYPENUM = U30000;
 //   must be equal to |mem_bot| in \.{INITEX}, otherwise |<=mem_bot|}
 /// smallest index in TeX's internal `mem` array; must be `min_halfword`
 /// or more; must be equal to `mem_bot` in `INITEX`, otherwise `<=mem_bot`
-pub(crate) const mem_min: u32 = mem_max_TYPENUM::U32;
+pub(crate) const mem_min: u32 = mem_min_TYPENUM::U32;
 pub(crate) type mem_min_TYPENUM = U0;
 
 // @!buf_size=500; {maximum number of characters simultaneously present in

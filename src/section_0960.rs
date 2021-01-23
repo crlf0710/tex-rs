@@ -5,6 +5,7 @@
 // @<Declare procedures for preprocessing hyph...@>=
 // procedure new_patterns; {initializes the hyphenation pattern data}
 /// initializes the hyphenation pattern data
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn new_patterns(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done, done1;
     // var k,@!l:0..64; {indices into |hc| and |hyf|;
