@@ -20,6 +20,7 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         region_forward_label! {
         |'found|
         {
+        trace_expr!("cs loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
         // begin if loc>limit then cur_cs:=null_cs {|state| is irrelevant in this case}
         if loc!($globals) > limit!($globals) {
             /// `state` is irrelevant in this case
@@ -32,6 +33,7 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
                 // else  begin start_cs: k:=loc; cur_chr:=buffer[k]; cat:=cat_code(cur_chr);
                 let mut k = loc!($globals);
                 $globals.cur_chr = $globals.buffer[k].into();
+                trace_expr!("cs cur_chr = {:?}", $globals.cur_chr);
                 let mut cat = cat_code!($globals, $globals.buffer[k]) as quarterword;
                 // incr(k);
                 incr!(k);

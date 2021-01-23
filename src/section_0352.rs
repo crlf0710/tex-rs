@@ -22,7 +22,7 @@ macro_rules! hex_to_cur_chr {
         }
         // else cur_chr:=16*cur_chr+cc-"a"+10
         else {
-            $globals.cur_chr = chr_code_type::new(16 * $globals.cur_chr.get() - b'a' as chr_code_repr + 10)
+            $globals.cur_chr = chr_code_type::new(16 * $globals.cur_chr.get() + $cc - b'a' as chr_code_repr + 10)
         }
         use crate::section_0297::chr_code_repr;
     }}

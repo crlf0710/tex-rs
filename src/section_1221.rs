@@ -9,7 +9,7 @@ macro_rules! Assignments_1221 {
 
             /// for temporary short-term use
             let p;
-            //   get_r_token; p:=cur_cs;
+            // get_r_token; p:=cur_cs;
             get_r_token($globals)?;
             p = $globals.cur_cs;
             // if n=normal then

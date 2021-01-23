@@ -41,8 +41,11 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
             If_this_sup_mark_starts_an_expanded_character_like___A__or__df__then_goto_reswitch__otherwise_set_state__mid_line!
                 ($globals, $lbl_reswitch);
         }
-        // any_state_plus(invalid_char): @<Decry the invalid character and
-        //   |goto restart|@>;
+        else if State_plus_cur_cmd_matches_any_case_plus!(state_plus_cur_cmd, invalid_char) {
+            // any_state_plus(invalid_char): @<Decry the invalid character and
+            //   |goto restart|@>;
+            todo!("invalid_char");
+        }
         // @t\4@>@<Handle situations involving spaces, braces, changes of state@>@;
         else if Handle_situations_involving_spaces_braces_changes_of_state!(
             $globals, state_plus_cur_cmd, $lbl_switch) {
@@ -68,6 +71,7 @@ macro_rules! Change_state_if_necessary_and_goto_switch_if_the_current_character_
         use crate::section_0207::tab_mark;
         use crate::section_0207::mac_param;
         use crate::section_0207::math_shift;
+        use crate::section_0207::invalid_char;
         use crate::section_0210::outer_call;
         use crate::section_0222::active_base;
         use crate::section_0297::chr_code_type;

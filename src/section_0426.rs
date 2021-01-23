@@ -3,6 +3,7 @@
 // @<Fetch a font integer@>=
 macro_rules! Fetch_a_font_integer {
     ($globals:expr, $m:expr) => {{
+        trace_span!("Fetch a font integer");
         // begin scan_font_ident;
         scan_font_ident($globals)?;
         // if m=0 then scanned_result(hyphen_char[cur_val])(int_val)
