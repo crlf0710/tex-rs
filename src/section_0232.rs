@@ -9,7 +9,7 @@
 //! possible.
 //
 // @d null_font==font_base
-pub(crate) const null_font: quarterword = font_base;
+pub(crate) const null_font: internal_font_number = unsafe { internal_font_number::new_unchecked(font_base as _) };
 // @d var_code==@'70000 {math code meaning ``use the current family''}
 //
 // @<Initialize table entries...@>=
@@ -23,10 +23,14 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     // box(0):=null; eq_type(box_base):=box_ref; eq_level(box_base):=level_one;
     // for k:=box_base+1 to box_base+255 do eqtb[k]:=eqtb[box_base];
     // cur_font:=null_font; eq_type(cur_font_loc):=data;
-    cur_font!(globals) = null_font as _;
+    cur_font!(globals) = null_font.get() as _;
     eq_type!(globals, cur_font_loc) = data;
     // eq_level(cur_font_loc):=level_one;@/
+    eq_level!(globals, cur_font_loc) = level_one;
     // for k:=math_font_base to math_font_base+47 do eqtb[k]:=eqtb[cur_font_loc];
+    for k in math_font_base ..= math_font_base + 47 {
+        globals.eqtb[k as pointer] = globals.eqtb[cur_font_loc as pointer];
+    }
     // equiv(cat_code_base):=0; eq_type(cat_code_base):=data;
     equiv!(globals, cat_code_base) = 0;
     eq_type!(globals, cat_code_base) = data;
@@ -94,6 +98,8 @@ use crate::section_0221::level_one;
 use crate::section_0230::cur_font_loc;
 use crate::section_0230::cat_code_base;
 use crate::section_0230::int_base;
+use crate::section_0230::math_font_base;
+use crate::section_0548::internal_font_number;
 
 use linkme::distributed_slice;
 

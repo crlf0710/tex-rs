@@ -41,12 +41,23 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
         // adjust_space_factor;@/
         adjust_space_factor!($globals);
         // main_f:=cur_font;
+        $globals.main_f = cur_font!($globals).into();
         // bchar:=font_bchar[main_f]; false_bchar:=font_false_bchar[main_f];
+        $globals.bchar = $globals.font_bchar[$globals.main_f];
+        $globals.false_bchar = $globals.font_false_bchar[$globals.main_f];
         // if mode>0 then if language<>clang then fix_language;
+        if mode!($globals) > 0 && language!($globals) != clang!($globals) as integer {
+            fix_language($globals);
+        }
         // fast_get_avail(lig_stack); font(lig_stack):=main_f; cur_l:=qi(cur_chr);
         fast_get_avail!($globals, $globals.lig_stack);
+        let f = $globals.main_f;
+        $globals.cur_l = $globals.cur_chr.get();
         // character(lig_stack):=cur_l;@/
+        let c = ASCII_code::from($globals.cur_l as integer);
+        assign_font_and_character!($globals, $globals.lig_stack, f, c);
         // cur_q:=tail;
+        $globals.cur_q = tail!($globals);
         // if cancel_boundary then
         if $globals.cancel_boundary {
             // begin cancel_boundary:=false; main_k:=non_address;
@@ -121,7 +132,10 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
             }
         }
         
+        use crate::pascal::integer;
+        use crate::section_0018::ASCII_code;
         use crate::section_0549::non_address;
         use crate::section_0549::non_char;
+        use crate::section_1376::fix_language;
     }}
 }

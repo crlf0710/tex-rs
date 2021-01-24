@@ -4,7 +4,7 @@
 #[distributed_slice(PRIM2HT)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0553(globals: &mut TeXGlobals) {
     // primitive("nullfont",set_font,null_font);
-    primitive(globals, strpool_str!("nullfont"), set_font, null_font as _);
+    primitive(globals, strpool_str!("nullfont"), set_font, null_font.get() as _);
     // @!@:null_font_}{\.{\\nullfont} primitive@>
     // text(frozen_null_font):="nullfont"; eqtb[frozen_null_font]:=eqtb[cur_val];
     text!(globals, frozen_null_font as pointer) = strpool_str!("nullfont").get() as _;

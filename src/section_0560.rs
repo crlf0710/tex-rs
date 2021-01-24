@@ -48,7 +48,7 @@ pub(crate) fn read_font_info(
     // @!alpha:integer;@!beta:1..16;
     //   {auxiliary quantities used in fixed-point multiplication}
     // begin g:=null_font;@/
-    g = internal_font_number::new(null_font as _);
+    g = null_font;
     region_forward_label!(
     |'done|
     {

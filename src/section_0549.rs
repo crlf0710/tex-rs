@@ -161,7 +161,7 @@ pub(crate) fn font_name_str(globals: &mut TeXGlobals, font: internal_font_number
     globals.font_name[font]
 }
 
-#[allow(unused_variables)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn font_code_range_contains_char(
     globals: &mut TeXGlobals,
     font: internal_font_number,

@@ -87,6 +87,28 @@ macro_rules! character {
     };
 }
 
+#[cfg(not(feature = "unicode_support"))]
+macro_rules! assign_font_and_character {
+    ($globals:expr, $f:expr, $font:expr, $character:expr) => {{
+        r#type!($globals, $f) = $font;
+        subtype!($globals, $f) = $character;
+    }};
+}
+
+#[cfg(feature = "unicode_support")]
+macro_rules! assign_font_and_character {
+    ($globals:expr, $f:expr, $font:expr, $character:expr) => {{
+        $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH] =
+            crate::unicode_support::register_fontchar_value(
+                $globals,
+                crate::section_0134::font_and_character {
+                    font: $font,
+                    character: $character,
+                },
+            );
+    }};
+}
+
 #[cfg(feature = "unicode_support")]
 #[derive(Copy, Clone, PartialEq)]
 pub(crate) struct font_and_character {
@@ -104,6 +126,6 @@ impl Default for font_and_character {
     }
 }
 
-use crate::section_0548::internal_font_number;
 use crate::section_0012::font_base;
 use crate::section_0018::ASCII_code;
+use crate::section_0548::internal_font_number;

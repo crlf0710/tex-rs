@@ -35,6 +35,10 @@ pub(crate) type ASCII_code_or_non_char = halfword;
 pub(crate) type ASCII_code_or_non_char = u32;
 
 // @!cur_q:pointer; {where a ligature should be detached}
+/// where a ligature should be detached
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_q: pointer = null;
+
 // @!lig_stack:pointer; {unfinished business to the right of the cursor}
 /// unfinished business to the right of the cursor
 #[globals_struct_field(TeXGlobals)]

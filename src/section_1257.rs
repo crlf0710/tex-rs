@@ -59,7 +59,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
         // end;
     }
     // define(u,set_font,null_font); scan_optional_equals; scan_file_name;
-    define!(globals, a, u, set_font, null_font as _);
+    define!(globals, a, u, set_font, null_font.get() as _);
     scan_optional_equals(globals)?;
     scan_file_name(globals)?;
     // @<Scan the font size specification@>;

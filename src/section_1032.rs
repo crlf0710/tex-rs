@@ -39,9 +39,6 @@ use crate::section_0554::char_info;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static main_k: font_index = font_index::default();
 
-#[globals_struct_use(TeXGlobals)]
-use crate::section_0548::font_index;
-
 // @!main_p:pointer; {temporary register for list manipulation}
 /// temporary register for list manipulation
 #[globals_struct_field(TeXGlobals)]
@@ -53,13 +50,28 @@ pub(crate) static main_p: pointer = pointer::default();
 pub(crate) static main_s: integer = integer::default();
 
 // @!bchar:halfword; {right boundary character of current font, or |non_char|}
+/// right boundary character of current font, or `non_char`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static bchar: ASCII_code_or_non_char = non_char;
 // @!false_bchar:halfword; {nonexistent character matching |bchar|, or |non_char|}
+/// nonexistent character matching `bchar`, or `non_char`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static false_bchar: ASCII_code_or_non_char = non_char;
 // @!cancel_boundary:boolean; {should the left boundary be ignored?}
 /// should the left boundary be ignored?
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static cancel_boundary: boolean = boolean::default();
 
 // @!ins_disc:boolean; {should we insert a discretionary node?}
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0548::font_index;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0549::non_char;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0907::ASCII_code_or_non_char;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
