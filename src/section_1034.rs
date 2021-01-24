@@ -95,12 +95,12 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
         }
         // @#
         region_multipart! {
-            ('main_loop_append, main_loop_status) {
+            ('main_loop_cycle, main_loop_status) {
                 // main_loop_wrapup:@<Make a ligature node, if |ligature_present|;
                 //   insert a null discretionary, if appropriate@>;
                 main_loop_status_kind::main_loop_wrapup => {
                     Make_a_ligature_node__if_ligature_present__insert_a_null_discretionary__if_appropriate!($globals);
-                    goto_part_label!('main_loop_append, main_loop_status, main_loop_move(0));
+                    goto_part_label!('main_loop_cycle, main_loop_status, main_loop_move(0));
                     unreachable!();
                 },
                 // main_loop_move:@<If the cursor is immediately followed by the right boundary,
@@ -108,27 +108,28 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
                 //   otherwise move the cursor one step to the right and |goto main_lig_loop|@>;
                 main_loop_status_kind::main_loop_move(mut part_idx) => {
                     If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_reswitch__if_its_followed_by_an_invalid_character__goto_big_switch__otherwise_move_the_cursor_one_step_to_the_right_and_goto_main_lig_loop!
-                        ($globals, part_idx, 'main_loop_append, main_loop_status, $lbl_reswitch, $lbl_big_switch);
+                        ($globals, part_idx, 'main_loop_cycle, main_loop_status, $lbl_reswitch, $lbl_big_switch);
                     unreachable!();
                 },
                 // main_loop_lookahead:@<Look ahead for another character, or leave |lig_stack|
                 //   empty if there's none there@>;
                 main_loop_status_kind::main_loop_lookahead(mut part_idx) => {
                     Look_ahead_for_another_character__or_leave_lig_stack_empty_if_there_s_none_there!
-                        ($globals, part_idx, 'main_loop_append, main_loop_status);
+                        ($globals, part_idx, 'main_loop_cycle, main_loop_status);
                     unreachable!();
                 },
                 // main_lig_loop:@<If there's a ligature/kern command relevant to |cur_l| and
                 //   |cur_r|, adjust the text appropriately; exit to |main_loop_wrapup|@>;
                 main_loop_status_kind::main_lig_loop(mut part_idx) => {
                     If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adjust_the_text_appropriately__exit_to_main_loop_wrapup!
-                        ($globals, part_idx, 'main_loop_append, main_loop_status);
+                        ($globals, part_idx, 'main_loop_cycle, main_loop_status);
                     unreachable!();
                 },
                 // main_loop_move_lig:@<Move the cursor past a pseudo-ligature, then
                 //   |goto main_loop_lookahead| or |main_lig_loop|@>
                 main_loop_status_kind::main_loop_move_lig => {
-                    todo!("move_lig");
+                    Move_the_cursor_past_a_pseudo_ligature__then_goto_main_loop_lookahead_or_main_lig_loop!
+                        ($globals, 'main_loop_cycle, main_loop_status);
                     unreachable!();
                 },                
             }

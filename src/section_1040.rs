@@ -9,7 +9,7 @@
 //
 // @<Do ligature or kern command...@>=
 macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loop_wrapup_or_main_loop_move {
-    ($globals:expr, $lbl_main_loop_append:lifetime, $main_loop_status:expr) => {{
+    ($globals:expr, $lbl_main_loop_cycle:lifetime, $main_loop_status:expr) => {{
         // begin if op_byte(main_j)>=kern_flag then
         if $globals.main_j.op_byte() >= kern_flag {
             // begin wrapup(rt_hit);
@@ -22,7 +22,7 @@ macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loo
                     char_kern!($globals, $globals.main_f, $globals.main_j)
                 )?
             );
-            goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_move(0));
+            goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_move(0));
             // end;
         }
         // if cur_l=non_char then lft_hit:=true
@@ -79,9 +79,14 @@ macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loo
             }
             // qi(3):begin cur_r:=rem_byte(main_j); {\.{\?=:\?}}
             3 => {
-                todo!("op3");
+                /// `|=:|`
+                const _ : () = ();
+                $globals.cur_r = $globals.main_j.rem_byte() as _;
                 // main_p:=lig_stack; lig_stack:=new_lig_item(cur_r);
+                $globals.main_p = $globals.lig_stack;
+                $globals.lig_stack = new_lig_item($globals, ASCII_code::from($globals.cur_r as integer))?;
                 // link(lig_stack):=main_p;
+                link!($globals, $globals.lig_stack) = $globals.main_p;
                 // end;
             }
             // qi(7),qi(11):begin wrapup(false); {\.{\?=:\?>}, \.{\?=:\?>>}}
@@ -103,15 +108,15 @@ macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loo
         // if op_byte(main_j)>qi(4) then
         //   if op_byte(main_j)<>qi(7) then goto main_loop_wrapup;
         if qo!($globals.main_j.op_byte()) > 4 && qo!($globals.main_j.op_byte()) != 7 {
-            goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_wrapup);
+            goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_wrapup);
         }
         // if cur_l<non_char then goto main_lig_loop;
         if $globals.cur_l < non_char {
-            goto_part_label!($lbl_main_loop_append, $main_loop_status, main_lig_loop(0));
+            goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_lig_loop(0));
         }
         // main_k:=bchar_label[main_f]; goto main_lig_loop+1;
         $globals.main_k = $globals.bchar_label[$globals.main_f];
-        goto_part_label!($lbl_main_loop_append, $main_loop_status, main_lig_loop(1));
+        goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_lig_loop(1));
         // end
         use crate::section_0144::new_lig_item;
         use crate::section_0156::new_kern;

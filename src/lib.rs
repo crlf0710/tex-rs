@@ -1366,12 +1366,13 @@ reversing_order_items!(
             }
             {
                 #[macro_use]
-                mod section_1035;        
+                mod section_1035;
+                #[macro_use]
+                mod section_1036;
+                #[macro_use]
+                mod section_1037;   
             }
         );
-        #[macro_use]
-        mod section_1036;
-        mod section_1037;
         #[macro_use]
         mod section_1038;
         reversing_order_items!(

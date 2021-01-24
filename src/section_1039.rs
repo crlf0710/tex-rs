@@ -11,7 +11,7 @@
 // @<If there's a ligature/kern command...@>=
 #[allow(unused_macros)]
 macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adjust_the_text_appropriately__exit_to_main_loop_wrapup {
-    ($globals:expr, $cur_part_idx:expr, $lbl_main_loop_append:lifetime, $main_loop_status:expr) => {{
+    ($globals:expr, $cur_part_idx:expr, $lbl_main_loop_cycle:lifetime, $main_loop_status:expr) => {{
         trace_span!("If there's a ligature/kern command...");
         region_multipart_autoincr! {
             ('main_lig_loop_inner, $cur_part_idx) {
@@ -20,11 +20,11 @@ macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adj
                     trace_span!("main_lig_loop");
                     // if char_tag(main_i)<>lig_tag then goto main_loop_wrapup;
                     if $globals.main_i.char_tag() != char_tag::lig_tag {
-                        goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_wrapup);
+                        goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_wrapup);
                     }
                     // if cur_r=non_char then goto main_loop_wrapup;
                     if $globals.cur_r == non_char {
-                        goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_wrapup);
+                        goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_wrapup);
                     }
                     // main_k:=lig_kern_start(main_f)(main_i); main_j:=font_info[main_k].qqqq;
                     $globals.main_k = font_index::new(lig_kern_start!($globals, $globals.main_f, $globals.main_i) as _);
@@ -52,7 +52,7 @@ macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adj
                             // @<Do ligature or kern command, returning to |main_lig_loop|
                             // or |main_loop_wrapup| or |main_loop_move|@>;
                             Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loop_wrapup_or_main_loop_move!
-                                ($globals, $lbl_main_loop_append, $main_loop_status);
+                                ($globals, $lbl_main_loop_cycle, $main_loop_status);
                         }
                     }
                     // if skip_byte(main_j)=qi(0) then incr(main_k)
@@ -62,7 +62,7 @@ macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adj
                     // else begin if skip_byte(main_j)>=stop_flag then goto main_loop_wrapup;
                     else {
                         if $globals.main_j.skip_byte() >= stop_flag {
-                            goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_wrapup);
+                            goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_wrapup);
                         }
                         // main_k:=main_k+qo(skip_byte(main_j))+1;
                         $globals.main_k += (qo!($globals.main_j.skip_byte()) as integer + 1) as _;

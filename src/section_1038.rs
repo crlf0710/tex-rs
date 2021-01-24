@@ -3,7 +3,7 @@
 //
 // @<Look ahead for another character...@>=
 macro_rules! Look_ahead_for_another_character__or_leave_lig_stack_empty_if_there_s_none_there {
-    ($globals:expr, $cur_part_idx:expr, $lbl_main_loop_append:lifetime, $main_loop_status:expr) => {{
+    ($globals:expr, $cur_part_idx:expr, $lbl_main_loop_cycle:lifetime, $main_loop_status:expr) => {{
         trace_span!("Look ahead for another character...");
         region_multipart_autoincr! {
             ('main_loop_lookahead_inner, $cur_part_idx) {
@@ -54,18 +54,27 @@ macro_rules! Look_ahead_for_another_character__or_leave_lig_stack_empty_if_there
                     // cur_r:=bchar; lig_stack:=null; goto main_lig_loop;
                     $globals.cur_r = $globals.bchar;
                     $globals.lig_stack = null;
-                    goto_part_label!($lbl_main_loop_append, $main_loop_status, main_lig_loop(0));
+                    goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_lig_loop(0));
                 },
                 1 =>
                 {
                     // main_loop_lookahead+1: adjust_space_factor;
+                    adjust_space_factor!($globals);
                     // fast_get_avail(lig_stack); font(lig_stack):=main_f;
+                    fast_get_avail!($globals, $globals.lig_stack);
+                    let f = $globals.main_f;
                     // cur_r:=qi(cur_chr); character(lig_stack):=cur_r;
+                    $globals.cur_r = $globals.cur_chr.get();
+                    let c = ASCII_code::from($globals.cur_r as integer);
+                    assign_font_and_character!($globals, $globals.lig_stack, f, c);
                     // if cur_r=false_bchar then cur_r:=non_char {this prevents spurious ligatures}
-                    trace_error_expr!("cur_cmd = {}", $globals.cur_cmd);
-                    todo!("lookahead");
+                    if $globals.cur_r == $globals.false_bchar {
+                        $globals.cur_r = non_char;
+                        /// this prevents spurious ligatures
+                        const _ : () = ();
+                    }
                     /// fall through to `main_lig_loop`
-                    goto_part_label!($lbl_main_loop_append, $main_loop_status, main_lig_loop(0));
+                    goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_lig_loop(0));
                 },
             }
         }

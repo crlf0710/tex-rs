@@ -8,16 +8,40 @@
 //! @^inner loop@>
 //
 // @d pack_lig(#)== {the parameter is either |rt_hit| or |false|}
-//   begin main_p:=new_ligature(main_f,cur_l,link(cur_q));
-//   if lft_hit then
-//     begin subtype(main_p):=2; lft_hit:=false;
-//     end;
-//   if # then if lig_stack=null then
-//     begin incr(subtype(main_p)); rt_hit:=false;
-//     end;
-//   link(cur_q):=main_p; tail:=main_p; ligature_present:=false;
-//   end
-//
+macro_rules! pack_lig {
+    ($globals:expr, $v:expr) => {{
+        /// the parameter is either `rt_hit` or `false`
+        const _: () = ();
+        // begin main_p:=new_ligature(main_f,cur_l,link(cur_q));
+        $globals.main_p = new_ligature(
+            $globals,
+            $globals.main_f,
+            ASCII_code::from($globals.cur_l as integer),
+            link!($globals, $globals.cur_q),
+        )?;
+        // if lft_hit then
+        if $globals.lft_hit {
+            // begin subtype(main_p):=2; lft_hit:=false;
+            subtype!($globals, $globals.main_p) = 2;
+            $globals.lft_hit = false;
+            // end;
+        }
+        // if # then if lig_stack=null then
+        if $v && $globals.lig_stack == null {
+            // begin incr(subtype(main_p)); rt_hit:=false;
+            incr!(subtype!($globals, $globals.main_p));
+            $globals.rt_hit = false;
+            // end;
+        }
+        // link(cur_q):=main_p; tail:=main_p; ligature_present:=false;
+        link!($globals, $globals.cur_q) = $globals.main_p;
+        tail!($globals) = $globals.main_p;
+        $globals.ligature_present = false;
+        // end
+        use crate::section_0144::new_ligature;
+    }};
+}
+
 // @d wrapup(#)==if cur_l<non_char then
 macro_rules! wrapup {
     ($globals:expr, $v:expr) => {{
@@ -33,7 +57,7 @@ macro_rules! wrapup {
             }
             // if ligature_present then pack_lig(#);
             if $globals.ligature_present {
-                todo!("pack_lig");
+                pack_lig!($globals, $v);
             }
             // if ins_disc then
             if $globals.ins_disc {
