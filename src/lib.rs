@@ -1147,6 +1147,9 @@ reversing_order_items!({
                             mod section_0650;
                             #[macro_use]
                             mod section_0651;
+                        }
+                        {
+                            #[macro_use]
                             mod section_0652;
                             #[macro_use]
                             mod section_0653;

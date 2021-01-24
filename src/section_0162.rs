@@ -53,6 +53,8 @@ pub(crate) const align_head: pointer = mem_top - 8;
 pub(crate) const omit_template: pointer = mem_top - 10;
 // @d null_list==mem_top-11 {permanently empty list}
 // @d lig_trick==mem_top-12 {a ligature masquerading as a |char_node|}
+/// a ligature masquerading as a `char_node`
+pub(crate) const lig_trick: pointer = mem_top - 12;
 // @d garbage==mem_top-12 {used for scrap information}
 /// used for scrap information
 pub(crate) const garbage: pointer = mem_top - 12;

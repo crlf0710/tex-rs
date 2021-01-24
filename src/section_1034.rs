@@ -48,7 +48,7 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
         $globals.false_bchar = $globals.font_false_bchar[$globals.main_f];
         // if mode>0 then if language<>clang then fix_language;
         if mode!($globals) > 0 && language!($globals) != clang!($globals) as integer {
-            fix_language($globals);
+            fix_language($globals)?;
         }
         // fast_get_avail(lig_stack); font(lig_stack):=main_f; cur_l:=qi(cur_chr);
         fast_get_avail!($globals, $globals.lig_stack);

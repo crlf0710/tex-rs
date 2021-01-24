@@ -41,8 +41,12 @@ macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loo
         match qo!($globals.main_j.op_byte()) {
             // qi(1),qi(5):begin cur_l:=rem_byte(main_j); {\.{=:\?}, \.{=:\?>}}
             1 | 5 => {
-                todo!("op1&5");
+                /// `=:|, =:|>`
+                const _ : () = ();
+                $globals.cur_l = $globals.main_j.rem_byte() as _;
                 // main_i:=char_info(main_f)(cur_l); ligature_present:=true;
+                $globals.main_i = char_info!($globals, $globals.main_f, $globals.cur_l);
+                $globals.ligature_present = true;
                 // end;
             }
             // qi(2),qi(6):begin cur_r:=rem_byte(main_j); {\.{\?=:}, \.{\?=:>}}
@@ -92,16 +96,30 @@ macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loo
             }
             // qi(7),qi(11):begin wrapup(false); {\.{\?=:\?>}, \.{\?=:\?>>}}
             7 | 11 => {
-                todo!("op7&11");
+                /// `|=:|>, |=:|>>`
+                wrapup!($globals, false);
                 // cur_q:=tail; cur_l:=rem_byte(main_j);
+                $globals.cur_q = tail!($globals);
+                $globals.cur_l = $globals.main_j.rem_byte() as _;
                 // main_i:=char_info(main_f)(cur_l); ligature_present:=true;
+                $globals.main_i = char_info!($globals, $globals.main_f, $globals.cur_l);
+                $globals.ligature_present = true;
                 // end;
             }
             // othercases begin cur_l:=rem_byte(main_j); ligature_present:=true; {\.{=:}}
             _ => {
-                todo!("othercases");
+                /// `=:`
+                const _ : () = ();
+                $globals.cur_l = $globals.main_j.rem_byte() as _;
+                $globals.ligature_present = true;
                 // if lig_stack=null then goto main_loop_wrapup
+                if $globals.lig_stack == null {
+                    goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_wrapup);
+                }
                 // else goto main_loop_move+1;
+                else {
+                    goto_part_label!($lbl_main_loop_cycle, $main_loop_status, main_loop_move(1));
+                }
             }
             // end
         }
