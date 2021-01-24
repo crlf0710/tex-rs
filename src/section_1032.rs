@@ -34,6 +34,12 @@ pub(crate) static main_i: char_info = char_info::default();
 use crate::section_0554::char_info;
 
 // @!main_j:four_quarters; {ligature/kern command}
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static main_j: lig_kern_cmd = lig_kern_cmd::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0545::lig_kern_cmd;
+
 // @!main_k:font_index; {index into |font_info|}
 /// index into `font_info`
 #[globals_struct_field(TeXGlobals)]
@@ -63,6 +69,9 @@ pub(crate) static false_bchar: ASCII_code_or_non_char = non_char;
 pub(crate) static cancel_boundary: boolean = boolean::default();
 
 // @!ins_disc:boolean; {should we insert a discretionary node?}
+/// should we insert a discretionary node?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static ins_disc: boolean = false;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0548::font_index;

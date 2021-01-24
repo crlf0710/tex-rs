@@ -2,7 +2,7 @@
 
 // @<If the cursor is immediately followed by the right boundary...@>=
 macro_rules! If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_reswitch__if_its_followed_by_an_invalid_character__goto_big_switch__otherwise_move_the_cursor_one_step_to_the_right_and_goto_main_lig_loop {
-    ($globals:expr, $part_idx:expr, $status:expr, $lbl_main_loop_append: lifetime, $lbl_reswitch:lifetime, $lbl_big_switch:lifetime) => {{
+    ($globals:expr, $part_idx:expr, $lbl_main_loop_append: lifetime, $main_loop_status:expr, $lbl_reswitch:lifetime, $lbl_big_switch:lifetime) => {{
         region_multipart! {
             ('main_loop_move, $part_idx) {
                 // @^inner loop@>
@@ -11,13 +11,16 @@ macro_rules! If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_re
                     if $globals.lig_stack == null {
                         goto_backward_label!($lbl_reswitch);
                     }
-                    todo!("move");
                     // cur_q:=tail; cur_l:=character(lig_stack);
+                    $globals.cur_q = tail!($globals);
+                    $globals.cur_l = character!($globals, $globals.lig_stack).numeric_value();
                     $part_idx = 1;
                 },
                 // main_loop_move+1:if not is_char_node(lig_stack) then goto main_loop_move_lig;
                 1 => {
-                    todo!("move1")
+                    if !is_char_node!($globals, $globals.lig_stack) {
+                        goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_move_lig);
+                    }
                     $part_idx = 2;
                 },
                 // main_loop_move+2:if(cur_chr<font_bc[main_f])or(cur_chr>font_ec[main_f]) then
@@ -44,7 +47,7 @@ macro_rules! If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_re
                     link!($globals, tail!($globals)) = $globals.lig_stack;
                     tail!($globals) = $globals.lig_stack;
                     /// `main_loop_lookahead` is next
-                    goto_part_label!($lbl_main_loop_append, $status, main_loop_lookahead);
+                    goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_lookahead);
                 },
             }
         }

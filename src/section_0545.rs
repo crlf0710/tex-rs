@@ -49,9 +49,61 @@
 //! or kerning command is performed.
 //
 // @d stop_flag==qi(128) {value indicating `\.{STOP}' in a lig/kern program}
+/// value indicating `STOP` in a lig/kern program
+pub(crate) const stop_flag: quarterword = qi!(128);
 // @d kern_flag==qi(128) {op code for a kern step}
-// @d skip_byte(#)==#.b0
-// @d next_char(#)==#.b1
-// @d op_byte(#)==#.b2
-// @d rem_byte(#)==#.b3
-//
+/// op code for a kern step
+pub(crate) const kern_flag: quarterword = qi!(128);
+
+#[derive(Copy, Clone, RefCast)]
+#[repr(transparent)]
+pub(crate) struct lig_kern_cmd(four_quarters);
+
+impl Default for lig_kern_cmd {
+    fn default() -> Self {
+        unsafe { std::mem::zeroed() }
+    }
+}
+
+impl lig_kern_cmd {
+    // @d skip_byte(#)==#.b0
+    pub(crate) fn skip_byte(self) -> quarterword {
+        self.0[FOUR_QUARTERS_B0]
+    }
+    // @d next_char(#)==#.b1
+    pub(crate) fn next_char(self) -> quarterword {
+        self.0[FOUR_QUARTERS_B1]
+    }
+    // @d op_byte(#)==#.b2
+    pub(crate) fn op_byte(self) -> quarterword {
+        self.0[FOUR_QUARTERS_B2]
+    }
+    // @d rem_byte(#)==#.b3
+    pub(crate) fn rem_byte(self) -> quarterword {
+        self.0[FOUR_QUARTERS_B3]
+    }
+}
+
+pub(crate) struct MEMORY_WORD_LIG_KERN_CMD;
+
+impl Index<MEMORY_WORD_LIG_KERN_CMD> for memory_word {
+    type Output = lig_kern_cmd;
+    fn index(&self, _: MEMORY_WORD_LIG_KERN_CMD) -> &lig_kern_cmd {
+        lig_kern_cmd::ref_cast(&self[MEMORY_WORD_QQQQ])
+    }
+}
+
+impl IndexMut<MEMORY_WORD_LIG_KERN_CMD> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_LIG_KERN_CMD) -> &mut lig_kern_cmd {
+        lig_kern_cmd::ref_cast_mut(&mut self[MEMORY_WORD_QQQQ])
+    }
+}
+
+
+use crate::section_0113::{FOUR_QUARTERS_B0, FOUR_QUARTERS_B1, FOUR_QUARTERS_B2, FOUR_QUARTERS_B3};
+use crate::section_0113::four_quarters;
+use crate::section_0113::MEMORY_WORD_QQQQ;
+use crate::section_0113::quarterword;
+use crate::section_0113::memory_word;
+use core::ops::{Index, IndexMut};
+use ref_cast::RefCast;

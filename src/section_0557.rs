@@ -14,9 +14,24 @@
 // @d kern_base_offset==256*(128+min_quarterword)
 pub(crate) const kern_base_offset: integer = 256 * (128 + min_quarterword as integer);
 // @d lig_kern_start(#)==lig_kern_base[#]+rem_byte {beginning of lig/kern program}
+/// beginning of lig/kern program
+#[allow(unused_macros)]
+macro_rules! lig_kern_start {
+    ($globals:expr, $f:expr, $lk:expr) => {{
+        $globals.lig_kern_base[$f] + $lk.rem_byte() as crate::pascal::integer
+    }}
+}
 // @d lig_kern_restart_end(#)==256*op_byte(#)+rem_byte(#)+32768-kern_base_offset
 // @d lig_kern_restart(#)==lig_kern_base[#]+lig_kern_restart_end
-//
+macro_rules! lig_kern_restart {
+    ($globals:expr, $f:expr, $lk:expr) => {{
+        $globals.lig_kern_base[$f]
+            + 256 * $lk.op_byte() as crate::pascal::integer
+            + $lk.rem_byte() as crate::pascal::integer
+            + 32768
+            - crate::section_0557::kern_base_offset
+    }};
+}
 
 use crate::pascal::integer;
 use crate::section_0110::min_quarterword;

@@ -99,15 +99,16 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
                 // main_loop_wrapup:@<Make a ligature node, if |ligature_present|;
                 //   insert a null discretionary, if appropriate@>;
                 main_loop_status_kind::main_loop_wrapup => {
-                    todo!("wrapup");
+                    Make_a_ligature_node__if_ligature_present__insert_a_null_discretionary__if_appropriate!($globals);
+                    goto_part_label!('main_loop_append, main_loop_status, main_loop_move(0));
                     unreachable!();
                 },
                 // main_loop_move:@<If the cursor is immediately followed by the right boundary,
                 //   |goto reswitch|; if it's followed by an invalid character, |goto big_switch|;
                 //   otherwise move the cursor one step to the right and |goto main_lig_loop|@>;
-                main_loop_status_kind::main_loop_move(part_idx) => {
+                main_loop_status_kind::main_loop_move(mut part_idx) => {
                     If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_reswitch__if_its_followed_by_an_invalid_character__goto_big_switch__otherwise_move_the_cursor_one_step_to_the_right_and_goto_main_lig_loop!
-                        ($globals, part_idx, main_loop_status, 'main_loop_append, $lbl_reswitch, $lbl_big_switch);
+                        ($globals, part_idx, 'main_loop_append, main_loop_status, $lbl_reswitch, $lbl_big_switch);
                     unreachable!();
                 },
                 // main_loop_lookahead:@<Look ahead for another character, or leave |lig_stack|

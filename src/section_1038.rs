@@ -23,6 +23,7 @@ macro_rules! Look_ahead_for_another_character__or_leave_lig_stack_empty_if_there
         // fast_get_avail(lig_stack); font(lig_stack):=main_f;
         // cur_r:=qi(cur_chr); character(lig_stack):=cur_r;
         // if cur_r=false_bchar then cur_r:=non_char {this prevents spurious ligatures}
+        trace_error_expr!("cur_cmd = {}", $globals.cur_cmd);
         todo!("lookahead");
         use crate::section_0341::get_next;
     }}

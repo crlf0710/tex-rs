@@ -45,6 +45,10 @@ pub(crate) static cur_q: pointer = null;
 pub(crate) static lig_stack: pointer = null;
 
 // @!ligature_present:boolean; {should a ligature node be made for |cur_l|?}
+/// should a ligature node be made for `cur_l`?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static ligature_present: boolean = false;
+
 // @!lft_hit,@!rt_hit:boolean; {did we hit a ligature with a boundary character?}
 
 use crate::section_0004::TeXGlobals;
