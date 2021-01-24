@@ -13,10 +13,10 @@
 // @d char_kern(#)==font_info[kern_base[#]+char_kern_end
 macro_rules! char_kern {
     ($globals:expr, $f:expr, $lk:expr) => {{
-        $globals.font_info[$globals.kern_base[$f] as crate::section_0548::font_index_repr
-            + 256 * $lk.op_byte() as crate::section_0548::font_index_repr
-            + $lk.rem_byte() as crate::section_0548::font_index_repr]
-            [crate::section_0101::MEMORY_WORD_SC]
+        $globals.font_info[($globals.kern_base[$f] as crate::pascal::integer
+            + 256 * $lk.op_byte() as crate::pascal::integer
+            + $lk.rem_byte() as crate::pascal::integer)
+            as crate::section_0548::font_index_repr][crate::section_0101::MEMORY_WORD_SC]
     }};
 }
 // @d kern_base_offset==256*(128+min_quarterword)

@@ -10,6 +10,7 @@
 // @<Do ligature or kern command...@>=
 macro_rules! Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loop_wrapup_or_main_loop_move {
     ($globals:expr, $lbl_main_loop_cycle:lifetime, $main_loop_status:expr) => {{
+        trace_span!("Do ligature or kern command...");
         // begin if op_byte(main_j)>=kern_flag then
         if $globals.main_j.op_byte() >= kern_flag {
             // begin wrapup(rt_hit);

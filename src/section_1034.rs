@@ -38,6 +38,7 @@ macro_rules! adjust_space_factor {
 // @<Append character |cur_chr|...@>=
 macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the_current_hlist_in_the_current_font__goto_reswitch_when_a_non_character_has_been_fetched {
     ($globals:expr, $lbl_reswitch:lifetime, $lbl_big_switch:lifetime) => {{
+        trace_span!("Append character `cur_chr`...");
         // adjust_space_factor;@/
         adjust_space_factor!($globals);
         // main_f:=cur_font;

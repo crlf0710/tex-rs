@@ -4,6 +4,7 @@
 // @<Move the cursor past a pseudo-ligature...@>=
 macro_rules! Move_the_cursor_past_a_pseudo_ligature__then_goto_main_loop_lookahead_or_main_lig_loop {
     ($globals:expr, $lbl_main_loop_cycle:lifetime, $main_loop_status:expr) => {{
+        trace_span!("Move the cursor past a pseudo-ligature...");
         // main_p:=lig_ptr(lig_stack);
         $globals.main_p = lig_ptr!($globals, $globals.lig_stack);
         // if main_p>null then tail_append(main_p); {append a single character}

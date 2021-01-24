@@ -3,6 +3,7 @@
 // @<If the cursor is immediately followed by the right boundary...@>=
 macro_rules! If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_reswitch__if_its_followed_by_an_invalid_character__goto_big_switch__otherwise_move_the_cursor_one_step_to_the_right_and_goto_main_lig_loop {
     ($globals:expr, $part_idx:expr, $lbl_main_loop_cycle: lifetime, $main_loop_status:expr, $lbl_reswitch:lifetime, $lbl_big_switch:lifetime) => {{
+        trace_span!("If the cursor is immediately followed by the right boundary...");
         region_multipart! {
             ('main_loop_move, $part_idx) {
                 // @^inner loop@>

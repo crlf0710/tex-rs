@@ -45,6 +45,7 @@ macro_rules! pack_lig {
 // @d wrapup(#)==if cur_l<non_char then
 macro_rules! wrapup {
     ($globals:expr, $v:expr) => {{
+        trace_span!("wrapup");
         if $globals.cur_l < non_char {
             // begin if link(cur_q)>null then
             if link!($globals, $globals.cur_q) > null {
