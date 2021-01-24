@@ -3,17 +3,33 @@
 //! a |new_lig_item| function, which returns a two-word node having a given
 //! |character| field. Such nodes are used for temporary processing as ligatures
 //! are being created.
-//!
-//! @p function new_ligature(@!f,@!c:quarterword; @!q:pointer):pointer;
-//! var p:pointer; {the new node}
-//! begin p:=get_node(small_node_size); type(p):=ligature_node;
-//! font(lig_char(p)):=f; character(lig_char(p)):=c; lig_ptr(p):=q;
-//! subtype(p):=0; new_ligature:=p;
-//! end;
-//! @#
-//! function new_lig_item(@!c:quarterword):pointer;
-//! var p:pointer; {the new node}
-//! begin p:=get_node(small_node_size); character(p):=c; lig_ptr(p):=null;
-//! new_lig_item:=p;
-//! end;
-//!
+//
+// @p function new_ligature(@!f,@!c:quarterword; @!q:pointer):pointer;
+// var p:pointer; {the new node}
+// begin p:=get_node(small_node_size); type(p):=ligature_node;
+// font(lig_char(p)):=f; character(lig_char(p)):=c; lig_ptr(p):=q;
+// subtype(p):=0; new_ligature:=p;
+// end;
+// @#
+// function new_lig_item(@!c:quarterword):pointer;
+pub(crate) fn new_lig_item(globals: &mut TeXGlobals, c: ASCII_code) -> TeXResult<pointer> {
+    // var p:pointer; {the new node}
+    /// the new node
+    let p: pointer;
+    // begin p:=get_node(small_node_size); character(p):=c; lig_ptr(p):=null;
+    p = get_node(globals, small_node_size.into())?;
+    assign_font_and_character!(globals, p, null_font, c);
+    lig_ptr!(globals, p) = null;
+    // new_lig_item:=p;
+    ok_nojump!(p)
+    // end;
+}
+
+use crate::section_0004::TeXGlobals;
+use crate::section_0018::ASCII_code;
+use crate::section_0081::TeXResult;
+use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0125::get_node;
+use crate::section_0141::small_node_size;
+use crate::section_0232::null_font;

@@ -50,6 +50,12 @@ pub(crate) static lig_stack: pointer = null;
 pub(crate) static ligature_present: boolean = false;
 
 // @!lft_hit,@!rt_hit:boolean; {did we hit a ligature with a boundary character?}
+/// did we hit a ligature with a boundary character?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static lft_hit: boolean = false;
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static rt_hit: boolean = false;
+
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0115::null;

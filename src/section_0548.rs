@@ -16,6 +16,7 @@ pub(crate) type internal_font_number = u16_from_m_to_n<font_base_TYPENUM, font_m
 // @!font_index=0..font_mem_size; {index into |font_info|}
 /// index into `font_info`
 pub(crate) type font_index = u16_from_0_to_n<font_mem_size_TYPENUM>;
+pub(crate) type font_index_repr = u16;
 
 impl font_index {
     pub(crate) const fn zero() -> Self {

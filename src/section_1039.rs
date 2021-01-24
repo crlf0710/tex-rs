@@ -51,7 +51,8 @@ macro_rules! If_there_s_a_ligature_kern_command_relevant_to_cur_l_and_cur_r__adj
                         if $globals.main_j.skip_byte() <= stop_flag {
                             // @<Do ligature or kern command, returning to |main_lig_loop|
                             // or |main_loop_wrapup| or |main_loop_move|@>;
-                            todo!("do ligature!");
+                            Do_ligature_or_kern_command__returning_to_main_lig_loop_or_main_loop_wrapup_or_main_loop_move!
+                                ($globals, $lbl_main_loop_append, $main_loop_status);
                         }
                     }
                     // if skip_byte(main_j)=qi(0) then incr(main_k)

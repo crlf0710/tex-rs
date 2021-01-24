@@ -46,8 +46,8 @@ macro_rules! If_the_cursor_is_immediately_followed_by_the_right_boundary_goto_re
                     // link(tail):=lig_stack; tail:=lig_stack {|main_loop_lookahead| is next}
                     link!($globals, tail!($globals)) = $globals.lig_stack;
                     tail!($globals) = $globals.lig_stack;
-                    /// `main_loop_lookahead` is next
-                    goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_lookahead);
+                    /// fall through to `main_loop_lookahead`
+                    goto_part_label!($lbl_main_loop_append, $main_loop_status, main_loop_lookahead(0));
                 },
             }
         }

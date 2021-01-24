@@ -72,7 +72,7 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
         enum main_loop_status_kind {
             main_loop_wrapup,
             main_loop_move(usize),
-            main_loop_lookahead,
+            main_loop_lookahead(usize),
             main_lig_loop(usize),
             main_loop_move_lig
         }
@@ -113,8 +113,9 @@ macro_rules! Append_character_cur_chr_and_the_following_characters_if_any_to_the
                 },
                 // main_loop_lookahead:@<Look ahead for another character, or leave |lig_stack|
                 //   empty if there's none there@>;
-                main_loop_status_kind::main_loop_lookahead => {
-                    Look_ahead_for_another_character__or_leave_lig_stack_empty_if_there_s_none_there!($globals);
+                main_loop_status_kind::main_loop_lookahead(mut part_idx) => {
+                    Look_ahead_for_another_character__or_leave_lig_stack_empty_if_there_s_none_there!
+                        ($globals, part_idx, 'main_loop_append, main_loop_status);
                     unreachable!();
                 },
                 // main_lig_loop:@<If there's a ligature/kern command relevant to |cur_l| and
