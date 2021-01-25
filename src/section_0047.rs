@@ -22,9 +22,9 @@ pub(crate) fn get_strings_started(globals: &mut TeXGlobals) -> boolean {
     // @!a:integer; {accumulator for check sum}
     // @!c:boolean; {check sum has been checked}
     // begin pool_ptr:=0; str_ptr:=0; str_start[0]:=0;
-    globals.pool_ptr = pool_pointer::new_zero();
-    globals.str_ptr = str_number::new_zero();
-    globals.str_start[0] = pool_pointer::new_zero();
+    globals.pool_ptr = pool_pointer::zero();
+    globals.str_ptr = str_number::zero();
+    globals.str_start[0] = pool_pointer::zero();
     // @<Make the first 256 strings@>;
     Make_the_first_256_strings!(globals, g);
     // @<Read the other strings from the \.{TEX.POOL} file and return |true|,

@@ -42,22 +42,22 @@ use crate::section_0039::str_start_array;
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsStringView)]
 #[globals_struct_field_view(TeXGlobalsIoStringLogView)]
-pub(crate) static pool_ptr: pool_pointer = pool_pointer::new_zero();
+pub(crate) static pool_ptr: pool_pointer = pool_pointer::zero();
 // @!str_ptr : str_number; {number of the current string being created}
 /// number of the current string being created
 #[globals_struct_field(TeXGlobals)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
 #[globals_struct_field_view(TeXGlobalsStringView)]
 #[globals_struct_field_view(TeXGlobalsIoStringLogView)]
-pub(crate) static str_ptr: str_number = str_number::new_zero();
+pub(crate) static str_ptr: str_number = str_number::zero();
 // @!init_pool_ptr : pool_pointer; {the starting value of |pool_ptr|}
 /// the starting value of `pool_ptr`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static init_pool_ptr: pool_pointer = pool_pointer::new_zero();
+pub(crate) static init_pool_ptr: pool_pointer = pool_pointer::zero();
 // @!init_str_ptr : str_number; {the starting value of |str_ptr|}
 /// the starting value of `str_ptr`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static init_str_ptr: str_number = str_number::new_zero();
+pub(crate) static init_str_ptr: str_number = str_number::zero();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0038::pool_pointer;

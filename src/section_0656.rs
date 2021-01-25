@@ -17,7 +17,7 @@ macro_rules! Incorporate_glue_into_the_horizontal_totals {
         o = shrink_order!($globals, g).into();
         $globals.total_shrink[o] += shrink!($globals, g);
         // if subtype(p)>=a_leaders then
-        if subtype!($globals, $p) >= a_leaders {
+        if subtype!($globals, $p) as integer >= glue_node_subtype::a_leaders as integer {
             // begin g:=leader_ptr(p);
             g = leader_ptr!($globals, $p);
             // if height(g)>h then h:=height(g);
@@ -31,7 +31,8 @@ macro_rules! Incorporate_glue_into_the_horizontal_totals {
             // end;
         }
         // end
-        use crate::section_0149::a_leaders;
+        use crate::pascal::integer;
+        use crate::section_0149::glue_node_subtype;
         use crate::section_0150::glue_ord;
-    }}
+    }};
 }

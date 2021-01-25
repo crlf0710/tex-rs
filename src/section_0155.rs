@@ -14,6 +14,16 @@
 pub(crate) const kern_node: quarterword = 11;
 // @d explicit=1 {|subtype| of kern nodes from \.{\\kern} and \.{\\/}}
 // @d acc_kern=2 {|subtype| of kern nodes from accents}
-//
+#[doc(hidden)]
+#[derive(Clone, Copy)]
+pub(crate) enum kern_node_subtype {
+    normal = 0,
+    /// `subtype` of kern nodes from `\kern` and `\/`
+    explicit = 1,
+    /// `subtype` of kern nodes from accents
+    acc_kern = 2,
+    /// `subtype` for for math glue
+    mu_glue = 99, 
+}
 
 use crate::section_0113::quarterword;

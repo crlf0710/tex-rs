@@ -10,7 +10,15 @@
 //!
 //! Meanwhile, this is a convenient place to catch up on something we were unable
 //! to do before the hash table was defined:
-//!
-//! @<Print the font identifier for |font(p)|@>=
-//! print_esc(font_id_text(font(p)))
-//!
+//
+// @<Print the font identifier for |font(p)|@>=
+macro_rules! Print_the_font_identifier_for_font_p {
+    ($globals:expr, $p:expr) => {{
+        // print_esc(font_id_text(font(p)))
+        let f = font!($globals, $p);
+        let t = font_id_text!($globals, f.get());
+        print_esc($globals, str_number::new(t as _));
+        use crate::section_0038::str_number;
+        use crate::section_0063::print_esc;
+    }}
+}

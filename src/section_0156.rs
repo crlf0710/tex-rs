@@ -1,10 +1,5 @@
 //! @ The |new_kern| function creates a kern node having a given width.
 
-#[non_exhaustive]
-enum kern_node_subtype {
-    normal = 0,
-}
-
 // @p function new_kern(@!w:scaled):pointer;
 pub(crate) fn new_kern(globals: &mut TeXGlobals, w: scaled) -> TeXResult<pointer> {
     // var p:pointer; {the new node}
@@ -29,3 +24,4 @@ use crate::section_0115::pointer;
 use crate::section_0125::get_node;
 use crate::section_0141::small_node_size;
 use crate::section_0155::kern_node;
+use crate::section_0155::kern_node_subtype;

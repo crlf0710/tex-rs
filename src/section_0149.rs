@@ -29,13 +29,24 @@
 pub(crate) const glue_node: quarterword = 10;
 // @d cond_math_glue=98 {special |subtype| to suppress glue in the next node}
 // @d mu_glue=99 {|subtype| for math glue}
-/// `subtype` for math glue
-pub(crate) const mu_glue: quarterword = 99;
 // @d a_leaders=100 {|subtype| for aligned leaders}
-/// `subtype` for aligned leaders
-pub(crate) const a_leaders: quarterword = 100;
 // @d c_leaders=101 {|subtype| for centered leaders}
 // @d x_leaders=102 {|subtype| for expanded leaders}
+#[doc(hidden)]
+#[derive(Clone, Copy)]
+pub(crate) enum glue_node_subtype {
+    normal = 0,
+    /// special `subtype` to suppress glue in the next node
+    cond_math_glue = 98,
+    /// `subtype` for math glue
+    mu_glue = 99,
+    /// `subtype` for aligned leaders
+    a_leaders = 100,
+    /// `subtype` for centered leaders
+    c_leaders = 101,
+    /// `subtype` for expanded leaders
+    x_leaders = 102,
+}
 // @d glue_ptr==llink {pointer to a glue specification}
 /// pointer to a glue specification
 macro_rules! glue_ptr {

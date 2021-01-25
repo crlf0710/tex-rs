@@ -42,14 +42,18 @@ macro_rules! text {
 macro_rules! hash_is_full {
     ($globals:expr) => {
         $globals.hash_used == hash_base as pointer
-    }
+    };
 }
 // @d font_id_text(#) == text(font_id_base+#) {a frozen font identifier's name}
 /// a frozen font identifier's name
 macro_rules! font_id_text {
     ($globals:expr, $ptr:expr) => {
-        text!($globals, (crate::section_0222::font_id_base + $ptr) as crate::section_0115::pointer)
-    }
+        text!(
+            $globals,
+            crate::section_0222::font_id_base as crate::section_0115::pointer
+                + $ptr as crate::section_0115::pointer
+        )
+    };
 }
 
 //

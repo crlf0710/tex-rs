@@ -18,7 +18,7 @@
 // @<Glob...@>=
 // @!format_ident:str_number;
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static format_ident: str_number = str_number::new_zero();
+pub(crate) static format_ident: str_number = str_number::zero();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0038::str_number;

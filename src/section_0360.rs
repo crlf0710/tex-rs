@@ -37,7 +37,7 @@ macro_rules! Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_
                 const _ : () = ();
                 // begin cur_cmd:=0; cur_chr:=0; return;
                 $globals.cur_cmd = 0;
-                $globals.cur_chr = chr_code_type::new_zero();
+                $globals.cur_chr = chr_code_type::zero();
                 return_nojump!();
                 // end;
             }

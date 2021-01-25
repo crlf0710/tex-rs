@@ -95,7 +95,7 @@ impl chr_code_type {
         chr_code_type(val)
     }
 
-    pub(crate) fn new_zero() -> Self {
+    pub(crate) fn zero() -> Self {
         chr_code_type(0)
     }
 

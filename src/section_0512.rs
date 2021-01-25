@@ -28,15 +28,15 @@
 // @!cur_name:str_number; {name of file just scanned}
 /// name of file just scanned
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static cur_name: str_number = str_number::new_zero();
+pub(crate) static cur_name: str_number = str_number::zero();
 // @!cur_area:str_number; {file area just scanned, or \.{""}}
 /// file area just scanned, or `""`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static cur_area: str_number = str_number::new_zero();
+pub(crate) static cur_area: str_number = str_number::zero();
 // @!cur_ext:str_number; {file extension just scanned, or \.{""}}
 /// file extension just scanned, or `""`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static cur_ext: str_number = str_number::new_zero();
+pub(crate) static cur_ext: str_number = str_number::zero();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0038::str_number;

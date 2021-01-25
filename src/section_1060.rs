@@ -47,7 +47,7 @@ pub(crate) fn append_glue(globals: &mut TeXGlobals) -> TeXResult<()> {
         decr!(glue_ref_count!(globals, globals.cur_val as pointer));
         // if s>skip_code then subtype(tail):=mu_glue;
         if s > skip_code as integer {
-            subtype!(globals, tail!(globals)) = mu_glue;
+            subtype!(globals, tail!(globals)) = glue_node_subtype::mu_glue as _;
         }
         // end;
     }
@@ -60,7 +60,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::pointer;
-use crate::section_0149::mu_glue;
+use crate::section_0149::glue_node_subtype;
 use crate::section_0153::new_glue;
 use crate::section_0162::fil_glue;
 use crate::section_0162::fill_glue;

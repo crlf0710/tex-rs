@@ -5,8 +5,8 @@
 #[allow(unused_variables)]
 pub(crate) fn begin_name(globals: &mut TeXGlobals) {
     // begin area_delimiter:=0; ext_delimiter:=0;
-    globals.area_delimiter = pool_pointer::new_zero();
-    globals.ext_delimiter = pool_pointer::new_zero();
+    globals.area_delimiter = pool_pointer::zero();
+    globals.ext_delimiter = pool_pointer::zero();
     // end;
 }
 

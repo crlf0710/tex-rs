@@ -71,7 +71,7 @@ impl pool_pointer {
     pub(crate) fn new(v: u32) -> Self {
         pool_pointer(u32_from_0_to_n::new(v))
     }
-    pub(crate) fn new_zero() -> Self {
+    pub(crate) fn zero() -> Self {
         pool_pointer(u32_from_0_to_n::new(0))
     }
     pub(crate) fn is_zero(&self) -> bool {
@@ -117,7 +117,7 @@ impl str_number {
     pub(crate) fn new(v: u32) -> Self {
         str_number(u32_from_0_to_n::new(v))
     }
-    pub(crate) fn new_zero() -> Self {
+    pub(crate) fn zero() -> Self {
         str_number(u32_from_0_to_n::new(0))
     }
     pub(crate) fn is_zero(&self) -> bool {

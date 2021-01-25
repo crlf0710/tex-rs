@@ -21,7 +21,7 @@ pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
         if c == ASCII_code_literal!(b'>') || c == ASCII_code_literal!(b':') {
             // begin area_delimiter:=cur_length; ext_delimiter:=0;
             globals.area_delimiter = pool_pointer::new(cur_length!(globals) as _);
-            globals.ext_delimiter = pool_pointer::new_zero();
+            globals.ext_delimiter = pool_pointer::zero();
             // end
         }
         // else if (c=".")and(ext_delimiter=0) then ext_delimiter:=cur_length;

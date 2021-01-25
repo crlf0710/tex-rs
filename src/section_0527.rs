@@ -18,7 +18,7 @@ pub(crate) static name_in_progress: boolean = false;
 // @!job_name:str_number; {principal file name}
 /// principal file name
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static job_name: str_number = str_number::new_zero();
+pub(crate) static job_name: str_number = str_number::zero();
 // @!log_opened:boolean; {has the transcript file been opened?}
 /// has the transcript file been opened?
 #[globals_struct_field(TeXGlobals)]
