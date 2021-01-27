@@ -52,6 +52,8 @@ pub(crate) const align_head: pointer = mem_top - 8;
 /// a constant token list
 pub(crate) const omit_template: pointer = mem_top - 10;
 // @d null_list==mem_top-11 {permanently empty list}
+/// permanently empty list
+pub(crate) const null_list: pointer = mem_top - 11;
 // @d lig_trick==mem_top-12 {a ligature masquerading as a |char_node|}
 /// a ligature masquerading as a `char_node`
 pub(crate) const lig_trick: pointer = mem_top - 12;

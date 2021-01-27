@@ -180,6 +180,9 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
     // sup_mark: chr_cmd("superscript character ");
     // sub_mark: chr_cmd("subscript character ");
     // endv: print("end of alignment template");
+    else if cmd == endv {
+        print(globals, strpool_str!("end of alignment template").get() as _);
+    }
     // spacer: chr_cmd("blank space ");
     else if cmd == spacer {
         chr_cmd!(globals, chr_code, strpool_str!("blank space "));

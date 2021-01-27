@@ -13,8 +13,11 @@ macro_rules! Display_node_p {
             // rule_node: @<Display rule |p|@>;
             // ins_node: @<Display insertion |p|@>;
             // whatsit_node: @<Display the whatsit node |p|@>;
+            if type_p == whatsit_node {
+                Display_the_whatsit_node_p!($globals, $p);
+            }
             // glue_node: @<Display glue |p|@>;
-            if type_p == glue_node {
+            else if type_p == glue_node {
                 Display_glue_p!($globals, $p);
             }
             // kern_node: @<Display kern |p|@>;
@@ -39,6 +42,7 @@ macro_rules! Display_node_p {
             // endcases
         }
         use crate::section_0143::ligature_node;
+        use crate::section_0146::whatsit_node;
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
         use crate::section_0176::print_font_and_char;

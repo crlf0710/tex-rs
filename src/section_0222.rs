@@ -45,6 +45,8 @@ pub(crate) const frozen_end_group: word = frozen_control_sequence + 2;
 /// permanent `\fi`
 pub(crate) const frozen_fi: word = frozen_control_sequence + 4;
 // @d frozen_end_template=frozen_control_sequence+5 {permanent `\.{\\endtemplate}'}
+/// permanent `\endtemplate`
+pub(crate) const frozen_end_template: word = frozen_control_sequence + 5;
 // @d frozen_endv=frozen_control_sequence+6 {second permanent `\.{\\endtemplate}'}
 /// second permanent `\endtemplate`
 pub(crate) const frozen_endv: word = frozen_control_sequence + 6;
