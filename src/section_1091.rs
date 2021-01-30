@@ -35,8 +35,9 @@ pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) -> TeXResult
     clang!(globals) = globals.cur_lang.numeric_value() as _;
     // prev_graf:=(norm_min(left_hyphen_min)*@'100+norm_min(right_hyphen_min))
     //              *@'200000+cur_lang;
-    prev_graf!(globals) = norm_min(left_hyphen_min!(globals)).get() as integer * 0o100
-        + norm_min(right_hyphen_min!(globals)).get() as integer * 0o200000
+    prev_graf!(globals) = (norm_min(left_hyphen_min!(globals)).get() as integer * 0o100
+        + norm_min(right_hyphen_min!(globals)).get() as integer)
+        * 0o200000
         + globals.cur_lang.numeric_value() as integer;
     // if indented then
     if indented {
