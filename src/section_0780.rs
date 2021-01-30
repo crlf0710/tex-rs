@@ -21,7 +21,8 @@ pub(crate) const cr_code: halfword = 257;
 /// this distinguishes `\crcr` from `\cr`
 pub(crate) const cr_cr_code: halfword = cr_code + 1;
 // @d end_template_token==cs_token_flag+frozen_end_template
-//
+pub(crate) const end_template_token: cur_tok_repr = cur_tok_type::from_cs(frozen_end_template as _).get();
+
 // @<Put each of \TeX's primitives into the hash table@>=
 #[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
@@ -63,6 +64,8 @@ use crate::section_0222::frozen_cr;
 use crate::section_0222::frozen_endv;
 use crate::section_0222::frozen_end_template;
 use crate::section_0264::primitive;
+use crate::section_0297::cur_tok_type;
+use crate::section_0297::cur_tok_repr;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;
 

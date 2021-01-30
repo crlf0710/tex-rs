@@ -34,7 +34,7 @@ pub(crate) fn init_align(globals: &mut TeXGlobals) -> TeXResult<()> {
     // scan_spec(align_group,false);@/
     scan_spec(globals, align_group.into(), false)?;
     // @<Scan the preamble and record it in the |preamble| list@>;
-    Scan_the_preamble_and_record_it_in_the_preamble_list!(globals);
+    Scan_the_preamble_and_record_it_in_the_preamble_list!(globals, save_cs_ptr);
     // new_save_level(align_group);
     new_save_level(globals, align_group.into());
     // if every_cr<>null then begin_token_list(every_cr,every_cr_text);

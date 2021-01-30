@@ -24,7 +24,7 @@ macro_rules! Append_a_normal_inter_word_space_to_the_current_list__then_goto_big
         }
         // else temp_ptr:=new_param_glue(space_skip_code);
         else {
-            $globals.temp_ptr = new_param_glue($globals, small_number::new(space_skip_code as _));
+            $globals.temp_ptr = new_param_glue($globals, small_number::new(space_skip_code as _))?;
         }
         // link(tail):=temp_ptr; tail:=temp_ptr;
         link!($globals, tail!($globals)) = $globals.temp_ptr;

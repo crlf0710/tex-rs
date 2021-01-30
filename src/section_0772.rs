@@ -18,6 +18,8 @@ pub(crate) fn push_alignment(globals: &mut TeXGlobals) -> TeXResult<()> {
     globals.mem[p + 2][MEMORY_WORD_INT] = globals.cur_loop.into();
     globals.mem[p + 3][MEMORY_WORD_INT] = globals.align_state;
     // info(p+4):=cur_head; link(p+4):=cur_tail;
+    info_inner!(globals, p + 4) = globals.cur_head;
+    link!(globals, p + 4) = globals.cur_tail;
     // align_ptr:=p;
     globals.align_ptr = p;
     // cur_head:=get_avail;

@@ -157,7 +157,7 @@ impl cur_tok_type {
         )
     }
 
-    pub(crate) fn from_cs(cs: pointer) -> Self {
+    pub(crate) const fn from_cs(cs: pointer) -> Self {
         cur_tok_type(cs_token_flag.0 + cs as cur_tok_repr)
     }
 

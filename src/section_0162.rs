@@ -40,6 +40,8 @@ pub(crate) const page_head: pointer = mem_top - 2;
 /// head of a temporary list of some kind
 pub(crate) const temp_head: pointer = mem_top - 3;
 // @d hold_head==mem_top-4 {head of a temporary list of another kind}
+/// head of a temporary list of another kind
+pub(crate) const hold_head: pointer = mem_top - 4;
 // @d adjust_head==mem_top-5 {head of adjustment list returned by |hpack|}
 // @d active==mem_top-7 {head of active list in |line_break|, needs two words}
 /// head of active list in `line_break`, needs two words
@@ -48,6 +50,8 @@ pub(crate) const active: pointer = mem_top - 7;
 /// head of preamble list for alignments
 pub(crate) const align_head: pointer = mem_top - 8;
 // @d end_span==mem_top-9 {tail of spanned-width lists}
+/// tail of spanned-width lists
+pub(crate) const end_span: pointer = mem_top - 9;
 // @d omit_template==mem_top-10 {a constant token list}
 /// a constant token list
 pub(crate) const omit_template: pointer = mem_top - 10;

@@ -124,6 +124,11 @@ macro_rules! space_skip {
 // @d thick_mu_skip==glue_par(thick_mu_skip_code)
 //
 // @<Current |mem| equivalent of glue parameter number |n|@>=glue_par(n)
+macro_rules! Current_mem_equivalent_of_glue_parameter_number_n {
+    ($globals:expr, $n:expr) => {
+        glue_par!($globals, $n)
+    }
+}
 //
 
 use crate::pascal::word;
