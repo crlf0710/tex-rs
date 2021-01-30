@@ -2,7 +2,13 @@
 //! itself---we must build it up little by little, somewhat more cautiously
 //! than we have done with the simpler procedures of \TeX. Here is the
 //! general outline.
-//
+
+macro_rules! Get_ready_to_start_line_breaking {
+    ($globals:expr) => {{
+
+    }}
+}
+
 // @p@t\4@>@<Declare subprocedures for |line_break|@>
 // procedure line_break(@!final_widow_penalty:integer);
 #[allow(unused_variables)]
@@ -14,7 +20,9 @@ pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer)
     const _ : () = ();
     globals.pack_begin_line = mode_line!(globals);
     // @<Get ready to start line breaking@>;
+    Get_ready_to_start_line_breaking!(globals);
     // @<Find optimal breakpoints@>;
+    Find_optimal_breakpoints!(globals);
     // @<Break the paragraph at the chosen breakpoints, justify the resulting lines
     // to the correct widths, and append them to the current vertical list@>;
     Break_the_paragraph_at_the_chosen_breakpoints__justify_the_resulting_lines_to_the_correct_widths__and_append_them_to_the_current_vertical_list!

@@ -15,19 +15,23 @@
 //! It is not difficult to prove that $$\hbox{|badness(t+1,s)>=badness(t,s)
 //! >=badness(t,s+1)|}.$$ The badness function defined here is capable of
 //! computing at most 1095 distinct values, but that is plenty.
-//!
-//! @d inf_bad = 10000 {infinitely bad value}
-//!
-//! @p function badness(@!t,@!s:scaled):halfword; {compute badness, given |t>=0|}
-//! var r:integer; {approximation to $\alpha t/s$, where $\alpha^3\approx
-//!   100\cdot2^{18}$}
-//! begin if t=0 then badness:=0
-//! else if s<=0 then badness:=inf_bad
-//! else  begin if t<=7230584 then  r:=(t*297) div s {$297^3=99.94\times2^{18}$}
-//!   else if s>=1663497 then r:=t div (s div 297)
-//!   else r:=t;
-//!   if r>1290 then badness:=inf_bad {$1290^3<2^{31}<1291^3$}
-//!   else badness:=(r*r*r+@'400000) div @'1000000;
-//!   end; {that was $r^3/2^{18}$, rounded to the nearest integer}
-//! end;
-//!
+//
+// @d inf_bad = 10000 {infinitely bad value}
+/// infinitely bad value
+pub(crate) const inf_bad: halfword = 10000;
+//
+// @p function badness(@!t,@!s:scaled):halfword; {compute badness, given |t>=0|}
+// var r:integer; {approximation to $\alpha t/s$, where $\alpha^3\approx
+//   100\cdot2^{18}$}
+// begin if t=0 then badness:=0
+// else if s<=0 then badness:=inf_bad
+// else  begin if t<=7230584 then  r:=(t*297) div s {$297^3=99.94\times2^{18}$}
+//   else if s>=1663497 then r:=t div (s div 297)
+//   else r:=t;
+//   if r>1290 then badness:=inf_bad {$1290^3<2^{31}<1291^3$}
+//   else badness:=(r*r*r+@'400000) div @'1000000;
+//   end; {that was $r^3/2^{18}$, rounded to the nearest integer}
+// end;
+//
+
+use crate::section_0113::halfword;

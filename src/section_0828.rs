@@ -25,6 +25,19 @@
 /// the current breakpoint under consideration
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static cur_p: pointer = null;
+// @!second_pass:boolean; {is this our second attempt to break this paragraph?}
+/// is this our second attempt to break this paragraph?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static second_pass: boolean = false;
+// @!final_pass:boolean; {is this our final attempt to break this paragraph?}
+/// is this our final attempt to break this paragraph?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static final_pass: boolean = false;
+// @!threshold:integer; {maximum badness on feasible lines}
+/// maximum badness on feasible lines
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static threshold: integer = 0;
+
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::pointer;
@@ -32,10 +45,11 @@ use crate::section_0115::pointer;
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::null;
 
-// @!second_pass:boolean; {is this our second attempt to break this paragraph?}
-// @!final_pass:boolean; {is this our final attempt to break this paragraph?}
-// @!threshold:integer; {maximum badness on feasible lines}
-//
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::boolean;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::integer;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};

@@ -207,7 +207,17 @@ macro_rules! int_par {
     };
 }
 // @d pretolerance==int_par(pretolerance_code)
+macro_rules! pretolerance {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::pretolerance_code)
+    };
+}
 // @d tolerance==int_par(tolerance_code)
+macro_rules! tolerance {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tolerance_code)
+    };
+}
 // @d line_penalty==int_par(line_penalty_code)
 // @d hyphen_penalty==int_par(hyphen_penalty_code)
 // @d ex_hyphen_penalty==int_par(ex_hyphen_penalty_code)

@@ -129,7 +129,12 @@ macro_rules! hang_indent {
 // @d h_offset==dimen_par(h_offset_code)
 // @d v_offset==dimen_par(v_offset_code)
 // @d emergency_stretch==dimen_par(emergency_stretch_code)
-//
+macro_rules! emergency_stretch {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::emergency_stretch_code)
+    };
+}
+
 // @p procedure print_length_param(@!n:integer);
 pub(crate) fn print_length_param(globals: &mut TeXGlobals, n: integer) {
     // begin case n of

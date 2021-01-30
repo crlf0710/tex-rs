@@ -1299,7 +1299,10 @@ reversing_order_items!({
             mod section_0824_to_0827;
             mod section_0828;
             mod section_0829_to_0861;
-            mod section_0862_to_0864;
+            mod section_0862;
+            #[macro_use]
+            mod section_0863;
+            mod section_0864;
             #[macro_use]
             mod section_0865;
             mod section_0866_to_0875;
