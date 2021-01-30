@@ -30,9 +30,20 @@ macro_rules! set_glue_ratio_one {
     }
 }
 // @d float(#) == # {convert from |glue_ratio| to type |real|}
+/// convert from `glue_ratio` to type `real`
+macro_rules! float {
+    ($val:expr) => {
+        $val
+    }
+}
 // @d unfloat(#) == # {convert from |real| to type |glue_ratio|}
 // @d float_constant(#) == #.0 {convert |integer| constant to |real|}
-//
+/// convert `integer` constant to `real`
+macro_rules! float_constant {
+    ($val:expr) => {
+        $val as crate::pascal::real
+    }
+}
 // @<Types...@>=
 // @!glue_ratio=real; {one-word representation of a glue expansion factor}
 

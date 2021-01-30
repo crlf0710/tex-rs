@@ -7,6 +7,17 @@
 //! Recursive calls on |show_node_list| therefore use the following pattern:
 //
 // @d node_list_display(#)==
-//   begin append_char("."); show_node_list(#); flush_char;
-//   end {|str_room| need not be checked; see |show_box| below}
-//
+macro_rules! node_list_display {
+    ($globals:expr, $p:expr) => {{
+        // begin append_char("."); show_node_list(#); flush_char;
+        append_char(make_globals_string_view!($globals), ASCII_code_literal!(b'.'));
+        show_node_list($globals, $p as _);
+        flush_char($globals);
+        // end {|str_room| need not be checked; see |show_box| below}
+        /// `str_room` need not be checked; see `show_box` below
+        const _ : () = ();
+        use crate::section_0004::TeXGlobalsStringView;
+        use crate::section_0042::append_char;
+        use crate::section_0042::flush_char;
+    }}
+}

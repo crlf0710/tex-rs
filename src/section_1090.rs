@@ -3,7 +3,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1090 {
     ($globals:expr, $abs_mode_plus_cur_cmd:expr) => {{
         // vmode+start_par: new_graf(cur_chr>0);
         if $abs_mode_plus_cur_cmd == vmode as u16 + start_par as u16 {
-            new_graf($globals, !$globals.cur_chr.is_zero());
+            new_graf($globals, !$globals.cur_chr.is_zero())?;
             use crate::section_1091::new_graf;
             true
         }
@@ -26,7 +26,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1090 {
             $abs_mode_plus_cur_cmd == vmode as u16 + no_boundary as u16 {
             // begin back_input; new_graf(true);
             back_input($globals);
-            new_graf($globals, true);
+            new_graf($globals, true)?;
             // end;
             use crate::section_1091::new_graf;
             true

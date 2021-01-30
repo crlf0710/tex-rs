@@ -85,6 +85,11 @@ macro_rules! par_shape_ptr {
 }
 // @d output_routine==equiv(output_routine_loc)
 // @d every_par==equiv(every_par_loc)
+macro_rules! every_par {
+    ($globals:expr) => {
+        equiv!($globals, crate::section_0230::every_par_loc)
+    };
+}
 // @d every_math==equiv(every_math_loc)
 // @d every_display==equiv(every_display_loc)
 // @d every_hbox==equiv(every_hbox_loc)

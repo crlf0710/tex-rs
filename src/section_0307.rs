@@ -105,6 +105,8 @@ pub(crate) const r#macro: quarterword = 5;
 /// `token_type` code for output routines
 pub(crate) const output_text: quarterword = 6;
 // @d every_par_text=7 {|token_type| code for \.{\\everypar}}
+/// `token_type` code for `\everypar`
+pub(crate) const every_par_text: quarterword = 7;
 // @d every_math_text=8 {|token_type| code for \.{\\everymath}}
 // @d every_display_text=9 {|token_type| code for \.{\\everydisplay}}
 // @d every_hbox_text=10 {|token_type| code for \.{\\everyhbox}}

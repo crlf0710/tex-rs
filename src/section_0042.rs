@@ -31,6 +31,11 @@ pub(crate) fn append_char(globals: TeXGlobalsStringView<'_>, val: ASCII_code) {
 }
 
 // @d flush_char == decr(pool_ptr) {forget the last character in the pool}
+/// forget the last character in the pool
+pub(crate) fn flush_char(globals: &mut TeXGlobals) {
+    decr!(globals.pool_ptr);
+}
+
 // @d str_room(#) == {make sure that the pool hasn't overflowed}
 /// make sure that the pool hasn't overflowed
 pub(crate) fn str_room(globals: &mut TeXGlobals, bytes_count: integer) {

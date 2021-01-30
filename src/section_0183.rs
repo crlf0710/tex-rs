@@ -10,10 +10,13 @@ macro_rules! Display_node_p {
         else {
             let type_p = r#type!($globals, $p as pointer);
             // hlist_node,vlist_node,unset_node: @<Display box |p|@>;
+            if type_p == hlist_node || type_p == vlist_node || type_p == unset_node {
+                Display_box_p!($globals, $p);
+            }
             // rule_node: @<Display rule |p|@>;
             // ins_node: @<Display insertion |p|@>;
             // whatsit_node: @<Display the whatsit node |p|@>;
-            if type_p == whatsit_node {
+            else if type_p == whatsit_node {
                 Display_the_whatsit_node_p!($globals, $p);
             }
             // glue_node: @<Display glue |p|@>;
@@ -41,10 +44,13 @@ macro_rules! Display_node_p {
             }
             // endcases
         }
+        use crate::section_0135::hlist_node;
+        use crate::section_0137::vlist_node;
         use crate::section_0143::ligature_node;
         use crate::section_0146::whatsit_node;
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
+        use crate::section_0159::unset_node;
         use crate::section_0176::print_font_and_char;
     }}
 }

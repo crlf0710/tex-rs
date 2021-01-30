@@ -94,6 +94,11 @@ macro_rules! dimen_par {
     };
 }
 // @d par_indent==dimen_par(par_indent_code)
+macro_rules! par_indent {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::par_indent_code)
+    }
+}
 // @d math_surround==dimen_par(math_surround_code)
 // @d line_skip_limit==dimen_par(line_skip_limit_code)
 // @d hsize==dimen_par(hsize_code)
