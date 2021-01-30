@@ -12,8 +12,8 @@
 //! Similarly, there is some conditional code delimited by
 //! `$|stat|\ldots|tats|$' that is intended for use when statistics are to be
 //! kept about \TeX's memory usage.  The |stat| $\ldots$ |tats| code also
-//! implements diagnostic information for \.{\\tracingparagraphs} and
-//! \.{\\tracingpages}.
+//! implements diagnostic information for \.{\\tracingparagraphs},
+//! \.{\\tracingpages}, and \.{\\tracingrestores}.
 //! @^debugging@>
 //!
 //! @d debug==@{ {change this to `$\\{debug}\equiv\null$' when debugging}

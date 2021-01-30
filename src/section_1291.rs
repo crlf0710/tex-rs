@@ -3,7 +3,7 @@
 // @d show_code=0 { \.{\\show} }
 // @d show_box_code=1 { \.{\\showbox} }
 // @d show_the_code=2 { \.{\\showthe} }
-// @d show_lists=3 { \.{\\showlists} }
+// @d show_lists_code=3 { \.{\\showlists} }
 pub(crate) enum show_kind {
     /// `\show`
     show_code = 0,
@@ -12,7 +12,7 @@ pub(crate) enum show_kind {
     /// `\showthe`
     show_the_code = 2,
     /// `\showlists`
-    show_lists = 3,
+    show_lists_code = 3,
 }
 
 // @<Put each...@>=
@@ -28,9 +28,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1291(globals: &m
     // primitive("showthe",xray,show_the_code);
     primitive(globals, strpool_str!("showthe"), xray, show_kind::show_the_code as _);
     // @!@:show_the_}{\.{\\showthe} primitive@>
-    // primitive("showlists",xray,show_lists);
-    primitive(globals, strpool_str!("showlists"), xray, show_kind::show_lists as _);
-    // @!@:show_lists_}{\.{\\showlists} primitive@>
+    // primitive("showlists",xray,show_lists_code);
+    primitive(globals, strpool_str!("showlists"), xray, show_kind::show_lists_code as _);
+    // @!@:show_lists_code_}{\.{\\showlists} primitive@>
 }
 
 use crate::section_0004::TeXGlobals;

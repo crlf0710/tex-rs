@@ -106,8 +106,8 @@ pub(crate) static skew_char: internal_font_array<integer> = internal_font_array:
 pub(crate) static bchar_label: internal_font_array<font_index> = internal_font_array::default();
 
 // @!font_bchar:array[internal_font_number] of min_quarterword..non_char;
-//   {right boundary character, |non_char| if there is none}
-/// right boundary character, `non_char` if there is none
+//   {boundary character, |non_char| if there is none}
+/// boundary character, `non_char` if there is none
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static font_bchar: internal_font_array<ASCII_code_or_non_char> =
     internal_font_array::default();

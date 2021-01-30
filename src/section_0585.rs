@@ -87,13 +87,13 @@
 //! The parameter is a signed number in two's complement notation, |-128<=b<128|;
 //! if |b<0|, the reference point moves left.
 //!
-//! \yskip\hang|right2| 144 |b[2]|. Same as |right1|, except that |b| is a
+//! \yskip\hang|@!right2| 144 |b[2]|. Same as |right1|, except that |b| is a
 //! two-byte quantity in the range |-32768<=b<32768|.
 //!
-//! \yskip\hang|right3| 145 |b[3]|. Same as |right1|, except that |b| is a
+//! \yskip\hang|@!right3| 145 |b[3]|. Same as |right1|, except that |b| is a
 //! three-byte quantity in the range |@t$-2^{23}$@><=b<@t$2^{23}$@>|.
 //!
-//! \yskip\hang|right4| 146 |b[4]|. Same as |right1|, except that |b| is a
+//! \yskip\hang|@!right4| 146 |b[4]|. Same as |right1|, except that |b| is a
 //! four-byte quantity in the range |@t$-2^{31}$@><=b<@t$2^{31}$@>|.
 //!
 //! \yskip\hang|w0| 147. Set |h:=h+w|; i.e., move right |w| units. With luck,

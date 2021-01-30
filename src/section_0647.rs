@@ -3,7 +3,7 @@
 //! items and appends the resulting material onto the list that ends at
 //! location |adjust_tail|.
 //
-// @< Glob...@>=
+// @<Glob...@>=
 // @!adjust_tail:pointer; {tail of adjustment list}
 /// tail of adjustment list
 #[globals_struct_field(TeXGlobals)]

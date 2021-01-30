@@ -22,7 +22,7 @@
 // @d trie_back(#)==trie[#].lh {backward links in |trie| holes}
 //
 // @<Glob...@>=
-// @!init@!trie_taken:packed array[1..trie_size] of boolean;
+// @!init @!trie_taken:packed array[1..trie_size] of boolean;
 //   {does a family start here?}
 // @t\hskip10pt@>@!trie_min:array[ASCII_code] of trie_pointer;
 //   {the first possible slot for each character}

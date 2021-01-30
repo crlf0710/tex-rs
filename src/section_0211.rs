@@ -25,7 +25,7 @@
 //! \hang|-mmode| stands for math formula mode (not displayed).
 //!
 //! \yskip\noindent The mode is temporarily set to zero while processing \.{\\write}
-//! texts in the |ship_out| routine.
+//! texts.
 //!
 //! Numeric values are assigned to |vmode|, |hmode|, and |mmode| so that
 //! \TeX's ``big semantic switch'' can select the appropriate thing to

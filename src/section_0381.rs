@@ -1,4 +1,4 @@
-//! @ The |get_x_token| procedure is equivalent to two consecutive
+//! @ The |get_x_token| procedure is essentially equivalent to two consecutive
 //! procedure calls: |get_next; x_token|.
 //
 // @p procedure x_token; {|get_x_token| without the initial |get_next|}

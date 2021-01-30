@@ -25,11 +25,11 @@
 //! current character (which may have a ligature/kerning program of its own).
 //!
 //! If the very first instruction of the |lig_kern| array has |skip_byte=255|,
-//! the |next_char| byte is the so-called right boundary character of this font;
+//! the |next_char| byte is the so-called boundary character of this font;
 //! the value of |next_char| need not lie between |bc| and~|ec|.
 //! If the very last instruction of the |lig_kern| array has |skip_byte=255|,
-//! there is a special ligature/kerning program for a left boundary character,
-//! beginning at location |256*op_byte+remainder|.
+//! there is a special ligature/kerning program for a boundary character at the
+//! left, beginning at location |256*op_byte+remainder|.
 //! The interpretation is that \TeX\ puts implicit boundary characters
 //! before and after each consecutive string of characters from the same font.
 //! These implicit characters do not appear in the output, but they can affect

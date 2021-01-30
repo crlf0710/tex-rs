@@ -32,7 +32,7 @@ macro_rules! Interpret_code_c_and_return_if_done {
                 use crate::section_1338::debug_help;
             }
         }
-        // "E": if base_ptr>0 then
+        // "E": if base_ptr>0 then if input_stack[base_ptr].name_field>=256 then
         //   begin print_nl("You want to edit file ");
         // @.You want to edit file x@>
         //   slow_print(input_stack[base_ptr].name_field);

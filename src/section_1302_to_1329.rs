@@ -76,6 +76,8 @@
 //! @ The inverse macros are slightly more complicated, since we need to check
 //! the range of the values we are reading in. We say `|undump(a)(b)(x)|' to
 //! read an integer value |x| that is supposed to be in the range |a<=x<=b|.
+//! System error messages should be suppressed when undumping.
+//! @^system dependencies@>
 //!
 //! @d undump_wd(#)==begin get(fmt_file); #:=fmt_file^;@+end
 //! @d undump_int(#)==begin get(fmt_file); #:=fmt_file^.int;@+end

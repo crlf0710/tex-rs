@@ -5,20 +5,21 @@
 //! |str_room| or |make_string| at this time, because a call on |overflow|
 //! might lead to an infinite loop.
 //! @^system dependencies@>
-//!
-//! Actually there's one way to get error messages, via |prepare_mag|;
-//! but that can't cause infinite recursion.
+//! (Actually there's one way to get error messages, via |prepare_mag|;
+//! but that can't cause infinite recursion.)
 //! @^recursion@>
 //!
-//! This program doesn't bother to close the input files that may still be open.
+//! If |final_cleanup| is bypassed, this program doesn't bother to close
+//! the input files that may still be open.
 
 // @<Last-minute...@>=
 // procedure close_files_and_terminate;
 #[allow(unused_variables)]
 pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
     // var k:integer; {all-purpose index}
-    // begin @<Finish the extensions@>;
+    // begin @<Finish the extensions@>; new_line_char:=-1;
     Finish_the_extensions!(globals);
+    new_line_char!(globals) = -1;
     // @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
     region_stat! {
         if tracing_stats!(globals) > 0 {

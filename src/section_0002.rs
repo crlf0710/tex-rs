@@ -62,9 +62,9 @@
 //! known as `\TeX' [cf.~Stanford Computer Science report CS1027,
 //! November 1984].
 
-// @d banner=='This is TeX, Version 3.14159265' {printed when \TeX\ starts}
+// @d banner=='This is TeX, Version 3.141592653' {printed when \TeX\ starts}
 
 /// printed when `TeX` starts
-pub(crate) const banner: &'static str = "This is TeX-rs, Version 3.14159265";
+pub(crate) const banner: &'static str = "This is TeX-rs, Version 3.141592653";
 
 migration_complete!();

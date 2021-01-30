@@ -13,7 +13,7 @@ macro_rules! Input_the_next_line_of_read_file_m {
             //   print_err("File ended within "); print_esc("read");
             // @.File ended within \\read@>
             //   help1("This \read has unbalanced braces.");
-            //   align_state:=1000000; error;
+            //   align_state:=1000000; limit:=0; error;
             //   end;
             // end;
         }

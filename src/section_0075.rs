@@ -7,7 +7,8 @@
 //!
 //! \hang|term_only| (when |interaction>batch_mode| and |log_file| not yet open);
 //!
-//! \hang|log_only| (when |interaction=batch_mode| and |log_file| is open);
+//! \hang|log_only| (when |interaction=batch_mode| and |log_file| is open,
+//!   or when tracing paragraphs);
 //!
 //! \hang|term_and_log| (when |interaction>batch_mode| and |log_file| is open).
 //

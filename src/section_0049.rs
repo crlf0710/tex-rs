@@ -20,7 +20,7 @@
 //! If character |k| cannot be printed, and |k<@'200|, then character |k+@'100| or
 //! |k-@'100| must be printable; moreover, ASCII codes |[@'41..@'46,
 //! @'60..@'71, @'136, @'141..@'146, @'160..@'171]| must be printable.
-//! Thus, at least 81 printable characters are needed.
+//! Thus, at least 80 printable characters are needed.
 //! @:TeXbook}{\sl The \TeX book@>
 //! @^character set dependencies@>
 //! @^system dependencies@>

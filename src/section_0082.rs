@@ -19,8 +19,9 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
         ASCII_code_literal!(b'.'),
     );
     show_context(globals);
-    // if interaction=error_stop_mode then @<Get user's advice and |return|@>;
-    if globals.interaction == error_stop_mode {
+    // if interaction=error_stop_mode then if selector<>log_only then
+    //   @<Get user's advice and |return|@>;
+    if globals.interaction == error_stop_mode && globals.selector != log_only {
         Get_user_s_advice_and_return!(globals);
     }
     // incr(error_count);
@@ -46,6 +47,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0054::log_only;
 use crate::section_0058::print_char;
 use crate::section_0062::print_nl;
 use crate::section_0073::error_stop_mode;

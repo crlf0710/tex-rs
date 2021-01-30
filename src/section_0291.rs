@@ -14,8 +14,8 @@
 //! number |c| into the text at this point.
 //!
 //! The enclosing \.{\char'173} and \.{\char'175} characters of a macro
-//! definition are omitted, but the final right brace of an output routine
-//! is included at the end of its token list.
+//! definition are omitted, but an output routine
+//! will be enclosed in braces.
 //!
 //! Here is an example macro definition that illustrates these conventions.
 //! After \TeX\ processes the text

@@ -55,8 +55,8 @@ pub(crate) static main_p: pointer = pointer::default();
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static main_s: integer = integer::default();
 
-// @!bchar:halfword; {right boundary character of current font, or |non_char|}
-/// right boundary character of current font, or `non_char`
+// @!bchar:halfword; {boundary character of current font, or |non_char|}
+/// boundary character of current font, or `non_char`
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static bchar: ASCII_code_or_non_char = non_char;
 // @!false_bchar:halfword; {nonexistent character matching |bchar|, or |non_char|}

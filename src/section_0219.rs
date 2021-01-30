@@ -40,8 +40,8 @@ macro_rules! Show_the_auxiliary_field__a {
             // 2: if a.int<>null then
             2 => {
                 if $a[MEMORY_WORD_INT] != null as integer {
-                    // begin print("this will be denominator of:"); show_box(a.int);@+
-                    print($globals, strpool_str!("this will be denominator of:").get() as _);
+                    // begin print("this will begin denominator of:"); show_box(a.int);@+
+                    print($globals, strpool_str!("this will begin denominator of:").get() as _);
                     show_box($globals, $a[MEMORY_WORD_INT] as _);
                 }
                 // end;

@@ -19,7 +19,7 @@ macro_rules! Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__i
         /// left boundary start location, or infinity
         let mut bch_label: integer;
 
-        /// right boundary character, or `non_char`
+        /// boundary character, or `non_char`
         let mut bchar: ASCII_code_or_non_char;
 
         // @<Open |tfm_file| for input@>;

@@ -23,7 +23,7 @@
 //! \yskip\hangg 2) If |save_type(p)=restore_zero|, then |save_index(p)|
 //! is a location in |eqtb| whose current value should be destroyed at the end
 //! of the current group, when it should be
-//! replaced by the current value of |eqtb[undefined_control_sequence]|.
+//! replaced by the value of |eqtb[undefined_control_sequence]|.
 //!
 //! \yskip\hangg 3) If |save_type(p)=insert_token|, then |save_index(p)|
 //! is a token that should be inserted into \TeX's input when the current

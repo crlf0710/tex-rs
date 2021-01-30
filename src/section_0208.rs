@@ -38,8 +38,8 @@ pub(crate) const vskip: quarterword = 27;
 // @d mskip=28 {math glue ( \.{\\mskip} )}
 /// math glue ( `\mskip` )
 pub(crate) const mskip: quarterword = 28;
-// @d kern=29 {fixed space ( \.{\\kern})}
-/// fixed space ( `\kern`)
+// @d kern=29 {fixed space ( \.{\\kern} )}
+/// fixed space ( `\kern` )
 pub(crate) const kern: quarterword = 29;
 // @d mkern=30 {math kern ( \.{\\mkern} )}
 /// math kern ( `\mkern` )

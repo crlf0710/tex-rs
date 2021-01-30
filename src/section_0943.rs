@@ -21,7 +21,7 @@
 //! is |trie_op_ptr|.
 //
 // @<Glob...@>=
-// @!init@! trie_op_hash:array[-trie_op_size..trie_op_size] of 0..trie_op_size;
+// @!init @!trie_op_hash:array[-trie_op_size..trie_op_size] of 0..trie_op_size;
 //   {trie op codes for quadruples}
 /// trie op codes for quadruples
 #[cfg(feature = "initex")]

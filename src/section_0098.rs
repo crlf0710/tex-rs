@@ -13,7 +13,7 @@ pub(crate) fn pause_for_instructions(globals: &mut TeXGlobals) {
     //   print_err("Interruption");
     // @.Interruption@>
     //   help3("You rang?")@/
-    //   ("Try to insert some instructions for me (e.g.,`I\showlists'),")@/
+    //   ("Try to insert an instruction for me (e.g., `I\showlists'),")@/
     //   ("unless you just want to quit by typing `X'.");
     //   deletions_allowed:=false; error; deletions_allowed:=true;
     //   interrupt:=0;

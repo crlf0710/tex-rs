@@ -3,12 +3,12 @@
 // @<If the next character is a parameter number...@>=
 
 macro_rules! If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_token__but_if_it_is_a_left_brace__store_left_brace_end_match__set_hash_brace_and_goto_done {
-    ($globals:expr, $t:expr, $hash_brace:expr, $lbl_done:lifetime, $p:expr, $q:expr) => {{
+    ($globals:expr, $t:expr, $hash_brace:expr, $lbl_done:lifetime, $lbl_continue:lifetime, $p:expr, $q:expr) => {{
         // begin s:=match_token+cur_chr; get_token;
         let s = match_token + $globals.cur_chr.get();
         get_token($globals)?;
-        // if cur_cmd=left_brace then
-        if $globals.cur_cmd == left_brace {
+        // if cur_tok<left_brace_limit then
+        if $globals.cur_tok.get() < left_brace_limit {
             // begin hash_brace:=cur_tok;
             $hash_brace = $globals.cur_tok.get();
             // store_new_token(cur_tok); store_new_token(end_match_token);
@@ -23,7 +23,8 @@ macro_rules! If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_t
             todo!();
             //   begin print_err("You already have nine parameters");
             // @.You already have nine...@>
-            //   help1("I'm going to ignore the # sign you just used."); error;
+            //   help2("I'm going to ignore the # sign you just used,")@/
+            //     ("as well as the token that followed it."); error; goto continue;
             //   end
         }
         // else  begin incr(t);
@@ -45,7 +46,7 @@ macro_rules! If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_t
             // end;
         }
         // end
-        use crate::section_0207::left_brace;
+        use crate::section_0289::left_brace_limit;
         use crate::section_0289::match_token;
         use crate::section_0297::cur_tok_type;
     }}

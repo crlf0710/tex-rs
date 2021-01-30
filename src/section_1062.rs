@@ -1,6 +1,6 @@
 //! @ Many of the actions related to box-making are triggered by the appearance
 //! of braces in the input. For example, when the user says `\.{\\hbox}
-//! \.{to} \.{100pt\{$\langle\,\hbox{hlist}\,\rangle$\}}' in vertical mode,
+//! \.{to} \.{100pt\{$\langle\,\hbox{\rm hlist}\,\rangle$\}}' in vertical mode,
 //! the information about the box size (100pt, |exactly|) is put onto |save_stack|
 //! with a level boundary word just above it, and |cur_group:=adjusted_hbox_group|;
 //! \TeX\ enters restricted horizontal mode to process the hlist. The right

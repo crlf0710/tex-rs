@@ -1,7 +1,7 @@
 //! @ @<Local variables for hyphenation@>=
 //! @!i,@!j,@!l:0..65; {indices into |hc| or |hu|}
 //! @!q,@!r,@!s:pointer; {temporary registers for list manipulation}
-//! @!bchar:halfword; {right boundary character of hyphenated word, or |non_char|}
+//! @!bchar:halfword; {boundary character of hyphenated word, or |non_char|}
 //!
 //! @ \TeX\ will never insert a hyphen that has fewer than
 //! \.{\\lefthyphenmin} letters before it or fewer than
@@ -123,7 +123,7 @@
 //! function reconstitute(@!j,@!n:small_number;@!bchar,@!hchar:halfword):
 //!   small_number;
 //! label continue,done;
-//! var @!p:pointer; {temporary register for list manipulation}
+//! var @!p:pointer; {temporary register for list manipulation} 
 //! @!t:pointer; {a node being appended to}
 //! @!q:four_quarters; {character information or a lig/kern instruction}
 //! @!cur_rh:halfword; {hyphen character for ligature testing}

@@ -96,8 +96,8 @@
 //! @d sub_mlist=3 {|math_type| when the attribute is a formula}
 //! @d math_text_char=4 {|math_type| when italic correction is dubious}
 //!
-//! @ Each portion of a formula is classified as Ord, Op, Bin, Rel, Ope,
-//! Clo, Pun, or Inn, for purposes of spacing and line breaking. An
+//! @ Each portion of a formula is classified as Ord, Op, Bin, Rel, Open,
+//! Close, Punct, or Inner, for purposes of spacing and line breaking. An
 //! |ord_noad|, |op_noad|, |bin_noad|, |rel_noad|, |open_noad|, |close_noad|,
 //! |punct_noad|, or |inner_noad| is used to represent portions of the various
 //! types. For example, an `\.=' sign in a formula leads to the creation of a
@@ -119,10 +119,10 @@
 //! @d op_noad=ord_noad+1 {|type| of a noad classified Op}
 //! @d bin_noad=ord_noad+2 {|type| of a noad classified Bin}
 //! @d rel_noad=ord_noad+3 {|type| of a noad classified Rel}
-//! @d open_noad=ord_noad+4 {|type| of a noad classified Ope}
-//! @d close_noad=ord_noad+5 {|type| of a noad classified Clo}
-//! @d punct_noad=ord_noad+6 {|type| of a noad classified Pun}
-//! @d inner_noad=ord_noad+7 {|type| of a noad classified Inn}
+//! @d open_noad=ord_noad+4 {|type| of a noad classified Open}
+//! @d close_noad=ord_noad+5 {|type| of a noad classified Close}
+//! @d punct_noad=ord_noad+6 {|type| of a noad classified Punct}
+//! @d inner_noad=ord_noad+7 {|type| of a noad classified Inner}
 //! @d limits=1 {|subtype| of |op_noad| whose scripts are to be above, below}
 //! @d no_limits=2 {|subtype| of |op_noad| whose scripts are to be normal}
 //!

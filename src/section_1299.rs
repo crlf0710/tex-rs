@@ -10,8 +10,8 @@
 //!
 //! The global variable |format_ident| is a string that is printed right
 //! after the |banner| line when \TeX\ is ready to start. For \.{INITEX} this
-//! string says simply `\.{(INITEX)}'; for other versions of \TeX\ it says,
-//! for example, `\.{(preloaded format=plain 1982.11.19)}', showing the year,
+//! string says simply `\.{ (INITEX)}'; for other versions of \TeX\ it says,
+//! for example, `\.{ (preloaded format=plain 1982.11.19)}', showing the year,
 //! month, and day that the format file was created. We have |format_ident=0|
 //! before \TeX's tables are loaded.
 //

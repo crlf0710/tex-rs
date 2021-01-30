@@ -86,7 +86,7 @@
 //!   else cur_i:=null_character;
 //!   if not(char_exists(cur_i)) then
 //!     begin char_warning(cur_f,qo(cur_c));
-//!     math_type(a):=empty;
+//!     math_type(a):=empty; cur_i:=null_character;
 //!     end;
 //!   end;
 //! end;
@@ -473,7 +473,7 @@
 //!
 //! @ The numerator and denominator must be separated by a certain minimum
 //! clearance, called |clr| in the following program. The difference between
-//! |clr| and the actual clearance is |2delta|.
+//! |clr| and the actual clearance is twice |delta|.
 //!
 //! @<Adjust \(s)|shift_up| and |shift_down| for the case of no fraction line@>=
 //! begin if cur_style<text_style then clr:=7*default_rule_thickness
@@ -856,8 +856,7 @@
 //! ord_noad,vcenter_noad,over_noad,under_noad: do_nothing;
 //! radical_noad: s:=radical_noad_size;
 //! accent_noad: s:=accent_noad_size;
-//! fraction_noad: begin t:=inner_noad; s:=fraction_noad_size;
-//!   end;
+//! fraction_noad: s:=fraction_noad_size;
 //! left_noad,right_noad: t:=make_left_right(q,style,max_d,max_h);
 //! style_node: @<Change the current style and |goto delete_q|@>;
 //! whatsit_node,penalty_node,rule_node,disc_node,adjust_node,ins_node,mark_node,
@@ -897,7 +896,7 @@
 //! goto delete_q;
 //! end
 //!
-//! @ The inter-element spacing in math formulas depends on a $8\times8$ table that
+//! @ The inter-element spacing in math formulas depends on an $8\times8$ table that
 //! \TeX\ preloads as a 64-digit string. The elements of this string have the
 //! following significance:
 //! $$\vbox{\halign{#\hfil\cr

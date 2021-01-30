@@ -13,8 +13,8 @@
 //! @^Plass, Michael Frederick@>
 //! @^Knuth, Donald Ervin@>
 //! the author in 1977, subsequently generalized and improved by the same two
-//! people in 1980. A detailed discussion appears in {\sl SOFTWARE---Practice
-//! \AM\ Experience \bf11} (1981), 1119--1184, where it is shown that the
+//! people in 1980. A detailed discussion appears in {\sl Software---Practice
+//! and Experience \bf11} (1981), 1119--1184, where it is shown that the
 //! line-breaking problem can be regarded as a special case of the problem of
 //! computing the shortest path in an acyclic network. The cited paper includes
 //! numerous examples and describes the history of line breaking as it has been

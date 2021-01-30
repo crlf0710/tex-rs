@@ -8,7 +8,8 @@
 /// word to be hyphenated
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static hc: [ASCII_code; 66] = [ASCII_code::default(); 66];
-// @!hn:small_number; {the number of positions occupied in |hc|}
+// @!hn:0..64; {the number of positions occupied in |hc|;
+//                                   not always a |small_number|}
 // @!ha,@!hb:pointer; {nodes |ha..hb| should be replaced by the hyphenated result}
 // @!hf:internal_font_number; {font number of the letters in |hc|}
 // @!hu:array[0..63] of 0..256; {like |hc|, before conversion to lowercase}

@@ -1,7 +1,7 @@
 //! @ The |new_null_box| function returns a pointer to an |hlist_node| in
 //! which all subfields have the values corresponding to `\.{\\hbox\{\}}'.
-//! The |subtype| field is set to |min_quarterword|, since that's the desired
-//! |span_count| value if this |hlist_node| is changed to an |unset_node|.
+//! (The |subtype| field is set to |min_quarterword|, for historic reasons
+//! that are no longer relevant.)
 //
 // @p function new_null_box:pointer; {creates a new box node}
 /// creates a new box node

@@ -29,7 +29,9 @@
 pub(crate) fn debug_help(globals: &mut TeXGlobals) {
     // label breakpoint,exit;
     // var k,@!l,@!m,@!n:integer;
-    // begin loop begin wake_up_terminal;
+    // begin clear_terminal;
+    clear_terminal(globals);
+    //   loop begin wake_up_terminal;
     loop {
         wake_up_terminal(globals);
         // print_nl("debug # (-1 to exit):"); update_terminal;
@@ -40,8 +42,8 @@ pub(crate) fn debug_help(globals: &mut TeXGlobals) {
         // read(term_in,m);
         // if m<0 then return
         // else if m=0 then
-        //   begin goto breakpoint;@\ {go to every label at least once}
-        //   breakpoint: m:=0; @{'BREAKPOINT'@}@\
+        //   begin goto breakpoint;@/ {go to every declared label at least once}
+        //   breakpoint: m:=0; @{'BREAKPOINT'@}@/
         //   end
         // else  begin read(term_in,n);
         //   case m of
@@ -58,4 +60,5 @@ pub(crate) fn debug_help(globals: &mut TeXGlobals) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0034::wake_up_terminal;
 use crate::section_0034::update_terminal;
+use crate::section_0034::clear_terminal;
 use crate::section_0062::print_nl;

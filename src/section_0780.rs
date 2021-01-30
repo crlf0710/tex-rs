@@ -40,6 +40,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0780(globals: &m
     primitive(globals, strpool_str!("crcr"), car_ret, cr_cr_code as _);
     // @!@:cr_cr_}{\.{\\crcr} primitive@>
     // text(frozen_end_template):="endtemplate"; text(frozen_endv):="endtemplate";
+    // @.endtemplate@>
     text!(globals, frozen_end_template as pointer) = strpool_str!("endtemplate").get() as _;
     text!(globals, frozen_endv as pointer) = strpool_str!("endtemplate").get() as _;
     // eq_type(frozen_endv):=endv; equiv(frozen_endv):=null_list;

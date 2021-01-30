@@ -11,8 +11,8 @@
 //! at the value |p| that is returned. (If |p=temp_head|, the list is empty.)
 //
 // @p function str_toks(@!b:pool_pointer):pointer;
-//   {changes the string |str_pool[b..pool_ptr]| to a token list}
-/// changes the string `str_pool[b..pool_ptr]` to a token list
+//   {converts |str_pool[b..pool_ptr-1]| to a token list}
+/// converts `str_pool[b..pool_ptr-1]` to a token list
 #[allow(unused_variables)]
 pub(crate) fn str_toks(globals: &mut TeXGlobals, b: pool_pointer) -> pointer {
     // var p:pointer; {tail of the token list}

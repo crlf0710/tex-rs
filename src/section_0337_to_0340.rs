@@ -30,7 +30,8 @@
 //!
 //! @ The recovery procedure can't be fully understood without knowing more
 //! about the \TeX\ routines that should be aborted, but we can sketch the
-//! ideas here:  For a runaway definition we will insert a right brace; for a
+//! ideas here:  For a runaway definition or a runaway balanced text
+//! we will insert a right brace; for a
 //! runaway preamble, we will insert a special \.{\\cr} token and a right
 //! brace; and for a runaway argument, we will set |long_state| to
 //! |outer_call| and insert \.{\\par}.

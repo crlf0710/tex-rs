@@ -43,7 +43,7 @@ pub(crate) fn read_font_info(
     // @!a,@!b,@!c,@!d:eight_bits; {byte variables}
     // @!qw:four_quarters;@!sw:scaled; {accumulators}
     // @!bch_label:integer; {left boundary start location, or infinity}
-    // @!bchar:0..256; {right boundary character, or 256}
+    // @!bchar:0..256; {boundary character, or 256}
     // @!z:scaled; {the design size or the ``at'' size}
     // @!alpha:integer;@!beta:1..16;
     //   {auxiliary quantities used in fixed-point multiplication}

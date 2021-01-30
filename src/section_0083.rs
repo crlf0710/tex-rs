@@ -2,11 +2,15 @@
 // @<Get user's advice...@>=
 macro_rules! Get_user_s_advice_and_return {
     ($globals:expr) => {
-        // loop@+begin continue: clear_for_error_prompt; prompt_input("? ");
+        // loop@+begin continue: if interaction<>error_stop_mode then return;
+        //   clear_for_error_prompt; prompt_input("? ");
         loop {
             region_backward_label!(
                 'continue_ <-
                 {
+                    if $globals.interaction != error_stop_mode {
+                        return_nojump!();
+                    }
                     clear_for_error_prompt($globals);
                     prompt_input!($globals, strpool_str!("? "));
                     // @.?\relax@>

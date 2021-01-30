@@ -31,7 +31,7 @@ pub(crate) fn scan_toks(
     macro_def: boolean,
     xpand: boolean,
 ) -> TeXResult<pointer> {
-    // label found,done,done1,done2;
+    // label found,continue,done,done1,done2;
     // var t:halfword; {token representing the highest parameter number}
     /// token representing the highest parameter number
     let mut t: cur_tok_repr;

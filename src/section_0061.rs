@@ -1,8 +1,8 @@
 //! @ Here is the very first thing that \TeX\ prints: a headline that identifies
 //! the version number and format package. The |term_offset| variable is temporarily
-//! incorrect, but the discrepancy is not serious since we assume that the banner
-//! and format identifier together will occupy at most |max_print_line|
-//! character positions.
+//! incorrect, but the discrepancy is not serious since we assume that this
+//! part of the program is system dependent.
+//! @^system dependencies@>
 
 // @<Initialize the output...@>=
 macro_rules! Initialize_the_output_routines_0061 {

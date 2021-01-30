@@ -1,5 +1,5 @@
 //! @ Notice that a code like \.{\^\^8} becomes \.x if not followed by a hex digit.
-
+//! 
 // @d is_hex(#)==(((#>="0")and(#<="9"))or((#>="a")and(#<="f")))
 macro_rules! is_hex {
     ($val:expr) => {
@@ -42,7 +42,7 @@ macro_rules! If_this_sup_mark_starts_an_expanded_character_like___A__or__df__the
                 if c < 0o200 {
                     /// yes we have an expanded char
                     const _ : () = ();
-                    // begin loc:=loc+2;
+                    // begin loc:=loc+2; 
                     loc!($globals) = loc!($globals) + 2;
                     // if is_hex(c) then if loc<=limit then
                     if is_hex!(c) {

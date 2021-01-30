@@ -496,7 +496,7 @@
 //! in internal vertical mode, and \TeX\ will do the following:
 //!
 //! @<Resume the page builder after an output routine has come to an end@>=
-//! begin if (loc<>null) or
+//! begin if (loc<>null) or 
 //!  ((token_type<>output_text)and(token_type<>backed_up)) then
 //!   @<Recover from an unbalanced output routine@>;
 //! end_token_list; {conserve stack space in case more outputs are triggered}

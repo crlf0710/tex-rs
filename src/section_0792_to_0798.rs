@@ -16,6 +16,7 @@
 //! @<Copy the templates from node |cur_loop| into node |p|@>;
 //! cur_loop:=link(cur_loop);
 //! link(p):=new_glue(glue_ptr(cur_loop));
+//! subtype(link(p)):=tab_skip_code+1;
 //! end
 //!
 //! @ @<Copy the templates from node |cur_loop| into node |p|@>=

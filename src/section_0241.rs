@@ -2,31 +2,44 @@
 //! input and output, establishes the initial values of the date and time.
 //! @^system dependencies@>
 //! Since standard \PASCAL\ cannot provide such information, something special
-//! is needed. The program here simply specifies July 4, 1776, at noon; but
-//! users probably want a better approximation to the truth.
+//! is needed. The program here simply assumes that suitable values appear in
+//! the global variables \\{sys\_time}, \\{sys\_day}, \\{sys\_month}, and
+//! \\{sys\_year} (which are initialized to noon on 4 July 1776,
+//! in case the implementor is careless).
 //
 // @p procedure fix_date_and_time;
 #[allow(unused_variables)]
 pub(crate) fn fix_date_and_time(globals: &mut TeXGlobals) {
-    // begin time:=12*60; {minutes since midnight}
+    // begin sys_time:=12*60;
+    {
+        globals.sys_time = 12 * 60;
+    }
+    // sys_day:=4; sys_month:=7; sys_year:=1776;  {self-evident truths}
+    /// self-evident truths
+    {
+        globals.sys_day = 4;
+        globals.sys_month = 7;
+        globals.sys_year = 1776;
+    }
+    // time:=sys_time; {minutes since midnight}
     /// minutes since midnight
     {
-        time!(globals) = 12 * 60;
+        time!(globals) = globals.sys_time;
     }
-    // day:=4; {fourth day of the month}
+    // day:=sys_day; {day of the month}
     /// fourth day of the month
     {
-        day!(globals) = 4;
+        day!(globals) = globals.sys_day;
     }
-    // month:=7; {seventh month of the year}
+    // month:=sys_month; {month of the year}
     /// seventh month of the year
     {
-        month!(globals) = 7;
+        month!(globals) = globals.sys_month;
     }
-    // year:=1776; {Anno Domini}
+    // year:=sys_year; {Anno Domini}
     /// Anno Domini
     {
-        year!(globals) = 1776;
+        year!(globals) = globals.sys_year;
     }
     // end;
 }

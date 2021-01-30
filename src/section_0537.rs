@@ -1,5 +1,8 @@
 //! @ Let's turn now to the procedure that is used to initiate file reading
 //! when an `\.{\\input}' command is being processed.
+//! Beware: For historic reasons, this code foolishly conserves a tiny bit
+//! of string pool space; but that can confuse the interactive `\.E' option.
+//! @^system dependencies@>
 //
 // @p procedure start_input; {\TeX\ will \.{\\input} something}
 /// `TeX` will `\input` something
@@ -88,9 +91,13 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     update_terminal(globals);
     // state:=new_line;
     state!(globals) = new_line;
-    // if name=str_ptr-1 then {we can conserve string pool space now}
-    //   begin flush_string; name:=cur_name;
-    //   end;
+    // if name=str_ptr-1 then {conserve string pool space (but see note above)}
+    if name!(globals) as integer == globals.str_ptr.get() as integer - 1 {
+        // begin flush_string; name:=cur_name;
+        flush_string(globals);
+        name!(globals) = globals.cur_name.get() as _;
+        // end;
+    }
     // @<Read the first line of the new file@>;
     Read_the_first_line_of_the_new_file!(globals);
     // end;
@@ -105,6 +112,7 @@ use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0027::a_open_in;
 use crate::section_0034::update_terminal;
 use crate::section_0040::length;
+use crate::section_0044::flush_string;
 use crate::section_0057::print_ln;
 use crate::section_0058::print_char;
 use crate::section_0060::slow_print;

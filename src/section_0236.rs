@@ -134,8 +134,8 @@ pub(crate) const max_dead_cycles_code: quarterword = 40;
 // @d hang_after_code=41 {hanging indentation changes after this many lines}
 /// hanging indentation changes after this many lines
 pub(crate) const hang_after_code: quarterword = 41;
-// @d floating_penalty_code=42 {penalty for insertions heldover after a split}
-/// penalty for insertions heldover after a split
+// @d floating_penalty_code=42 {penalty for insertions held over after a split}
+/// penalty for insertions held over after a split
 pub(crate) const floating_penalty_code: quarterword = 42;
 // @d global_defs_code=43 {override \.{\\global} specifications}
 /// override `\global` specifications

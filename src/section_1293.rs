@@ -9,8 +9,8 @@ pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     |'common_ending|
     {
     // begin case cur_chr of
-    // show_lists: begin begin_diagnostic; show_activities;
-    if globals.cur_chr.get() == show_lists as chr_code_repr {
+    // show_lists_code: begin begin_diagnostic; show_activities;
+    if globals.cur_chr.get() == show_lists_code as chr_code_repr {
         begin_diagnostic(globals);
         show_activities(globals);
         // end;

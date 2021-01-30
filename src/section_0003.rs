@@ -9,7 +9,7 @@
 //! if necessary. (\ph\ is Charles Hedrick's modification of a compiler
 //! @^Hedrick, Charles Locke@>
 //! for the DECsystem-10 that was originally developed at the University of
-//! Hamburg; cf.\ {\sl SOFTWARE---Practice \AM\ Experience \bf6} (1976),
+//! Hamburg; cf.\ {\sl Software---Practice and Experience \bf6} (1976),
 //! 29--42. The \TeX\ program below is intended to be adaptable, without
 //! extensive changes, to most other versions of \PASCAL, so it does not fully
 //! use the admirable features of \ph. Indeed, a conscious effort has been

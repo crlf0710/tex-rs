@@ -9,7 +9,7 @@
 /// prints an integer in decimal form
 #[allow(unused_variables)]
 pub(crate) fn print_int(globals: &mut TeXGlobals, mut n: integer) {
-    // var k:0..23; {index to current digit; we assume that $|n|<10^{23}$}
+    // var k:0..23; {index to current digit; we assume that $\vert n\vert<10^{23}$}
     /// index to current digit; we assume that `|n|<10^{23}`
     let mut k;
     // @!m:integer; {used to negate |n| in possibly dangerous cases}

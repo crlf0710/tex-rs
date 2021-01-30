@@ -3,7 +3,8 @@
 //! @.Type <return> to proceed...@>
 //! print_nl("R to run without stopping, Q to run quietly,");@/
 //! print_nl("I to insert something, ");
-//! if base_ptr>0 then print("E to edit your file,");
+//! if base_ptr>0 then if input_stack[base_ptr].name_field>=256 then
+//!   print("E to edit your file,");
 //! if deletions_allowed then
 //!   print_nl("1 or ... or 9 to ignore the next 1 to 9 tokens of input,");
 //! print_nl("H for help, X to quit.");

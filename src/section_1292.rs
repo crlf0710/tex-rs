@@ -13,8 +13,8 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1292 {
             else if $chr_code.get() == show_the_code as chr_code_repr {
                 print_esc($globals, strpool_str!("showthe"));
             }
-            // show_lists:print_esc("showlists");
-            else if $chr_code.get() == show_lists as chr_code_repr {
+            // show_lists_code:print_esc("showlists");
+            else if $chr_code.get() == show_lists_code as chr_code_repr {
                 print_esc($globals, strpool_str!("showlists"));
             }
             // othercases print_esc("show")

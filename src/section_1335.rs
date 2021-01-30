@@ -7,7 +7,7 @@
 pub(crate) fn final_cleanup(globals: &mut TeXGlobals) {
     // label exit;
     // var c:small_number; {0 for \.{\\end}, 1 for \.{\\dump}}
-    // begin c:=cur_chr;
+    // begin c:=cur_chr; if c<>1 then new_line_char:=-1;
     // if job_name=0 then open_log_file;
     // while input_ptr>0 do
     //   if state=token_list then end_token_list@+else end_file_reading;

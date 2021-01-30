@@ -46,7 +46,8 @@ pub(crate) static last_penalty: integer = 0;
 /// used to implement `\lastkern`
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static last_kern: scaled = scaled::zero();
-// @!insert_penalties:integer; {sum of the penalties for held-over insertions}
+// @!insert_penalties:integer; {sum of the penalties for insertions
+//   that were held over}
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0101::scaled;

@@ -35,7 +35,7 @@
 //! template is being scanned;
 //!
 //! \hang|backed_up|, if the token list being scanned has been inserted as
-//! `to be read again'.
+//! `to be read again';
 //!
 //! \hang|inserted|, if the token list being scanned has been inserted as
 //! the text expansion of a \.{\\count} or similar variable;

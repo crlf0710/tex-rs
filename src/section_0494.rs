@@ -1,5 +1,5 @@
 //! @ Here is a procedure that ignores text until coming to an \.{\\or},
-//! \.{\\else}, or \.{\\fi} at level zero of $\.{\\if}\ldots\.{\\fi}$
+//! \.{\\else}, or \.{\\fi} at the current level of $\.{\\if}\ldots\.{\\fi}$
 //! nesting. After it has acted, |cur_chr| will indicate the token that
 //! was found, but |cur_tok| will not be set (because this makes the
 //! procedure run faster).

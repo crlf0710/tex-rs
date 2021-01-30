@@ -25,7 +25,7 @@
 //!   if is_char_node(q) then goto done1;
 //!   if non_discardable(q) then goto done1;
 //!   if type(q)=kern_node then if subtype(q)<>explicit then goto done1;
-//!   r:=q; {now |type(q)=glue_node|, |kern_node|, |math_node| or |penalty_node|}
+//!   r:=q; {now |type(q)=glue_node|, |kern_node|, |math_node|, or |penalty_node|}
 //!   end;
 //! done1: if r<>temp_head then
 //!   begin link(r):=null; flush_node_list(link(temp_head));
