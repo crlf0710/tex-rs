@@ -53,7 +53,12 @@ pub(crate) static trie_r: Box<trie_pointer_array<trie_pointer>> = Box::new(trie_
 pub(crate) static trie_ptr: trie_pointer = trie_pointer::default();
 // @t\hskip10pt@>@!trie_hash:packed array[trie_pointer] of trie_pointer;
 //   {used to identify equivalent subtries}
+/// used to identify equivalent subtries
+#[cfg(feature = "initex")]
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static trie_hash: Box<trie_pointer_array<trie_pointer>> = Default::default();
 // tini
+const _ : () = ();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0018::ASCII_code;

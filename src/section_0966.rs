@@ -13,6 +13,7 @@ pub(crate) fn init_trie(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!r,@!s:trie_pointer; {used to clean up the packed |trie|}
     // @!h:two_halves; {template used to zero out |trie|'s holes}
     // begin @<Get ready to compress the trie@>;
+    Get_ready_to_compress_the_trie!(globals);
     // if trie_root<>0 then
     if trie_root!(globals) != 0 {
         // begin first_fit(trie_root); trie_pack(trie_root);

@@ -26,6 +26,7 @@
 // @!trie_pointer=0..trie_size; {an index into |trie|}
 /// an index into `trie`
 pub(crate) type trie_pointer = u16_from_0_to_n<trie_size_TYPENUM>;
+pub(crate) type trie_pointer_repr = u16;
 
 type trie_pointer_array_LENGTH_TYPENUM = typenum::op!(trie_size_TYPENUM + U1);
 

@@ -41,6 +41,15 @@ pub(crate) static hyf_next: trie_op_val_array<quarterword> = trie_op_val_array::
 use crate::section_0113::quarterword;
 
 // @!op_start:array[ASCII_code] of 0..trie_op_size; {offset for current language}
+/// offset for current language
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static op_start: [u16_from_0_to_n<trie_op_size_TYPENUM>; 256] = [u16_from_0_to_n::default(); 256];
+
+#[globals_struct_use(TeXGlobals)]
+use crate::pascal::u16_from_0_to_n;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0011::trie_op_size_TYPENUM;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};

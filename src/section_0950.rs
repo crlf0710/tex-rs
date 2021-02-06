@@ -19,7 +19,14 @@
 //! entries.
 //
 // @d trie_ref==trie_hash {where linked trie families go into |trie|}
+/// where linked trie families go into `trie`
+macro_rules! trie_ref {
+    ($globals:expr, $v:expr) => {
+        $globals.trie_hash[$v]
+    }
+}
 // @d trie_back(#)==trie[#].lh {backward links in |trie| holes}
+/// backward links in `trie` holes
 macro_rules! trie_back {
     ($globals:expr, $v:expr) => {
         $globals.trie[$v][crate::section_0113::TWO_HALVES_LH]

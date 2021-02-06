@@ -1359,14 +1359,17 @@ reversing_order_items!({
             #[macro_use]
             mod section_0943;
             mod section_0944;
+            #[macro_use]
             mod section_0945;
             mod section_0946;
             #[macro_use]
             mod section_0947;
-            mod section_0948_to_0949;
+            mod section_0948;
+            mod section_0949;
             #[macro_use]
             mod section_0950;
             mod section_0951;
+            #[macro_use]
             mod section_0952;
             reversing_order_items!(
                 {
@@ -1375,10 +1378,12 @@ reversing_order_items!({
                 {
                     #[macro_use]
                     mod section_0954;
+                    #[macro_use]
+                    mod section_0955;
+                    #[macro_use]
+                    mod section_0956;
                 }
             );
-            mod section_0955;
-            mod section_0956;
             mod section_0957;
             mod section_0958;
             mod section_0959;

@@ -13,10 +13,10 @@ pub(crate) fn first_fit(globals: &mut TeXGlobals, p: trie_pointer) -> TeXResult<
     // label not_found,found;
     // var h:trie_pointer; {candidate for |trie_ref[p]|}
     /// candidate for `trie_ref[p]`
-    let h: trie_pointer;
+    let mut h: trie_pointer;
     // @!z:trie_pointer; {runs through holes}
     /// runs through holes
-    let z: trie_pointer;
+    let mut z: trie_pointer;
     // @!q:trie_pointer; {runs through the family starting at |p|}
     // @!c:ASCII_code; {smallest character in the family}
     /// smallest character in the family
@@ -34,19 +34,39 @@ pub(crate) fn first_fit(globals: &mut TeXGlobals, p: trie_pointer) -> TeXResult<
         todo!();
     };
     z = globals.trie_min[c_u8 as usize];
-    // loop@+  begin h:=z-c;@/
-    loop {
-        h = trie_pointer::new((z.get() as integer - c_u8 as integer) as _);
-        // @<Ensure that |trie_max>=h+256|@>;
-        Ensure_that_trie_max_ge_h_plus_256!(globals, h);
-        todo!();
-        // if trie_taken[h] then goto not_found;
-        // @<If all characters of the family fit relative to |h|, then
-        //   |goto found|,\30\ otherwise |goto not_found|@>;
-        // not_found: z:=trie_link(z); {move to the next hole}
-        // end;
-    }
-    // found: @<Pack the family into |trie| relative to |h|@>;
+    region_forward_label!(
+        |'found|
+        {
+            // loop@+  begin h:=z-c;@/
+            loop {
+                h = trie_pointer::new((z.get() as integer - c_u8 as integer) as _);
+                // @<Ensure that |trie_max>=h+256|@>;
+                Ensure_that_trie_max_ge_h_plus_256!(globals, h);
+                region_forward_label!(
+                    |'not_found|
+                    {
+                        // if trie_taken[h] then goto not_found;
+                        if globals.trie_taken[h.get()] {
+                            goto_forward_label!('not_found);
+                        }
+                        // @<If all characters of the family fit relative to |h|, then
+                        //   |goto found|,\30\ otherwise |goto not_found|@>;
+                        If_all_characters_of_the_family_fit_relative_to_h__then_goto_found__otherwise_goto_not_found!
+                            (globals, h, p, 'not_found, 'found);
+                    }
+                    // not_found: z:=trie_link(z); {move to the next hole}
+                    'not_found <-
+                );
+                /// move to the next hole
+                const _: () = ();
+                z = trie_link!(globals, z.get()).into();
+                // end;
+            }
+        }
+        // found: @<Pack the family into |trie| relative to |h|@>;
+        'found <-
+    );
+    Pack_the_family_into_trie_relative_to_h!(globals, h, p, z);
     // end;
     todo!();
 }
