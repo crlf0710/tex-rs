@@ -4,7 +4,7 @@
 //
 // @<Find optimal breakpoints@>=
 macro_rules! Find_optimal_breakpoints {
-    ($globals:expr) => {{
+    ($globals:expr) => {#[allow(unused_assignments)]{
         // threshold:=pretolerance;
         $globals.threshold = pretolerance!($globals);
         // if threshold>=0 then
@@ -38,32 +38,64 @@ macro_rules! Find_optimal_breakpoints {
         }
         // loop@+  begin if threshold>inf_bad then threshold:=inf_bad;
         loop {
+            /// is node |cur_p| outside a formula?
+            let auto_breaking: boolean;
+            /// helps to determine when glue nodes are breakpoints
+            let prev_p: pointer;
+
             if $globals.threshold as integer > inf_bad as integer {
                 $globals.threshold = inf_bad as _;
             }
-            todo!();
             // if second_pass then @<Initialize for hyphenating a paragraph@>;
+            if $globals.second_pass {
+                Initialize_for_hyphenating_a_paragraph!($globals);
+            }
             // @<Create an active breakpoint representing the beginning of the paragraph@>;
+            todo!();
             // cur_p:=link(temp_head); auto_breaking:=true;@/
+            $globals.cur_p = link!($globals, temp_head);
+            auto_breaking = true;
             // prev_p:=cur_p; {glue at beginning is not a legal breakpoint}
+            /// glue at beginning is not a legal breakpoint
+            const _ : () = ();
+            prev_p = $globals.cur_p;
             // while (cur_p<>null)and(link(active)<>last_active) do
-            //   @<Call |try_break| if |cur_p| is a legal breakpoint;
-            //   on the second pass, also try to hyphenate the next
-            //   word, if |cur_p| is a glue node;
-            //   then advance |cur_p| to the next node of the paragraph
-            //   that could possibly be a legal breakpoint@>;
+            while $globals.cur_p != null && link!($globals, active) != last_active!() {
+                todo!("call try_break");
+                // @<Call |try_break| if |cur_p| is a legal breakpoint;
+                // on the second pass, also try to hyphenate the next
+                // word, if |cur_p| is a glue node;
+                // then advance |cur_p| to the next node of the paragraph
+                // that could possibly be a legal breakpoint@>;
+            }
             // if cur_p=null then
-            //   @<Try the final line break at the end of the paragraph,
-            //   and |goto done| if the desired breakpoints have been found@>;
+            if $globals.cur_p == null {
+                todo!("try the final");
+                // @<Try the final line break at the end of the paragraph,
+                // and |goto done| if the desired breakpoints have been found@>;
+            }
             // @<Clean up the memory by removing the break nodes@>;
+            todo!("clean up the memory");
             // if not second_pass then
-            //   begin@!stat if tracing_paragraphs>0 then print_nl("@@secondpass");@;@+tats@/
-            //   threshold:=tolerance; second_pass:=true; final_pass:=(emergency_stretch<=0);
-            //   end {if at first you don't succeed, \dots}
+            if !$globals.second_pass {
+                todo!("not second_pass");
+                // begin@!stat if tracing_paragraphs>0 then print_nl("@@secondpass");@;@+tats@/
+                // threshold:=tolerance; second_pass:=true; final_pass:=(emergency_stretch<=0);
+                // end {if at first you don't succeed, \dots}
+            }
             // else begin @!stat if tracing_paragraphs>0 then
-            //     print_nl("@@emergencypass");@;@+tats@/
-            //   background[2]:=background[2]+emergency_stretch; final_pass:=true;
-            //   end;
+            else {
+                region_stat! {
+                    if tracing_paragraphs!($globals) > 0 {
+                        // print_nl("@@emergencypass");@;@+tats@/
+                        print_nl($globals, strpool_str!("@@emergencypass"));
+                    }
+                }
+                // background[2]:=background[2]+emergency_stretch; final_pass:=true;
+                $globals.background[2] += emergency_stretch!($globals);
+                $globals.final_pass = true;
+                // end;
+            }
             // end;
         }
         // done: @!stat if tracing_paragraphs>0 then
@@ -76,7 +108,12 @@ macro_rules! Find_optimal_breakpoints {
             }
         }
 
+        use crate::pascal::boolean;
         use crate::section_0101::scaled;
         use crate::section_0108::inf_bad;
+        use crate::section_0115::null;
+        use crate::section_0115::pointer;
+        use crate::section_0162::active;
+        use crate::section_0162::temp_head;
     }}
 }

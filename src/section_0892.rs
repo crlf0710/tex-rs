@@ -22,6 +22,16 @@ pub(crate) static cur_lang: ASCII_code = ASCII_code::default();
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static init_cur_lang: ASCII_code = ASCII_code::default();
 // @!l_hyf,@!r_hyf,@!init_l_hyf,@!init_r_hyf:integer; {limits on fragment sizes}
+/// limits on fragment sizes
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static l_hyf: integer = 0;
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static r_hyf: integer = 0;
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static init_l_hyf: integer = 0;
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static init_r_hyf: integer = 0;
+
 // @!hyf_bchar:halfword; {boundary character after $c_n$}
 
 #[globals_struct_use(TeXGlobals)]

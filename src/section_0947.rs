@@ -15,7 +15,12 @@
 //! ordered by their |c| fields.
 //
 // @d trie_root==trie_l[0] {root of the linked trie}
-//
+/// root of the linked trie
+macro_rules! trie_root {
+    ($globals:expr) => {
+        $globals.trie_l[0]
+    }
+}
 // @<Glob...@>=
 // @!init @!trie_c:packed array[trie_pointer] of packed_ASCII_code;
 //   {characters to match}

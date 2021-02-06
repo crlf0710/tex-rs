@@ -19,7 +19,7 @@ macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_
         }
         // vbox_group: begin end_graf; package(0);
         else if $globals.cur_group == vbox_group {
-            end_graf($globals);
+            end_graf($globals)?;
             package($globals, 0.into())?;
             // end;
             use crate::section_1086::package;

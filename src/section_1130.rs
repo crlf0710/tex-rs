@@ -20,7 +20,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1130 {
             || $abs_mode_plus_cur_cmd == hmode as u16 + endv as u16
         {
             // vmode+endv,hmode+endv: do_endv;
-            do_endv($globals);
+            do_endv($globals)?;
             use crate::section_1131::do_endv;
             true
         } else {

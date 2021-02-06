@@ -12,7 +12,7 @@ macro_rules! Get_ready_to_start_line_breaking {
 // @p@t\4@>@<Declare subprocedures for |line_break|@>
 // procedure line_break(@!final_widow_penalty:integer);
 #[allow(unused_variables)]
-pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer) {
+pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer) -> TeXResult<()> {
     // label done,done1,done2,done3,done4,done5,continue;
     // var @<Local variables for line breaking@>@;
     // begin pack_begin_line:=mode_line; {this is for over/underfull box messages}
@@ -32,8 +32,9 @@ pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer)
     // pack_begin_line:=0;
     globals.pack_begin_line = 0;
     // end;
-    todo!("line_break");
+    ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;

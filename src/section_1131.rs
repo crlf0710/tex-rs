@@ -6,7 +6,7 @@
 //
 // @<Declare act...@>=
 // procedure do_endv;
-pub(crate) fn do_endv(globals: &mut TeXGlobals) {
+pub(crate) fn do_endv(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin base_ptr:=input_ptr; input_stack[base_ptr]:=cur_input;
     globals.base_ptr = globals.input_ptr;
     globals.input_stack[globals.base_ptr] = globals.cur_input;
@@ -31,7 +31,7 @@ pub(crate) fn do_endv(globals: &mut TeXGlobals) {
     // if cur_group=align_group then
     if globals.cur_group == align_group {
         // begin end_graf;
-        end_graf(globals);
+        end_graf(globals)?;
         // if fin_col then fin_row;
         if fin_col(globals) {
             fin_row(globals);
@@ -43,9 +43,11 @@ pub(crate) fn do_endv(globals: &mut TeXGlobals) {
         off_save(globals);
     }
     // end;
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0269::align_group;
 use crate::section_0307::token_list;

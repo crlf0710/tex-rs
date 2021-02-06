@@ -20,13 +20,37 @@
 //
 // @d trie_ref==trie_hash {where linked trie families go into |trie|}
 // @d trie_back(#)==trie[#].lh {backward links in |trie| holes}
-//
+macro_rules! trie_back {
+    ($globals:expr, $v:expr) => {
+        $globals.trie[$v][crate::section_0113::TWO_HALVES_LH]
+    }
+}
 // @<Glob...@>=
 // @!init @!trie_taken:packed array[1..trie_size] of boolean;
 //   {does a family start here?}
+#[cfg(feature = "initex")]
+/// does a family start here?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static trie_taken: trie_taken_array<boolean> = Default::default();
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0950::trie_taken_array;
+
+define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
+    pub(crate) trie_taken_array[u16_from_m_to_n<U1, trie_size_TYPENUM>] =>
+    u16; U16; U1; trie_size_TYPENUM
+);
+
 // @t\hskip10pt@>@!trie_min:array[ASCII_code] of trie_pointer;
 //   {the first possible slot for each character}
+/// the first possible slot for each character
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static trie_min: [trie_pointer; 256] = [Default::default(); 256];
 // @t\hskip10pt@>@!trie_max:trie_pointer; {largest location used in |trie|}
+#[cfg(feature = "initex")]
+/// largest location used in `trie`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static trie_max: trie_pointer = trie_pointer::default();
 // @t\hskip10pt@>@!trie_not_ready:boolean; {is the trie still in linked form?}
 #[cfg(feature = "initex")]
 /// is the trie still in linked form?
@@ -39,6 +63,9 @@ use crate::pascal::boolean;
 // tini
 const _ : () = ();
 
+use crate::pascal::u16_from_m_to_n;
 use crate::section_0004::TeXGlobals;
+use crate::section_0011::trie_size_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;
 

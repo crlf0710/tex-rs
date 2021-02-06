@@ -52,9 +52,21 @@
 //! @^Knuth, Donald Ervin@>
 //! tried per paragraph, since the line breaking algorithm needed to use two
 //! passes on only about 5 per cent of the paragraphs.
-//!
-//! @<Initialize for hyphenating...@>=
-//! begin @!init if trie_not_ready then init_trie;@+tini@;@/
-//! cur_lang:=init_cur_lang; l_hyf:=init_l_hyf; r_hyf:=init_r_hyf;
-//! end
-//!
+//
+// @<Initialize for hyphenating...@>=
+macro_rules! Initialize_for_hyphenating_a_paragraph {
+    ($globals:expr) => {{
+        // begin @!init if trie_not_ready then init_trie;@+tini@;@/
+        region_initex! {
+            if $globals.trie_not_ready {
+                init_trie($globals)?;
+            }
+        } 
+        // cur_lang:=init_cur_lang; l_hyf:=init_l_hyf; r_hyf:=init_r_hyf;
+        $globals.cur_lang = $globals.init_cur_lang;
+        $globals.l_hyf = $globals.init_l_hyf;
+        $globals.r_hyf = $globals.init_r_hyf;
+        // end
+        use crate::section_0966::init_trie;
+    }}
+}
