@@ -1328,8 +1328,22 @@ reversing_order_items!({
                             #[macro_use]
                             mod section_0851;
                         }
+                        {
+                            #[macro_use]
+                            mod section_0852;
+                            #[macro_use]
+                            mod section_0853;
+                            #[macro_use]
+                            mod section_0854;
+                            mod section_0855_to_0859;
+                            #[macro_use]
+                            mod section_0860;
+                        }
+                        {
+                            #[macro_use]
+                            mod section_0861;
+                        }
                     );
-                    mod section_0852_to_0861;
                     mod section_0862;
                     reversing_order_items!(
                         {

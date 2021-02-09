@@ -12,13 +12,15 @@
 macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r_if_it_should_no_longer_be_active__then_goto_continue_if_a_line_from_r_to_cur_p_is_infeasible__otherwise_record_a_new_feasible_break {
     ($globals:expr, $r:expr, $prev_r:expr, $line_width:expr, $pi:expr, $lbl_continue:lifetime) => {{
         /// has `d` been forced to zero?
-        let artificial_demerits: boolean;
+        let mut artificial_demerits: boolean;
         /// used in badness calculations
         let shortfall: scaled;
         /// should node `r` remain in the active list?
         let node_r_stays_active: boolean;
         /// badness of test line
         let b: halfword;
+        /// possible fitness class of test line
+        let fit_class: fit_class_kind;
 
         // begin artificial_demerits:=false;@/
         artificial_demerits = false;
@@ -31,18 +33,24 @@ macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r
         if shortfall > scaled::zero() {
             // @<Set the value of |b| to the badness for stretching the line,
             //   and compute the corresponding |fit_class|@>
-            todo!("shortfall > 0");
+            Set_the_value_of_b_to_the_badness_for_stretching_the_line__and_compute_the_corresponding_fit_class!
+                ($globals, b, fit_class, shortfall);
         }
         // else @<Set the value of |b| to the badness for shrinking the line,
         //     and compute the corresponding |fit_class|@>;
         else {
-            todo!("shortfall <= 0");
+            Set_the_value_of_b_to_the_badness_for_shrinking_the_line__and_compute_the_corresponding_fit_class!
+                ($globals, b, fit_class, shortfall);
         }
+        region_forward_label!(
+        |'deactivate|
+        {
         // if (b>inf_bad)or(pi=eject_penalty) then
         if b > inf_bad || $pi == eject_penalty {
             // @<Prepare to deactivate node~|r|, and |goto deactivate| unless
             //   there is a reason to consider lines of text from |r| to |cur_p|@>
-            todo!("prepare to deactivate");
+            Prepare_to_deactivate_node_r__and_goto_deactivate_unless_there_is_a_reason_to_consider_lines_of_text_from_r_to_cur_p!
+                ($globals, b, $r, $prev_r, artificial_demerits, node_r_stays_active, 'deactivate);
         }
         // else  begin prev_r:=r;
         else {
@@ -63,9 +71,13 @@ macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r
             goto_backward_label!($lbl_continue);
         }
         // deactivate: @<Deactivate node |r|@>;
-        todo!("deactivate node");
+        }
+        'deactivate <-
+        );
+        Deactivate_node_r!($globals, $r, $prev_r);
         // end
         use crate::section_0108::inf_bad;
         use crate::section_0157::eject_penalty;
+        use crate::section_0817::fit_class_kind;
     }}
 }

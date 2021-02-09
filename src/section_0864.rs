@@ -17,7 +17,7 @@ macro_rules! Create_an_active_breakpoint_representing_the_beginning_of_the_parag
         q = get_node($globals, active_node_size as _)?;
         // type(q):=unhyphenated; fitness(q):=decent_fit;
         r#type!($globals, q) = unhyphenated;
-        fitness!($globals, q) = decent_fit;
+        fitness!($globals, q) = fit_class_kind::decent_fit as _;
         // link(q):=last_active; break_node(q):=null;
         link!($globals, q) = last_active!();
         break_node!($globals, q) = null;
@@ -35,7 +35,7 @@ macro_rules! Create_an_active_breakpoint_representing_the_beginning_of_the_parag
         $globals.font_in_short_display = null_font.get() as _;
         use crate::section_0125::get_node;
         use crate::section_0232::null_font;
-        use crate::section_0817::decent_fit;
+        use crate::section_0817::fit_class_kind;
         use crate::section_0819::active_node_size;
         use crate::section_0819::unhyphenated;
         

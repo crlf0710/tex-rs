@@ -19,19 +19,31 @@
 // @d inf_bad = 10000 {infinitely bad value}
 /// infinitely bad value
 pub(crate) const inf_bad: halfword = 10000;
-//
-// @p function badness(@!t,@!s:scaled):halfword; {compute badness, given |t>=0|}
-// var r:integer; {approximation to $\alpha t/s$, where $\alpha^3\approx
-//   100\cdot2^{18}$}
-// begin if t=0 then badness:=0
-// else if s<=0 then badness:=inf_bad
-// else  begin if t<=7230584 then  r:=(t*297) div s {$297^3=99.94\times2^{18}$}
-//   else if s>=1663497 then r:=t div (s div 297)
-//   else r:=t;
-//   if r>1290 then badness:=inf_bad {$1290^3<2^{31}<1291^3$}
-//   else badness:=(r*r*r+@'400000) div @'1000000;
-//   end; {that was $r^3/2^{18}$, rounded to the nearest integer}
-// end;
-//
 
+// @p function badness(@!t,@!s:scaled):halfword; {compute badness, given |t>=0|}
+/// compute badness, given `t>=0`
+#[allow(unused_variables)]
+pub(crate) fn badness(globals: &mut TeXGlobals, t: scaled, s:scaled) -> halfword {
+    // var r:integer; {approximation to $\alpha t/s$, where $\alpha^3\approx
+    //   100\cdot2^{18}$}
+    // begin if t=0 then badness:=0
+    if t == scaled::zero() {
+        return 0;
+    }
+    // else if s<=0 then badness:=inf_bad
+    else if s <= scaled::zero() {
+        return inf_bad;
+    }
+    // else  begin if t<=7230584 then  r:=(t*297) div s {$297^3=99.94\times2^{18}$}
+    //   else if s>=1663497 then r:=t div (s div 297)
+    //   else r:=t;
+    //   if r>1290 then badness:=inf_bad {$1290^3<2^{31}<1291^3$}
+    //   else badness:=(r*r*r+@'400000) div @'1000000;
+    //   end; {that was $r^3/2^{18}$, rounded to the nearest integer}
+    // end;
+    todo!();
+}
+
+use crate::section_0004::TeXGlobals;
+use crate::section_0101::scaled;
 use crate::section_0113::halfword;
