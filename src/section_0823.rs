@@ -13,11 +13,35 @@
 //! macro makes such six-tuples convenient.
 //
 // @d do_all_six(#)==#(1);#(2);#(3);#(4);#(5);#(6)
+macro_rules! do_all_six {
+    ($macro_ident:ident !; @globals = $globals:expr) => {{
+        $macro_ident!($globals, 1);
+        $macro_ident!($globals, 2);
+        $macro_ident!($globals, 3);
+        $macro_ident!($globals, 4);
+        $macro_ident!($globals, 5);
+        $macro_ident!($globals, 6);
+    }};
+    ($macro_ident:ident !; @globals = $globals:expr; $($arg:expr),*) => {{
+        $macro_ident!($globals, 1, $($arg),*);
+        $macro_ident!($globals, 2, $($arg),*);
+        $macro_ident!($globals, 3, $($arg),*);
+        $macro_ident!($globals, 4, $($arg),*);
+        $macro_ident!($globals, 5, $($arg),*);
+        $macro_ident!($globals, 6, $($arg),*);
+    }}
+}
 //
 // @<Glob...@>=
 // @!active_width:array[1..6] of scaled;
 //   {distance from first active node to~|cur_p|}
+/// distance from first active node to `cur_p`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static active_width: all_six_array<scaled> = all_six_array::default();
 // @!cur_active_width:array[1..6] of scaled; {distance from current active node}
+/// distance from current active node
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_active_width: all_six_array<scaled> = all_six_array::default();
 // @!background:array[1..6] of scaled; {length of an ``empty'' line}
 /// length of an "empty" line
 #[globals_struct_field(TeXGlobals)]

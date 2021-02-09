@@ -9,7 +9,11 @@
 /// `type` of a penalty node
 pub(crate) const penalty_node: quarterword = 12;
 // @d inf_penalty=inf_bad {``infinite'' penalty value}
+/// "infinite" penalty value
+pub(crate) const inf_penalty: integer = inf_bad as integer;
 // @d eject_penalty=-inf_penalty {``negatively infinite'' penalty value}
+/// "negatively infinite" penalty value
+pub(crate) const eject_penalty: integer = -inf_penalty;
 // @d penalty(#) == mem[#+1].int {the added cost of breaking a list here}
 /// the added cost of breaking a list here
 macro_rules! penalty {
@@ -18,4 +22,6 @@ macro_rules! penalty {
     }
 }
 
+use crate::pascal::integer;
+use crate::section_0108::inf_bad;
 use crate::section_0113::quarterword;

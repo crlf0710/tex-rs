@@ -31,7 +31,13 @@
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static passive: pointer = null;
 // @!printed_node:pointer; {most recent node that has been printed}
+/// most recent node that has been printed
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static printed_node: pointer = null;
 // @!pass_number:halfword; {the number of passive nodes allocated on this pass}
+/// the number of passive nodes allocated on this pass
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static pass_number: halfword = 0;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::pointer;

@@ -54,7 +54,7 @@ pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) -> TeXResult
     // if nest_ptr=1 then build_page; {put |par_skip| glue on current page}
     if globals.nest_ptr == 1 {
         /// put `par_skip` glue on current page
-        todo!("build page");
+        build_page(globals);
     }
     // end;
     ok_nojump!()
@@ -74,3 +74,4 @@ use crate::section_0216::push_nest;
 use crate::section_0224::par_skip_code;
 use crate::section_0307::every_par_text;
 use crate::section_0323::begin_token_list;
+use crate::section_0994::build_page;

@@ -2,13 +2,42 @@
 //! corresponding passive node.
 //
 // @d store_background(#)==active_width[#]:=background[#]
-//
+macro_rules! store_background {
+    ($globals:expr, $idx:expr) => {{
+        $globals.active_width[$idx] = $globals.background[$idx]
+    }}
+}
+
 // @<Create an active breakpoint representing the beginning of the paragraph@>=
-// q:=get_node(active_node_size);
-// type(q):=unhyphenated; fitness(q):=decent_fit;
-// link(q):=last_active; break_node(q):=null;
-// line_number(q):=prev_graf+1; total_demerits(q):=0; link(active):=q;
-// do_all_six(store_background);@/
-// passive:=null; printed_node:=temp_head; pass_number:=0;
-// font_in_short_display:=null_font
-//
+macro_rules! Create_an_active_breakpoint_representing_the_beginning_of_the_paragraph {
+    ($globals:expr) => {{
+        /// miscellaneous nodes of temporary interest
+        let q: pointer;
+        // q:=get_node(active_node_size);
+        q = get_node($globals, active_node_size as _)?;
+        // type(q):=unhyphenated; fitness(q):=decent_fit;
+        r#type!($globals, q) = unhyphenated;
+        fitness!($globals, q) = decent_fit;
+        // link(q):=last_active; break_node(q):=null;
+        link!($globals, q) = last_active!();
+        break_node!($globals, q) = null;
+        // line_number(q):=prev_graf+1; total_demerits(q):=0; link(active):=q;
+        line_number!($globals, q) = (prev_graf!($globals) + 1) as _;
+        total_demerits!($globals, q) = 0;
+        link!($globals, active) = q;
+        // do_all_six(store_background);@/
+        do_all_six!(store_background !; @globals = $globals);
+        // passive:=null; printed_node:=temp_head; pass_number:=0;
+        $globals.passive = null;
+        $globals.printed_node = temp_head;
+        $globals.pass_number = 0;
+        // font_in_short_display:=null_font
+        $globals.font_in_short_display = null_font.get() as _;
+        use crate::section_0125::get_node;
+        use crate::section_0232::null_font;
+        use crate::section_0817::decent_fit;
+        use crate::section_0819::active_node_size;
+        use crate::section_0819::unhyphenated;
+        
+    }}
+}

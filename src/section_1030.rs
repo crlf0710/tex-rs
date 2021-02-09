@@ -78,7 +78,7 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
             goto_forward_label!('append_normal_space);
         } else {
             // else app_space;
-            app_space(globals);
+            app_space(globals)?;
 
             use crate::section_1043::app_space;
         }

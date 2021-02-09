@@ -28,11 +28,39 @@
 /// number of words in active nodes
 pub(crate) const active_node_size: quarterword = 3;
 // @d fitness==subtype {|very_loose_fit..tight_fit| on final line for this break}
+/// `very_loose_fit..tight_fit` on final line for this break
+macro_rules! fitness {
+    ($globals:expr, $p:expr) => {
+        subtype!($globals, $p)
+    }
+}
 // @d break_node==rlink {pointer to the corresponding passive node}
+/// pointer to the corresponding passive node
+macro_rules! break_node {
+    ($globals:expr, $p:expr) => {
+        rlink!($globals, $p)
+    }
+}
 // @d line_number==llink {line that begins at this breakpoint}
+/// line that begins at this breakpoint
+macro_rules! line_number {
+    ($globals:expr, $p:expr) => {
+        llink!($globals, $p)
+    }
+}
 // @d total_demerits(#)==mem[#+2].int {the quantity that \TeX\ minimizes}
+/// the quantity that `TeX` minimizes
+macro_rules! total_demerits {
+    ($globals:expr, $p:expr) => {
+        $globals.mem[$p + 2][crate::section_0113::MEMORY_WORD_INT]
+    }
+}
 // @d unhyphenated=0 {the |type| of a normal active break node}
+/// the `type` of a normal active break node
+pub(crate) const unhyphenated: quarterword = 0;
 // @d hyphenated=1 {the |type| of an active node that breaks at a |disc_node|}
+/// the `type` of an active node that breaks at a `disc_node`
+pub(crate) const hyphenated: quarterword = 1;
 // @d last_active==active {the active list ends where it begins}
 /// the active list ends where it begins
 macro_rules! last_active {

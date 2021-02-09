@@ -5,7 +5,7 @@
 
 macro_rules! Get_ready_to_start_line_breaking {
     ($globals:expr) => {{
-
+        Get_ready_to_start_line_breaking_0848!($globals);
     }}
 }
 

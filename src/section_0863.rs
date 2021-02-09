@@ -36,6 +36,9 @@ macro_rules! Find_optimal_breakpoints {
             }
             // end;
         }
+        region_forward_label! {
+        |'done|
+        {
         // loop@+  begin if threshold>inf_bad then threshold:=inf_bad;
         loop {
             /// is node |cur_p| outside a formula?
@@ -51,7 +54,7 @@ macro_rules! Find_optimal_breakpoints {
                 Initialize_for_hyphenating_a_paragraph!($globals);
             }
             // @<Create an active breakpoint representing the beginning of the paragraph@>;
-            todo!();
+            Create_an_active_breakpoint_representing_the_beginning_of_the_paragraph!($globals);
             // cur_p:=link(temp_head); auto_breaking:=true;@/
             $globals.cur_p = link!($globals, temp_head);
             auto_breaking = true;
@@ -70,9 +73,10 @@ macro_rules! Find_optimal_breakpoints {
             }
             // if cur_p=null then
             if $globals.cur_p == null {
-                todo!("try the final");
                 // @<Try the final line break at the end of the paragraph,
                 // and |goto done| if the desired breakpoints have been found@>;
+                Try_the_final_line_break_at_the_end_of_the_paragraph__and_goto_done_if_the_desired_breakpoints_have_been_found!
+                    ($globals, 'done);
             }
             // @<Clean up the memory by removing the break nodes@>;
             todo!("clean up the memory");
@@ -98,7 +102,10 @@ macro_rules! Find_optimal_breakpoints {
             }
             // end;
         }
+        }
         // done: @!stat if tracing_paragraphs>0 then
+        'done <-
+        }
         region_stat! {
             if tracing_paragraphs!($globals) > 0 {
                 // begin end_diagnostic(true); normalize_selector;

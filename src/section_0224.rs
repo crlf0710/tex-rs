@@ -118,6 +118,11 @@ macro_rules! space_skip {
     }
 }
 // @d xspace_skip==glue_par(xspace_skip_code)
+macro_rules! xspace_skip {
+    ($globals:expr) => {
+        glue_par!($globals, crate::section_0224::xspace_skip_code)
+    }
+}
 // @d par_fill_skip==glue_par(par_fill_skip_code)
 // @d thin_mu_skip==glue_par(thin_mu_skip_code)
 // @d med_mu_skip==glue_par(med_mu_skip_code)

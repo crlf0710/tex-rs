@@ -102,6 +102,11 @@ macro_rules! par_indent {
 // @d math_surround==dimen_par(math_surround_code)
 // @d line_skip_limit==dimen_par(line_skip_limit_code)
 // @d hsize==dimen_par(hsize_code)
+macro_rules! hsize {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::hsize_code)
+    };
+}
 // @d vsize==dimen_par(vsize_code)
 // @d max_depth==dimen_par(max_depth_code)
 // @d split_max_depth==dimen_par(split_max_depth_code)
