@@ -17,6 +17,9 @@ pub(crate) const awful_bad: integer = 0o7777777777;
 // @<Global...@>=
 // @!minimal_demerits:array[very_loose_fit..tight_fit] of integer; {best total
 //   demerits known for current line class and position, given the fitness}
+/// best total demerits known for current line class and position, given the fitness
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static minimal_demerits: fit_class_array<integer> = fit_class_array::default();
 // @!minimum_demerits:integer; {best total demerits known for current line class
 //   and position}
 /// best total demerits known for current line class and position
@@ -26,7 +29,18 @@ pub(crate) static minimum_demerits: integer = 0;
 //   |minimal_demerits|}
 // @!best_pl_line:array[very_loose_fit..tight_fit] of halfword; {corresponding
 //   line number}
-//
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0833::fit_class_array;
+
+type fit_class_array_LENGTH_TYPENUM = typenum::op!(tight_fit_TYPENUM - very_loose_fit_TYPENUM + U1);
+
+define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
+    pub(crate) fit_class_array[fit_class_kind] => u8; U8; fit_class_array_LENGTH_TYPENUM
+);
 
 use crate::pascal::integer;
+use crate::section_0817::{tight_fit_TYPENUM, very_loose_fit_TYPENUM};
+use crate::section_0817::fit_class_kind;
+use typenum::U1;
 use globals_struct::{globals_struct_field, globals_struct_use};

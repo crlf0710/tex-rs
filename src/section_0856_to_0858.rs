@@ -1,24 +1,3 @@
-//! @ When we get to this part of the code, the line from |r| to |cur_p| is
-//! feasible, its badness is~|b|, and its fitness classification is |fit_class|.
-//! We don't want to make an active node for this break yet, but we will
-//! compute the total demerits and record them in the |minimal_demerits| array,
-//! if such a break is the current champion among all ways to get to |cur_p|
-//! in a given line-number class and fitness class.
-//!
-//! @<Record a new feasible break@>=
-//! if artificial_demerits then d:=0
-//! else @<Compute the demerits, |d|, from |r| to |cur_p|@>;
-//! @!stat if tracing_paragraphs>0 then
-//!   @<Print a symbolic description of this feasible break@>;
-//! tats@;@/
-//! d:=d+total_demerits(r); {this is the minimum total demerits
-//!   from the beginning to |cur_p| via |r|}
-//! if d<=minimal_demerits[fit_class] then
-//!   begin minimal_demerits[fit_class]:=d;
-//!   best_place[fit_class]:=break_node(r); best_pl_line[fit_class]:=l;
-//!   if d<minimum_demerits then minimum_demerits:=d;
-//!   end
-//!
 //! @ @<Print a symbolic description of this feasible break@>=
 //! begin if printed_node<>cur_p then
 //!   @<Print the list between |printed_node| and |cur_p|,
@@ -64,16 +43,4 @@
 //!     begin decr(t); printed_node:=link(printed_node);
 //!     end;
 //!   end
-//!
-//! @ @<Compute the demerits, |d|, from |r| to |cur_p|@>=
-//! begin d:=line_penalty+b;
-//! if abs(d)>=10000 then d:=100000000@+else d:=d*d;
-//! if pi<>0 then
-//!   if pi>0 then d:=d+pi*pi
-//!   else if pi>eject_penalty then d:=d-pi*pi;
-//! if (break_type=hyphenated)and(type(r)=hyphenated) then
-//!   if cur_p<>null then d:=d+double_hyphen_demerits
-//!   else d:=d+final_hyphen_demerits;
-//! if abs(fit_class-fitness(r))>1 then d:=d+adj_demerits;
-//! end
 //!

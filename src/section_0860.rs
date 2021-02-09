@@ -11,6 +11,7 @@
 // @<Deactivate node |r|@>=
 macro_rules! Deactivate_node_r {
     ($globals:expr, $r:expr, $prev_r:expr) => {{
+        trace_span!("Deactivate node `r`");
         // link(prev_r):=link(r); free_node(r,active_node_size);
         link!($globals, $prev_r) = link!($globals, $r);
         free_node($globals, $r, active_node_size as _);

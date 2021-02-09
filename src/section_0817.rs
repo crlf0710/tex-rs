@@ -26,4 +26,14 @@ pub(crate) enum fit_class_kind {
     decent_fit = 2,
 }
 
+impl fit_class_kind {
+    pub(crate) fn get(self) -> u8 {
+        self as u8
+    }
+}
+
+pub(crate) type very_loose_fit_TYPENUM = U0;
+pub(crate) type tight_fit_TYPENUM = U3;
+
 use crate::section_0113::quarterword;
+use typenum::{U0, U3};

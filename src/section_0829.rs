@@ -74,7 +74,7 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
         //   then |goto continue| if a line from |r| to |cur_p| is infeasible,
         //   otherwise record a new feasible break@>;
         Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r_if_it_should_no_longer_be_active__then_goto_continue_if_a_line_from_r_to_cur_p_is_infeasible__otherwise_record_a_new_feasible_break!
-            (globals, r, prev_r, line_width, pi, 'continue_);
+            (globals, r, prev_r, line_width, pi, break_type, 'continue_);
         // end;
         }
         |'continue_|

@@ -219,6 +219,11 @@ macro_rules! tolerance {
     };
 }
 // @d line_penalty==int_par(line_penalty_code)
+macro_rules! line_penalty {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::line_penalty_code)
+    };
+}
 // @d hyphen_penalty==int_par(hyphen_penalty_code)
 // @d ex_hyphen_penalty==int_par(ex_hyphen_penalty_code)
 // @d club_penalty==int_par(club_penalty_code)
@@ -238,6 +243,11 @@ macro_rules! widow_penalty {
 // @d double_hyphen_demerits==int_par(double_hyphen_demerits_code)
 // @d final_hyphen_demerits==int_par(final_hyphen_demerits_code)
 // @d adj_demerits==int_par(adj_demerits_code)
+macro_rules! adj_demerits {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::adj_demerits_code)
+    };
+}
 // @d mag==int_par(mag_code)
 // @d delimiter_factor==int_par(delimiter_factor_code)
 // @d looseness==int_par(looseness_code)
