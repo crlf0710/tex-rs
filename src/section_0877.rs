@@ -41,7 +41,8 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     //   current vertical list, together with associated penalties and other
     //   insertions@>;
     loop {
-        todo!("justify the line ending");
+        Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_current_vertical_list__together_with_associated_penalties_and_other_insertions!
+            (globals, cur_line);
         // incr(cur_line); cur_p:=next_break(cur_p);
         incr!(cur_line);
         globals.cur_p = next_break!(globals, globals.cur_p);
