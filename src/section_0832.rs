@@ -12,6 +12,7 @@ macro_rules! update_width {
 // @<If node |r|...@>=
 macro_rules! If_node_r_is_of_type_delta_node__update_cur_active_width__set_prev_r_and_prev_prev_r__then_goto_continue {
     ($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr, $lbl_continue:lifetime) => {{
+        trace_span!("If node `r`...");
         // @^inner loop@>
         // if type(r)=delta_node then
         if r#type!($globals, $r) == delta_node {

@@ -6,6 +6,7 @@
 // @<Move the data into |trie|@>=
 macro_rules! Move_the_data_into_trie {
     ($globals:expr) => {{
+        trace_span!("Move the data into `trie`");
         /// template used to zero out `trie`'s holes
         let mut h: two_halves = two_halves::default();
         // h.rh:=0; h.b0:=min_quarterword; h.b1:=min_quarterword; {|trie_link:=0|,

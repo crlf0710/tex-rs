@@ -5,6 +5,7 @@
 // @<Find optimal breakpoints@>=
 macro_rules! Find_optimal_breakpoints {
     ($globals:expr) => {#[allow(unused_assignments)]{
+        trace_span!("Find optimal breakpoints");
         // threshold:=pretolerance;
         $globals.threshold = pretolerance!($globals);
         // if threshold>=0 then

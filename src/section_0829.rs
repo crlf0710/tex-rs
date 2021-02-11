@@ -55,6 +55,8 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
         let mut prev_prev_r: pointer;
         /// the current line will be justified to this width
         let mut line_width: scaled = scaled::zero();
+        /// line number of current active node
+        let mut l: halfword;
 
         region_backward_label!(
         'continue_ <-
@@ -68,13 +70,13 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
         //   the best feasible breaks in that class; then |return|
         //   if |r=last_active|, otherwise compute the new |line_width|@>;
         If_a_line_number_class_has_ended__create_new_active_nodes_for_the_best_feasible_breaks_in_that_class__then_return_if_r_eq_last_active__otherwise_compute_the_new_line_width!
-            (globals, r, prev_r, prev_prev_r, old_l, line_width, break_type, no_break_yet);
+            (globals, r, prev_r, prev_prev_r, l, old_l, line_width, break_type, no_break_yet);
         // @<Consider the demerits for a line from |r| to |cur_p|;
         //   deactivate node |r| if it should no longer be active;
         //   then |goto continue| if a line from |r| to |cur_p| is infeasible,
         //   otherwise record a new feasible break@>;
         Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r_if_it_should_no_longer_be_active__then_goto_continue_if_a_line_from_r_to_cur_p_is_infeasible__otherwise_record_a_new_feasible_break!
-            (globals, r, prev_r, line_width, pi, break_type, 'continue_);
+            (globals, r, prev_r, l, line_width, pi, break_type, 'continue_);
         // end;
         }
         |'continue_|

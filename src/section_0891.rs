@@ -56,6 +56,7 @@
 // @<Initialize for hyphenating...@>=
 macro_rules! Initialize_for_hyphenating_a_paragraph {
     ($globals:expr) => {{
+        trace_span!("Initialize for hyphenating...");
         // begin @!init if trie_not_ready then init_trie;@+tini@;@/
         region_initex! {
             if $globals.trie_not_ready {

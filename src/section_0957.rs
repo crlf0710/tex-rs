@@ -22,6 +22,9 @@ pub(crate) fn trie_pack(globals: &mut TeXGlobals, mut p: trie_pointer) -> TeXRes
         // p:=trie_r[p];
         p = globals.trie_r[p];
         // until p=0;
+        if p == 0 {
+            break;
+        }
     }
     // end;
     ok_nojump!()

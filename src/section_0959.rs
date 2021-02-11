@@ -44,7 +44,6 @@ pub(crate) fn trie_fix(globals: &mut TeXGlobals, mut p: trie_pointer) {
         }
     }
     // end;
-    todo!();
 }
 
 use crate::section_0004::TeXGlobals;

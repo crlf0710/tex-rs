@@ -11,6 +11,7 @@ macro_rules! Get_ready_to_start_line_breaking {
 
 // @p@t\4@>@<Declare subprocedures for |line_break|@>
 // procedure line_break(@!final_widow_penalty:integer);
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 #[allow(unused_variables)]
 pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer) -> TeXResult<()> {
     // label done,done1,done2,done3,done4,done5,continue;

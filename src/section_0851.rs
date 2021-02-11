@@ -10,7 +10,7 @@
 //
 // @<Consider the demerits for a line from |r| to |cur_p|...@>=
 macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r_if_it_should_no_longer_be_active__then_goto_continue_if_a_line_from_r_to_cur_p_is_infeasible__otherwise_record_a_new_feasible_break {
-    ($globals:expr, $r:expr, $prev_r:expr, $line_width:expr, $pi:expr, $break_type:expr, $lbl_continue:lifetime) => {{
+    ($globals:expr, $r:expr, $prev_r:expr, $l:expr, $line_width:expr, $pi:expr, $break_type:expr, $lbl_continue:lifetime) => {{
         trace_span!("Consider the demerits for a line from |r| to |cur_p|...");
         /// has `d` been forced to zero?
         let mut artificial_demerits: boolean;
@@ -58,6 +58,7 @@ macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r
             $prev_r = $r;
             // if b>threshold then goto continue;
             if b as integer > $globals.threshold {
+                trace_span!("jump because b > threshold");
                 goto_backward_label!($lbl_continue);
             }
             // node_r_stays_active:=true;
@@ -65,9 +66,10 @@ macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r
             // end;
         }
         // @<Record a new feasible break@>;
-        Record_a_new_feasible_break!($globals, $r, b, $pi, $break_type, fit_class, artificial_demerits);
+        Record_a_new_feasible_break!($globals, $r, $l, b, $pi, $break_type, fit_class, artificial_demerits);
         // if node_r_stays_active then goto continue; {|prev_r| has been set to |r|}
         if node_r_stays_active {
+            trace_span!("jump because node_r_stays_active");
             /// `prev_r` has been set to `r`
             goto_backward_label!($lbl_continue);
         }

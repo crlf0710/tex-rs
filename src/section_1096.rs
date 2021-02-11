@@ -2,6 +2,7 @@
 
 // @<Declare act...@>=
 // procedure end_graf;
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn end_graf(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin if mode=hmode then
     if mode!(globals) == hmode {

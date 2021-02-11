@@ -7,7 +7,7 @@
 //
 // @<Record a new feasible break@>=
 macro_rules! Record_a_new_feasible_break {
-    ($globals:expr, $r:expr, $b:expr, $pi:expr, $break_type:expr, $fit_class:expr, $artificial_demerits:expr) => {{
+    ($globals:expr, $r:expr, $l:expr, $b:expr, $pi:expr, $break_type:expr, $fit_class:expr, $artificial_demerits:expr) => {{
         trace_span!("Record a new feasible break");
         /// demerits of test line
         let mut d: integer;
@@ -30,15 +30,20 @@ macro_rules! Record_a_new_feasible_break {
         }
         // d:=d+total_demerits(r); {this is the minimum total demerits
         //   from the beginning to |cur_p| via |r|}
-        d = d + total_demerits!($globals, $r);
+        d += total_demerits!($globals, $r);
         /// this is the minimum total demerits from the beginning to `cur_p` via `r`
         const _ : () = ();
         // if d<=minimal_demerits[fit_class] then
-        if d <= $globals.minimal_demerits[$fit_class as u8] {
-            todo!("d<=minimal_demerits[fit_class]");
+        if d <= $globals.minimal_demerits[$fit_class] {
             // begin minimal_demerits[fit_class]:=d;
+            $globals.minimal_demerits[$fit_class] = d;
             // best_place[fit_class]:=break_node(r); best_pl_line[fit_class]:=l;
+            $globals.best_place[$fit_class] = break_node!($globals, $r);
+            $globals.best_pl_line[$fit_class] = $l;
             // if d<minimum_demerits then minimum_demerits:=d;
+            if d < $globals.minimum_demerits {
+                $globals.minimum_demerits = d;
+            }
             // end
         }
     }}
