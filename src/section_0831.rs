@@ -8,7 +8,7 @@ macro_rules! Make_sure_that_pi_is_in_the_proper_range {
             if $pi > 0 {
                 /// this breakpoint is inhibited by infinite penalty
                 const _ : () = ();
-                return;
+                return_nojump!();
             }
             // else pi:=eject_penalty {this breakpoint will be forced}
             else {

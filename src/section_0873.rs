@@ -3,7 +3,7 @@
 macro_rules! Try_the_final_line_break_at_the_end_of_the_paragraph__and_goto_done_if_the_desired_breakpoints_have_been_found {
     ($globals:expr, $lbl_done:lifetime) => {{
         // begin try_break(eject_penalty,hyphenated);
-        try_break($globals, eject_penalty, hyphenated.into());
+        try_break($globals, eject_penalty, hyphenated.into())?;
         // if link(active)<>last_active then
         if link!($globals, active) != last_active!() {
             // begin @<Find an active node with fewest demerits@>;

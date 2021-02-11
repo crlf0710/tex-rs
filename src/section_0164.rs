@@ -1,5 +1,11 @@
 //! ` `
 
+macro_rules! Initialize_the_special_list_heads_and_constant_nodes {
+    ($globals:expr) => {{
+        Initialize_the_special_list_heads_and_constant_nodes_0820!($globals);
+    }}
+}
+
 // @<Initialize table entries...@>=
 #[distributed_slice(INIT_TBLENTRY)]
 #[allow(unused_variables)]
@@ -22,14 +28,12 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     globals.rover = lo_mem_stat_max + 1;
     // link(rover):=empty_flag; {now initialize the dynamic memory}
     /// now initialize the dynamic memory
-    {
-        link!(globals, globals.rover) = empty_flag;
-    }
+    const _ : () = ();
+    link!(globals, globals.rover) = empty_flag;
     // node_size(rover):=1000; {which is a 1000-word available node}
     /// which is a 1000-word available node
-    {
-        node_size!(globals, globals.rover) = 1000;
-    }
+    const _ : () = ();
+    node_size!(globals, globals.rover) = 1000;
     // llink(rover):=rover; rlink(rover):=rover;@/
     llink!(globals, globals.rover) = globals.rover;
     rlink!(globals, globals.rover) = globals.rover;
@@ -40,13 +44,14 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     // for k:=hi_mem_stat_min to mem_top do
     //   mem[k]:=mem[lo_mem_max]; {clear list heads}
     // @<Initialize the special list heads and constant nodes@>;
+    Initialize_the_special_list_heads_and_constant_nodes!(globals);
     // avail:=null; mem_end:=mem_top;
     globals.avail = null;
     globals.mem_end = mem_top;
     // hi_mem_min:=hi_mem_stat_min; {initialize the one-word memory}
-    globals.hi_mem_min = hi_mem_stat_min;
     /// initialize the one-word memory
     const _: () = ();
+    globals.hi_mem_min = hi_mem_stat_min;
     // var_used:=lo_mem_stat_max+1-mem_bot; dyn_used:=hi_mem_stat_usage;
     //   {initialize statistics}
 }

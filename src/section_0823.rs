@@ -47,6 +47,9 @@ pub(crate) static cur_active_width: all_six_array<scaled> = all_six_array::defau
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static background: all_six_array<scaled> = all_six_array::default();
 // @!break_width:array[1..6] of scaled; {length being computed after current break}
+/// length being computed after current break
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static break_width: all_six_array<scaled> = all_six_array::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0823::all_six_array;

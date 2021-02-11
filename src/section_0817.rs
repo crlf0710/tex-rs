@@ -32,6 +32,22 @@ impl fit_class_kind {
     }
 }
 
+impl From<u8> for fit_class_kind {
+    fn from(val: u8) -> Self {
+        if val == fit_class_kind::tight_fit as u8 {
+            return fit_class_kind::tight_fit;
+        } else if val == fit_class_kind::loose_fit as u8 {
+            return fit_class_kind::loose_fit;
+        } else if val == fit_class_kind::very_loose_fit as u8 {
+            return fit_class_kind::very_loose_fit;
+        } else if val == fit_class_kind::decent_fit as u8 {
+            return fit_class_kind::decent_fit;
+        } else {
+            unreachable!();
+        }
+    }
+}
+
 pub(crate) type very_loose_fit_TYPENUM = U0;
 pub(crate) type tight_fit_TYPENUM = U3;
 

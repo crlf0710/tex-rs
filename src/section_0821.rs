@@ -20,8 +20,22 @@
 //! the line-breaking computation is being displayed.
 //
 // @d passive_node_size=2 {number of words in passive nodes}
+/// number of words in passive nodes
+pub(crate) const passive_node_size: quarterword = 2;
 // @d cur_break==rlink {in passive node, points to position of this breakpoint}
+/// in passive node, points to position of this breakpoint
+macro_rules! cur_break {
+    ($globals:expr, $p:expr) => {
+        rlink!($globals, $p)
+    }
+}
 // @d prev_break==llink {points to passive node that should precede this one}
+/// points to passive node that should precede this one
+macro_rules! prev_break {
+    ($globals:expr, $p:expr) => {
+        llink!($globals, $p)
+    }
+}
 // @d serial==info {serial number for symbolic identification}
 //
 // @<Glob...@>=
@@ -43,4 +57,5 @@ pub(crate) static pass_number: halfword = 0;
 use crate::section_0115::pointer;
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0113::quarterword;
 use globals_struct::{globals_struct_field, globals_struct_use};

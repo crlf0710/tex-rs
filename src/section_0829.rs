@@ -25,7 +25,7 @@ macro_rules! copy_to_cur_active {
 // @<Declare subprocedures for |line_break|@>=
 // procedure try_break(@!pi:integer;@!break_type:small_number);
 #[allow(unused_variables, unused_assignments)]
-pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: small_number) {
+pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: small_number) -> TeXResult<()> {
     // label exit,done,done1,continue,deactivate;
     // var r:pointer; {runs through the active list}
     /// runs through the active list
@@ -38,7 +38,7 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
     let mut old_l: halfword;
     // @!no_break_yet:boolean; {have we found a feasible break at |cur_p|?}
     /// have we found a feasible break at `cur_p`?
-    let no_break_yet: boolean;
+    let mut no_break_yet: boolean;
     // @<Other local variables for |try_break|@>@;
     const _ : () = ();
     // begin @<Make sure that |pi| is in the proper range@>;
@@ -68,7 +68,7 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
         //   the best feasible breaks in that class; then |return|
         //   if |r=last_active|, otherwise compute the new |line_width|@>;
         If_a_line_number_class_has_ended__create_new_active_nodes_for_the_best_feasible_breaks_in_that_class__then_return_if_r_eq_last_active__otherwise_compute_the_new_line_width!
-            (globals, r, old_l, line_width);
+            (globals, r, prev_r, prev_prev_r, old_l, line_width, break_type, no_break_yet);
         // @<Consider the demerits for a line from |r| to |cur_p|;
         //   deactivate node |r| if it should no longer be active;
         //   then |goto continue| if a line from |r| to |cur_p| is infeasible,
@@ -86,12 +86,13 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
         todo!();
     }
     // end;
-    todo!();
+    ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0101::scaled;
 use crate::section_0113::halfword;

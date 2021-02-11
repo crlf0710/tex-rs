@@ -25,10 +25,12 @@ macro_rules! Clean_up_the_memory_by_removing_the_break_nodes {
         q = $globals.passive;
         // while q<>null do
         while q != null {
-            todo!("passive");
             // begin cur_p:=link(q);
+            $globals.cur_p = link!($globals, q);
             // free_node(q,passive_node_size);
+            free_node($globals, q, passive_node_size.into());
             // q:=cur_p;
+            q = $globals.cur_p;
             // end
         }
         use crate::section_0115::pointer;
@@ -36,6 +38,7 @@ macro_rules! Clean_up_the_memory_by_removing_the_break_nodes {
         use crate::section_0130::free_node;
         use crate::section_0162::active;
         use crate::section_0819::active_node_size;
+        use crate::section_0821::passive_node_size;
         use crate::section_0822::delta_node_size;
         use crate::section_0822::delta_node;
     }}

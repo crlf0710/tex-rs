@@ -27,8 +27,14 @@ pub(crate) static minimal_demerits: fit_class_array<integer> = fit_class_array::
 pub(crate) static minimum_demerits: integer = 0;
 // @!best_place:array[very_loose_fit..tight_fit] of pointer; {how to achieve
 //   |minimal_demerits|}
+/// how to achieve `minimal_demerits`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static best_place: fit_class_array<pointer> = fit_class_array::default();
 // @!best_pl_line:array[very_loose_fit..tight_fit] of halfword; {corresponding
 //   line number}
+/// corresponding line number
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static best_pl_line: fit_class_array<halfword> = fit_class_array::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0833::fit_class_array;

@@ -79,13 +79,22 @@ macro_rules! Find_optimal_breakpoints {
                     ($globals, 'done);
             }
             // @<Clean up the memory by removing the break nodes@>;
-            todo!("clean up the memory");
+            Clean_up_the_memory_by_removing_the_break_nodes!($globals);
             // if not second_pass then
             if !$globals.second_pass {
-                todo!("not second_pass");
                 // begin@!stat if tracing_paragraphs>0 then print_nl("@@secondpass");@;@+tats@/
+                region_stat! {
+                    if tracing_paragraphs!($globals) > 0 {
+                        print_nl($globals, strpool_str!("@@secondpass"));
+                    }
+                }
                 // threshold:=tolerance; second_pass:=true; final_pass:=(emergency_stretch<=0);
+                $globals.threshold = tolerance!($globals);
+                $globals.second_pass = true;
+                $globals.final_pass = emergency_stretch!($globals) <= scaled::zero();
                 // end {if at first you don't succeed, \dots}
+                /// if at first you don't succeed, ...
+                const _ : () = ();
             }
             // else begin @!stat if tracing_paragraphs>0 then
             else {

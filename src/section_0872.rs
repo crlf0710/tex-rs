@@ -10,8 +10,17 @@
 //
 // @<Glob...@>=
 // @!best_bet:pointer; {use this passive node and its predecessors}
+/// use this passive node and its predecessors
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static best_bet: pointer = null;
 // @!fewest_demerits:integer; {the demerits associated with |best_bet|}
+/// the demerits associated with `best_bet`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static fewest_demerits: integer = 0;
 // @!best_line:halfword; {line number following the last line of the new paragraph}
+/// line number following the last line of the new paragraph
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static best_line: halfword = 0;
 // @!actual_looseness:integer; {the difference between |line_number(best_bet)|
 //   and the optimum |best_line|}
 /// the difference between `line_number(best_bet)` and the optimum `best_line`
