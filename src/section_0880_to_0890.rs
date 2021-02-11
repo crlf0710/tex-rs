@@ -1,38 +1,3 @@
-//! @ The job of reversing links in a list is conveniently regarded as the job
-//! of taking items off one stack and putting them on another. In this case we
-//! take them off a stack pointed to by |q| and having |prev_break| fields;
-//! we put them on a stack pointed to by |cur_p| and having |next_break| fields.
-//! Node |r| is the passive node being moved from stack to stack.
-//!
-//! @<Reverse the links of the relevant passive nodes...@>=
-//! q:=break_node(best_bet); cur_p:=null;
-//! repeat r:=q; q:=prev_break(q); next_break(r):=cur_p; cur_p:=r;
-//! until q=null
-//!
-//! @ Glue and penalty and kern and math nodes are deleted at the beginning of
-//! a line, except in the anomalous case that the node to be deleted is actually
-//! one of the chosen breakpoints. Otherwise
-//! the pruning done here is designed to match
-//! the lookahead computation in |try_break|, where the |break_width| values
-//! are computed for non-discretionary breakpoints.
-//!
-//! @<Prune unwanted nodes at the beginning of the next line@>=
-//! begin r:=temp_head;
-//! loop@+  begin q:=link(r);
-//!   if q=cur_break(cur_p) then goto done1;
-//!     {|cur_break(cur_p)| is the next breakpoint}
-//!   {now |q| cannot be |null|}
-//!   if is_char_node(q) then goto done1;
-//!   if non_discardable(q) then goto done1;
-//!   if type(q)=kern_node then if subtype(q)<>explicit then goto done1;
-//!   r:=q; {now |type(q)=glue_node|, |kern_node|, |math_node|, or |penalty_node|}
-//!   end;
-//! done1: if r<>temp_head then
-//!   begin link(r):=null; flush_node_list(link(temp_head));
-//!   link(temp_head):=q;
-//!   end;
-//! end
-//!
 //! @ The current line to be justified appears in a horizontal list starting
 //! at |link(temp_head)| and ending at |cur_break(cur_p)|. If |cur_break(cur_p)| is
 //! a glue node, we reset the glue to equal the |right_skip| glue; otherwise
