@@ -18,14 +18,15 @@ pub(crate) fn init_trie(globals: &mut TeXGlobals) -> TeXResult<()> {
     if trie_root!(globals) != 0 {
         // begin first_fit(trie_root); trie_pack(trie_root);
         first_fit(globals, trie_root!(globals))?;
-        trie_pack(globals, trie_root!(globals));
+        trie_pack(globals, trie_root!(globals))?;
         // end;
     }
     // @<Move the data into |trie|@>;
+    Move_the_data_into_trie!(globals);
     // trie_not_ready:=false;
     globals.trie_not_ready = false;
     // end;
-    todo!();
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;

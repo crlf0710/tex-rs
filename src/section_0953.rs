@@ -68,7 +68,7 @@ pub(crate) fn first_fit(globals: &mut TeXGlobals, p: trie_pointer) -> TeXResult<
     );
     Pack_the_family_into_trie_relative_to_h!(globals, h, p, z);
     // end;
-    todo!();
+    ok_nojump!()
 }
 
 use crate::pascal::integer;

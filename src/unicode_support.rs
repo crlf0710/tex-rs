@@ -366,12 +366,54 @@ pub(crate) fn fontchar_value(globals: &mut TeXGlobals, idx: halfword) -> font_an
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static allow_big_char_code: boolean = false;
 
+pub(crate) const triecharop_val_count_limit: usize = 65536;
+
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static triecharop_val_gallery: Box<[trie_char_and_op]> =
+    vec![trie_char_and_op::default(); triecharop_val_count_limit].into();
+
+
+#[globals_struct_use(TeXGlobals)]
+use crate::unicode_support::triecharop_val_count_limit;
+
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static triecharop_val_count: usize = 0;
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0921::trie_char_and_op;
+
+pub(crate) fn register_triecharop_value(
+    globals: &mut TeXGlobals,
+    triecharop_val: trie_char_and_op,
+) -> halfword {
+    for i in 0..globals.triecharop_val_count {
+        if globals.triecharop_val_gallery[i] == triecharop_val {
+            return i as halfword;
+        }
+    }
+    if globals.triecharop_val_count + 1 >= triecharop_val_count_limit {
+        panic!("triecharop idx used up");
+    }
+    let idx = globals.triecharop_val_count;
+    globals.triecharop_val_gallery[idx] = triecharop_val;
+    globals.triecharop_val_count += 1;
+    idx as halfword
+}
+
+pub(crate) fn triecharop_value(globals: &mut TeXGlobals, idx: halfword) -> trie_char_and_op {
+    if idx as usize >= globals.triecharop_val_count {
+        panic!("triecharop idx out of bound");
+    }
+    globals.triecharop_val_gallery[idx as usize]
+}
+
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::packed_ASCII_code;
 use crate::section_0113::halfword;
 use crate::section_0134::font_and_character;
 use crate::section_0297::cur_tok_repr;
+use crate::section_0921::trie_char_and_op;
 use core::cell::{Cell, RefCell};
 use globals_struct::{globals_struct_field, globals_struct_use};
 use std::collections::BTreeMap;
