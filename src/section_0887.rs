@@ -4,12 +4,25 @@
 //
 // @<Put the \(l)\.{\\leftskip} glue at the left...@>=
 macro_rules! Put_the_leftskip_glue_at_the_left_and_detach_this_line {
-    ($globals:expr) => {{
+    ($globals:expr, $q:expr) => {{
+        /// temporary registers for list manipulation
+        let mut r: pointer;
         // r:=link(q); link(q):=null; q:=link(temp_head); link(temp_head):=r;
+        r = link!($globals, $q);
+        link!($globals, $q) = null;
+        $q = link!($globals, temp_head);
+        link!($globals, temp_head) = r;
         // if left_skip<>zero_glue then
-        //   begin r:=new_param_glue(left_skip_code);
-        //   link(r):=q; q:=r;
-        //   end
-        todo!("Put the leftskip glue");
+        if left_skip!($globals) != zero_glue {
+            // begin r:=new_param_glue(left_skip_code);
+            r = new_param_glue($globals, left_skip_code.into())?;
+            // link(r):=q; q:=r;
+            link!($globals, r) = $q;
+            $q = r;
+            // end
+        }
+        use crate::section_0152::new_param_glue;
+        use crate::section_0162::zero_glue;
+        use crate::section_0224::left_skip_code;
     }}
 }

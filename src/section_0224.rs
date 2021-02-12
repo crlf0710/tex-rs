@@ -107,6 +107,11 @@ macro_rules! glue_par {
 // @d above_display_short_skip==glue_par(above_display_short_skip_code)
 // @d below_display_short_skip==glue_par(below_display_short_skip_code)
 // @d left_skip==glue_par(left_skip_code)
+macro_rules! left_skip {
+    ($globals:expr) => {
+        glue_par!($globals, crate::section_0224::left_skip_code)
+    }
+}
 // @d right_skip==glue_par(right_skip_code)
 // @d top_skip==glue_par(top_skip_code)
 // @d split_top_skip==glue_par(split_top_skip_code)

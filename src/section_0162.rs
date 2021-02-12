@@ -43,6 +43,8 @@ pub(crate) const temp_head: pointer = mem_top - 3;
 /// head of a temporary list of another kind
 pub(crate) const hold_head: pointer = mem_top - 4;
 // @d adjust_head==mem_top-5 {head of adjustment list returned by |hpack|}
+/// head of adjustment list returned by `hpack`
+pub(crate) const adjust_head: pointer = mem_top - 5;
 // @d active==mem_top-7 {head of active list in |line_break|, needs two words}
 /// head of active list in `line_break`, needs two words
 pub(crate) const active: pointer = mem_top - 7;

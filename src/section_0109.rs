@@ -37,6 +37,12 @@ macro_rules! float {
     }
 }
 // @d unfloat(#) == # {convert from |real| to type |glue_ratio|}
+/// convert from `real` to type `glue_ratio`
+macro_rules! unfloat {
+    ($val:expr) => {
+        $val
+    }
+}
 // @d float_constant(#) == #.0 {convert |integer| constant to |real|}
 /// convert `integer` constant to `real`
 macro_rules! float_constant {

@@ -4,7 +4,7 @@
 // @<Determine the value of |width(r)| and the appropriate glue setting...@>=
 
 macro_rules! Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending {
-    ($globals:expr, $m:expr, $r:expr, $w:expr, $x:expr) => {{
+    ($globals:expr, $m:expr, $r:expr, $w:expr, $x:expr, $lbl_common_ending:lifetime) => {{
         // if m=additional then w:=x+w;
         if $m == additional {
             $w = $x + $w;
@@ -28,7 +28,8 @@ macro_rules! Determine_the_value_of_width_r_and_the_appropriate_glue_setting__th
         // else if x>0 then @<Determine horizontal glue stretch setting, then |return|
         //     or \hbox{|goto common_ending|}@>
         else if $x > scaled::zero() {
-            todo!("x > 0");
+            Determine_horizontal_glue_stretch_setting__then_return_or_goto_common_ending!
+                ($globals, $r, $x, $lbl_common_ending);
         }
         // else @<Determine horizontal glue shrink setting, then |return|
         //     or \hbox{|goto common_ending|}@>

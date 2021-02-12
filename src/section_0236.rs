@@ -293,6 +293,11 @@ macro_rules! show_box_depth {
     };
 }
 // @d hbadness==int_par(hbadness_code)
+macro_rules! hbadness {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::hbadness_code)
+    };
+}
 // @d vbadness==int_par(vbadness_code)
 // @d pausing==int_par(pausing_code)
 // @d tracing_online==int_par(tracing_online_code)

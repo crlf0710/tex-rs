@@ -46,15 +46,20 @@ pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: 
     // height(r):=h; depth(r):=d;@/
     height!(globals, r) = h;
     depth!(globals, r) = d;
+    region_forward_label!(
+    |'common_ending|
+    {
     // @<Determine the value of |width(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
     Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!
-        (globals, m, r, w, x);
+        (globals, m, r, w, x, 'common_ending);
+    }
     // common_ending: @<Finish issuing a diagnostic message
     //       for an overfull or underfull hbox@>;
-    Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_hbox!(globals);
+    'common_ending <-
+    );
+    Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_hbox!(globals, r);
     // exit: hpack:=r;
-    todo!("hpack");
     return_nojump!(r);
     // end;
 }

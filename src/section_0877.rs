@@ -21,6 +21,8 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     // label done,done1;
     // var q,@!r,@!s:pointer; {temporary registers for list manipulation}
     // @!disc_break:boolean; {was the current break at a discretionary node?}
+    /// was the current break at a discretionary node?
+    let disc_break: boolean;
     // @!post_disc_break:boolean; {and did it have a nonempty post-break part?}
     /// and did it have a nonempty post-break part?
     let post_disc_break: boolean;
@@ -42,7 +44,7 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     //   insertions@>;
     loop {
         Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_current_vertical_list__together_with_associated_penalties_and_other_insertions!
-            (globals, cur_line);
+            (globals, cur_line, disc_break, post_disc_break);
         // incr(cur_line); cur_p:=next_break(cur_p);
         incr!(cur_line);
         globals.cur_p = next_break!(globals, globals.cur_p);
