@@ -35,20 +35,3 @@
 //!   end;
 //! end
 //!
-//! @ When a box is being appended to the current vertical list, the
-//! baselineskip calculation is handled by the |append_to_vlist| routine.
-//!
-//! @p procedure append_to_vlist(@!b:pointer);
-//! var d:scaled; {deficiency of space between baselines}
-//! @!p:pointer; {a new glue node}
-//! begin if prev_depth>ignore_depth then
-//!   begin d:=width(baseline_skip)-prev_depth-height(b);
-//!   if d<line_skip_limit then p:=new_param_glue(line_skip_code)
-//!   else  begin p:=new_skip_param(baseline_skip_code);
-//!     width(temp_ptr):=d; {|temp_ptr=glue_ptr(p)|}
-//!     end;
-//!   link(tail):=p; tail:=p;
-//!   end;
-//! link(tail):=b; tail:=b; prev_depth:=depth(b);
-//! end;
-//!

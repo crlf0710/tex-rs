@@ -45,7 +45,7 @@ pub(crate) fn short_display(globals: &mut TeXGlobals, mut p: integer) {
         }
         // else @<Print a short indication of the contents of node |p|@>;
         else {
-            todo!("Print a short indication");
+            Print_a_short_indication_of_the_contents_of_node_p!(globals, p as pointer);
         }
         // p:=link(p);
         p = link!(globals, p as pointer) as integer;

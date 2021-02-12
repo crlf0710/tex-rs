@@ -22,17 +22,17 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     // var q,@!r,@!s:pointer; {temporary registers for list manipulation}
     // @!disc_break:boolean; {was the current break at a discretionary node?}
     /// was the current break at a discretionary node?
-    let disc_break: boolean;
+    let mut disc_break: boolean;
     // @!post_disc_break:boolean; {and did it have a nonempty post-break part?}
     /// and did it have a nonempty post-break part?
-    let post_disc_break: boolean;
+    let mut post_disc_break: boolean;
     // @!cur_width:scaled; {width of line number |cur_line|}
     // @!cur_indent:scaled; {left margin of line number |cur_line|}
     // @!t:quarterword; {used for replacement counts in discretionary nodes}
     // @!pen:integer; {use when calculating penalties between lines}
     // @!cur_line: halfword; {the current line number being justified}
     /// the current line number being justified
-    let cur_line: halfword;
+    let mut cur_line: halfword;
     // begin @<Reverse the links of the relevant passive nodes, setting |cur_p| to the
     //   first breakpoint@>;
     Reverse_the_links_of_the_relevant_passive_nodes__setting_cur_p_to_the_first_breakpoint!
@@ -44,7 +44,7 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     //   insertions@>;
     loop {
         Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_current_vertical_list__together_with_associated_penalties_and_other_insertions!
-            (globals, cur_line, disc_break, post_disc_break);
+            (globals, cur_line, disc_break, post_disc_break, final_widow_penalty);
         // incr(cur_line); cur_p:=next_break(cur_p);
         incr!(cur_line);
         globals.cur_p = next_break!(globals, globals.cur_p);

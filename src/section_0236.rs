@@ -227,6 +227,11 @@ macro_rules! line_penalty {
 // @d hyphen_penalty==int_par(hyphen_penalty_code)
 // @d ex_hyphen_penalty==int_par(ex_hyphen_penalty_code)
 // @d club_penalty==int_par(club_penalty_code)
+macro_rules! club_penalty {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::club_penalty_code)
+    };
+}
 // @d widow_penalty==int_par(widow_penalty_code)
 macro_rules! widow_penalty {
     ($globals:expr) => {
@@ -235,11 +240,21 @@ macro_rules! widow_penalty {
 }
 // @d display_widow_penalty==int_par(display_widow_penalty_code)
 // @d broken_penalty==int_par(broken_penalty_code)
+macro_rules! broken_penalty {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::broken_penalty_code)
+    };
+}
 // @d bin_op_penalty==int_par(bin_op_penalty_code)
 // @d rel_penalty==int_par(rel_penalty_code)
 // @d pre_display_penalty==int_par(pre_display_penalty_code)
 // @d post_display_penalty==int_par(post_display_penalty_code)
 // @d inter_line_penalty==int_par(inter_line_penalty_code)
+macro_rules! inter_line_penalty {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::inter_line_penalty_code)
+    };
+}
 // @d double_hyphen_demerits==int_par(double_hyphen_demerits_code)
 // @d final_hyphen_demerits==int_par(final_hyphen_demerits_code)
 // @d adj_demerits==int_par(adj_demerits_code)

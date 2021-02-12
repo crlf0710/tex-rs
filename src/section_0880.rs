@@ -8,7 +8,7 @@
 //
 // @<Justify the line ending at breakpoint |cur_p|, and append it...@>=
 macro_rules! Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_current_vertical_list__together_with_associated_penalties_and_other_insertions {
-    ($globals:expr, $cur_line:expr, $disc_break:expr, $post_disc_break:expr) => {{
+    ($globals:expr, $cur_line:expr, $disc_break:expr, $post_disc_break:expr, $final_widow_penalty:expr) => {{
         /// temporary registers for list manipulation
         let mut q: pointer;
         // @<Modify the end of the line to reflect the nature of the break and to include
@@ -24,7 +24,8 @@ macro_rules! Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_c
         Append_the_new_box_to_the_current_vertical_list__followed_by_the_list_of_special_nodes_taken_out_of_the_box_by_the_packager!
             ($globals);
         // @<Append a penalty node, if a nonzero penalty is appropriate@>
-        Append_a_penalty_node__if_a_nonzero_penalty_is_appropriate!($globals, $cur_line);
+        Append_a_penalty_node__if_a_nonzero_penalty_is_appropriate!
+            ($globals, $cur_line, $disc_break, $final_widow_penalty);
 
         use crate::section_0115::pointer;
     }}

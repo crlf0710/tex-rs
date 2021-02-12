@@ -101,6 +101,11 @@ macro_rules! glue_par {
 }
 // @d line_skip==glue_par(line_skip_code)
 // @d baseline_skip==glue_par(baseline_skip_code)
+macro_rules! baseline_skip {
+    ($globals:expr) => {
+        glue_par!($globals, crate::section_0224::baseline_skip_code)
+    }
+}
 // @d par_skip==glue_par(par_skip_code)
 // @d above_display_skip==glue_par(above_display_skip_code)
 // @d below_display_skip==glue_par(below_display_skip_code)
