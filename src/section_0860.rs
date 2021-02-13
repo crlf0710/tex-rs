@@ -7,10 +7,16 @@
 // @d combine_two_deltas(#)==@|mem[prev_r+#].sc:=mem[prev_r+#].sc+mem[r+#].sc
 // @d downdate_width(#)==@|cur_active_width[#]:=cur_active_width[#]-
 //   mem[prev_r+#].sc
-//
+macro_rules! downdate_width {
+    ($globals:expr, $idx:expr, $prev_r:expr) => {{
+        $globals.cur_active_width[$idx] = $globals.cur_active_width[$idx]
+            - $globals.mem[$prev_r + $idx][crate::section_0101::MEMORY_WORD_SC]
+    }};
+}
+
 // @<Deactivate node |r|@>=
 macro_rules! Deactivate_node_r {
-    ($globals:expr, $r:expr, $prev_r:expr) => {{
+    ($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr) => {{
         trace_span!("Deactivate node `r`");
         // link(prev_r):=link(r); free_node(r,active_node_size);
         link!($globals, $prev_r) = link!($globals, $r);
@@ -22,22 +28,32 @@ macro_rules! Deactivate_node_r {
         }
         // else if type(prev_r)=delta_node then
         else if r#type!($globals, $prev_r) == delta_node {
-            todo!("process when prev_r is delta node");
             // begin r:=link(prev_r);
+            $r = link!($globals, $prev_r);
             // if r=last_active then
-            //   begin do_all_six(downdate_width);
-            //   link(prev_prev_r):=last_active;
-            //   free_node(prev_r,delta_node_size); prev_r:=prev_prev_r;
-            //   end
+            if $r == last_active!() {
+                // begin do_all_six(downdate_width);
+                do_all_six!(downdate_width !; @globals = $globals; $prev_r);
+                // link(prev_prev_r):=last_active;
+                link!($globals, $prev_prev_r) = last_active!();
+                // free_node(prev_r,delta_node_size); prev_r:=prev_prev_r;
+                free_node($globals, $prev_r, delta_node_size as _);
+                $prev_r = $prev_prev_r;
+                // end
+            }
             // else if type(r)=delta_node then
-            //   begin do_all_six(update_width);
-            //   do_all_six(combine_two_deltas);
-            //   link(prev_r):=link(r); free_node(r,delta_node_size);
-            //   end;
+            else if r#type!($globals, $r) == delta_node {
+                todo!("process when prev_r is delta node b");
+                // begin do_all_six(update_width);
+                // do_all_six(combine_two_deltas);
+                // link(prev_r):=link(r); free_node(r,delta_node_size);
+                // end;
+            }
             // end
         }
         use crate::section_0130::free_node;
         use crate::section_0819::active_node_size;
         use crate::section_0822::delta_node;
+        use crate::section_0822::delta_node_size;
     }}
 }

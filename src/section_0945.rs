@@ -26,15 +26,30 @@ macro_rules! Sort_the_hyphenation_op_tables_into_proper_order {
             // for j:=1 to trie_op_ptr do while trie_op_hash[j]>j do
             for j in 1..=$globals.trie_op_ptr.get() {
                 while $globals.trie_op_hash[j as i16] > j {
-                    todo!("sort 2");
+                    /// all-purpose registers for initialization
+                    let k: integer;
                     // begin k:=trie_op_hash[j];@/
+                    k = $globals.trie_op_hash[j as i16].get() as _;
                     // t:=hyf_distance[k]; hyf_distance[k]:=hyf_distance[j]; hyf_distance[j]:=t;@/
+                    let t = $globals.hyf_distance[k as u16];
+                    $globals.hyf_distance[k as u16] = $globals.hyf_distance[j as u16];
+                    $globals.hyf_distance[j as u16] = t;
                     // t:=hyf_num[k]; hyf_num[k]:=hyf_num[j]; hyf_num[j]:=t;@/
+                    let t = $globals.hyf_num[k as u16];
+                    $globals.hyf_num[k as u16] = $globals.hyf_num[j as u16];
+                    $globals.hyf_num[j as u16] = t;
                     // t:=hyf_next[k]; hyf_next[k]:=hyf_next[j]; hyf_next[j]:=t;@/
+                    let t = $globals.hyf_next[k as u16];
+                    $globals.hyf_next[k as u16] = $globals.hyf_next[j as u16];
+                    $globals.hyf_next[j as u16] = t;
                     // trie_op_hash[j]:=trie_op_hash[k]; trie_op_hash[k]:=k;
+                    $globals.trie_op_hash[j as i16] = $globals.trie_op_hash[k as i16];
+                    $globals.trie_op_hash[k as i16] = u16_from_0_to_n::new(k as _);
                     // end
                 }
             }
+            use crate::pascal::integer;
+            use crate::pascal::u16_from_0_to_n;
             use crate::section_0110::min_quarterword;
             use crate::section_0920::trie_pointer_repr;
         }

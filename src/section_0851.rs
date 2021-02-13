@@ -10,7 +10,7 @@
 //
 // @<Consider the demerits for a line from |r| to |cur_p|...@>=
 macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r_if_it_should_no_longer_be_active__then_goto_continue_if_a_line_from_r_to_cur_p_is_infeasible__otherwise_record_a_new_feasible_break {
-    ($globals:expr, $r:expr, $prev_r:expr, $l:expr, $line_width:expr, $pi:expr, $break_type:expr, $lbl_continue:lifetime) => {{
+    ($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr, $l:expr, $line_width:expr, $pi:expr, $break_type:expr, $lbl_continue:lifetime) => {{
         trace_span!("Consider the demerits for a line from |r| to |cur_p|...");
         /// has `d` been forced to zero?
         let mut artificial_demerits: boolean;
@@ -77,7 +77,7 @@ macro_rules! Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r
         }
         'deactivate <-
         );
-        Deactivate_node_r!($globals, $r, $prev_r);
+        Deactivate_node_r!($globals, $r, $prev_r, $prev_prev_r);
         // end
         use crate::section_0108::inf_bad;
         use crate::section_0157::eject_penalty;

@@ -28,5 +28,8 @@ pub(crate) static best_line: halfword = 0;
 pub(crate) static actual_looseness: integer = 0;
 // @!line_diff:integer; {the difference between the current line number and
 //   the optimum |best_line|}
+/// the difference between the current line number and the optimum `best_line`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static line_diff: integer = 0;
 
 use globals_struct::{globals_struct_field, globals_struct_use};

@@ -1,18 +1,3 @@
-//! @ The code that passes over the characters of words in a paragraph is
-//! part of \TeX's inner loop, so it has been streamlined for speed. We use
-//! the fact that `\.{\\parfillskip}' glue appears at the end of each paragraph;
-//! it is therefore unnecessary to check if |link(cur_p)=null| when |cur_p| is a
-//! character node.
-//! @^inner loop@>
-//!
-//! @<Advance \(c)|cur_p| to the node following the present string...@>=
-//! begin prev_p:=cur_p;
-//! repeat f:=font(cur_p);
-//! act_width:=act_width+char_width(f)(char_info(f)(character(cur_p)));
-//! cur_p:=link(cur_p);
-//! until not is_char_node(cur_p);
-//! end
-//!
 //! @ When node |cur_p| is a glue node, we look at |prev_p| to see whether or not
 //! a breakpoint is legal at |cur_p|, as explained above.
 //!

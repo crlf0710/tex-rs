@@ -45,7 +45,7 @@ macro_rules! Find_optimal_breakpoints {
             /// is node |cur_p| outside a formula?
             let auto_breaking: boolean;
             /// helps to determine when glue nodes are breakpoints
-            let prev_p: pointer;
+            let mut prev_p: pointer;
 
             if $globals.threshold as integer > inf_bad as integer {
                 $globals.threshold = inf_bad as _;
@@ -65,12 +65,13 @@ macro_rules! Find_optimal_breakpoints {
             prev_p = $globals.cur_p;
             // while (cur_p<>null)and(link(active)<>last_active) do
             while $globals.cur_p != null && link!($globals, active) != last_active!() {
-                todo!("call try_break");
                 // @<Call |try_break| if |cur_p| is a legal breakpoint;
                 // on the second pass, also try to hyphenate the next
                 // word, if |cur_p| is a glue node;
                 // then advance |cur_p| to the next node of the paragraph
                 // that could possibly be a legal breakpoint@>;
+                Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__also_try_to_hyphenate_the_next_word__if_cur_p_is_a_glue_node__then_advance_cur_p_to_the_next_node_of_the_paragraph_that_could_possibly_be_a_legal_breakpoint!
+                    ($globals, prev_p);
             }
             // if cur_p=null then
             if $globals.cur_p == null {

@@ -52,7 +52,7 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
     // loop@+  begin continue: r:=link(prev_r);
     loop {
         /// a step behind `prev_r`, if `type(prev_r)=delta_node`
-        let mut prev_prev_r: pointer;
+        let mut prev_prev_r: pointer = null;
         /// the current line will be justified to this width
         let mut line_width: scaled = scaled::zero();
         /// line number of current active node
@@ -76,7 +76,7 @@ pub(crate) fn try_break(globals: &mut TeXGlobals, mut pi: integer, break_type: s
         //   then |goto continue| if a line from |r| to |cur_p| is infeasible,
         //   otherwise record a new feasible break@>;
         Consider_the_demerits_for_a_line_from_r_to_cur_p__deactivate_node_r_if_it_should_no_longer_be_active__then_goto_continue_if_a_line_from_r_to_cur_p_is_infeasible__otherwise_record_a_new_feasible_break!
-            (globals, r, prev_r, l, line_width, pi, break_type, 'continue_);
+            (globals, r, prev_r, prev_prev_r, l, line_width, pi, break_type, 'continue_);
         // end;
         }
         |'continue_|
@@ -99,4 +99,5 @@ use crate::section_0101::small_number;
 use crate::section_0101::scaled;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;
+use crate::section_0115::null;
 use crate::section_0162::active;
