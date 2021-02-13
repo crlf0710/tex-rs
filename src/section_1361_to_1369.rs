@@ -1,7 +1,3 @@
-//! @ @<Incorporate a whatsit node into a vbox@>=do_nothing
-//!
-//! @ @<Incorporate a whatsit node into an hbox@>=do_nothing
-//!
 //! @ @<Let |d| be the width of the whatsit |p|@>=d:=0
 //!
 //! @ @d adv_past(#)==@+if subtype(#)=language_node then
