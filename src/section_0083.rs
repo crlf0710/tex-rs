@@ -2,6 +2,7 @@
 // @<Get user's advice...@>=
 macro_rules! Get_user_s_advice_and_return {
     ($globals:expr) => {
+        trace_span!("Get user's advice...");
         // loop@+begin continue: if interaction<>error_stop_mode then return;
         //   clear_for_error_prompt; prompt_input("? ");
         loop {

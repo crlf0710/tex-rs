@@ -13,6 +13,7 @@
 // @<Interpret code |c| and |return| if done@>=
 macro_rules! Interpret_code_c_and_return_if_done {
     ($globals:expr, $c:expr, $lbl_continue:lifetime) => {{
+        trace_span!("Interpret code `c` and `return` if done");
         #[cfg(feature = "debugging")]
         const DEBUGGING_ENABLED: bool = true;
         #[cfg(not(feature = "debugging"))]

@@ -78,6 +78,7 @@ pub(crate) fn input_ln(
                 // if max_buf_stack=buf_size then
                 if *globals_view.max_buf_stack == buf_size {
                     // @<Report overflow of the input buffer, and abort@>;
+                    todo!("report overflow");
                 }
                 // end;
             }

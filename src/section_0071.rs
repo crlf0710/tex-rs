@@ -10,6 +10,7 @@
 /// prints a string and gets a line of input
 macro_rules! prompt_input {
     ($globals:expr, $val:expr) => {{
+        trace_span!("prompt_input");
         wake_up_terminal($globals);
         print($globals, ($val).into());
         term_input($globals)?;
@@ -38,17 +39,34 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // @.End of file on the terminal@>
     // term_offset:=0; {the user's line ended with \<\rm return>}
+    /// the user's line ended with \<\rm return>
+    const _ : () = ();
+    globals.term_offset = 0.into();
     // decr(selector); {prepare to echo the input}
+    /// prepare to echo the input
+    const _ : () = ();
+    decr!(globals.selector);
     // if last<>first then for k:=first to last-1 do print(buffer[k]);
+    if globals.last != globals.first {
+        for k in globals.first.get()..=(globals.last.get() - 1) {
+            print(globals, globals.buffer[k].numeric_value() as _);
+        }
+    }
     // print_ln; incr(selector); {restore previous status}
+    /// restore previous status
+    const _ : () = ();
+    print_ln(make_globals_io_string_log_view!(globals));
+    incr!(globals.selector);
     // end;
-
     return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0031::input_ln;
 use crate::section_0034::update_terminal;
+use crate::section_0057::print_ln;
+use crate::section_0059::print;
 use crate::section_0081::TeXResult;
 use crate::section_0093::fatal_error;
