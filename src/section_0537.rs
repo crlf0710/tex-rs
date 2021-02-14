@@ -43,6 +43,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end_file_reading; {remove the level that didn't work}
         /// remove the level that didn't work
         end_file_reading(globals);
+        // prompt_file_name("input file name",".tex");
         prompt_file_name(globals, strpool_str!("input file name"),strpool_str!(".tex"))?;
         // end;
     }
@@ -93,6 +94,8 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     state!(globals) = new_line;
     // if name=str_ptr-1 then {conserve string pool space (but see note above)}
     if name!(globals) as integer == globals.str_ptr.get() as integer - 1 {
+        /// conserve string pool space (but see note above)
+        const _ : () = ();
         // begin flush_string; name:=cur_name;
         flush_string(globals);
         name!(globals) = globals.cur_name.get() as _;
