@@ -38,7 +38,7 @@
 //! current page. The value of |page_goal| at the time of the best break is
 //! stored in |best_size|.
 //
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, PartialEq, PartialOrd)]
 pub(crate) enum page_contents_kind {
     /// symbolic name for a null constant
     empty = 0,

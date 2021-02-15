@@ -28,9 +28,8 @@ pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointe
     'restart <-
     {
     /// start at some free node in the ring
-    {
-        p = globals.rover;
-    }
+    const _ : () = ();
+    p = globals.rover;
     region_forward_label!(
     |'found|
     {

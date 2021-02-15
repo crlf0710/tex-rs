@@ -11,7 +11,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1094 {
             normal_paragraph($globals)?;
             // if mode>0 then build_page;
             if mode!($globals) > 0 {
-                build_page($globals);
+                build_page($globals)?;
             }
             // end;
             use crate::section_1070::normal_paragraph;
@@ -32,7 +32,7 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1094 {
             end_graf($globals)?;
             // if mode=vmode then build_page;
             if mode!($globals).get() == vmode {
-                build_page($globals);
+                build_page($globals)?;
             }
             // end;
             use crate::section_0994::build_page;

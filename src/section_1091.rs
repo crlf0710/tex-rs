@@ -54,7 +54,7 @@ pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) -> TeXResult
     // if nest_ptr=1 then build_page; {put |par_skip| glue on current page}
     if globals.nest_ptr == 1 {
         /// put `par_skip` glue on current page
-        build_page(globals);
+        build_page(globals)?;
     }
     // end;
     ok_nojump!()

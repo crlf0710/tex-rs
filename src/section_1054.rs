@@ -35,7 +35,7 @@ pub(crate) fn its_all_over(globals: &mut TeXGlobals) -> TeXResult<boolean> {
         // build_page; {append \.{\\hbox to \\hsize\{\}\\vfill\\penalty-'10000000000}}
         /// append `\hbox` to `\hsize{}\vfill\penalty-'10000000000`
         const _ : () = ();
-        build_page(globals);
+        build_page(globals)?;
         // end;
     }
     // its_all_over:=false;

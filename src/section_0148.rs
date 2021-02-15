@@ -8,7 +8,7 @@
 // @d precedes_break(#)==(type(#)<math_node)
 macro_rules! precedes_break {
     ($globals:expr, $p:expr) => {
-        r#type!($globals, $p) < math_node
+        r#type!($globals, $p) < crate::section_0147::math_node
     }
 }
 // @d non_discardable(#)==(type(#)<math_node)

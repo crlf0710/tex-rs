@@ -15,7 +15,7 @@ fn set_initial_values_of_key_variables_0074(globals: &mut TeXGlobals) {
     // mode:=vmode; head:=contrib_head; tail:=contrib_head;
     mode!(globals) = vmode.into();
     head!(globals) = contrib_head;
-    tail!(globals) = contrib_tail!(globals);
+    tail!(globals) = contrib_head;
     // prev_depth:=ignore_depth; mode_line:=0;
     prev_depth!(globals) = ignore_depth;
     mode_line!(globals) = 0;

@@ -1,7 +1,6 @@
 //! ` `
 // @<Declare action...@>=
 // procedure append_penalty;
-#[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn append_penalty(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin scan_int; tail_append(new_penalty(cur_val));
@@ -9,7 +8,7 @@ pub(crate) fn append_penalty(globals: &mut TeXGlobals) -> TeXResult<()> {
     tail_append!(globals, new_penalty(globals, globals.cur_val)?);
     // if mode=vmode then build_page;
     if mode!(globals) == vmode {
-        build_page(globals);
+        build_page(globals)?;
     }
     // end;
     ok_nojump!()
