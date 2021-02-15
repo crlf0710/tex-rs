@@ -9,11 +9,21 @@
 macro_rules! Finish_the_DVI_file {
     ($globals:expr) => {{
         // while cur_s>-1 do
-        //   begin if cur_s>0 then dvi_out(pop)
-        //   else  begin dvi_out(eop); incr(total_pages);
-        //     end;
-        //   decr(cur_s);
-        //   end;
+        while $globals.cur_s > -1 {
+            // begin if cur_s>0 then dvi_out(pop)
+            if $globals.cur_s > 0 {
+                dvi_out!($globals, pop);
+            }
+            // else  begin dvi_out(eop); incr(total_pages);
+            else {
+                dvi_out!($globals, eop);
+                incr!($globals.total_pages);
+                // end;
+            }
+            // decr(cur_s);
+            decr!($globals.cur_s);
+            // end;
+        }
         // if total_pages=0 then print_nl("No pages of output.")
         if $globals.total_pages == 0 {
             print_nl($globals, strpool_str!("No pages of output."));
@@ -44,5 +54,7 @@ macro_rules! Finish_the_DVI_file {
             todo!("generate dvi postamble");
         }
         use crate::section_0062::print_nl;
+        use crate::section_0586::pop;
+        use crate::section_0586::eop;
     }}
 }

@@ -3,6 +3,12 @@
 #[derive(Copy, Clone)]
 pub(crate) struct dvi_command(u8);
 
+impl dvi_command {
+    pub(crate) fn byte(self) -> u8 {
+        self.0
+    }
+}
+
 // @d set_char_0=0 {typeset character 0 and move right}
 /// typeset character 0 and move right
 pub(crate) const set_char_0: dvi_command = dvi_command(0);

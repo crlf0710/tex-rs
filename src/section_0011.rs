@@ -114,6 +114,9 @@ pub(crate) type trie_op_size_POS_TYPENUM = P500;
 pub(crate) type trie_op_size_NEG_TYPENUM = N500;
 
 // @!dvi_buf_size=800; {size of the output buffer; must be a multiple of 8}
+/// size of the output buffer; must be a multiple of 8
+pub(crate) const dvi_buf_size: u16 = dvi_buf_size_TYPENUM::U16;
+pub(crate) type dvi_buf_size_TYPENUM = U800;
 // @!file_name_size=40; {file names shouldn't be longer than this}
 /// file names shouldn't be longer than this
 pub(crate) const file_name_size: u16 = file_name_size_TYPENUM::U16;
@@ -136,7 +139,7 @@ type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
 use static_assertions::const_assert;
 use typenum::{
-    Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79, U8
+    Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79, U8, U800
 };
 use typenum::{N500, P500};
 use globals_struct::{globals_struct_field, globals_struct_use};

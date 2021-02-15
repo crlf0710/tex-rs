@@ -4,26 +4,27 @@
 //
 // @<Try to allocate...@>=
 macro_rules! Try_to_allocate_within_node_p_and_its_physical_successors_and_goto_found_if_allocation_was_possible {
-    ($globals:expr, $p:expr, $q:expr, $r:expr, $s:expr, $t:expr, $lbl_found:lifetime) => {{
+    ($globals:expr, $p:expr, $q:expr, $r:expr, $s:expr, $lbl_found:lifetime) => {{
         // q:=p+node_size(p); {find the physical successor}
         /// find the physical successor
-        {
-            $q = $p + node_size!($globals, $p);
-        }
+        const _ : () = ();
+        $q = $p + node_size!($globals, $p);
         // @^inner loop@>
         // while is_empty(q) do {merge node |p| with node |q|}
         /// merge node `p` with node `q`
         while is_empty!($globals, $q) {
+            /// temporary register
+            let t: integer;
             // begin t:=rlink(q);
-            $t = rlink!($globals, $q) as _;
+            t = rlink!($globals, $q) as _;
             // if q=rover then rover:=t;
             if $q == $globals.rover {
-                $globals.rover = $t as _;
+                $globals.rover = t as _;
             }
             // llink(t):=llink(q); rlink(llink(q)):=t;@/
-            llink!($globals, $t as pointer) = llink!($globals, $q);
+            llink!($globals, t as pointer) = llink!($globals, $q);
             let llink_q = llink!($globals, $q);
-            rlink!($globals, llink_q) = $t as _;
+            rlink!($globals, llink_q) = t as _;
             // q:=q+node_size(q);
             $q = $q + node_size!($globals, $q);
             // end;
@@ -37,7 +38,7 @@ macro_rules! Try_to_allocate_within_node_p_and_its_physical_successors_and_goto_
         // if r=p then if rlink(p)<>p then
         //   @<Allocate entire node |p| and |goto found|@>;
         if $r == $p as integer && rlink!($globals, $p) != $p {
-            todo!();
+            Allocate_entire_node_p_and_goto_found!($globals, $p, $lbl_found);
         }
         // node_size(p):=q-p {reset the size in case it grew}
         node_size!($globals, $p) = $q - $p;

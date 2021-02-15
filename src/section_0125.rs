@@ -21,8 +21,8 @@ pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointe
     /// the newly allocated node, or a candidate for this honor
     let mut r: integer;
     // @!t:integer; {temporary register}
-    /// temporary register
-    let mut t: integer;
+    const _ : () = ();
+
     // begin restart: p:=rover; {start at some free node in the ring}
     region_backward_label!(
     'restart <-
@@ -38,13 +38,12 @@ pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointe
     //   and |goto found| if allocation was possible@>;
     loop {
         Try_to_allocate_within_node_p_and_its_physical_successors_and_goto_found_if_allocation_was_possible!
-            (globals, p, q, r, s, t, 'found);
+            (globals, p, q, r, s, 'found);
         // @^inner loop@>
         // p:=rlink(p); {move to the next node in the ring}
         /// move to the next node in the ring
-        {
-            p = rlink!(globals, p);
-        }
+        const _: () = ();
+        p = rlink!(globals, p);
         // until p=rover; {repeat until the whole list has been traversed}
         /// repeat until the whole list has been traversed
         if p == globals.rover {
@@ -60,7 +59,7 @@ pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointe
     // if lo_mem_max+2<hi_mem_min then if lo_mem_max+2<=mem_bot+max_halfword then
     if globals.lo_mem_max + 2 < globals.hi_mem_min && globals.lo_mem_max + 2 <= mem_bot + max_halfword {
         // @<Grow more variable-size memory and |goto restart|@>;
-        Grow_more_variable_size_memory_and_goto_restart!(globals, p, q, t, 'restart);
+        Grow_more_variable_size_memory_and_goto_restart!(globals, p, q, 'restart);
     }
     // overflow("main memory size",mem_max+1-mem_min);
     //   {sorry, nothing satisfactory is left}
@@ -72,9 +71,8 @@ pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointe
     'found <-
     );
     /// this node is now nonempty
-    {
-        link!(globals, r as pointer) = null;
-    }
+    const _: () = ();
+    link!(globals, r as pointer) = null;
     }
     |'restart|
     );

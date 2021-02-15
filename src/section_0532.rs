@@ -11,8 +11,12 @@
 //
 // @<Glob...@>=
 // @!dvi_file: byte_file; {the device-independent output goes here}
+/// the device-independent output goes here
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static dvi_file: byte_file = byte_file::default();
 // @!output_file_name: str_number; {full name of the output file}
 // @!log_name:str_number; {full name of the log file}
+/// full name of the log file
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static log_name: str_number = str_number::default();
 

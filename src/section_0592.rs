@@ -37,10 +37,25 @@ pub(crate) static total_pages: integer = 0;
 use crate::pascal::integer;
 
 // @!max_v:scaled; {maximum height-plus-depth of pages shipped so far}
+/// maximum height-plus-depth of pages shipped so far
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static max_v: scaled = scaled::zero();
 // @!max_h:scaled; {maximum width of pages shipped so far}
+/// maximum width of pages shipped so far
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static max_h: scaled = scaled::zero();
 // @!max_push:integer; {deepest nesting of |push| commands encountered so far}
+/// deepest nesting of `push` commands encountered so far
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static max_push: integer = 0;
 // @!last_bop:integer; {location of previous |bop| in the \.{DVI} output}
+/// location of previous `bop` in the `DVI` output
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static last_bop: integer = -1;
 // @!dead_cycles:integer; {recent outputs that didn't ship anything out}
+/// recent outputs that didn't ship anything out
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static dead_cycles: integer = 0;
 // @!doing_leaders:boolean; {are we inside a leader box?}
 /// are we inside a leader box?
 #[globals_struct_field(TeXGlobals)]
