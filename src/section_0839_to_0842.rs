@@ -1,9 +1,3 @@
-//! @ @<Subtract glue from |break...@>=
-//! begin v:=glue_ptr(s); break_width[1]:=break_width[1]-width(v);
-//! break_width[2+stretch_order(v)]:=break_width[2+stretch_order(v)]-stretch(v);
-//! break_width[6]:=break_width[6]-shrink(v);
-//! end
-//!
 //! @ When |cur_p| is a discretionary break, the length of a line ``from |cur_p| to
 //! |cur_p|'' has to be defined properly so that the other calculations work out.
 //! Suppose that the pre-break text at |cur_p| has length $l_0$, the post-break

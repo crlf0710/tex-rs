@@ -49,8 +49,13 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         }
         // kern_node: if subtype(cur_p)=explicit then kern_break
         else if type_cur_p == kern_node {
-            todo!("kern_node");
+            if subtype!($globals, $globals.cur_p) as integer == kern_node_subtype::explicit as integer {
+                todo!("kern_break");
+            }
             // else act_width:=act_width+width(cur_p);
+            else {
+                act_width!($globals) += width!($globals, $globals.cur_p);
+            }
         }
         // ligature_node: begin f:=font(lig_char(cur_p));
         else if type_cur_p == ligature_node {
@@ -98,6 +103,7 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         use crate::section_0147::math_node;
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
+        use crate::section_0155::kern_node_subtype;
         use crate::section_0157::penalty_node;
         use crate::section_0819::unhyphenated;
         use crate::section_0829::try_break;

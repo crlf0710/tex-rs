@@ -53,7 +53,7 @@ macro_rules! Compute_the_values_of_break_width {
             let type_s = r#type!($globals, s);
             // glue_node:@<Subtract glue from |break_width|@>;
             if type_s == glue_node {
-                todo!("substract glue");
+                Subtract_glue_from_break_width!($globals, s);
             }
             // penalty_node: do_nothing;
             else if type_s == penalty_node {

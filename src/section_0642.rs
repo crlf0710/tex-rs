@@ -41,6 +41,7 @@ macro_rules! Finish_the_DVI_file {
             //   print(", "); print_int(dvi_offset+dvi_ptr); print(" bytes).");
             //   b_close(dvi_file);
             //   end
+            todo!("generate dvi postamble");
         }
         use crate::section_0062::print_nl;
     }}
