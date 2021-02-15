@@ -1,19 +1,3 @@
-//! @ When node |cur_p| is a glue node, we look at |prev_p| to see whether or not
-//! a breakpoint is legal at |cur_p|, as explained above.
-//!
-//! @<If node |cur_p| is a legal breakpoint, call...@>=
-//! if auto_breaking then
-//!   begin if is_char_node(prev_p) then try_break(0,unhyphenated)
-//!   else if precedes_break(prev_p) then try_break(0,unhyphenated)
-//!   else if (type(prev_p)=kern_node)and(subtype(prev_p)<>explicit) then
-//!     try_break(0,unhyphenated);
-//!   end;
-//! check_shrinkage(glue_ptr(cur_p)); q:=glue_ptr(cur_p);
-//! act_width:=act_width+width(q);@|
-//! active_width[2+stretch_order(q)]:=@|
-//!   active_width[2+stretch_order(q)]+stretch(q);@/
-//! active_width[6]:=active_width[6]+shrink(q)
-//!
 //! @ The following code knows that discretionary texts contain
 //! only character nodes, kern nodes, box nodes, rule nodes, and ligature nodes.
 //!

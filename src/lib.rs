@@ -302,6 +302,7 @@ mod section_0144;
 mod section_0145;
 mod section_0146;
 mod section_0147;
+#[macro_use]
 mod section_0148;
 #[macro_use]
 mod section_0149;
@@ -1333,6 +1334,7 @@ reversing_order_items!({
                     mod section_0815;
                 }
                 {
+                    #[macro_use]
                     mod section_0816;
                     mod section_0817;
                     mod section_0818;
@@ -1345,7 +1347,12 @@ reversing_order_items!({
                     mod section_0822;
                     #[macro_use]
                     mod section_0823;
-                    mod section_0824_to_0827;
+                    mod section_0824;
+                    #[macro_use]
+                    mod section_0825;
+                    mod section_0826;
+                    #[macro_use]
+                    mod section_0827;
                     mod section_0828;
                     reversing_order_items!(
                         {
@@ -1358,6 +1365,7 @@ reversing_order_items!({
                             #[macro_use]
                             mod section_0832;
                             mod section_0833;
+                            #[macro_use]
                             mod section_0834;
                             #[macro_use]
                             mod section_0835;
@@ -1423,7 +1431,9 @@ reversing_order_items!({
                         {
                             #[macro_use]
                             mod section_0867;
-                            mod section_0868_to_0871;
+                            #[macro_use]
+                            mod section_0868;
+                            mod section_0869_to_0871;
                             mod section_0872;
                             reversing_order_items! (
                                 {
@@ -1473,11 +1483,16 @@ reversing_order_items!({
                                 }
                             );
                         }
+                        {
+                            mod section_0892;
+                            mod section_0893;
+                            #[macro_use]
+                            mod section_0894;
+                        }
                     );
                 }
             );
-            mod section_0892;
-            mod section_0893_to_0899;
+            mod section_0895_to_0899;
             mod section_0900_to_0906;
             mod section_0907;
             mod section_0908_to_0918;

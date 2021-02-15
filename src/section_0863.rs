@@ -71,7 +71,7 @@ macro_rules! Find_optimal_breakpoints {
                 // then advance |cur_p| to the next node of the paragraph
                 // that could possibly be a legal breakpoint@>;
                 Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__also_try_to_hyphenate_the_next_word__if_cur_p_is_a_glue_node__then_advance_cur_p_to_the_next_node_of_the_paragraph_that_could_possibly_be_a_legal_breakpoint!
-                    ($globals, prev_p);
+                    ($globals, prev_p, auto_breaking);
             }
             // if cur_p=null then
             if $globals.cur_p == null {

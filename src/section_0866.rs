@@ -18,7 +18,7 @@ macro_rules! act_width {
 //
 // @<Call |try_break| if |cur_p| is a legal breakpoint...@>=
 macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__also_try_to_hyphenate_the_next_word__if_cur_p_is_a_glue_node__then_advance_cur_p_to_the_next_node_of_the_paragraph_that_could_possibly_be_a_legal_breakpoint {
-    ($globals:expr, $prev_p:expr) => {{
+    ($globals:expr, $prev_p:expr, $auto_breaking:expr) => {{
         // begin if is_char_node(cur_p) then
         if is_char_node!($globals, $globals.cur_p) {
             // @<Advance \(c)|cur_p| to the node following the present
@@ -38,9 +38,13 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         // glue_node: begin @<If node |cur_p| is a legal breakpoint, call |try_break|;
         //   then update the active widths by including the glue in |glue_ptr(cur_p)|@>;
         else if type_cur_p == glue_node {
-            todo!("glue_node");
+            If_node_cur_p_is_a_legal_breakpoint__call_try_break__then_update_the_active_widths_by_including_the_glue_in_glue_ptr_cur_p!
+                ($globals, $prev_p, $auto_breaking);
             // if second_pass and auto_breaking then
-            //   @<Try to hyphenate the following word@>;
+            if $globals.second_pass && $auto_breaking {
+                // @<Try to hyphenate the following word@>;
+                Try_to_hyphenate_the_following_word!($globals);
+            }
             // end;
         }
         // kern_node: if subtype(cur_p)=explicit then kern_break
@@ -65,7 +69,7 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         }
         // penalty_node: try_break(penalty(cur_p),unhyphenated);
         else if type_cur_p == penalty_node {
-            todo!("penalty_node");
+            try_break($globals, penalty!($globals, $globals.cur_p), unhyphenated.into())?;
         }
         // mark_node,ins_node,adjust_node: do_nothing;
         else if type_cur_p == mark_node || type_cur_p == ins_node || type_cur_p == adjust_node {
@@ -95,5 +99,7 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
         use crate::section_0157::penalty_node;
+        use crate::section_0819::unhyphenated;
+        use crate::section_0829::try_break;
     }}
 }

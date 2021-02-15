@@ -4,7 +4,12 @@
 //! type codes, by permitting a break at glue in a list if and only if the
 //! |type| of the previous node is less than |math_node|. Furthermore, a
 //! node is discarded after a break if its type is |math_node| or~more.
-//!
-//! @d precedes_break(#)==(type(#)<math_node)
-//! @d non_discardable(#)==(type(#)<math_node)
-//!
+//
+// @d precedes_break(#)==(type(#)<math_node)
+macro_rules! precedes_break {
+    ($globals:expr, $p:expr) => {
+        r#type!($globals, $p) < math_node
+    }
+}
+// @d non_discardable(#)==(type(#)<math_node)
+//

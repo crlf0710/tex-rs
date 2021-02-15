@@ -95,6 +95,7 @@ pub mod TeXGlobals {
     include!("src/section_0814.rs");
     include!("src/section_0821.rs");
     include!("src/section_0823.rs");
+    include!("src/section_0825.rs");
     include!("src/section_0828.rs");
     include!("src/section_0833.rs");
     include!("src/section_0847.rs");

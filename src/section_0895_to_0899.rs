@@ -1,25 +1,3 @@
-//! @ Hyphenation routines need a few more local variables.
-//!
-//! @<Local variables for line...@>=
-//! @!j:small_number; {an index into |hc| or |hu|}
-//! @!c:0..255; {character being considered for hyphenation}
-//!
-//! @ When the following code is activated, the |line_break| procedure is in its
-//! second pass, and |cur_p| points to a glue node.
-//!
-//! @<Try to hyphenate...@>=
-//! begin prev_s:=cur_p; s:=link(prev_s);
-//! if s<>null then
-//!   begin @<Skip to node |ha|, or |goto done1| if no hyphenation
-//!     should be attempted@>;
-//!   if l_hyf+r_hyf>63 then goto done1;
-//!   @<Skip to node |hb|, putting letters into |hu| and |hc|@>;
-//!   @<Check that the nodes following |hb| permit hyphenation and that at least
-//!     |l_hyf+r_hyf| letters have been found, otherwise |goto done1|@>;
-//!   hyphenate;
-//!   end;
-//! done1: end
-//!
 //! @ @<Declare subprocedures for |line_break|@>=
 //! @t\4@>@<Declare the function called |reconstitute|@>
 //! procedure hyphenate;

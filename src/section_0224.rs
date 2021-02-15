@@ -118,6 +118,11 @@ macro_rules! left_skip {
     }
 }
 // @d right_skip==glue_par(right_skip_code)
+macro_rules! right_skip {
+    ($globals:expr) => {
+        glue_par!($globals, crate::section_0224::right_skip_code)
+    }
+}
 // @d top_skip==glue_par(top_skip_code)
 // @d split_top_skip==glue_par(split_top_skip_code)
 // @d tab_skip==glue_par(tab_skip_code)
