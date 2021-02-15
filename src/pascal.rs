@@ -747,6 +747,7 @@ pub(crate) enum FileState<T> {
     LineInspectionMode {
         read_line_buffer: LineBufferState<T>,
         read_target: Box<dyn ReadLine>,
+        read_flag_extra_eoln_line: bool,
     },
     BlockInspectionMode {
         read_block_buffer: BlockBufferState<T>,
@@ -784,6 +785,7 @@ impl<T> FileState<T> {
             FileState::LineInspectionMode {
                 read_line_buffer,
                 read_target,
+                ..
             } => match read_line_buffer {
                 LineBufferState::UnknownState { initial_line } => {
                     let initial_line = *initial_line;
@@ -1129,11 +1131,13 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
                     line_position: 0,
                     line_no_more: false,
                 },
+                read_flag_extra_eoln_line: true,
             };
         } else {
             *file.file_state_mut() = FileState::LineInspectionMode {
                 read_target: new_read_target,
                 read_line_buffer: LineBufferState::UnknownState { initial_line: true },
+                read_flag_extra_eoln_line: false,
             };
         }
         file.set_error_state(0);
@@ -1329,7 +1333,6 @@ pub(crate) fn eof<F: PascalFile>(file: &mut F) -> bool {
     }
 }
 
-#[allow(unused_variables)]
 pub(crate) fn eoln<F: PascalFile>(file: &mut F) -> bool {
     loop {
         match file.file_state() {
@@ -1399,15 +1402,24 @@ pub(crate) fn break_in<F: PascalFile>(file: &mut F, _: boolean) {
     let file_state = file.file_state_mut();
     match file_state {
         FileState::LineInspectionMode {
-            read_line_buffer, ..
+            read_line_buffer, read_flag_extra_eoln_line, ..
         } => match read_line_buffer {
             LineBufferState::AfterReadLine { line_no_more, .. } => {
                 if *line_no_more {
                     *read_line_buffer = LineBufferState::Eof
                 } else {
-                    *read_line_buffer = LineBufferState::UnknownState {
-                        initial_line: false,
-                    };
+                    if *read_flag_extra_eoln_line {
+                        *read_line_buffer = LineBufferState::AfterReadLine {
+                            line_buffer: vec![F::eoln_unit()],
+                            line_position: 0,
+                            line_no_more: false,
+                        };
+                    }
+                    else {
+                        *read_line_buffer = LineBufferState::UnknownState {
+                            initial_line: false,
+                        };
+                    }
                 }
             }
             _ => {}
@@ -1423,6 +1435,52 @@ pub(crate) fn erstat<F: PascalFile>(file: &mut F) -> usize {
 
 pub(crate) fn close<F: PascalFile>(file: &mut F) {
     *file.file_state_mut() = FileState::default();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[allow(non_snake_case)]
+    fn ASCII_lit_char(c: u8) -> char {
+        let val: u8 = c;
+        char::new(val as _)
+    }
+
+    #[test]
+    fn file_input_0001()
+    {
+        use std::io::Cursor;
+        const DATA: &'static str = "A\nBC\nA";
+        let input_data = Cursor::new(DATA);
+        let mut input_file = file_of_text_char::default();
+        *input_file.file_state_mut() = FileState::LineInspectionMode {
+            read_target: Box::new(input_data),
+            read_line_buffer: LineBufferState::UnknownState { initial_line: true },
+        };
+        input_file.set_error_state(0);
+        assert_eq!(false, eoln(&mut input_file));
+        assert_eq!(ASCII_lit_char(b'A'), buffer_variable(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(true, eoln(&mut input_file));
+        assert_eq!(ASCII_lit_char(b'\n'), buffer_variable(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(ASCII_lit_char(b'B'), buffer_variable(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(ASCII_lit_char(b'C'), buffer_variable(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(true, eoln(&mut input_file));
+        assert_eq!(ASCII_lit_char(b'\n'), buffer_variable(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(false, eoln(&mut input_file));
+        assert_eq!(ASCII_lit_char(b'A'), buffer_variable(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(true, eoln(&mut input_file));
+        assert_eq!(ASCII_lit_char(b'\n'), buffer_variable(&mut input_file));
+        assert_eq!(false, eof(&mut input_file));
+        get(&mut input_file);
+        assert_eq!(true, eof(&mut input_file));
+    }
 }
 
 use crate::section_0019::text_char;
