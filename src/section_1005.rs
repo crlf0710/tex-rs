@@ -67,7 +67,7 @@ macro_rules! Check_if_node_p_is_a_new_champion_breakpoint__then_if_it_is_time_fo
             if c == awful_bad || $pi <= eject_penalty {
                 // begin fire_up(p); {output the current page at the best place}
                 /// output the current page at the best place
-                fire_up($globals, $p);
+                fire_up($globals, $p)?;
                 // if output_active then return; {user's output routine will act}
                 /// user's output routine will act
                 if $globals.output_active {

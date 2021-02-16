@@ -133,6 +133,11 @@ macro_rules! box_max_depth {
 }
 // @d hfuzz==dimen_par(hfuzz_code)
 // @d vfuzz==dimen_par(vfuzz_code)
+macro_rules! vfuzz {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::vfuzz_code)
+    };
+}
 // @d delimiter_shortfall==dimen_par(delimiter_shortfall_code)
 // @d null_delimiter_space==dimen_par(null_delimiter_space_code)
 // @d script_space==dimen_par(script_space_code)

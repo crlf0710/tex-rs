@@ -8,6 +8,10 @@
 fn initialize_table_entries_done_by_initex_only_1301(globals: &mut TeXGlobals) {
     // for k:=int_base to del_code_base-1 do eqtb[k].int:=0;
     // mag:=1000; tolerance:=10000; hang_after:=1; max_dead_cycles:=25;
+    mag!(globals) = 1000;
+    tolerance!(globals) = 10000;
+    hang_after!(globals) = 1;
+    max_dead_cycles!(globals) = 25;
     // escape_char:="\"; end_line_char:=carriage_return;
     escape_char!(globals) = b'\\'.into();
     end_line_char!(globals) = carriage_return.into();

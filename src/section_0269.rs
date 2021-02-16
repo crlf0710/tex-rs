@@ -32,6 +32,8 @@ pub(crate) const vtop_group: quarterword = 5;
 pub(crate) const align_group: quarterword = 6;
 // @d no_align_group=7 {code for `\.{\\noalign}\grp'}
 // @d output_group=8 {code for output routine}
+/// code for output routine
+pub(crate) const output_group: quarterword = 8;
 // @d math_group=9 {code for, e.g., `\.{\char'136}\grp'}
 // @d disc_group=10 {code for `\.{\\discretionary}\grp\grp\grp'}
 // @d insert_group=11 {code for `\.{\\insert}\grp', `\.{\\vadjust}\grp'}

@@ -25,8 +25,15 @@ macro_rules! Print_type_of_token_list {
             print_nl($globals, strpool_str!("<inserted text> "));
         }
         // macro: begin print_ln; print_cs(name);
-        //   end;
+        else if token_type == r#macro {
+            print_ln(make_globals_io_string_log_view!($globals));
+            print_cs($globals, name!($globals) as _);
+            // end;
+        }
         // output_text: print_nl("<output> ");
+        else if token_type == output_text {
+            print_nl($globals, strpool_str!("<output> "));
+        }
         // every_par_text: print_nl("<everypar> ");
         // every_math_text: print_nl("<everymath> ");
         // every_display_text: print_nl("<everydisplay> ");
@@ -43,6 +50,9 @@ macro_rules! Print_type_of_token_list {
             print_nl($globals, strpool_str!("?"));
         }
         // endcases
+        use crate::section_0004::TeXGlobalsIoStringLogView;
+        use crate::section_0057::print_ln;
+        use crate::section_0262::print_cs;
         use crate::section_0307::*;
     }}
 }

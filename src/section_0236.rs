@@ -264,6 +264,11 @@ macro_rules! adj_demerits {
     };
 }
 // @d mag==int_par(mag_code)
+macro_rules! mag {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::mag_code)
+    };
+}
 // @d delimiter_factor==int_par(delimiter_factor_code)
 // @d looseness==int_par(looseness_code)
 macro_rules! looseness {
@@ -314,6 +319,11 @@ macro_rules! hbadness {
     };
 }
 // @d vbadness==int_par(vbadness_code)
+macro_rules! vbadness {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::vbadness_code)
+    };
+}
 // @d pausing==int_par(pausing_code)
 // @d tracing_online==int_par(tracing_online_code)
 macro_rules! tracing_online {
@@ -347,6 +357,11 @@ macro_rules! tracing_commands {
 // @d uc_hyph==int_par(uc_hyph_code)
 // @d output_penalty==int_par(output_penalty_code)
 // @d max_dead_cycles==int_par(max_dead_cycles_code)
+macro_rules! max_dead_cycles {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::max_dead_cycles_code)
+    };
+}
 // @d hang_after==int_par(hang_after_code)
 macro_rules! hang_after {
     ($globals:expr) => {

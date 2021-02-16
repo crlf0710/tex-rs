@@ -29,7 +29,7 @@ macro_rules! Put_the_optimal_current_page_into_box_255__update_first_mark_and_bo
         // if holding_inserts<=0 then
         if holding_inserts!($globals) <= 0 {
             // @<Prepare all the boxes involved in insertions to act as queues@>;
-            todo!("prepare all the boxes");
+            Prepare_all_the_boxes_involved_in_insertions_to_act_as_queues!($globals);
         }
         // q:=hold_head; link(q):=null; prev_p:=page_head; p:=link(prev_p);
         q = hold_head;
@@ -61,7 +61,8 @@ macro_rules! Put_the_optimal_current_page_into_box_255__update_first_mark_and_bo
         split_top_skip!($globals) = save_split_top_skip;
         // @<Break the current page at node |p|, put it in box~255,
         //   and put the remaining nodes on the contribution list@>;
-        todo!("break cur page");
+        Break_the_current_page_at_node_p__put_it_in_box_255__and_put_the_remaining_nodes_on_the_contribution_list!
+            ($globals, p, q);
         // @<Delete \(t)the page-insertion nodes@>
         Delete_the_page_insertion_nodes!($globals);
         use crate::section_0140::ins_node;

@@ -16,7 +16,7 @@
 // @<Declare the procedure called |fire_up|@>=
 // procedure fire_up(@!c:pointer);
 #[allow(unused_variables)]
-pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) {
+pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) -> TeXResult<()> {
     // label exit;
     // var p,@!q,@!r,@!s:pointer; {nodes being examined and/or changed}
     // @!prev_p:pointer; {predecessor of |p|}
@@ -50,18 +50,24 @@ pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) {
     // if output_routine<>null then
     if output_routine!(globals) != null {
         // if dead_cycles>=max_dead_cycles then
-        //   @<Explain that too many dead cycles have occurred in a row@>
+        if globals.dead_cycles >= max_dead_cycles!(globals) {
+            // @<Explain that too many dead cycles have occurred in a row@>
+            todo!("explain");
+        }
         // else @<Fire up the user's output routine and |return|@>;
-        todo!("output routine");
+        else {
+            Fire_up_the_user_s_output_routine_and_return!(globals);
+        }
     }
     else {
         // @<Perform the default output routine@>;
         todo!("perform default output");
     }
     // exit:end;
-    todo!("fire up");
+    ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0115::null;

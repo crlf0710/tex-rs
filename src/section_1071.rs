@@ -94,6 +94,14 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1071(globals: &m
     );
     // @!@:hbox_}{\.{\\hbox} primitive@>
     // primitive("shipout",leader_ship,a_leaders-1); {|ship_out_flag=leader_flag-1|}
+    /// `ship_out_flag=leader_flag-1`
+    const _ : () = ();
+    primitive(
+        globals,
+        strpool_str!("shipout"),
+        leader_ship,
+        glue_node_subtype::a_leaders as halfword - 1
+    );
     // @!@:ship_out_}{\.{\\shipout} primitive@>
     // primitive("leaders",leader_ship,a_leaders);
     // @!@:leaders_}{\.{\\leaders} primitive@>
@@ -105,7 +113,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1071(globals: &m
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0113::halfword;
+use crate::section_0149::glue_node_subtype;
 use crate::section_0208::make_box;
+use crate::section_0208::leader_ship;
 use crate::section_0211::hmode;
 use crate::section_0211::vmode;
 use crate::section_0264::primitive;

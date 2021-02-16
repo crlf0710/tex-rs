@@ -27,7 +27,8 @@ macro_rules! Determine_the_value_of_height_r_and_the_appropriate_glue_setting__t
         // else if x>0 then @<Determine vertical glue stretch setting, then |return|
         //     or \hbox{|goto common_ending|}@>
         else if $x > scaled::zero() {
-            todo!("x>0");
+            Determine_vertical_glue_stretch_setting__then_return_or_goto_common_ending!
+                ($globals, $r, $x);
         }
         // else @<Determine vertical glue shrink setting, then |return|
         //     or \hbox{|goto common_ending|}@>

@@ -3,7 +3,7 @@
 macro_rules! Delete_the_page_insertion_nodes {
     ($globals:expr) => {{
         /// nodes being examined and/or changed
-        let (q, r): (pointer, pointer);
+        let (mut q, mut r): (pointer, pointer);
         // r:=link(page_ins_head);
         r = link!($globals, page_ins_head);
         // while r<>page_ins_head do
