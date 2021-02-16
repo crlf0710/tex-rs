@@ -15,6 +15,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1107(globals: &m
     // primitive("unhcopy",un_hbox,copy_code);@/
     // @!@:un_hcopy_}{\.{\\unhcopy} primitive@>
     // primitive("unvbox",un_vbox,box_code);@/
+    primitive(globals, strpool_str!("unvbox"), un_vbox, box_code as _);
     // @!@:un_vbox_}{\.{\\unvbox} primitive@>
     // primitive("unvcopy",un_vbox,copy_code);@/
     // @!@:un_vcopy_}{\.{\\unvcopy} primitive@>
@@ -22,6 +23,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1107(globals: &m
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0208::un_hbox;
+use crate::section_0208::un_vbox;
 use crate::section_0264::primitive;
 use crate::section_1071::box_code;
 use crate::section_1336::PRIM2HT;

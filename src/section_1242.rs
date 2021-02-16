@@ -11,7 +11,8 @@ macro_rules! Assignments_1242 {
     ($globals:expr, $cur_cmd:expr, $a:expr) => {{
         // set_aux:alter_aux;
         if $cur_cmd == set_aux {
-            todo!("");
+            alter_aux($globals)?;
+            use crate::section_1243::alter_aux;
             true
         }
         // set_prev_graf:alter_prev_graf;

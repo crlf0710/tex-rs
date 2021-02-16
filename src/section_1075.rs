@@ -16,10 +16,15 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) -> TeXResu
     }
     // else if cur_box<>null then
     else if globals.cur_box != null {
-        todo!("append or shipout");
         // if box_context>ship_out_flag then @<Append a new leader node that
         //     uses |cur_box|@>
+        if box_context > ship_out_flag {
+            todo!("append a new leader");
+        }
         // else ship_out(cur_box);
+        else {
+            ship_out(globals, globals.cur_box);
+        }
     }
     // end;
     ok_nojump!()
@@ -29,5 +34,6 @@ use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0115::null;
+use crate::section_0638::ship_out;
 use crate::section_1071::box_flag;
 use crate::section_1071::ship_out_flag;

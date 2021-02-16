@@ -23,8 +23,14 @@ pub(crate) const if_vmode_code: quarterword = 5;
 pub(crate) const if_mmode_code: quarterword = 7;
 // @d if_inner_code=8 { `\.{\\ifinner}' }
 // @d if_void_code=9 { `\.{\\ifvoid}' }
+/// `\ifvoid'
+pub(crate) const if_void_code: quarterword = 9;
 // @d if_hbox_code=10 { `\.{\\ifhbox}' }
+/// `\ifhbox'
+pub(crate) const if_hbox_code: quarterword = 10;
 // @d if_vbox_code=11 { `\.{\\ifvbox}' }
+/// `\ifvbox`
+pub(crate) const if_vbox_code: quarterword = 11;
 // @d ifx_code=12 { `\.{\\ifx}' }
 /// `\ifx`
 pub(crate) const ifx_code: quarterword = 12;
@@ -69,6 +75,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &m
     // primitive("ifinner",if_test,if_inner_code);
     // @!@:if_inner_}{\.{\\ifinner} primitive@>
     // primitive("ifvoid",if_test,if_void_code);
+    primitive(globals, strpool_str!("ifvoid"), if_test, if_void_code as _);
     // @!@:if_void_}{\.{\\ifvoid} primitive@>
     // primitive("ifhbox",if_test,if_hbox_code);
     // @!@:if_hbox_}{\.{\\ifhbox} primitive@>

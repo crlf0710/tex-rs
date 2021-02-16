@@ -1,7 +1,3 @@
-//! @ @<Display penalty |p|@>=
-//! begin print_esc("penalty "); print_int(penalty(p));
-//! end
-//!
 //! @ The |post_break| list of a discretionary node is indicated by a prefixed
 //! `\.{\char'174}' instead of the `\..' before the |pre_break| list.
 //!

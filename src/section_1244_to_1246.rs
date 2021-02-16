@@ -1,24 +1,4 @@
 //! @ @<Declare subprocedures for |prefixed_command|@>=
-//! procedure alter_aux;
-//! var c:halfword; {|hmode| or |vmode|}
-//! begin if cur_chr<>abs(mode) then report_illegal_case
-//! else  begin c:=cur_chr; scan_optional_equals;
-//!   if c=vmode then
-//!     begin scan_normal_dimen; prev_depth:=cur_val;
-//!     end
-//!   else  begin scan_int;
-//!     if (cur_val<=0)or(cur_val>32767) then
-//!       begin print_err("Bad space factor");
-//! @.Bad space factor@>
-//!       help1("I allow only values in the range 1..32767 here.");
-//!       int_error(cur_val);
-//!       end
-//!     else space_factor:=cur_val;
-//!     end;
-//!   end;
-//! end;
-//!
-//! @ @<Declare subprocedures for |prefixed_command|@>=
 //! procedure alter_prev_graf;
 //! var p:0..nest_size; {index into |nest|}
 //! begin nest[nest_ptr]:=cur_list; p:=nest_ptr;

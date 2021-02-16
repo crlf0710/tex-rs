@@ -53,6 +53,12 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("ht",set_box_dimen,height_offset);
     // @!@:ht_}{\.{\\ht} primitive@>
     // primitive("dp",set_box_dimen,depth_offset);
+    primitive(
+        globals,
+        strpool_str!("dp"),
+        set_box_dimen,
+        depth_offset as _,
+    );
     // @!@:dp_}{\.{\\dp} primitive@>
     // primitive("lastpenalty",last_item,int_val);
     // @!@:last_penalty_}{\.{\\lastpenalty} primitive@>
@@ -80,6 +86,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0135::width_offset;
+use crate::section_0135::depth_offset;
 use crate::section_0208::last_item;
 use crate::section_0209::set_aux;
 use crate::section_0209::set_box_dimen;

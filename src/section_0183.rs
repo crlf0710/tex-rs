@@ -33,6 +33,9 @@ macro_rules! Display_node_p {
                 Display_ligature_p!($globals, $p);
             }
             // penalty_node: @<Display penalty |p|@>;
+            else if type_p == penalty_node {
+                Display_penalty_p!($globals, $p);
+            }
             // disc_node: @<Display discretionary |p|@>;
             // mark_node: @<Display mark |p|@>;
             // adjust_node: @<Display adjustment |p|@>;
@@ -50,6 +53,7 @@ macro_rules! Display_node_p {
         use crate::section_0146::whatsit_node;
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
+        use crate::section_0157::penalty_node;
         use crate::section_0159::unset_node;
         use crate::section_0176::print_font_and_char;
     }}
