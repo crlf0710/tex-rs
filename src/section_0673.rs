@@ -1,7 +1,7 @@
 //! ` `
 // @<Determine vertical glue stretch setting...@>=
 macro_rules! Determine_vertical_glue_stretch_setting__then_return_or_goto_common_ending {
-    ($globals:expr, $r:expr, $x:expr) => {{
+    ($globals:expr, $r:expr, $x:expr, $lbl_common_ending:lifetime) => {{
         /// order of infinity
         let o: glue_ord;
         // begin @<Determine the stretch order@>;
@@ -28,7 +28,7 @@ macro_rules! Determine_vertical_glue_stretch_setting__then_return_or_goto_common
             // @<Report an underfull vbox and |goto common_ending|, if this box
             //   is sufficiently bad@>;
             Report_an_underfull_vbox_and_goto_common_ending__if_this_box_is_sufficiently_bad!
-                ($globals, $x);
+                ($globals, $x, $lbl_common_ending);
         }
         // return;
         return_nojump!($r);

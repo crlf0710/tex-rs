@@ -13,8 +13,8 @@ macro_rules! Initiate_the_construction_of_an_hbox_or_vbox_then_return {
         if k == hmode as halfword {
             // if (box_context<box_flag)and(abs(mode)=vmode) then
             if $box_context < box_flag && mode!($globals).get().abs() == vmode {
-                todo!("scan_spec1");
                 // scan_spec(adjusted_hbox_group,true)
+                scan_spec($globals, adjusted_hbox_group.into(), true)?;
             }
             // else scan_spec(hbox_group,true)
             else {
@@ -70,6 +70,7 @@ macro_rules! Initiate_the_construction_of_an_hbox_or_vbox_then_return {
         use crate::section_0269::hbox_group;
         use crate::section_0269::vbox_group;
         use crate::section_0269::vtop_group;
+        use crate::section_0269::adjusted_hbox_group;
         use crate::section_0307::every_hbox_text;
         use crate::section_0307::every_vbox_text;
         use crate::section_0323::begin_token_list;

@@ -31,6 +31,12 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("spacefactor",set_aux,hmode);
     // @!@:space_factor_}{\.{\\spacefactor} primitive@>
     // primitive("prevdepth",set_aux,vmode);@/
+    primitive(
+        globals,
+        strpool_str!("prevdepth"),
+        set_aux,
+        vmode as _
+    );
     // @!@:prev_depth_}{\.{\\prevdepth} primitive@>
     // primitive("deadcycles",set_page_int,0);
     // @!@:dead_cycles_}{\.{\\deadcycles} primitive@>
@@ -75,7 +81,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
 use crate::section_0004::TeXGlobals;
 use crate::section_0135::width_offset;
 use crate::section_0208::last_item;
+use crate::section_0209::set_aux;
 use crate::section_0209::set_box_dimen;
+use crate::section_0211::vmode;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;

@@ -3,7 +3,7 @@
 //
 // @<Determine the value of |height(r)| and the appropriate glue setting...@>=
 macro_rules! Determine_the_value_of_height_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending {
-    ($globals:expr, $r:expr, $m:expr, $h:expr, $x:expr) => {{
+    ($globals:expr, $r:expr, $m:expr, $h:expr, $x:expr, $lbl_common_ending:lifetime) => {{
         // if m=additional then h:=x+h;
         if $m == additional {
             $h = $x + $h;
@@ -28,7 +28,7 @@ macro_rules! Determine_the_value_of_height_r_and_the_appropriate_glue_setting__t
         //     or \hbox{|goto common_ending|}@>
         else if $x > scaled::zero() {
             Determine_vertical_glue_stretch_setting__then_return_or_goto_common_ending!
-                ($globals, $r, $x);
+                ($globals, $r, $x, $lbl_common_ending);
         }
         // else @<Determine vertical glue shrink setting, then |return|
         //     or \hbox{|goto common_ending|}@>

@@ -12,9 +12,12 @@ macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_
             true
         }
         // adjusted_hbox_group: begin adjust_tail:=adjust_head; package(0);
-        //   end;
         else if $globals.cur_group == adjusted_hbox_group {
-            todo!("adjusted_hbox_group");
+            $globals.adjust_tail = adjust_head;
+            package($globals, 0.into())?;
+            // end;
+            use crate::section_0162::adjust_head;
+            use crate::section_1086::package;
             true
         }
         // vbox_group: begin end_graf; package(0);

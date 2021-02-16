@@ -58,13 +58,19 @@ pub(crate) fn vpackage(
     else {
         depth!(globals, r) = d;
     }
+    region_forward_label!(
+    |'common_ending|
+    {
     // @<Determine the value of |height(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
     Determine_the_value_of_height_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!(
-        globals, r, m, h, x
+        globals, r, m, h, x, 'common_ending
     );
+    }
     // common_ending: @<Finish issuing a diagnostic message
     //       for an overfull or underfull vbox@>;
+    'common_ending <-
+    );
     Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_vbox!(globals, r);
     // exit: vpackage:=r;
     return_nojump!(r);
