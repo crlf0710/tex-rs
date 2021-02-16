@@ -2,7 +2,9 @@
 
 macro_rules! Initialize_the_special_list_heads_and_constant_nodes {
     ($globals:expr) => {{
+        Initialize_the_special_list_heads_and_constant_nodes_0797!($globals);
         Initialize_the_special_list_heads_and_constant_nodes_0820!($globals);
+        Initialize_the_special_list_heads_and_constant_nodes_0981!($globals);
     }}
 }
 

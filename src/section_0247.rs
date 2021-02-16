@@ -113,7 +113,17 @@ macro_rules! hsize {
     };
 }
 // @d vsize==dimen_par(vsize_code)
+macro_rules! vsize {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::vsize_code)
+    };
+}
 // @d max_depth==dimen_par(max_depth_code)
+macro_rules! max_depth {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::max_depth_code)
+    };
+}
 // @d split_max_depth==dimen_par(split_max_depth_code)
 // @d box_max_depth==dimen_par(box_max_depth_code)
 macro_rules! box_max_depth {

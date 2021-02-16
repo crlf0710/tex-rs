@@ -65,8 +65,17 @@ pub(crate) static page_contents: page_contents_kind = page_contents_kind::empty;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static page_max_depth: scaled = scaled::zero();
 // @!best_page_break:pointer; {break here to get the best page known so far}
+/// break here to get the best page known so far
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static best_page_break: pointer = null;
 // @!least_page_cost:integer; {the score for this currently best page}
+/// the score for this currently best page
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static least_page_cost: integer = 0;
 // @!best_size:scaled; {its |page_goal|}
+/// its `page_goal`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static best_size: scaled = scaled::zero();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::pointer;

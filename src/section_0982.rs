@@ -19,8 +19,27 @@
 //! all split and floating insertions.
 //
 // @d page_goal==page_so_far[0] {desired height of information on page being built}
+/// desired height of information on page being built
+macro_rules! page_goal {
+    ($globals:expr) => {
+        $globals.page_so_far[0]
+    }
+}
 // @d page_total==page_so_far[1] {height of the current page}
+/// height of the current page
+macro_rules! page_total {
+    ($globals:expr) => {
+        $globals.page_so_far[1]
+    }
+}
 // @d page_shrink==page_so_far[6] {shrinkability of the current page}
+/// shrinkability of the current page
+macro_rules! page_shrink {
+    ($globals:expr) => {
+        $globals.page_so_far[6]
+    }
+}
+
 // @d page_depth==page_so_far[7] {depth of the current page}
 /// depth of the current page
 macro_rules! page_depth {
@@ -48,6 +67,9 @@ pub(crate) static last_penalty: integer = 0;
 pub(crate) static last_kern: scaled = scaled::zero();
 // @!insert_penalties:integer; {sum of the penalties for insertions
 //   that were held over}
+/// sum of the penalties for insertions that were held over
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static insert_penalties: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0101::scaled;

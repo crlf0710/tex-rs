@@ -33,17 +33,50 @@
 //! The data structure definitions here use the fact that the |@!height| field
 //! appears in the fourth word of a box node.
 //! @^data structure assumptions@>
-//!
-//! @d page_ins_node_size=4 {number of words for a page insertion node}
-//! @d inserting=0 {an insertion class that has not yet overflowed}
-//! @d split_up=1 {an overflowed insertion class}
-//! @d broken_ptr(#)==link(#+1)
-//!   {an insertion for this class will break here if anywhere}
-//! @d broken_ins(#)==info(#+1) {this insertion might break at |broken_ptr|}
-//! @d last_ins_ptr(#)==link(#+2) {the most recent insertion for this |subtype|}
-//! @d best_ins_ptr(#)==info(#+2) {the optimum most recent insertion}
-//!
-//! @<Initialize the special list heads...@>=
-//! subtype(page_ins_head):=qi(255);
-//! type(page_ins_head):=split_up; link(page_ins_head):=page_ins_head;
-//!
+//
+// @d page_ins_node_size=4 {number of words for a page insertion node}
+/// number of words for a page insertion node
+pub(crate) const page_ins_node_size: quarterword = 4;
+// @d inserting=0 {an insertion class that has not yet overflowed}
+// @d split_up=1 {an overflowed insertion class}
+#[doc(hidden)]
+#[derive(Clone, Copy)]
+pub(crate) enum page_ins_node_subtype {
+    /// an insertion class that has not yet overflowed
+    inserting = 0,
+    /// an overflowed insertion class
+    split_up = 1,
+}
+// @d broken_ptr(#)==link(#+1)
+//   {an insertion for this class will break here if anywhere}
+// @d broken_ins(#)==info(#+1) {this insertion might break at |broken_ptr|}
+// @d last_ins_ptr(#)==link(#+2) {the most recent insertion for this |subtype|}
+/// the most recent insertion for this `subtype`
+macro_rules! last_ins_ptr {
+    ($globals:expr, $p:expr) => {
+        link!($globals, $p + 2)
+    }
+}
+
+// @d best_ins_ptr(#)==info(#+2) {the optimum most recent insertion}
+/// the optimum most recent insertion
+macro_rules! best_ins_ptr {
+    ($globals:expr, $p:expr) => {
+        info_inner!($globals, $p + 2)
+    }
+}
+
+// @<Initialize the special list heads...@>=
+macro_rules! Initialize_the_special_list_heads_and_constant_nodes_0981 {
+    ($globals:expr) => {{
+        // subtype(page_ins_head):=qi(255);
+        subtype!($globals, page_ins_head) = qi!(255);
+        // type(page_ins_head):=split_up; link(page_ins_head):=page_ins_head;
+        r#type!($globals, page_ins_head) = page_ins_node_subtype::split_up as _;
+        link!($globals, page_ins_head) = page_ins_head;
+        use crate::section_0162::page_ins_head;
+        use crate::section_0981::page_ins_node_subtype;
+    }}
+}
+
+use crate::section_0113::quarterword;

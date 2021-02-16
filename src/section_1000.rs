@@ -5,7 +5,7 @@
 //
 // @<If the current page is empty...@>=
 macro_rules! If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_done1__otherwise_use_node_p_to_update_the_state_of_the_current_page__if_this_node_is_an_insertion__goto_contribute__otherwise_if_this_node_is_not_a_legal_breakpoint__goto_contribute_or_update_heights__otherwise_set_pi_to_the_penalty_associated_with_this_breakpoint {
-    ($globals:expr, $p:expr, $pi:expr, $lbl_update_heights:lifetime, $lbl_done1:lifetime) => {{
+    ($globals:expr, $p:expr, $pi:expr, $lbl_continue:lifetime, $lbl_update_heights:lifetime, $lbl_contribute:lifetime, $lbl_done1:lifetime) => {{
         // case type(p) of
         let type_p = r#type!($globals, $p);
         // hlist_node,vlist_node,rule_node: if page_contents<box_there then
@@ -13,12 +13,14 @@ macro_rules! If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_done
             if $globals.page_contents < page_contents_kind::box_there {
                 // @<Initialize the current page, insert the \.{\\topskip} glue
                 //   ahead of |p|, and |goto continue|@>
-                todo!("initialize cur page");
+                Initialize_the_current_page__insert_the_topskip_glue_ahead_of_p__and_goto_continue!
+                    ($globals, $p, $lbl_continue);
             }
             // else @<Prepare to move a box or rule node to the current page,
             //   then |goto contribute|@>;
             else {
-                todo!("prepare to move a node");
+                Prepare_to_move_a_box_or_rule_node_to_the_current_page__then_goto_contribute!
+                    ($globals, $p, $lbl_contribute);
             }
         }
         // whatsit_node: @<Prepare to move whatsit |p| to the current page,
@@ -49,7 +51,11 @@ macro_rules! If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_done
         }
         // penalty_node: if page_contents<box_there then goto done1@+else pi:=penalty(p);
         else if type_p == penalty_node {
-            todo!("move penalty_node");
+            if $globals.page_contents < page_contents_kind::box_there {
+                goto_forward_label!($lbl_done1);
+            } else {
+                $pi = penalty!($globals, $p);
+            }
         }
         // mark_node: goto contribute;
         else if type_p == mark_node {

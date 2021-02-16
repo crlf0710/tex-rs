@@ -410,6 +410,11 @@ macro_rules! right_hyphen_min {
     };
 }
 // @d holding_inserts==int_par(holding_inserts_code)
+macro_rules! holding_inserts {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::holding_inserts_code)
+    };
+}
 // @d error_context_lines==int_par(error_context_lines_code)
 macro_rules! error_context_lines {
     ($globals:expr) => {

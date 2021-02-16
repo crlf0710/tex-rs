@@ -30,6 +30,8 @@ pub(crate) const fil_neg_glue: pointer = ss_glue + glue_spec_size as pointer;
 pub(crate) const lo_mem_stat_max: pointer = fil_neg_glue + glue_spec_size as pointer - 1;
 // @#
 // @d page_ins_head==mem_top {list of insertion data for current page}
+/// list of insertion data for current page
+pub(crate) const page_ins_head: pointer = mem_top;
 // @d contrib_head==mem_top-1 {vlist of items not yet on current page}
 /// vlist of items not yet on current page
 pub(crate) const contrib_head: pointer = mem_top - 1;

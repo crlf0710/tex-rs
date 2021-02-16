@@ -28,6 +28,9 @@ pub(crate) fn build_page(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // repeat continue: p:=link(contrib_head);@/
     loop {
+        region_backward_label!(
+        'continue_ <-
+        {
         p = link!(globals, contrib_head);
         // @<Update the values of |last_glue|, |last_penalty|, and |last_kern|@>;
         Update_the_values_of_last_glue_last_penalty_and_last_kern!(globals, p);
@@ -35,7 +38,10 @@ pub(crate) fn build_page(globals: &mut TeXGlobals) -> TeXResult<()> {
         //   put the nodes following the break back onto the contribution list,
         //   and |return| to the user's output routine if there is one@>;
         Move_node_p_to_the_current_page__if_it_is_time_for_a_page_break__put_the_nodes_following_the_break_back_onto_the_contribution_list__and_return_to_the_user_s_output_routine_if_there_is_one!
-            (globals, p);
+            (globals, p, 'continue_);
+        }
+        |'continue_|
+        );
         // until link(contrib_head)=null;
         if link!(globals, contrib_head) == null {
             break;

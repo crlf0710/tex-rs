@@ -125,6 +125,11 @@ macro_rules! right_skip {
 }
 // @d top_skip==glue_par(top_skip_code)
 // @d split_top_skip==glue_par(split_top_skip_code)
+macro_rules! split_top_skip {
+    ($globals:expr) => {
+        glue_par!($globals, crate::section_0224::split_top_skip_code)
+    }
+}
 // @d tab_skip==glue_par(tab_skip_code)
 // @d space_skip==glue_par(space_skip_code)
 macro_rules! space_skip {
