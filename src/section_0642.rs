@@ -61,7 +61,7 @@ macro_rules! Finish_the_DVI_file {
             Output_the_font_definitions_for_all_fonts_that_were_used!($globals);
             // dvi_out(post_post); dvi_four(last_bop); dvi_out(id_byte);@/
             dvi_out!($globals, post_post.byte());
-            dvi_out!($globals, $globals.last_bop);
+            dvi_four($globals, $globals.last_bop);
             dvi_out!($globals, id_byte);
             /// all-purpose index
             let mut k;
