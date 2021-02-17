@@ -1210,17 +1210,36 @@ reversing_order_items!({
                             mod section_0603;
                         }
                     );
-                    mod section_0604_to_0615;
+                    mod section_0604;
+                    #[macro_use]
+                    mod section_0605;
+                    mod section_0606;
+                    mod section_0607;
+                    mod section_0608_to_0614;
+                    mod section_0615;
+                    #[macro_use]
                     mod section_0616;
                     #[macro_use]
                     mod section_0617;
                     mod section_0618;
                     mod section_0619;
                     mod section_0620_to_0628;
-                    mod section_0629;
-                    mod section_0630_to_0637;
                     reversing_order_items!(
                         {
+                            mod section_0629;
+                        }
+                        {
+                            #[macro_use]
+                            mod section_0630;
+                        }
+                        {
+                            #[macro_use]
+                            mod section_0631;
+                        }
+                        {
+                            #[macro_use]
+                            mod section_0632;
+                            mod section_0633_to_0637;
                             mod section_0638;
                         }
                         {

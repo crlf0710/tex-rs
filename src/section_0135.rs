@@ -108,6 +108,20 @@ pub(crate) enum glue_sign {
     shrinking = 2,
 }
 
+impl From<u8> for glue_sign {
+    fn from(val: u8) -> Self {
+        if val == glue_sign::normal as u8 {
+            glue_sign::normal
+        } else if val == glue_sign::stretching as u8 {
+            glue_sign::stretching
+        } else if val == glue_sign::shrinking as u8 {
+            glue_sign::shrinking
+        } else {
+            unreachable!()
+        }
+    }
+}
+
 // @d glue_offset = 6 {position of |glue_set| in a box node}
 /// position of `glue_set` in a box node
 pub(crate) const glue_offset: quarterword = 6;

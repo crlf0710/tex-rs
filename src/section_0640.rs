@@ -2,6 +2,7 @@
 // @<Ship box |p| out@>=
 macro_rules! Ship_box_p_out {
     ($globals:expr, $p:expr) => {{
+        trace_span!("Ship box `p` out");
         /// location of the current `bop`
         let page_loc: integer;
         // @<Update the values of |max_h| and |max_v|; but if the page is too large,
@@ -25,7 +26,7 @@ macro_rules! Ship_box_p_out {
         $globals.temp_ptr = $p;
         // if type(p)=vlist_node then vlist_out@+else hlist_out;
         if r#type!($globals, $p) == vlist_node {
-            vlist_out($globals);
+            vlist_out($globals)?;
         } else {
             hlist_out($globals);
         }

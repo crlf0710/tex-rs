@@ -25,8 +25,16 @@
 //     begin movement(cur_h-dvi_h,right1); dvi_h:=cur_h;
 //     end
 // @d synch_v==if cur_v<>dvi_v then
-//     begin movement(cur_v-dvi_v,down1); dvi_v:=cur_v;
-//     end
+macro_rules! synch_v {
+    ($globals:expr) => {{
+        // begin movement(cur_v-dvi_v,down1); dvi_v:=cur_v;
+        movement($globals, $globals.cur_v - $globals.dvi_v, down1);
+        $globals.dvi_v = $globals.cur_v;
+        // end
+        use crate::section_0586::down1;
+        use crate::section_0607::movement;
+    }}
+}
 //
 // @<Glob...@>=
 // @!dvi_h,@!dvi_v:scaled; {a \.{DVI} reader program thinks we are here}

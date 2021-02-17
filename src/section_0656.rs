@@ -2,6 +2,7 @@
 // @<Incorporate glue into the horizontal totals@>=
 macro_rules! Incorporate_glue_into_the_horizontal_totals {
     ($globals:expr, $p:expr, $h:expr, $d:expr, $x:expr) => {{
+        trace_span!("Incorporate glue into the horizontal totals");
         /// points to a glue specification
         let mut g: pointer;
         /// order of infinity
