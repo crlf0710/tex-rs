@@ -1375,6 +1375,26 @@ pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
     writeln!(write_target, "").unwrap();
 }
 
+pub(crate) trait IntoBlob {
+    type BlobType: core::borrow::Borrow<[u8]>;
+
+    fn into_blob(&self) -> Self::BlobType;
+}
+
+impl IntoBlob for u8 {
+    type BlobType = [u8; 1];
+    fn into_blob(&self) -> Self::BlobType {
+        [*self]
+    }
+}
+
+pub(crate) fn write_binary<F: PascalFile, T: IntoBlob>(file: &mut F, val: T) {
+    use core::borrow::Borrow;
+    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    let blob = val.into_blob();
+    write_target.write_all(blob.borrow()).unwrap();
+}
+
 pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
     let write_target = file.file_state_mut().discard_caret_and_get_write_target();
     write_target.flush().unwrap();

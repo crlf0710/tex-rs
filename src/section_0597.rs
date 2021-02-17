@@ -14,11 +14,11 @@ pub(crate) fn write_dvi(globals: &mut TeXGlobals, a: dvi_index, b: dvi_index) {
     // var k:dvi_index;
     // begin for k:=a to b do write(dvi_file,dvi_buf[k]);
     for k in a.get()..=b.get() {
-        write(&mut globals.dvi_file, globals.dvi_buf[k]);
+        write_binary(&mut globals.dvi_file, globals.dvi_buf[k]);
     }
     // end;
 }
 
-use crate::pascal::write;
+use crate::pascal::write_binary;
 use crate::section_0004::TeXGlobals;
 use crate::section_0594::dvi_index;
