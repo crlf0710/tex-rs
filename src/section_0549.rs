@@ -85,6 +85,10 @@ pub(crate) static font_glue: internal_font_array<pointer> = internal_font_array:
 
 // @!font_used:array[internal_font_number] of boolean;
 //   {has a character from this font actually appeared in the output?}
+/// has a character from this font actually appeared in the output?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static font_used: internal_font_array<boolean> = internal_font_array::default();
+
 // @!hyphen_char:array[internal_font_number] of integer;
 //   {current \.{\\hyphenchar} values}
 /// current `\hyphenchar` values

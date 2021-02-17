@@ -23,7 +23,7 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) -> TeXResu
         }
         // else ship_out(cur_box);
         else {
-            ship_out(globals, globals.cur_box);
+            ship_out(globals, globals.cur_box)?;
         }
     }
     // end;

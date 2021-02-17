@@ -152,7 +152,17 @@ macro_rules! hang_indent {
     };
 }
 // @d h_offset==dimen_par(h_offset_code)
+macro_rules! h_offset {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::h_offset_code)
+    };
+}
 // @d v_offset==dimen_par(v_offset_code)
+macro_rules! v_offset {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::v_offset_code)
+    };
+}
 // @d emergency_stretch==dimen_par(emergency_stretch_code)
 macro_rules! emergency_stretch {
     ($globals:expr) => {

@@ -80,6 +80,9 @@ pub(crate) fn scan_something_internal(
     // set_aux: @<Fetch the |space_factor| or the |prev_depth|@>;
     // set_prev_graf: @<Fetch the |prev_graf|@>;
     // set_page_int:@<Fetch the |dead_cycles| or the |insert_penalties|@>;
+    else if globals.cur_cmd == set_page_int {
+        Fetch_the_dead_cycles_or_the_insert_penalties!(globals, m);
+    }
     // set_page_dimen: @<Fetch something on the |page_so_far|@>;
     else if globals.cur_cmd == set_page_dimen {
         Fetch_something_on_the_page_so_far!(globals, m);

@@ -4,7 +4,7 @@
 // @d dvi_out(#)==@+begin dvi_buf[dvi_ptr]:=#; incr(dvi_ptr);
 macro_rules! dvi_out {
     ($globals:expr, $v:expr) => {{
-        $globals.dvi_buf[$globals.dvi_ptr] = $v.byte();
+        $globals.dvi_buf[$globals.dvi_ptr] = $v as _;
         incr!($globals.dvi_ptr);
         // if dvi_ptr=dvi_limit then dvi_swap;
         if $globals.dvi_ptr == $globals.dvi_limit {

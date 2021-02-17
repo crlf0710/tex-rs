@@ -4,7 +4,7 @@
 //
 // @<Cases of |handle...@>=
 macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1085 {
-    ($globals:expr) => {
+    ($globals:expr) => {{
         // hbox_group: package(0);
         if $globals.cur_group == hbox_group {
             package($globals, 0.into())?;
@@ -38,5 +38,5 @@ macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_
         else {
             false
         }
-    }
+    }}
 }

@@ -63,6 +63,7 @@ pub mod TeXGlobals {
     include!("src/section_0253.rs");
     include!("src/section_0256.rs");
     include!("src/section_0271.rs");
+    include!("src/section_0286.rs");
     include!("src/section_0297.rs");
     include!("src/section_0301.rs");
     include!("src/section_0304.rs");

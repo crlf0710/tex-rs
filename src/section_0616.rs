@@ -30,8 +30,21 @@
 //
 // @<Glob...@>=
 // @!dvi_h,@!dvi_v:scaled; {a \.{DVI} reader program thinks we are here}
+/// a `DVI` reader program thinks we are here
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static dvi_h: scaled = scaled::zero();
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static dvi_v: scaled = scaled::zero();
 // @!cur_h,@!cur_v:scaled; {\TeX\ thinks we are here}
+/// `TeX` thinks we are here
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_h: scaled = scaled::zero();
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static cur_v: scaled = scaled::zero();
 // @!dvi_f:internal_font_number; {the current font}
+/// the current font
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static dvi_f: internal_font_number = internal_font_number::default();
 // @!cur_s:integer; {current depth of output box nesting, initially $-1$}
 /// current depth of output box nesting, initially `-1`
 #[globals_struct_field(TeXGlobals)]

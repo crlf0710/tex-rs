@@ -82,7 +82,7 @@ pub(crate) union memory_word {
 }
 
 // @!word_file = file of memory_word;
-type word_file = file_of<memory_word>;
+pub(crate) type word_file = file_of<memory_word>;
 
 use crate::pascal::{file_of, integer, word};
 use crate::section_0101::scaled;
@@ -182,6 +182,36 @@ impl Index<MEMORY_WORD_HH_B0> for memory_word {
 impl IndexMut<MEMORY_WORD_HH_B0> for memory_word {
     fn index_mut(&mut self, _: MEMORY_WORD_HH_B0) -> &mut quarterword {
         unsafe { &mut self.hh.lh_or_b01.b.0 }
+    }
+}
+
+pub(crate) struct MEMORY_WORD_QQQQ_B2;
+
+impl Index<MEMORY_WORD_QQQQ_B2> for memory_word {
+    type Output = quarterword;
+    fn index(&self, _: MEMORY_WORD_QQQQ_B2) -> &quarterword {
+        unsafe { &self.qqqq.b.2 }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_QQQQ_B2> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_QQQQ_B2) -> &mut quarterword {
+        unsafe { &mut self.qqqq.b.2 }
+    }
+}
+
+pub(crate) struct MEMORY_WORD_QQQQ_B3;
+
+impl Index<MEMORY_WORD_QQQQ_B3> for memory_word {
+    type Output = quarterword;
+    fn index(&self, _: MEMORY_WORD_QQQQ_B3) -> &quarterword {
+        unsafe { &self.qqqq.b.3 }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_QQQQ_B3> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_QQQQ_B3) -> &mut quarterword {
+        unsafe { &mut self.qqqq.b.3 }
     }
 }
 

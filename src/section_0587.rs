@@ -27,6 +27,9 @@
 //!
 //! Finally, |k| and |x| allow the \.{DVI} writer to include a comment, which is not
 //! interpreted further. The length of comment |x| is |k|, where |0<=k<256|.
-//!
-//! @d id_byte=2 {identifies the kind of \.{DVI} files described here}
-//!
+//
+// @d id_byte=2 {identifies the kind of \.{DVI} files described here}
+/// identifies the kind of `DVI` files described here
+pub(crate) const id_byte: quarterword = 2;
+
+use crate::section_0113::quarterword;

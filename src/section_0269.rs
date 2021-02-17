@@ -37,6 +37,8 @@ pub(crate) const output_group: quarterword = 8;
 // @d math_group=9 {code for, e.g., `\.{\char'136}\grp'}
 // @d disc_group=10 {code for `\.{\\discretionary}\grp\grp\grp'}
 // @d insert_group=11 {code for `\.{\\insert}\grp', `\.{\\vadjust}\grp'}
+/// code for `\insert{...}`, `\vadjust{...}`
+pub(crate) const insert_group: quarterword = 11;
 // @d vcenter_group=12 {code for `\.{\\vcenter}\grp'}
 // @d math_choice_group=13 {code for `\.{\\mathchoice}\grp\grp\grp\grp'}
 // @d semi_simple_group=14 {code for `\.{\\begingroup...\\endgroup}'}

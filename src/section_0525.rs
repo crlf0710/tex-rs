@@ -9,7 +9,6 @@
 //! we dare not use `|str_room|'.
 //
 // @p function make_name_string:str_number;
-#[allow(unused_variables)]
 pub(crate) fn make_name_string(mut globals: TeXGlobalsIoStringView<'_>) -> str_number {
     // var k:1..file_name_size; {index into |name_of_file|}
     // begin if (pool_ptr+name_length>pool_size)or(str_ptr=max_strings)or
@@ -48,22 +47,36 @@ pub(crate) fn a_make_name_string(
 }
 
 // function b_make_name_string(var f:byte_file):str_number;
-// begin b_make_name_string:=make_name_string;
-// end;
-// function w_make_name_string(var f:word_file):str_number;
-// begin w_make_name_string:=make_name_string;
-// end;
-//
+pub(crate) fn b_make_name_string(
+    globals: TeXGlobalsIoStringView<'_>,
+    _: &mut byte_file,
+) -> str_number {
+    // begin b_make_name_string:=make_name_string;
+    return make_name_string(globals);
+    // end;
+}
 
-use crate::section_0004::alpha_file;
+// function w_make_name_string(var f:word_file):str_number;
+pub(crate) fn w_make_name_string(
+    globals: TeXGlobalsIoStringView<'_>,
+    _: &mut word_file,
+) -> str_number {
+    // begin w_make_name_string:=make_name_string;
+    return make_name_string(globals);
+    // end;
+}
+
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::max_strings;
 use crate::section_0011::pool_size;
 use crate::section_0020::xord;
+use crate::section_0025::alpha_file;
+use crate::section_0025::byte_file;
 use crate::section_0038::pool_pointer_repr;
 use crate::section_0038::str_number;
 use crate::section_0038::str_number_repr;
 use crate::section_0042::append_char;
 use crate::section_0043::make_string;
+use crate::section_0113::word_file;

@@ -58,6 +58,9 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     // end;
                 }
                 // kern_node,math_node,penalty_node: do_nothing;
+                else if type_p == kern_node || type_p == math_node || type_p == penalty_node {
+                    do_nothing!();
+                }
                 // ligature_node: flush_node_list(lig_ptr(p));
                 // mark_node: delete_token_ref(mark_ptr(p));
                 // disc_node: begin flush_node_list(pre_break(p));
@@ -98,5 +101,8 @@ use crate::section_0135::box_node_size;
 use crate::section_0137::vlist_node;
 use crate::section_0141::small_node_size;
 use crate::section_0146::whatsit_node;
+use crate::section_0147::math_node;
 use crate::section_0149::glue_node;
+use crate::section_0155::kern_node;
+use crate::section_0157::penalty_node;
 use crate::section_0159::unset_node;

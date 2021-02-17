@@ -68,8 +68,13 @@ pub(crate) fn b_open_in(globals: TeXGlobalsFilenameView<'_>, f: &mut byte_file) 
 // @#
 // function b_open_out(var f:byte_file):boolean;
 //   {open a binary file for output}
-// begin rewrite(f,name_of_file,'/O'); b_open_out:=rewrite_OK(f);
-// end;
+/// open a binary file for output
+pub(crate) fn b_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut byte_file) -> boolean {
+    // begin rewrite(f,name_of_file,'/O'); b_open_out:=rewrite_OK(f);
+    rewrite(f, &*globals.name_of_file, "/O");
+    return rewrite_OK!(f);
+    // end;
+}
 // @#
 // function w_open_in(var f:word_file):boolean;
 //   {open a word file for input}

@@ -341,6 +341,11 @@ macro_rules! tracing_macros {
 // @d tracing_paragraphs==int_par(tracing_paragraphs_code)
 // @d tracing_pages==int_par(tracing_pages_code)
 // @d tracing_output==int_par(tracing_output_code)
+macro_rules! tracing_output {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_output_code)
+    };
+}
 // @d tracing_lost_chars==int_par(tracing_lost_chars_code)
 macro_rules! tracing_lost_chars {
     ($globals:expr) => {

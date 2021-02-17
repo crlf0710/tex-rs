@@ -41,6 +41,12 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("deadcycles",set_page_int,0);
     // @!@:dead_cycles_}{\.{\\deadcycles} primitive@>
     // primitive("insertpenalties",set_page_int,1);
+    primitive(
+        globals,
+        strpool_str!("insertpenalties"),
+        set_page_int,
+        1,
+    );
     // @!@:insert_penalties_}{\.{\\insertpenalties} primitive@>
     // primitive("wd",set_box_dimen,width_offset);
     primitive(
@@ -90,6 +96,7 @@ use crate::section_0135::depth_offset;
 use crate::section_0208::last_item;
 use crate::section_0209::set_aux;
 use crate::section_0209::set_box_dimen;
+use crate::section_0209::set_page_int;
 use crate::section_0211::vmode;
 use crate::section_0264::primitive;
 use crate::section_1336::PRIM2HT;

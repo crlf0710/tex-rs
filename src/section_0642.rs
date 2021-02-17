@@ -12,11 +12,11 @@ macro_rules! Finish_the_DVI_file {
         while $globals.cur_s > -1 {
             // begin if cur_s>0 then dvi_out(pop)
             if $globals.cur_s > 0 {
-                dvi_out!($globals, pop);
+                dvi_out!($globals, pop.byte());
             }
             // else  begin dvi_out(eop); incr(total_pages);
             else {
-                dvi_out!($globals, eop);
+                dvi_out!($globals, eop.byte());
                 incr!($globals.total_pages);
                 // end;
             }
@@ -31,30 +31,85 @@ macro_rules! Finish_the_DVI_file {
         // @.No pages of output@>
         // else  begin dvi_out(post); {beginning of the postamble}
         else {
-            //   dvi_four(last_bop); last_bop:=dvi_offset+dvi_ptr-5; {|post| location}
-            //   dvi_four(25400000); dvi_four(473628672); {conversion ratio for sp}
-            //   prepare_mag; dvi_four(mag); {magnification factor}
-            //   dvi_four(max_v); dvi_four(max_h);@/
-            //   dvi_out(max_push div 256); dvi_out(max_push mod 256);@/
-            //   dvi_out((total_pages div 256) mod 256); dvi_out(total_pages mod 256);@/
-            //   @<Output the font definitions for all fonts that were used@>;
-            //   dvi_out(post_post); dvi_four(last_bop); dvi_out(id_byte);@/
-            //   k:=4+((dvi_buf_size-dvi_ptr) mod 4); {the number of 223's}
-            //   while k>0 do
-            //     begin dvi_out(223); decr(k);
-            //     end;
-            //   @<Empty the last bytes out of |dvi_buf|@>;
-            //   print_nl("Output written on "); slow_print(output_file_name);
+            /// beginning of the postamble
+            dvi_out!($globals, post.byte());
+            // dvi_four(last_bop); last_bop:=dvi_offset+dvi_ptr-5; {|post| location}
+            /// `post` location
+            const _ : () = ();
+            dvi_four($globals, $globals.last_bop);
+            $globals.last_bop = $globals.dvi_offset + $globals.dvi_ptr.get() as integer - 5;
+            // dvi_four(25400000); dvi_four(473628672); {conversion ratio for sp}
+            /// conversion ratio for sp
+            const _ : () = ();
+            dvi_four($globals, 25400000);
+            dvi_four($globals, 473628672);
+            // prepare_mag; dvi_four(mag); {magnification factor}
+            /// magnification factor
+            const _ : () = ();
+            prepare_mag($globals);
+            dvi_four($globals, mag!($globals));
+            // dvi_four(max_v); dvi_four(max_h);@/
+            dvi_four($globals, $globals.max_v.inner());
+            dvi_four($globals, $globals.max_h.inner());
+            // dvi_out(max_push div 256); dvi_out(max_push mod 256);@/
+            dvi_out!($globals, $globals.max_push / 256);
+            dvi_out!($globals, $globals.max_push % 256);
+            // dvi_out((total_pages div 256) mod 256); dvi_out(total_pages mod 256);@/
+            dvi_out!($globals, ($globals.total_pages / 256) % 256);
+            dvi_out!($globals, $globals.total_pages % 256);
+            // @<Output the font definitions for all fonts that were used@>;
+            Output_the_font_definitions_for_all_fonts_that_were_used!($globals);
+            // dvi_out(post_post); dvi_four(last_bop); dvi_out(id_byte);@/
+            dvi_out!($globals, post_post.byte());
+            dvi_out!($globals, $globals.last_bop);
+            dvi_out!($globals, id_byte);
+            /// all-purpose index
+            let mut k;
+            // k:=4+((dvi_buf_size-dvi_ptr) mod 4); {the number of 223's}
+            /// the number of 223's
+            const _ : () = ();
+            k = 4 + ((dvi_buf_size - $globals.dvi_ptr.get()) % 4);
+            // while k>0 do
+            while k > 0 {
+                // begin dvi_out(223); decr(k);
+                dvi_out!($globals, 223);
+                decr!(k);
+                // end;
+            }
+            // @<Empty the last bytes out of |dvi_buf|@>;
+            Empty_the_last_bytes_out_of_dvi_buf!($globals);
+            // print_nl("Output written on "); slow_print(output_file_name);
+            print_nl($globals, strpool_str!("Output written on "));
+            slow_print($globals, $globals.output_file_name.get() as _);
             // @.Output written on x@>
-            //   print(" ("); print_int(total_pages); print(" page");
-            //   if total_pages<>1 then print_char("s");
-            //   print(", "); print_int(dvi_offset+dvi_ptr); print(" bytes).");
-            //   b_close(dvi_file);
-            //   end
-            todo!("generate dvi postamble");
+            // print(" ("); print_int(total_pages); print(" page");
+            print($globals, strpool_str!(" (").get() as _);
+            print_int($globals, $globals.total_pages);
+            print($globals, strpool_str!(" page").get() as _);
+            // if total_pages<>1 then print_char("s");
+            if $globals.total_pages != 1 {
+                print_char(make_globals_io_string_log_view!($globals), ASCII_code_literal!(b's'));
+            }
+            // print(", "); print_int(dvi_offset+dvi_ptr); print(" bytes).");
+            print($globals, strpool_str!(", ").get() as _);
+            print_int($globals, $globals.dvi_offset + $globals.dvi_ptr.get() as integer);
+            print($globals, strpool_str!(" bytes).").get() as _);
+            // b_close(dvi_file);
+            b_close(&mut $globals.dvi_file);
+            // end
         }
+        use crate::pascal::integer;
+        use crate::section_0011::dvi_buf_size;
+        use crate::section_0028::b_close;
+        use crate::section_0059::print;
         use crate::section_0062::print_nl;
+        use crate::section_0065::print_int;
+        use crate::section_0288::prepare_mag;
         use crate::section_0586::pop;
         use crate::section_0586::eop;
+        use crate::section_0586::post;
+        use crate::section_0586::post_post;
+        use crate::section_0587::id_byte;
+        use crate::section_0600::dvi_four;
     }}
 }

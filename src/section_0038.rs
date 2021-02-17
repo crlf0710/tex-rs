@@ -169,3 +169,9 @@ impl core::ops::Sub<u32> for str_number {
         self
     }
 }
+
+impl packed_ASCII_code {
+    pub(crate) fn numeric_value(self) -> u8 {
+        self.0
+    }
+}
