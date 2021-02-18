@@ -20,17 +20,29 @@
 //!
 //! The depth of nesting of |hlist_out| and |vlist_out| is called |cur_s|;
 //! this is essentially the depth of |push| commands in the \.{DVI} output.
-//
+
 // @d synch_h==if cur_h<>dvi_h then
-//     begin movement(cur_h-dvi_h,right1); dvi_h:=cur_h;
-//     end
+macro_rules! synch_h {
+    ($globals:expr) => {{
+        if $globals.cur_h != $globals.dvi_h {
+            // begin movement(cur_h-dvi_h,right1); dvi_h:=cur_h;
+            movement($globals, $globals.cur_h - $globals.dvi_h, right1)?;
+            $globals.dvi_h = $globals.cur_h;
+            // end
+        }
+        use crate::section_0586::right1;
+        use crate::section_0607::movement;
+    }}
+}
 // @d synch_v==if cur_v<>dvi_v then
 macro_rules! synch_v {
     ($globals:expr) => {{
-        // begin movement(cur_v-dvi_v,down1); dvi_v:=cur_v;
-        movement($globals, $globals.cur_v - $globals.dvi_v, down1)?;
-        $globals.dvi_v = $globals.cur_v;
-        // end
+        if $globals.cur_v != $globals.dvi_v {
+            // begin movement(cur_v-dvi_v,down1); dvi_v:=cur_v;
+            movement($globals, $globals.cur_v - $globals.dvi_v, down1)?;
+            $globals.dvi_v = $globals.cur_v;
+            // end
+        }
         use crate::section_0586::down1;
         use crate::section_0607::movement;
     }}

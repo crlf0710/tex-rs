@@ -15,6 +15,8 @@ pub(crate) const set_char_0: dvi_command = dvi_command(0);
 // @d set1=128 {typeset a character and move right}
 /// typeset a character and move right
 pub(crate) const set1: dvi_command = dvi_command(128);
+#[cfg(feature = "unicode_support")]
+pub(crate) const set4: dvi_command = dvi_command(131);
 // @d set_rule=132 {typeset a rule and move right}
 /// typeset a rule and move right
 pub(crate) const set_rule: dvi_command = dvi_command(132);

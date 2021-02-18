@@ -66,6 +66,11 @@ use crate::pascal::boolean;
 
 // @#
 // @!c,@!f:quarterword; {character and font in current |char_node|}
+/// character and font in current `char_node`
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static ship_out_c: ASCII_code = ASCII_code::default();
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static ship_out_f: internal_font_number = internal_font_number::default();
 // @!rule_ht,@!rule_dp,@!rule_wd:scaled; {size of current rule being output}
 /// size of current rule being output
 #[globals_struct_field(TeXGlobals)]

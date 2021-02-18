@@ -1,7 +1,7 @@
 //! ` `
 // @<Output the non-|char_node| |p| for |hlist_out|...@>=
 macro_rules! Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_node {
-    ($globals:expr, $p:expr, $base_line:expr, $cur_g:expr, $g_sign:expr) => {{
+    ($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr) => {{
         // begin case type(p) of
         let type_p = r#type!($globals, $p);
         region_forward_label!(
@@ -26,7 +26,7 @@ macro_rules! Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_node 
         }
         // glue_node: @<Move right or output leaders@>;
         else if type_p == glue_node {
-            Move_right_or_output_leaders!($globals, $p, $cur_g, $g_sign, 'move_past);
+            Move_right_or_output_leaders!($globals, $p, $this_box, $cur_glue, $cur_g, $g_sign, $g_order, 'move_past);
         }
         // kern_node,math_node:cur_h:=cur_h+width(p);
         else if type_p == kern_node || type_p == math_node {
