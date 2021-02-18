@@ -1,6 +1,6 @@
 //! @ ` `
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 pub(crate) struct dvi_command(u8);
 
 impl dvi_command {

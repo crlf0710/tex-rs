@@ -99,6 +99,7 @@ macro_rules! glue_sign {
 // @d stretching = 1 {glue setting applies to the stretch components}
 // @d shrinking = 2 {glue setting applies to the shrink components}
 
+#[derive(Clone, Copy, PartialEq)]
 pub(crate) enum glue_sign {
     /// the most common case when several cases are named
     normal = 0,

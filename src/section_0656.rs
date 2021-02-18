@@ -7,7 +7,6 @@ macro_rules! Incorporate_glue_into_the_horizontal_totals {
         let mut g: pointer;
         /// order of infinity
         let mut o: glue_ord;
-
         // begin g:=glue_ptr(p); x:=x+width(g);@/
         g = glue_ptr!($globals, $p);
         $x = $x + width!($globals, g);

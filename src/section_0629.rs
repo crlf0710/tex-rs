@@ -68,7 +68,7 @@ pub(crate) fn vlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     //   maintaining the condition |cur_h=left_edge|@>;
     while p != null {
         Output_node_p_for_vlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_h_eq_left_edge!
-            (globals, p, left_edge);
+            (globals, p, left_edge, cur_g, g_sign);
     }
     // prune_movements(save_loc);
     prune_movements(globals, save_loc);

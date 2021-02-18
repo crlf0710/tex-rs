@@ -28,7 +28,7 @@ macro_rules! Ship_box_p_out {
         if r#type!($globals, $p) == vlist_node {
             vlist_out($globals)?;
         } else {
-            hlist_out($globals);
+            hlist_out($globals)?;
         }
         // dvi_out(eop); incr(total_pages); cur_s:=-1;
         dvi_out!($globals, eop.byte());

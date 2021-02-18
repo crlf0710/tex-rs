@@ -70,6 +70,11 @@ impl core::ops::Neg for scaled {
     }
 }
 
+impl core::ops::RemAssign<scaled> for scaled {
+    fn rem_assign(&mut self, rhs: Self) {
+        self.0 %= rhs.0;
+    }
+}
 
 pub type nonnegative_integer = i32_from_m_to_n<Z0, ::typenum::op!(P2147483648 - P1)>;
 pub type small_number = u8_from_m_to_n<U0, U63>;

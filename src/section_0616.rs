@@ -28,7 +28,7 @@
 macro_rules! synch_v {
     ($globals:expr) => {{
         // begin movement(cur_v-dvi_v,down1); dvi_v:=cur_v;
-        movement($globals, $globals.cur_v - $globals.dvi_v, down1);
+        movement($globals, $globals.cur_v - $globals.dvi_v, down1)?;
         $globals.dvi_v = $globals.cur_v;
         // end
         use crate::section_0586::down1;

@@ -1,37 +1,3 @@
-//! @ @<Output a rule in a vlist...@>=
-//! if is_running(rule_wd) then rule_wd:=width(this_box);
-//! rule_ht:=rule_ht+rule_dp; {this is the rule thickness}
-//! cur_v:=cur_v+rule_ht;
-//! if (rule_ht>0)and(rule_wd>0) then {we don't output empty rules}
-//!   begin synch_h; synch_v;
-//!   dvi_out(put_rule); dvi_four(rule_ht); dvi_four(rule_wd);
-//!   end;
-//! goto next_p
-//!
-//! @ @<Move down or output leaders@>=
-//! begin g:=glue_ptr(p); rule_ht:=width(g)-cur_g;
-//! if g_sign<>normal then
-//!   begin if g_sign=stretching then
-//!     begin if stretch_order(g)=g_order then
-//!       begin cur_glue:=cur_glue+stretch(g);
-//!       vet_glue(float(glue_set(this_box))*cur_glue);
-//! @^real multiplication@>
-//!       cur_g:=round(glue_temp);
-//!       end;
-//!     end
-//!   else if shrink_order(g)=g_order then
-//!       begin cur_glue:=cur_glue-shrink(g);
-//!       vet_glue(float(glue_set(this_box))*cur_glue);
-//!       cur_g:=round(glue_temp);
-//!       end;
-//!   end;
-//! rule_ht:=rule_ht+cur_g;
-//! if subtype(p)>=a_leaders then
-//!   @<Output leaders in a vlist, |goto fin_rule| if a rule
-//!     or to |next_p| if done@>;
-//! goto move_past;
-//! end
-//!
 //! @ @<Output leaders in a vlist...@>=
 //! begin leader_box:=leader_ptr(p);
 //! if type(leader_box)=rule_node then

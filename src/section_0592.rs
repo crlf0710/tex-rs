@@ -67,8 +67,21 @@ use crate::pascal::boolean;
 // @#
 // @!c,@!f:quarterword; {character and font in current |char_node|}
 // @!rule_ht,@!rule_dp,@!rule_wd:scaled; {size of current rule being output}
+/// size of current rule being output
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static rule_ht: scaled = scaled::zero();
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static rule_dp: scaled = scaled::zero();
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static rule_wd: scaled = scaled::zero();
 // @!g:pointer; {current glue specification}
+/// current glue specification
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static ship_out_g: pointer = null;
 // @!lq,@!lr:integer; {quantities used in calculations for leaders}
+
+#[globals_struct_use(TeXGlobals)]
+use crate::section_0101::scaled;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};

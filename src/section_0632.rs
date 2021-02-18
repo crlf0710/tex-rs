@@ -28,7 +28,7 @@ macro_rules! Output_a_box_in_a_vlist {
             if r#type!($globals, $p) == vlist_node {
                 vlist_out($globals)?;
             } else {
-                hlist_out($globals);
+                hlist_out($globals)?;
             }
             // dvi_h:=save_h; dvi_v:=save_v;
             $globals.dvi_h = save_h;
