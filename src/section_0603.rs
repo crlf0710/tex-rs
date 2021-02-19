@@ -10,8 +10,8 @@ macro_rules! Output_the_font_name_whose_internal_number_is_f {
             dvi_out!($globals, $globals.str_pool[k].numeric_value());
         }
         // for k:=str_start[font_name[f]] to str_start[font_name[f]+1]-1 do
-        for k in $globals.str_start[$globals.font_area[$f]].get()
-            ..=$globals.str_start[$globals.font_area[$f] + 1].get() - 1
+        for k in $globals.str_start[$globals.font_name[$f]].get()
+            ..=$globals.str_start[$globals.font_name[$f] + 1].get() - 1
         {
             // dvi_out(so(str_pool[k]))
             dvi_out!($globals, $globals.str_pool[k].numeric_value());
