@@ -360,6 +360,11 @@ macro_rules! tracing_commands {
 }
 // @d tracing_restores==int_par(tracing_restores_code)
 // @d uc_hyph==int_par(uc_hyph_code)
+macro_rules! uc_hyph {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::uc_hyph_code)
+    };
+}
 // @d output_penalty==int_par(output_penalty_code)
 // @d max_dead_cycles==int_par(max_dead_cycles_code)
 macro_rules! max_dead_cycles {

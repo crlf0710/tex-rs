@@ -1611,10 +1611,19 @@ reversing_order_items!({
                             #[macro_use]
                             mod section_0894;
                         }
+                        {
+                            mod section_0895;
+                            #[macro_use]
+                            mod section_0896;
+                            #[macro_use]
+                            mod section_0897;
+                            mod section_0898;
+                            #[macro_use]
+                            mod section_0899;
+                        }
                     );
                 }
             );
-            mod section_0895_to_0899;
             mod section_0900_to_0906;
             mod section_0907;
             mod section_0908_to_0918;
