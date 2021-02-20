@@ -9,7 +9,7 @@ pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: 
     let r: pointer;
     // @!q:pointer; {trails behind |p|}
     /// trails behind `p`
-    let q: pointer;
+    let mut q: pointer;
     // @!h,@!d,@!x:scaled; {height, depth, and natural width}
     /// height, depth, and natural width
     let (mut h, mut d, mut x): (scaled, scaled, scaled);
@@ -52,7 +52,7 @@ pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: 
     // @<Determine the value of |width(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
     Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!
-        (globals, m, r, w, x, 'common_ending);
+        (globals, m, r, w, x, q, 'common_ending);
     }
     // common_ending: @<Finish issuing a diagnostic message
     //       for an overfull or underfull hbox@>;

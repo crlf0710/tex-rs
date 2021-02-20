@@ -27,8 +27,8 @@ macro_rules! If_node_cur_p_is_a_legal_breakpoint__call_try_break__then_update_th
             // end;
         }
         // check_shrinkage(glue_ptr(cur_p)); q:=glue_ptr(cur_p);
-        check_shrinkage!($globals, glue_ptr!($globals, $prev_p));
-        q = glue_ptr!($globals, $prev_p);
+        check_shrinkage!($globals, glue_ptr!($globals, $globals.cur_p));
+        q = glue_ptr!($globals, $globals.cur_p);
         // act_width:=act_width+width(q);@|
         act_width!($globals) += width!($globals, q);
         // active_width[2+stretch_order(q)]:=@|

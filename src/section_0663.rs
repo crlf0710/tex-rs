@@ -11,11 +11,18 @@ macro_rules! Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_hb
         else {
             if $globals.pack_begin_line != 0 {
                 // begin if pack_begin_line>0 then print(") in paragraph at lines ")
+                if $globals.pack_begin_line > 0 {
+                    print($globals, strpool_str!(") in paragraph at lines ").get() as _);
+                }
                 // else print(") in alignment at lines ");
+                else {
+                    print($globals, strpool_str!(") in alignment at lines ").get() as _);
+                }
                 // print_int(abs(pack_begin_line));
+                print_int($globals, $globals.pack_begin_line.abs());
                 // print("--");
+                print($globals, strpool_str!("--").get() as _);
                 // end
-                todo!("issue message");
             }
             // else print(") detected at line ");
             else {

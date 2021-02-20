@@ -33,7 +33,7 @@ macro_rules! Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_di
                     }
                     // whatsit_node:@<Incorporate a whatsit node into an hbox@>;
                     else if type_p == whatsit_node {
-                        todo!("whatsit");
+                        Incorporate_a_whatsit_node_into_an_hbox!($globals);
                     }
                     // glue_node:@<Incorporate glue into the horizontal totals@>;
                     else if type_p == glue_node {

@@ -5,6 +5,13 @@
 //! to~|cur_p|.
 //
 // @d combine_two_deltas(#)==@|mem[prev_r+#].sc:=mem[prev_r+#].sc+mem[r+#].sc
+macro_rules! combine_two_deltas {
+    ($globals:expr, $idx:expr, $r:expr, $prev_r:expr) => {{
+        let v = $globals.mem[$r + $idx][MEMORY_WORD_SC];
+        $globals.mem[$prev_r + $idx][MEMORY_WORD_SC] += v;
+        use crate::section_0101::MEMORY_WORD_SC;
+    }}
+}
 // @d downdate_width(#)==@|cur_active_width[#]:=cur_active_width[#]-
 //   mem[prev_r+#].sc
 macro_rules! downdate_width {
@@ -43,10 +50,13 @@ macro_rules! Deactivate_node_r {
             }
             // else if type(r)=delta_node then
             else if r#type!($globals, $r) == delta_node {
-                todo!("process when prev_r is delta node b");
                 // begin do_all_six(update_width);
+                do_all_six!(update_width !; @globals = $globals; $r);
                 // do_all_six(combine_two_deltas);
+                do_all_six!(combine_two_deltas !; @globals = $globals; $r, $prev_r);
                 // link(prev_r):=link(r); free_node(r,delta_node_size);
+                link!($globals, $prev_r) = link!($globals, $r);
+                free_node($globals, $r, delta_node_size.into());
                 // end;
             }
             // end

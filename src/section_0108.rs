@@ -36,15 +36,40 @@ pub(crate) fn badness(globals: &mut TeXGlobals, t: scaled, s:scaled) -> halfword
         return inf_bad;
     }
     // else  begin if t<=7230584 then  r:=(t*297) div s {$297^3=99.94\times2^{18}$}
-    //   else if s>=1663497 then r:=t div (s div 297)
-    //   else r:=t;
-    //   if r>1290 then badness:=inf_bad {$1290^3<2^{31}<1291^3$}
-    //   else badness:=(r*r*r+@'400000) div @'1000000;
-    //   end; {that was $r^3/2^{18}$, rounded to the nearest integer}
+    else {
+        /// approximation to `αt/s`, where `α^3≈100·2^18`
+        let r: integer;
+        if t.inner() <= 7230584 {
+            /// `297^3=99.94*2^{18}`
+            const _: () = ();
+            r = t.inner() * 297 / s.inner();
+        }
+        // else if s>=1663497 then r:=t div (s div 297)
+        else if s.inner() >= 1663497 {
+            r = t.inner() / (s.inner() / 297);
+        }
+        // else r:=t;
+        else {
+            r = t.inner();
+        }
+        // if r>1290 then badness:=inf_bad {$1290^3<2^{31}<1291^3$}
+        if r > 1290 {
+            /// `1290^3<2^{31}<1291^3`
+            const _: () = ();
+            return inf_bad;
+        }
+        // else badness:=(r*r*r+@'400000) div @'1000000;
+        else {
+            return ((r * r * r + 0o400000) / 0o1000000) as _;
+            /// that was `r^3/2^{18}`, rounded to the nearest integer
+            const _: () = ();
+        }
+        // end; {that was $r^3/2^{18}$, rounded to the nearest integer}
+    }
     // end;
-    todo!();
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0101::scaled;
 use crate::section_0113::halfword;

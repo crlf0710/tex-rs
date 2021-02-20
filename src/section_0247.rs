@@ -132,6 +132,11 @@ macro_rules! box_max_depth {
     };
 }
 // @d hfuzz==dimen_par(hfuzz_code)
+macro_rules! hfuzz {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::hfuzz_code)
+    };
+}
 // @d vfuzz==dimen_par(vfuzz_code)
 macro_rules! vfuzz {
     ($globals:expr) => {
@@ -145,6 +150,11 @@ macro_rules! vfuzz {
 // @d display_width==dimen_par(display_width_code)
 // @d display_indent==dimen_par(display_indent_code)
 // @d overfull_rule==dimen_par(overfull_rule_code)
+macro_rules! overfull_rule {
+    ($globals:expr) => {
+        dimen_par!($globals, crate::section_0247::overfull_rule_code)
+    };
+}
 // @d hang_indent==dimen_par(hang_indent_code)
 macro_rules! hang_indent {
     ($globals:expr) => {

@@ -4,7 +4,7 @@
 // @<Determine the value of |width(r)| and the appropriate glue setting...@>=
 
 macro_rules! Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending {
-    ($globals:expr, $m:expr, $r:expr, $w:expr, $x:expr, $lbl_common_ending:lifetime) => {{
+    ($globals:expr, $m:expr, $r:expr, $w:expr, $x:expr, $q:expr, $lbl_common_ending:lifetime) => {{
         // if m=additional then w:=x+w;
         if $m == additional {
             $w = $x + $w;
@@ -34,7 +34,8 @@ macro_rules! Determine_the_value_of_width_r_and_the_appropriate_glue_setting__th
         // else @<Determine horizontal glue shrink setting, then |return|
         //     or \hbox{|goto common_ending|}@>
         else {
-            todo!("x < 0")
+            Determine_horizontal_glue_shrink_setting__then_return_or_goto_common_ending!
+                ($globals, $r, $x, $q, $lbl_common_ending);
         }
 
         use crate::section_0135::glue_sign;
