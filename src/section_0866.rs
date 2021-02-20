@@ -9,7 +9,7 @@
 macro_rules! act_width {
     ($globals:expr) => {
         $globals.active_width[1]
-    }
+    };
 }
 // @d kern_break==begin if not is_char_node(link(cur_p)) and auto_breaking then
 //     if type(link(cur_p))=glue_node then try_break(0,unhyphenated);
@@ -33,7 +33,7 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         }
         // whatsit_node: @<Advance \(p)past a whatsit node in the \(l)|line_break| loop@>;
         else if type_cur_p == whatsit_node {
-            todo!("advance past a whatsit node");
+            Advance_past_a_whatsit_node_in_the_line_break_loop!($globals);
         }
         // glue_node: begin @<If node |cur_p| is a legal breakpoint, call |try_break|;
         //   then update the active widths by including the glue in |glue_ptr(cur_p)|@>;
@@ -59,8 +59,11 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         }
         // ligature_node: begin f:=font(lig_char(cur_p));
         else if type_cur_p == ligature_node {
-            todo!("ligature_node");
+            let f: internal_font_number;
+            f = font!($globals, lig_char!($globals.cur_p));
             // act_width:=act_width+char_width(f)(char_info(f)(character(lig_char(cur_p))));
+            let c = character!($globals, lig_char!($globals.cur_p));
+            act_width!($globals) += char_width!($globals, f, char_info!($globals, f, c.numeric_value()));
             // end;
         }
         // disc_node: @<Try to break after a discretionary fragment, then |goto done5|@>;
@@ -105,6 +108,7 @@ macro_rules! Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__
         use crate::section_0155::kern_node;
         use crate::section_0155::kern_node_subtype;
         use crate::section_0157::penalty_node;
+        use crate::section_0548::internal_font_number;
         use crate::section_0819::unhyphenated;
         use crate::section_0829::try_break;
     }}

@@ -1,14 +1,3 @@
-//! @ @<Let |d| be the width of the whatsit |p|@>=d:=0
-//!
-//! @ @d adv_past(#)==@+if subtype(#)=language_node then
-//!     begin cur_lang:=what_lang(#); l_hyf:=what_lhm(#); r_hyf:=what_rhm(#);@+end
-//!
-//! @<Advance \(p)past a whatsit node in the \(l)|line_break| loop@>=@+
-//! adv_past(cur_p)
-//!
-//! @ @<Advance \(p)past a whatsit node in the \(p)pre-hyphenation loop@>=@+
-//! adv_past(s)
-//!
 //! @ @<Prepare to move whatsit |p| to the current page, then |goto contribute|@>=
 //! goto contribute
 //!
