@@ -26,7 +26,7 @@ pub(crate) fn freeze_page_specs(globals: &mut TeXGlobals, s: page_contents_kind)
             // begin begin_diagnostic;
             begin_diagnostic(globals);
             // print_nl("%% goal height="); print_scaled(page_goal);
-            print_nl(globals, strpool_str("%% goal height="));
+            print_nl(globals, strpool_str!("%% goal height="));
             print_scaled(globals, page_goal!(globals));
             // @.goal height@>
             // print(", max depth="); print_scaled(page_max_depth);
@@ -36,6 +36,11 @@ pub(crate) fn freeze_page_specs(globals: &mut TeXGlobals, s: page_contents_kind)
             end_diagnostic(globals, false);
             // end;@;@+tats@;@/
         }
+        use crate::section_0059::print;
+        use crate::section_0062::print_nl;
+        use crate::section_0103::print_scaled;
+        use crate::section_0245::begin_diagnostic;
+        use crate::section_0245::end_diagnostic;
     }
     // end;
 }

@@ -76,11 +76,12 @@ pub(crate) fn get_node(globals: &mut TeXGlobals, s: integer) -> TeXResult<pointe
     |'restart|
     );
     // @!stat var_used:=var_used+s; {maintain usage statistics}
-    /// maintain usage statistics
     region_stat! {
-        todo!();
+        /// maintain usage statistics
+        const _ : () = ();
+        globals.var_used += s as integer;
+        // tats@;@/
     }
-    // tats@;@/
     // get_node:=r;
     return_nojump!(r as _);
     // exit:end;

@@ -338,8 +338,26 @@ macro_rules! tracing_macros {
     };
 }
 // @d tracing_stats==int_par(tracing_stats_code)
+#[cfg(feature = "statistics")]
+macro_rules! tracing_stats {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_stats_code)
+    };
+}
 // @d tracing_paragraphs==int_par(tracing_paragraphs_code)
+#[cfg(feature = "statistics")]
+macro_rules! tracing_paragraphs {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_paragraphs_code)
+    };
+}
 // @d tracing_pages==int_par(tracing_pages_code)
+#[cfg(feature = "statistics")]
+macro_rules! tracing_pages {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_pages_code)
+    };
+}
 // @d tracing_output==int_par(tracing_output_code)
 macro_rules! tracing_output {
     ($globals:expr) => {
@@ -359,6 +377,12 @@ macro_rules! tracing_commands {
     };
 }
 // @d tracing_restores==int_par(tracing_restores_code)
+#[cfg(feature = "statistics")]
+macro_rules! tracing_restores {
+    ($globals:expr) => {
+        int_par!($globals, crate::section_0236::tracing_restores_code)
+    };
+}
 // @d uc_hyph==int_par(uc_hyph_code)
 macro_rules! uc_hyph {
     ($globals:expr) => {

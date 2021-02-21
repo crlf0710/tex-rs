@@ -1,12 +1,3 @@
-//! @ @<Declare the procedure called |restore_trace|@>=
-//! @!stat procedure restore_trace(@!p:pointer;@!s:str_number);
-//!   {|eqtb[p]| has just been restored or retained}
-//! begin begin_diagnostic; print_char("{"); print(s); print_char(" ");
-//! show_eqtb(p); print_char("}");
-//! end_diagnostic(false);
-//! end;
-//! tats
-//!
 //! @ When looking for possible pointers to a memory location, it is helpful
 //! to look for references from |eqtb| that might be waiting on the
 //! save stack. Of course, we might find spurious pointers too; but this

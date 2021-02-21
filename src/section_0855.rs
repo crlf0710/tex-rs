@@ -24,7 +24,8 @@ macro_rules! Record_a_new_feasible_break {
         region_stat! {
             if tracing_paragraphs!($globals) > 0 {
                 // @<Print a symbolic description of this feasible break@>;
-                todo!("print symbolic");
+                Print_a_symbolic_description_of_this_feasible_break!
+                    ($globals, $r, d, $b, $pi, $artificial_demerits);
             }
             // tats@;@/
         }

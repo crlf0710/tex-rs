@@ -20,7 +20,7 @@ macro_rules! fast_get_avail {
             link!($globals, $val) = null;
             // @!stat incr(dyn_used);@+tats@/
             region_stat! {
-                incr!(dyn_used);
+                incr!($globals.dyn_used);
             }
             // end;
         }

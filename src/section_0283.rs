@@ -26,9 +26,10 @@ macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global
                 $globals.eqtb[$p] = $globals.save_stack[$globals.save_ptr];
                 // @!stat if tracing_restores>0 then restore_trace(p,"restoring");@+tats@;@/
                 region_stat! {
-                    if $globals.tracing_restores > 0 {
-                        restore_trace($globals, p, strpool_str!("restoring"));
+                    if tracing_restores!($globals) > 0 {
+                        restore_trace($globals, $p, strpool_str!("restoring"));
                     }
+                    use crate::section_0284::restore_trace;
                 }
                 // end
             }
@@ -40,7 +41,10 @@ macro_rules! Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_global
             $globals.xeq_level[$p] = $l;
             // @!stat if tracing_restores>0 then restore_trace(p,"restoring");@+tats@;@/
             region_stat! {
-                todo!("");
+                if tracing_restores!($globals) > 0 {
+                    restore_trace($globals, $p, strpool_str!("restoring"));
+                }
+                use crate::section_0284::restore_trace;
             }
             // end
         }

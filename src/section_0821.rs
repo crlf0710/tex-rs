@@ -37,10 +37,15 @@ macro_rules! prev_break {
     }
 }
 // @d serial==info {serial number for symbolic identification}
-//
+/// serial number for symbolic identification
+#[cfg(feature = "statistics")]
+macro_rules! serial {
+    ($globals:expr, $p:expr) => {
+        info_inner!($globals, $p)
+    }
+}
 // @<Glob...@>=
 // @!passive:pointer; {most recent node on passive list}
-
 /// most recent node on passive list
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static passive: pointer = null;

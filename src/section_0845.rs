@@ -37,7 +37,7 @@ macro_rules! Insert_a_new_active_node_from_best_place_fit_class_to_cur_p {
         region_stat! {
             if tracing_paragraphs!($globals) > 0 {
                 // @<Print a symbolic description of the new break node@>;
-                todo!("print a symbolic description");
+                Print_a_symbolic_description_of_the_new_break_node!($globals, q, $break_type, $fit_class);
             }
             // tats@;@/
         }

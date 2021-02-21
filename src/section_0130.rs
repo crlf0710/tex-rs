@@ -28,7 +28,8 @@ pub(crate) fn free_node(globals: &mut TeXGlobals, p: pointer, s: halfword) {
     region_stat!{
         /// maintain statistics
         const _ : () = ();
-        globals.var_used = globals.var_used - s;
+        globals.var_used -= s as integer;
+        use crate::pascal::integer;
     }
     // end;
 }
