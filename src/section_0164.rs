@@ -5,6 +5,7 @@ macro_rules! Initialize_the_special_list_heads_and_constant_nodes {
         Initialize_the_special_list_heads_and_constant_nodes_0797!($globals);
         Initialize_the_special_list_heads_and_constant_nodes_0820!($globals);
         Initialize_the_special_list_heads_and_constant_nodes_0981!($globals);
+        Initialize_the_special_list_heads_and_constant_nodes_0988!($globals);
     }}
 }
 

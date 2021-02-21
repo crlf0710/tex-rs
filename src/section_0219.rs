@@ -16,10 +16,18 @@ macro_rules! Show_the_auxiliary_field__a {
                 }
                 // if nest[p].pg_field<>0 then
                 if $globals.nest[$p].pg_field != 0 {
-                    todo!("pg_field != 0");
                     // begin print(", prevgraf ");
+                    print($globals, strpool_str!(", prevgraf ").get() as _);
                     // print_int(nest[p].pg_field); print(" line");
+                    print_int($globals, $globals.nest[$p].pg_field);
+                    print($globals, strpool_str!(" line").get() as _);
                     // if nest[p].pg_field<>1 then print_char("s");
+                    if $globals.nest[$p].pg_field != 1 {
+                        print_char(
+                            make_globals_io_string_log_view!($globals),
+                            ASCII_code_literal!(b's'),
+                        );
+                    }
                     // end;
                 }
                 // end;
@@ -41,7 +49,10 @@ macro_rules! Show_the_auxiliary_field__a {
             2 => {
                 if $a[MEMORY_WORD_INT] != null as integer {
                     // begin print("this will begin denominator of:"); show_box(a.int);@+
-                    print($globals, strpool_str!("this will begin denominator of:").get() as _);
+                    print(
+                        $globals,
+                        strpool_str!("this will begin denominator of:").get() as _,
+                    );
                     show_box($globals, $a[MEMORY_WORD_INT] as _);
                 }
                 // end;
@@ -55,11 +66,11 @@ macro_rules! Show_the_auxiliary_field__a {
         use crate::pascal::integer;
         use crate::section_0101::MEMORY_WORD_SC;
         use crate::section_0103::print_scaled;
-        use crate::section_0113::MEMORY_WORD_INT;
         use crate::section_0113::MEMORY_WORD_HH_LH;
         use crate::section_0113::MEMORY_WORD_HH_RH;
+        use crate::section_0113::MEMORY_WORD_INT;
         use crate::section_0115::null;
         use crate::section_0209::max_command;
         use crate::section_0212::ignore_depth;
-    }}
+    }};
 }

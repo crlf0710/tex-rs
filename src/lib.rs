@@ -1749,7 +1749,6 @@ reversing_order_items! (
                         mod section_0980;
                         #[macro_use]
                         mod section_0981;
-                        forward_mod_d!();
                         #[macro_use]
                         mod section_0982;
                         mod section_0983;
@@ -1760,7 +1759,9 @@ reversing_order_items! (
                         mod section_0986;
                         forward_mod_h!();
                         mod section_0987;
+                        #[macro_use]
                         mod section_0988;
+                        forward_mod_d!();
                         mod section_0989;
                         mod section_0990;
                         #[macro_use]
@@ -1996,7 +1997,9 @@ reversing_order_items! (
                                                         #[macro_use]
                                                         mod section_1109;
                                                         mod section_1110;
-                                                        mod section_1111_to_1125;
+                                                        mod section_1111_to_1113;
+                                                        mod section_1114;
+                                                        mod section_1115_to_1125;
                                                         #[macro_use]
                                                         mod section_1126;
                                                         reversing_order_items!(

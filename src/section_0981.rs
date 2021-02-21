@@ -50,6 +50,13 @@ pub(crate) enum page_ins_node_subtype {
 // @d broken_ptr(#)==link(#+1)
 //   {an insertion for this class will break here if anywhere}
 // @d broken_ins(#)==info(#+1) {this insertion might break at |broken_ptr|}
+/// this insertion might break at `broken_ptr`
+macro_rules! broken_ins {
+    ($globals:expr, $p:expr) => {
+        info_inner!($globals, $p + 1)
+    }
+}
+
 // @d last_ins_ptr(#)==link(#+2) {the most recent insertion for this |subtype|}
 /// the most recent insertion for this `subtype`
 macro_rules! last_ins_ptr {
