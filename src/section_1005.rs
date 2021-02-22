@@ -39,7 +39,7 @@ macro_rules! Check_if_node_p_is_a_new_champion_breakpoint__then_if_it_is_time_fo
             // @!stat if tracing_pages>0 then @<Display the page break cost@>;@+tats@;@/
             region_stat! {
                 if tracing_pages!($globals) > 0 {
-                    Display_the_page_break_cost!($globals);
+                    Display_the_page_break_cost!($globals, b, $pi, c);
                 }
             }
             // if c<=least_page_cost then

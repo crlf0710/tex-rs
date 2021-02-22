@@ -6,7 +6,18 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0417 {
             unreachable!();
         }
         // set_aux: if chr_code=vmode then print_esc("prevdepth")
-        // @+else print_esc("spacefactor");
+        else if $cmd == set_aux {
+            if $chr_code.get() == vmode as chr_code_repr {
+                print_esc($globals, strpool_str!("prevdepth"));
+            }
+            // @+else print_esc("spacefactor");
+            else {
+                print_esc($globals, strpool_str!("spacefactor"));
+            }
+            use crate::section_0211::vmode;
+            use crate::section_0297::chr_code_repr;
+            true
+        }
         // set_page_int: if chr_code=0 then print_esc("deadcycles")
         // @+else print_esc("insertpenalties");
         // set_box_dimen: if chr_code=width_offset then print_esc("wd")

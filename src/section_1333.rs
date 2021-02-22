@@ -23,7 +23,7 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
     // @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
     region_stat! {
         if tracing_stats!(globals) > 0 {
-            todo!("output");
+            Output_statistics_about_this_job!(globals);
         }
     }
     // wake_up_terminal; @<Finish the \.{DVI} file@>;
