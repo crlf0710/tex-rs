@@ -1,27 +1,42 @@
 //! ` `
 // @<Move down or output leaders@>=
 macro_rules! Move_down_or_output_leaders {
-    ($globals:expr, $p:expr, $cur_g:expr, $g_sign:expr, $lbl_move_past:lifetime) => {{
+    ($globals:expr, $p:expr, $this_box:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_move_past:lifetime) => {{
         // begin g:=glue_ptr(p); rule_ht:=width(g)-cur_g;
         $globals.ship_out_g = glue_ptr!($globals, $p);
         $globals.rule_ht = width!($globals, $globals.ship_out_g) - $cur_g;
         // if g_sign<>normal then
         if $g_sign != glue_sign::normal {
+            /// glue value before rounding
+            let mut glue_temp: real;
             // begin if g_sign=stretching then
-            //   begin if stretch_order(g)=g_order then
-            //     begin cur_glue:=cur_glue+stretch(g);
-            //     vet_glue(float(glue_set(this_box))*cur_glue);
-            // @^real multiplication@>
-            //     cur_g:=round(glue_temp);
-            //     end;
-            //   end
+            if $g_sign == glue_sign::stretching {
+                // begin if stretch_order(g)=g_order then
+                if stretch_order!($globals, $globals.ship_out_g) as integer == $g_order as integer {
+                    // begin cur_glue:=cur_glue+stretch(g);
+                    $cur_glue += stretch!($globals, $globals.ship_out_g).inner() as real;
+                    // vet_glue(float(glue_set(this_box))*cur_glue);
+                    vet_glue!(glue_temp, float!(glue_set!($globals, $this_box)) * $cur_glue);
+                    // @^real multiplication@>
+                    // cur_g:=round(glue_temp);
+                    $cur_g = scaled::new_from_inner(glue_temp.round() as _);
+                    // end;
+                }
+                // end
+            }
             // else if shrink_order(g)=g_order then
-            //     begin cur_glue:=cur_glue-shrink(g);
-            //     vet_glue(float(glue_set(this_box))*cur_glue);
-            //     cur_g:=round(glue_temp);
-            //     end;
-            // end;
-            todo!("g_sign != normal");
+            else {
+                if shrink_order!($globals, $globals.ship_out_g) as integer == $g_order as integer {
+                    // begin cur_glue:=cur_glue-shrink(g);
+                    $cur_glue -= shrink!($globals, $globals.ship_out_g).inner() as real;
+                    // vet_glue(float(glue_set(this_box))*cur_glue);
+                    vet_glue!(glue_temp, float!(glue_set!($globals, $this_box)) * $cur_glue);
+                    // cur_g:=round(glue_temp);
+                    $cur_g = scaled::new_from_inner(glue_temp.round() as _);
+                    // end;
+                }
+                // end;
+            }
         }
         // rule_ht:=rule_ht+cur_g;
         $globals.rule_ht += $cur_g;

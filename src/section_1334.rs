@@ -98,7 +98,7 @@ macro_rules! Output_statistics_about_this_job {
             // wlog_ln(' out of ',hyph_size:1);@/
             wlog_ln(
                 make_globals_log_view!($globals),
-                format!(" out of {}", $globals.hyph_count.get()),
+                format!(" out of {}", hyph_size),
             );
             // wlog_ln(' ',max_in_stack:1,'i,',max_nest_stack:1,'n,',@|
             //   max_param_stack:1,'p,',@|
@@ -140,6 +140,7 @@ macro_rules! Output_statistics_about_this_job {
         use crate::section_0011::stack_size;
         use crate::section_0012::font_base;
         use crate::section_0012::hash_size;
+        use crate::section_0012::hyph_size;
         use crate::section_0056::wlog;
         use crate::section_0056::wlog_ln;
     }};

@@ -1,7 +1,7 @@
 //! ` `
 // @<Output the non-|char_node| |p| for |vlist_out|@>=
 macro_rules! Output_the_non_char_node_p_for_vlist_out {
-    ($globals:expr, $p:expr, $left_edge:expr, $cur_g:expr, $g_sign:expr, $lbl_next_p:lifetime) => {{
+    ($globals:expr, $p:expr, $left_edge:expr, $this_box:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_next_p:lifetime) => {{
         // begin case type(p) of
         let type_p = r#type!($globals, $p);
         region_forward_label!(
@@ -23,8 +23,7 @@ macro_rules! Output_the_non_char_node_p_for_vlist_out {
         }
         // glue_node: @<Move down or output leaders@>;
         else if type_p == glue_node {
-            Move_down_or_output_leaders!($globals, $p, $cur_g, $g_sign, 'move_past);
-            todo!("move down or output leaders");
+            Move_down_or_output_leaders!($globals, $p, $this_box, $cur_glue, $cur_g, $g_sign, $g_order, 'move_past);
         }
         // kern_node:cur_v:=cur_v+width(p);
         else if type_p == kern_node {

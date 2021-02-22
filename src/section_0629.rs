@@ -35,10 +35,10 @@ pub(crate) fn vlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!glue_temp:real; {glue value before rounding}
     // @!cur_glue:real; {glue seen so far}
     /// glue seen so far
-    let cur_glue: real;
+    let mut cur_glue: real;
     // @!cur_g:scaled; {rounded equivalent of |cur_glue| times the glue ratio}
     /// rounded equivalent of `cur_glue` times the glue ratio
-    let cur_g: scaled;
+    let mut cur_g: scaled;
     // begin cur_g:=0; cur_glue:=float_constant(0);
     cur_g = scaled::zero();
     cur_glue = float_constant!(0);
@@ -68,7 +68,7 @@ pub(crate) fn vlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     //   maintaining the condition |cur_h=left_edge|@>;
     while p != null {
         Output_node_p_for_vlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_h_eq_left_edge!
-            (globals, p, left_edge, cur_g, g_sign);
+            (globals, p, left_edge, this_box, cur_glue, cur_g, g_sign, g_order);
     }
     // prune_movements(save_loc);
     prune_movements(globals, save_loc);

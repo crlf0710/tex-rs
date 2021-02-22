@@ -50,6 +50,9 @@ macro_rules! Insert_a_new_control_sequence_after_p_then_make_p_point_to_it {
         trace_expr!("text(p) = {}", text!($globals, $p));
         $globals.pool_ptr = $globals.pool_ptr + d as _;
         // @!stat incr(cs_count);@+tats@;@/
+        region_stat! {
+            incr!($globals.cs_count);
+        }
         // end
         use crate::section_0004::TeXGlobalsStringView;
         use crate::section_0042::append_char;
