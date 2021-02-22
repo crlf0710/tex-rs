@@ -10,6 +10,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
                 unreachable!();
             }
             // if_cat_code:print_esc("ifcat");
+            else if chr_code == code::if_cat_code as chr_code_repr {
+                print_esc($globals, strpool_str!("ifcat"));
+            }
             // if_int_code:print_esc("ifnum");
             else if chr_code == code::if_int_code as chr_code_repr {
                 print_esc($globals, strpool_str!("ifnum"));
@@ -24,6 +27,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
             // if_mmode_code:print_esc("ifmmode");
             // if_inner_code:print_esc("ifinner");
             // if_void_code:print_esc("ifvoid");
+            else if chr_code == code::if_void_code as chr_code_repr {
+                print_esc($globals, strpool_str!("ifvoid"));
+            }
             // if_hbox_code:print_esc("ifhbox");
             // if_vbox_code:print_esc("ifvbox");
             // ifx_code:print_esc("ifx");
@@ -33,6 +39,9 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488 {
             // if_eof_code:print_esc("ifeof");
             // if_true_code:print_esc("iftrue");
             // if_false_code:print_esc("iffalse");
+            else if chr_code == code::if_false_code as chr_code_repr {
+                print_esc($globals, strpool_str!("iffalse"));
+            }
             // if_case_code:print_esc("ifcase");
             // othercases print_esc("if")
             else {

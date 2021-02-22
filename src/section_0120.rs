@@ -52,10 +52,13 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     }
     // link(p):=null; {provide an oft-desired initialization of the new node}
     /// provide an oft-desired initialization of the new node
-    {
-        link!(globals, p) = null;
-    }
+    const _ : () = ();
+    link!(globals, p) = null;
     // @!stat incr(dyn_used);@+tats@;{maintain statistics}
+    region_stat! {
+        /// maintain statistics
+        incr!(globals.dyn_used);
+    }
     // get_avail:=p;
     return p;
     // end;

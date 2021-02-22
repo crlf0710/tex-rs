@@ -57,15 +57,22 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     globals.hi_mem_min = hi_mem_stat_min;
     // var_used:=lo_mem_stat_max+1-mem_bot; dyn_used:=hi_mem_stat_usage;
     //   {initialize statistics}
+    /// initialize statistics
+    const _: () = ();
+    globals.var_used = lo_mem_stat_max as integer + 1 - mem_bot as integer;
+    globals.dyn_used = hi_mem_stat_usage as _;
 }
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0012::mem_top;
+use crate::section_0012::mem_bot;
 use crate::section_0115::null;
 use crate::section_0124::empty_flag;
 use crate::section_0162::hi_mem_stat_min;
 use crate::section_0162::lo_mem_stat_max;
+use crate::section_0162::hi_mem_stat_usage;
 
 use linkme::distributed_slice;
 

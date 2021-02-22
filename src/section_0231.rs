@@ -18,7 +18,7 @@ macro_rules! Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0231 {
                 }
                 // output_routine_loc: print_esc("output");
                 else if $chr_code.get() == output_routine_loc as chr_code_repr {
-                   print_esc($globals, strpool_str!("voffset"));
+                   print_esc($globals, strpool_str!("output"));
                 }
                 // every_par_loc: print_esc("everypar");
                 else if $chr_code.get() == every_par_loc as chr_code_repr {
