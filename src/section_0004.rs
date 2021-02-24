@@ -121,6 +121,7 @@ pub mod TeXGlobals {
     include!("src/section_1074.rs");
     include!("src/section_1266.rs");
     include!("src/section_1299.rs");
+    include!("src/section_1305.rs");
     include!("src/section_1331.rs");
     include!("src/section_1342.rs");
     include!("src/section_1345.rs");

@@ -173,6 +173,9 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
         chr_cmd!(globals, chr_code, strpool_str!("end-group character "));
     }
     // math_shift: chr_cmd("math shift character ");
+    else if cmd == math_shift {
+        chr_cmd!(globals, chr_code, strpool_str!("math shift character "));
+    }
     // mac_param: chr_cmd("macro parameter character ");
     else if cmd == mac_param {
         chr_cmd!(globals, chr_code, strpool_str!("macro parameter character "));

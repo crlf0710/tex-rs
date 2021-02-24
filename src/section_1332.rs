@@ -107,7 +107,7 @@ pub fn entry(globals: &mut TeXGlobals) {
     try_or_jump!(main_control(globals), 'end_of_TEX);
     // final_cleanup; {prepare for death}
     /// prepare for death
-    final_cleanup(globals);
+    try_or_jump!(final_cleanup(globals), 'end_of_TEX);
     }
     // end_of_TEX: close_files_and_terminate;
     'end_of_TEX <-

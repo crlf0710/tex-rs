@@ -26,10 +26,14 @@ pub(crate) fn b_close(f: &mut byte_file) {
 }
 // @#
 // procedure w_close(var f:word_file); {close a word file}
-// begin close(f);
-// end;
-//
+/// close a word file
+pub(crate) fn w_close(f: &mut word_file) {
+    // begin close(f);
+    close(f);
+    // end;
+}
 
 use crate::pascal::close;
 use crate::section_0025::alpha_file;
 use crate::section_0025::byte_file;
+use crate::section_0113::word_file;

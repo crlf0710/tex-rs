@@ -83,9 +83,13 @@ pub(crate) fn b_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut byte_file)
 // @#
 // function w_open_out(var f:word_file):boolean;
 //   {open a word file for output}
-// begin rewrite(f,name_of_file,'/O'); w_open_out:=rewrite_OK(f);
-// end;
-//
+/// open a word file for output
+pub(crate) fn w_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut word_file) -> boolean {
+    // begin rewrite(f,name_of_file,'/O'); w_open_out:=rewrite_OK(f);
+    rewrite(f, &*globals.name_of_file, "/O");
+    return rewrite_OK!(f);
+    // end;
+}
 
 use crate::pascal::boolean;
 use crate::pascal::reset;
@@ -93,3 +97,4 @@ use crate::pascal::rewrite;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0025::alpha_file;
 use crate::section_0025::byte_file;
+use crate::section_0113::word_file;
