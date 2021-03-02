@@ -322,7 +322,7 @@ macro_rules! define_ranged_signed_integer {
         impl<MIN, MAX> core::ops::Neg for $name<MIN, MAX>
         where MIN: typenum::Integer, MAX: typenum::Integer {
             type Output = Self;
-            
+
             fn neg(self) -> Self {
                 Self::new(-self.0)
             }
@@ -762,7 +762,7 @@ impl<T> Default for FileState<T> {
 }
 
 impl<T> FileState<T> {
-    fn discard_caret_and_get_write_target(&mut self) -> &mut dyn Write {
+    fn discard_buffer_variable_value_and_get_write_target(&mut self) -> &mut dyn Write {
         match self {
             FileState::GenerationMode {
                 write_caret,
@@ -886,7 +886,9 @@ pub(crate) trait PascalFile {
 
     fn convert_line_string_to_units(input: &str, units: &mut Vec<Self::Unit>);
 
-    fn convert_storage_repr_to_unit(input: &[u8]) -> Self::Unit;
+    fn convert_blob_to_unit(input: &[u8]) -> Self::Unit;
+    
+    fn convert_unit_to_blob(data: Self::Unit, f: &mut dyn for<'a> FnMut(&'a [u8]));
 
     fn file_state(&self) -> &FileState<Self::Unit>;
 
@@ -895,10 +897,6 @@ pub(crate) trait PascalFile {
     fn error_state(&self) -> usize;
 
     fn set_error_state(&mut self, error_state: usize);
-
-    fn put_unit_to_target(&mut self, val: Self::Unit) {
-        todo!();
-    }
 }
 
 pub(crate) struct file_of_text_char {
@@ -965,7 +963,11 @@ impl PascalFile for file_of_text_char {
         }
     }
 
-    fn convert_storage_repr_to_unit(_: &[u8]) -> Self::Unit {
+    fn convert_blob_to_unit(_: &[u8]) -> Self::Unit {
+        unreachable!();
+    }
+
+    fn convert_unit_to_blob(_: Self::Unit, _: &mut dyn for<'a> FnMut(&'a [u8])) {
         unreachable!();
     }
 
@@ -1004,11 +1006,17 @@ impl<T> Default for file_of<T> {
     }
 }
 
-pub(crate) trait FromStorageBytes {
-    fn from_storage_bytes(data: &[u8]) -> Self;
+pub(crate) trait FromBlob {
+    fn from_blob(data: &[u8]) -> Self;
+}
+pub(crate) trait IntoBlob {
+    type BlobType: core::borrow::Borrow<[u8]>;
+
+    fn into_blob(&self) -> Self::BlobType;
 }
 
-impl<T: FromStorageBytes> PascalFile for file_of<T> {
+
+impl<T: FromBlob + IntoBlob> PascalFile for file_of<T> {
     type Unit = T;
 
     fn is_text_file() -> bool {
@@ -1031,8 +1039,14 @@ impl<T: FromStorageBytes> PascalFile for file_of<T> {
         unreachable!()
     }
 
-    fn convert_storage_repr_to_unit(input: &[u8]) -> Self::Unit {
-        T::from_storage_bytes(input)
+    fn convert_blob_to_unit(input: &[u8]) -> Self::Unit {
+        T::from_blob(input)
+    }
+
+    fn convert_unit_to_blob(v: Self::Unit, f: &mut dyn for<'a> FnMut(&'a [u8])) {
+        use core::borrow::Borrow;
+        let blob = v.into_blob();
+        f(blob.borrow());
     }
 
     fn file_state(&self) -> &FileState<T> {
@@ -1077,17 +1091,32 @@ pub(crate) fn rewrite<F: PascalFile, P: Into<String>>(file: &mut F, path: P, opt
     };
 }
 
-#[allow(unused_variables)]
+pub(crate) fn buffer_variable_assign<F: PascalFile>(file: &mut F, value: F::Unit) {
+    match file.file_state_mut() {
+        FileState::GenerationMode {
+            write_caret,
+            ..
+        } => {
+            *write_caret = Some(value);
+        }
+        _ => {
+            panic!("file not in generation mode!");
+        }
+    }
+}
+
 pub(crate) fn put<F: PascalFile>(file: &mut F) {
     match file.file_state_mut() {
         FileState::GenerationMode {
             write_target,
-            write_caret,
+            write_caret
         } => {
             let caret_value = write_caret
                 .take()
                 .expect("file buffer variable value is undefined!");
-            file.put_unit_to_target(caret_value);
+            F::convert_unit_to_blob(caret_value, &mut |data| {
+                write_target.write_all(data).expect("fail to write data");
+            });
         }
         _ => {
             panic!("file not in generation mode!");
@@ -1239,8 +1268,7 @@ where
     loop {
         match file.file_state_mut() {
             FileState::LineInspectionMode {
-                read_line_buffer,
-                ..
+                read_line_buffer, ..
             } => match read_line_buffer {
                 LineBufferState::Eof => {
                     panic!("file eof reached");
@@ -1258,8 +1286,7 @@ where
                 }
             },
             FileState::BlockInspectionMode {
-                read_block_buffer,
-                ..
+                read_block_buffer, ..
             } => match read_block_buffer {
                 BlockBufferState::Eof => {
                     panic!("file eof reached");
@@ -1278,7 +1305,7 @@ where
                         let size_of_t = core::mem::size_of::<F::Unit>();
                         assert!(size_of_t > 0);
                         let bytes_position_end = *bytes_position + size_of_t;
-                        let v = F::convert_storage_repr_to_unit(
+                        let v = F::convert_blob_to_unit(
                             &bytes_buffer[*bytes_position..bytes_position_end],
                         );
                         *bytes_caret = Some(v.clone());
@@ -1361,42 +1388,39 @@ pub(crate) fn eoln<F: PascalFile>(file: &mut F) -> bool {
 }
 
 pub(crate) fn write<F: PascalFile, T: Display>(file: &mut F, val: T) {
-    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    let write_target = file
+        .file_state_mut()
+        .discard_buffer_variable_value_and_get_write_target();
     write!(write_target, "{}", val).unwrap();
 }
 
 pub(crate) fn write_ln<F: PascalFile, T: Display>(file: &mut F, val: T) {
-    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    let write_target = file
+        .file_state_mut()
+        .discard_buffer_variable_value_and_get_write_target();
     writeln!(write_target, "{}", val).unwrap();
 }
 
 pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
-    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    let write_target = file
+        .file_state_mut()
+        .discard_buffer_variable_value_and_get_write_target();
     writeln!(write_target, "").unwrap();
-}
-
-pub(crate) trait IntoBlob {
-    type BlobType: core::borrow::Borrow<[u8]>;
-
-    fn into_blob(&self) -> Self::BlobType;
-}
-
-impl IntoBlob for u8 {
-    type BlobType = [u8; 1];
-    fn into_blob(&self) -> Self::BlobType {
-        [*self]
-    }
 }
 
 pub(crate) fn write_binary<F: PascalFile, T: IntoBlob>(file: &mut F, val: T) {
     use core::borrow::Borrow;
-    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    let write_target = file
+        .file_state_mut()
+        .discard_buffer_variable_value_and_get_write_target();
     let blob = val.into_blob();
     write_target.write_all(blob.borrow()).unwrap();
 }
 
 pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
-    let write_target = file.file_state_mut().discard_caret_and_get_write_target();
+    let write_target = file
+        .file_state_mut()
+        .discard_buffer_variable_value_and_get_write_target();
     write_target.flush().unwrap();
 }
 
@@ -1422,7 +1446,9 @@ pub(crate) fn break_in<F: PascalFile>(file: &mut F, _: boolean) {
     let file_state = file.file_state_mut();
     match file_state {
         FileState::LineInspectionMode {
-            read_line_buffer, read_flag_extra_eoln_line, ..
+            read_line_buffer,
+            read_flag_extra_eoln_line,
+            ..
         } => match read_line_buffer {
             LineBufferState::AfterReadLine { line_no_more, .. } => {
                 if *line_no_more {
@@ -1434,8 +1460,7 @@ pub(crate) fn break_in<F: PascalFile>(file: &mut F, _: boolean) {
                             line_position: 0,
                             line_no_more: false,
                         };
-                    }
-                    else {
+                    } else {
                         *read_line_buffer = LineBufferState::UnknownState {
                             initial_line: false,
                         };
@@ -1468,8 +1493,7 @@ mod tests {
     }
 
     #[test]
-    fn file_input_0001()
-    {
+    fn file_input_0001() {
         use std::io::Cursor;
         const DATA: &'static str = "A\nBC\nA";
         let input_data = Cursor::new(DATA);

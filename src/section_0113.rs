@@ -125,6 +125,22 @@ impl IndexMut<MEMORY_WORD_GR> for memory_word {
     }
 }
 
+pub(crate) struct MEMORY_WORD_HH;
+
+impl Index<MEMORY_WORD_HH> for memory_word {
+    type Output = two_halves;
+    fn index(&self, _: MEMORY_WORD_HH) -> &two_halves {
+        unsafe { &self.hh }
+    }
+}
+
+impl IndexMut<MEMORY_WORD_HH> for memory_word {
+    fn index_mut(&mut self, _: MEMORY_WORD_HH) -> &mut two_halves {
+        unsafe { &mut self.hh }
+    }
+}
+
+
 pub(crate) struct MEMORY_WORD_HH_RH;
 
 impl Index<MEMORY_WORD_HH_RH> for memory_word {
@@ -326,8 +342,8 @@ impl IndexMut<FOUR_QUARTERS_B3> for four_quarters {
     }
 }
 
-impl FromStorageBytes for memory_word {
-    fn from_storage_bytes(data: &[u8]) -> Self {
+impl FromBlob for memory_word {
+    fn from_blob(data: &[u8]) -> Self {
         use core::mem::transmute;
         assert!(data.len() == 4);
         memory_word {
@@ -341,6 +357,13 @@ impl FromStorageBytes for memory_word {
     }
 }
 
-use core::ops::{Index, IndexMut};
-use crate::pascal::FromStorageBytes;
+impl IntoBlob for memory_word {
+    type BlobType = [u8; 4];
+    fn into_blob(&self) -> Self::BlobType {
+        self[MEMORY_WORD_INT].to_le_bytes()
+    }
+}
 
+use core::ops::{Index, IndexMut};
+use crate::pascal::FromBlob;
+use crate::pascal::IntoBlob;
