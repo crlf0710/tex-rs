@@ -78,8 +78,13 @@ pub(crate) fn b_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut byte_file)
 // @#
 // function w_open_in(var f:word_file):boolean;
 //   {open a word file for input}
-// begin reset(f,name_of_file,'/O'); w_open_in:=reset_OK(f);
-// end;
+/// open a word file for input
+pub(crate) fn w_open_in(globals: TeXGlobalsFilenameView<'_>, f: &mut word_file) -> boolean {
+    // begin reset(f,name_of_file,'/O'); w_open_in:=reset_OK(f);
+    reset(f, &*globals.name_of_file, "/O");
+    return reset_OK!(f);
+    // end;
+}
 // @#
 // function w_open_out(var f:word_file):boolean;
 //   {open a word file for output}

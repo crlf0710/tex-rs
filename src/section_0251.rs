@@ -1,5 +1,6 @@
 //! ` `
 // @<Show equivalent |n|, in region 6@>=
+#[cfg(feature = "statistics")]
 macro_rules! Show_equivalent_n__in_region_6 {
     ($globals:expr, $n:expr) => {{
         // begin if n<scaled_base then print_length_param(n-dimen_base)

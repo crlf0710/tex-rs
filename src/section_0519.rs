@@ -10,10 +10,12 @@ macro_rules! append_to_name {
         let c = $val;
         incr!($k);
         // if k<=file_name_size then name_of_file[k]:=xchr[c];
-        if $k < file_name_size {
-            $globals.name_of_file[$k] = xchr(c);
+        if ($k as integer) < file_name_size as integer {
+            $globals.name_of_file[$k as u16] = xchr(c);
         }
         // end
+        use crate::pascal::integer;
+        use crate::section_0020::xchr;
     }}
 }
 

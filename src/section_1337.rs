@@ -19,11 +19,22 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
                 initialize($globals);
             }
             // if not open_fmt_file then goto final_end;
+            if !open_fmt_file($globals) {
+                goto_forward_label!($lbl_final_end);
+            }
             // if not load_fmt_file then
-            //   begin w_close(fmt_file); goto final_end;
-            //   end;
+            if !load_fmt_file($globals) {
+                // begin w_close(fmt_file); goto final_end;
+                w_close(&mut $globals.fmt_file);
+                goto_forward_label!($lbl_final_end);
+                // end;
+            }
             // w_close(fmt_file);
+            w_close(&mut $globals.fmt_file);
             // while (loc<limit)and(buffer[loc]=" ") do incr(loc);
+            while loc!($globals) < limit!($globals) && $globals.buffer[loc!($globals)] == ASCII_code_literal!(b' ') {
+                incr!(loc!($globals));
+            }
             // end;
         }
         // if end_line_char_inactive then decr(limit)
@@ -47,11 +58,13 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
             const _: () = ();
         }
         // end
-
-        use crate::section_0037::init_terminal;
-        use crate::section_0207::escape;
-        use crate::section_0537::start_input;
-        use crate::section_0113::halfword;
         use crate::section_0018::ASCII_code;
+        use crate::section_0028::w_close;
+        use crate::section_0037::init_terminal;
+        use crate::section_0113::halfword;
+        use crate::section_0207::escape;
+        use crate::section_0524::open_fmt_file;
+        use crate::section_0537::start_input;
+        use crate::section_1303::load_fmt_file;
     };
 }

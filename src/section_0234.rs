@@ -1,5 +1,6 @@
 //! ` `
 // @<Show the font identifier in |eqtb[n]|@>=
+#[cfg(feature = "statistics")]
 macro_rules! Show_the_font_identifier_in_eqtb_n {
     ($globals:expr, $n:expr) => {{
         // begin if n=cur_font_loc then print("current font")

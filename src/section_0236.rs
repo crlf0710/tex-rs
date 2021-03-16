@@ -338,7 +338,6 @@ macro_rules! tracing_macros {
     };
 }
 // @d tracing_stats==int_par(tracing_stats_code)
-#[cfg(feature = "statistics")]
 macro_rules! tracing_stats {
     ($globals:expr) => {
         int_par!($globals, crate::section_0236::tracing_stats_code)

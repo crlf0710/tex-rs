@@ -1176,6 +1176,7 @@ pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
         } else {
             let mut path = path.trim_end_matches(' ');
             path = path.trim_start_matches("TeXfonts:");
+            path = path.trim_start_matches("TeXformats:");
             let file = match std::fs::File::open(path) {
                 Ok(f) => f,
                 Err(e) => {

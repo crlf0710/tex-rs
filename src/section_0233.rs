@@ -1,5 +1,6 @@
 //! ` `
 // @<Show equivalent |n|, in region 4@>=
+#[cfg(feature = "statistics")]
 macro_rules! Show_equivalent_n__in_region_4 {
     ($globals:expr, $n:expr) => {{
         // if n=par_shape_loc then

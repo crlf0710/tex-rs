@@ -3,6 +3,7 @@
 //! up |str_pool| memory when a non-{\bf stat} version of \TeX\ is being used.
 //
 // @<Output statistics...@>=
+#[cfg(feature = "statistics")]
 macro_rules! Output_statistics_about_this_job {
     ($globals:expr) => {{
         // if log_opened then

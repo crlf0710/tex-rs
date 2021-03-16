@@ -1,5 +1,6 @@
 //! ` `
 // @<Show equivalent |n|, in region 3@>=
+#[cfg(feature = "statistics")]
 macro_rules! Show_equivalent_n__in_region_3 {
     ($globals:expr, $n:expr) => {{
         // if n<skip_base then
