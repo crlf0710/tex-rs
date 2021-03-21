@@ -31,12 +31,16 @@ macro_rules! Dump_the_string_pool {
         for k in 0..=$globals.str_ptr.get() {
             dump_int!($globals, $globals.str_start[k].get() as _);
         }
-        // k:=0;
-        // while k+4<pool_ptr do
-        for k in (0..$globals.pool_ptr.get()).step_by(4) {
-            // begin dump_four_ASCII; k:=k+4;
-            dump_four_ASCII!($globals, k);
-            // end;
+        {
+            // k:=0;
+            let mut k = 0;
+            // while k+4<pool_ptr do
+            while k + 4 < $globals.pool_ptr.get() {
+                // begin dump_four_ASCII; k:=k+4;
+                dump_four_ASCII!($globals, k);
+                k += 4;
+                // end;
+            }
         }
         // k:=pool_ptr-4; dump_four_ASCII;
         let k = $globals.pool_ptr.get() - 4;

@@ -730,10 +730,10 @@ pub(crate) enum LineBufferState<T> {
 pub(crate) enum BlockBufferState<T> {
     UnknownState,
     AfterReadBlock {
-        bytes_buffer: Box<[u8]>,
+        bytes_block_buffer: Box<[u8]>,
         bytes_avail_length: usize,
         bytes_position: usize,
-        bytes_caret: Option<T>,
+        bytes_buffer: Option<T>,
     },
     Eof,
 }
@@ -741,7 +741,7 @@ pub(crate) enum BlockBufferState<T> {
 pub(crate) enum FileState<T> {
     Undefined,
     GenerationMode {
-        write_caret: Option<T>,
+        write_buffer: Option<T>,
         write_target: Box<dyn Write>,
     },
     LineInspectionMode {
@@ -765,10 +765,10 @@ impl<T> FileState<T> {
     fn discard_buffer_variable_value_and_get_write_target(&mut self) -> &mut dyn Write {
         match self {
             FileState::GenerationMode {
-                write_caret,
+                write_buffer,
                 write_target,
             } => {
-                *write_caret = None;
+                *write_buffer = None;
                 write_target.as_mut()
             }
             _ => {
@@ -824,24 +824,24 @@ impl<T> FileState<T> {
                 if matches!(read_block_buffer, BlockBufferState::UnknownState) {
                     let dest_size = ((IDEAL_BUFSIZE / size_of_t) + 1) * size_of_t;
                     *read_block_buffer = BlockBufferState::AfterReadBlock {
-                        bytes_buffer: vec![0u8; dest_size].into_boxed_slice(),
+                        bytes_block_buffer: vec![0u8; dest_size].into_boxed_slice(),
                         bytes_avail_length: dest_size,
                         bytes_position: dest_size - size_of_t,
-                        bytes_caret: None,
+                        bytes_buffer: None,
                     }
                 }
                 match read_block_buffer {
                     BlockBufferState::AfterReadBlock {
-                        bytes_buffer,
+                        bytes_block_buffer,
                         bytes_avail_length,
                         bytes_position,
-                        bytes_caret,
+                        bytes_buffer,
                     } => {
                         let bytes_position_end = *bytes_position + size_of_t;
                         let mut remaining_range = bytes_position_end..*bytes_avail_length;
                         if remaining_range.start > 0 {
                             if remaining_range.len() > 0 {
-                                bytes_buffer.copy_within(remaining_range.clone(), 0);
+                                bytes_block_buffer.copy_within(remaining_range.clone(), 0);
                                 remaining_range = 0..remaining_range.len();
                             } else {
                                 remaining_range = 0..0;
@@ -849,11 +849,11 @@ impl<T> FileState<T> {
                         }
                         *bytes_avail_length = remaining_range.end;
                         *bytes_position = 0;
-                        *bytes_caret = None;
+                        *bytes_buffer = None;
                         while *bytes_avail_length < size_of_t {
-                            let fillable_range = *bytes_avail_length..bytes_buffer.len();
+                            let fillable_range = *bytes_avail_length..bytes_block_buffer.len();
                             let newly_read_len = read_target
-                                .read(&mut bytes_buffer[fillable_range])
+                                .read(&mut bytes_block_buffer[fillable_range])
                                 .expect("read block failure");
                             if newly_read_len == 0 {
                                 *read_block_buffer = BlockBufferState::Eof;
@@ -1087,17 +1087,17 @@ pub(crate) fn rewrite<F: PascalFile, P: Into<String>>(file: &mut F, path: P, opt
     };
     *file.file_state_mut() = FileState::GenerationMode {
         write_target: new_write_target,
-        write_caret: None,
+        write_buffer: None,
     };
 }
 
 pub(crate) fn buffer_variable_assign<F: PascalFile>(file: &mut F, value: F::Unit) {
     match file.file_state_mut() {
         FileState::GenerationMode {
-            write_caret,
+            write_buffer,
             ..
         } => {
-            *write_caret = Some(value);
+            *write_buffer = Some(value);
         }
         _ => {
             panic!("file not in generation mode!");
@@ -1109,9 +1109,9 @@ pub(crate) fn put<F: PascalFile>(file: &mut F) {
     match file.file_state_mut() {
         FileState::GenerationMode {
             write_target,
-            write_caret
+            write_buffer
         } => {
-            let caret_value = write_caret
+            let caret_value = write_buffer
                 .take()
                 .expect("file buffer variable value is undefined!");
             F::convert_unit_to_blob(caret_value, &mut |data| {
@@ -1239,7 +1239,7 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                 BlockBufferState::AfterReadBlock {
                     bytes_avail_length,
                     bytes_position,
-                    bytes_caret,
+                    bytes_buffer,
                     ..
                 } => {
                     let size_of_t = core::mem::size_of::<F::Unit>();
@@ -1250,7 +1250,7 @@ pub(crate) fn get<F: PascalFile>(file: &mut F) {
                         file.file_state_mut().refill::<F>();
                         return;
                     }
-                    *bytes_caret = None;
+                    *bytes_buffer = None;
                     *bytes_position = bytes_position_end;
                 }
             },
@@ -1297,19 +1297,19 @@ where
                     continue;
                 }
                 BlockBufferState::AfterReadBlock {
-                    bytes_caret,
+                    bytes_block_buffer,
                     bytes_buffer,
                     bytes_position,
                     ..
-                } => match bytes_caret {
+                } => match bytes_buffer {
                     None => {
                         let size_of_t = core::mem::size_of::<F::Unit>();
                         assert!(size_of_t > 0);
                         let bytes_position_end = *bytes_position + size_of_t;
                         let v = F::convert_blob_to_unit(
-                            &bytes_buffer[*bytes_position..bytes_position_end],
+                            &bytes_block_buffer[*bytes_position..bytes_position_end],
                         );
-                        *bytes_caret = Some(v.clone());
+                        *bytes_buffer = Some(v.clone());
                         return v;
                     }
                     Some(v) => {

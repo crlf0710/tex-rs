@@ -5,7 +5,7 @@
 macro_rules! Dump_constants_for_consistency_check {
     ($globals:expr) => {{
         // dump_int(@$);@/
-        dump_int!($globals, *CHECKSUM as _);
+        dump_int!($globals, string_pool_checksum() as _);
         // dump_int(mem_bot);@/
         dump_int!($globals, mem_bot as _);
         // dump_int(mem_top);@/
@@ -16,7 +16,7 @@ macro_rules! Dump_constants_for_consistency_check {
         dump_int!($globals, hash_prime as _);
         // dump_int(hyph_size)
         dump_int!($globals, hyph_size as _);
-        use crate::string_pool::CHECKSUM;
+        use crate::string_pool::string_pool_checksum;
         use crate::section_0012::mem_bot;
         use crate::section_0012::mem_top;
         use crate::section_0247::eqtb_size;

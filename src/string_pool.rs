@@ -34,7 +34,11 @@ pub(crate) fn string_pool_index(val: &'static str) -> usize {
 
 static POOL_FILE: Lazy<Vec<u8>> = Lazy::new(generate_initial_memory_pool_file);
 
-pub(crate) static CHECKSUM: Lazy<usize> = Lazy::new(generate_checksum);
+static CHECKSUM: Lazy<usize> = Lazy::new(generate_checksum);
+
+pub(crate) fn string_pool_checksum() -> usize {
+    *CHECKSUM
+}
 
 pub(crate) fn generate_initial_memory_pool_file() -> Vec<u8> {
     let mut cursor = io::Cursor::new(vec![]);
