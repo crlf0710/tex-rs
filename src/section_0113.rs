@@ -40,6 +40,15 @@ pub(crate) struct two_halves {
     lh_or_b01: halfword_or_b01,
 }
 
+impl two_halves {
+    pub(crate) const fn new_with_halves(lh: halfword, rh: halfword) -> Self {
+        two_halves {
+            lh_or_b01: halfword_or_b01 { lh },
+            rh,
+        }
+    }
+}
+
 #[derive(Copy, Clone)]
 union halfword_or_b01 {
     lh: halfword,
@@ -56,6 +65,19 @@ union halfword_or_b01 {
 #[derive(Copy, Clone, Debug)]
 pub(crate) struct four_quarters {
     b: (quarterword, quarterword, quarterword, quarterword),
+}
+
+impl four_quarters {
+    pub(crate) const fn new_with_quarters(
+        b0: quarterword,
+        b1: quarterword,
+        b2: quarterword,
+        b3: quarterword,
+    ) -> Self {
+        four_quarters {
+            b: (b0, b1, b2, b3),
+        }
+    }
 }
 
 impl Default for four_quarters {

@@ -23,7 +23,7 @@ pub(crate) fn init_math(globals: &mut TeXGlobals) -> TeXResult<()> {
     // else  begin back_input; @<Go into ordinary math mode@>;
     else {
         back_input(globals);
-        todo!("go into ordinary math mode");
+        Go_into_ordinary_math_mode!(globals);
         // end;
     }
     // end;

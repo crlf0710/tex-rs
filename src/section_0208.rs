@@ -6,6 +6,8 @@
 /// character specified numerically ( `\char` )
 pub(crate) const char_num: quarterword = 16;
 // @d math_char_num=17 {explicit math code ( \.{\\mathchar} )}
+/// explicit math code ( `\mathchar` )
+pub(crate) const math_char_num: quarterword = 17;
 // @d mark=18 {mark definition ( \.{\\mark} )}
 // @d xray=19 {peek inside of \TeX\ ( \.{\\show}, \.{\\showbox}, etc.~)}
 /// peek inside of `TeX` ( `\show`, `\showbox`, etc. )
@@ -84,18 +86,36 @@ pub(crate) const start_par: quarterword = 43;
 /// attach accent in text ( `\accent` )
 pub(crate) const accent: quarterword = 45;
 // @d math_accent=46 {attach accent in math ( \.{\\mathaccent} )}
+/// attach accent in math ( `\mathaccent` )
+pub(crate) const math_accent: quarterword = 46;
 // @d discretionary=47 {discretionary texts ( \.{\\-}, \.{\\discretionary} )}
 /// discretionary texts ( `\-`, `\discretionary` )
 pub(crate) const discretionary: quarterword = 47;
 // @d eq_no=48 {equation number ( \.{\\eqno}, \.{\\leqno} )}
 // @d left_right=49 {variable delimiter ( \.{\\left}, \.{\\right} )}
+/// variable delimiter ( `\left`, `\right` )
+pub(crate) const left_right: quarterword = 49;
 // @d math_comp=50 {component of formula ( \.{\\mathbin}, etc.~)}
+/// component of formula ( `\mathbin`, etc. )
+pub(crate) const math_comp: quarterword = 50;
 // @d limit_switch=51 {diddle limit conventions ( \.{\\displaylimits}, etc.~)}
+/// diddle limit conventions ( `\displaylimits`, etc. )
+pub(crate) const limit_switch: quarterword = 51;
 // @d above=52 {generalized fraction ( \.{\\above}, \.{\\atop}, etc.~)}
+/// generalized fraction ( `\above`, `\atop`, etc. )
+pub(crate) const above: quarterword = 52;
 // @d math_style=53 {style specification ( \.{\\displaystyle}, etc.~)}
+/// style specification ( `\displaystyle`, etc. )
+pub(crate) const math_style: quarterword = 53;
 // @d math_choice=54 {choice specification ( \.{\\mathchoice} )}
+/// choice specification ( `\mathchoice` )
+pub(crate) const math_choice: quarterword = 54;
 // @d non_script=55 {conditional math glue ( \.{\\nonscript} )}
+/// conditional math glue ( `\nonscript` )
+pub(crate) const non_script: quarterword = 55;
 // @d vcenter=56 {vertically center a vbox ( \.{\\vcenter} )}
+/// vertically center a vbox ( `\vcenter` )
+pub(crate) const vcenter: quarterword = 56;
 // @d case_shift=57 {force specific case ( \.{\\lowercase}, \.{\\uppercase}~)}
 /// force specific case ( `\lowercase`, `\uppercase` )
 pub(crate) const case_shift: quarterword = 57;
@@ -124,6 +144,8 @@ pub(crate) const ex_space: quarterword = 64;
 /// suppress boundary ligatures ( `\noboundary` )
 pub(crate) const no_boundary: quarterword = 65;
 // @d radical=66 {square root and similar signs ( \.{\\radical} )}
+/// square root and similar signs ( `\radical` )
+pub(crate) const radical: quarterword = 66;
 // @d end_cs_name=67 {end control sequence ( \.{\\endcsname} )}
 /// end control sequence ( `\endcsname` )
 pub(crate) const end_cs_name: quarterword = 67;

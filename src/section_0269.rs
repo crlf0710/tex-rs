@@ -40,6 +40,8 @@ pub(crate) const output_group: quarterword = 8;
 /// code for `\insert{...}`, `\vadjust{...}`
 pub(crate) const insert_group: quarterword = 11;
 // @d vcenter_group=12 {code for `\.{\\vcenter}\grp'}
+/// code for `\vcenter{...}`
+pub(crate) const vcenter_group: quarterword = 12;
 // @d math_choice_group=13 {code for `\.{\\mathchoice}\grp\grp\grp\grp'}
 // @d semi_simple_group=14 {code for `\.{\\begingroup...\\endgroup}'}
 /// code for `\begingroup...\endgroup`

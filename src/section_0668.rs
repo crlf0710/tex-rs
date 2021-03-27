@@ -6,7 +6,16 @@
 //! point is simply moved down until the limiting depth is attained.
 //
 // @d vpack(#)==vpackage(#,max_dimen) {special case of unconstrained depth}
-//
+/// special case of unconstrained depth
+pub(crate) fn vpack(
+    globals: &mut TeXGlobals,
+    p: pointer,
+    h: scaled,
+    m: small_number,
+) -> TeXResult<pointer> {
+    vpackage(globals, p, h, m, scaled::new_from_inner(max_dimen))
+}
+
 // @p function vpackage(@!p:pointer;@!h:scaled;@!m:small_number;@!l:scaled):
 //   pointer;
 #[allow(unused_variables, unused_assignments)]
@@ -42,8 +51,9 @@ pub(crate) fn vpackage(
     // while p<>null do @<Examine node |p| in the vlist, taking account of its effect
     //   on the dimensions of the new box; then advance |p| to the next node@>;
     while p != null {
-        Examine_node_p_in_the_vlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__then_advance_p_to_the_next_node!
-            (globals, p, w, d, x);
+        Examine_node_p_in_the_vlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__then_advance_p_to_the_next_node!(
+            globals, p, w, d, x
+        );
     }
     // width(r):=w;
     width!(globals, r) = w;
@@ -87,3 +97,4 @@ use crate::section_0115::pointer;
 use crate::section_0125::get_node;
 use crate::section_0135::box_node_size;
 use crate::section_0137::vlist_node;
+use crate::section_0421::max_dimen;

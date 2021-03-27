@@ -118,6 +118,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0265(globals: &m
     primitive(globals, strpool_str!("valign"), valign, 0);
     // @!@:valign_}{\.{\\valign} primitive@>
     // primitive("vcenter",vcenter,0);@/
+    primitive(globals, strpool_str!("vcenter"), vcenter, 0);
     // @!@:vcenter_}{\.{\\vcenter} primitive@>
     // primitive("vrule",vrule,0);@/
     primitive(globals, strpool_str!("vrule"), vrule, 0);

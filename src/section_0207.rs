@@ -84,6 +84,8 @@ pub(crate) const stop: quarterword = 14;
 /// characters that shouldn't appear ( `^^?` )
 pub(crate) const invalid_char: quarterword = 15;
 // @d delim_num=15 {specify delimiter numerically ( \.{\\delimiter} )}
+/// specify delimiter numerically ( `\delimiter` )
+pub(crate) const delim_num: quarterword = 15;
 // @d max_char_code=15 {largest catcode for individual characters}
 /// largest catcode for individual characters
 pub(crate) const max_char_code: quarterword = 15;

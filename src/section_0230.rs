@@ -96,6 +96,11 @@ macro_rules! every_par {
     };
 }
 // @d every_math==equiv(every_math_loc)
+macro_rules! every_math {
+    ($globals:expr) => {
+        equiv!($globals, crate::section_0230::every_math_loc)
+    };
+}
 // @d every_display==equiv(every_display_loc)
 // @d every_hbox==equiv(every_hbox_loc)
 macro_rules! every_hbox {
