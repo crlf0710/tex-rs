@@ -19,7 +19,7 @@ pub(crate) const eject_penalty: integer = -inf_penalty;
 macro_rules! penalty {
     ($globals:expr, $ptr:expr) => {
         $globals.mem[$ptr + 1][crate::section_0113::MEMORY_WORD_INT]
-    }
+    };
 }
 
 use crate::pascal::integer;

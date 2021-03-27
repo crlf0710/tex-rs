@@ -28,5 +28,5 @@ pub(crate) fn print_roman_int(globals: &mut TeXGlobals, n: integer) {
     // exit:end;
 }
 
-use crate::section_0004::TeXGlobals;
 use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;

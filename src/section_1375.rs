@@ -30,13 +30,13 @@ macro_rules! Implement_immediate {
             back_input($globals);
         }
         // end
-        use crate::section_0115::pointer;
         use crate::section_0115::null;
+        use crate::section_0115::pointer;
         use crate::section_0202::flush_node_list;
         use crate::section_0208::extension;
         use crate::section_0325::back_input;
         use crate::section_0380::get_x_token;
         use crate::section_1341::close_node;
         use crate::section_1373::out_what;
-    }}
+    }};
 }

@@ -11,11 +11,17 @@ pub(crate) fn print_the_digs(globals: &mut TeXGlobals, mut k: eight_bits) {
         decr!(k);
         // if dig[k]<10 then print_char("0"+dig[k])
         if globals.dig[k as usize] < 10 {
-            print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'0' + globals.dig[k as usize].get()));
+            print_char(
+                make_globals_io_string_log_view!(globals),
+                ASCII_code_literal!(b'0' + globals.dig[k as usize].get()),
+            );
         }
         // else print_char("A"-10+dig[k]);
         else {
-            print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'A' - 10 + globals.dig[k as usize].get()));
+            print_char(
+                make_globals_io_string_log_view!(globals),
+                ASCII_code_literal!(b'A' - 10 + globals.dig[k as usize].get()),
+            );
         }
         // end;
     }

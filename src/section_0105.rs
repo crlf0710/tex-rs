@@ -23,8 +23,9 @@ macro_rules! mult_integers {
             crate::section_0101::scaled::new_from_inner($y),
             crate::section_0101::scaled::zero(),
             crate::section_0101::scaled::new_from_inner(0o17777777777),
-        ).inner()
-    }
+        )
+        .inner()
+    };
 }
 
 // @p function mult_and_add(@!n:integer;@!x,@!y,@!max_answer:scaled):scaled;

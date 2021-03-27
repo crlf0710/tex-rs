@@ -23,7 +23,7 @@ pub(crate) enum kern_node_subtype {
     /// `subtype` of kern nodes from accents
     acc_kern = 2,
     /// `subtype` for for math glue
-    mu_glue = 99, 
+    mu_glue = 99,
 }
 
 use crate::section_0113::quarterword;

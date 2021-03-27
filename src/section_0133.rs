@@ -15,12 +15,12 @@
 macro_rules! r#type {
     ($globals:expr, $ptr:expr) => {
         $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B0]
-    }
+    };
 }
 // @d subtype(#) == mem[#].hh.b1 {secondary identification in some cases}
 /// secondary identification in some cases
 macro_rules! subtype {
     ($globals:expr, $ptr:expr) => {
         $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B1]
-    }
+    };
 }

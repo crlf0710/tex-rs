@@ -10,7 +10,7 @@
 pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
     // var @!q,@!r:pointer; {list traversers}
     /// list traversers
-    let (mut q, mut r) : (pointer, pointer);
+    let (mut q, mut r): (pointer, pointer);
     // begin if p<>null then
     if p != null {
         // begin r:=p;
@@ -37,5 +37,5 @@ pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;

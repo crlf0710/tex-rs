@@ -14,7 +14,7 @@
 macro_rules! qi {
     ($val:expr) => {
         $val + crate::section_0110::min_quarterword
-    }
+    };
 }
 // @d qo(#)==#-min_quarterword
 //   {to take an |eight_bits| item out of a quarterword}

@@ -24,7 +24,7 @@ pub(crate) const inf_bad: halfword = 10000;
 /// compute badness, given `t>=0`
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
-pub(crate) fn badness(globals: &mut TeXGlobals, t: scaled, s:scaled) -> halfword {
+pub(crate) fn badness(globals: &mut TeXGlobals, t: scaled, s: scaled) -> halfword {
     // var r:integer; {approximation to $\alpha t/s$, where $\alpha^3\approx
     //   100\cdot2^{18}$}
     // begin if t=0 then badness:=0

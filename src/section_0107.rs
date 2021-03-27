@@ -12,7 +12,11 @@ pub(crate) fn xn_over_d(globals: &mut TeXGlobals, mut x: scaled, n: integer, d: 
     let positive: boolean;
     // @!t,@!u,@!v:nonnegative_integer; {intermediate quantities}
     /// intermediate quantities
-    let (t, mut u, v): (nonnegative_integer, nonnegative_integer, nonnegative_integer);
+    let (t, mut u, v): (
+        nonnegative_integer,
+        nonnegative_integer,
+        nonnegative_integer,
+    );
     // begin if x>=0 then positive:=true
     if x >= scaled::zero() {
         positive = true;
@@ -55,8 +59,8 @@ pub(crate) fn xn_over_d(globals: &mut TeXGlobals, mut x: scaled, n: integer, d: 
     scaled::new_from_inner(xn_over_d)
 }
 
-use crate::pascal::integer;
 use crate::pascal::boolean;
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0101::nonnegative_integer;
 use crate::section_0101::scaled;

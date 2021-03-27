@@ -10,7 +10,7 @@ pub(crate) fn x_over_n(globals: &mut TeXGlobals, mut x: scaled, mut n: integer) 
     // begin negative:=false;
     negative = false;
     // if n=0 then
-    if n == 0{
+    if n == 0 {
         // begin arith_error:=true; x_over_n:=0; remainder:=x;
         globals.arith_error = true;
         x_over_n = scaled::zero();
@@ -49,7 +49,7 @@ pub(crate) fn x_over_n(globals: &mut TeXGlobals, mut x: scaled, mut n: integer) 
     return x_over_n;
 }
 
-use crate::pascal::integer;
 use crate::pascal::boolean;
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0101::scaled;

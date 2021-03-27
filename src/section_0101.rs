@@ -84,7 +84,7 @@ use crate::section_0113::memory_word;
 use crate::section_0113::MEMORY_WORD_INT;
 use core::ops::{Index, IndexMut};
 use ref_cast::RefCast;
-use typenum::{P1, P2147483648, Z0, U0, U1, U63};
+use typenum::{P1, P2147483648, U0, U1, U63, Z0};
 
 pub(crate) struct MEMORY_WORD_SC;
 

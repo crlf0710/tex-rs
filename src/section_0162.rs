@@ -79,8 +79,8 @@ pub(crate) const hi_mem_stat_min: pointer = mem_top - 13;
 /// the number of one-word nodes always present
 pub(crate) const hi_mem_stat_usage: quarterword = 14;
 
-use crate::section_0012::mem_top;
 use crate::section_0012::mem_bot;
+use crate::section_0012::mem_top;
 use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
 use crate::section_0150::glue_spec_size;

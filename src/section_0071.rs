@@ -40,11 +40,11 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @.End of file on the terminal@>
     // term_offset:=0; {the user's line ended with \<\rm return>}
     /// the user's line ended with \<\rm return>
-    const _ : () = ();
+    const _: () = ();
     globals.term_offset = 0.into();
     // decr(selector); {prepare to echo the input}
     /// prepare to echo the input
-    const _ : () = ();
+    const _: () = ();
     decr!(globals.selector);
     // if last<>first then for k:=first to last-1 do print(buffer[k]);
     if globals.last != globals.first {
@@ -54,7 +54,7 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // print_ln; incr(selector); {restore previous status}
     /// restore previous status
-    const _ : () = ();
+    const _: () = ();
     print_ln(make_globals_io_string_log_view!(globals));
     incr!(globals.selector);
     // end;
@@ -62,8 +62,8 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0031::input_ln;
 use crate::section_0034::update_terminal;
 use crate::section_0057::print_ln;

@@ -21,6 +21,13 @@ macro_rules! undump_int {
         use crate::pascal::get;
         use crate::pascal::buffer_variable;
         use crate::section_0113::MEMORY_WORD_INT;
+    }};
+    ($globals:expr, $v:expr, $value_ctor:expr) => {{
+        get(&mut $globals.fmt_file);
+        $v = ($value_ctor)(buffer_variable(&mut $globals.fmt_file)[MEMORY_WORD_INT] as _);
+        use crate::pascal::get;
+        use crate::pascal::buffer_variable;
+        use crate::section_0113::MEMORY_WORD_INT;
     }}
 }
 // @d undump_hh(#)==begin get(fmt_file); #:=fmt_file^.hh;@+end

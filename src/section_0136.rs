@@ -31,12 +31,12 @@ pub(crate) fn new_null_box(globals: &mut TeXGlobals) -> TeXResult<pointer> {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
-use crate::section_0110::min_quarterword;
 use crate::section_0101::scaled;
-use crate::section_0115::pointer;
+use crate::section_0110::min_quarterword;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0125::get_node;
 use crate::section_0135::box_node_size;
-use crate::section_0135::hlist_node;
 use crate::section_0135::glue_sign;
+use crate::section_0135::hlist_node;
 use crate::section_0150::glue_ord;

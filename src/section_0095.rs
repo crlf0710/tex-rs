@@ -19,10 +19,16 @@ pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) -> TeXResult<()
         // begin print_err("This can't happen ("); print(s); print_char(")");
         print_err!(globals, strpool_str!("This can't happen ("));
         print(globals, s.get() as _);
-        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b')'));
+        print_char(
+            make_globals_io_string_log_view!(globals),
+            ASCII_code_literal!(b')'),
+        );
         // @.This can't happen@>
         // help1("I'm broken. Please show this to someone who can fix can fix");
-        help1!(globals, strpool_str!("I'm broken. Please show this to someone who can fix can fix"));
+        help1!(
+            globals,
+            strpool_str!("I'm broken. Please show this to someone who can fix can fix")
+        );
         // end
     }
     // else  begin print_err("I can't go on meeting you like this");
@@ -31,8 +37,11 @@ pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) -> TeXResult<()
         // @.I can't go on...@>
         // help2("One of your faux pas seems to have wounded me deeply...")@/
         //   ("in fact, I'm barely conscious. Please fix it and try again.");
-        help2!(globals, strpool_str!("One of your faux pas seems to have wounded me deeply..."),
-            strpool_str!("in fact, I'm barely conscious. Please fix it and try again."));
+        help2!(
+            globals,
+            strpool_str!("One of your faux pas seems to have wounded me deeply..."),
+            strpool_str!("in fact, I'm barely conscious. Please fix it and try again.")
+        );
         // end;
     }
     // succumb;

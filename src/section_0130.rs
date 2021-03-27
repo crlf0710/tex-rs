@@ -15,17 +15,17 @@ pub(crate) fn free_node(globals: &mut TeXGlobals, p: pointer, s: halfword) {
     link!(globals, p) = empty_flag;
     // q:=llink(rover); llink(p):=q; rlink(p):=rover; {set both links}
     /// set both links
-    const _ : () = ();
+    const _: () = ();
     q = llink!(globals, globals.rover);
     llink!(globals, p) = q;
     rlink!(globals, p) = globals.rover;
     // llink(rover):=p; rlink(q):=p; {insert |p| into the ring}
     /// insert `p` into the ring
-    const _ : () = ();
+    const _: () = ();
     llink!(globals, globals.rover) = p;
     rlink!(globals, q) = p;
     // @!stat var_used:=var_used-s;@+tats@;{maintain statistics}
-    region_stat!{
+    region_stat! {
         /// maintain statistics
         const _ : () = ();
         globals.var_used -= s as integer;

@@ -22,21 +22,21 @@ pub(crate) const empty_flag: halfword = max_halfword;
 macro_rules! is_empty {
     ($globals:expr, $ptr:expr) => {
         link!($globals, $ptr) == crate::section_0124::empty_flag
-    }
+    };
 }
 // @d node_size == info {the size field in empty variable-size nodes}
 /// the size field in empty variable-size nodes
 macro_rules! node_size {
     ($globals:expr, $ptr:expr) => {
         info_inner!($globals, $ptr)
-    }
+    };
 }
 // @d llink(#) == info(#+1) {left link in doubly-linked list of empty nodes}
 /// left link in doubly-linked list of empty nodes
 macro_rules! llink {
     ($globals:expr, $ptr:expr) => {
         info_inner!($globals, $ptr + 1)
-    }
+    };
 }
 
 // @d rlink(#) == link(#+1) {right link in doubly-linked list of empty nodes}
@@ -44,7 +44,7 @@ macro_rules! llink {
 macro_rules! rlink {
     ($globals:expr, $ptr:expr) => {
         link!($globals, $ptr + 1)
-    }
+    };
 }
 
 // @<Glob...@>=

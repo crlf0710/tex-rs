@@ -52,14 +52,14 @@ pub(crate) enum glue_node_subtype {
 macro_rules! glue_ptr {
     ($globals:expr, $ptr:expr) => {
         llink!($globals, $ptr)
-    }
+    };
 }
 // @d leader_ptr==rlink {pointer to box or rule node for leaders}
 /// pointer to box or rule node for leaders
 macro_rules! leader_ptr {
     ($globals:expr, $ptr:expr) => {
         rlink!($globals, $ptr)
-    }
+    };
 }
 
 use crate::section_0113::quarterword;

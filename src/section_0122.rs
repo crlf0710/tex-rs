@@ -8,7 +8,7 @@ macro_rules! fast_get_avail {
     ($globals:expr, $val:expr) => {{
         // begin #:=avail; {avoid |get_avail| if possible, to save time}
         /// avoid `get_avail` if possible, to save time
-        const _ : () = ();
+        const _: () = ();
         $val = $globals.avail;
         // if #=null then #:=get_avail
         if $val == null {
@@ -27,5 +27,5 @@ macro_rules! fast_get_avail {
         // end
         use crate::section_0115::null;
         use crate::section_0120::get_avail;
-    }}
+    }};
 }

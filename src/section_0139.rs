@@ -12,7 +12,7 @@ pub(crate) fn new_rule(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     r#type!(globals, p) = rule_node;
     // subtype(p):=0; {the |subtype| is not used}
     /// the `subtype` is not used
-    const _ : () = ();
+    const _: () = ();
     subtype!(globals, p) = 0;
     // width(p):=null_flag; depth(p):=null_flag; height(p):=null_flag;
     width!(globals, p) = null_flag;
@@ -28,5 +28,5 @@ use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
 use crate::section_0138::null_flag;
-use crate::section_0138::rule_node_size;
 use crate::section_0138::rule_node;
+use crate::section_0138::rule_node_size;

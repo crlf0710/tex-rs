@@ -18,7 +18,10 @@ pub(crate) fn print_int(globals: &mut TeXGlobals, mut n: integer) {
     // if n<0 then
     if n < 0 {
         // begin print_char("-");
-        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'-'));
+        print_char(
+            make_globals_io_string_log_view!(globals),
+            ASCII_code_literal!(b'-'),
+        );
         // if n>-100000000 then negate(n)
         if n > -100000000 {
             negate!(n);

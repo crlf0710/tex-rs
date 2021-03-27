@@ -13,6 +13,17 @@ macro_rules! too_small {
         // goto bad_fmt;
         goto_forward_label!($lbl_bad_fmt);
         // end
+        use crate::section_0004::TeXGlobalsIoView;
+        use crate::section_0034::wake_up_terminal;
+        use crate::section_0056::wterm_ln;
+    }}
+}
+
+macro_rules! Undump_the_unicode_support_data {
+    ($globals:expr, $lbl_bad_fmt:lifetime) => {{
+        if !crate::unicode_support::undump_the_unicode_support_data($globals) {
+            goto_forward_label!($lbl_bad_fmt);
+        }
     }}
 }
 
@@ -40,6 +51,8 @@ pub(crate) fn load_fmt_file(globals: &mut TeXGlobals) -> boolean {
         Undump_the_font_information!(globals, 'bad_fmt);
         // @<Undump the hyphenation tables@>;
         Undump_the_hyphenation_tables!(globals, 'bad_fmt);
+        #[cfg(feature = "unicode_support")]
+        Undump_the_unicode_support_data!(globals, 'bad_fmt);
         // @<Undump a couple more things and the closing check word@>;
         Undump_a_couple_more_things_and_the_closing_check_word!(globals, 'bad_fmt);
         // load_fmt_file:=true; return; {it worked!}

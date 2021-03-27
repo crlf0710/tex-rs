@@ -1,4 +1,11 @@
 //! ` `
+
+macro_rules! Dump_the_unicode_support_data {
+    ($globals:expr) => {{
+        crate::unicode_support::dump_the_unicode_support_data($globals);
+    }}
+}
+
 // @<Declare act...@>=
 // @!init procedure store_fmt_file;
 #[cfg(feature = "initex")]
@@ -26,6 +33,8 @@ pub(crate) fn store_fmt_file(globals: &mut TeXGlobals) -> TeXResult<()> {
     Dump_the_font_information!(globals);
     // @<Dump the hyphenation tables@>;
     Dump_the_hyphenation_tables!(globals);
+    #[cfg(feature = "unicode_support")]
+    Dump_the_unicode_support_data!(globals);
     // @<Dump a couple more things and the closing check word@>;
     Dump_a_couple_more_things_and_the_closing_check_word!(globals);
     // @<Close the format file@>;

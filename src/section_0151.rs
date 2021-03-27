@@ -24,8 +24,7 @@ pub(crate) fn new_spec(globals: &mut TeXGlobals, p: pointer) -> TeXResult<pointe
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0125::get_node;
 use crate::section_0150::glue_spec_size;
-

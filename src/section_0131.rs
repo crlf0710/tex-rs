@@ -16,7 +16,7 @@ pub(crate) fn sort_avail(globals: &mut TeXGlobals) -> TeXResult<()> {
     let old_rover: pointer;
     // begin p:=get_node(@'10000000000); {merge adjacent free areas}
     /// merge adjacent free areas
-    const _ : () = ();
+    const _: () = ();
     let _ = get_node(globals, 0o10000000000)?;
     // p:=rlink(rover); rlink(rover):=max_halfword; old_rover:=rover;
     p = rlink!(globals, globals.rover);

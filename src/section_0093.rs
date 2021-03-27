@@ -49,7 +49,7 @@ use crate::section_0073::batch_mode;
 use crate::section_0073::error_stop_mode;
 use crate::section_0073::scroll_mode;
 use crate::section_0076::history_kind;
-use crate::section_0081::TeXResult;
 use crate::section_0081::jump_out;
+use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0092::normalize_selector;

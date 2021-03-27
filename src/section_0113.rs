@@ -61,7 +61,7 @@ pub(crate) struct four_quarters {
 impl Default for four_quarters {
     fn default() -> Self {
         unsafe { core::mem::zeroed() }
-    }  
+    }
 }
 
 // @!memory_word = record@;@/
@@ -139,7 +139,6 @@ impl IndexMut<MEMORY_WORD_HH> for memory_word {
         unsafe { &mut self.hh }
     }
 }
-
 
 pub(crate) struct MEMORY_WORD_HH_RH;
 
@@ -296,7 +295,6 @@ impl IndexMut<FOUR_QUARTERS_B0> for four_quarters {
     }
 }
 
-
 pub(crate) struct FOUR_QUARTERS_B1;
 
 impl Index<FOUR_QUARTERS_B1> for four_quarters {
@@ -347,12 +345,7 @@ impl FromBlob for memory_word {
         use core::mem::transmute;
         assert!(data.len() == 4);
         memory_word {
-            int: i32::from_le_bytes([
-                data[0],
-                data[1],
-                data[2],
-                data[3],
-            ])
+            int: i32::from_le_bytes([data[0], data[1], data[2], data[3]]),
         }
     }
 }
@@ -364,6 +357,6 @@ impl IntoBlob for memory_word {
     }
 }
 
-use core::ops::{Index, IndexMut};
 use crate::pascal::FromBlob;
 use crate::pascal::IntoBlob;
+use core::ops::{Index, IndexMut};

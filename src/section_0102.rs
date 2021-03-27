@@ -24,6 +24,6 @@ pub(crate) fn round_decimals(globals: &mut TeXGlobals, mut k: small_number) -> s
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0101::scaled;
 use crate::section_0101::small_number;
 use crate::section_0101::two;
-use crate::section_0101::scaled;

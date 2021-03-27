@@ -1,10 +1,15 @@
-const unimplemented_code: quarterword = if_case_code + 1; 
+const unimplemented_code: quarterword = if_case_code + 1;
 
 #[distributed_slice(PRIM2HT)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_latex_support(
     globals: &mut TeXGlobals,
 ) {
-    primitive(globals, strpool_str!("ifcsname"), if_test, unimplemented_code as _);
+    primitive(
+        globals,
+        strpool_str!("ifcsname"),
+        if_test,
+        unimplemented_code as _,
+    );
 
     globals.error_line = 79;
     globals.half_error_line = 50;

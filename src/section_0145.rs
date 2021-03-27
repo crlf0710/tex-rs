@@ -23,21 +23,21 @@ pub(crate) const disc_node: quarterword = 7;
 macro_rules! replace_count {
     ($globals:expr, $v:expr) => {
         subtype!($globals, $v)
-    }
+    };
 }
 // @d pre_break==llink {text that precedes a discretionary break}
 /// text that precedes a discretionary break
 macro_rules! pre_break {
     ($globals:expr, $v:expr) => {
         llink!($globals, $v)
-    }
+    };
 }
 // @d post_break==rlink {text that follows a discretionary break}
 /// text that follows a discretionary break
 macro_rules! post_break {
     ($globals:expr, $v:expr) => {
         rlink!($globals, $v)
-    }
+    };
 }
 // @p function new_disc:pointer; {creates an empty |disc_node|}
 /// creates an empty `disc_node`

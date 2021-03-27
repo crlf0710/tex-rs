@@ -887,7 +887,7 @@ pub(crate) trait PascalFile {
     fn convert_line_string_to_units(input: &str, units: &mut Vec<Self::Unit>);
 
     fn convert_blob_to_unit(input: &[u8]) -> Self::Unit;
-    
+
     fn convert_unit_to_blob(data: Self::Unit, f: &mut dyn for<'a> FnMut(&'a [u8]));
 
     fn file_state(&self) -> &FileState<Self::Unit>;
@@ -1015,7 +1015,6 @@ pub(crate) trait IntoBlob {
     fn into_blob(&self) -> Self::BlobType;
 }
 
-
 impl<T: FromBlob + IntoBlob> PascalFile for file_of<T> {
     type Unit = T;
 
@@ -1093,10 +1092,7 @@ pub(crate) fn rewrite<F: PascalFile, P: Into<String>>(file: &mut F, path: P, opt
 
 pub(crate) fn buffer_variable_assign<F: PascalFile>(file: &mut F, value: F::Unit) {
     match file.file_state_mut() {
-        FileState::GenerationMode {
-            write_buffer,
-            ..
-        } => {
+        FileState::GenerationMode { write_buffer, .. } => {
             *write_buffer = Some(value);
         }
         _ => {
@@ -1109,7 +1105,7 @@ pub(crate) fn put<F: PascalFile>(file: &mut F) {
     match file.file_state_mut() {
         FileState::GenerationMode {
             write_target,
-            write_buffer
+            write_buffer,
         } => {
             let caret_value = write_buffer
                 .take()

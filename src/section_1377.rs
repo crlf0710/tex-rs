@@ -39,5 +39,5 @@ macro_rules! Implement_setlanguage {
         use crate::section_1091::norm_min;
         use crate::section_1341::language_node;
         use crate::section_1349::new_whatsit;
-    }}
+    }};
 }

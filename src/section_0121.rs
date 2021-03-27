@@ -14,5 +14,5 @@ macro_rules! free_avail {
             decr!($globals.dyn_used);
         }
         // end
-    }}
+    }};
 }
