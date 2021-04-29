@@ -11,10 +11,9 @@ pub(crate) type ASCII_code_repr = u8;
 #[cfg(feature = "unicode_support")]
 pub(crate) type ASCII_code_repr = u32;
 
-
-#[cfg_attr(not(feature = "unicode_support"), doc("eight-bit numbers"))]
-#[cfg_attr(feature = "unicode_support", doc("32-bit internal form character code, compatible with ascii"))]
 #[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
+/// When `unicode_support` feature is not enabled, these are eight-bit numbers
+/// otherwise, it is a 32-bit internal form character code, compatible with ascii
 pub struct ASCII_code(pub(crate) ASCII_code_repr);
 
 impl ASCII_code {
