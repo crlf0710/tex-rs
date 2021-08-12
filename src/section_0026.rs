@@ -18,7 +18,7 @@
 #[globals_struct_field_view(TeXGlobalsFilenameView)]
 #[globals_struct_field_view(TeXGlobalsIoStringView)]
 pub(crate) static name_of_file: name_of_file_array<crate::pascal::char> =
-    name_of_file_array::from_copied(crate::pascal::char::new(b' ' as _));
+    name_of_file_array::from_copied(crate::pascal::char::from_char(' ').unwrap());
 
 type name_of_file_array_LENGTH_TYPENUM = typenum::op!(file_name_size_TYPENUM - U1 + U1);
 
@@ -66,7 +66,7 @@ impl name_of_file_array<crate::pascal::char> {
                 val.chars().count()
             );
             for (dest, src) in self.0.iter_mut().zip(val.chars()) {
-                *dest = crate::pascal::char::new(src as _);
+                *dest = crate::pascal::char::from_char(src).unwrap();
             }
         }
         use typenum::Unsigned;

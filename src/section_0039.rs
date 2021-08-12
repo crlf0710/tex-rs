@@ -83,18 +83,18 @@ impl str_pool_array<packed_ASCII_code> {
         &self,
         str_start: &str_start_array<pool_pointer>,
         s: str_number,
-    ) -> crate::unicode_support::GenericCharIter<'_> {
+    ) -> impl Iterator<Item = crate::section_0019::text_char> + '_ {
         let slice = &self[str_start[s]..str_start[s + 1]];
         trace_expr!("slice_len = {}", slice.len());
-        crate::unicode_support::GenericCharIter::new(slice)
+        runestr::from_rune_bytes(slice).unwrap().runes()
     }
 
     pub(crate) fn slice_ascii_codes(
         &self,
         range: core::ops::Range<pool_pointer>,
-    ) -> crate::unicode_support::GenericCharIter<'_> {
+    ) -> impl Iterator<Item = crate::section_0019::text_char> + '_ {
         let slice = &self[range];
         trace_expr!("slice_len = {}", slice.len());
-        crate::unicode_support::GenericCharIter::new(slice)
+        runestr::from_rune_bytes(slice).unwrap().runes()
     }
 }

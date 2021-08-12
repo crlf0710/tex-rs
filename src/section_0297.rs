@@ -113,17 +113,34 @@ impl chr_code_type {
     }
 }
 
+#[cfg(not(feature = "unicode_support"))]
 impl From<ASCII_code> for chr_code_type {
     fn from(v: ASCII_code) -> Self {
         chr_code_type(v.0 as _)
     }
 }
 
+#[cfg(not(feature = "unicode_support"))]
 impl From<chr_code_type> for ASCII_code {
     fn from(v: chr_code_type) -> Self {
         ASCII_code(v.0 as _)
     }
 }
+
+#[cfg(feature = "unicode_support")]
+impl From<ASCII_code> for chr_code_type {
+    fn from(v: ASCII_code) -> Self {
+        chr_code_type(v.0.into_inner())
+    }
+}
+
+#[cfg(feature = "unicode_support")]
+impl From<chr_code_type> for ASCII_code {
+    fn from(v: chr_code_type) -> Self {
+        ASCII_code(runestr::rune::from_inner(v.0 as _).unwrap())
+    }
+}
+
 
 #[cfg(not(feature = "unicode_support"))]
 pub(crate) type cur_tok_repr = halfword;

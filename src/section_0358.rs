@@ -4,7 +4,7 @@
 //
 // @d no_expand_flag=257 {this characterizes a special variant of |relax|}
 /// this characterizes a special variant of `relax`
-pub(crate) const no_expand_flag: chr_code_repr = crate::pascal::char::MAX.0 as chr_code_repr + 1;
+pub(crate) const no_expand_flag: chr_code_repr = crate::pascal::CHAR_MAX_REPR as chr_code_repr + 1;
 
 // @<Get the next token, suppressing expansion@>=
 macro_rules! Get_the_next_token__suppressing_expansion {

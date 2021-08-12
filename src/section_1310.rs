@@ -6,11 +6,11 @@ macro_rules! undump_four_ASCII {
         // undump_qqqq(w);
         undump_qqqq!($globals, w);
         // str_pool[k]:=si(qo(w.b0)); str_pool[k+1]:=si(qo(w.b1));
-        $globals.str_pool[$k] = packed_ASCII_code(w[FOUR_QUARTERS_B0]);
-        $globals.str_pool[$k + 1] = packed_ASCII_code(w[FOUR_QUARTERS_B1]);
+        $globals.str_pool[$k] = packed_ASCII_code::from(w[FOUR_QUARTERS_B0]);
+        $globals.str_pool[$k + 1] = packed_ASCII_code::from(w[FOUR_QUARTERS_B1]);
         // str_pool[k+2]:=si(qo(w.b2)); str_pool[k+3]:=si(qo(w.b3))
-        $globals.str_pool[$k + 2] = packed_ASCII_code(w[FOUR_QUARTERS_B2]);
-        $globals.str_pool[$k + 3] = packed_ASCII_code(w[FOUR_QUARTERS_B3]);
+        $globals.str_pool[$k + 2] = packed_ASCII_code::from(w[FOUR_QUARTERS_B2]);
+        $globals.str_pool[$k + 3] = packed_ASCII_code::from(w[FOUR_QUARTERS_B3]);
 
         use crate::section_0038::packed_ASCII_code;
         use crate::section_0113::FOUR_QUARTERS_B0;

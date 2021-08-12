@@ -29,19 +29,17 @@ pub(crate) fn str_eq_buf(globals: &mut TeXGlobals, s: str_number, k: integer) ->
         }
         #[cfg(feature = "unicode_support")]
         {
-            let stored_bytes_len = globals.str_start[s + 1] - globals.str_start[s];
-            let stored_bytes = (0..stored_bytes_len).map(|k|
-                globals.str_pool[globals.str_start[s] + k]);
-            let fss_utf_bytes = (k..).flat_map(|k|
-                FssUtfEncodedIP32::new(globals.buffer[k as u16].0 as i32).into_iter());
-            for (p1, p2) in stored_bytes.zip(fss_utf_bytes) {
-                if p1.0 != p2 {
+            let stored_bytes_range = globals.str_start[s]..globals.str_start[s + 1];
+            let stored_bytes_runes = runestr::from_rune_bytes(&globals.str_pool[stored_bytes_range]).expect("need to be valid rune data")
+            .runes();
+            let buffer_runes = (k..).map(|k|
+                globals.buffer[k as u16].0);
+            for (p1, p2) in stored_bytes_runes.zip(buffer_runes) {
+                if p1 != p2 {
                     result = false;
                     goto_forward_label!('not_found);
                 }
             }
-
-            use crate::unicode_support::FssUtfEncodedIP32;
         }
         // result:=true;
         result = true;

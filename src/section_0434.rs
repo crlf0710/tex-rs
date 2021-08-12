@@ -6,7 +6,7 @@ pub(crate) fn scan_char_num(globals: &mut TeXGlobals, extended_max: boolean) -> 
     // begin scan_int;
     scan_int(globals)?;
     let val_max = if extended_max {
-        crate::pascal::char::MAX.0 as integer
+        crate::pascal::CHAR_MAX_REPR as integer
     } else {
         255
     };

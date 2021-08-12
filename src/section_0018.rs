@@ -11,14 +11,31 @@ pub(crate) type ASCII_code_repr = u8;
 #[cfg(feature = "unicode_support")]
 pub(crate) type ASCII_code_repr = u32;
 
+#[cfg(not(feature = "unicode_support"))]
 #[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Debug)]
-/// When `unicode_support` feature is not enabled, these are eight-bit numbers
-/// otherwise, it is a 32-bit internal form character code, compatible with ascii
+/// eight-bit numbers
 pub struct ASCII_code(pub(crate) ASCII_code_repr);
+
+#[derive(Default, Copy, Clone, PartialEq, Eq, Debug)]
+/// 32-bit internal form character code, compatible with ascii
+pub struct ASCII_code(pub(crate) runestr::rune);
+
+impl PartialOrd for ASCII_code {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.0.into_inner().partial_cmp(&other.0.into_inner())
+    }
+}
 
 impl ASCII_code {
     pub(crate) fn numeric_value(self) -> ASCII_code_repr {
-        self.0
+        #[cfg(not(feature = "unicode_support"))]
+        {
+            self.0
+        }
+        #[cfg(feature = "unicode_support")]
+        {
+            self.0.into_inner()
+        }
     }
     pub(crate) fn from_integer(val: integer) -> Self {
         #[cfg(not(feature = "unicode_support"))]
@@ -28,13 +45,11 @@ impl ASCII_code {
         }
         #[cfg(feature = "unicode_support")]
         {
-            if val >= 0 && val <= 255
-            {
-                ASCII_code(val as _)
-            }
-            else
-            {
-                todo!("{} is > 255", val);
+            assert!(val >= 0);
+            if val == '\r' as u32 as integer {
+                ASCII_code(runestr::rune::from_char_lossy('\r'))
+            } else {
+                ASCII_code(runestr::rune::from_inner(val as _).unwrap())
             }
         }
     }
@@ -47,7 +62,7 @@ macro_rules! ASCII_code_literal {
         use crate::section_0018::ASCII_code;
 
         let val: u8 = $val;
-        ASCII_code(val as _)
+        ASCII_code(runestr::rune::from_char_lossy(val as char))
     }};
 }
 
@@ -65,7 +80,7 @@ impl ASCII_code {
 
     #[cfg(feature = "unicode_support")]
     pub(crate) fn len_bytes(self) -> usize {
-        crate::unicode_support::len_fss_utf(self.0 as integer)
+        self.0.len_runestr()
     }
 }
 

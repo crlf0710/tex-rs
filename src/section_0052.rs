@@ -32,7 +32,7 @@ macro_rules! Read_one_string_but_return_false_if_the_string_memory_space_is_gett
             for k in 1..=l {
                 // begin if eoln(pool_file) then m:=' '@+else read(pool_file,m);
                 if eoln(&mut $globals.pool_file) {
-                    m = text_char::new(b' ' as _);
+                    m = text_char::from_char(' ').unwrap();
                 } else {
                     m = read_onearg(&mut $globals.pool_file);
                 }

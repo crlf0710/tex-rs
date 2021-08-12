@@ -183,7 +183,7 @@ macro_rules! strpool_str {
         static __: &'static str = $s;
 
         let v = crate::string_pool::string_pool_index($s);
-        debug_assert!(v <= crate::pascal::char::MAX.0 as _);
+        debug_assert!(v <= crate::section_0011::max_strings as _);
         crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
     }};
 }

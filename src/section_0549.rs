@@ -4,7 +4,7 @@
 #[cfg(not(feature = "unicode_support"))]
 pub(crate) const non_char: ASCII_code_or_non_char = qi(256);
 #[cfg(feature = "unicode_support")]
-pub(crate) const non_char: ASCII_code_or_non_char = crate::pascal::char::MAX.0 + 1;
+pub(crate) const non_char: ASCII_code_or_non_char = crate::pascal::CHAR_MAX_REPR as ASCII_code_or_non_char + 1;
 // @d non_address=0 {a spurious |bchar_label|}
 /// a spurious `bchar_label`
 pub(crate) const non_address: font_index = font_index::zero();

@@ -19,13 +19,13 @@ pub(crate) fn append_char(globals: TeXGlobalsStringView<'_>, val: ASCII_code) {
     }
     #[cfg(feature = "unicode_support")]
     {
-        let encoded_iter = FssUtfEncodedIP32::new(val.0 as _).into_iter();
-        for byte in encoded_iter {
-            (*globals.str_pool)[*globals.pool_ptr] = packed_ASCII_code(byte);
+        let mut buffer = [0; 6];
+        let encoded = val.0.encode_runestr(&mut buffer);
+        for byte in encoded.bytes() {
+            (*globals.str_pool)[*globals.pool_ptr] = packed_ASCII_code::from(byte);
             incr!(*globals.pool_ptr);
         }
         use crate::section_0038::packed_ASCII_code;
-        use crate::unicode_support::FssUtfEncodedIP32;
     }
     // end
 }

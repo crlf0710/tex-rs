@@ -42,7 +42,7 @@ macro_rules! Get_the_first_line_of_input_and_prepare_to_start {
             decr!(limit!($globals));
         } else {
             // else  buffer[limit]:=end_line_char;
-            $globals.buffer[limit!($globals)] = ASCII_code(end_line_char!($globals) as _);
+            $globals.buffer[limit!($globals)] = ASCII_code::from_integer(end_line_char!($globals) as _);
         }
         // fix_date_and_time;@/
         fix_date_and_time($globals);

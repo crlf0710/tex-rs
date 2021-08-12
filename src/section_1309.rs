@@ -4,11 +4,11 @@ macro_rules! dump_four_ASCII {
     ($globals:expr, $k:expr) => {{
         let mut w = four_quarters::default();
         // w.b0:=qi(so(str_pool[k])); w.b1:=qi(so(str_pool[k+1]));
-        w[FOUR_QUARTERS_B0] = $globals.str_pool[$k].numeric_value();
-        w[FOUR_QUARTERS_B1] = $globals.str_pool[$k + 1].numeric_value();
+        w[FOUR_QUARTERS_B0] = $globals.str_pool[$k].into();
+        w[FOUR_QUARTERS_B1] = $globals.str_pool[$k + 1].into();
         // w.b2:=qi(so(str_pool[k+2])); w.b3:=qi(so(str_pool[k+3]));
-        w[FOUR_QUARTERS_B2] = $globals.str_pool[$k + 2].numeric_value();
-        w[FOUR_QUARTERS_B3] = $globals.str_pool[$k + 3].numeric_value();
+        w[FOUR_QUARTERS_B2] = $globals.str_pool[$k + 2].into();
+        w[FOUR_QUARTERS_B3] = $globals.str_pool[$k + 3].into();
         // dump_qqqq(w)
         dump_qqqq!($globals, w);
         use crate::section_0113::four_quarters;

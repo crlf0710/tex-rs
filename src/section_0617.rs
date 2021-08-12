@@ -50,7 +50,7 @@ macro_rules! Initialize_variables_as_ship_out_begins {
             dvi_out!($globals, cur_length!($globals));
             // for s:=str_start[str_ptr] to pool_ptr-1 do dvi_out(so(str_pool[s]));
             for s in $globals.str_start[$globals.str_ptr].get()..=$globals.pool_ptr.get() - 1 {
-                dvi_out!($globals, $globals.str_pool[s].numeric_value());
+                dvi_out!($globals, $globals.str_pool[s]);
             }
             // pool_ptr:=str_start[str_ptr]; {flush the current string}
             $globals.pool_ptr = $globals.str_start[$globals.str_ptr];

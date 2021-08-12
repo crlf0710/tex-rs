@@ -12,7 +12,7 @@ macro_rules! Compute_the_hash_code_h {
             // h:=buffer[j];
             $h = $globals.buffer[$j as u16].0 as integer;
             // for k:=j+1 to j+l-1 do
-            for k in $j + 1 ..= $j + $l - 1 {
+            for k in $j + 1..=$j + $l - 1 {
                 // begin h:=h+h+buffer[k];
                 $h = $h + $h + $globals.buffer[k as u16].0 as integer;
                 // while h>=hash_prime do h:=h-hash_prime;
@@ -24,12 +24,16 @@ macro_rules! Compute_the_hash_code_h {
         }
         #[cfg(feature = "unicode_support")]
         {
-            let mut fss_utf_bytes = ($j ..= $j + $l - 1).flat_map(|k|
-                FssUtfEncodedIP32::new($globals.buffer[k as u16].0 as i32).into_iter());
+            let runestr = $globals.buffer[crate::pascal::u16_from_m_to_n::from($j as u16)
+                ..=crate::pascal::u16_from_m_to_n::from(($j + $l - 1) as u16)]
+                .iter()
+                .map(|x| x.0)
+                .collect::<runestr::RuneString>();
+            let mut runestr_bytes = runestr.chars();
             // h:=buffer[j];
-            $h = fss_utf_bytes.next().unwrap() as integer;
+            $h = runestr_bytes.next().unwrap() as integer;
             // for k:=j+1 to j+l-1 do
-            for v in fss_utf_bytes {
+            for v in runestr_bytes {
                 // begin h:=h+h+buffer[k];
                 $h = $h + $h + v as integer;
                 // while h>=hash_prime do h:=h-hash_prime;
@@ -38,9 +42,7 @@ macro_rules! Compute_the_hash_code_h {
                 }
                 // end
             }
-
-            use crate::unicode_support::FssUtfEncodedIP32;
         }
         use crate::section_0012::hash_prime;
-    }
+    };
 }

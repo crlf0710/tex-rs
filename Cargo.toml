@@ -16,6 +16,7 @@ once_cell = "1.4.1"
 tracing = { version = "0.1.21", optional = true }
 tracing-subscriber = { version = "0.2.14", optional = true }
 ref-cast = "1.0.3"
+runestr = "0.1.4"
 
 [features]
 initex = []

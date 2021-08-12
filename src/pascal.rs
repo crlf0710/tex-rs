@@ -38,50 +38,24 @@ type char_repr = u8;
 impl core::fmt::Debug for char {}
 
 #[cfg(not(feature = "unicode_support"))]
-impl char {
-    pub(crate) const MAX: char = char(255);
-
-    pub(crate) const fn new(v: u8) -> Self {
-        char(v)
+impl PartialEq<core::primitive::char> for char {
+    fn partial_eq(&self, rhs: &core::primitive::char) -> bool {
+        self.0 as u32 == *rhs as u32
     }
 }
 
-#[cfg(feature = "unicode_support")]
-#[derive(Copy, Clone, Default, PartialOrd, PartialEq)]
-pub(crate) struct char(pub(crate) u32, PhantomData<Rc<()>>);
+#[cfg(not(feature = "unicode_support"))]
+pub(crate) const CHAR_MAX_REPR: char_repr = 0xFF;
+
 
 #[cfg(feature = "unicode_support")]
-impl char {
-    pub(crate) const MAX: char = char(0x007F_FFFF, PhantomData);
-    pub(crate) const fn new(v: u32) -> Self {
-        char(v, PhantomData)
-    }
-}
+pub(crate) type char = runestr::rune;
 
 #[cfg(feature = "unicode_support")]
 type char_repr = u32;
 
 #[cfg(feature = "unicode_support")]
-impl core::fmt::Debug for char {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        assert!(*self <= char::MAX);
-        f.debug_list()
-            .entries(crate::unicode_support::chars_from_generalized_char(*self))
-            .finish()?;
-        Ok(())
-    }
-}
-
-#[cfg(feature = "unicode_support")]
-impl core::fmt::Display for char {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        assert!(*self <= char::MAX);
-        for ch in crate::unicode_support::chars_from_generalized_char(*self) {
-            write!(f, "{}", ch)?;
-        }
-        Ok(())
-    }
-}
+pub(crate) const CHAR_MAX_REPR: char_repr = 0x7FFF_FFFF;
 
 macro_rules! define_ranged_unsigned_integer {
     ($v:vis $name:ident => $base_type:path; $typenum_const:ident) => {
@@ -501,6 +475,21 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_l
         {
             fn index_mut(&mut self, range: core::ops::Range<$index_type>) -> &mut [ELEMENT] {
                 &mut (self.0)[range.start.get() as usize..range.end.get() as usize]
+            }
+        }
+
+        impl<ELEMENT> core::ops::Index<core::ops::RangeInclusive<$index_type>> for $name<ELEMENT>
+        {
+            type Output = [ELEMENT];
+            fn index(&self, range: core::ops::RangeInclusive<$index_type>) -> &[ELEMENT] {
+                &(self.0)[range.start().get() as usize..=range.end().get() as usize]
+            }
+        }
+
+        impl<ELEMENT> core::ops::IndexMut<core::ops::RangeInclusive<$index_type>> for $name<ELEMENT>
+        {
+            fn index_mut(&mut self, range: core::ops::RangeInclusive<$index_type>) -> &mut [ELEMENT] {
+                &mut (self.0)[range.start().get() as usize..=range.end().get() as usize]
             }
         }
     };
@@ -923,11 +912,11 @@ impl PascalFile for file_of_text_char {
     }
 
     fn is_eoln_unit(unit: &Self::Unit) -> bool {
-        unit.0 == b'\n' as char_repr
+        *unit == '\n'
     }
 
     fn eoln_unit() -> Self::Unit {
-        text_char::new(b'\n' as _)
+        text_char::from_char('\n').unwrap()
     }
 
     fn convert_line_string_crlf_to_lf(input: &mut String) {
@@ -947,19 +936,8 @@ impl PascalFile for file_of_text_char {
         }
         #[cfg(feature = "unicode_support")]
         {
-            use unicode_segmentation::UnicodeSegmentation;
-            for grapheme in input.graphemes(true) {
-                if grapheme.as_bytes().len() == 1 {
-                    units.push(text_char::new(grapheme.as_bytes()[0] as _))
-                } else {
-                    let (byte_offset, ch) = grapheme.char_indices().rev().next().unwrap();
-                    if byte_offset == 0 {
-                        units.push(text_char::new(ch as _))
-                    } else {
-                        todo!();
-                    }
-                }
-            }
+            units.extend(
+            runestr::RuneString::from_str_lossy(input).runes());
         }
     }
 

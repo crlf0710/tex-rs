@@ -34,13 +34,13 @@ macro_rules! Test_if_two_characters_match {
         get_x_token_or_active_char!($globals);
         // if (cur_cmd>active_char)or(cur_chr>255) then {not a character}
         if $globals.cur_cmd > active_char
-            || $globals.cur_chr.get() > crate::pascal::char::MAX.0 as chr_code_repr
+            || $globals.cur_chr.get() > crate::pascal::CHAR_MAX_REPR as chr_code_repr
         {
             /// not a character
             const _: () = ();
             // begin m:=relax; n:=256;
             m = relax;
-            n = chr_code_type::new(crate::pascal::char::MAX.0 as chr_code_repr);
+            n = chr_code_type::new(crate::pascal::CHAR_MAX_REPR as chr_code_repr);
         // end
         }
         // else  begin m:=cur_cmd; n:=cur_chr;
@@ -53,11 +53,11 @@ macro_rules! Test_if_two_characters_match {
         get_x_token_or_active_char!($globals);
         // if (cur_cmd>active_char)or(cur_chr>255) then
         if $globals.cur_cmd > active_char
-            || $globals.cur_chr.get() > crate::pascal::char::MAX.0 as chr_code_repr
+            || $globals.cur_chr.get() > crate::pascal::CHAR_MAX_REPR as chr_code_repr
         {
             // begin cur_cmd:=relax; cur_chr:=256;
             $globals.cur_cmd = relax;
-            $globals.cur_chr = chr_code_type::new(crate::pascal::char::MAX.0 as chr_code_repr);
+            $globals.cur_chr = chr_code_type::new(crate::pascal::CHAR_MAX_REPR as chr_code_repr);
             // end;
         }
         // if this_if=if_char_code then b:=(n=cur_chr)@+else b:=(m=cur_cmd);

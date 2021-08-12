@@ -32,6 +32,7 @@ pub(crate) type text_char = crate::pascal::char;
 // @d first_text_char=0 {ordinal number of the smallest element of |text_char|}
 
 /// ordinal number of the smallest element of [text_char]
+#[cfg(not(feature = "unicode_support"))]
 const first_text_char: text_char = text_char::new(0);
 
 // @d last_text_char=255 {ordinal number of the largest element of |text_char|}
@@ -39,10 +40,6 @@ const first_text_char: text_char = text_char::new(0);
 /// ordinal number of the largest element of [text_char]
 #[cfg(not(feature = "unicode_support"))]
 const last_text_char: text_char = text_char::new(255);
-
-/// ordinal number of the largest element of [text_char]
-#[cfg(feature = "unicode_support")]
-const last_text_char: text_char = text_char::MAX;
 
 //
 // @<Local variables for init...@>=

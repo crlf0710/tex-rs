@@ -59,8 +59,7 @@ pub(crate) type str_number_repr = u32;
 
 // @!packed_ASCII_code = 0..255; {elements of |str_pool| array}
 /// elements of `str_pool` array
-#[derive(Copy, Clone, Debug, Default, PartialEq)]
-pub(crate) struct packed_ASCII_code(pub(crate) u8);
+pub(crate) type packed_ASCII_code = u8;
 
 use crate::pascal::{integer, u32_from_0_to_n};
 use crate::section_0011::max_strings_TYPENUM;
@@ -167,11 +166,5 @@ impl core::ops::Sub<u32> for str_number {
         use core::ops::SubAssign;
         self.sub_assign(val);
         self
-    }
-}
-
-impl packed_ASCII_code {
-    pub(crate) fn numeric_value(self) -> u8 {
-        self.0
     }
 }
