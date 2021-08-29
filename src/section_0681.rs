@@ -81,6 +81,8 @@ macro_rules! math_type {
 }
 // @d fam==font {a |quarterword| in |mem|}
 // @d math_char=1 {|math_type| when the attribute is simple}
+/// `math_type` when the attribute is simple
+pub(crate) const math_char: quarterword = 1;
 // @d sub_box=2 {|math_type| when the attribute is a box}
 /// `math_type` when the attribute is a box
 pub(crate) const sub_box: quarterword = 2;
