@@ -1498,6 +1498,7 @@ mod tests {
         *input_file.file_state_mut() = FileState::LineInspectionMode {
             read_target: Box::new(input_data),
             read_line_buffer: LineBufferState::UnknownState { initial_line: true },
+            read_flag_extra_eoln_line: true
         };
         input_file.set_error_state(0);
         assert_eq!(false, eoln(&mut input_file));
