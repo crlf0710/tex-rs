@@ -52,7 +52,8 @@
     non_upper_case_globals,
     non_camel_case_types,
     unused_imports,
-    unused_doc_comments
+    unused_doc_comments,
+    unused_attributes,
 )]
 #![allow(unreachable_code)]
 //! This is `TeX`-rs, a document compiler intended to produce typesetting of high quality.

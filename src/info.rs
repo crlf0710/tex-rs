@@ -94,13 +94,13 @@ macro_rules! region_backward_label {
 
 macro_rules! goto_forward_label {
     ($lbl:lifetime) => {
-        break $lbl;
+        break $lbl
     };
 }
 
 macro_rules! goto_backward_label {
     ($lbl:lifetime) => {
-        continue $lbl;
+        continue $lbl
     };
 }
 
