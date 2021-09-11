@@ -6,7 +6,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_latex_support(
 ) {
     primitive(
         globals,
-        strpool_str!("ifcsname"),
+        crate::strpool_str!("ifcsname"),
         if_test,
         unimplemented_code as _,
     );

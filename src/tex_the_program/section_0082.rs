@@ -22,7 +22,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
     // if interaction=error_stop_mode then if selector<>log_only then
     //   @<Get user's advice and |return|@>;
     if globals.interaction == error_stop_mode && globals.selector != log_only {
-        Get_user_s_advice_and_return!(globals);
+        crate::section_0083::Get_user_s_advice_and_return!(globals);
     }
     // incr(error_count);
     incr!(globals.error_count);
@@ -31,7 +31,7 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
         // begin print_nl("(That makes 100 errors; please try again.)");
         print_nl(
             globals,
-            strpool_str!("(That makes 100 errors; please try again.)"),
+            crate::strpool_str!("(That makes 100 errors; please try again.)"),
         );
         // @.That makes 100 errors...@>
         // history:=fatal_error_stop; jump_out;
@@ -40,13 +40,16 @@ pub(crate) fn error(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // @<Put help message on the transcript file@>;
-    Put_help_message_on_the_transcript_file!(globals);
+    crate::section_0090::Put_help_message_on_the_transcript_file!(globals);
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0016::incr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0054::log_only;
 use crate::section_0058::print_char;
 use crate::section_0062::print_nl;

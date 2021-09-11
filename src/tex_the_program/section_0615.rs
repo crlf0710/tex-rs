@@ -12,14 +12,14 @@ pub(crate) fn prune_movements(globals: &mut TeXGlobals, l: integer) {
     // var p:pointer; {node being deleted}
     /// node being deleted
     let mut p: pointer;
-    region_forward_label!(
+    crate::region_forward_label!(
     |'done|
     {
     // begin while down_ptr<>null do
     while globals.down_ptr != null {
         // begin if location(down_ptr)<l then goto done;
         if location!(globals, globals.down_ptr) < l {
-            goto_forward_label!('done);
+            crate::goto_forward_label!('done);
         }
         // p:=down_ptr; down_ptr:=link(p); free_node(p,movement_node_size);
         p = globals.down_ptr;
@@ -47,7 +47,9 @@ pub(crate) fn prune_movements(globals: &mut TeXGlobals, l: integer) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0130::free_node;
+use crate::section_0605::location;
 use crate::section_0605::movement_node_size;

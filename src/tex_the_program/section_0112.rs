@@ -11,26 +11,20 @@
 // @d qi(#)==#+min_quarterword
 //   {to put an |eight_bits| item into a quarterword}
 /// to put an `eight_bits` item into a quarterword
-macro_rules! qi {
-    ($val:expr) => {
-        $val + crate::section_0110::min_quarterword
-    };
+pub(crate) macro qi($val:expr) {
+    $val + crate::section_0110::min_quarterword
 }
 // @d qo(#)==#-min_quarterword
 //   {to take an |eight_bits| item out of a quarterword}
 /// to take an `eight_bits` item out of a quarterword
-macro_rules! qo {
-    ($val:expr) => {
-        $val - crate::section_0110::min_quarterword
-    };
+pub(crate) macro qo($val:expr) {
+    $val - crate::section_0110::min_quarterword
 }
 // @d hi(#)==#+min_halfword
 //   {to put a sixteen-bit item into a halfword}
 /// to put a sixteen-bit item into a halfword
-macro_rules! hi {
-    ($val:expr) => {
-        $val + crate::section_0110::min_halfword
-    };
+pub(crate) macro hi($val:expr) {
+    $val + crate::section_0110::min_halfword
 }
 // @d ho(#)==#-min_halfword
 //   {to take a sixteen-bit item from a halfword}

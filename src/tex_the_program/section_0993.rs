@@ -20,12 +20,14 @@ pub(crate) fn ensure_vbox(globals: &mut TeXGlobals, n: eight_bits) -> TeXResult<
         todo!("box error");
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0025::eight_bits;
 use crate::section_0081::TeXResult;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0133::r#type;
 use crate::section_0135::hlist_node;
+use crate::section_0230::r#box;

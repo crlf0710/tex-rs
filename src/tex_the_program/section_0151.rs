@@ -18,7 +18,7 @@ pub(crate) fn new_spec(globals: &mut TeXGlobals, p: pointer) -> TeXResult<pointe
     stretch!(globals, q) = stretch!(globals, p);
     shrink!(globals, q) = shrink!(globals, p);
     // new_spec:=q;
-    ok_nojump!(q)
+    crate::ok_nojump!(q)
     // end;
 }
 
@@ -27,4 +27,8 @@ use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0135::width;
+use crate::section_0150::glue_ref_count;
 use crate::section_0150::glue_spec_size;
+use crate::section_0150::shrink;
+use crate::section_0150::stretch;

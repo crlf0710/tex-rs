@@ -45,3 +45,7 @@ pub(crate) fn fix_date_and_time(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0236::day;
+use crate::section_0236::month;
+use crate::section_0236::time;
+use crate::section_0236::year;

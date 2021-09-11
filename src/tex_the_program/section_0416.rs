@@ -33,9 +33,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("prevdepth",set_aux,vmode);@/
     primitive(
         globals,
-        strpool_str!("prevdepth"),
+        crate::strpool_str!("prevdepth"),
         set_aux,
-        vmode as _
+        vmode as _,
     );
     // @!@:prev_depth_}{\.{\\prevdepth} primitive@>
     // primitive("deadcycles",set_page_int,0);
@@ -43,7 +43,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("insertpenalties",set_page_int,1);
     primitive(
         globals,
-        strpool_str!("insertpenalties"),
+        crate::strpool_str!("insertpenalties"),
         set_page_int,
         1,
     );
@@ -51,7 +51,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("wd",set_box_dimen,width_offset);
     primitive(
         globals,
-        strpool_str!("wd"),
+        crate::strpool_str!("wd"),
         set_box_dimen,
         width_offset as _,
     );
@@ -61,7 +61,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("dp",set_box_dimen,depth_offset);
     primitive(
         globals,
-        strpool_str!("dp"),
+        crate::strpool_str!("dp"),
         set_box_dimen,
         depth_offset as _,
     );
@@ -75,7 +75,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("inputlineno",last_item,input_line_no_code);
     primitive(
         globals,
-        strpool_str!("inputlineno"),
+        crate::strpool_str!("inputlineno"),
         last_item,
         last_item_command_kind::input_line_no_code as _,
     );
@@ -83,7 +83,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
     // primitive("badness",last_item,badness_code);
     primitive(
         globals,
-        strpool_str!("badness"),
+        crate::strpool_str!("badness"),
         last_item,
         last_item_command_kind::badness_code as _,
     );
@@ -91,8 +91,8 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0135::width_offset;
 use crate::section_0135::depth_offset;
+use crate::section_0135::width_offset;
 use crate::section_0208::last_item;
 use crate::section_0209::set_aux;
 use crate::section_0209::set_box_dimen;

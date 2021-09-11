@@ -79,69 +79,49 @@ pub(crate) type eqtb_size_TYPENUM = typenum::op!(scaled_base_TYPENUM + U255);
 pub(crate) const eqtb_size: word = eqtb_size_TYPENUM::U32;
 // @#
 // @d dimen(#)==eqtb[scaled_base+#].sc
-macro_rules! dimen {
-    ($globals:expr, $val:expr) => {
-        $globals.eqtb[crate::section_0247::scaled_base as crate::section_0115::pointer
-            + $val as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro dimen($globals:expr, $val:expr) {
+    $globals.eqtb[crate::section_0247::scaled_base as crate::section_0115::pointer
+        + $val as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d dimen_par(#)==eqtb[dimen_base+#].sc {a scaled quantity}
 /// a scaled quantity
-macro_rules! dimen_par {
-    ($globals:expr, $val:expr) => {
-        $globals.eqtb[crate::section_0236::dimen_base as crate::section_0115::pointer
-            + $val as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro dimen_par($globals:expr, $val:expr) {
+    $globals.eqtb[crate::section_0236::dimen_base as crate::section_0115::pointer
+        + $val as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d par_indent==dimen_par(par_indent_code)
-macro_rules! par_indent {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::par_indent_code)
-    }
+pub(crate) macro par_indent($globals:expr) {
+    dimen_par!($globals, crate::section_0247::par_indent_code)
 }
 // @d math_surround==dimen_par(math_surround_code)
 // @d line_skip_limit==dimen_par(line_skip_limit_code)
-macro_rules! line_skip_limit {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::line_skip_limit_code)
-    };
+pub(crate) macro line_skip_limit($globals:expr) {
+    dimen_par!($globals, crate::section_0247::line_skip_limit_code)
 }
 // @d hsize==dimen_par(hsize_code)
-macro_rules! hsize {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::hsize_code)
-    };
+pub(crate) macro hsize($globals:expr) {
+    dimen_par!($globals, crate::section_0247::hsize_code)
 }
 // @d vsize==dimen_par(vsize_code)
-macro_rules! vsize {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::vsize_code)
-    };
+pub(crate) macro vsize($globals:expr) {
+    dimen_par!($globals, crate::section_0247::vsize_code)
 }
 // @d max_depth==dimen_par(max_depth_code)
-macro_rules! max_depth {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::max_depth_code)
-    };
+pub(crate) macro max_depth($globals:expr) {
+    dimen_par!($globals, crate::section_0247::max_depth_code)
 }
 // @d split_max_depth==dimen_par(split_max_depth_code)
 // @d box_max_depth==dimen_par(box_max_depth_code)
-macro_rules! box_max_depth {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::box_max_depth_code)
-    };
+pub(crate) macro box_max_depth($globals:expr) {
+    dimen_par!($globals, crate::section_0247::box_max_depth_code)
 }
 // @d hfuzz==dimen_par(hfuzz_code)
-macro_rules! hfuzz {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::hfuzz_code)
-    };
+pub(crate) macro hfuzz($globals:expr) {
+    dimen_par!($globals, crate::section_0247::hfuzz_code)
 }
 // @d vfuzz==dimen_par(vfuzz_code)
-macro_rules! vfuzz {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::vfuzz_code)
-    };
+pub(crate) macro vfuzz($globals:expr) {
+    dimen_par!($globals, crate::section_0247::vfuzz_code)
 }
 // @d delimiter_shortfall==dimen_par(delimiter_shortfall_code)
 // @d null_delimiter_space==dimen_par(null_delimiter_space_code)
@@ -150,34 +130,24 @@ macro_rules! vfuzz {
 // @d display_width==dimen_par(display_width_code)
 // @d display_indent==dimen_par(display_indent_code)
 // @d overfull_rule==dimen_par(overfull_rule_code)
-macro_rules! overfull_rule {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::overfull_rule_code)
-    };
+pub(crate) macro overfull_rule($globals:expr) {
+    dimen_par!($globals, crate::section_0247::overfull_rule_code)
 }
 // @d hang_indent==dimen_par(hang_indent_code)
-macro_rules! hang_indent {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::hang_indent_code)
-    };
+pub(crate) macro hang_indent($globals:expr) {
+    dimen_par!($globals, crate::section_0247::hang_indent_code)
 }
 // @d h_offset==dimen_par(h_offset_code)
-macro_rules! h_offset {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::h_offset_code)
-    };
+pub(crate) macro h_offset($globals:expr) {
+    dimen_par!($globals, crate::section_0247::h_offset_code)
 }
 // @d v_offset==dimen_par(v_offset_code)
-macro_rules! v_offset {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::v_offset_code)
-    };
+pub(crate) macro v_offset($globals:expr) {
+    dimen_par!($globals, crate::section_0247::v_offset_code)
 }
 // @d emergency_stretch==dimen_par(emergency_stretch_code)
-macro_rules! emergency_stretch {
-    ($globals:expr) => {
-        dimen_par!($globals, crate::section_0247::emergency_stretch_code)
-    };
+pub(crate) macro emergency_stretch($globals:expr) {
+    dimen_par!($globals, crate::section_0247::emergency_stretch_code)
 }
 
 // @p procedure print_length_param(@!n:integer);
@@ -188,99 +158,102 @@ pub(crate) fn print_length_param(globals: &mut TeXGlobals, n: integer) {
     }
     // par_indent_code:print_esc("parindent");
     else if n == par_indent_code as integer {
-        print_esc(globals, strpool_str!("parindent"));
+        print_esc(globals, crate::strpool_str!("parindent"));
     }
     // math_surround_code:print_esc("mathsurround");
     else if n == math_surround_code as integer {
-        print_esc(globals, strpool_str!("mathsurround"));
+        print_esc(globals, crate::strpool_str!("mathsurround"));
     }
     // line_skip_limit_code:print_esc("lineskiplimit");
     else if n == line_skip_limit_code as integer {
-        print_esc(globals, strpool_str!("lineskiplimit"));
+        print_esc(globals, crate::strpool_str!("lineskiplimit"));
     }
     // hsize_code:print_esc("hsize");
     else if n == hsize_code as integer {
-        print_esc(globals, strpool_str!("hsize"));
+        print_esc(globals, crate::strpool_str!("hsize"));
     }
     // vsize_code:print_esc("vsize");
     else if n == vsize_code as integer {
-        print_esc(globals, strpool_str!("vsize"));
+        print_esc(globals, crate::strpool_str!("vsize"));
     }
     // max_depth_code:print_esc("maxdepth");
     else if n == max_depth_code as integer {
-        print_esc(globals, strpool_str!("maxdepth"));
+        print_esc(globals, crate::strpool_str!("maxdepth"));
     }
     // split_max_depth_code:print_esc("splitmaxdepth");
     else if n == split_max_depth_code as integer {
-        print_esc(globals, strpool_str!("splitmaxdepth"));
+        print_esc(globals, crate::strpool_str!("splitmaxdepth"));
     }
     // box_max_depth_code:print_esc("boxmaxdepth");
     else if n == box_max_depth_code as integer {
-        print_esc(globals, strpool_str!("boxmaxdepth"));
+        print_esc(globals, crate::strpool_str!("boxmaxdepth"));
     }
     // hfuzz_code:print_esc("hfuzz");
     else if n == hfuzz_code as integer {
-        print_esc(globals, strpool_str!("hfuzz"));
+        print_esc(globals, crate::strpool_str!("hfuzz"));
     }
     // vfuzz_code:print_esc("vfuzz");
     else if n == vfuzz_code as integer {
-        print_esc(globals, strpool_str!("vfuzz"));
+        print_esc(globals, crate::strpool_str!("vfuzz"));
     }
     // delimiter_shortfall_code:print_esc("delimitershortfall");
     else if n == delimiter_shortfall_code as integer {
-        print_esc(globals, strpool_str!("delimitershortfall"));
+        print_esc(globals, crate::strpool_str!("delimitershortfall"));
     }
     // null_delimiter_space_code:print_esc("nulldelimiterspace");
     else if n == null_delimiter_space_code as integer {
-        print_esc(globals, strpool_str!("nulldelimiterspace"));
+        print_esc(globals, crate::strpool_str!("nulldelimiterspace"));
     }
     // script_space_code:print_esc("scriptspace");
     else if n == script_space_code as integer {
-        print_esc(globals, strpool_str!("scriptspace"));
+        print_esc(globals, crate::strpool_str!("scriptspace"));
     }
     // pre_display_size_code:print_esc("predisplaysize");
     else if n == pre_display_size_code as integer {
-        print_esc(globals, strpool_str!("predisplaysize"));
+        print_esc(globals, crate::strpool_str!("predisplaysize"));
     }
     // display_width_code:print_esc("displaywidth");
     else if n == display_width_code as integer {
-        print_esc(globals, strpool_str!("displaywidth"));
+        print_esc(globals, crate::strpool_str!("displaywidth"));
     }
     // display_indent_code:print_esc("displayindent");
     else if n == display_indent_code as integer {
-        print_esc(globals, strpool_str!("displayindent"));
+        print_esc(globals, crate::strpool_str!("displayindent"));
     }
     // overfull_rule_code:print_esc("overfullrule");
     else if n == overfull_rule_code as integer {
-        print_esc(globals, strpool_str!("overfullrule"));
+        print_esc(globals, crate::strpool_str!("overfullrule"));
     }
     // hang_indent_code:print_esc("hangindent");
     else if n == hang_indent_code as integer {
-        print_esc(globals, strpool_str!("hangindent"));
+        print_esc(globals, crate::strpool_str!("hangindent"));
     }
     // h_offset_code:print_esc("hoffset");
     else if n == h_offset_code as integer {
-        print_esc(globals, strpool_str!("hoffset"));
+        print_esc(globals, crate::strpool_str!("hoffset"));
     }
     // v_offset_code:print_esc("voffset");
     else if n == v_offset_code as integer {
-        print_esc(globals, strpool_str!("voffset"));
+        print_esc(globals, crate::strpool_str!("voffset"));
     }
     // emergency_stretch_code:print_esc("emergencystretch");
     else if n == emergency_stretch_code as integer {
-        print_esc(globals, strpool_str!("emergencystretch"));
+        print_esc(globals, crate::strpool_str!("emergencystretch"));
     }
     // othercases print("[unknown dimen parameter!]")
     else {
-        trace_error_expr!("n = {}", n);
-        print(globals, strpool_str!("[unknown dimen parameter!]").get() as _);
+        crate::trace_error_expr!("n = {}", n);
+        print(
+            globals,
+            crate::strpool_str!("[unknown dimen parameter!]").get() as _,
+        );
     }
     // endcases;
     // end;
 }
 
-use crate::pascal::word;
 use crate::pascal::integer;
+use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
 use crate::section_0059::print;
 use crate::section_0063::print_esc;

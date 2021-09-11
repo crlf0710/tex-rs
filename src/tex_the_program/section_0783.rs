@@ -1,14 +1,14 @@
 //! @ Spaces are eliminated from the beginning of a template.
 //
 // @<Scan the template \<u_j>...@>=
-macro_rules! Scan_the_template_u_j__putting_the_resulting_token_list_in_hold_head {
+pub(crate) macro Scan_the_template_u_j__putting_the_resulting_token_list_in_hold_head {
     ($globals:expr) => {{
         /// for short-term temporary use
         let p: pointer;
         // p:=hold_head; link(p):=null;
         p = hold_head;
         link!($globals, p) = null;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done1|
         {
         // loop@+  begin get_preamble_token;
@@ -16,7 +16,7 @@ macro_rules! Scan_the_template_u_j__putting_the_resulting_token_list_in_hold_hea
             get_preamble_token($globals)?;
             // if cur_cmd=mac_param then goto done1;
             if $globals.cur_cmd == mac_param {
-                goto_forward_label!('done1);
+                crate::goto_forward_label!('done1);
             }
             todo!("scan u_j");
             // if (cur_cmd<=car_ret)and(cur_cmd>=tab_mark)and(align_state=-1000000) then
@@ -38,6 +38,10 @@ macro_rules! Scan_the_template_u_j__putting_the_resulting_token_list_in_hold_hea
         }
         'done1 <-
         );
+        use crate::section_0115::null;
+        use crate::section_0115::pointer;
+        use crate::section_0118::link;
+        use crate::section_0162::hold_head;
         use crate::section_0207::mac_param;
         use crate::section_0782::get_preamble_token;
     }}

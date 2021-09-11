@@ -9,7 +9,7 @@ pub(crate) fn scan_font_ident(globals: &mut TeXGlobals) -> TeXResult<()> {
     let f: internal_font_number;
     // @!m:halfword;
     // begin @<Get the next non-blank non-call...@>;
-    Get_the_next_non_blank_non_call_token!(globals);
+    crate::section_0406::Get_the_next_non_blank_non_call_token!(globals);
     // if cur_cmd=def_font then f:=cur_font
     if globals.cur_cmd == def_font {
         f = internal_font_number::new(cur_font!(globals) as _);
@@ -39,7 +39,7 @@ pub(crate) fn scan_font_ident(globals: &mut TeXGlobals) -> TeXResult<()> {
     // cur_val:=f;
     globals.cur_val = f.get() as _;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
@@ -47,5 +47,7 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0113::halfword;
 use crate::section_0209::*;
+use crate::section_0221::equiv;
+use crate::section_0230::cur_font;
 use crate::section_0435::scan_four_bit_int;
 use crate::section_0548::internal_font_number;

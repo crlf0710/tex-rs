@@ -6,22 +6,21 @@
 //! |new_hyph_exceptions| to do the right thing.
 //
 // @d set_cur_lang==if language<=0 then cur_lang:=0
-macro_rules! set_cur_lang {
-    ($globals:expr) => {{
-        if language!($globals) <= 0 {
-            $globals.cur_lang = ASCII_code_literal!(0);
-        }
-        // else if language>255 then cur_lang:=0
-        else if language!($globals) > 255 {
-            $globals.cur_lang = ASCII_code_literal!(0);
-        }
-        // else cur_lang:=language
-        else {
-            $globals.cur_lang = ASCII_code::from(language!($globals));
-        }
-        use crate::section_0018::ASCII_code;
-    }};
-}
+pub(crate) macro set_cur_lang($globals:expr) {{
+    if language!($globals) <= 0 {
+        $globals.cur_lang = ASCII_code_literal!(0);
+    }
+    // else if language>255 then cur_lang:=0
+    else if language!($globals) > 255 {
+        $globals.cur_lang = ASCII_code_literal!(0);
+    }
+    // else cur_lang:=language
+    else {
+        $globals.cur_lang = ASCII_code::from(language!($globals));
+    }
+    use crate::section_0018::ASCII_code;
+    use crate::section_0236::language;
+}}
 
 // @p procedure new_hyph_exceptions; {enters new exceptions}
 /// enters new exceptions
@@ -44,13 +43,14 @@ pub(crate) fn new_hyph_exceptions(globals: &mut TeXGlobals) -> TeXResult<()> {
     set_cur_lang!(globals);
     // @<Enter as many hyphenation exceptions as are listed,
     // until coming to a right brace; then |return|@>;
-    Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to_a_right_brace__then_return!(
+    crate::section_0935::Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to_a_right_brace__then_return!(
         globals
     );
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0081::TeXResult;
 use crate::section_0403::scan_left_brace;

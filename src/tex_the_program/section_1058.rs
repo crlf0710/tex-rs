@@ -26,34 +26,34 @@ pub(crate) const mskip_code: halfword = 5;
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1058(globals: &mut TeXGlobals) {
     // primitive("hskip",hskip,skip_code);@/
-    primitive(globals, strpool_str!("hskip"), hskip, skip_code);
+    primitive(globals, crate::strpool_str!("hskip"), hskip, skip_code);
     // @!@:hskip_}{\.{\\hskip} primitive@>
     // primitive("hfil",hskip,fil_code);
-    primitive(globals, strpool_str!("hfil"), hskip, fil_code);
+    primitive(globals, crate::strpool_str!("hfil"), hskip, fil_code);
     // @!@:hfil_}{\.{\\hfil} primitive@>
     // primitive("hfill",hskip,fill_code);@/
-    primitive(globals, strpool_str!("hfill"), hskip, fill_code);
+    primitive(globals, crate::strpool_str!("hfill"), hskip, fill_code);
     // @!@:hfill_}{\.{\\hfill} primitive@>
     // primitive("hss",hskip,ss_code);
-    primitive(globals, strpool_str!("hss"), hskip, ss_code);
+    primitive(globals, crate::strpool_str!("hss"), hskip, ss_code);
     // @!@:hss_}{\.{\\hss} primitive@>
     // primitive("hfilneg",hskip,fil_neg_code);@/
-    primitive(globals, strpool_str!("hfilneg"), hskip, fil_neg_code);
+    primitive(globals, crate::strpool_str!("hfilneg"), hskip, fil_neg_code);
     // @!@:hfil_neg_}{\.{\\hfilneg} primitive@>
     // primitive("vskip",vskip,skip_code);@/
-    primitive(globals, strpool_str!("vskip"), vskip, skip_code);
+    primitive(globals, crate::strpool_str!("vskip"), vskip, skip_code);
     // @!@:vskip_}{\.{\\vskip} primitive@>
     // primitive("vfil",vskip,fil_code);
-    primitive(globals, strpool_str!("vfil"), vskip, fil_code);
+    primitive(globals, crate::strpool_str!("vfil"), vskip, fil_code);
     // @!@:vfil_}{\.{\\vfil} primitive@>
     // primitive("vfill",vskip,fill_code);@/
-    primitive(globals, strpool_str!("vfill"), vskip, fill_code);
+    primitive(globals, crate::strpool_str!("vfill"), vskip, fill_code);
     // @!@:vfill_}{\.{\\vfill} primitive@>
     // primitive("vss",vskip,ss_code);
-    primitive(globals, strpool_str!("vss"), vskip, ss_code);
+    primitive(globals, crate::strpool_str!("vss"), vskip, ss_code);
     // @!@:vss_}{\.{\\vss} primitive@>
     // primitive("vfilneg",vskip,fil_neg_code);@/
-    primitive(globals, strpool_str!("vfilneg"), vskip, fil_neg_code);
+    primitive(globals, crate::strpool_str!("vfilneg"), vskip, fil_neg_code);
     // @!@:vfil_neg_}{\.{\\vfilneg} primitive@>
     // primitive("mskip",mskip,mskip_code);@/
     // @!@:mskip_}{\.{\\mskip} primitive@>
@@ -64,10 +64,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1058(globals: &m
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0207::par_end;
 use crate::section_0208::*;
 use crate::section_0264::primitive;
 use crate::section_0297::cur_tok_type;
-use crate::section_0207::par_end;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;
 

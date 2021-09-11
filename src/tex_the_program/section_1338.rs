@@ -35,7 +35,7 @@ pub(crate) fn debug_help(globals: &mut TeXGlobals) {
     loop {
         wake_up_terminal(globals);
         // print_nl("debug # (-1 to exit):"); update_terminal;
-        print_nl(globals, strpool_str!("debug # (-1 to exit):"));
+        print_nl(globals, crate::strpool_str!("debug # (-1 to exit):"));
         update_terminal(globals);
         // @.debug \#@>
         todo!();
@@ -58,7 +58,7 @@ pub(crate) fn debug_help(globals: &mut TeXGlobals) {
 // gubed
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0034::wake_up_terminal;
-use crate::section_0034::update_terminal;
 use crate::section_0034::clear_terminal;
+use crate::section_0034::update_terminal;
+use crate::section_0034::wake_up_terminal;
 use crate::section_0062::print_nl;

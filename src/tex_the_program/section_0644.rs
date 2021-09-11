@@ -35,15 +35,13 @@ pub(crate) const additional: quarterword = 1;
 // @d natural==0,additional {shorthand for parameters to |hpack| and |vpack|}
 /// shorthand for parameters to `hpack` and `vpack`
 #[allow(unused_macros)]
-macro_rules! natural0 {
-    () => {scaled::zero()}
+pub(crate) macro natural0() {
+    crate::section_0101::scaled::zero()
 }
 
 #[allow(unused_macros)]
-macro_rules! natural1 {
-    () => {
-        crate::section_0644::additional.into()
-    };
+pub(crate) macro natural1() {
+    crate::section_0644::additional.into()
 }
 
 use crate::section_0113::quarterword;

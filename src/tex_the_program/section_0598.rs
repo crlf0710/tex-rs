@@ -2,18 +2,17 @@
 //! each time, we use the macro |dvi_out|.
 //
 // @d dvi_out(#)==@+begin dvi_buf[dvi_ptr]:=#; incr(dvi_ptr);
-macro_rules! dvi_out {
-    ($globals:expr, $v:expr) => {{
-        $globals.dvi_buf[$globals.dvi_ptr] = $v as _;
-        incr!($globals.dvi_ptr);
-        // if dvi_ptr=dvi_limit then dvi_swap;
-        if $globals.dvi_ptr == $globals.dvi_limit {
-            dvi_swap($globals);
-        }
-        // end
-        use crate::section_0598::dvi_swap;
-    }}
-}
+pub(crate) macro dvi_out($globals:expr, $v:expr) {{
+    $globals.dvi_buf[$globals.dvi_ptr] = $v as _;
+    incr!($globals.dvi_ptr);
+    // if dvi_ptr=dvi_limit then dvi_swap;
+    if $globals.dvi_ptr == $globals.dvi_limit {
+        dvi_swap($globals);
+    }
+    // end
+    use crate::section_0016::incr;
+    use crate::section_0598::dvi_swap;
+}}
 
 // @p procedure dvi_swap; {outputs half of the buffer}
 /// outputs half of the buffer

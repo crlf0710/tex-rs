@@ -2,9 +2,9 @@
 //! |assign_int..assign_mu_glue| correspond to each other nicely.
 //
 // @<Compute the register location |l| and its type |p|...@>=
-macro_rules! Compute_the_register_location_l_and_its_type_p_but_return_if_invalid {
-    ($globals:expr, $p:expr, $q:expr, $l:expr) => {{
-        region_forward_label!(
+pub(crate) macro Compute_the_register_location_l_and_its_type_p_but_return_if_invalid
+    ($globals:expr, $p:expr, $q:expr, $l:expr) {{
+        crate::region_forward_label!(
         |'found|
         {
         // begin if q<>register then
@@ -16,7 +16,7 @@ macro_rules! Compute_the_register_location_l_and_its_type_p_but_return_if_invali
                 // begin l:=cur_chr; p:=cur_cmd-assign_int; goto found;
                 $l = $globals.cur_chr.get() as pointer;
                 $p = ($globals.cur_cmd - assign_int).into();
-                goto_forward_label!('found);
+                crate::goto_forward_label!('found);
                 todo!("update l and p");
                 // end;
             }
@@ -62,13 +62,13 @@ macro_rules! Compute_the_register_location_l_and_its_type_p_but_return_if_invali
         'found <-
         );
         use crate::pascal::integer;
-        use crate::section_0209::assign_int;
-        use crate::section_0209::assign_mu_glue;
+        use crate::section_0115::pointer;
+        use crate::section_0209::*;
         use crate::section_0224::skip_base;
         use crate::section_0224::mu_skip_base;
         use crate::section_0236::count_base;
         use crate::section_0247::scaled_base;
         use crate::section_0380::get_x_token;
+        use crate::section_0410::cur_val_level_kind;
         use crate::section_0433::scan_eight_bit_int;
     }}
-}

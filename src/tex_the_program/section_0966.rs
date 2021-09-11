@@ -13,7 +13,7 @@ pub(crate) fn init_trie(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!r,@!s:trie_pointer; {used to clean up the packed |trie|}
     // @!h:two_halves; {template used to zero out |trie|'s holes}
     // begin @<Get ready to compress the trie@>;
-    Get_ready_to_compress_the_trie!(globals);
+    crate::section_0952::Get_ready_to_compress_the_trie!(globals);
     // if trie_root<>0 then
     if trie_root!(globals) != 0 {
         // begin first_fit(trie_root); trie_pack(trie_root);
@@ -22,14 +22,15 @@ pub(crate) fn init_trie(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // @<Move the data into |trie|@>;
-    Move_the_data_into_trie!(globals);
+    crate::section_0958::Move_the_data_into_trie!(globals);
     // trie_not_ready:=false;
     globals.trie_not_ready = false;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0947::trie_root;
 use crate::section_0953::first_fit;
 use crate::section_0957::trie_pack;

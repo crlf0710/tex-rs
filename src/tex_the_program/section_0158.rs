@@ -16,7 +16,7 @@ pub(crate) fn new_penalty(globals: &mut TeXGlobals, m: integer) -> TeXResult<poi
     subtype!(globals, p) = 0;
     // penalty(p):=m; new_penalty:=p;
     penalty!(globals, p) = m;
-    return_nojump!(p);
+    crate::return_nojump!(p);
     // end;
 }
 
@@ -25,5 +25,8 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0141::small_node_size;
+use crate::section_0157::penalty;
 use crate::section_0157::penalty_node;

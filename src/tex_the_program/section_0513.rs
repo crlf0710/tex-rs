@@ -22,5 +22,5 @@ pub(crate) static ext_delimiter: pool_pointer = pool_pointer::default();
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0038::pool_pointer;
 
-use globals_struct::{globals_struct_field, globals_struct_use};
 use crate::section_0004::TeXGlobals;
+use globals_struct::{globals_struct_field, globals_struct_use};

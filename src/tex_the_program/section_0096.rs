@@ -8,14 +8,12 @@
 //
 // @d check_interrupt==begin if interrupt<>0 then pause_for_instructions;
 //   end
-macro_rules! check_interrupt {
-    ($globals:expr) => {
-        if $globals.interrupt != 0 {
-            pause_for_instructions($globals);
-        }
+pub(crate) macro check_interrupt($globals:expr) {
+    if $globals.interrupt != 0 {
+        pause_for_instructions($globals);
+    }
 
-        use crate::section_0098::pause_for_instructions;
-    };
+    use crate::section_0098::pause_for_instructions;
 }
 //
 // @<Global...@>=

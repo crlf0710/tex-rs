@@ -6,10 +6,10 @@
 #[distributed_slice(PRIM2HT)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1088(globals: &mut TeXGlobals) {
     // primitive("indent",start_par,1);
-    primitive(globals, strpool_str!("indent"), start_par, 1);
+    primitive(globals, crate::strpool_str!("indent"), start_par, 1);
     // @!@:indent_}{\.{\\indent} primitive@>
     // primitive("noindent",start_par,0);
-    primitive(globals, strpool_str!("noindent"), start_par, 0);
+    primitive(globals, crate::strpool_str!("noindent"), start_par, 0);
     // @!@:no_indent_}{\.{\\noindent} primitive@>
 }
 

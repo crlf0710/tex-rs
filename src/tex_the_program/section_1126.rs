@@ -7,11 +7,12 @@
 //! program attempts to make an appropriate recovery.
 //
 // @<Cases of |main_control| that build...@>=
-macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1126 {
-    ($globals:expr, $abs_mode_plus_cur_cmd:expr) => {{
-        // any_mode(car_ret), any_mode(tab_mark): align_error;
-        if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, car_ret as u16) || 
-            abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, tab_mark as u16) {
+pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1126($globals:expr, $abs_mode_plus_cur_cmd:expr) {{
+    // any_mode(car_ret), any_mode(tab_mark): align_error;
+    let processed =
+        if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, car_ret as u16)
+            || abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, tab_mark as u16)
+        {
             align_error($globals)?;
             use crate::section_1127::align_error;
             true
@@ -27,6 +28,9 @@ macro_rules! Cases_of_main_control_that_build_boxes_and_lists_1126 {
             true
         } else {
             false
-        }
-    }}
-}
+        };
+    use crate::section_0207::*;
+    use crate::section_0208::*;
+    use crate::section_1045::abs_mode_plus_cur_cmd_matches_any_mode;
+    processed
+}}

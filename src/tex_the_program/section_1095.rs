@@ -26,5 +26,7 @@ pub(crate) fn head_for_vmode(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0213::mode;
 use crate::section_0307::inserted;
+use crate::section_0307::token_type;
 use crate::section_0325::back_input;

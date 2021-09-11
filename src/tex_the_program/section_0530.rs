@@ -20,13 +20,13 @@ pub(crate) fn prompt_file_name(
         wake_up_terminal(globals);
     }
     // if s="input file name" then print_err("I can't find file `")
-    if s == strpool_str!("input file name") {
-        print_err!(globals, strpool_str!("I can't find file `"));
+    if s == crate::strpool_str!("input file name") {
+        print_err!(globals, crate::strpool_str!("I can't find file `"));
     }
     // @.I can't find file x@>
     // else print_err("I can't write on file `");
     else {
-        print_err!(globals, strpool_str!("I can't write on file `"));
+        print_err!(globals, crate::strpool_str!("I can't write on file `"));
     }
     // @.I can't write on file x@>
     // print_file_name(cur_name,cur_area,cur_ext); print("'.");
@@ -36,13 +36,13 @@ pub(crate) fn prompt_file_name(
         globals.cur_area.get() as _,
         globals.cur_ext.get() as _,
     );
-    print(globals, strpool_str!("'.").get() as _);
+    print(globals, crate::strpool_str!("'.").get() as _);
     // if e=".tex" then show_context;
-    if e == strpool_str!(".tex") {
+    if e == crate::strpool_str!(".tex") {
         show_context(globals);
     }
     // print_nl("Please type another "); print(s);
-    print_nl(globals, strpool_str!("Please type another "));
+    print_nl(globals, crate::strpool_str!("Please type another "));
     print(globals, s.into());
     // @.Please type...@>
     // if interaction<scroll_mode then
@@ -50,22 +50,22 @@ pub(crate) fn prompt_file_name(
         // fatal_error("*** (job aborted, file error in nonstop mode)");
         fatal_error(
             globals,
-            strpool_str!("*** (job aborted, file error in nonstop mode)"),
+            crate::strpool_str!("*** (job aborted, file error in nonstop mode)"),
         )?;
     }
     // @.job aborted, file error...@>
     // clear_terminal; prompt_input(": "); @<Scan file name in the buffer@>;
     clear_terminal(globals);
-    prompt_input!(globals, strpool_str!(": "));
-    Scan_file_name_in_the_buffer!(globals);
+    prompt_input!(globals, crate::strpool_str!(": "));
+    crate::section_0531::Scan_file_name_in_the_buffer!(globals);
     // if cur_ext="" then cur_ext:=e;
-    if globals.cur_ext == strpool_str!("") {
+    if globals.cur_ext == crate::strpool_str!("") {
         globals.cur_ext = e;
     }
     // pack_cur_name;
     pack_cur_name(globals);
     // end;
-    return_nojump!();
+    crate::return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
@@ -74,6 +74,8 @@ use crate::section_0034::wake_up_terminal;
 use crate::section_0038::str_number;
 use crate::section_0059::print;
 use crate::section_0062::print_nl;
+use crate::section_0071::prompt_input;
+use crate::section_0073::print_err;
 use crate::section_0073::scroll_mode;
 use crate::section_0081::TeXResult;
 use crate::section_0093::fatal_error;

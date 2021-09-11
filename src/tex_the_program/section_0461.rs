@@ -22,7 +22,9 @@ pub(crate) fn scan_glue(globals: &mut TeXGlobals, level: small_number) -> TeXRes
     let mu: boolean;
     // begin mu:=(level=mu_val); @<Get the next non-blank non-sign...@>;
     mu = level == small_number::new(cur_val_level_kind::mu_val as _);
-    Get_the_next_non_blank_non_sign_token__set_negative_appropriately!(globals, negative);
+    crate::section_0441::Get_the_next_non_blank_non_sign_token__set_negative_appropriately!(
+        globals, negative
+    );
     // if (cur_cmd>=min_internal)and(cur_cmd<=max_internal) then
     if globals.cur_cmd >= min_internal && globals.cur_cmd <= max_internal {
         // begin scan_something_internal(level,negative);
@@ -34,7 +36,7 @@ pub(crate) fn scan_glue(globals: &mut TeXGlobals, level: small_number) -> TeXRes
                 todo!("mu_error");
             }
             // return;
-            return_nojump!();
+            crate::return_nojump!();
             // end;
         }
         // if cur_val_level=int_val then scan_dimen(mu,false,true)
@@ -59,13 +61,16 @@ pub(crate) fn scan_glue(globals: &mut TeXGlobals, level: small_number) -> TeXRes
     }
     // @<Create a new glue specification whose width is |cur_val|; scan for its
     //   stretch and shrink components@>;
-    Create_a_new_glue_specification_whose_width_is_cur_val__scan_for_its_stretch_and_shrink_components!(globals, mu);
+    crate::section_0462::Create_a_new_glue_specification_whose_width_is_cur_val__scan_for_its_stretch_and_shrink_components!(
+        globals, mu
+    );
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::negate;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0113::quarterword;

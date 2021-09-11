@@ -17,38 +17,28 @@
 pub(crate) const glue_spec_size: quarterword = 4;
 // @d glue_ref_count(#) == link(#) {reference count of a glue specification}
 /// reference count of a glue specification
-macro_rules! glue_ref_count {
-    ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr)
-    };
+pub(crate) macro glue_ref_count($globals:expr, $ptr:expr) {
+    crate::section_0118::link!($globals, $ptr)
 }
 // @d stretch(#) == mem[#+2].sc {the stretchability of this glob of glue}
 /// the stretchability of this glob of glue
-macro_rules! stretch {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 2][crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro stretch($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + 2][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d shrink(#) == mem[#+3].sc {the shrinkability of this glob of glue}
 /// the shrinkability of this glob of glue
-macro_rules! shrink {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 3][crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro shrink($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + 3][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d stretch_order == type {order of infinity for stretching}
 /// order of infinity for stretching
-macro_rules! stretch_order {
-    ($globals:expr, $ptr:expr) => {
-        r#type!($globals, $ptr)
-    };
+pub(crate) macro stretch_order($globals:expr, $ptr:expr) {
+    crate::section_0133::r#type!($globals, $ptr)
 }
 // @d shrink_order == subtype {order of infinity for shrinking}
 /// order of infinity for shrinking
-macro_rules! shrink_order {
-    ($globals:expr, $ptr:expr) => {
-        subtype!($globals, $ptr)
-    };
+pub(crate) macro shrink_order($globals:expr, $ptr:expr) {
+    crate::section_0133::subtype!($globals, $ptr)
 }
 
 // @d fil=1 {first-order infinity}

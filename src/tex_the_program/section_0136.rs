@@ -25,18 +25,28 @@ pub(crate) fn new_null_box(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     glue_order!(globals, p) = glue_ord::normal as _;
     set_glue_ratio_zero!(glue_set!(globals, p));
     // new_null_box:=p;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
+use crate::section_0109::set_glue_ratio_zero;
 use crate::section_0110::min_quarterword;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0135::box_node_size;
+use crate::section_0135::depth;
+use crate::section_0135::glue_order;
+use crate::section_0135::glue_set;
 use crate::section_0135::glue_sign;
+use crate::section_0135::height;
 use crate::section_0135::hlist_node;
+use crate::section_0135::list_ptr;
+use crate::section_0135::shift_amount;
+use crate::section_0135::width;
 use crate::section_0150::glue_ord;

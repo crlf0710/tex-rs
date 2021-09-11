@@ -12,13 +12,14 @@
 // @d span_node_size=2 {number of |mem| words for a span node}
 //
 // @<Initialize the special list heads...@>=
-macro_rules! Initialize_the_special_list_heads_and_constant_nodes_0797 {
-    ($globals:expr) => {{
-        // link(end_span):=max_quarterword+1; info(end_span):=null;
-        link!($globals, end_span) = max_quarterword as pointer + 1;
-        info_inner!($globals, end_span) = null;
-        use crate::section_0110::max_quarterword;
-        use crate::section_0115::pointer;
-        use crate::section_0162::end_span;
-    }}
-}
+pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes_0797($globals:expr) {{
+    // link(end_span):=max_quarterword+1; info(end_span):=null;
+    link!($globals, end_span) = max_quarterword as pointer + 1;
+    info_inner!($globals, end_span) = null;
+    use crate::section_0110::max_quarterword;
+    use crate::section_0115::null;
+    use crate::section_0115::pointer;
+    use crate::section_0118::info_inner;
+    use crate::section_0118::link;
+    use crate::section_0162::end_span;
+}}

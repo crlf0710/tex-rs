@@ -6,7 +6,7 @@
 pub(crate) fn show_box(globals: &mut TeXGlobals, p: pointer) {
     // begin @<Assign the values |depth_threshold:=show_box_depth| and
     //   |breadth_max:=show_box_breadth|@>;
-    Assign_the_values_depth_threshold_from_show_box_depth_and_breadth_max_show_box_breadth!(
+    crate::section_0236::Assign_the_values_depth_threshold_from_show_box_depth_and_breadth_max_show_box_breadth!(
         globals
     );
     // if breadth_max<=0 then breadth_max:=5;
@@ -33,6 +33,7 @@ pub(crate) fn show_box(globals: &mut TeXGlobals, p: pointer) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0011::pool_size;

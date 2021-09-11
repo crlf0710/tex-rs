@@ -53,13 +53,18 @@
     non_camel_case_types,
     unused_imports,
     unused_doc_comments,
-    unused_attributes,
+    unused_attributes
 )]
 #![allow(unreachable_code)]
+#![allow(unused_macros)]
+#![feature(decl_macro)]
 //! This is `TeX`-rs, a document compiler intended to produce typesetting of high quality.
 
 #[macro_use]
 mod info;
+
+use info::*;
+
 #[macro_use]
 mod pascal;
 

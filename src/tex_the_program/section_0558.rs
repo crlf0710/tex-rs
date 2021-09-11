@@ -2,11 +2,10 @@
 //
 // @d param_end(#)==param_base[#]].sc
 // @d param(#)==font_info[#+param_end
-macro_rules! param {
-    ($globals:expr, $p:expr, $v:expr) => {
-        $globals.font_info[($v as crate::pascal::integer + $globals.param_base[$p as pointer])
-            as crate::section_0548::font_index_repr][crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro param($globals:expr, $p:expr, $v:expr) {
+    $globals.font_info[($v as crate::pascal::integer
+        + $globals.param_base[$p as crate::section_0115::pointer])
+        as crate::section_0548::font_index_repr][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d slant==param(slant_code) {slant to the right, per unit distance upward}
 // @d space==param(space_code) {normal space between words}
@@ -16,10 +15,8 @@ macro_rules! param {
 // @d quad==param(quad_code) {one em}
 // @d extra_space==param(extra_space_code) {additional space at end of sentence}
 /// additional space at end of sentence
-macro_rules! extra_space {
-    ($globals:expr, $p:expr) => {
-        param!($globals, $p, crate::section_0547::extra_space_code)
-    };
+pub(crate) macro extra_space($globals:expr, $p:expr) {
+    param!($globals, $p, crate::section_0547::extra_space_code)
 }
 
 // @<The em width for |cur_font|@>=quad(cur_font)

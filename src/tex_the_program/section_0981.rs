@@ -51,39 +51,35 @@ pub(crate) enum page_ins_node_subtype {
 //   {an insertion for this class will break here if anywhere}
 // @d broken_ins(#)==info(#+1) {this insertion might break at |broken_ptr|}
 /// this insertion might break at `broken_ptr`
-macro_rules! broken_ins {
-    ($globals:expr, $p:expr) => {
-        info_inner!($globals, $p + 1)
-    }
+pub(crate) macro broken_ins($globals:expr, $p:expr) {
+    crate::section_0118::info_inner!($globals, $p + 1)
 }
 
 // @d last_ins_ptr(#)==link(#+2) {the most recent insertion for this |subtype|}
 /// the most recent insertion for this `subtype`
-macro_rules! last_ins_ptr {
-    ($globals:expr, $p:expr) => {
-        link!($globals, $p + 2)
-    }
+pub(crate) macro last_ins_ptr($globals:expr, $p:expr) {
+    crate::section_0118::link!($globals, $p + 2)
 }
 
 // @d best_ins_ptr(#)==info(#+2) {the optimum most recent insertion}
 /// the optimum most recent insertion
-macro_rules! best_ins_ptr {
-    ($globals:expr, $p:expr) => {
-        info_inner!($globals, $p + 2)
-    }
+pub(crate) macro best_ins_ptr($globals:expr, $p:expr) {
+    crate::section_0118::info_inner!($globals, $p + 2)
 }
 
 // @<Initialize the special list heads...@>=
-macro_rules! Initialize_the_special_list_heads_and_constant_nodes_0981 {
-    ($globals:expr) => {{
-        // subtype(page_ins_head):=qi(255);
-        subtype!($globals, page_ins_head) = qi!(255);
-        // type(page_ins_head):=split_up; link(page_ins_head):=page_ins_head;
-        r#type!($globals, page_ins_head) = page_ins_node_subtype::split_up as _;
-        link!($globals, page_ins_head) = page_ins_head;
-        use crate::section_0162::page_ins_head;
-        use crate::section_0981::page_ins_node_subtype;
-    }}
-}
+pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes_0981($globals:expr) {{
+    // subtype(page_ins_head):=qi(255);
+    subtype!($globals, page_ins_head) = qi!(255);
+    // type(page_ins_head):=split_up; link(page_ins_head):=page_ins_head;
+    r#type!($globals, page_ins_head) = page_ins_node_subtype::split_up as _;
+    link!($globals, page_ins_head) = page_ins_head;
+    use crate::section_0112::qi;
+    use crate::section_0118::link;
+    use crate::section_0133::r#type;
+    use crate::section_0133::subtype;
+    use crate::section_0162::page_ins_head;
+    use crate::section_0981::page_ins_node_subtype;
+}}
 
 use crate::section_0113::quarterword;

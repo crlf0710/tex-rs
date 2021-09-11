@@ -41,4 +41,4 @@
 //! with particular care.
 //!
 
-migration_complete!();
+crate::migration_complete!();

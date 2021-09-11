@@ -11,7 +11,7 @@ pub(crate) fn out_what(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     // open_node,write_node,close_node:@<Do some work that has been queued up
     //   for \.{\\write}@>;
     if subtype_p == open_node || subtype_p == write_node || subtype_p == close_node {
-        Do_some_work_that_has_been_queued_up_for_write!(globals, p);
+        crate::section_1374::Do_some_work_that_has_been_queued_up_for_write!(globals, p);
     }
     // special_node:special_out(p);
     else if subtype_p == special_node {
@@ -23,16 +23,18 @@ pub(crate) fn out_what(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     }
     // othercases confusion("ext4")
     else {
-        confusion(globals, strpool_str!("ext4"))?;
+        confusion(globals, crate::strpool_str!("ext4"))?;
     }
     // @:this can't happen ext4}{\quad ext4@>
     // endcases;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::do_nothing;
 use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
 use crate::section_0115::pointer;
+use crate::section_0133::subtype;
 use crate::section_1341::*;

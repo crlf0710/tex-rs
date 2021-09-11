@@ -5,7 +5,7 @@
 pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label common_ending;
     // var p:pointer; {tail of a token list to show}
-    region_forward_label!(
+    crate::region_forward_label!(
     |'common_ending|
     {
     // begin case cur_chr of
@@ -17,20 +17,20 @@ pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // show_box_code: @<Show the current contents of a box@>;
     else if globals.cur_chr.get() == show_box_code as chr_code_repr {
-        Show_the_current_contents_of_a_box!(globals);
+        crate::section_1296::Show_the_current_contents_of_a_box!(globals);
     }
     // show_code: @<Show the current meaning of a token, then |goto common_ending|@>;
     else if globals.cur_chr.get() == show_code as chr_code_repr {
-        Show_the_current_meaning_of_a_token__then_goto_common_ending!(globals, 'common_ending);
+        crate::section_1294::Show_the_current_meaning_of_a_token__then_goto_common_ending!(globals, 'common_ending);
     }
     // othercases @<Show the current value of some parameter or register,
     //   then |goto common_ending|@>
     else {
-        Show_the_current_value_of_some_parameter_or_register__then_goto_common_ending!(globals, 'common_ending);
+        crate::section_1297::Show_the_current_value_of_some_parameter_or_register__then_goto_common_ending!(globals, 'common_ending);
     }
     // endcases;@/
     // @<Complete a potentially long \.{\\show} command@>;
-    Complete_a_potentially_long_show_command!(globals);
+    crate::section_1298::Complete_a_potentially_long_show_command!(globals);
     }
     // common_ending: if interaction<error_stop_mode then
     'common_ending <-
@@ -61,14 +61,17 @@ pub(crate) fn show_whatever(globals: &mut TeXGlobals) -> TeXResult<()> {
     // error;
     error(globals)?;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
 use crate::section_0073::error_stop_mode;
+use crate::section_0079::help0;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0218::show_activities;
+use crate::section_0236::tracing_online;
 use crate::section_0245::begin_diagnostic;
 use crate::section_0297::chr_code_repr;
 use crate::section_1291::show_kind::*;

@@ -18,7 +18,9 @@ pub(crate) fn shift_case(globals: &mut TeXGlobals) -> TeXResult<()> {
     // while p<>null do
     while p != null {
         // begin @<Change the case of the token in |p|, if a change is appropriate@>;
-        Change_the_case_of_the_token_in_p_if_a_change_is_appropriate!(globals, p, b);
+        crate::section_1289::Change_the_case_of_the_token_in_p_if_a_change_is_appropriate!(
+            globals, p, b
+        );
         // p:=link(p);
         p = link!(globals, p);
         // end;
@@ -28,11 +30,14 @@ pub(crate) fn shift_case(globals: &mut TeXGlobals) -> TeXResult<()> {
     back_list!(globals, link!(globals, globals.def_ref));
     free_avail!(globals, globals.def_ref);
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0118::link;
+use crate::section_0121::free_avail;
+use crate::section_0323::back_list;
 use crate::section_0473::scan_toks;

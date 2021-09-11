@@ -12,15 +12,11 @@
 //
 // @d type(#) == mem[#].hh.b0 {identifies what kind of node this is}
 /// identifies what kind of node this is
-macro_rules! r#type {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B0]
-    };
+pub(crate) macro r#type($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B0]
 }
 // @d subtype(#) == mem[#].hh.b1 {secondary identification in some cases}
 /// secondary identification in some cases
-macro_rules! subtype {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B1]
-    };
+pub(crate) macro subtype($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr][crate::section_0113::MEMORY_WORD_HH_B1]
 }

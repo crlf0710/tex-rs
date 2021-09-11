@@ -5,7 +5,7 @@
 /// saves `eqtb[p]`
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn eq_save(globals: &mut TeXGlobals, p:pointer, l:quarterword) {
+pub(crate) fn eq_save(globals: &mut TeXGlobals, p: pointer, l: quarterword) {
     // begin check_full_save_stack;
     check_full_save_stack!(globals);
     // if l=level_zero then save_type(save_ptr):=restore_zero
@@ -28,8 +28,13 @@ pub(crate) fn eq_save(globals: &mut TeXGlobals, p:pointer, l:quarterword) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
 use crate::section_0221::level_zero;
 use crate::section_0268::restore_old_value;
 use crate::section_0268::restore_zero;
+use crate::section_0268::save_index;
+use crate::section_0268::save_level;
+use crate::section_0268::save_type;
+use crate::section_0273::check_full_save_stack;

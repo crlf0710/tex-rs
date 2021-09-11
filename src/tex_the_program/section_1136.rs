@@ -22,6 +22,8 @@ pub(crate) fn push_math(globals: &mut TeXGlobals, c: group_code) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0115::null;
 use crate::section_0211::mmode;
+use crate::section_0213::incompleat_noad;
+use crate::section_0213::mode;
 use crate::section_0216::push_nest;
 use crate::section_0269::group_code;
 use crate::section_0274::new_save_level;

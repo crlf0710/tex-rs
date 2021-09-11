@@ -21,7 +21,7 @@ pub(crate) fn alter_box_dimen(globals: &mut TeXGlobals) -> TeXResult<()> {
             scaled::new_from_inner(globals.cur_val);
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
@@ -32,5 +32,7 @@ use crate::section_0101::small_number;
 use crate::section_0101::MEMORY_WORD_SC;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0230::r#box;
 use crate::section_0405::scan_optional_equals;
 use crate::section_0433::scan_eight_bit_int;
+use crate::section_0448::scan_normal_dimen;

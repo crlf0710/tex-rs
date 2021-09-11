@@ -16,10 +16,8 @@ pub(crate) const inf_penalty: integer = inf_bad as integer;
 pub(crate) const eject_penalty: integer = -inf_penalty;
 // @d penalty(#) == mem[#+1].int {the added cost of breaking a list here}
 /// the added cost of breaking a list here
-macro_rules! penalty {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 1][crate::section_0113::MEMORY_WORD_INT]
-    };
+pub(crate) macro penalty($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + 1][crate::section_0113::MEMORY_WORD_INT]
 }
 
 use crate::pascal::integer;

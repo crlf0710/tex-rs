@@ -18,15 +18,13 @@
 //! Kern nodes do not disappear at a line break unless they are |explicit|.
 //
 // @d set_break_width_to_background(#)==break_width[#]:=background[#]
-macro_rules! set_break_width_to_background {
-    ($globals:expr, $idx:expr) => {{
-        $globals.break_width[$idx] = $globals.background[$idx]
-    }}
-}
+pub(crate) macro set_break_width_to_background($globals:expr, $idx:expr) {{
+    $globals.break_width[$idx] = $globals.background[$idx]
+}}
 
 // @<Compute the values of |break...@>=
-macro_rules! Compute_the_values_of_break_width {
-    ($globals:expr, $break_type:expr, $no_break_yet:expr) => {{
+pub(crate) macro Compute_the_values_of_break_width
+    ($globals:expr, $break_type:expr, $no_break_yet:expr) {{
         /// runs through nodes ahead of `cur_p`
         let mut s: pointer;
 
@@ -40,20 +38,20 @@ macro_rules! Compute_the_values_of_break_width {
             // @<Compute the discretionary |break_width| values@>;
             todo!("compute the discretionary break_width");
         }
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done|
         {
         // while s<>null do
         while s != null {
             // begin if is_char_node(s) then goto done;
             if is_char_node!($globals, s) {
-                goto_forward_label!('done);
+                crate::goto_forward_label!('done);
             }
             // case type(s) of
             let type_s = r#type!($globals, s);
             // glue_node:@<Subtract glue from |break_width|@>;
             if type_s == glue_node {
-                Subtract_glue_from_break_width!($globals, s);
+                crate::section_0838::Subtract_glue_from_break_width!($globals, s);
             }
             // penalty_node: do_nothing;
             else if type_s == penalty_node {
@@ -66,7 +64,7 @@ macro_rules! Compute_the_values_of_break_width {
             // kern_node: if subtype(s)<>explicit then goto done
             else if type_s == kern_node {
                 if subtype!($globals, s) as integer != kern_node_subtype::explicit as integer {
-                    goto_forward_label!('done)
+                    crate::goto_forward_label!('done)
                 }
                 // else break_width[1]:=break_width[1]-width(s);
                 else {
@@ -75,7 +73,7 @@ macro_rules! Compute_the_values_of_break_width {
             }
             // othercases goto done
             else {
-                goto_forward_label!('done);
+                crate::goto_forward_label!('done);
             }
             // endcases;@/
             // s:=link(s);
@@ -86,12 +84,20 @@ macro_rules! Compute_the_values_of_break_width {
         // done: end
         'done <-
         );
+        use crate::pascal::integer;
+        use crate::section_0016::do_nothing;
         use crate::section_0115::null;
+        use crate::section_0115::pointer;
+        use crate::section_0118::link;
+        use crate::section_0133::r#type;
+        use crate::section_0133::subtype;
+        use crate::section_0134::is_char_node;
+        use crate::section_0135::width;
         use crate::section_0147::math_node;
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
         use crate::section_0155::kern_node_subtype;
         use crate::section_0157::penalty_node;
         use crate::section_0819::unhyphenated;
+        use crate::section_0823::do_all_six;
     }}
-}

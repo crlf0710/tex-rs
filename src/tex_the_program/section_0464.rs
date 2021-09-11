@@ -47,7 +47,10 @@ pub(crate) fn str_toks(globals: &mut TeXGlobals, b: pool_pointer) -> pointer {
     #[cfg(feature = "unicode_support")]
     {
         let range = b..globals.pool_ptr;
-        let ascii_codes = globals.str_pool.slice_ascii_codes(range).collect::<Vec<_>>();
+        let ascii_codes = globals
+            .str_pool
+            .slice_ascii_codes(range)
+            .collect::<Vec<_>>();
         for t in ascii_codes {
             let t: ASCII_code = xord(t);
             let tok;
@@ -69,13 +72,16 @@ pub(crate) fn str_toks(globals: &mut TeXGlobals, b: pool_pointer) -> pointer {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0020::xord;
 use crate::section_0038::pool_pointer;
-use crate::section_0042::str_room;
 use crate::section_0042::character_max_room;
+use crate::section_0042::str_room;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0162::temp_head;
-use crate::section_0289::space_token;
 use crate::section_0289::other_token;
+use crate::section_0289::space_token;
 use crate::section_0297::cur_tok_type;
+use crate::section_0371::fast_store_new_token;

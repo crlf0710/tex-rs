@@ -19,6 +19,7 @@ pub(crate) fn print_nl(globals: &mut TeXGlobals, s: str_number) {
 }
 
 use crate::pascal::IsOddOrEven;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0038::str_number;

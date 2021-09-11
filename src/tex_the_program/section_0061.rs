@@ -5,31 +5,31 @@
 //! @^system dependencies@>
 
 // @<Initialize the output...@>=
-macro_rules! Initialize_the_output_routines_0061 {
-    ($globals:expr) => {
-        // wterm(banner);
-        wterm(make_globals_io_view!($globals), banner);
+pub(crate) macro Initialize_the_output_routines_0061($globals:expr) {
+    // wterm(banner);
+    wterm(make_globals_io_view!($globals), banner);
 
-        // if format_ident=0 then wterm_ln(' (no format preloaded)')
-        if $globals.format_ident.is_zero() {
-            wterm_ln(make_globals_io_view!($globals), " (no format preloaded)");
-        } else {
-            // else  begin slow_print(format_ident); print_ln;
-            slow_print($globals, $globals.format_ident.into());
-            print_ln(make_globals_io_string_log_view!($globals));
-            // end;
-        }
+    // if format_ident=0 then wterm_ln(' (no format preloaded)')
+    if $globals.format_ident.is_zero() {
+        wterm_ln(make_globals_io_view!($globals), " (no format preloaded)");
+    } else {
+        // else  begin slow_print(format_ident); print_ln;
+        slow_print($globals, $globals.format_ident.into());
+        print_ln(make_globals_io_string_log_view!($globals));
+        // end;
+    }
 
-        // update_terminal;
-        update_terminal($globals);
+    // update_terminal;
+    update_terminal($globals);
 
-        use crate::section_0002::banner;
-        use crate::section_0034::update_terminal;
-        use crate::section_0056::wterm;
-        use crate::section_0056::wterm_ln;
-        use crate::section_0057::print_ln;
-        use crate::section_0060::slow_print;
-    };
+    use crate::section_0002::banner;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0004::make_globals_io_view;
+    use crate::section_0034::update_terminal;
+    use crate::section_0056::wterm;
+    use crate::section_0056::wterm_ln;
+    use crate::section_0057::print_ln;
+    use crate::section_0060::slow_print;
 }
 
-migration_complete!();
+crate::migration_complete!();

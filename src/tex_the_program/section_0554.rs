@@ -33,19 +33,15 @@ pub(crate) struct char_info(four_quarters);
 
 // @d char_info_end(#)==#].qqqq
 // @d char_info(#)==font_info[char_base[#]+char_info_end
-macro_rules! char_info {
-    ($globals:expr, $f:expr, $c:expr) => {
-        $globals.font_info[$globals.char_base[$f] as crate::section_0115::pointer
-            + $c as crate::section_0115::pointer][crate::section_0554::MEMORY_WORD_CHAR_INFO]
-    };
+pub(crate) macro char_info($globals:expr, $f:expr, $c:expr) {
+    $globals.font_info[$globals.char_base[$f] as crate::section_0115::pointer
+        + $c as crate::section_0115::pointer][crate::section_0554::MEMORY_WORD_CHAR_INFO]
 }
 // @d char_width_end(#)==#.b0].sc
 // @d char_width(#)==font_info[width_base[#]+char_width_end
-macro_rules! char_width {
-    ($globals:expr, $f:expr, $c:expr) => {
-        $globals.font_info[$globals.width_base[$f] as pointer + $c.width() as pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro char_width($globals:expr, $f:expr, $c:expr) {
+    $globals.font_info[$globals.width_base[$f] as crate::section_0115::pointer
+        + $c.width() as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d char_exists(#)==(#.b0>min_quarterword)
 impl char_info {
@@ -66,19 +62,15 @@ impl char_info {
 }
 // @d char_height_end(#)==(#) div 16].sc
 // @d char_height(#)==font_info[height_base[#]+char_height_end
-macro_rules! char_height {
-    ($globals:expr, $f:expr, $c:expr) => {
-        $globals.font_info[$globals.height_base[$f] as pointer + ($c / 16) as pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro char_height($globals:expr, $f:expr, $c:expr) {
+    $globals.font_info[$globals.height_base[$f] as crate::section_0115::pointer
+        + ($c / 16) as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d char_depth_end(#)==(#) mod 16].sc
 // @d char_depth(#)==font_info[depth_base[#]+char_depth_end
-macro_rules! char_depth {
-    ($globals:expr, $f:expr, $c:expr) => {
-        $globals.font_info[$globals.depth_base[$f] as pointer + ($c % 16) as pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro char_depth($globals:expr, $f:expr, $c:expr) {
+    $globals.font_info[$globals.depth_base[$f] as crate::section_0115::pointer
+        + ($c % 16) as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d char_tag(#)==((qo(#.b2)) mod 4)
 
@@ -116,6 +108,7 @@ impl IndexMut<MEMORY_WORD_CHAR_INFO> for memory_word {
 
 use crate::section_0025::eight_bits;
 use crate::section_0110::min_quarterword;
+use crate::section_0112::qo;
 use crate::section_0113::four_quarters;
 use crate::section_0113::memory_word;
 use crate::section_0113::quarterword;

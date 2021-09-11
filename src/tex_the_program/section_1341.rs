@@ -38,59 +38,43 @@ pub(crate) const special_node: quarterword = 3;
 pub(crate) const language_node: quarterword = 4;
 // @d what_lang(#)==link(#+1) {language number, in the range |0..255|}
 /// language number, in the range `0..255`
-macro_rules! what_lang {
-    ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr + 1)
-    }
+pub(crate) macro what_lang($globals:expr, $ptr:expr) {
+    crate::section_0118::link!($globals, $ptr + 1)
 }
 // @d what_lhm(#)==type(#+1) {minimum left fragment, in the range |1..63|}
 /// minimum left fragment, in the range `1..63`
-macro_rules! what_lhm {
-    ($globals:expr, $ptr:expr) => {
-        r#type!($globals, $ptr + 1)
-    }
+pub(crate) macro what_lhm($globals:expr, $ptr:expr) {
+    crate::section_0133::r#type!($globals, $ptr + 1)
 }
 // @d what_rhm(#)==subtype(#+1) {minimum right fragment, in the range |1..63|}
 /// minimum right fragment, in the range `1..63`
-macro_rules! what_rhm {
-    ($globals:expr, $ptr:expr) => {
-        subtype!($globals, $ptr + 1)
-    }
+pub(crate) macro what_rhm($globals:expr, $ptr:expr) {
+    crate::section_0133::subtype!($globals, $ptr + 1)
 }
 // @d write_tokens(#) == link(#+1) {reference count of token list to write}
 /// reference count of token list to write
-macro_rules! write_tokens {
-    ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr + 1)
-    }
+pub(crate) macro write_tokens($globals:expr, $ptr:expr) {
+    crate::section_0118::link!($globals, $ptr + 1)
 }
 // @d write_stream(#) == info(#+1) {stream number (0 to 17)}
 /// stream number (0 to 17)
-macro_rules! write_stream {
-    ($globals:expr, $ptr:expr) => {
-        info_inner!($globals, $ptr + 1)
-    }
+pub(crate) macro write_stream($globals:expr, $ptr:expr) {
+    crate::section_0118::info_inner!($globals, $ptr + 1)
 }
 // @d open_name(#) == link(#+1) {string number of file name to open}
 /// string number of file name to open
-macro_rules! open_name {
-    ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr + 1)
-    }
+pub(crate) macro open_name($globals:expr, $ptr:expr) {
+    crate::section_0118::link!($globals, $ptr + 1)
 }
 // @d open_area(#) == info(#+2) {string number of file area for |open_name|}
 /// string number of file area for `open_name`
-macro_rules! open_area {
-    ($globals:expr, $ptr:expr) => {
-        info_inner!($globals, $ptr + 2)
-    }
+pub(crate) macro open_area($globals:expr, $ptr:expr) {
+    crate::section_0118::info_inner!($globals, $ptr + 2)
 }
 // @d open_ext(#) == link(#+2) {string number of file extension for |open_name|}
 /// string number of file extension for `open_name`
-macro_rules! open_ext {
-    ($globals:expr, $ptr:expr) => {
-        link!($globals, $ptr + 2)
-    }
+pub(crate) macro open_ext($globals:expr, $ptr:expr) {
+    crate::section_0118::link!($globals, $ptr + 2)
 }
 
 use crate::section_0113::quarterword;

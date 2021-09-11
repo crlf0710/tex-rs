@@ -9,19 +9,19 @@
 pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label restart,done;
     // begin restart: get_next;
-    region_forward_label! {
+    crate::region_forward_label! {
     |'done|
     {
-    region_backward_label! {
+    crate::region_backward_label! {
     'restart <-
     {
         get_next(globals)?;
-        trace_expr!("cur_chr = {:?}", globals.cur_chr);
-        trace_expr!("cur_cmd = {}", globals.cur_cmd);
+        crate::trace_expr!("cur_chr = {:?}", globals.cur_chr);
+        crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
         // @^inner loop@>
         // if cur_cmd<=max_command then goto done;
         if globals.cur_cmd <= max_command {
-            goto_forward_label!('done);
+            crate::goto_forward_label!('done);
         }
         // if cur_cmd>=call then
         if globals.cur_cmd >= call {
@@ -35,7 +35,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
                 globals.cur_cmd = endv;
                 // goto done; {|cur_chr=null_list|}
                 /// `cur_chr=null_list`
-                goto_forward_label!('done);
+                crate::goto_forward_label!('done);
                 // end
             }
         } else {
@@ -43,7 +43,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
             expand(globals)?;
         }
         // goto restart;
-        goto_backward_label!('restart);
+        crate::goto_backward_label!('restart);
     }
     |'restart|
     }
@@ -58,9 +58,9 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     } else {
         globals.cur_tok = cur_tok_type::from_cs(globals.cur_cs);
     }
-    trace_expr!("cur_tok = {:?}", globals.cur_tok);
-    
-    return_nojump!();
+    crate::trace_expr!("cur_tok = {:?}", globals.cur_tok);
+
+    crate::return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;

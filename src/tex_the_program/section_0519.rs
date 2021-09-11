@@ -5,24 +5,28 @@
 //! @^system dependencies@>
 //
 // @d append_to_name(#)==begin c:=#; incr(k);
-macro_rules! append_to_name {
-    ($globals:expr, $val:expr, $k:expr) => {{
-        let c = $val;
-        incr!($k);
-        // if k<=file_name_size then name_of_file[k]:=xchr[c];
-        if ($k as integer) < file_name_size as integer {
-            $globals.name_of_file[$k as u16] = xchr(c);
-        }
-        // end
-        use crate::pascal::integer;
-        use crate::section_0020::xchr;
-    }}
-}
+pub(crate) macro append_to_name($globals:expr, $val:expr, $k:expr) {{
+    let c = $val;
+    incr!($k);
+    // if k<=file_name_size then name_of_file[k]:=xchr[c];
+    if ($k as integer) < file_name_size as integer {
+        $globals.name_of_file[$k as u16] = xchr(c);
+    }
+    // end
+    use crate::pascal::integer;
+    use crate::section_0016::incr;
+    use crate::section_0020::xchr;
+}}
 
 // @p procedure pack_file_name(@!n,@!a,@!e:str_number);
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn pack_file_name(globals: &mut TeXGlobals, n: str_number, a: str_number, e:str_number) {
+pub(crate) fn pack_file_name(
+    globals: &mut TeXGlobals,
+    n: str_number,
+    a: str_number,
+    e: str_number,
+) {
     // var k:integer; {number of positions filled in |name_of_file|}
     // @!c: ASCII_code; {character being packed}
     // @!j:pool_pointer; {index into |str_pool|}
@@ -54,7 +58,7 @@ pub(crate) fn pack_file_name(globals: &mut TeXGlobals, n: str_number, a: str_num
         globals.name_length = file_name_size.into();
     }
     // for k:=name_length+1 to file_name_size do name_of_file[k]:=' ';
-    for k in globals.name_length.get() + 1 ..= file_name_size {
+    for k in globals.name_length.get() + 1..=file_name_size {
         globals.name_of_file[k] = xchr(ASCII_code_literal!(b' '));
     }
     // end;
@@ -62,6 +66,7 @@ pub(crate) fn pack_file_name(globals: &mut TeXGlobals, n: str_number, a: str_num
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::file_name_size;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0020::xchr;
-use crate::section_0038::str_number;
 use crate::section_0020::xord;
+use crate::section_0038::str_number;

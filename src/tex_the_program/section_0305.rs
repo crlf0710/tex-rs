@@ -39,15 +39,15 @@
 pub(crate) enum scanner_status_kind {
     normal = 0,
     /// `scanner_status` when passing conditional text
-    skipping=1,
+    skipping = 1,
     /// `scanner_status` when reading a macro definition
-    defining=2,
+    defining = 2,
     /// `scanner_status` when reading macro arguments
-    matching=3,
+    matching = 3,
     /// `scanner_status` when reading an alignment preamble
-    aligning=4,
+    aligning = 4,
     /// `scanner_status` when reading a balanced text
-    absorbing=5,
+    absorbing = 5,
 }
 
 pub(crate) use scanner_status_kind::*;
@@ -71,7 +71,5 @@ pub(crate) static warning_index: pointer = null;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static def_ref: pointer = pointer::default();
 
-
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
-

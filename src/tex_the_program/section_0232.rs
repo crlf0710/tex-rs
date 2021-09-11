@@ -9,7 +9,8 @@
 //! possible.
 //
 // @d null_font==font_base
-pub(crate) const null_font: internal_font_number = unsafe { internal_font_number::new_unchecked(font_base as _) };
+pub(crate) const null_font: internal_font_number =
+    unsafe { internal_font_number::new_unchecked(font_base as _) };
 // @d var_code==@'70000 {math code meaning ``use the current family''}
 //
 // @<Initialize table entries...@>=
@@ -28,7 +29,7 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     // eq_level(cur_font_loc):=level_one;@/
     eq_level!(globals, cur_font_loc) = level_one;
     // for k:=math_font_base to math_font_base+47 do eqtb[k]:=eqtb[cur_font_loc];
-    for k in math_font_base ..= math_font_base + 47 {
+    for k in math_font_base..=math_font_base + 47 {
         globals.eqtb[k as pointer] = globals.eqtb[cur_font_loc as pointer];
     }
     // equiv(cat_code_base):=0; eq_type(cat_code_base):=data;
@@ -37,7 +38,7 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
     // eq_level(cat_code_base):=level_one;@/
     eq_level!(globals, cat_code_base) = level_one;
     // for k:=cat_code_base+1 to int_base-1 do eqtb[k]:=eqtb[cat_code_base];
-    for k in cat_code_base + 1..= int_base - 1 {
+    for k in cat_code_base + 1..=int_base - 1 {
         globals.eqtb[k as pointer] = globals.eqtb[cat_code_base as pointer];
     }
     // for k:=0 to 255 do
@@ -79,26 +80,36 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0012::font_base;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0022::carriage_return;
-use crate::section_0022::null_code;
 use crate::section_0022::invalid_code;
+use crate::section_0022::null_code;
+use crate::section_0112::hi;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
+use crate::section_0207::car_ret;
 use crate::section_0207::comment;
 use crate::section_0207::escape;
+use crate::section_0207::ignore;
+use crate::section_0207::invalid_char;
 use crate::section_0207::letter;
 use crate::section_0207::other_char;
 use crate::section_0207::spacer;
-use crate::section_0207::car_ret;
-use crate::section_0207::ignore;
-use crate::section_0207::invalid_char;
 use crate::section_0210::data;
+use crate::section_0221::eq_level;
+use crate::section_0221::eq_type;
+use crate::section_0221::equiv;
 use crate::section_0221::level_one;
-use crate::section_0230::cur_font_loc;
+use crate::section_0230::cat_code;
 use crate::section_0230::cat_code_base;
+use crate::section_0230::cur_font;
+use crate::section_0230::cur_font_loc;
 use crate::section_0230::int_base;
+use crate::section_0230::lc_code;
+use crate::section_0230::math_code;
 use crate::section_0230::math_font_base;
+use crate::section_0230::sf_code;
 use crate::section_0548::internal_font_number;
 
 use linkme::distributed_slice;

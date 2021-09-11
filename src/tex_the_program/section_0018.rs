@@ -23,33 +23,28 @@ impl ASCII_code {
     pub(crate) fn from_integer(val: integer) -> Self {
         #[cfg(not(feature = "unicode_support"))]
         {
-            assert!(val >=0 && val <= 255);
+            assert!(val >= 0 && val <= 255);
             ASCII_code(val as _)
         }
         #[cfg(feature = "unicode_support")]
         {
-            if val >= 0 && val <= 255
-            {
+            if val >= 0 && val <= 255 {
                 ASCII_code(val as _)
-            }
-            else
-            {
+            } else {
                 todo!("{} is > 255", val);
             }
         }
     }
 }
 
-migration_complete!();
+crate::migration_complete!();
 
-macro_rules! ASCII_code_literal {
-    ($val:expr) => {{
-        use crate::section_0018::ASCII_code;
+pub(crate) macro ASCII_code_literal($val:expr) {{
+    use crate::section_0018::ASCII_code;
 
-        let val: u8 = $val;
-        ASCII_code(val as _)
-    }};
-}
+    let val: u8 = $val;
+    ASCII_code(val as _)
+}}
 
 impl From<integer> for ASCII_code {
     fn from(val: integer) -> Self {

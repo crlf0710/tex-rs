@@ -78,132 +78,93 @@ pub(crate) type int_base_TYPENUM = typenum::op!(math_code_base_TYPENUM + U256);
 pub(crate) const int_base: word = int_base_TYPENUM::U32;
 // @#
 // @d par_shape_ptr==equiv(par_shape_loc)
-macro_rules! par_shape_ptr {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::par_shape_loc)
-    };
+pub(crate) macro par_shape_ptr($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::par_shape_loc)
 }
 // @d output_routine==equiv(output_routine_loc)
-macro_rules! output_routine {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::output_routine_loc)
-    };
+pub(crate) macro output_routine($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::output_routine_loc)
 }
 // @d every_par==equiv(every_par_loc)
-macro_rules! every_par {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::every_par_loc)
-    };
+pub(crate) macro every_par($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_par_loc)
 }
 // @d every_math==equiv(every_math_loc)
-macro_rules! every_math {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::every_math_loc)
-    };
+pub(crate) macro every_math($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_math_loc)
 }
 // @d every_display==equiv(every_display_loc)
 // @d every_hbox==equiv(every_hbox_loc)
-macro_rules! every_hbox {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::every_hbox_loc)
-    };
+pub(crate) macro every_hbox($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_hbox_loc)
 }
 // @d every_vbox==equiv(every_vbox_loc)
-macro_rules! every_vbox {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::every_vbox_loc)
-    };
+pub(crate) macro every_vbox($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_vbox_loc)
 }
 // @d every_job==equiv(every_job_loc)
-macro_rules! every_job {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::every_job_loc)
-    };
+pub(crate) macro every_job($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_job_loc)
 }
 // @d every_cr==equiv(every_cr_loc)
-macro_rules! every_cr {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::every_cr_loc)
-    };
+pub(crate) macro every_cr($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_cr_loc)
 }
 // @d err_help==equiv(err_help_loc)
-macro_rules! err_help {
-    ($globals:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::box_base as crate::section_0115::pointer
-                + crate::section_0230::err_help_loc as crate::section_0115::pointer
-        )
-    };
+pub(crate) macro err_help($globals:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::box_base as crate::section_0115::pointer
+            + crate::section_0230::err_help_loc as crate::section_0115::pointer
+    )
 }
 // @d toks(#)==equiv(toks_base+#)
 // @d box(#)==equiv(box_base+#)
-macro_rules! r#box {
-    ($globals:expr, $ptr:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::box_base as crate::section_0115::pointer
-                + $ptr as crate::section_0115::pointer
-        )
-    };
+pub(crate) macro r#box($globals:expr, $ptr:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::box_base as crate::section_0115::pointer
+            + $ptr as crate::section_0115::pointer
+    )
 }
 // @d cur_font==equiv(cur_font_loc)
-macro_rules! cur_font {
-    ($globals:expr) => {
-        equiv!($globals, crate::section_0230::cur_font_loc)
-    };
+pub(crate) macro cur_font($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::cur_font_loc)
 }
 // @d fam_fnt(#)==equiv(math_font_base+#)
 // @d cat_code(#)==equiv(cat_code_base+#)
-macro_rules! cat_code {
-    ($globals:expr, $val:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::index_offset_with_ASCII_code(
-                crate::section_0230::cat_code_base,
-                $val
-            )
-        )
-    };
+pub(crate) macro cat_code($globals:expr, $val:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::index_offset_with_ASCII_code(crate::section_0230::cat_code_base, $val)
+    )
 }
 // @d lc_code(#)==equiv(lc_code_base+#)
-macro_rules! lc_code {
-    ($globals:expr, $val:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::index_offset_with_ASCII_code(
-                crate::section_0230::lc_code_base,
-                $val
-            )
-        )
-    };
+pub(crate) macro lc_code($globals:expr, $val:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::index_offset_with_ASCII_code(crate::section_0230::lc_code_base, $val)
+    )
 }
 // @d uc_code(#)==equiv(uc_code_base+#)
 // @d sf_code(#)==equiv(sf_code_base+#)
-macro_rules! sf_code {
-    ($globals:expr, $val:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::index_offset_with_ASCII_code(
-                crate::section_0230::sf_code_base,
-                $val
-            )
-        )
-    };
+pub(crate) macro sf_code($globals:expr, $val:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::index_offset_with_ASCII_code(crate::section_0230::sf_code_base, $val)
+    )
 }
 // @d math_code(#)==equiv(math_code_base+#)
 //   {Note: |math_code(c)| is the true math code plus |min_halfword|}
 /// Note: `math_code(c)` is the true math code plus `min_halfword`
-macro_rules! math_code {
-    ($globals:expr, $val:expr) => {
-        equiv!(
-            $globals,
-            crate::section_0230::index_offset_with_ASCII_code(
-                crate::section_0230::math_code_base,
-                $val
-            )
+pub(crate) macro math_code($globals:expr, $val:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::index_offset_with_ASCII_code(
+            crate::section_0230::math_code_base,
+            $val
         )
-    };
+    )
 }
 
 // @<Put each...@>=
@@ -212,7 +173,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("output",assign_toks,output_routine_loc);
     primitive(
         globals,
-        strpool_str!("output"),
+        crate::strpool_str!("output"),
         assign_toks,
         output_routine_loc as _,
     );
@@ -220,7 +181,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everypar",assign_toks,every_par_loc);
     primitive(
         globals,
-        strpool_str!("everypar"),
+        crate::strpool_str!("everypar"),
         assign_toks,
         every_par_loc as _,
     );
@@ -228,7 +189,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everymath",assign_toks,every_math_loc);
     primitive(
         globals,
-        strpool_str!("everymath"),
+        crate::strpool_str!("everymath"),
         assign_toks,
         every_math_loc as _,
     );
@@ -236,7 +197,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everydisplay",assign_toks,every_display_loc);
     primitive(
         globals,
-        strpool_str!("everydisplay"),
+        crate::strpool_str!("everydisplay"),
         assign_toks,
         every_display_loc as _,
     );
@@ -244,7 +205,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everyhbox",assign_toks,every_hbox_loc);
     primitive(
         globals,
-        strpool_str!("everyhbox"),
+        crate::strpool_str!("everyhbox"),
         assign_toks,
         every_hbox_loc as _,
     );
@@ -252,7 +213,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everyvbox",assign_toks,every_vbox_loc);
     primitive(
         globals,
-        strpool_str!("everyvbox"),
+        crate::strpool_str!("everyvbox"),
         assign_toks,
         every_vbox_loc as _,
     );
@@ -260,7 +221,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everyjob",assign_toks,every_job_loc);
     primitive(
         globals,
-        strpool_str!("everyjob"),
+        crate::strpool_str!("everyjob"),
         assign_toks,
         every_job_loc as _,
     );
@@ -268,7 +229,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("everycr",assign_toks,every_cr_loc);
     primitive(
         globals,
-        strpool_str!("everycr"),
+        crate::strpool_str!("everycr"),
         assign_toks,
         every_cr_loc as _,
     );
@@ -276,7 +237,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
     // primitive("errhelp",assign_toks,err_help_loc);
     primitive(
         globals,
-        strpool_str!("errhelp"),
+        crate::strpool_str!("errhelp"),
         assign_toks,
         err_help_loc as _,
     );

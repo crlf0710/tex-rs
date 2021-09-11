@@ -192,293 +192,205 @@ pub(crate) const dimen_base: word = dimen_base_TYPENUM::U32;
 // @#
 // @d del_code(#)==eqtb[del_code_base+#].int
 // @d count(#)==eqtb[count_base+#].int
-macro_rules! count {
-    ($globals:expr, $val:expr) => {
-        $globals.eqtb[crate::section_0236::count_base as crate::section_0115::pointer
-            + $val as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
-    };
+pub(crate) macro count($globals:expr, $val:expr) {
+    $globals.eqtb[crate::section_0236::count_base as crate::section_0115::pointer
+        + $val as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
 }
 // @d int_par(#)==eqtb[int_base+#].int {an integer parameter}
 /// an integer parameter
-macro_rules! int_par {
-    ($globals:expr, $val:expr) => {
-        $globals.eqtb[crate::section_0230::int_base as crate::section_0115::pointer
-            + $val as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
-    };
+pub(crate) macro int_par($globals:expr, $val:expr) {
+    $globals.eqtb[crate::section_0230::int_base as crate::section_0115::pointer
+        + $val as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
 }
 // @d pretolerance==int_par(pretolerance_code)
-macro_rules! pretolerance {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::pretolerance_code)
-    };
+pub(crate) macro pretolerance($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::pretolerance_code)
 }
 // @d tolerance==int_par(tolerance_code)
-macro_rules! tolerance {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tolerance_code)
-    };
+pub(crate) macro tolerance($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tolerance_code)
 }
 // @d line_penalty==int_par(line_penalty_code)
-macro_rules! line_penalty {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::line_penalty_code)
-    };
+pub(crate) macro line_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::line_penalty_code)
 }
 // @d hyphen_penalty==int_par(hyphen_penalty_code)
 // @d ex_hyphen_penalty==int_par(ex_hyphen_penalty_code)
 // @d club_penalty==int_par(club_penalty_code)
-macro_rules! club_penalty {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::club_penalty_code)
-    };
+pub(crate) macro club_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::club_penalty_code)
 }
 // @d widow_penalty==int_par(widow_penalty_code)
-macro_rules! widow_penalty {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::widow_penalty_code)
-    };
+pub(crate) macro widow_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::widow_penalty_code)
 }
 // @d display_widow_penalty==int_par(display_widow_penalty_code)
 // @d broken_penalty==int_par(broken_penalty_code)
-macro_rules! broken_penalty {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::broken_penalty_code)
-    };
+pub(crate) macro broken_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::broken_penalty_code)
 }
 // @d bin_op_penalty==int_par(bin_op_penalty_code)
 // @d rel_penalty==int_par(rel_penalty_code)
 // @d pre_display_penalty==int_par(pre_display_penalty_code)
 // @d post_display_penalty==int_par(post_display_penalty_code)
 // @d inter_line_penalty==int_par(inter_line_penalty_code)
-macro_rules! inter_line_penalty {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::inter_line_penalty_code)
-    };
+pub(crate) macro inter_line_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::inter_line_penalty_code)
 }
 // @d double_hyphen_demerits==int_par(double_hyphen_demerits_code)
 // @d final_hyphen_demerits==int_par(final_hyphen_demerits_code)
 // @d adj_demerits==int_par(adj_demerits_code)
-macro_rules! adj_demerits {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::adj_demerits_code)
-    };
+pub(crate) macro adj_demerits($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::adj_demerits_code)
 }
 // @d mag==int_par(mag_code)
-macro_rules! mag {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::mag_code)
-    };
+pub(crate) macro mag($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::mag_code)
 }
 // @d delimiter_factor==int_par(delimiter_factor_code)
 // @d looseness==int_par(looseness_code)
-macro_rules! looseness {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::looseness_code)
-    };
+pub(crate) macro looseness($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::looseness_code)
 }
 // @d time==int_par(time_code)
-macro_rules! time {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::time_code)
-    };
+pub(crate) macro time($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::time_code)
 }
 // @d day==int_par(day_code)
-macro_rules! day {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::day_code)
-    };
+pub(crate) macro day($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::day_code)
 }
 // @d month==int_par(month_code)
-macro_rules! month {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::month_code)
-    };
+pub(crate) macro month($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::month_code)
 }
 // @d year==int_par(year_code)
-macro_rules! year {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::year_code)
-    };
+pub(crate) macro year($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::year_code)
 }
 // @d show_box_breadth==int_par(show_box_breadth_code)
-macro_rules! show_box_breadth {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::show_box_breadth_code)
-    };
+pub(crate) macro show_box_breadth($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::show_box_breadth_code)
 }
 // @d show_box_depth==int_par(show_box_depth_code)
-macro_rules! show_box_depth {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::show_box_depth_code)
-    };
+pub(crate) macro show_box_depth($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::show_box_depth_code)
 }
 // @d hbadness==int_par(hbadness_code)
-macro_rules! hbadness {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::hbadness_code)
-    };
+pub(crate) macro hbadness($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::hbadness_code)
 }
 // @d vbadness==int_par(vbadness_code)
-macro_rules! vbadness {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::vbadness_code)
-    };
+pub(crate) macro vbadness($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::vbadness_code)
 }
 // @d pausing==int_par(pausing_code)
 // @d tracing_online==int_par(tracing_online_code)
-macro_rules! tracing_online {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_online_code)
-    };
+pub(crate) macro tracing_online($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_online_code)
 }
 // @d tracing_macros==int_par(tracing_macros_code)
-macro_rules! tracing_macros {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_macros_code)
-    };
+pub(crate) macro tracing_macros($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_macros_code)
 }
 // @d tracing_stats==int_par(tracing_stats_code)
-macro_rules! tracing_stats {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_stats_code)
-    };
+pub(crate) macro tracing_stats($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_stats_code)
 }
 // @d tracing_paragraphs==int_par(tracing_paragraphs_code)
 #[cfg(feature = "statistics")]
-macro_rules! tracing_paragraphs {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_paragraphs_code)
-    };
+pub(crate) macro tracing_paragraphs($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_paragraphs_code)
 }
 // @d tracing_pages==int_par(tracing_pages_code)
 #[cfg(feature = "statistics")]
-macro_rules! tracing_pages {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_pages_code)
-    };
+pub(crate) macro tracing_pages($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_pages_code)
 }
 // @d tracing_output==int_par(tracing_output_code)
-macro_rules! tracing_output {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_output_code)
-    };
+pub(crate) macro tracing_output($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_output_code)
 }
 // @d tracing_lost_chars==int_par(tracing_lost_chars_code)
-macro_rules! tracing_lost_chars {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_lost_chars_code)
-    };
+pub(crate) macro tracing_lost_chars($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_lost_chars_code)
 }
 // @d tracing_commands==int_par(tracing_commands_code)
-macro_rules! tracing_commands {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_commands_code)
-    };
+pub(crate) macro tracing_commands($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_commands_code)
 }
 // @d tracing_restores==int_par(tracing_restores_code)
 #[cfg(feature = "statistics")]
-macro_rules! tracing_restores {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::tracing_restores_code)
-    };
+pub(crate) macro tracing_restores($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::tracing_restores_code)
 }
 // @d uc_hyph==int_par(uc_hyph_code)
-macro_rules! uc_hyph {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::uc_hyph_code)
-    };
+pub(crate) macro uc_hyph($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::uc_hyph_code)
 }
 // @d output_penalty==int_par(output_penalty_code)
 // @d max_dead_cycles==int_par(max_dead_cycles_code)
-macro_rules! max_dead_cycles {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::max_dead_cycles_code)
-    };
+pub(crate) macro max_dead_cycles($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::max_dead_cycles_code)
 }
 // @d hang_after==int_par(hang_after_code)
-macro_rules! hang_after {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::hang_after_code)
-    };
+pub(crate) macro hang_after($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::hang_after_code)
 }
 // @d floating_penalty==int_par(floating_penalty_code)
 // @d global_defs==int_par(global_defs_code)
-macro_rules! global_defs {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::global_defs_code)
-    };
+pub(crate) macro global_defs($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::global_defs_code)
 }
 // @d cur_fam==int_par(cur_fam_code)
 // @d escape_char==int_par(escape_char_code)
-macro_rules! escape_char {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::escape_char_code)
-    };
+pub(crate) macro escape_char($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::escape_char_code)
 }
 // @d default_hyphen_char==int_par(default_hyphen_char_code)
-macro_rules! default_hyphen_char {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::default_hyphen_char_code)
-    };
+pub(crate) macro default_hyphen_char($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::default_hyphen_char_code)
 }
 // @d default_skew_char==int_par(default_skew_char_code)
-macro_rules! default_skew_char {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::default_skew_char_code)
-    };
+pub(crate) macro default_skew_char($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::default_skew_char_code)
 }
 // @d end_line_char==int_par(end_line_char_code)
-macro_rules! end_line_char {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::end_line_char_code)
-    };
+pub(crate) macro end_line_char($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::end_line_char_code)
 }
 // @d new_line_char==int_par(new_line_char_code)
-macro_rules! new_line_char {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::new_line_char_code)
-    };
+pub(crate) macro new_line_char($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::new_line_char_code)
 }
 // @d language==int_par(language_code)
-macro_rules! language {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::language_code)
-    };
+pub(crate) macro language($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::language_code)
 }
 // @d left_hyphen_min==int_par(left_hyphen_min_code)
-macro_rules! left_hyphen_min {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::left_hyphen_min_code)
-    };
+pub(crate) macro left_hyphen_min($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::left_hyphen_min_code)
 }
 // @d right_hyphen_min==int_par(right_hyphen_min_code)
-macro_rules! right_hyphen_min {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::right_hyphen_min_code)
-    };
+pub(crate) macro right_hyphen_min($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::right_hyphen_min_code)
 }
 // @d holding_inserts==int_par(holding_inserts_code)
-macro_rules! holding_inserts {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::holding_inserts_code)
-    };
+pub(crate) macro holding_inserts($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::holding_inserts_code)
 }
 // @d error_context_lines==int_par(error_context_lines_code)
-macro_rules! error_context_lines {
-    ($globals:expr) => {
-        int_par!($globals, crate::section_0236::error_context_lines_code)
-    };
+pub(crate) macro error_context_lines($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::error_context_lines_code)
 }
 //
 // @<Assign the values |depth_threshold:=show_box_depth|...@>=
-macro_rules! Assign_the_values_depth_threshold_from_show_box_depth_and_breadth_max_show_box_breadth {
-    ($globals:expr) => {{
-        // depth_threshold:=show_box_depth;
-        $globals.depth_threshold = show_box_depth!($globals);
-        // breadth_max:=show_box_breadth
-        $globals.breadth_max = show_box_breadth!($globals);
-    }}
-}
+pub(crate) macro Assign_the_values_depth_threshold_from_show_box_depth_and_breadth_max_show_box_breadth($globals:expr) {{
+    // depth_threshold:=show_box_depth;
+    $globals.depth_threshold = show_box_depth!($globals);
+    // breadth_max:=show_box_breadth
+    $globals.breadth_max = show_box_breadth!($globals);
+}}
 
 use crate::pascal::word;
 use crate::section_0113::halfword;

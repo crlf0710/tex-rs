@@ -16,7 +16,11 @@ pub(crate) fn init_col(globals: &mut TeXGlobals) {
     // else  begin back_input; begin_token_list(u_part(cur_align),u_template);
     else {
         back_input(globals);
-        begin_token_list(globals, u_part!(globals, globals.cur_align) as _, u_template);
+        begin_token_list(
+            globals,
+            u_part!(globals, globals.cur_align) as _,
+            u_template,
+        );
         // end; {now |align_state=1000000|}
         /// now `align_state=1000000`
         const _: () = ();
@@ -29,3 +33,5 @@ use crate::section_0208::omit;
 use crate::section_0307::u_template;
 use crate::section_0323::begin_token_list;
 use crate::section_0325::back_input;
+use crate::section_0769::extra_info;
+use crate::section_0769::u_part;

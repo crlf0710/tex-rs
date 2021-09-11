@@ -10,74 +10,60 @@
 // @d hlp6(#)==help_line[5]:=#; hlp5
 // @d help0==help_ptr:=0 {sometimes there might be no help}
 /// sometimes there might be no help
-macro_rules! help0 {
-    ($globals:expr) => {{
-        $globals.help_ptr = 0.into();
-    }}
-}
+pub(crate) macro help0($globals:expr) {{
+    $globals.help_ptr = 0.into();
+}}
 // @d help1==@+begin help_ptr:=1; hlp1 {use this with one help line}
 /// use this with one help line
-macro_rules! help1 {
-    ($globals:expr, $val1:expr) => {{
-        $globals.help_ptr = 1.into();
-        $globals.help_line[0] = $val1;
-    }}
-}
+pub(crate) macro help1($globals:expr, $val1:expr) {{
+    $globals.help_ptr = 1.into();
+    $globals.help_line[0] = $val1;
+}}
 // @d help2==@+begin help_ptr:=2; hlp2 {use this with two help lines}
 /// use this with two help lines
-macro_rules! help2 {
-    ($globals:expr, $val1:expr, $val2:expr) => {{
-        $globals.help_ptr = 2.into();
-        $globals.help_line[1] = $val1;
-        $globals.help_line[0] = $val2;
-    }}
-}
+pub(crate) macro help2($globals:expr, $val1:expr, $val2:expr) {{
+    $globals.help_ptr = 2.into();
+    $globals.help_line[1] = $val1;
+    $globals.help_line[0] = $val2;
+}}
 // @d help3==@+begin help_ptr:=3; hlp3 {use this with three help lines}
 /// use this with three help lines
-macro_rules! help3 {
-    ($globals:expr, $val1:expr, $val2:expr, $val3:expr) => {{
-        $globals.help_ptr = 3.into();
-        $globals.help_line[2] = $val1;
-        $globals.help_line[1] = $val2;
-        $globals.help_line[0] = $val3;
-    }}
-}
+pub(crate) macro help3($globals:expr, $val1:expr, $val2:expr, $val3:expr) {{
+    $globals.help_ptr = 3.into();
+    $globals.help_line[2] = $val1;
+    $globals.help_line[1] = $val2;
+    $globals.help_line[0] = $val3;
+}}
 // @d help4==@+begin help_ptr:=4; hlp4 {use this with four help lines}
 /// use this with four help lines
-macro_rules! help4 {
-    ($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr) => {{
-        $globals.help_ptr = 4.into();
-        $globals.help_line[3] = $val1;
-        $globals.help_line[2] = $val2;
-        $globals.help_line[1] = $val3;
-        $globals.help_line[0] = $val4;
-    }}
-}
+pub(crate) macro help4($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr) {{
+    $globals.help_ptr = 4.into();
+    $globals.help_line[3] = $val1;
+    $globals.help_line[2] = $val2;
+    $globals.help_line[1] = $val3;
+    $globals.help_line[0] = $val4;
+}}
 // @d help5==@+begin help_ptr:=5; hlp5 {use this with five help lines}
 /// use this with five help lines
-macro_rules! help5 {
-    ($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr, $val5:expr) => {{
-        $globals.help_ptr = 5.into();
-        $globals.help_line[4] = $val1;
-        $globals.help_line[3] = $val2;
-        $globals.help_line[2] = $val3;
-        $globals.help_line[1] = $val4;
-        $globals.help_line[0] = $val5;
-    }}
-}
+pub(crate) macro help5($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr, $val5:expr) {{
+    $globals.help_ptr = 5.into();
+    $globals.help_line[4] = $val1;
+    $globals.help_line[3] = $val2;
+    $globals.help_line[2] = $val3;
+    $globals.help_line[1] = $val4;
+    $globals.help_line[0] = $val5;
+}}
 // @d help6==@+begin help_ptr:=6; hlp6 {use this with six help lines}
 /// use this with six help lines
-macro_rules! help6 {
-    ($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr, $val5:expr, $val6:expr) => {{
-        $globals.help_ptr = 6.into();
-        $globals.help_line[5] = $val1;
-        $globals.help_line[4] = $val2;
-        $globals.help_line[3] = $val3;
-        $globals.help_line[2] = $val4;
-        $globals.help_line[1] = $val5;
-        $globals.help_line[0] = $val6;
-    }}
-}
+pub(crate) macro help6($globals:expr, $val1:expr, $val2:expr, $val3:expr, $val4:expr, $val5:expr, $val6:expr) {{
+    $globals.help_ptr = 6.into();
+    $globals.help_line[5] = $val1;
+    $globals.help_line[4] = $val2;
+    $globals.help_line[3] = $val3;
+    $globals.help_line[2] = $val4;
+    $globals.help_line[1] = $val5;
+    $globals.help_line[0] = $val6;
+}}
 
 //
 // @<Glob...@>=

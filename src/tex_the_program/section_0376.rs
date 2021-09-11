@@ -6,10 +6,10 @@
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0376(globals: &mut TeXGlobals) {
     // primitive("input",input,0);@/
-    primitive(globals, strpool_str!("input"), input, 0);
+    primitive(globals, crate::strpool_str!("input"), input, 0);
     // @!@:input_}{\.{\\input} primitive@>
     // primitive("endinput",input,1);@/
-    primitive(globals, strpool_str!("endinput"), input, 1);
+    primitive(globals, crate::strpool_str!("endinput"), input, 1);
     // @!@:end_input_}{\.{\\endinput} primitive@>
 }
 

@@ -18,7 +18,7 @@ pub(crate) fn push_nest(globals: &mut TeXGlobals) {
     }
     // nest[nest_ptr]:=cur_list; {stack the record}
     /// stack the record
-    const _ : () = ();
+    const _: () = ();
     globals.nest[globals.nest_ptr] = globals.cur_list;
     // incr(nest_ptr); head:=get_avail; tail:=head; prev_graf:=0; mode_line:=line;
     incr!(globals.nest_ptr);
@@ -31,5 +31,9 @@ pub(crate) fn push_nest(globals: &mut TeXGlobals) {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::nest_size;
+use crate::section_0016::incr;
 use crate::section_0120::get_avail;
-
+use crate::section_0213::head;
+use crate::section_0213::mode_line;
+use crate::section_0213::prev_graf;
+use crate::section_0213::tail;

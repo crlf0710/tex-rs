@@ -5,10 +5,10 @@
 // @<Declare subprocedures for |prefixed_command|@>=
 // procedure get_r_token;
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace",skip(globals)))]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn get_r_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label restart;
-    trace_expr!("cur_cs = {}", globals.cur_cs);
+    crate::trace_expr!("cur_cs = {}", globals.cur_cs);
     // begin restart: repeat get_token;
     loop {
         get_token(globals)?;
@@ -19,7 +19,7 @@ pub(crate) fn get_r_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // if (cur_cs=0)or(cur_cs>frozen_control_sequence) then
     if globals.cur_cs == 0 || globals.cur_cs > frozen_control_sequence as _ {
-        trace_expr!("cur_cs = {}", globals.cur_cs);
+        crate::trace_expr!("cur_cs = {}", globals.cur_cs);
         todo!();
         //   begin print_err("Missing control sequence inserted");
         // @.Missing control...@>
@@ -34,11 +34,11 @@ pub(crate) fn get_r_token(globals: &mut TeXGlobals) -> TeXResult<()> {
         //   end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0222::frozen_control_sequence;
-use crate::section_0365::get_token;
-use crate::section_0289::space_token;
 use crate::section_0081::TeXResult;
+use crate::section_0222::frozen_control_sequence;
+use crate::section_0289::space_token;
+use crate::section_0365::get_token;

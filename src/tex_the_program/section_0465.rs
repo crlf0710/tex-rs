@@ -41,21 +41,20 @@ pub(crate) fn the_toks(globals: &mut TeXGlobals) -> TeXResult<pointer> {
         //   end;
         else if globals.cur_val_level == cur_val_level_kind::dimen_val {
             print_scaled(globals, scaled::new_from_inner(globals.cur_val));
-            print(globals, strpool_str!("pt").get() as _);
+            print(globals, crate::strpool_str!("pt").get() as _);
         }
         // glue_val: begin print_spec(cur_val,"pt"); delete_glue_ref(cur_val);
         //   end;
         else if globals.cur_val_level == cur_val_level_kind::glue_val {
-            print_spec(globals, globals.cur_val, strpool_str!("pt"));
+            print_spec(globals, globals.cur_val, crate::strpool_str!("pt"));
             delete_glue_ref(globals, globals.cur_val as pointer);
         }
         // mu_val: begin print_spec(cur_val,"mu"); delete_glue_ref(cur_val);
         //   end;
         else if globals.cur_val_level == cur_val_level_kind::mu_val {
-            print_spec(globals, globals.cur_val, strpool_str!("mu"));
+            print_spec(globals, globals.cur_val, crate::strpool_str!("mu"));
             delete_glue_ref(globals, globals.cur_val as pointer);
-        }
-        else {
+        } else {
             // end; {there are no other cases}
             /// there are no other cases
             unreachable!()
@@ -66,7 +65,7 @@ pub(crate) fn the_toks(globals: &mut TeXGlobals) -> TeXResult<pointer> {
         // end;
     }
     // end;
-    ok_nojump!(the_toks)
+    crate::ok_nojump!(the_toks)
 }
 
 use crate::section_0004::TeXGlobals;
@@ -75,8 +74,8 @@ use crate::section_0054::new_string;
 use crate::section_0059::print;
 use crate::section_0065::print_int;
 use crate::section_0081::TeXResult;
-use crate::section_0101::small_number;
 use crate::section_0101::scaled;
+use crate::section_0101::small_number;
 use crate::section_0103::print_scaled;
 use crate::section_0115::pointer;
 use crate::section_0178::print_spec;
@@ -85,3 +84,4 @@ use crate::section_0380::get_x_token;
 use crate::section_0410::cur_val_level_kind;
 use crate::section_0413::scan_something_internal;
 use crate::section_0464::str_toks;
+use crate::section_0466::Copy_the_token_list;

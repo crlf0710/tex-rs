@@ -26,15 +26,13 @@ impl fmt::Display for JumpOutToEndOfTEX {
 
 pub(crate) type TeXResult<T> = Result<T, JumpOutToEndOfTEX>;
 
-macro_rules! try_or_jump {
-    ($val:expr, $jump_target:lifetime) => {
-        match $val {
-            Ok(v) => v,
-            Err(crate::section_0081::JumpOutToEndOfTEX) => goto_forward_label!($jump_target),
-        }
-    };
+pub(crate) macro try_or_jump($val:expr, $jump_target:lifetime) {
+    match $val {
+        Ok(v) => v,
+        Err(crate::section_0081::JumpOutToEndOfTEX) => crate::goto_forward_label!($jump_target),
+    }
 }
 
 use core::fmt;
 
-migration_complete!();
+crate::migration_complete!();

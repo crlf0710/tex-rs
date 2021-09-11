@@ -28,3 +28,4 @@ pub(crate) fn prepare_mag(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0236::mag;

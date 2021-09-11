@@ -7,36 +7,36 @@
 //! global; but \TeX\ does not look at the \.{\\global} switch.
 //
 // @<Assignments@>=
-macro_rules! Assignments_1242 {
-    ($globals:expr, $cur_cmd:expr, $a:expr) => {{
-        // set_aux:alter_aux;
-        if $cur_cmd == set_aux {
-            alter_aux($globals)?;
-            use crate::section_1243::alter_aux;
-            true
-        }
-        // set_prev_graf:alter_prev_graf;
-        else if $cur_cmd == set_prev_graf {
-            todo!("");
-            true
-        }
-        // set_page_dimen:alter_page_so_far;
-        else if $cur_cmd == set_page_dimen {
-            todo!("");
-            true
-        }
-        // set_page_int:alter_integer;
-        else if $cur_cmd == set_page_int {
-            todo!("");
-            true
-        }
-        // set_box_dimen:alter_box_dimen;
-        else if $cur_cmd == set_box_dimen {
-            alter_box_dimen($globals)?;
-            use crate::section_1247::alter_box_dimen;
-            true
-        } else {
-            false
-        }
-    }}
-}
+pub(crate) macro Assignments_1242($globals:expr, $cur_cmd:expr, $a:expr) {{
+    // set_aux:alter_aux;
+    let processed = if $cur_cmd == set_aux {
+        alter_aux($globals)?;
+        use crate::section_1243::alter_aux;
+        true
+    }
+    // set_prev_graf:alter_prev_graf;
+    else if $cur_cmd == set_prev_graf {
+        todo!("");
+        true
+    }
+    // set_page_dimen:alter_page_so_far;
+    else if $cur_cmd == set_page_dimen {
+        todo!("");
+        true
+    }
+    // set_page_int:alter_integer;
+    else if $cur_cmd == set_page_int {
+        todo!("");
+        true
+    }
+    // set_box_dimen:alter_box_dimen;
+    else if $cur_cmd == set_box_dimen {
+        alter_box_dimen($globals)?;
+        use crate::section_1247::alter_box_dimen;
+        true
+    } else {
+        false
+    };
+    use crate::section_0209::*;
+    processed
+}}

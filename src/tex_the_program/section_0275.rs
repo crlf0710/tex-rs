@@ -39,13 +39,16 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) -> TeXResult<
     }
     // endcases;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::do_nothing;
 use crate::section_0081::TeXResult;
 use crate::section_0113::memory_word;
 use crate::section_0200::delete_token_ref;
 use crate::section_0201::delete_glue_ref;
 use crate::section_0202::flush_node_list;
 use crate::section_0210::*;
+use crate::section_0221::eq_type_field;
+use crate::section_0221::equiv_field;

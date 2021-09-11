@@ -16,10 +16,8 @@
 pub(crate) const movement_node_size: quarterword = 3;
 // @d location(#)==mem[#+2].int {\.{DVI} byte number for a movement command}
 /// `DVI` byte number for a movement command
-macro_rules! location {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 2][crate::section_0113::MEMORY_WORD_INT]
-    }
+pub(crate) macro location($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + 2][crate::section_0113::MEMORY_WORD_INT]
 }
 
 // @<Glob...@>=

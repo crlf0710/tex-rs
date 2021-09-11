@@ -24,6 +24,7 @@ pub(crate) fn normalize_selector(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
 use crate::section_0054::term_and_log;
 use crate::section_0054::term_only;
 use crate::section_0073::batch_mode;

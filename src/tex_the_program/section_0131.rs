@@ -42,11 +42,13 @@ pub(crate) fn sort_avail(globals: &mut TeXGlobals) -> TeXResult<()> {
     llink!(globals, globals.rover) = p;
     // end;
     // tini
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0110::max_halfword;
 use crate::section_0115::pointer;
+use crate::section_0124::llink;
+use crate::section_0124::rlink;
 use crate::section_0125::get_node;

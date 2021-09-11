@@ -17,25 +17,19 @@
 pub(crate) const unset_node: quarterword = 13;
 // @d glue_stretch(#)==mem[#+glue_offset].sc {total stretch in an unset node}
 /// total stretch in an unset node
-macro_rules! glue_stretch {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + crate::section_0135::glue_offset as pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro glue_stretch($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + crate::section_0135::glue_offset as crate::section_0115::pointer]
+        [crate::section_0101::MEMORY_WORD_SC]
 }
 // @d glue_shrink==shift_amount {total shrink in an unset node}
 /// total shrink in an unset node
-macro_rules! glue_shrink {
-    ($globals:expr, $ptr:expr) => {
-        shift_amount!($globals, $ptr)
-    };
+pub(crate) macro glue_shrink($globals:expr, $ptr:expr) {
+    crate::section_0135::shift_amount!($globals, $ptr)
 }
 // @d span_count==subtype {indicates the number of spanned columns}
 /// indicates the number of spanned columns
-macro_rules! span_count {
-    ($globals:expr, $ptr:expr) => {
-        subtype!($globals, $ptr)
-    };
+pub(crate) macro span_count($globals:expr, $ptr:expr) {
+    crate::section_0133::subtype!($globals, $ptr)
 }
 
 use crate::section_0113::quarterword;

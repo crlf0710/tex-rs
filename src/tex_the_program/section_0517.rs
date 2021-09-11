@@ -9,7 +9,7 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
     // @:TeX capacity exceeded number of strings}{\quad number of strings@>
     // if area_delimiter=0 then cur_area:=""
     if globals.area_delimiter.is_zero() {
-        globals.cur_area = strpool_str!("");
+        globals.cur_area = crate::strpool_str!("");
     }
     // else  begin cur_area:=str_ptr;
     else {
@@ -23,7 +23,7 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
     // if ext_delimiter=0 then
     if globals.ext_delimiter.is_zero() {
         // begin cur_ext:=""; cur_name:=make_string;
-        globals.cur_ext = strpool_str!("");
+        globals.cur_ext = crate::strpool_str!("");
         globals.cur_name = make_string(make_globals_string_view!(globals));
     // end
     }
@@ -45,7 +45,9 @@ pub(crate) fn end_name(globals: &mut TeXGlobals) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_string_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
+use crate::section_0016::incr;
 use crate::section_0038::pool_pointer;
 use crate::section_0043::make_string;

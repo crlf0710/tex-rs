@@ -8,3 +8,4 @@ pub(crate) fn flush_string(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;

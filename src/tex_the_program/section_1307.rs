@@ -2,25 +2,24 @@
 //! dump/undump macros.
 //
 // @<Dump constants for consistency check@>=
-macro_rules! Dump_constants_for_consistency_check {
-    ($globals:expr) => {{
-        // dump_int(@$);@/
-        dump_int!($globals, string_pool_checksum() as _);
-        // dump_int(mem_bot);@/
-        dump_int!($globals, mem_bot as _);
-        // dump_int(mem_top);@/
-        dump_int!($globals, mem_top as _);
-        // dump_int(eqtb_size);@/
-        dump_int!($globals, eqtb_size as _);
-        // dump_int(hash_prime);@/
-        dump_int!($globals, hash_prime as _);
-        // dump_int(hyph_size)
-        dump_int!($globals, hyph_size as _);
-        use crate::string_pool::string_pool_checksum;
-        use crate::section_0012::mem_bot;
-        use crate::section_0012::mem_top;
-        use crate::section_0247::eqtb_size;
-        use crate::section_0012::hash_prime;
-        use crate::section_0012::hyph_size;
-    }}
-}
+pub(crate) macro Dump_constants_for_consistency_check($globals:expr) {{
+    // dump_int(@$);@/
+    dump_int!($globals, string_pool_checksum() as _);
+    // dump_int(mem_bot);@/
+    dump_int!($globals, mem_bot as _);
+    // dump_int(mem_top);@/
+    dump_int!($globals, mem_top as _);
+    // dump_int(eqtb_size);@/
+    dump_int!($globals, eqtb_size as _);
+    // dump_int(hash_prime);@/
+    dump_int!($globals, hash_prime as _);
+    // dump_int(hyph_size)
+    dump_int!($globals, hyph_size as _);
+    use crate::section_0012::hash_prime;
+    use crate::section_0012::hyph_size;
+    use crate::section_0012::mem_bot;
+    use crate::section_0012::mem_top;
+    use crate::section_0247::eqtb_size;
+    use crate::section_1305::dump_int;
+    use crate::string_pool::string_pool_checksum;
+}}

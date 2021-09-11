@@ -11,12 +11,14 @@ pub(crate) fn append_penalty(globals: &mut TeXGlobals) -> TeXResult<()> {
         build_page(globals)?;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0158::new_penalty;
 use crate::section_0211::vmode;
+use crate::section_0213::mode;
+use crate::section_0214::tail_append;
 use crate::section_0440::scan_int;
 use crate::section_0994::build_page;

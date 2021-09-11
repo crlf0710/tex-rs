@@ -28,7 +28,10 @@ pub(crate) fn print_the_digs(globals: &mut TeXGlobals, mut k: eight_bits) {
     // end;
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0016::decr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0025::eight_bits;
 use crate::section_0058::print_char;

@@ -14,7 +14,7 @@ pub(crate) fn init_math(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!d:scaled; {increment to |v|}
     // begin get_token; {|get_x_token| would fail on \.{\\ifmmode}\thinspace!}
     /// `get_x_token` would fail on `\ifmmode`!
-    const _ : () = ();
+    const _: () = ();
     get_token(globals)?;
     // if (cur_cmd=math_shift)and(mode>0) then @<Go into display math mode@>
     if globals.cur_cmd == math_shift && mode!(globals) > 0 {
@@ -27,11 +27,13 @@ pub(crate) fn init_math(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0207::math_shift;
+use crate::section_0213::mode;
 use crate::section_0325::back_input;
 use crate::section_0365::get_token;
+use crate::section_1139::Go_into_ordinary_math_mode;

@@ -67,4 +67,4 @@
 /// printed when `TeX` starts
 pub(crate) const banner: &'static str = "This is TeX-rs, Version 3.141592653";
 
-migration_complete!();
+crate::migration_complete!();

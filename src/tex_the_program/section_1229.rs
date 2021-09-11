@@ -23,5 +23,9 @@ pub(crate) fn trap_zero_glue(globals: &mut TeXGlobals) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0101::scaled;
 use crate::section_0115::pointer;
+use crate::section_0135::width;
+use crate::section_0150::shrink;
+use crate::section_0150::stretch;
 use crate::section_0162::zero_glue;
 use crate::section_0201::delete_glue_ref;
+use crate::section_0203::add_glue_ref;

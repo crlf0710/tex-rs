@@ -8,7 +8,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
     // primitive("catcode",def_code,cat_code_base);
     primitive(
         globals,
-        strpool_str!("catcode"),
+        crate::strpool_str!("catcode"),
         def_code,
         cat_code_base as _,
     );
@@ -16,24 +16,39 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
     // primitive("mathcode",def_code,math_code_base);
     primitive(
         globals,
-        strpool_str!("mathcode"),
+        crate::strpool_str!("mathcode"),
         def_code,
         math_code_base as _,
     );
     // @!@:math_code_}{\.{\\mathcode} primitive@>
     // primitive("lccode",def_code,lc_code_base);
-    primitive(globals, strpool_str!("lccode"), def_code, lc_code_base as _);
+    primitive(
+        globals,
+        crate::strpool_str!("lccode"),
+        def_code,
+        lc_code_base as _,
+    );
     // @!@:lc_code_}{\.{\\lccode} primitive@>
     // primitive("uccode",def_code,uc_code_base);
-    primitive(globals, strpool_str!("uccode"), def_code, uc_code_base as _);
+    primitive(
+        globals,
+        crate::strpool_str!("uccode"),
+        def_code,
+        uc_code_base as _,
+    );
     // @!@:uc_code_}{\.{\\uccode} primitive@>
     // primitive("sfcode",def_code,sf_code_base);
-    primitive(globals, strpool_str!("sfcode"), def_code, sf_code_base as _);
+    primitive(
+        globals,
+        crate::strpool_str!("sfcode"),
+        def_code,
+        sf_code_base as _,
+    );
     // @!@:sf_code_}{\.{\\sfcode} primitive@>
     // primitive("delcode",def_code,del_code_base);
     primitive(
         globals,
-        strpool_str!("delcode"),
+        crate::strpool_str!("delcode"),
         def_code,
         del_code_base as _,
     );
@@ -41,7 +56,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
     // primitive("textfont",def_family,math_font_base);
     primitive(
         globals,
-        strpool_str!("textfont"),
+        crate::strpool_str!("textfont"),
         def_family,
         math_font_base as _,
     );
@@ -49,7 +64,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
     // primitive("scriptfont",def_family,math_font_base+script_size);
     primitive(
         globals,
-        strpool_str!("scriptfont"),
+        crate::strpool_str!("scriptfont"),
         def_family,
         (math_font_base + script_size as word) as _,
     );
@@ -57,7 +72,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
     // primitive("scriptscriptfont",def_family,math_font_base+script_script_size);
     primitive(
         globals,
-        strpool_str!("scriptscriptfont"),
+        crate::strpool_str!("scriptscriptfont"),
         def_family,
         (math_font_base + script_script_size as word) as _,
     );

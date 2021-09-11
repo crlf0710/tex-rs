@@ -5,8 +5,8 @@
 //! Let's hope people don't use that fact.
 //
 // @<Scan decimal fraction@>=
-macro_rules! Scan_decimal_fraction {
-    ($globals:expr, $f:expr) => {{
+pub(crate) macro Scan_decimal_fraction
+    ($globals:expr, $f:expr) {{
         /// number of digits in a decimal fraction
         let mut k: small_number;
         /// top of decimal digit stack
@@ -16,7 +16,7 @@ macro_rules! Scan_decimal_fraction {
         p = null;
         /// `point_token` is being re-scanned
         get_token($globals)?;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done1|
         {
             // loop@+  begin get_x_token;
@@ -24,7 +24,7 @@ macro_rules! Scan_decimal_fraction {
                 get_x_token($globals)?;
                 // if (cur_tok>zero_token+9)or(cur_tok<zero_token) then goto done1;
                 if $globals.cur_tok > zero_token + 9 || $globals.cur_tok < zero_token {
-                    goto_forward_label!('done1);
+                    crate::goto_forward_label!('done1);
                 }
                 // if k<17 then {digits for |k>=17| cannot affect the result}
                 if k < 17 {
@@ -61,6 +61,8 @@ macro_rules! Scan_decimal_fraction {
         }
         // end
         use crate::pascal::u8_from_m_to_n;
+        use crate::section_0016::incr;
+        use crate::section_0121::free_avail;
         use crate::section_0101::small_number;
         use crate::section_0102::round_decimals;
         use crate::section_0115::pointer;
@@ -69,6 +71,8 @@ macro_rules! Scan_decimal_fraction {
         use crate::section_0207::spacer;
         use crate::section_0365::get_token;
         use crate::section_0380::get_x_token;
+        use crate::section_0118::link;
         use crate::section_0445::zero_token;
+        use crate::section_0118::info_inner;
+        use crate::section_0325::back_input;
     }}
-}

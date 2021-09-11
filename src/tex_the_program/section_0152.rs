@@ -19,20 +19,26 @@ pub(crate) fn new_param_glue(globals: &mut TeXGlobals, n: small_number) -> TeXRe
     // leader_ptr(p):=null;@/
     leader_ptr!(globals, p) = null;
     // q:=@<Current |mem| equivalent of glue parameter number |n|@>@t@>;
-    q = Current_mem_equivalent_of_glue_parameter_number_n!(globals, n.get());
+    q = crate::section_0224::Current_mem_equivalent_of_glue_parameter_number_n!(globals, n.get());
     // glue_ptr(p):=q; incr(glue_ref_count(q));
     glue_ptr!(globals, p) = q;
     incr!(glue_ref_count!(globals, q));
     // new_param_glue:=p;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0141::small_node_size;
 use crate::section_0149::glue_node;
+use crate::section_0149::glue_ptr;
+use crate::section_0149::leader_ptr;
+use crate::section_0150::glue_ref_count;

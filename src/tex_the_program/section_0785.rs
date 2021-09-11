@@ -14,7 +14,7 @@ pub(crate) fn align_peek(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label restart;
     // begin restart: align_state:=1000000; @<Get the next non-blank non-call token@>;
     globals.align_state = 1000000;
-    Get_the_next_non_blank_non_call_token!(globals);
+    crate::section_0406::Get_the_next_non_blank_non_call_token!(globals);
     // if cur_cmd=no_align then
     if globals.cur_cmd == no_align {
         todo!("align_peek 1");
@@ -43,7 +43,7 @@ pub(crate) fn align_peek(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;

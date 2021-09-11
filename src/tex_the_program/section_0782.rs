@@ -11,12 +11,12 @@
 pub(crate) fn get_preamble_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label restart;
     // begin restart: get_token;
-    region_backward_label!(
+    crate::region_backward_label!(
         'restart <-
         {
             get_token(globals)?;
             // while (cur_chr=span_code)and(cur_cmd=tab_mark) do
-            while globals.cur_chr.get() as integer == span_code as integer && 
+            while globals.cur_chr.get() as integer == span_code as integer &&
                 globals.cur_cmd == tab_mark {
                 // begin get_token; {this token will be expanded once}
                 get_token(globals)?;
@@ -38,7 +38,7 @@ pub(crate) fn get_preamble_token(globals: &mut TeXGlobals) -> TeXResult<()> {
             }
             // @.interwoven alignment preambles...@>
             // if (cur_cmd=assign_glue)and(cur_chr=glue_base+tab_skip_code) then
-            if globals.cur_cmd == assign_glue && 
+            if globals.cur_cmd == assign_glue &&
                 globals.cur_chr.get() as integer == glue_base as integer + tab_skip_code as integer {
                 todo!();
                 // begin scan_optional_equals; scan_glue(glue_val);
@@ -51,7 +51,7 @@ pub(crate) fn get_preamble_token(globals: &mut TeXGlobals) -> TeXResult<()> {
         |'restart|
     );
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;

@@ -99,11 +99,11 @@ impl IndexMut<MEMORY_WORD_LIG_KERN_CMD> for memory_word {
     }
 }
 
-
-use crate::section_0113::{FOUR_QUARTERS_B0, FOUR_QUARTERS_B1, FOUR_QUARTERS_B2, FOUR_QUARTERS_B3};
+use crate::section_0112::qi;
 use crate::section_0113::four_quarters;
-use crate::section_0113::MEMORY_WORD_QQQQ;
-use crate::section_0113::quarterword;
 use crate::section_0113::memory_word;
+use crate::section_0113::quarterword;
+use crate::section_0113::MEMORY_WORD_QQQQ;
+use crate::section_0113::{FOUR_QUARTERS_B0, FOUR_QUARTERS_B1, FOUR_QUARTERS_B2, FOUR_QUARTERS_B3};
 use core::ops::{Index, IndexMut};
 use ref_cast::RefCast;

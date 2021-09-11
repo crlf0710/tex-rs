@@ -2,7 +2,7 @@
 
 // @<Check variable-size...@>=
 #[allow(unused_macros)]
-macro_rules! Check_variable_size_avail_list {
+pub(crate) macro Check_variable_size_avail_list {
     ($globals:expr) => {{
         /// current locations of interest in `mem`
         let (mut p, mut q) : (pointer, pointer);
@@ -12,7 +12,7 @@ macro_rules! Check_variable_size_avail_list {
         p = $globals.rover;
         q = null;
         clobbered = false;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done2|
         {
         // repeat if (p>=lo_mem_max)or(p<mem_min) then clobbered:=true
@@ -35,10 +35,10 @@ macro_rules! Check_variable_size_avail_list {
             // if clobbered then
             if clobbered {
                 // begin print_nl("Double-AVAIL list clobbered at ");
-                print_nl($globals, strpool_str!("Double-AVAIL list clobbered at "));
+                print_nl($globals, crate::strpool_str!("Double-AVAIL list clobbered at "));
                 // print_int(q); goto done2;
                 print_int($globals, q as _);
-                goto_forward_label!('done2);
+                crate::goto_forward_label!('done2);
                 // end;
             }
             // for q:=p to p+node_size(p)-1 do {mark all locations free}
@@ -47,11 +47,11 @@ macro_rules! Check_variable_size_avail_list {
                 // begin if free[q] then
                 if $globals.free[q] {
                     // begin print_nl("Doubly free location at ");
-                    print_nl($globals, strpool_str!("Doubly free location at "));
+                    print_nl($globals, crate::strpool_str!("Doubly free location at "));
                     // @.Doubly free location...@>
                     // print_int(q); goto done2;
                     print_int($globals, q as _);
-                    goto_forward_label!('done2);
+                    crate::goto_forward_label!('done2);
                     // end;
                 }
                 // free[q]:=true;

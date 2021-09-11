@@ -1,13 +1,13 @@
 //! ` `
 // @<Scan the template \<v_j>...@>=
-macro_rules! Scan_the_template_v_j__putting_the_resulting_token_list_in_hold_head {
+pub(crate) macro Scan_the_template_v_j__putting_the_resulting_token_list_in_hold_head {
     ($globals:expr) => {{
         /// for short-term temporary use
         let mut p: pointer;
         // p:=hold_head; link(p):=null;
         p = hold_head;
         link!($globals, p) = null;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done2|
         {
         // loop@+  begin continue: get_preamble_token;
@@ -16,7 +16,7 @@ macro_rules! Scan_the_template_v_j__putting_the_resulting_token_list_in_hold_hea
             // if (cur_cmd<=car_ret)and(cur_cmd>=tab_mark)and(align_state=-1000000) then
             //   goto done2;
             if $globals.cur_cmd <= car_ret && $globals.cur_cmd >= tab_mark && $globals.align_state == -1000000 {
-                goto_forward_label!('done2);
+                crate::goto_forward_label!('done2);
             }
             todo!("scan v_j");
             // if cur_cmd=mac_param then
@@ -40,7 +40,13 @@ macro_rules! Scan_the_template_v_j__putting_the_resulting_token_list_in_hold_hea
         info_tok_assign!($globals, p, cur_tok_type::new(end_template_token));
         /// put `\endtemplate` at the end
         const _: () = ();
+        use crate::section_0115::pointer;
+        use crate::section_0115::null;
+        use crate::section_0118::link;
+        use crate::section_0118::info_tok_assign;
+        use crate::section_0162::hold_head;
         use crate::section_0120::get_avail;
+        use crate::section_0207::car_ret;
         use crate::section_0207::tab_mark;
         use crate::section_0297::cur_tok_type;
         use crate::section_0780::end_template_token;

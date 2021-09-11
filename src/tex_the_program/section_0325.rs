@@ -50,12 +50,20 @@ pub(crate) fn back_input(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0115::pointer;
+use crate::section_0016::decr;
+use crate::section_0016::incr;
+use crate::section_0036::loc;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0118::info_tok_assign;
 use crate::section_0120::get_avail;
 use crate::section_0289::left_brace_limit;
 use crate::section_0289::right_brace_limit;
+use crate::section_0302::start;
+use crate::section_0302::state;
 use crate::section_0307::backed_up;
 use crate::section_0307::token_list;
+use crate::section_0307::token_type;
 use crate::section_0307::v_template;
+use crate::section_0321::push_input;
 use crate::section_0324::end_token_list;

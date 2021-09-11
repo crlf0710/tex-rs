@@ -23,7 +23,7 @@ pub(crate) fn print_spec(globals: &mut TeXGlobals, p: integer, s: str_number) {
         // if stretch(p)<>0 then
         if stretch!(globals, p as pointer) != scaled::zero() {
             // begin print(" plus "); print_glue(stretch(p),stretch_order(p),s);
-            print(globals, strpool_str!(" plus ").get() as _);
+            print(globals, crate::strpool_str!(" plus ").get() as _);
             print_glue(
                 globals,
                 stretch!(globals, p as pointer),
@@ -35,7 +35,7 @@ pub(crate) fn print_spec(globals: &mut TeXGlobals, p: integer, s: str_number) {
         // if shrink(p)<>0 then
         if shrink!(globals, p as pointer) != scaled::zero() {
             // begin print(" minus "); print_glue(shrink(p),shrink_order(p),s);
-            print(globals, strpool_str!(" minus ").get() as _);
+            print(globals, crate::strpool_str!(" minus ").get() as _);
             print_glue(
                 globals,
                 shrink!(globals, p as pointer),
@@ -50,13 +50,20 @@ pub(crate) fn print_spec(globals: &mut TeXGlobals, p: integer, s: str_number) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0011::mem_min;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;
 use crate::section_0059::print;
 use crate::section_0101::scaled;
 use crate::section_0103::print_scaled;
 use crate::section_0115::pointer;
+use crate::section_0135::width;
+use crate::section_0150::shrink;
+use crate::section_0150::shrink_order;
+use crate::section_0150::stretch;
+use crate::section_0150::stretch_order;
 use crate::section_0177::print_glue;

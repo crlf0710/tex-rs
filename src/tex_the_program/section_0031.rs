@@ -84,7 +84,7 @@ pub(crate) fn input_ln(
             }
             // buffer[last]:=xord[f^]; get(f); incr(last);
             globals_view.buffer[*globals_view.last] = xord(buffer_variable(f));
-            trace_expr!(
+            crate::trace_expr!(
                 "buffer[{:?}] = {:?}",
                 globals_view.last,
                 globals_view.buffer[*globals_view.last]
@@ -112,5 +112,7 @@ use crate::pascal::{buffer_variable, eof, eoln, get};
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0011::buf_size;
 use crate::section_0011::buf_size_TYPENUM;
+use crate::section_0016::incr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0020::xord;
 use crate::section_0025::alpha_file;

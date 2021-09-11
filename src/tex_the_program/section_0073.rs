@@ -18,21 +18,19 @@ pub(crate) type scroll_mode_TYPENUM = U2;
 pub(crate) const error_stop_mode: u8 = error_stop_mode_TYPENUM::U8;
 pub(crate) type error_stop_mode_TYPENUM = U3;
 // @d print_err(#)==begin if interaction=error_stop_mode then wake_up_terminal;
-macro_rules! print_err {
-    ($globals:expr, $val:expr) => {{
-        if $globals.interaction == error_stop_mode {
-            wake_up_terminal($globals);
-        }
-        // print_nl("! "); print(#);
-        print_nl($globals, strpool_str!("! "));
-        print($globals, $val.into());
-        // end
-        use crate::section_0034::wake_up_terminal;
-        use crate::section_0059::print;
-        use crate::section_0062::print_nl;
-        use crate::section_0073::error_stop_mode;
-    }}
-}
+pub(crate) macro print_err($globals:expr, $val:expr) {{
+    if $globals.interaction == error_stop_mode {
+        wake_up_terminal($globals);
+    }
+    // print_nl("! "); print(#);
+    print_nl($globals, crate::strpool_str!("! "));
+    print($globals, $val.into());
+    // end
+    use crate::section_0034::wake_up_terminal;
+    use crate::section_0059::print;
+    use crate::section_0062::print_nl;
+    use crate::section_0073::error_stop_mode;
+}}
 
 // @<Glob...@>=
 // @!interaction:batch_mode..error_stop_mode; {current level of interaction}

@@ -51,12 +51,12 @@ pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword,
         {
             flush_string(globals);
             text!(globals, globals.cur_val as pointer) = s.get() as _;
-            trace_expr!("text(cur_val) = text({}) = {}", globals.cur_val, s.get());
+            crate::trace_expr!("text(cur_val) = text({}) = {}", globals.cur_val, s.get());
         }
         // end;
     }
     // eq_level(cur_val):=level_one; eq_type(cur_val):=c; equiv(cur_val):=o;
-    trace_expr!("cur_val = {}", globals.cur_val);
+    crate::trace_expr!("cur_val = {}", globals.cur_val);
     eq_level!(globals, globals.cur_val as u32) = level_one;
     eq_type!(globals, globals.cur_val as u32) = c;
     equiv!(globals, globals.cur_val as u32) = o;
@@ -73,6 +73,11 @@ use crate::section_0044::flush_string;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
+use crate::section_0221::eq_level;
+use crate::section_0221::eq_type;
+use crate::section_0221::eq_type_field;
+use crate::section_0221::equiv;
 use crate::section_0221::level_one;
 use crate::section_0222::single_base;
+use crate::section_0256::text;
 use crate::section_0259::id_lookup;

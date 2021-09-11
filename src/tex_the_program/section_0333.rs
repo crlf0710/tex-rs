@@ -7,7 +7,7 @@
 // @!par_loc:pointer; {location of `\.{\\par}' in |eqtb|}
 /// location of '`\par`' in `eqtb`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static par_loc:pointer = pointer::default();
+pub(crate) static par_loc: pointer = pointer::default();
 // @!par_token:halfword; {token representing `\.{\\par}'}
 /// token representing '`\par`'
 #[globals_struct_field(TeXGlobals)]

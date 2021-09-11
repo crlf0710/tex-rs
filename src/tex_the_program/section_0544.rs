@@ -42,7 +42,7 @@ impl From<u8> for char_tag {
             1 => char_tag::lig_tag,
             2 => char_tag::list_tag,
             3 => char_tag::ext_tag,
-            _ => unreachable!()
+            _ => unreachable!(),
         }
     }
 }

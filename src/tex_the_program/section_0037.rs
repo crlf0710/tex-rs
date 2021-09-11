@@ -59,9 +59,13 @@ pub(crate) fn init_terminal(globals: &mut TeXGlobals) -> boolean {
 }
 
 use crate::pascal::{boolean, write, write_ln, write_ln_noargs};
+use crate::section_0004::make_globals_io_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0016::incr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0031::input_ln;
 use crate::section_0033::t_open_in;
 use crate::section_0034::update_terminal;
 use crate::section_0034::wake_up_terminal;
+use crate::section_0036::loc;

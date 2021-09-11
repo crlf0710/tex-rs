@@ -7,12 +7,10 @@
 // @d scanned_result_end(#)==cur_val_level:=#;@+end
 const _: () = ();
 // @d scanned_result(#)==@+begin cur_val:=#;scanned_result_end
-macro_rules! scanned_result {
-    ($globals:expr, $val:expr, $level:expr) => {{
-        $globals.cur_val = $val;
-        $globals.cur_val_level = $level;
-    }};
-}
+pub(crate) macro scanned_result($globals:expr, $val:expr, $level:expr) {{
+    $globals.cur_val = $val;
+    $globals.cur_val_level = $level;
+}}
 //
 // @p procedure scan_something_internal(@!level:small_number;@!negative:boolean);
 //   {fetch an internal parameter}
@@ -29,11 +27,11 @@ pub(crate) fn scan_something_internal(
     // @!p:0..nest_size; {index into |nest|}
     // begin m:=cur_chr;
     m = globals.cur_chr;
-    trace_expr!("cur_cmd = {}", globals.cur_cmd);
+    crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
     // case cur_cmd of
     // def_code: @<Fetch a character code from some table@>;
     if globals.cur_cmd == def_code {
-        Fetch_a_character_code_from_some_table!(globals, m);
+        crate::section_0414::Fetch_a_character_code_from_some_table!(globals, m);
     }
     // toks_register,assign_toks,def_family,set_font,def_font: @<Fetch a token list or
     //   font identifier, provided that |level=tok_val|@>;
@@ -43,7 +41,9 @@ pub(crate) fn scan_something_internal(
         || globals.cur_cmd == set_font
         || globals.cur_cmd == def_font
     {
-        Fetch_a_token_list_or_font_identifier__provided_that_level_is_tok_val!(globals, level, m);
+        crate::section_0415::Fetch_a_token_list_or_font_identifier__provided_that_level_is_tok_val!(
+            globals, level, m
+        );
     }
     // assign_int: scanned_result(eqtb[m].int)(int_val);
     else if globals.cur_cmd == assign_int {
@@ -81,16 +81,16 @@ pub(crate) fn scan_something_internal(
     // set_prev_graf: @<Fetch the |prev_graf|@>;
     // set_page_int:@<Fetch the |dead_cycles| or the |insert_penalties|@>;
     else if globals.cur_cmd == set_page_int {
-        Fetch_the_dead_cycles_or_the_insert_penalties!(globals, m);
+        crate::section_0419::Fetch_the_dead_cycles_or_the_insert_penalties!(globals, m);
     }
     // set_page_dimen: @<Fetch something on the |page_so_far|@>;
     else if globals.cur_cmd == set_page_dimen {
-        Fetch_something_on_the_page_so_far!(globals, m);
+        crate::section_0421::Fetch_something_on_the_page_so_far!(globals, m);
     }
     // set_shape: @<Fetch the |par_shape| size@>;
     // set_box_dimen: @<Fetch a box dimension@>;
     else if globals.cur_cmd == set_box_dimen {
-        Fetch_a_box_dimension!(globals, m);
+        crate::section_0420::Fetch_a_box_dimension!(globals, m);
     }
     // char_given,math_given: scanned_result(cur_chr)(int_val);
     else if globals.cur_cmd == char_given || globals.cur_cmd == math_given {
@@ -102,33 +102,35 @@ pub(crate) fn scan_something_internal(
     }
     // assign_font_dimen: @<Fetch a font dimension@>;
     else if globals.cur_cmd == assign_font_dimen {
-        Fetch_a_font_dimension!(globals);
+        crate::section_0425::Fetch_a_font_dimension!(globals);
     }
     // assign_font_int: @<Fetch a font integer@>;
     else if globals.cur_cmd == assign_font_int {
-        Fetch_a_font_integer!(globals, m);
+        crate::section_0426::Fetch_a_font_integer!(globals, m);
     }
     // register: @<Fetch a register@>;
     else if globals.cur_cmd == register {
-        Fetch_a_register!(globals, m);
+        crate::section_0427::Fetch_a_register!(globals, m);
     }
     // last_item: @<Fetch an item in the current node, if appropriate@>;
     else if globals.cur_cmd == last_item {
-        Fetch_an_item_in_the_current_node__if_appropriate!(globals);
+        crate::section_0424::Fetch_an_item_in_the_current_node__if_appropriate!(globals);
     }
     // othercases @<Complain that \.{\\the} can't do this; give zero result@>
     else {
-        Complain_that_the_cant_do_this__give_zero_result!(globals, level);
+        crate::section_0428::Complain_that_the_cant_do_this__give_zero_result!(globals, level);
     }
     // endcases;@/
     // while cur_val_level>level do @<Convert \(c)|cur_val| to a lower level@>;
     while globals.cur_val_level as integer > level.get() as integer {
-        Convert_cur_val_to_a_lower_level!(globals);
+        crate::section_0429::Convert_cur_val_to_a_lower_level!(globals);
     }
     // @<Fix the reference count, if any, and negate |cur_val| if |negative|@>;
-    Fix_the_reference_count__if_any__and_negate_cur_val_if_negative!(globals, negative);
+    crate::section_0430::Fix_the_reference_count__if_any__and_negate_cur_val_if_negative!(
+        globals, negative
+    );
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::boolean;
@@ -141,5 +143,6 @@ use crate::section_0113::MEMORY_WORD_INT;
 use crate::section_0115::pointer;
 use crate::section_0208::*;
 use crate::section_0209::*;
+use crate::section_0221::equiv;
 use crate::section_0297::chr_code_type;
 use crate::section_0410::cur_val_level_kind;

@@ -19,25 +19,25 @@ pub(crate) fn build_page(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!q,@!r:pointer; {nodes being examined}
     // @!b,@!c:integer; {badness and cost of current page}
     // @!pi:integer; {penalty to be added to the badness}
-    const _ : () = ();
+    const _: () = ();
     // @!n:min_quarterword..255; {insertion box number}
     // @!delta,@!h,@!w:scaled; {sizes used for insertion calculations}
     // begin if (link(contrib_head)=null)or output_active then return;
     if link!(globals, contrib_head) == null || globals.output_active {
-        return_nojump!();
+        crate::return_nojump!();
     }
     // repeat continue: p:=link(contrib_head);@/
     loop {
-        region_backward_label!(
+        crate::region_backward_label!(
         'continue_ <-
         {
         p = link!(globals, contrib_head);
         // @<Update the values of |last_glue|, |last_penalty|, and |last_kern|@>;
-        Update_the_values_of_last_glue_last_penalty_and_last_kern!(globals, p);
+        crate::section_0996::Update_the_values_of_last_glue_last_penalty_and_last_kern!(globals, p);
         // @<Move node |p| to the current page; if it is time for a page break,
         //   put the nodes following the break back onto the contribution list,
         //   and |return| to the user's output routine if there is one@>;
-        Move_node_p_to_the_current_page__if_it_is_time_for_a_page_break__put_the_nodes_following_the_break_back_onto_the_contribution_list__and_return_to_the_user_s_output_routine_if_there_is_one!
+        crate::section_0997::Move_node_p_to_the_current_page__if_it_is_time_for_a_page_break__put_the_nodes_following_the_break_back_onto_the_contribution_list__and_return_to_the_user_s_output_routine_if_there_is_one!
             (globals, p, 'continue_);
         }
         |'continue_|
@@ -48,13 +48,16 @@ pub(crate) fn build_page(globals: &mut TeXGlobals) -> TeXResult<()> {
         }
     }
     // @<Make the contribution list empty by setting its tail to |contrib_head|@>;
-    Make_the_contribution_list_empty_by_setting_its_tail_to_contrib_head!(globals);
+    crate::section_0995::Make_the_contribution_list_empty_by_setting_its_tail_to_contrib_head!(
+        globals
+    );
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0162::contrib_head;

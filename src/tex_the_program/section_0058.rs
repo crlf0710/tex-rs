@@ -10,7 +10,7 @@
 pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_code) {
     // label exit;
     // begin if @<Character |s| is the current new-line character@> then
-    if Character_s_is_the_current_new_line_character!(globals, s) {
+    if crate::section_0244::Character_s_is_the_current_new_line_character!(globals, s) {
         // if selector<pseudo then
         if *globals.selector < pseudo {
             // begin print_ln; return;
@@ -94,11 +94,16 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
 
 use crate::pascal::integer;
 use crate::pascal::write;
+use crate::section_0004::make_globals_io_view;
+use crate::section_0004::make_globals_log_view;
+use crate::section_0004::make_globals_string_view;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsLogView;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::pool_size;
+use crate::section_0016::do_nothing;
+use crate::section_0016::incr;
 use crate::section_0018::ASCII_code;
 use crate::section_0020::xchr;
 use crate::section_0042::append_char;

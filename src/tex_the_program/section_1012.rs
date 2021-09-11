@@ -26,7 +26,7 @@ pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) -> TeXResult<()> {
     // @!save_vfuzz: scaled; {saved value of |vfuzz|}
     // @!save_split_top_skip: pointer; {saved value of |split_top_skip|}
     // begin @<Set the value of |output_penalty|@>;
-    Set_the_value_of_output_penalty!(globals);
+    crate::section_1013::Set_the_value_of_output_penalty!(globals);
     // if bot_mark<>null then
     if bot_mark!(globals) != null {
         // begin if top_mark<>null then delete_token_ref(top_mark);
@@ -38,8 +38,9 @@ pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) -> TeXResult<()> {
     // @<Put the \(o)optimal current page into box 255, update |first_mark| and
     //   |bot_mark|, append insertions to their boxes, and put the
     //   remaining nodes back on the contribution list@>;
-    Put_the_optimal_current_page_into_box_255__update_first_mark_and_bot_mark__append_insertions_to_their_boxes__and_put_the_remaining_nodes_back_on_the_contribution_list!
-        (globals, c);
+    crate::section_1014::Put_the_optimal_current_page_into_box_255__update_first_mark_and_bot_mark__append_insertions_to_their_boxes__and_put_the_remaining_nodes_back_on_the_contribution_list!(
+        globals, c
+    );
     // if (top_mark<>null)and(first_mark=null) then
     if top_mark!(globals) != null && first_mark!(globals) == null {
         // begin first_mark:=top_mark; add_token_ref(top_mark);
@@ -56,18 +57,23 @@ pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) -> TeXResult<()> {
         }
         // else @<Fire up the user's output routine and |return|@>;
         else {
-            Fire_up_the_user_s_output_routine_and_return!(globals);
+            crate::section_1025::Fire_up_the_user_s_output_routine_and_return!(globals);
         }
-    }
-    else {
+    } else {
         // @<Perform the default output routine@>;
         todo!("perform default output");
     }
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0203::add_token_ref;
+use crate::section_0230::output_routine;
+use crate::section_0236::max_dead_cycles;
+use crate::section_0382::bot_mark;
+use crate::section_0382::first_mark;
+use crate::section_0382::top_mark;

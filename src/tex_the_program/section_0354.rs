@@ -14,26 +14,26 @@
 //! buffer and the process is repeated, slowly but surely.
 
 // @<Scan a control...@>=
-macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
+pub(crate) macro Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
     ($globals:expr) => {{
-        trace_span!("Scan a control...");
-        region_forward_label! {
+        crate::trace_span!("Scan a control...");
+        crate::region_forward_label! {
         |'found|
         {
-        trace_expr!("cs loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
+        crate::trace_expr!("cs loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
         // begin if loc>limit then cur_cs:=null_cs {|state| is irrelevant in this case}
         if loc!($globals) > limit!($globals) {
             /// `state` is irrelevant in this case
             const _ : () = ();
             $globals.cur_cs = null_cs;
         } else {
-            region_backward_label! {
+            crate::region_backward_label! {
             'start_cs <-
             {
                 // else  begin start_cs: k:=loc; cur_chr:=buffer[k]; cat:=cat_code(cur_chr);
                 let mut k = loc!($globals);
                 $globals.cur_chr = $globals.buffer[k].into();
-                trace_expr!("cs cur_chr = {:?}", $globals.cur_chr);
+                crate::trace_expr!("cs cur_chr = {:?}", $globals.cur_chr);
                 let mut cat = cat_code!($globals, $globals.buffer[k]) as quarterword;
                 // incr(k);
                 incr!(k);
@@ -54,11 +54,11 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
                     // and |goto start_cs|; otherwise if a multiletter control
                     // sequence is found, adjust |cur_cs| and |loc|, and
                     // |goto found|@>
-                    Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_code_is_encountered_reduce_it_and_goto_start_cs__otherwise_if_a_multiletter_control_sequence_is_found_adjust_cur_cs_and_loc_and_goto_found!
+                    crate::section_0356::Scan_ahead_in_the_buffer_until_finding_a_nonletter__if_an_expanded_code_is_encountered_reduce_it_and_goto_start_cs__otherwise_if_a_multiletter_control_sequence_is_found_adjust_cur_cs_and_loc_and_goto_found!
                         ($globals, k, cat, 'start_cs, 'found);
                 } else {
                     // else @<If an expanded code is present, reduce it and |goto start_cs|@>;
-                    If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!
+                    crate::section_0355::If_an_expanded_code_is_present_reduce_it_and_goto_start_cs!
                         ($globals, k, cat, 'start_cs);
                 }
                 // cur_cs:=single_base+buffer[loc]; incr(loc);
@@ -78,26 +78,33 @@ macro_rules! Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         // found: cur_cmd:=eq_type(cur_cs); cur_chr:=equiv(cur_cs);
         'found <-
         }
-        trace_expr!("cur_cs = {}", $globals.cur_cs);
+        crate::trace_expr!("cur_cs = {}", $globals.cur_cs);
         $globals.cur_cmd = eq_type!($globals, $globals.cur_cs as u32);
-        trace_expr!("cur_cmd = {}", $globals.cur_cmd);
+        crate::trace_expr!("cur_cmd = {}", $globals.cur_cmd);
         $globals.cur_chr = chr_code_type::new(equiv!($globals, $globals.cur_cs as u32) as _);
-        trace_expr!("cur_chr = {:?}", $globals.cur_chr);
+        crate::trace_expr!("cur_chr = {:?}", $globals.cur_chr);
         // if cur_cmd>=outer_call then check_outer_validity;
         if $globals.cur_cmd >= outer_call {
             check_outer_validity($globals);
             // end
         }
+        use crate::section_0016::incr;
+        use crate::section_0036::loc;
         use crate::section_0113::halfword;
         use crate::section_0113::quarterword;
+        use crate::section_0221::equiv;
         use crate::section_0222::null_cs;
         use crate::section_0222::single_base;
         use crate::section_0297::chr_code_type;
         use crate::section_0018::ASCII_code;
         use crate::section_0210::outer_call;
+        use crate::section_0221::eq_type;
+        use crate::section_0230::cat_code;
+        use crate::section_0302::limit;
         use crate::section_0336::check_outer_validity;
         use crate::section_0207::spacer;
         use crate::section_0207::letter;
+        use crate::section_0302::state;
         use crate::section_0303::skip_blanks;
         use crate::section_0303::mid_line;
         use crate::pascal::integer;

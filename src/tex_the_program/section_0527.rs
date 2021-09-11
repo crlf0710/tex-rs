@@ -30,5 +30,4 @@ use crate::pascal::boolean;
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0038::str_number;
 
-
 use globals_struct::{globals_struct_field, globals_struct_use};

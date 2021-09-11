@@ -36,26 +36,20 @@
 //
 // @d save_type(#)==save_stack[#].hh.b0 {classifies a |save_stack| entry}
 /// classifies a `save_stack` entry
-macro_rules! save_type {
-    ($globals:expr, $ptr:expr) => {
-        $globals.save_stack[$ptr][crate::section_0113::MEMORY_WORD_HH_B0]
-    }
+pub(crate) macro save_type($globals:expr, $ptr:expr) {
+    $globals.save_stack[$ptr][crate::section_0113::MEMORY_WORD_HH_B0]
 }
 // @d save_level(#)==save_stack[#].hh.b1
 //   {saved level for regions 5 and 6, or group code}
 /// saved level for regions 5 and 6, or group code
-macro_rules! save_level {
-    ($globals:expr, $ptr:expr) => {
-        $globals.save_stack[$ptr][crate::section_0113::MEMORY_WORD_HH_B1]
-    }
+pub(crate) macro save_level($globals:expr, $ptr:expr) {
+    $globals.save_stack[$ptr][crate::section_0113::MEMORY_WORD_HH_B1]
 }
 // @d save_index(#)==save_stack[#].hh.rh
 //   {|eqtb| location or token or |save_stack| location}
 /// `eqtb` location or token or `save_stack` location
-macro_rules! save_index {
-    ($globals:expr, $ptr:expr) => {
-        $globals.save_stack[$ptr][crate::section_0113::MEMORY_WORD_HH_RH]
-    }
+pub(crate) macro save_index($globals:expr, $ptr:expr) {
+    $globals.save_stack[$ptr][crate::section_0113::MEMORY_WORD_HH_RH]
 }
 // @d restore_old_value=0 {|save_type| when a value should be restored later}
 /// `save_type` when a value should be restored later

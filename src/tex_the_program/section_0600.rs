@@ -33,3 +33,4 @@ pub(crate) fn dvi_four(globals: &mut TeXGlobals, x: integer) {
 use crate::pascal::integer;
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
+use crate::section_0598::dvi_out;

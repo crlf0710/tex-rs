@@ -47,11 +47,11 @@ pub(crate) fn vpackage(
     list_ptr!(globals, r) = p;
     // w:=0; @<Clear dimensions to zero@>;
     w = scaled::zero();
-    Clear_dimensions_to_zero!(globals, d, x);
+    crate::section_0650::Clear_dimensions_to_zero!(globals, d, x);
     // while p<>null do @<Examine node |p| in the vlist, taking account of its effect
     //   on the dimensions of the new box; then advance |p| to the next node@>;
     while p != null {
-        Examine_node_p_in_the_vlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__then_advance_p_to_the_next_node!(
+        crate::section_0669::Examine_node_p_in_the_vlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__then_advance_p_to_the_next_node!(
             globals, p, w, d, x
         );
     }
@@ -68,12 +68,12 @@ pub(crate) fn vpackage(
     else {
         depth!(globals, r) = d;
     }
-    region_forward_label!(
+    crate::region_forward_label!(
     |'common_ending|
     {
     // @<Determine the value of |height(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
-    Determine_the_value_of_height_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!(
+    crate::section_0672::Determine_the_value_of_height_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!(
         globals, r, m, h, x, 'common_ending
     );
     }
@@ -81,9 +81,11 @@ pub(crate) fn vpackage(
     //       for an overfull or underfull vbox@>;
     'common_ending <-
     );
-    Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_vbox!(globals, r);
+    crate::section_0675::Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_vbox!(
+        globals, r
+    );
     // exit: vpackage:=r;
-    return_nojump!(r);
+    crate::return_nojump!(r);
     // end;
 }
 
@@ -95,6 +97,12 @@ use crate::section_0110::min_quarterword;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0135::box_node_size;
+use crate::section_0135::depth;
+use crate::section_0135::list_ptr;
+use crate::section_0135::shift_amount;
+use crate::section_0135::width;
 use crate::section_0137::vlist_node;
 use crate::section_0421::max_dimen;

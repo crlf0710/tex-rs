@@ -34,3 +34,4 @@ pub(crate) fn wake_up_terminal(_globals: &mut TeXGlobals) {
 use crate::pascal::break_in;
 use crate::pascal::r#break;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::do_nothing;

@@ -10,13 +10,13 @@
 //
 // @<Scan the parameters and make |link(r)| point to the macro body...@>=
 
-macro_rules! Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_return_if_an_illegal_par_is_detected {
+pub(crate) macro Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_return_if_an_illegal_par_is_detected {
     ($globals:expr, $match_chr:expr, $r:expr, $info_r:expr, $m:expr, $n:expr, $p:expr, $q:expr) => {{
-        trace_span!("Scan the parameters and make `link(r)` point to the macro body...");
+        crate::trace_span!("Scan the parameters and make `link(r)` point to the macro body...");
         /// unmatched left braces in current parameter
         let mut unbalance: halfword;
         /// backup pointer for parameter matching
-        let mut s:pointer;
+        let mut s: pointer;
 
         // begin scanner_status:=matching; unbalance:=0;
         $globals.scanner_status = scanner_status_kind::matching;
@@ -47,7 +47,7 @@ macro_rules! Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_re
             }
             // @<Scan a parameter until its delimiter string has been found; or, if |s=null|,
             //   simply scan the delimiter string@>;@/
-            Scan_a_parameter_until_its_delimiter_string_has_been_found_or_if_s_null_simply_scan_the_delimiter_string!
+            crate::section_0392::Scan_a_parameter_until_its_delimiter_string_has_been_found_or_if_s_null_simply_scan_the_delimiter_string!
                 ($globals, $match_chr, $r, $info_r, s, $m, $n, $p, $q, unbalance);
             // {now |info(r)| is a token whose command code is either |match| or |end_match|}
             // until info(r)=end_match_token;
@@ -58,9 +58,17 @@ macro_rules! Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_re
         }
         // end
         use crate::pascal::integer;
-        use crate::section_0210::outer_call;
+        use crate::section_0018::ASCII_code;
+        use crate::section_0113::halfword;
+        use crate::section_0115::pointer;
         use crate::section_0115::null;
+        use crate::section_0118::link;
+        use crate::section_0118::info_tok;
         use crate::section_0162::temp_head;
+        use crate::section_0210::outer_call;
+        use crate::section_0221::eq_type;
         use crate::section_0289::match_token;
+        use crate::section_0289::end_match_token;
+        use crate::section_0305::scanner_status_kind;
     }}
 }

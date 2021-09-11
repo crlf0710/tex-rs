@@ -17,16 +17,21 @@ pub(crate) fn new_glue(globals: &mut TeXGlobals, q: pointer) -> TeXResult<pointe
     glue_ptr!(globals, p) = q;
     incr!(glue_ref_count!(globals, q));
     // new_glue:=p;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0081::TeXResult;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0141::small_node_size;
 use crate::section_0149::glue_node;
 use crate::section_0149::glue_node_subtype;
-
+use crate::section_0149::glue_ptr;
+use crate::section_0149::leader_ptr;
+use crate::section_0150::glue_ref_count;

@@ -1,9 +1,9 @@
 //! ` `
 
 // @<Enter as many...@>=
-macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to_a_right_brace__then_return {
+pub(crate) macro Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to_a_right_brace__then_return {
     ($globals:expr) => {{
-        trace_span!("Enter as many...");
+        crate::trace_span!("Enter as many...");
         /// length of current word; not always a `small_number`
         let mut n: u8_from_0_to_n<U64>;
         /// head of a list of hyphen positions
@@ -14,13 +14,13 @@ macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to
         // loop@+  begin get_x_token;
         loop {
             get_x_token($globals)?;
-            region_backward_label!(
+            crate::region_backward_label!(
             'reswitch <-
             {
                 // reswitch: case cur_cmd of
                 // letter,other_char,char_given:@<Append a new letter or hyphen@>;
                 if $globals.cur_cmd == letter || $globals.cur_cmd == other_char || $globals.cur_cmd == char_given {
-                    Append_a_new_letter_or_hyphen!($globals, n, p);
+                    crate::section_0937::Append_a_new_letter_or_hyphen!($globals, n, p);
                 }
                 // char_num: begin scan_char_num; cur_chr:=cur_val; cur_cmd:=char_given;
                 else if $globals.cur_cmd == char_num {
@@ -28,17 +28,17 @@ macro_rules! Enter_as_many_hyphenation_exceptions_as_are_listed__until_coming_to
                     $globals.cur_chr = chr_code_type::new($globals.cur_val as _);
                     $globals.cur_cmd = char_given;
                     // goto reswitch;
-                    goto_backward_label!('reswitch);
+                    crate::goto_backward_label!('reswitch);
                     // end;
                 }
                 // spacer,right_brace: begin if n>1 then @<Enter a hyphenation exception@>;
                 else if $globals.cur_cmd == spacer || $globals.cur_cmd == right_brace {
                     if n > 1 {
-                        Enter_a_hyphenation_exception!($globals, n, p);
+                        crate::section_0939::Enter_a_hyphenation_exception!($globals, n, p);
                     }
                     // if cur_cmd=right_brace then return;
                     if $globals.cur_cmd == right_brace {
-                        return_nojump!();
+                        crate::return_nojump!();
                     }
                     // n:=0; p:=null;
                     n = 0.into();

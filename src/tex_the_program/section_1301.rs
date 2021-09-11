@@ -2,7 +2,7 @@
 // format_ident:=" (INITEX)";
 #[distributed_slice(INIT_TBLENTRY)]
 fn initialize_table_entries_done_by_initex_only_1301(globals: &mut TeXGlobals) {
-    globals.format_ident = strpool_str!(" (INITEX)");
+    globals.format_ident = crate::strpool_str!(" (INITEX)");
 }
 
 use crate::section_0004::TeXGlobals;

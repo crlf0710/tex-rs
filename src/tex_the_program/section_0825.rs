@@ -6,19 +6,21 @@
 //! prevents this error message from appearing more than once per paragraph.
 //
 // @d check_shrinkage(#)==if (shrink_order(#)<>normal)and(shrink(#)<>0) then
-macro_rules! check_shrinkage {
-    ($globals:expr, $v:expr) => {{
-        if shrink_order!($globals, $v) as integer != glue_ord::normal as integer
-            && shrink!($globals, $v) != scaled::zero()
-        {
-            // begin #:=finite_shrink(#);
-            $v = finite_shrink($globals, $v)?;
-            // end
-        }
-        use crate::section_0150::glue_ord;
-        use crate::section_0826::finite_shrink;
-    }};
-}
+pub(crate) macro check_shrinkage($globals:expr, $v:expr) {{
+    if shrink_order!($globals, $v) as integer != glue_ord::normal as integer
+        && shrink!($globals, $v) != scaled::zero()
+    {
+        // begin #:=finite_shrink(#);
+        $v = finite_shrink($globals, $v)?;
+        // end
+    }
+    use crate::pascal::integer;
+    use crate::section_0101::scaled;
+    use crate::section_0150::glue_ord;
+    use crate::section_0150::shrink;
+    use crate::section_0150::shrink_order;
+    use crate::section_0826::finite_shrink;
+}}
 
 // @<Glob...@>=
 // @!no_shrink_error_yet:boolean; {have we complained about infinite shrinkage?}

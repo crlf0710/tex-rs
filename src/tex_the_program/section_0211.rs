@@ -56,46 +56,49 @@ pub(crate) fn print_mode(globals: &mut TeXGlobals, m: integer) {
         // case m div (max_command+1) of
         match m / (max_command + 1) as integer {
             // 0:print("vertical");
-            0 => print(globals, strpool_str!("vertical").get() as _),
+            0 => print(globals, crate::strpool_str!("vertical").get() as _),
             // 1:print("horizontal");
-            1 => print(globals, strpool_str!("horizontal").get() as _),
+            1 => print(globals, crate::strpool_str!("horizontal").get() as _),
             // 2:print("display math");
-            2 => print(globals, strpool_str!("display math").get() as _),
+            2 => print(globals, crate::strpool_str!("display math").get() as _),
             _ => {
-                trace_error_expr!("m = {}", m);
+                crate::trace_error_expr!("m = {}", m);
                 unreachable!()
-            },
+            }
         }
         // end
     }
     // else if m=0 then print("no")
     else if m == 0 {
-        print(globals, strpool_str!("no").get() as _);
+        print(globals, crate::strpool_str!("no").get() as _);
     }
     // else  case (-m) div (max_command+1) of
     else {
         match (-m) / (max_command + 1) as integer {
             // 0:print("internal vertical");
-            0 => print(globals, strpool_str!("internal vertical").get() as _),
+            0 => print(globals, crate::strpool_str!("internal vertical").get() as _),
             // 1:print("restricted horizontal");
-            1 => print(globals, strpool_str!("restricted horizontal").get() as _),
+            1 => print(
+                globals,
+                crate::strpool_str!("restricted horizontal").get() as _,
+            ),
             // 2:print("math");
-            2 => print(globals, strpool_str!("math").get() as _),
+            2 => print(globals, crate::strpool_str!("math").get() as _),
             _ => unreachable!(),
         }
         // end;
     }
     // print(" mode");
-    print(globals, strpool_str!(" mode").get() as _);
+    print(globals, crate::strpool_str!(" mode").get() as _);
     // end;
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0059::print;
-use crate::section_0209::max_command_POS_TYPENUM;
 use crate::section_0209::max_command;
+use crate::section_0209::max_command_POS_TYPENUM;
 use typenum::Integer;
 use typenum::{N1, P1};
 
-migration_complete!();
+crate::migration_complete!();

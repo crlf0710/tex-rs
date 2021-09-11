@@ -8,12 +8,21 @@
 pub(crate) fn restore_trace(globals: &mut TeXGlobals, p: pointer, s: str_number) {
     // begin begin_diagnostic; print_char("{"); print(s); print_char(" ");
     begin_diagnostic(globals);
-    print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'{'));
+    print_char(
+        make_globals_io_string_log_view!(globals),
+        ASCII_code_literal!(b'{'),
+    );
     print(globals, s.get() as _);
-    print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b' '));
+    print_char(
+        make_globals_io_string_log_view!(globals),
+        ASCII_code_literal!(b' '),
+    );
     // show_eqtb(p); print_char("}");
     show_eqtb(globals, p);
-    print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'}'));
+    print_char(
+        make_globals_io_string_log_view!(globals),
+        ASCII_code_literal!(b'}'),
+    );
     // end_diagnostic(false);
     end_diagnostic(globals, false);
     // end;

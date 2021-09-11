@@ -21,7 +21,7 @@ pub(crate) fn x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
         globals.cur_tok = cur_tok_type::from_cs(globals.cur_cs);
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;

@@ -25,7 +25,7 @@ pub(crate) fn dvi_font_def(globals: &mut TeXGlobals, f: internal_font_number) {
     // dvi_out(length(font_name[f]));
     dvi_out!(globals, length(globals, globals.font_name[f].get() as _));
     // @<Output the font name whose internal number is |f|@>;
-    Output_the_font_name_whose_internal_number_is_f!(globals, f);
+    crate::section_0603::Output_the_font_name_whose_internal_number_is_f!(globals, f);
     // end;
 }
 
@@ -39,4 +39,5 @@ use crate::section_0113::FOUR_QUARTERS_B2;
 use crate::section_0113::FOUR_QUARTERS_B3;
 use crate::section_0548::internal_font_number;
 use crate::section_0586::fnt_def1;
+use crate::section_0598::dvi_out;
 use crate::section_0600::dvi_four;

@@ -37,4 +37,3 @@ use crate::section_0594::dvi_index_array;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
-

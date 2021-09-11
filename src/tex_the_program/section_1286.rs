@@ -5,10 +5,20 @@
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1286(globals: &mut TeXGlobals) {
     // primitive("lowercase",case_shift,lc_code_base);
-    primitive(globals, strpool_str!("lowercase"), case_shift, lc_code_base as _);
+    primitive(
+        globals,
+        crate::strpool_str!("lowercase"),
+        case_shift,
+        lc_code_base as _,
+    );
     // @!@:lowercase_}{\.{\\lowercase} primitive@>
     // primitive("uppercase",case_shift,uc_code_base);
-    primitive(globals, strpool_str!("uppercase"), case_shift, uc_code_base as _);
+    primitive(
+        globals,
+        crate::strpool_str!("uppercase"),
+        case_shift,
+        uc_code_base as _,
+    );
     // @!@:uppercase_}{\.{\\uppercase} primitive@>
 }
 

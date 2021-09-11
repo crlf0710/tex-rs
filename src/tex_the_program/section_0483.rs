@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Input and store tokens from the next line of the file@>=
-macro_rules! Input_and_store_tokens_from_the_next_line_of_the_file {
+pub(crate) macro Input_and_store_tokens_from_the_next_line_of_the_file {
     ($globals:expr, $m:expr, $p:expr, $q:expr) => {{
         // begin_file_reading; name:=m+1;
         begin_file_reading($globals);
@@ -12,11 +12,11 @@ macro_rules! Input_and_store_tokens_from_the_next_line_of_the_file {
         }
         // else if read_open[m]=just_open then @<Input the first line of |read_file[m]|@>
         else if $globals.read_open[$m.get()] == read_open_kind::just_open {
-            Input_the_first_line_of_read_file_m!($globals, $m);
+            crate::section_0485::Input_the_first_line_of_read_file_m!($globals, $m);
         }
         // else @<Input the next line of |read_file[m]|@>;
         else {
-            Input_the_next_line_of_read_file_m!($globals, $m);
+            crate::section_0486::Input_the_next_line_of_read_file_m!($globals, $m);
         }
         // limit:=last;
         limit!($globals) = $globals.last.get();
@@ -32,7 +32,7 @@ macro_rules! Input_and_store_tokens_from_the_next_line_of_the_file {
         $globals.first = (limit!($globals) + 1).into();
         loc!($globals) = start!($globals);
         state!($globals) = new_line;
-        region_forward_label!(
+        crate::region_forward_label!(
             |'done|
             {
                 // loop@+  begin get_token;
@@ -42,7 +42,7 @@ macro_rules! Input_and_store_tokens_from_the_next_line_of_the_file {
                     //   {|cur_cmd=cur_chr=0| will occur at the end of the line}
                     /// `cur_cmd=cur_chr=0` will occur at the end of the line
                     if $globals.cur_tok.get() == 0 {
-                        goto_forward_label!('done);
+                        crate::goto_forward_label!('done);
                     }
                     // if align_state<1000000 then {unmatched `\.\}' aborts the line}
                     /// unmatched `}` aborts the line
@@ -56,7 +56,7 @@ macro_rules! Input_and_store_tokens_from_the_next_line_of_the_file {
                         }
                         // align_state:=1000000; goto done;
                         $globals.align_state = 1000000;
-                        goto_forward_label!('done);
+                        crate::goto_forward_label!('done);
                         // end;
                     }
                     // store_new_token(cur_tok);
@@ -69,12 +69,21 @@ macro_rules! Input_and_store_tokens_from_the_next_line_of_the_file {
         );
         end_file_reading($globals);
 
+        use crate::section_0016::decr;
         use crate::section_0018::ASCII_code;
+        use crate::section_0036::loc;
         use crate::section_0113::halfword;
+        use crate::section_0236::end_line_char;
+        use crate::section_0302::limit;
+        use crate::section_0302::name;
+        use crate::section_0302::state;
+        use crate::section_0302::start;
         use crate::section_0303::new_line;
         use crate::section_0328::begin_file_reading;
         use crate::section_0329::end_file_reading;
+        use crate::section_0360::end_line_char_inactive;
         use crate::section_0365::get_token;
+        use crate::section_0371::store_new_token;
         use crate::section_0480::read_open_kind;
     }}
 }

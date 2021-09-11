@@ -37,5 +37,5 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 use crate::pascal::u8_from_0_to_n;
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
-use typenum::{U1, U15, U17};
 use typenum::Unsigned;
+use typenum::{U1, U15, U17};

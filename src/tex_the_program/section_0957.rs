@@ -27,10 +27,11 @@ pub(crate) fn trie_pack(globals: &mut TeXGlobals, mut p: trie_pointer) -> TeXRes
         }
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0920::trie_pointer;
+use crate::section_0950::trie_ref;
 use crate::section_0953::first_fit;

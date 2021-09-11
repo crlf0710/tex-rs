@@ -8,18 +8,16 @@
 // @d prompt_input(#)==begin wake_up_terminal; print(#); term_input;
 //     end {prints a string and gets a line of input}
 /// prints a string and gets a line of input
-macro_rules! prompt_input {
-    ($globals:expr, $val:expr) => {{
-        trace_span!("prompt_input");
-        wake_up_terminal($globals);
-        print($globals, ($val).into());
-        term_input($globals)?;
+pub(crate) macro prompt_input($globals:expr, $val:expr) {{
+    crate::trace_span!("prompt_input");
+    wake_up_terminal($globals);
+    print($globals, ($val).into());
+    term_input($globals)?;
 
-        use crate::section_0034::wake_up_terminal;
-        use crate::section_0059::print;
-        use crate::section_0071::term_input;
-    }};
-}
+    use crate::section_0034::wake_up_terminal;
+    use crate::section_0059::print;
+    use crate::section_0071::term_input;
+}}
 
 // @p procedure term_input; {gets a line from the terminal}
 /// gets a line from the terminal
@@ -35,7 +33,7 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     update_terminal(globals);
     // if not input_ln(term_in,true) then fatal_error("End of file on the terminal!");
     if !input_ln(make_globals_io_view!(globals), &mut globals.term_in, true) {
-        fatal_error(globals, strpool_str!("End of file on the terminal!"))?;
+        fatal_error(globals, crate::strpool_str!("End of file on the terminal!"))?;
     }
     // @.End of file on the terminal@>
     // term_offset:=0; {the user's line ended with \<\rm return>}
@@ -58,12 +56,16 @@ pub(crate) fn term_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     print_ln(make_globals_io_string_log_view!(globals));
     incr!(globals.selector);
     // end;
-    return_nojump!();
+    crate::return_nojump!();
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
+use crate::section_0004::make_globals_io_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
+use crate::section_0016::decr;
+use crate::section_0016::incr;
 use crate::section_0031::input_ln;
 use crate::section_0034::update_terminal;
 use crate::section_0057::print_ln;

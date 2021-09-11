@@ -17,8 +17,8 @@ pub(crate) fn sprint_cs(globals: &mut TeXGlobals, p: pointer) {
         }
         // else begin print_esc("csname"); print_esc("endcsname");
         else {
-            print_esc(globals, strpool_str!("csname"));
-            print_esc(globals, strpool_str!("endcsname"));
+            print_esc(globals, crate::strpool_str!("csname"));
+            print_esc(globals, crate::strpool_str!("endcsname"));
             // end
         }
     }
@@ -35,7 +35,8 @@ use crate::section_0038::str_number;
 use crate::section_0059::print;
 use crate::section_0063::print_esc;
 use crate::section_0115::pointer;
-use crate::section_0222::hash_base;
 use crate::section_0222::active_base;
-use crate::section_0222::single_base;
+use crate::section_0222::hash_base;
 use crate::section_0222::null_cs;
+use crate::section_0222::single_base;
+use crate::section_0256::text;

@@ -5,12 +5,14 @@
 //! since such characters are indistinguishable on most computer terminal displays.
 //
 // @<Finish line, emit a space@>=
-macro_rules! Finish_line__emit_a_space {
-    ($globals:expr) => {
-        // begin loc:=limit+1; cur_cmd:=spacer; cur_chr:=" ";
-        loc!($globals) = limit!($globals) + 1;
-        $globals.cur_cmd = spacer;
-        $globals.cur_chr = ASCII_code_literal!(b' ').into();
-        // end
-    }
+pub(crate) macro Finish_line__emit_a_space($globals:expr) {
+    // begin loc:=limit+1; cur_cmd:=spacer; cur_chr:=" ";
+    loc!($globals) = limit!($globals) + 1;
+    $globals.cur_cmd = spacer;
+    $globals.cur_chr = ASCII_code_literal!(b' ').into();
+    // end
+    use crate::section_0018::ASCII_code_literal;
+    use crate::section_0036::loc;
+    use crate::section_0207::*;
+    use crate::section_0302::limit;
 }

@@ -1,8 +1,8 @@
 //! ` `
 
 // @<Compute the trie op code, |v|...@>=
-macro_rules! Compute_the_trie_op_code__v__and_set_l_to_0 {
-    ($globals:expr, $k:expr, $l:expr, $v:expr) => {{
+pub(crate) macro Compute_the_trie_op_code__v__and_set_l_to_0
+    ($globals:expr, $k:expr, $l:expr, $v:expr) {{
         // if hc[1]=0 then hyf[0]:=0;
         if $globals.hc[1] == ASCII_code::from(0) {
             $globals.hyf[0] = 0.into();
@@ -14,7 +14,7 @@ macro_rules! Compute_the_trie_op_code__v__and_set_l_to_0 {
         // l:=k; v:=min_quarterword;
         $l = $k;
         $v = min_quarterword;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done1|
         {
         // loop@+  begin if hyf[l]<>0 then v:=new_trie_op(k-l,hyf[l],v);
@@ -26,7 +26,7 @@ macro_rules! Compute_the_trie_op_code__v__and_set_l_to_0 {
             if $l > 0 {
                 decr!($l);
             } else {
-                goto_forward_label!('done1);
+                crate::goto_forward_label!('done1);
             }
             // end;
         }
@@ -35,7 +35,8 @@ macro_rules! Compute_the_trie_op_code__v__and_set_l_to_0 {
         'done1 <-
         );
 
+        use crate::section_0016::decr;
         use crate::section_0018::ASCII_code;
+        use crate::section_0110::min_quarterword;
         use crate::section_0944::new_trie_op;
     }}
-}

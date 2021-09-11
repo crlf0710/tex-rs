@@ -15,16 +15,12 @@
 //
 // @d add_token_ref(#)==incr(token_ref_count(#)) {new reference to a token list}
 /// new reference to a token list
-macro_rules! add_token_ref {
-    ($globals:expr, $token:expr) => {
-        incr!(token_ref_count!($globals, $token))
-    };
+pub(crate) macro add_token_ref($globals:expr, $token:expr) {
+    crate::section_0016::incr!(crate::section_0200::token_ref_count!($globals, $token))
 }
 // @d add_glue_ref(#)==incr(glue_ref_count(#)) {new reference to a glue spec}
 /// new reference to a glue spec
 #[allow(unused_macros)]
-macro_rules! add_glue_ref {
-    ($globals:expr, $glue:expr) => {
-        incr!(glue_ref_count!($globals, $glue))
-    };
+pub(crate) macro add_glue_ref($globals:expr, $glue:expr) {
+    crate::section_0016::incr!(crate::section_0150::glue_ref_count!($globals, $glue))
 }

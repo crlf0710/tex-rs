@@ -18,4 +18,5 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0222::frozen_relax;
 use crate::section_0297::cur_tok_type;
 use crate::section_0307::inserted;
+use crate::section_0307::token_type;
 use crate::section_0325::back_input;

@@ -34,7 +34,6 @@ pub(crate) static radix: small_number = small_number::default();
 use crate::section_0101::small_number;
 
 use crate::section_0004::TeXGlobals;
-use globals_struct::{globals_struct_field, globals_struct_use};
-use crate::section_0297::cur_tok_repr;
 use crate::section_0289::other_token;
-
+use crate::section_0297::cur_tok_repr;
+use globals_struct::{globals_struct_field, globals_struct_use};

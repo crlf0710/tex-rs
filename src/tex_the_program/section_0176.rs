@@ -8,7 +8,7 @@
 pub(crate) fn print_font_and_char(globals: &mut TeXGlobals, p: integer) {
     // begin if p>mem_end then print_esc("CLOBBERED.")
     if p > globals.mem_end as integer {
-        print_esc(globals, strpool_str!("CLOBBERED."));
+        print_esc(globals, crate::strpool_str!("CLOBBERED."));
     }
     // else  begin if (font(p)<font_base)or(font(p)>font_max) then print_char("*")
     else {
@@ -23,7 +23,7 @@ pub(crate) fn print_font_and_char(globals: &mut TeXGlobals, p: integer) {
         // @.*\relax@>
         // else @<Print the font identifier for |font(p)|@>;
         else {
-            Print_the_font_identifier_for_font_p!(globals, p as pointer);
+            crate::section_0267::Print_the_font_identifier_for_font_p!(globals, p as pointer);
         }
         // print_char(" "); print_ASCII(qo(character(p)));
         print_char(
@@ -51,11 +51,15 @@ pub(crate) fn print_font_and_char(globals: &mut TeXGlobals, p: integer) {
 //
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0011::font_max;
 use crate::section_0012::font_base;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0058::print_char;
 use crate::section_0063::print_esc;
 use crate::section_0068::print_ASCII;
 use crate::section_0115::pointer;
+use crate::section_0134::character;
+use crate::section_0134::font;

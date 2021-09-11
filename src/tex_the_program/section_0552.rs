@@ -9,8 +9,8 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0552(globals: &mut Te
     globals.font_ptr = null_font;
     globals.fmem_ptr = 7.into();
     // font_name[null_font]:="nullfont"; font_area[null_font]:="";
-    globals.font_name[null_font] = strpool_str!("nullfont");
-    globals.font_area[null_font] = strpool_str!("");
+    globals.font_name[null_font] = crate::strpool_str!("nullfont");
+    globals.font_area[null_font] = crate::strpool_str!("");
     // hyphen_char[null_font]:="-"; skew_char[null_font]:=-1;
     globals.hyphen_char[null_font] = b'-' as _;
     globals.skew_char[null_font] = -1;
@@ -50,8 +50,8 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0552(globals: &mut Te
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
-use crate::section_0101::MEMORY_WORD_SC;
 use crate::section_0101::scaled;
+use crate::section_0101::MEMORY_WORD_SC;
 use crate::section_0115::null;
 use crate::section_0232::null_font;
 use crate::section_0548::internal_font_number;
@@ -62,4 +62,3 @@ use linkme::distributed_slice;
 
 // Workaround https://github.com/rust-lang/rust/issues/47384
 pub(crate) fn workaround_47384() {}
-

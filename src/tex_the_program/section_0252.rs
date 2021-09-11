@@ -8,7 +8,10 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
     // begin if n<active_base then print_char("?") {this can't happen}
     if (n as integer) < active_base as integer {
         /// this can't happen
-        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'?'));
+        print_char(
+            make_globals_io_string_log_view!(globals),
+            ASCII_code_literal!(b'?'),
+        );
     }
     // else if n<glue_base then @<Show equivalent |n|, in region 1 or 2@>
     else if (n as integer) < glue_base as integer {
@@ -33,7 +36,10 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
     // else print_char("?"); {this can't happen either}
     else {
         /// this can't happen either
-        print_char(make_globals_io_string_log_view!(globals), ASCII_code_literal!(b'?'));
+        print_char(
+            make_globals_io_string_log_view!(globals),
+            ASCII_code_literal!(b'?'),
+        );
     }
     // end;
     // tats

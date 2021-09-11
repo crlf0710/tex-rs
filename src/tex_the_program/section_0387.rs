@@ -14,7 +14,8 @@
 // @!long_state:call..long_outer_call; {governs the acceptance of \.{\\par}}
 /// governs the acceptance of `\par`
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static long_state: u8_from_m_to_n<call_TYPENUM, long_outer_call_TYPENUM> = u8_from_m_to_n::default();
+pub(crate) static long_state: u8_from_m_to_n<call_TYPENUM, long_outer_call_TYPENUM> =
+    u8_from_m_to_n::default();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::u8_from_m_to_n;
@@ -27,5 +28,3 @@ use crate::section_0210::long_outer_call_TYPENUM;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
-
-

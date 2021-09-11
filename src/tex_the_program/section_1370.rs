@@ -12,7 +12,9 @@ pub(crate) fn write_out(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     // @!q,@!r:pointer; {temporary variables for list manipulation}
     // begin @<Expand macros in the token list
     //   and make |link(def_ref)| point to the result@>;
-    Expand_macros_in_the_token_list_and_make_link_def_ref_point_to_the_result!(globals, p);
+    crate::section_1371::Expand_macros_in_the_token_list_and_make_link_def_ref_point_to_the_result!(
+        globals, p
+    );
     // old_setting:=selector; j:=write_stream(p);
     old_settings = globals.selector;
     j = small_number::new(write_stream!(globals, p) as _);
@@ -23,13 +25,13 @@ pub(crate) fn write_out(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     // else  begin {write to the terminal if file isn't open}
     else {
         /// write to the terminal if file isn't open
-        const _ : () = ();
+        const _: () = ();
         // if (j=17)and(selector=term_and_log) then selector:=log_only;
         if j == 17 && globals.selector == term_and_log {
             globals.selector = log_only.into();
         }
         // print_nl("");
-        print_nl(globals, strpool_str!(""));
+        print_nl(globals, crate::strpool_str!(""));
         // end;
     }
     // token_show(def_ref); print_ln;
@@ -39,13 +41,14 @@ pub(crate) fn write_out(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     flush_list(globals, globals.def_ref);
     globals.selector = old_settings;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
-use crate::section_0054::term_and_log;
 use crate::section_0054::log_only;
+use crate::section_0054::term_and_log;
 use crate::section_0057::print_ln;
 use crate::section_0062::print_nl;
 use crate::section_0081::TeXResult;
@@ -53,3 +56,4 @@ use crate::section_0101::small_number;
 use crate::section_0115::pointer;
 use crate::section_0123::flush_list;
 use crate::section_0295::token_show;
+use crate::section_1341::write_stream;

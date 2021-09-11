@@ -53,31 +53,23 @@
 pub(crate) const noad_size: quarterword = 4;
 // @d nucleus(#)==#+1 {the |nucleus| field of a noad}
 /// the `nucleus` field of a noad
-macro_rules! nucleus {
-    ($p:expr) => {
-        $p + 1
-    }
+pub(crate) macro nucleus($p:expr) {
+    $p + 1
 }
 // @d supscr(#)==#+2 {the |supscr| field of a noad}
 /// the `supscr` field of a noad
-macro_rules! supscr {
-    ($p:expr) => {
-        $p + 2
-    }
+pub(crate) macro supscr($p:expr) {
+    $p + 2
 }
 // @d subscr(#)==#+3 {the |subscr| field of a noad}
 /// the `subscr` field of a noad
-macro_rules! subscr {
-    ($p:expr) => {
-        $p + 3
-    }
+pub(crate) macro subscr($p:expr) {
+    $p + 3
 }
 // @d math_type==link {a |halfword| in |mem|}
 /// a `halfword` in `mem`
-macro_rules! math_type {
-    ($globals:expr, $p:expr) => {
-        link!($globals, $p)
-    }
+pub(crate) macro math_type($globals:expr, $p:expr) {
+    crate::section_0118::link!($globals, $p)
 }
 // @d fam==font {a |quarterword| in |mem|}
 // @d math_char=1 {|math_type| when the attribute is simple}

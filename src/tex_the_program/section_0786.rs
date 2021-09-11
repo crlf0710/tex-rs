@@ -17,7 +17,10 @@ pub(crate) fn init_row(globals: &mut TeXGlobals) -> TeXResult<()> {
         prev_depth!(globals) = scaled::zero();
     }
     // tail_append(new_glue(glue_ptr(preamble)));
-    tail_append!(globals, new_glue(globals, glue_ptr!(globals, preamble!(globals)))?);
+    tail_append!(
+        globals,
+        new_glue(globals, glue_ptr!(globals, preamble!(globals)))?
+    );
     // subtype(tail):=tab_skip_code+1;@/
     subtype!(globals, tail!(globals)) = tab_skip_code + 1;
     // cur_align:=link(preamble); cur_tail:=cur_head; init_span(cur_align);
@@ -25,14 +28,23 @@ pub(crate) fn init_row(globals: &mut TeXGlobals) -> TeXResult<()> {
     globals.cur_tail = globals.cur_head;
 
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
+use crate::section_0118::link;
+use crate::section_0133::subtype;
+use crate::section_0149::glue_ptr;
 use crate::section_0153::new_glue;
 use crate::section_0211::hmode;
 use crate::section_0211::vmode;
+use crate::section_0213::mode;
+use crate::section_0213::prev_depth;
+use crate::section_0213::space_factor;
+use crate::section_0213::tail;
+use crate::section_0214::tail_append;
 use crate::section_0216::push_nest;
 use crate::section_0224::tab_skip_code;
+use crate::section_0770::preamble;

@@ -11,32 +11,32 @@ pub(crate) fn do_extension(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // open_node:@<Implement \.{\\openout}@>;
     else if globals.cur_chr.get() == open_node as chr_code_repr {
-        Implement_openout!(globals);
+        crate::section_1351::Implement_openout!(globals);
     }
     // write_node:@<Implement \.{\\write}@>;
     else if globals.cur_chr.get() == write_node as chr_code_repr {
-        Implement_write!(globals);
+        crate::section_1352::Implement_write!(globals);
     }
     // close_node:@<Implement \.{\\closeout}@>;
     else if globals.cur_chr.get() == close_node as chr_code_repr {
-        Implement_closeout!(globals);
+        crate::section_1353::Implement_closeout!(globals);
     }
     // special_node:@<Implement \.{\\special}@>;
     // immediate_code:@<Implement \.{\\immediate}@>;
     else if globals.cur_chr.get() == immediate_code as chr_code_repr {
-        Implement_immediate!(globals);
+        crate::section_1375::Implement_immediate!(globals);
     }
     // set_language_code:@<Implement \.{\\setlanguage}@>;
     else if globals.cur_chr.get() == set_language_code as chr_code_repr {
-        Implement_setlanguage!(globals);
+        crate::section_1377::Implement_setlanguage!(globals);
     }
     // othercases confusion("ext1")
     else {
-        confusion(globals, strpool_str!("ext1"))?;
+        confusion(globals, crate::strpool_str!("ext1"))?;
     }
     // @:this can't happen ext1}{\quad ext1@>
     // endcases;
-    ok_nojump!()
+    crate::ok_nojump!()
     // end;
 }
 
@@ -49,4 +49,3 @@ use crate::section_1341::open_node;
 use crate::section_1341::write_node;
 use crate::section_1344::immediate_code;
 use crate::section_1344::set_language_code;
-

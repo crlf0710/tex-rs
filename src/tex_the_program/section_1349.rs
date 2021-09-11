@@ -20,13 +20,16 @@ pub(crate) fn new_whatsit(
     link!(globals, tail!(globals)) = p;
     tail!(globals) = p;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0146::whatsit_node;
-
+use crate::section_0213::tail;

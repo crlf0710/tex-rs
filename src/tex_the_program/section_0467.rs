@@ -7,11 +7,13 @@ pub(crate) fn ins_the_toks(globals: &mut TeXGlobals) -> TeXResult<()> {
     link!(globals, garbage) = the_toks(globals)?;
     ins_list!(globals, link!(globals, temp_head));
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0118::link;
 use crate::section_0162::garbage;
 use crate::section_0162::temp_head;
+use crate::section_0323::ins_list;
 use crate::section_0465::the_toks;

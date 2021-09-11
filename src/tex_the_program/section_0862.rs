@@ -23,5 +23,5 @@
 // @!prev_p:pointer; {helps to determine when glue nodes are breakpoints}
 // @!q,@!r,@!s,@!prev_s:pointer; {miscellaneous nodes of temporary interest}
 // @!f:internal_font_number; {used when calculating character widths}
-const _ : () = ();
+const _: () = ();
 //

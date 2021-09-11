@@ -4,18 +4,18 @@
 //! copies of $x_n$, namely $(x_1,\ldots,x_n,x_n,\ldots,x_n)$.
 //
 // @<Dump regions 1 to 4 of |eqtb|@>=
-macro_rules! Dump_regions_1_to_4_of_eqtb {
-    ($globals:expr, $k:expr) => {{
+pub(crate) macro Dump_regions_1_to_4_of_eqtb
+    ($globals:expr, $k:expr) {{
         /// all-purpose indices
         let (mut j, mut k, mut l): (integer, integer, integer);
         // k:=active_base;
         k = active_base as integer;
         // repeat j:=k;
         loop {
-            region_forward_label!(
+            crate::region_forward_label!(
             |'done1|
             {
-            region_forward_label!(
+            crate::region_forward_label!(
             |'found1|
             {
             j = k;
@@ -26,7 +26,7 @@ macro_rules! Dump_regions_1_to_4_of_eqtb {
                 if equiv!($globals, j) == equiv!($globals, j + 1) &&
                     eq_type!($globals, j) == eq_type!($globals, j + 1) &&
                     eq_level!($globals, j) == eq_level!($globals, j + 1) {
-                    goto_forward_label!('found1);
+                    crate::goto_forward_label!('found1);
                 }
                 // incr(j);
                 incr!(j);
@@ -36,10 +36,10 @@ macro_rules! Dump_regions_1_to_4_of_eqtb {
             l = int_base as integer;
             /// `j=int_base-1`
             const _ : () = ();
-            goto_forward_label!('done1);
+            crate::goto_forward_label!('done1);
             }
             // found1: incr(j); l:=j;
-            'found1 <- 
+            'found1 <-
             );
             incr!(j);
             l = j;
@@ -50,7 +50,7 @@ macro_rules! Dump_regions_1_to_4_of_eqtb {
                 if equiv!($globals, j) != equiv!($globals, j + 1) ||
                     eq_type!($globals, j) != eq_type!($globals, j + 1) ||
                     eq_level!($globals, j) != eq_level!($globals, j + 1) {
-                    goto_forward_label!('done1);
+                    crate::goto_forward_label!('done1);
                 }
                 // incr(j);
                 incr!(j);
@@ -78,7 +78,12 @@ macro_rules! Dump_regions_1_to_4_of_eqtb {
         }
         $k = k;
         use crate::pascal::integer;
+        use crate::section_0016::incr;
+        use crate::section_1305::dump_wd;
+        use crate::section_0221::equiv;
         use crate::section_0222::active_base;
         use crate::section_0230::int_base;
+        use crate::section_1305::dump_int;
+        use crate::section_0221::eq_type;
+        use crate::section_0221::eq_level;
     }}
-}

@@ -16,7 +16,7 @@ pub(crate) fn unpackage(globals: &mut TeXGlobals) -> TeXResult<()> {
     p = r#box!(globals, globals.cur_val);
     // if p=null then return;
     if p == null {
-        return_nojump!();
+        crate::return_nojump!();
     }
     // if (abs(mode)=mmode)or((abs(mode)=vmode)and(type(p)<>vlist_node))or@|
     //    ((abs(mode)=hmode)and(type(p)<>hlist_node)) then
@@ -50,7 +50,9 @@ pub(crate) fn unpackage(globals: &mut TeXGlobals) -> TeXResult<()> {
         tail!(globals) = link!(globals, tail!(globals));
     }
     // exit:end;
-    ok_nojump!()
+    use crate::section_0118::link;
+    use crate::section_0135::list_ptr;
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
@@ -58,6 +60,7 @@ use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0130::free_node;
+use crate::section_0133::r#type;
 use crate::section_0135::box_node_size;
 use crate::section_0135::hlist_node;
 use crate::section_0137::vlist_node;
@@ -65,6 +68,9 @@ use crate::section_0204::copy_node_list;
 use crate::section_0211::hmode;
 use crate::section_0211::mmode;
 use crate::section_0211::vmode;
+use crate::section_0213::mode;
+use crate::section_0213::tail;
+use crate::section_0230::r#box;
 use crate::section_0297::chr_code_repr;
 use crate::section_0433::scan_eight_bit_int;
 use crate::section_1071::copy_code;

@@ -58,4 +58,6 @@ use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::pool_size;
+use crate::section_0016::decr;
+use crate::section_0016::incr;
 use crate::section_0018::ASCII_code;

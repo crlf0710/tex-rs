@@ -1,13 +1,13 @@
 //! ` `
 // @<Generate a |down| or |right|...@>=
-macro_rules! Generate_a_down_or_right_command_for_w_and_return {
-    ($globals:expr, $q:expr, $w:expr, $o:expr) => {{
+pub(crate) macro Generate_a_down_or_right_command_for_w_and_return
+    ($globals:expr, $q:expr, $w:expr, $o:expr) {{
         // info(q):=yz_OK;
         info_inner!($globals, $q) = yz_OK as _;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'label1|
         {
-        region_forward_label!(
+        crate::region_forward_label!(
         |'label2|
         {
         // if abs(w)>=@'40000000 then
@@ -17,7 +17,7 @@ macro_rules! Generate_a_down_or_right_command_for_w_and_return {
             dvi_out!($globals, $o.byte() + 3);
             // dvi_four(w); return;
             dvi_four($globals, $w.inner());
-            return_nojump!();
+            crate::return_nojump!();
             // end;
         }
         // if abs(w)>=@'100000 then
@@ -32,7 +32,7 @@ macro_rules! Generate_a_down_or_right_command_for_w_and_return {
             // dvi_out(w div @'200000); w:=w mod @'200000; goto 2;
             dvi_out!($globals, $w.inner() / 0o200000);
             $w %= scaled::new_from_inner(0o200000);
-            goto_forward_label!('label2);
+            crate::goto_forward_label!('label2);
             // end;
         }
         // if abs(w)>=@'200 then
@@ -45,7 +45,7 @@ macro_rules! Generate_a_down_or_right_command_for_w_and_return {
                 $w += scaled::new_from_inner(0o200000);
             }
             // goto 2;
-            goto_forward_label!('label2);
+            crate::goto_forward_label!('label2);
             // end;
         }
         // dvi_out(o); {|down1| or |right1|}
@@ -56,7 +56,7 @@ macro_rules! Generate_a_down_or_right_command_for_w_and_return {
             $w += scaled::new_from_inner(0o400);
         }
         // goto 1;
-        goto_forward_label!('label1);
+        crate::goto_forward_label!('label1);
         }
         // 2: dvi_out(w div @'400);
         'label2 <-
@@ -67,8 +67,10 @@ macro_rules! Generate_a_down_or_right_command_for_w_and_return {
         'label1 <-
         );
         dvi_out!($globals, $w.inner() % 0o400);
-        return_nojump!();
+        crate::return_nojump!();
+        use crate::section_0101::scaled;
         use crate::section_0600::dvi_four;
+        use  crate::section_0598::dvi_out;
+        use crate::section_0118::info_inner;
         use crate::section_0608::yz_OK;
     }}
-}

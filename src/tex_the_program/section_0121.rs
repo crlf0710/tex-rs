@@ -4,15 +4,14 @@
 //
 // @d free_avail(#)== {single-word node liberation}
 /// single-word node liberation
-macro_rules! free_avail {
-    ($globals:expr, $ptr:expr) => {{
-        // begin link(#):=avail; avail:=#;
-        link!($globals, $ptr) = $globals.avail;
-        $globals.avail = $ptr;
-        // @!stat decr(dyn_used);@+tats@/
-        region_stat! {
-            decr!($globals.dyn_used);
-        }
-        // end
-    }};
-}
+pub(crate) macro free_avail($globals:expr, $ptr:expr) {{
+    // begin link(#):=avail; avail:=#;
+    link!($globals, $ptr) = $globals.avail;
+    $globals.avail = $ptr;
+    // @!stat decr(dyn_used);@+tats@/
+    crate::region_stat! {
+        decr!($globals.dyn_used);
+    }
+    // end
+    use crate::section_0118::link;
+}}

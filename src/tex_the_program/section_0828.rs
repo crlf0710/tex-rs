@@ -38,7 +38,6 @@ pub(crate) static final_pass: boolean = false;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static threshold: integer = 0;
 
-
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::pointer;
 

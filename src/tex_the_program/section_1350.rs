@@ -26,14 +26,15 @@ pub(crate) fn new_write_whatsit(globals: &mut TeXGlobals, w: small_number) -> Te
     // write_stream(tail):=cur_val;
     write_stream!(globals, tail!(globals)) = globals.cur_val as _;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
+use crate::section_0213::tail;
 use crate::section_0435::scan_four_bit_int;
 use crate::section_0440::scan_int;
 use crate::section_1341::write_node_size;
+use crate::section_1341::write_stream;
 use crate::section_1349::new_whatsit;
-

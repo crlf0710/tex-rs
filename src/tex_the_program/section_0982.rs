@@ -20,32 +20,24 @@
 //
 // @d page_goal==page_so_far[0] {desired height of information on page being built}
 /// desired height of information on page being built
-macro_rules! page_goal {
-    ($globals:expr) => {
-        $globals.page_so_far[0]
-    }
+pub(crate) macro page_goal($globals:expr) {
+    $globals.page_so_far[0]
 }
 // @d page_total==page_so_far[1] {height of the current page}
 /// height of the current page
-macro_rules! page_total {
-    ($globals:expr) => {
-        $globals.page_so_far[1]
-    }
+pub(crate) macro page_total($globals:expr) {
+    $globals.page_so_far[1]
 }
 // @d page_shrink==page_so_far[6] {shrinkability of the current page}
 /// shrinkability of the current page
-macro_rules! page_shrink {
-    ($globals:expr) => {
-        $globals.page_so_far[6]
-    }
+pub(crate) macro page_shrink($globals:expr) {
+    $globals.page_so_far[6]
 }
 
 // @d page_depth==page_so_far[7] {depth of the current page}
 /// depth of the current page
-macro_rules! page_depth {
-    ($globals:expr) => {
-        $globals.page_so_far[7]
-    }
+pub(crate) macro page_depth($globals:expr) {
+    $globals.page_so_far[7]
 }
 
 // @<Glob...@>=

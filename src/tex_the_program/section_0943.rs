@@ -98,22 +98,18 @@ use crate::section_0011::trie_op_size_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;
 
-macro_rules! trie_used {
-    ($globals:expr, $sel:expr) => {{
-        let idx = $sel.numeric_value();
-        if idx >= 256 {
-            todo!(">= 256");
-        }
-        $globals.trie_used[idx as usize]
-    }}
-}
+pub(crate) macro trie_used($globals:expr, $sel:expr) {{
+    let idx = $sel.numeric_value();
+    if idx >= 256 {
+        todo!(">= 256");
+    }
+    $globals.trie_used[idx as usize]
+}}
 
-macro_rules! trie_used_assign {
-    ($globals:expr, $sel:expr, $val:expr) => {{
-        let idx = $sel.numeric_value();
-        if idx >= 256 {
-            todo!(">= 256");
-        }
-        $globals.trie_used[idx as usize] = $val;
-    }}
-}
+pub(crate) macro trie_used_assign($globals:expr, $sel:expr, $val:expr) {{
+    let idx = $sel.numeric_value();
+    if idx >= 256 {
+        todo!(">= 256");
+    }
+    $globals.trie_used[idx as usize] = $val;
+}}

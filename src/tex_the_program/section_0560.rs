@@ -49,22 +49,22 @@ pub(crate) fn read_font_info(
     //   {auxiliary quantities used in fixed-point multiplication}
     // begin g:=null_font;@/
     g = null_font;
-    region_forward_label!(
+    crate::region_forward_label!(
     |'done|
     {
-    region_forward_label!(
+    crate::region_forward_label!(
     |'bad_tfm|
     {
     // @<Read and check the font data; |abort| if the \.{TFM} file is
     //   malformed; if there's no room for this font, say so and |goto
     //   done|; otherwise |incr(font_ptr)| and |goto done|@>;
-    Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__if_there_s_no_room_for_this_font__say_so_and_goto_done__otherwise_incr_font_ptr_and_goto_done!
+    crate::section_0562::Read_and_check_the_font_data__abort_if_the_TFM_file_is_malformed__if_there_s_no_room_for_this_font__say_so_and_goto_done__otherwise_incr_font_ptr_and_goto_done!
         (globals, s, g, nom, aire, file_opened, 'bad_tfm, 'done);
     // bad_tfm: @<Report that the font won't be loaded@>;
     }
     'bad_tfm <-
     );
-    Report_that_the_font_wont_be_loaded!(globals, nom, aire, s, file_opened);
+    crate::section_0561::Report_that_the_font_wont_be_loaded!(globals, nom, aire, s, file_opened);
     // done: if file_opened then b_close(tfm_file);
     }
     'done <-
@@ -73,7 +73,7 @@ pub(crate) fn read_font_info(
         b_close(&mut globals.tfm_file);
     }
     // read_font_info:=g;
-    return_nojump!(g);
+    crate::return_nojump!(g);
     // end;
 }
 

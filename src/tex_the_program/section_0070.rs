@@ -27,6 +27,7 @@ pub(crate) fn print_current_string(globals: &mut TeXGlobals) {
     }
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0020::xord;

@@ -39,13 +39,16 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
     }
     // othercases @<Initiate the construction of an hbox or vbox, then |return|@>
     else {
-        Initiate_the_construction_of_an_hbox_or_vbox_then_return!(globals, box_context);
+        crate::section_1083::Initiate_the_construction_of_an_hbox_or_vbox_then_return!(
+            globals,
+            box_context
+        );
     }
     // endcases;@/
     // box_end(box_context); {in simple cases, we use the box immediately}
     todo!("box_end");
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;

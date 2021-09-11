@@ -12,7 +12,7 @@ pub(crate) fn pack_cur_name(globals: &mut TeXGlobals) {
 /// `s = ".log"`, `".dvi"`, or `format_extension`
 pub(crate) fn pack_job_name(globals: &mut TeXGlobals, s: str_number) {
     // begin cur_area:=""; cur_ext:=s;
-    globals.cur_area = strpool_str!("");
+    globals.cur_area = crate::strpool_str!("");
     globals.cur_ext = s;
     // cur_name:=job_name; pack_cur_name;
     globals.cur_name = globals.job_name;

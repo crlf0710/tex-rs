@@ -2,7 +2,12 @@
 //
 // @p function hpack(@!p:pointer;@!w:scaled;@!m:small_number):pointer;
 #[allow(unused_variables)]
-pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: small_number) -> TeXResult<pointer> {
+pub(crate) fn hpack(
+    globals: &mut TeXGlobals,
+    mut p: pointer,
+    mut w: scaled,
+    m: small_number,
+) -> TeXResult<pointer> {
     // label reswitch, common_ending, exit;
     // var r:pointer; {the box node that will be returned}
     /// the box node that will be returned
@@ -31,13 +36,14 @@ pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: 
     link!(globals, q) = p;
     // h:=0; @<Clear dimensions to zero@>;
     h = scaled::zero();
-    Clear_dimensions_to_zero!(globals, d, x);
+    crate::section_0650::Clear_dimensions_to_zero!(globals, d, x);
     // while p<>null do @<Examine node |p| in the hlist, taking account of its effect
     //   on the dimensions of the new box, or moving it to the adjustment list;
     //   then advance |p| to the next node@>;
     while p != null {
-        Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__or_moving_it_to_the_adjustment_list__then_advance_p_to_the_next_node!
-            (globals, p, h, d, x);
+        crate::section_0651::Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__or_moving_it_to_the_adjustment_list__then_advance_p_to_the_next_node!(
+            globals, p, h, d, x
+        );
     }
     // if adjust_tail<>null then link(adjust_tail):=null;
     if globals.adjust_tail != null {
@@ -46,21 +52,23 @@ pub(crate) fn hpack(globals: &mut TeXGlobals, mut p: pointer, mut w: scaled, m: 
     // height(r):=h; depth(r):=d;@/
     height!(globals, r) = h;
     depth!(globals, r) = d;
-    region_forward_label!(
+    crate::region_forward_label!(
     |'common_ending|
     {
     // @<Determine the value of |width(r)| and the appropriate glue setting;
     //   then |return| or |goto common_ending|@>;
-    Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!
+    crate::section_0657::Determine_the_value_of_width_r_and_the_appropriate_glue_setting__then_return_or_goto_common_ending!
         (globals, m, r, w, x, q, 'common_ending);
     }
     // common_ending: @<Finish issuing a diagnostic message
     //       for an overfull or underfull hbox@>;
     'common_ending <-
     );
-    Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_hbox!(globals, r);
+    crate::section_0663::Finish_issuing_a_diagnostic_message_for_an_overfull_or_underfull_hbox!(
+        globals, r
+    );
     // exit: hpack:=r;
-    return_nojump!(r);
+    crate::return_nojump!(r);
     // end;
 }
 
@@ -69,9 +77,15 @@ use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
 use crate::section_0101::small_number;
 use crate::section_0110::min_quarterword;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0125::get_node;
-use crate::section_0135::hlist_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
 use crate::section_0135::box_node_size;
+use crate::section_0135::depth;
+use crate::section_0135::height;
+use crate::section_0135::hlist_node;
 use crate::section_0135::list_offset;
+use crate::section_0135::shift_amount;

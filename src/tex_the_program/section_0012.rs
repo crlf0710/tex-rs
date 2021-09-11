@@ -42,9 +42,9 @@ pub(crate) type hyph_size_TYPENUM = U307;
 //
 
 type U2100 = typenum::op!(U1000 + U1000 + U100);
+use crate::pascal::integer;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
 use crate::section_0115::pointer;
-use crate::pascal::integer;
 use typenum::Unsigned;
-use typenum::{U0, U100, U307, U1000};
+use typenum::{U0, U100, U1000, U307};

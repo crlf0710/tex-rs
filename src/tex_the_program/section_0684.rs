@@ -11,6 +11,6 @@ pub(crate) const null_delimiter: four_quarters =
 
 use crate::section_0110::min_quarterword;
 use crate::section_0113::four_quarters;
-use crate::section_0113::two_halves;
 use crate::section_0113::halfword;
+use crate::section_0113::two_halves;
 use crate::section_0115::null;

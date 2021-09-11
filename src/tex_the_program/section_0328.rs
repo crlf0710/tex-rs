@@ -22,9 +22,15 @@ pub(crate) fn begin_file_reading(globals: &mut TeXGlobals) {
     // name:=0; {|terminal_input| is now |true|}
     name!(globals) = 0;
     /// `terminal_input` is now `true`
-    const _ : () = ();
+    const _: () = ();
     // end;
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
+use crate::section_0302::index;
+use crate::section_0302::name;
+use crate::section_0302::start;
+use crate::section_0302::state;
 use crate::section_0303::mid_line;
+use crate::section_0321::push_input;

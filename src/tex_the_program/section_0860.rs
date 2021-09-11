@@ -5,33 +5,29 @@
 //! to~|cur_p|.
 //
 // @d combine_two_deltas(#)==@|mem[prev_r+#].sc:=mem[prev_r+#].sc+mem[r+#].sc
-macro_rules! combine_two_deltas {
-    ($globals:expr, $idx:expr, $r:expr, $prev_r:expr) => {{
-        let v = $globals.mem[$r + $idx][MEMORY_WORD_SC];
-        $globals.mem[$prev_r + $idx][MEMORY_WORD_SC] += v;
-        use crate::section_0101::MEMORY_WORD_SC;
-    }}
-}
+pub(crate) macro combine_two_deltas($globals:expr, $idx:expr, $r:expr, $prev_r:expr) {{
+    let v = $globals.mem[$r + $idx][MEMORY_WORD_SC];
+    $globals.mem[$prev_r + $idx][MEMORY_WORD_SC] += v;
+    use crate::section_0101::MEMORY_WORD_SC;
+}}
 // @d downdate_width(#)==@|cur_active_width[#]:=cur_active_width[#]-
 //   mem[prev_r+#].sc
-macro_rules! downdate_width {
-    ($globals:expr, $idx:expr, $prev_r:expr) => {{
-        $globals.cur_active_width[$idx] = $globals.cur_active_width[$idx]
-            - $globals.mem[$prev_r + $idx][crate::section_0101::MEMORY_WORD_SC]
-    }};
-}
+pub(crate) macro downdate_width($globals:expr, $idx:expr, $prev_r:expr) {{
+    $globals.cur_active_width[$idx] = $globals.cur_active_width[$idx]
+        - $globals.mem[$prev_r + $idx][crate::section_0101::MEMORY_WORD_SC]
+}}
 
 // @<Deactivate node |r|@>=
-macro_rules! Deactivate_node_r {
-    ($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr) => {{
-        trace_span!("Deactivate node `r`");
+pub(crate) macro Deactivate_node_r
+    ($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr) {{
+        crate::trace_span!("Deactivate node `r`");
         // link(prev_r):=link(r); free_node(r,active_node_size);
         link!($globals, $prev_r) = link!($globals, $r);
         free_node($globals, $r, active_node_size as _);
         // if prev_r=active then @<Update the active widths, since the first active
         //   node has been deleted@>
         if $prev_r == active {
-            Update_the_active_widths__since_the_first_active_node_has_been_deleted!($globals, $r);
+            crate::section_0861::Update_the_active_widths__since_the_first_active_node_has_been_deleted!($globals, $r);
         }
         // else if type(prev_r)=delta_node then
         else if r#type!($globals, $prev_r) == delta_node {
@@ -62,8 +58,13 @@ macro_rules! Deactivate_node_r {
             // end
         }
         use crate::section_0130::free_node;
+        use crate::section_0162::active;
         use crate::section_0819::active_node_size;
         use crate::section_0822::delta_node;
         use crate::section_0822::delta_node_size;
+        use crate::section_0118::link;
+        use crate::section_0133::r#type;
+        use crate::section_0832::update_width;
+        use crate::section_0819::last_active;
+        use crate::section_0823::do_all_six;
     }}
-}

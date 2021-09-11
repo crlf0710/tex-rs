@@ -4,8 +4,8 @@
 //! are being held over for a subsequent page.
 //
 // @<Put the \(o)optimal current page into box 255...@>=
-macro_rules! Put_the_optimal_current_page_into_box_255__update_first_mark_and_bot_mark__append_insertions_to_their_boxes__and_put_the_remaining_nodes_back_on_the_contribution_list {
-    ($globals:expr, $c:expr) => {{
+pub(crate) macro Put_the_optimal_current_page_into_box_255__update_first_mark_and_bot_mark__append_insertions_to_their_boxes__and_put_the_remaining_nodes_back_on_the_contribution_list
+    ($globals:expr, $c:expr) {{
         /// nodes being examined and/or changed
         let (mut p, q): (pointer, pointer);
         /// predecessor of `p`
@@ -19,7 +19,7 @@ macro_rules! Put_the_optimal_current_page_into_box_255__update_first_mark_and_bo
             $globals.best_page_break = null;
         }
         // @<Ensure that box 255 is empty before output@>;
-        Ensure_that_box_255_is_empty_before_output!($globals);
+        crate::section_1015::Ensure_that_box_255_is_empty_before_output!($globals);
         // insert_penalties:=0; {this will count the number of insertions held over}
         /// this will count the number of insertions held over
         const _ : () = ();
@@ -29,7 +29,7 @@ macro_rules! Put_the_optimal_current_page_into_box_255__update_first_mark_and_bo
         // if holding_inserts<=0 then
         if holding_inserts!($globals) <= 0 {
             // @<Prepare all the boxes involved in insertions to act as queues@>;
-            Prepare_all_the_boxes_involved_in_insertions_to_act_as_queues!($globals);
+            crate::section_1018::Prepare_all_the_boxes_involved_in_insertions_to_act_as_queues!($globals);
         }
         // q:=hold_head; link(q):=null; prev_p:=page_head; p:=link(prev_p);
         q = hold_head;
@@ -61,13 +61,18 @@ macro_rules! Put_the_optimal_current_page_into_box_255__update_first_mark_and_bo
         split_top_skip!($globals) = save_split_top_skip;
         // @<Break the current page at node |p|, put it in box~255,
         //   and put the remaining nodes on the contribution list@>;
-        Break_the_current_page_at_node_p__put_it_in_box_255__and_put_the_remaining_nodes_on_the_contribution_list!
+        crate::section_1017::Break_the_current_page_at_node_p__put_it_in_box_255__and_put_the_remaining_nodes_on_the_contribution_list!
             ($globals, p, q);
         // @<Delete \(t)the page-insertion nodes@>
-        Delete_the_page_insertion_nodes!($globals);
+        crate::section_1019::Delete_the_page_insertion_nodes!($globals);
+        use crate::section_0115::null;
         use crate::section_0140::ins_node;
         use crate::section_0141::mark_node;
         use crate::section_0162::page_head;
+        use crate::section_0115::pointer;
+        use crate::section_0236::holding_inserts;
+        use crate::section_0224::split_top_skip;
+        use crate::section_0133::r#type;
         use crate::section_0162::hold_head;
+        use crate::section_0118::link;
     }}
-}

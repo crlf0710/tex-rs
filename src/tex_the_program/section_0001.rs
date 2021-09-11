@@ -32,4 +32,4 @@
 //! \TeX\ language itself, since the reader is supposed to be familiar with
 //! {\sl The \TeX book}.
 
-migration_complete!();
+crate::migration_complete!();

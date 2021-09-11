@@ -24,7 +24,11 @@ pub(crate) fn find_font_dimen(globals: &mut TeXGlobals, writing: boolean) -> TeX
     // else  begin if writing and(n<=space_shrink_code)and@|
     // (n>=space_code)and(font_glue[f]<>null) then
     else {
-        if writing && n <= space_shrink_code.into() && n >= space_code.into() && globals.font_glue[f] != null {
+        if writing
+            && n <= space_shrink_code.into()
+            && n >= space_code.into()
+            && globals.font_glue[f] != null
+        {
             // begin delete_glue_ref(font_glue[f]);
             delete_glue_ref(globals, globals.font_glue[f]);
             // font_glue[f]:=null;
@@ -39,7 +43,9 @@ pub(crate) fn find_font_dimen(globals: &mut TeXGlobals, writing: boolean) -> TeX
             }
             // else @<Increase the number of parameters in the last font@>
             else {
-                Increase_the_number_of_parameters_in_the_last_font!(globals, n, f);
+                crate::section_0580::Increase_the_number_of_parameters_in_the_last_font!(
+                    globals, n, f
+                );
             }
         }
         // else cur_val:=n+param_base[f];
@@ -49,9 +55,9 @@ pub(crate) fn find_font_dimen(globals: &mut TeXGlobals, writing: boolean) -> TeX
         // end;
     }
     // @<Issue an error message if |cur_val=fmem_ptr|@>;
-    Issue_an_error_message_if_cur_val_eq_fmem_ptr!(globals);
+    crate::section_0579::Issue_an_error_message_if_cur_val_eq_fmem_ptr!(globals);
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::boolean;

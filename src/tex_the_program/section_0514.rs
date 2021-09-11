@@ -6,17 +6,13 @@
 //! @^system dependencies@>
 //
 // @d TEX_area=="TeXinputs:"
-macro_rules! TEX_area {
-    () => {
-        strpool_str!("TeXinputs:")
-    };
+pub(crate) macro TEX_area() {
+    crate::strpool_str!("TeXinputs:")
 }
 // @.TeXinputs@>
 // @d TEX_font_area=="TeXfonts:"
-macro_rules! TEX_font_area {
-    () => {
-        strpool_str!("TeXfonts:")
-    };
+pub(crate) macro TEX_font_area() {
+    crate::strpool_str!("TeXfonts:")
 }
 // @.TeXfonts@>
 //

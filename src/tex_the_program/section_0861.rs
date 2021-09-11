@@ -4,16 +4,14 @@
 //! node is next inserted.
 //
 // @d update_active(#)==active_width[#]:=active_width[#]+mem[r+#].sc
-macro_rules! update_active {
-    ($globals:expr, $idx:expr, $r:expr) => {{
-        $globals.active_width[$idx] = $globals.active_width[$idx]
-            + $globals.mem[$r + $idx][crate::section_0101::MEMORY_WORD_SC]
-    }};
-}
+pub(crate) macro update_active($globals:expr, $idx:expr, $r:expr) {{
+    $globals.active_width[$idx] =
+        $globals.active_width[$idx] + $globals.mem[$r + $idx][crate::section_0101::MEMORY_WORD_SC]
+}}
 
 // @<Update the active widths,...@>=
-macro_rules! Update_the_active_widths__since_the_first_active_node_has_been_deleted {
-    ($globals:expr, $r:expr) => {{
+pub(crate) macro Update_the_active_widths__since_the_first_active_node_has_been_deleted
+    ($globals:expr, $r:expr) {{
         // begin r:=link(active);
         $r = link!($globals, active);
         // if type(r)=delta_node then
@@ -29,5 +27,11 @@ macro_rules! Update_the_active_widths__since_the_first_active_node_has_been_dele
         }
         // end
         use crate::section_0822::delta_node_size;
+        use crate::section_0118::link;
+        use crate::section_0130::free_node;
+        use crate::section_0133::r#type;
+        use crate::section_0162::active;
+        use crate::section_0822::delta_node;
+        use crate::section_0829::copy_to_cur_active;
+        use crate::section_0823::do_all_six;
     }}
-}

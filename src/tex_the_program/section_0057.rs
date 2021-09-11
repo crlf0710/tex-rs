@@ -46,10 +46,13 @@ pub(crate) fn print_ln(mut globals: TeXGlobalsIoStringLogView<'_>) {
 }
 
 use crate::pascal::write_ln_noargs;
+use crate::section_0004::make_globals_io_view;
+use crate::section_0004::make_globals_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsLogView;
+use crate::section_0016::do_nothing;
 use crate::section_0054::*;
 use crate::section_0056::wlog_cr;
 use crate::section_0056::wterm_cr;

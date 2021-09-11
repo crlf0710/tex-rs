@@ -31,29 +31,29 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
         begin_token_list(globals, every_job!(globals), every_job_text);
     }
     // big_switch: get_x_token;@/
-    region_backward_label! {
+    crate::region_backward_label! {
     'big_switch <-
     {
     get_x_token(globals)?;
     // reswitch: @<Give diagnostic information, if requested@>;
-    region_backward_label! {
+    crate::region_backward_label! {
     'reswitch <-
     {
-    region_forward_label! {
+    crate::region_forward_label! {
     |'append_normal_space|
     {
-    region_forward_label! {
+    crate::region_forward_label! {
     |'main_loop|
     {
-    Give_diagnostic_information_if_requested!(globals, 'big_switch);
+    crate::section_1031::Give_diagnostic_information_if_requested!(globals, 'big_switch);
     // case abs(mode)+cur_cmd of
     let abs_mode_plus_cur_cmd = mode!(globals).get().abs() as u16 + globals.cur_cmd as u16;
-    trace_expr!("abs(mode)+cur_cmd={}", abs_mode_plus_cur_cmd);
+    crate::trace_expr!("abs(mode)+cur_cmd={}", abs_mode_plus_cur_cmd);
     // hmode+letter,hmode+other_char,hmode+char_given: goto main_loop;
     if abs_mode_plus_cur_cmd == hmode as u16 + letter as u16 ||
         abs_mode_plus_cur_cmd == hmode as u16 + other_char as u16 ||
         abs_mode_plus_cur_cmd == hmode as u16 + char_given as u16 {
-        goto_forward_label!('main_loop);
+        crate::goto_forward_label!('main_loop);
     }
     // hmode+char_num: begin scan_char_num; cur_chr:=cur_val; goto main_loop;@+end;
     else if abs_mode_plus_cur_cmd == hmode as u16 + char_num as u16 {
@@ -69,13 +69,13 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
             globals.cancel_boundary = true;
         }
         // goto reswitch;
-        goto_backward_label!('reswitch);
+        crate::goto_backward_label!('reswitch);
         // end;
     }
     // hmode+spacer: if space_factor=1000 then goto append_normal_space
     else if abs_mode_plus_cur_cmd == hmode as u16 + spacer as u16 {
         if space_factor!(globals) == 1000 {
-            goto_forward_label!('append_normal_space);
+            crate::goto_forward_label!('append_normal_space);
         } else {
             // else app_space;
             app_space(globals)?;
@@ -86,11 +86,11 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     // hmode+ex_space,mmode+ex_space: goto append_normal_space;
     else if abs_mode_plus_cur_cmd == hmode as u16 + ex_space as u16 ||
         abs_mode_plus_cur_cmd == mmode as u16 + ex_space as u16 {
-        goto_forward_label!('append_normal_space);
+        crate::goto_forward_label!('append_normal_space);
     }
     // @t\4@>@<Cases of |main_control| that are not part of the inner loop@>@;
     else {
-        Cases_of_main_control_that_are_not_part_of_the_inner_loop!(
+        crate::section_1045::Cases_of_main_control_that_are_not_part_of_the_inner_loop!(
             globals, abs_mode_plus_cur_cmd
         );
         // end; {of the big |case| statement}
@@ -98,28 +98,28 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     /// end of the big `case` statement
     const _ : () = ();
     // goto big_switch;
-    goto_backward_label!('big_switch);
+    crate::goto_backward_label!('big_switch);
     }
     'main_loop <-
     }
     // main_loop:@<Append character |cur_chr| and the following characters (if~any)
     //   to the current hlist in the current font; |goto reswitch| when
     //   a non-character has been fetched@>;
-    Append_character_cur_chr_and_the_following_characters_if_any_to_the_current_hlist_in_the_current_font__goto_reswitch_when_a_non_character_has_been_fetched!
+    crate::section_1034::Append_character_cur_chr_and_the_following_characters_if_any_to_the_current_hlist_in_the_current_font__goto_reswitch_when_a_non_character_has_been_fetched!
         (globals, 'reswitch, 'big_switch);
     }
     'append_normal_space <-
     }
     // append_normal_space:@<Append a normal inter-word space to the current list,
     //   then |goto big_switch|@>;
-    Append_a_normal_inter_word_space_to_the_current_list__then_goto_big_switch!
+     crate::section_1041::Append_a_normal_inter_word_space_to_the_current_list__then_goto_big_switch!
         (globals, 'big_switch);
     }
     |'reswitch|}
     }
     |'big_switch|}
     // exit:end;
-    return_nojump!();
+    crate::return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
@@ -128,6 +128,9 @@ use crate::section_0115::null;
 use crate::section_0207::*;
 use crate::section_0208::*;
 use crate::section_0211::*;
+use crate::section_0213::mode;
+use crate::section_0213::space_factor;
+use crate::section_0230::every_job;
 use crate::section_0307::every_job_text;
 use crate::section_0323::begin_token_list;
 use crate::section_0380::get_x_token;

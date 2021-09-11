@@ -23,7 +23,7 @@ fn set_initial_values_of_key_variables_0074(globals: &mut TeXGlobals) {
     prev_graf!(globals) = 0;
     globals.shown_mode = 0.into();
     // @<Start a new current page@>;
-    Start_a_new_current_page!(globals);
+    crate::section_0991::Start_a_new_current_page!(globals);
 }
 
 use crate::section_0004::TeXGlobals;
@@ -31,6 +31,12 @@ use crate::section_0008::SET_INIT_KEYVAR;
 use crate::section_0162::contrib_head;
 use crate::section_0211::vmode;
 use crate::section_0212::ignore_depth;
+use crate::section_0213::head;
+use crate::section_0213::mode;
+use crate::section_0213::mode_line;
+use crate::section_0213::prev_depth;
+use crate::section_0213::prev_graf;
+use crate::section_0213::tail;
 use linkme::distributed_slice;
 
 // Workaround https://github.com/rust-lang/rust/issues/47384

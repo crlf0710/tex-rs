@@ -14,14 +14,14 @@ pub(crate) fn pass_text(globals: &mut TeXGlobals) -> TeXResult<()> {
     let mut l: integer;
     // @!save_scanner_status:small_number; {|scanner_status| upon entry}
     /// `scanner_status` upon entry
-    let save_scanner_status : scanner_status_kind; 
+    let save_scanner_status: scanner_status_kind;
     // begin save_scanner_status:=scanner_status; scanner_status:=skipping; l:=0;
     save_scanner_status = globals.scanner_status;
     globals.scanner_status = scanner_status_kind::skipping;
     l = 0;
     // skip_line:=line;
     globals.skip_line = globals.line;
-    region_forward_label!(
+    crate::region_forward_label!(
     |'done|
     {
         // loop@+  begin get_next;
@@ -31,7 +31,7 @@ pub(crate) fn pass_text(globals: &mut TeXGlobals) -> TeXResult<()> {
             if globals.cur_cmd == fi_or_else {
                 // begin if l=0 then goto done;
                 if l == 0 {
-                    goto_forward_label!('done);
+                    crate::goto_forward_label!('done);
                 }
                 // if cur_chr=fi_code then decr(l);
                 if globals.cur_chr.get() == fi_code as chr_code_repr {
@@ -51,16 +51,18 @@ pub(crate) fn pass_text(globals: &mut TeXGlobals) -> TeXResult<()> {
     );
     globals.scanner_status = save_scanner_status;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
+use crate::section_0016::incr;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
-use crate::section_0210::if_test;
 use crate::section_0210::fi_or_else;
+use crate::section_0210::if_test;
 use crate::section_0297::chr_code_repr;
-use crate::section_0341::get_next;
 use crate::section_0305::scanner_status_kind;
+use crate::section_0341::get_next;
 use crate::section_0489::fi_code;

@@ -37,6 +37,7 @@
 #[globals_struct_field_view(TeXGlobalsStringView, make_globals_string_view)]
 #[globals_struct_field_view(TeXGlobalsIoStringView, make_globals_io_string_view)]
 #[globals_struct_field_view(TeXGlobalsIoStringLogView, make_globals_io_string_log_view)]
+#[globals_struct_field_view_decl_macro_ctor]
 pub mod TeXGlobals {
     include!("src/tex_the_program/section_0011.rs");
     include!("src/tex_the_program/section_0013.rs");
@@ -129,10 +130,9 @@ pub mod TeXGlobals {
     include!("src/unicode_support.rs");
 }
 
-impl_debug_with_literal!(TeXGlobals, "TeXGlobals");
-impl_debug_with_literal!(TeXGlobalsIoView['view], "TeXGlobalsIoView");
-impl_debug_with_literal!(TeXGlobalsIoStringView['view], "TeXGlobalsIoStringView");
-
+crate::impl_debug_with_literal!(TeXGlobals, "TeXGlobals");
+crate::impl_debug_with_literal!(TeXGlobalsIoView['view], "TeXGlobalsIoView");
+crate::impl_debug_with_literal!(TeXGlobalsIoStringView['view], "TeXGlobalsIoStringView");
 
 // @#
 // procedure initialize; {this procedure gets things started properly}
@@ -141,7 +141,7 @@ impl_debug_with_literal!(TeXGlobalsIoStringView['view], "TeXGlobalsIoStringView"
 pub(crate) fn initialize(globals: &mut TeXGlobals) {
     // var @<Local variables for initialization@>@/
     // begin @<Initialize whatever \TeX\ might access@>@;
-    Initialize_whatever_TeX_might_access!(globals);
+    crate::section_0008::Initialize_whatever_TeX_might_access!(globals);
     // end;@#
 }
 

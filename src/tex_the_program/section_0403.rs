@@ -8,12 +8,12 @@
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin @<Get the next non-blank non-relax non-call token@>;
-    Get_the_next_non_blank_non_relax_non_call_token!(globals);
-    trace_expr!("cur_cmd = {}", globals.cur_cmd);
+    crate::section_0404::Get_the_next_non_blank_non_relax_non_call_token!(globals);
+    crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
     // if cur_cmd<>left_brace then
     if globals.cur_cmd != left_brace {
         // begin print_err("Missing { inserted");
-        print_err!(globals, strpool_str!("Missing { inserted"));
+        print_err!(globals, crate::strpool_str!("Missing { inserted"));
         // @.Missing \{ inserted@>
         // help4("A left brace was mandatory here, so I've put one in.")@/
         //   ("You might want to delete and/or insert some corrections")@/
@@ -24,9 +24,10 @@ pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0073::print_err;
 use crate::section_0081::TeXResult;
 use crate::section_0207::left_brace;

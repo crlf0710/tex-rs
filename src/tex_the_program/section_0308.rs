@@ -35,9 +35,8 @@ use crate::section_0011::param_size_TYPENUM;
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static max_param_stack: integer = integer::default();
 
+use crate::pascal::u8_from_0_to_n;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::param_size_TYPENUM;
-use crate::pascal::u8_from_0_to_n;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;
-

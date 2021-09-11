@@ -8,16 +8,17 @@
 //! of their new significance.) Then the lines are justified, one by one.
 //
 // @d next_break==prev_break {new name for |prev_break| after links are reversed}
-macro_rules! next_break {
-    ($globals:expr, $p:expr) => {
-        prev_break!($globals, $p)
-    }
+pub(crate) macro next_break($globals:expr, $p:expr) {
+    crate::section_0821::prev_break!($globals, $p)
 }
 
 // @<Declare subprocedures for |line_break|@>=
 // procedure post_line_break(@!final_widow_penalty:integer);
 #[allow(unused_variables, unused_assignments)]
-pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: integer) -> TeXResult<()> {
+pub(crate) fn post_line_break(
+    globals: &mut TeXGlobals,
+    final_widow_penalty: integer,
+) -> TeXResult<()> {
     // label done,done1;
     // var q,@!r,@!s:pointer; {temporary registers for list manipulation}
     // @!disc_break:boolean; {was the current break at a discretionary node?}
@@ -35,16 +36,22 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     let mut cur_line: halfword;
     // begin @<Reverse the links of the relevant passive nodes, setting |cur_p| to the
     //   first breakpoint@>;
-    Reverse_the_links_of_the_relevant_passive_nodes__setting_cur_p_to_the_first_breakpoint!
-        (globals);
+    crate::section_0878::Reverse_the_links_of_the_relevant_passive_nodes__setting_cur_p_to_the_first_breakpoint!(
+        globals
+    );
     // cur_line:=prev_graf+1;
     cur_line = (prev_graf!(globals) + 1) as _;
     // repeat @<Justify the line ending at breakpoint |cur_p|, and append it to the
     //   current vertical list, together with associated penalties and other
     //   insertions@>;
     loop {
-        Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_current_vertical_list__together_with_associated_penalties_and_other_insertions!
-            (globals, cur_line, disc_break, post_disc_break, final_widow_penalty);
+        crate::section_0880::Justify_the_line_ending_at_breakpoint_cur_p__and_append_it_to_the_current_vertical_list__together_with_associated_penalties_and_other_insertions!(
+            globals,
+            cur_line,
+            disc_break,
+            post_disc_break,
+            final_widow_penalty
+        );
         // incr(cur_line); cur_p:=next_break(cur_p);
         incr!(cur_line);
         globals.cur_p = next_break!(globals, globals.cur_p);
@@ -61,20 +68,24 @@ pub(crate) fn post_line_break(globals: &mut TeXGlobals, final_widow_penalty: int
     // if (cur_line<>best_line)or(link(temp_head)<>null) then
     if cur_line != globals.best_line || link!(globals, temp_head) != null {
         // confusion("line breaking");
-        confusion(globals, strpool_str!("line breaking"))?;
+        confusion(globals, crate::strpool_str!("line breaking"))?;
     }
     // @:this can't happen line breaking}{\quad line breaking@>
     // prev_graf:=best_line-1;
     prev_graf!(globals) = globals.best_line as integer - 1;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::boolean;
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
 use crate::section_0113::halfword;
 use crate::section_0115::null;
+use crate::section_0118::link;
 use crate::section_0162::temp_head;
+use crate::section_0213::prev_graf;
+use crate::section_0821::prev_break;

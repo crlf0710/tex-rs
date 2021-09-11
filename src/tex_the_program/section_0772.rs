@@ -25,7 +25,7 @@ pub(crate) fn push_alignment(globals: &mut TeXGlobals) -> TeXResult<()> {
     // cur_head:=get_avail;
     globals.cur_head = get_avail(globals);
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 // @#
 // procedure pop_alignment;
@@ -46,6 +46,11 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0113::MEMORY_WORD_INT;
 use crate::section_0115::pointer;
+use crate::section_0118::info_inner;
+use crate::section_0118::link;
 use crate::section_0120::get_avail;
+use crate::section_0124::llink;
+use crate::section_0124::rlink;
 use crate::section_0125::get_node;
 use crate::section_0770::align_stack_node_size;
+use crate::section_0770::preamble;

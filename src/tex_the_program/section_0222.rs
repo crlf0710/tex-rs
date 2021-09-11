@@ -96,14 +96,17 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
 }
 
 use crate::pascal::word;
-use crate::section_0012::hash_size_TYPENUM;
-use crate::section_0012::font_base;
-use crate::section_0113::halfword;
-use crate::section_0115::pointer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
+use crate::section_0012::font_base;
+use crate::section_0012::hash_size_TYPENUM;
+use crate::section_0113::halfword;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0210::undefined_cs;
+use crate::section_0221::eq_level;
+use crate::section_0221::eq_type;
+use crate::section_0221::equiv;
 use crate::section_0221::level_zero;
 use typenum::Unsigned;
 use typenum::{U1, U10, U256, U257};

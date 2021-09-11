@@ -12,10 +12,8 @@
 // @d attach_sign=89 {go here when |cur_val| is correct except perhaps for sign}
 // @d scan_normal_dimen==scan_dimen(false,false,false)
 #[allow(unused_macros)]
-macro_rules! scan_normal_dimen {
-    ($globals:expr) => {
-        crate::section_0448::scan_dimen($globals, false, false, false)
-    };
+pub(crate) macro scan_normal_dimen($globals:expr) {
+    crate::section_0448::scan_dimen($globals, false, false, false)
 }
 
 // @p procedure scan_dimen(@!mu,@!inf,@!shortcut:boolean);
@@ -23,7 +21,12 @@ macro_rules! scan_normal_dimen {
 /// sets `cur_val` to a dimension
 #[allow(unused_variables)]
 #[allow(unused_assignments)]
-pub(crate) fn scan_dimen(globals: &mut TeXGlobals, mu: boolean, inf: boolean, shortcut: boolean) -> TeXResult<()> {
+pub(crate) fn scan_dimen(
+    globals: &mut TeXGlobals,
+    mu: boolean,
+    inf: boolean,
+    shortcut: boolean,
+) -> TeXResult<()> {
     // label done, done1, done2, found, not_found, attach_fraction, attach_sign;
     // var negative:boolean; {should the answer be negated?}
     /// should the answer be negated?
@@ -37,18 +40,18 @@ pub(crate) fn scan_dimen(globals: &mut TeXGlobals, mu: boolean, inf: boolean, sh
     globals.arith_error = false;
     globals.cur_order = glue_ord::normal;
     negative = false;
-    region_forward_label!(
+    crate::region_forward_label!(
     |'attach_sign|
     {
     // if not shortcut then
     if !shortcut {
         // begin @<Get the next non-blank non-sign...@>;
-        Get_the_next_non_blank_non_sign_token__set_negative_appropriately!(globals, negative);
+        crate::section_0441::Get_the_next_non_blank_non_sign_token__set_negative_appropriately!(globals, negative);
         // if (cur_cmd>=min_internal)and(cur_cmd<=max_internal) then
         if globals.cur_cmd >= min_internal && globals.cur_cmd <= max_internal {
             // @<Fetch an internal dimension and |goto attach_sign|,
             //   or fetch an internal integer@>
-            Fetch_an_internal_dimension_and_goto_attach_sign__or_fetch_an_internal_integer!(globals, mu, 'attach_sign);
+            crate::section_0449::Fetch_an_internal_dimension_and_goto_attach_sign__or_fetch_an_internal_integer!(globals, mu, 'attach_sign);
         }
         // else  begin back_input;
         else {
@@ -73,7 +76,7 @@ pub(crate) fn scan_dimen(globals: &mut TeXGlobals, mu: boolean, inf: boolean, sh
             }
             // if (radix=10)and(cur_tok=point_token) then @<Scan decimal fraction@>;
             if globals.radix == 10 && globals.cur_tok == point_token {
-                Scan_decimal_fraction!(globals, f);
+                crate::section_0452::Scan_decimal_fraction!(globals, f);
             }
             // end;
         }
@@ -90,14 +93,14 @@ pub(crate) fn scan_dimen(globals: &mut TeXGlobals, mu: boolean, inf: boolean, sh
     }
     // @<Scan units and set |cur_val| to $x\cdot(|cur_val|+f/2^{16})$, where there
     //   are |x| sp per unit; |goto attach_sign| if the units are internal@>;
-    Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_x_sp_per_unit__goto_attach_sign_if_the_units_are_internal!
+    crate::section_0453::Scan_units_and_set_cur_val_to_x_dot_cur_val_f_2_16_where_there_are_x_sp_per_unit__goto_attach_sign_if_the_units_are_internal!
         (globals, mu, inf, f, 'attach_sign);
     // @<Scan an optional space@>;
-    Scan_an_optional_space!(globals);
+    crate::section_0443::Scan_an_optional_space!(globals);
     }
     // attach_sign: if arith_error or(abs(cur_val)>=@'10000000000) then
     //   @<Report that this dimension is out of range@>;
-    'attach_sign <- 
+    'attach_sign <-
     );
     if globals.arith_error || globals.cur_val.abs() >= 0o10000000000 {
         todo!("out of range");
@@ -107,12 +110,13 @@ pub(crate) fn scan_dimen(globals: &mut TeXGlobals, mu: boolean, inf: boolean, sh
         negate!(globals.cur_val);
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::boolean;
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::negate;
 use crate::section_0081::TeXResult;
 use crate::section_0150::glue_ord;
 use crate::section_0208::min_internal;

@@ -39,7 +39,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     else if u >= single_base as pointer {
         // if u=null_cs then t:="FONT"@+else t:=u-single_base
         if u == null_cs {
-            t = strpool_str!("FONT");
+            t = crate::strpool_str!("FONT");
         } else {
             t = str_number::new((u - single_base as pointer) as _);
         }
@@ -49,7 +49,7 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
         old_setting = globals.selector;
         globals.selector = new_string.into();
         // print("FONT"); print(u-active_base); selector:=old_setting;
-        print(globals, strpool_str!("FONT").get() as _);
+        print(globals, crate::strpool_str!("FONT").get() as _);
         print(globals, (u - active_base as pointer) as _);
         globals.selector = old_setting;
         // @.FONTx@>
@@ -63,13 +63,13 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     scan_optional_equals(globals)?;
     scan_file_name(globals)?;
     // @<Scan the font size specification@>;
-    Scan_the_font_size_specification!(globals, s);
-    region_forward_label!(
+    crate::section_1258::Scan_the_font_size_specification!(globals, s);
+    crate::region_forward_label!(
     |'common_ending|
     {
     // @<If this font has already been loaded, set |f| to the internal
     //   font number and |goto common_ending|@>;
-    If_this_font_has_already_been_loaded_set_f_to_the_internal_font_number_and_goto_common_ending!
+    crate::section_1260::If_this_font_has_already_been_loaded_set_f_to_the_internal_font_number_and_goto_common_ending!
         (globals, f, s, 'common_ending);
     // f:=read_font_info(u,cur_name,cur_area,s);
     f = read_font_info(globals, u, globals.cur_name, globals.cur_area, s)?;
@@ -81,32 +81,37 @@ pub(crate) fn new_font(globals: &mut TeXGlobals, a: small_number) -> TeXResult<(
     globals.eqtb[(font_id_base + f.get() as word) as pointer] = globals.eqtb[u];
     font_id_text!(globals, f.get() as word) = t.get() as _;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::word;
+use crate::section_0004::make_globals_string_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0038::str_number;
-use crate::section_0042::str_room;
 use crate::section_0042::character_max_room;
+use crate::section_0042::str_room;
 use crate::section_0043::make_string;
 use crate::section_0054::new_string;
 use crate::section_0059::print;
 use crate::section_0081::TeXResult;
-use crate::section_0101::small_number;
 use crate::section_0101::scaled;
+use crate::section_0101::small_number;
 use crate::section_0115::pointer;
 use crate::section_0209::set_font;
+use crate::section_0221::equiv;
+use crate::section_0222::active_base;
+use crate::section_0222::font_id_base;
+use crate::section_0222::hash_base;
 use crate::section_0222::null_cs;
 use crate::section_0222::single_base;
-use crate::section_0222::hash_base;
-use crate::section_0222::active_base;
 use crate::section_0232::null_font;
-use crate::section_0222::font_id_base;
+use crate::section_0256::font_id_text;
+use crate::section_0256::text;
 use crate::section_0405::scan_optional_equals;
 use crate::section_0526::scan_file_name;
 use crate::section_0534::open_log_file;
 use crate::section_0548::internal_font_number;
 use crate::section_0560::read_font_info;
+use crate::section_1214::define;
 use crate::section_1215::get_r_token;

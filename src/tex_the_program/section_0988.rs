@@ -23,13 +23,13 @@
 //! the current page will not be considered a valid breakpoint.
 //
 // @<Initialize the special list...@>=
-macro_rules! Initialize_the_special_list_heads_and_constant_nodes_0988 {
-    ($globals:expr) => {{
-        // type(page_head):=glue_node; subtype(page_head):=normal;
-        r#type!($globals, page_head) = glue_node;
-        subtype!($globals, page_head) = glue_node_subtype::normal as _;
-        use crate::section_0149::glue_node;
-        use crate::section_0149::glue_node_subtype;
-        use crate::section_0162::page_head;
-    }}
-}
+pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes_0988($globals:expr) {{
+    // type(page_head):=glue_node; subtype(page_head):=normal;
+    r#type!($globals, page_head) = glue_node;
+    subtype!($globals, page_head) = glue_node_subtype::normal as _;
+    use crate::section_0133::r#type;
+    use crate::section_0133::subtype;
+    use crate::section_0149::glue_node;
+    use crate::section_0149::glue_node_subtype;
+    use crate::section_0162::page_head;
+}}

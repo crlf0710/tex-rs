@@ -403,21 +403,20 @@ pub(crate) fn triecharop_value(globals: &mut TeXGlobals, idx: halfword) -> trie_
     globals.triecharop_val_gallery[idx as usize]
 }
 
-macro_rules! dump_four_bytes {
-    ($globals:expr, $bytes:expr, $k:expr) => {{
-        let mut w = four_quarters::default();
-        w[FOUR_QUARTERS_B0] = *$bytes.get($k as usize).unwrap_or(&0);
-        w[FOUR_QUARTERS_B1] = *$bytes.get($k as usize + 1).unwrap_or(&0);
-        w[FOUR_QUARTERS_B2] = *$bytes.get($k as usize + 2).unwrap_or(&0);
-        w[FOUR_QUARTERS_B3] = *$bytes.get($k as usize + 3).unwrap_or(&0);
-        dump_qqqq!($globals, w);
-        use crate::section_0113::four_quarters;
-        use crate::section_0113::FOUR_QUARTERS_B0;
-        use crate::section_0113::FOUR_QUARTERS_B1;
-        use crate::section_0113::FOUR_QUARTERS_B2;
-        use crate::section_0113::FOUR_QUARTERS_B3;
-    }};
-}
+pub(crate) macro dump_four_bytes($globals:expr, $bytes:expr, $k:expr) {{
+    let mut w = four_quarters::default();
+    w[FOUR_QUARTERS_B0] = *$bytes.get($k as usize).unwrap_or(&0);
+    w[FOUR_QUARTERS_B1] = *$bytes.get($k as usize + 1).unwrap_or(&0);
+    w[FOUR_QUARTERS_B2] = *$bytes.get($k as usize + 2).unwrap_or(&0);
+    w[FOUR_QUARTERS_B3] = *$bytes.get($k as usize + 3).unwrap_or(&0);
+    dump_qqqq!($globals, w);
+    use crate::section_0113::four_quarters;
+    use crate::section_0113::FOUR_QUARTERS_B0;
+    use crate::section_0113::FOUR_QUARTERS_B1;
+    use crate::section_0113::FOUR_QUARTERS_B2;
+    use crate::section_0113::FOUR_QUARTERS_B3;
+    use crate::section_1305::dump_qqqq;
+}}
 
 pub(crate) fn dump_the_unicode_support_data(globals: &mut TeXGlobals) {
     dump_int!(globals, 0xABCDEF);
@@ -459,42 +458,40 @@ pub(crate) fn dump_the_unicode_support_data(globals: &mut TeXGlobals) {
     }
 }
 
-macro_rules! undump_four_bytes {
-    ($globals:expr, $bytes:expr, $k:expr) => {{
-        let w;
-        undump_qqqq!($globals, w);
-        if let Some(byte) = $bytes.get_mut($k as usize) {
-            *byte = w[FOUR_QUARTERS_B0];
-        }
-        if let Some(byte) = $bytes.get_mut($k as usize + 1) {
-            *byte = w[FOUR_QUARTERS_B1];
-        }
-        if let Some(byte) = $bytes.get_mut($k as usize + 2) {
-            *byte = w[FOUR_QUARTERS_B2];
-        }
-        if let Some(byte) = $bytes.get_mut($k as usize + 3) {
-            *byte = w[FOUR_QUARTERS_B3];
-        }
+pub(crate) macro undump_four_bytes($globals:expr, $bytes:expr, $k:expr) {{
+    let w;
+    undump_qqqq!($globals, w);
+    if let Some(byte) = $bytes.get_mut($k as usize) {
+        *byte = w[FOUR_QUARTERS_B0];
+    }
+    if let Some(byte) = $bytes.get_mut($k as usize + 1) {
+        *byte = w[FOUR_QUARTERS_B1];
+    }
+    if let Some(byte) = $bytes.get_mut($k as usize + 2) {
+        *byte = w[FOUR_QUARTERS_B2];
+    }
+    if let Some(byte) = $bytes.get_mut($k as usize + 3) {
+        *byte = w[FOUR_QUARTERS_B3];
+    }
 
-        use crate::section_0113::FOUR_QUARTERS_B0;
-        use crate::section_0113::FOUR_QUARTERS_B1;
-        use crate::section_0113::FOUR_QUARTERS_B2;
-        use crate::section_0113::FOUR_QUARTERS_B3;
-    }};
-}
+    use crate::section_0113::FOUR_QUARTERS_B0;
+    use crate::section_0113::FOUR_QUARTERS_B1;
+    use crate::section_0113::FOUR_QUARTERS_B2;
+    use crate::section_0113::FOUR_QUARTERS_B3;
+}}
 
 pub(crate) fn undump_the_unicode_support_data(globals: &mut TeXGlobals) -> bool {
-    region_forward_label!(
+    crate::region_forward_label!(
     |'bad_fmt|
     {
         let mut x: integer;
         undump_int!(globals, x);
         if x != 0xABCDEF {
-            goto_forward_label!('bad_fmt);
+            crate::goto_forward_label!('bad_fmt);
         }
         undump_int!(globals, x);
         if x != GRAPHEME_REGISTRY_INITIAL_VALUE as integer {
-            goto_forward_label!('bad_fmt);
+            crate::goto_forward_label!('bad_fmt);
         }
         let mut graphme_registry_next_value = GRAPHEME_REGISTRY_INITIAL_VALUE;
         if !(GRAPHE_REGISTRY.with(|reg| -> bool {
@@ -599,6 +596,11 @@ use crate::section_0134::font_and_character;
 use crate::section_0297::cur_tok_repr;
 use crate::section_0548::internal_font_number;
 use crate::section_0921::trie_char_and_op;
+use crate::section_1305::dump_int;
+use crate::section_1306::undump;
+use crate::section_1306::undump_int;
+use crate::section_1306::undump_qqqq;
+use crate::section_1306::undump_size;
 use core::cell::{Cell, RefCell};
 use globals_struct::{globals_struct_field, globals_struct_use};
 use std::collections::BTreeMap;

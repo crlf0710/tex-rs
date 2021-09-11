@@ -16,10 +16,8 @@
 //
 // @d trie_root==trie_l[0] {root of the linked trie}
 /// root of the linked trie
-macro_rules! trie_root {
-    ($globals:expr) => {
-        $globals.trie_l[0]
-    }
+pub(crate) macro trie_root($globals:expr) {
+    $globals.trie_l[0]
 }
 // @<Glob...@>=
 // @!init @!trie_c:packed array[trie_pointer] of packed_ASCII_code;
@@ -27,25 +25,29 @@ macro_rules! trie_root {
 /// characters to match
 #[cfg(feature = "initex")]
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static trie_c: Box<trie_pointer_array<ASCII_code>> = Box::new(trie_pointer_array::default());
+pub(crate) static trie_c: Box<trie_pointer_array<ASCII_code>> =
+    Box::new(trie_pointer_array::default());
 // @t\hskip10pt@>@!trie_o:packed array[trie_pointer] of quarterword;
 //   {operations to perform}
 /// operations to perform
 #[cfg(feature = "initex")]
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static trie_o: Box<trie_pointer_array<quarterword>> = Box::new(trie_pointer_array::default());
+pub(crate) static trie_o: Box<trie_pointer_array<quarterword>> =
+    Box::new(trie_pointer_array::default());
 // @t\hskip10pt@>@!trie_l:packed array[trie_pointer] of trie_pointer;
 //   {left subtrie links}
 /// left subtrie links
 #[cfg(feature = "initex")]
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static trie_l: Box<trie_pointer_array<trie_pointer>> = Box::new(trie_pointer_array::default());
+pub(crate) static trie_l: Box<trie_pointer_array<trie_pointer>> =
+    Box::new(trie_pointer_array::default());
 // @t\hskip10pt@>@!trie_r:packed array[trie_pointer] of trie_pointer;
 //   {right subtrie links}
 /// right subtrie links
 #[cfg(feature = "initex")]
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static trie_r: Box<trie_pointer_array<trie_pointer>> = Box::new(trie_pointer_array::default());
+pub(crate) static trie_r: Box<trie_pointer_array<trie_pointer>> =
+    Box::new(trie_pointer_array::default());
 // @t\hskip10pt@>@!trie_ptr:trie_pointer; {the number of nodes in the trie}
 /// the number of nodes in the trie
 #[cfg(feature = "initex")]
@@ -58,7 +60,7 @@ pub(crate) static trie_ptr: trie_pointer = trie_pointer::default();
 #[globals_struct_field(TeXGlobals)]
 pub(crate) static trie_hash: Box<trie_pointer_array<trie_pointer>> = Default::default();
 // tini
-const _ : () = ();
+const _: () = ();
 
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0018::ASCII_code;
@@ -75,14 +77,10 @@ use crate::section_0920::trie_pointer;
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
 
-macro_rules! trie_c {
-    ($globals:expr, $p:expr) => {
-        $globals.trie_c[$p]
-    };
+pub(crate) macro trie_c($globals:expr, $p:expr) {
+    $globals.trie_c[$p]
 }
 
-macro_rules! trie_c_assign {
-    ($globals:expr, $p:expr, $c:expr) => {
-        $globals.trie_c[$p] = $c
-    };
+pub(crate) macro trie_c_assign($globals:expr, $p:expr, $c:expr) {
+    $globals.trie_c[$p] = $c
 }

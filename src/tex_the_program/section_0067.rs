@@ -29,7 +29,10 @@ pub(crate) fn print_hex(globals: &mut TeXGlobals, mut n: integer) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0016::incr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0058::print_char;
 use crate::section_0064::print_the_digs;

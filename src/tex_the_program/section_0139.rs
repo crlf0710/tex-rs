@@ -19,7 +19,7 @@ pub(crate) fn new_rule(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     depth!(globals, p) = null_flag;
     height!(globals, p) = null_flag;
     // new_rule:=p;
-    return_nojump!(p);
+    crate::return_nojump!(p);
     // end;
 }
 
@@ -27,6 +27,12 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
+use crate::section_0135::depth;
+use crate::section_0135::height;
+use crate::section_0135::list_ptr;
+use crate::section_0135::width;
 use crate::section_0138::null_flag;
 use crate::section_0138::rule_node;
 use crate::section_0138::rule_node_size;

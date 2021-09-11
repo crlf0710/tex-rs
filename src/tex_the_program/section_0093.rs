@@ -14,7 +14,7 @@ pub(crate) fn succumb(globals: &mut TeXGlobals) -> TeXResult<()> {
         error(globals)?;
     }
     // @!debug if interaction>batch_mode then debug_help;@+gubed@;@/
-    region_debug! {
+    crate::region_debug! {
         if globals.interaction > batch_mode {
             debug_help(globals);
             use crate::section_1338::debug_help;
@@ -25,7 +25,7 @@ pub(crate) fn succumb(globals: &mut TeXGlobals) -> TeXResult<()> {
     /// irrecoverable error
     jump_out()?;
     // end
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 //
 // @<Error hand...@>=
@@ -35,20 +35,22 @@ pub(crate) fn fatal_error(globals: &mut TeXGlobals, s: str_number) -> TeXResult<
     // begin normalize_selector;@/
     normalize_selector(globals);
     // print_err("Emergency stop"); help1(s); succumb;
-    print_err!(globals, strpool_str!("Emergency stop"));
+    print_err!(globals, crate::strpool_str!("Emergency stop"));
     help1!(globals, s);
     succumb(globals)?;
     // @.Emergency stop@>
     // end;
-    return_nojump!();
+    crate::return_nojump!();
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0038::str_number;
 use crate::section_0073::batch_mode;
 use crate::section_0073::error_stop_mode;
+use crate::section_0073::print_err;
 use crate::section_0073::scroll_mode;
 use crate::section_0076::history_kind;
+use crate::section_0079::help1;
 use crate::section_0081::jump_out;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;

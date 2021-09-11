@@ -9,7 +9,7 @@ pub(crate) fn print_esc(globals: &mut TeXGlobals, s: str_number) {
     /// the escape character code
     let c;
     // begin  @<Set variable |c| to the current escape character@>;
-    Set_variable_c_to_the_current_escape_character!(globals, c);
+    crate::section_0243::Set_variable_c_to_the_current_escape_character!(globals, c);
     // if c>=0 then if c<256 then print(c);
     if c >= 0 && c < 256 {
         print(globals, c);

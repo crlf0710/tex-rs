@@ -16,7 +16,7 @@ pub(crate) fn scan_four_bit_int(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;

@@ -21,8 +21,8 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
             // if p=null_cs then
             if p == null_cs as integer {
                 // begin print_esc("csname"); print_esc("endcsname"); print_char(" ");
-                print_esc(globals, strpool_str!("csname"));
-                print_esc(globals, strpool_str!("endcsname"));
+                print_esc(globals, crate::strpool_str!("csname"));
+                print_esc(globals, crate::strpool_str!("endcsname"));
                 print_char(
                     make_globals_io_string_log_view!(globals),
                     ASCII_code_literal!(b' '),
@@ -46,7 +46,7 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
         }
         // else if p<active_base then print_esc("IMPOSSIBLE.")
         else if p < active_base as integer {
-            print_esc(globals, strpool_str!("IMPOSSIBLE."));
+            print_esc(globals, crate::strpool_str!("IMPOSSIBLE."));
         }
         // @.IMPOSSIBLE@>
         // else print(p-active_base)
@@ -56,13 +56,13 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
     }
     // else if p>=undefined_control_sequence then print_esc("IMPOSSIBLE.")
     else if p >= undefined_control_sequence as _ {
-        print_esc(globals, strpool_str!("IMPOSSIBLE."));
+        print_esc(globals, crate::strpool_str!("IMPOSSIBLE."));
     }
     // else if (text(p)<0)or(text(p)>=str_ptr) then print_esc("NONEXISTENT.")
     else if text!(globals, p as pointer) < 0
         || text!(globals, p as pointer) >= globals.str_ptr.get() as _
     {
-        print_esc(globals, strpool_str!("IMPOSSIBLE."));
+        print_esc(globals, crate::strpool_str!("IMPOSSIBLE."));
     }
     // @.NONEXISTENT@>
     // else  begin print_esc(text(p));
@@ -79,9 +79,11 @@ pub(crate) fn print_cs(globals: &mut TeXGlobals, p: integer) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;
 use crate::section_0059::print;
@@ -94,3 +96,5 @@ use crate::section_0222::hash_base;
 use crate::section_0222::null_cs;
 use crate::section_0222::single_base;
 use crate::section_0222::undefined_control_sequence;
+use crate::section_0230::cat_code;
+use crate::section_0256::text;

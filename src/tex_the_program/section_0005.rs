@@ -9,4 +9,4 @@
 //! intended to combine the advantages of the ``bottom up'' and ``top down''
 //! approaches to the problem of understanding a somewhat complicated system.
 
-migration_complete!();
+crate::migration_complete!();

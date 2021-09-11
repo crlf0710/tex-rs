@@ -8,11 +8,14 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) -> TeXResu
     // begin if box_context<box_flag then @<Append box |cur_box| to the current list,
     //     shifted by |box_context|@>
     if box_context < box_flag {
-        Append_box_cur_box_to_the_current_list__shifted_by_box_context!(globals, box_context);
+        crate::section_1076::Append_box_cur_box_to_the_current_list__shifted_by_box_context!(
+            globals,
+            box_context
+        );
     }
     // else if box_context<ship_out_flag then @<Store \(c)|cur_box| in a box register@>
     else if box_context < ship_out_flag {
-        Store_cur_box_in_a_box_register!(globals, box_context);
+        crate::section_1077::Store_cur_box_in_a_box_register!(globals, box_context);
     }
     // else if cur_box<>null then
     else if globals.cur_box != null {
@@ -27,7 +30,7 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) -> TeXResu
         }
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;

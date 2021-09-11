@@ -1,13 +1,11 @@
 //! ` `
 
-macro_rules! Initialize_the_special_list_heads_and_constant_nodes {
-    ($globals:expr) => {{
-        Initialize_the_special_list_heads_and_constant_nodes_0797!($globals);
-        Initialize_the_special_list_heads_and_constant_nodes_0820!($globals);
-        Initialize_the_special_list_heads_and_constant_nodes_0981!($globals);
-        Initialize_the_special_list_heads_and_constant_nodes_0988!($globals);
-    }}
-}
+pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes($globals:expr) {{
+    crate::section_0797::Initialize_the_special_list_heads_and_constant_nodes_0797!($globals);
+    crate::section_0820::Initialize_the_special_list_heads_and_constant_nodes_0820!($globals);
+    crate::section_0981::Initialize_the_special_list_heads_and_constant_nodes_0981!($globals);
+    crate::section_0988::Initialize_the_special_list_heads_and_constant_nodes_0988!($globals);
+}}
 
 // @<Initialize table entries...@>=
 #[distributed_slice(INIT_TBLENTRY)]
@@ -15,9 +13,9 @@ macro_rules! Initialize_the_special_list_heads_and_constant_nodes {
 pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut TeXGlobals) {
     // for k:=mem_bot+1 to lo_mem_stat_max do mem[k].sc:=0;
     //   {all glue dimensions are zeroed}
-    for k in mem_bot + 1 ..= lo_mem_stat_max {
+    for k in mem_bot + 1..=lo_mem_stat_max {
         /// all glue dimensions are zeroed
-        const _ : () = ();
+        const _: () = ();
         globals.mem[k][MEMORY_WORD_SC] = scaled::zero();
         use crate::section_0101::MEMORY_WORD_SC;
     }
@@ -26,14 +24,14 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     //     {set first words of glue specifications}
     for k in (mem_bot..=lo_mem_stat_max).step_by(glue_spec_size as _) {
         /// set first words of glue specifications
-        const _ : () = ();
+        const _: () = ();
         // begin glue_ref_count(k):=null+1;
         glue_ref_count!(globals, k) = null + 1;
         // stretch_order(k):=normal; shrink_order(k):=normal;
         stretch_order!(globals, k) = glue_ord::normal as _;
         shrink_order!(globals, k) = glue_ord::normal as _;
         // k:=k+glue_spec_size;
-        const _ : () = ();
+        const _: () = ();
         // end;
     }
     // stretch(fil_glue):=unity; stretch_order(fil_glue):=fil;@/
@@ -55,11 +53,11 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     globals.rover = lo_mem_stat_max + 1;
     // link(rover):=empty_flag; {now initialize the dynamic memory}
     /// now initialize the dynamic memory
-    const _ : () = ();
+    const _: () = ();
     link!(globals, globals.rover) = empty_flag;
     // node_size(rover):=1000; {which is a 1000-word available node}
     /// which is a 1000-word available node
-    const _ : () = ();
+    const _: () = ();
     node_size!(globals, globals.rover) = 1000;
     // llink(rover):=rover; rlink(rover):=rover;@/
     llink!(globals, globals.rover) = globals.rover;
@@ -90,21 +88,31 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
-use crate::section_0012::mem_top;
 use crate::section_0012::mem_bot;
+use crate::section_0012::mem_top;
 use crate::section_0101::scaled;
 use crate::section_0101::unity;
 use crate::section_0115::null;
+use crate::section_0118::info_inner;
+use crate::section_0118::link;
 use crate::section_0124::empty_flag;
+use crate::section_0124::llink;
+use crate::section_0124::node_size;
+use crate::section_0124::rlink;
 use crate::section_0150::glue_ord;
+use crate::section_0150::glue_ref_count;
 use crate::section_0150::glue_spec_size;
-use crate::section_0162::hi_mem_stat_min;
-use crate::section_0162::lo_mem_stat_max;
-use crate::section_0162::hi_mem_stat_usage;
+use crate::section_0150::shrink;
+use crate::section_0150::shrink_order;
+use crate::section_0150::stretch;
+use crate::section_0150::stretch_order;
 use crate::section_0162::fil_glue;
-use crate::section_0162::fill_glue;
-use crate::section_0162::ss_glue;
 use crate::section_0162::fil_neg_glue;
+use crate::section_0162::fill_glue;
+use crate::section_0162::hi_mem_stat_min;
+use crate::section_0162::hi_mem_stat_usage;
+use crate::section_0162::lo_mem_stat_max;
+use crate::section_0162::ss_glue;
 
 use linkme::distributed_slice;
 

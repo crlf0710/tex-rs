@@ -2,9 +2,6 @@
 //! token beginning line~2 is about to be shown:
 //
 // @<Do magic computation@>=set_trick_count
-macro_rules! Do_magic_computation {
-    ($globals:expr) => {{
-        set_trick_count!($globals);
-    }}
-}
-
+pub(crate) macro Do_magic_computation($globals:expr) {{
+    crate::section_0316::set_trick_count!($globals);
+}}

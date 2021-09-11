@@ -12,7 +12,7 @@
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
 pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> pointer {
     debug_assert!(l > 1);
-    trace_expr!("id_lookup(j = {}, l = {})", j, l);
+    crate::trace_expr!("id_lookup(j = {}, l = {})", j, l);
     // label found; {go here if you found it}
     // var h:integer; {hash code}
     /// hash code
@@ -23,15 +23,15 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
     let mut p: pointer;
     // @!k:pointer; {index in |buffer| array}
     // begin @<Compute the hash code |h|@>;
-    Compute_the_hash_code_h!(globals, h, j, l);
-    trace_expr!("hash = {}", h);
+    crate::section_0261::Compute_the_hash_code_h!(globals, h, j, l);
+    crate::trace_expr!("hash = {}", h);
     // p:=h+hash_base; {we start searching here; note that |0<=h<hash_prime|}
     /// we start searching here; note that `0<=h<hash_prime`
     {
         p = (h as i32 + hash_base as i32) as pointer;
-        trace_expr!("initial_p = {}", p);
+        crate::trace_expr!("initial_p = {}", p);
     }
-    region_forward_label!(
+    crate::region_forward_label!(
     |'found|
     {
         let mut l_bytes = l;
@@ -46,7 +46,7 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
             if text!(globals, p) > 0 {
                 if length(globals, text!(globals, p) as _) == l_bytes {
                     if str_eq_buf(globals, str_number::new(text!(globals, p) as _), j) {
-                        goto_forward_label!('found);
+                        crate::goto_forward_label!('found);
                     }
                 }
             }
@@ -55,37 +55,39 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
                 // begin if no_new_control_sequence then
                 if globals.no_new_control_sequence  {
                     // p:=undefined_control_sequence
-                    trace_expr!("p = undefined_cs = {}", undefined_control_sequence);
+                    crate::trace_expr!("p = undefined_cs = {}", undefined_control_sequence);
                     p = undefined_control_sequence;
                 } else {
                     // else @<Insert a new control sequence after |p|, then make
                     //   |p| point to it@>;
-                    Insert_a_new_control_sequence_after_p_then_make_p_point_to_it!
+                    crate::section_0260::Insert_a_new_control_sequence_after_p_then_make_p_point_to_it!
                         (globals, p, j, l);
                 }
                 // goto found;
-                goto_forward_label!('found);
+                crate::goto_forward_label!('found);
                 // end;
             }
             // p:=next(p);
             p = next!(globals, p);
-            trace_expr!("new_p = {}", p);
+            crate::trace_expr!("new_p = {}", p);
             // end;
         }
     }
     // found: id_lookup:=p;
     'found <-
     );
-    trace_expr!("final_p = {}", p);
+    crate::trace_expr!("final_p = {}", p);
     return p;
     // end;
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0038::str_number;
 use crate::section_0040::length;
 use crate::section_0045::str_eq_buf;
 use crate::section_0115::pointer;
-use crate::section_0038::str_number;
 use crate::section_0222::hash_base;
 use crate::section_0222::undefined_control_sequence;
+use crate::section_0256::next;
+use crate::section_0256::text;

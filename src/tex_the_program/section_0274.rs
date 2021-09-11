@@ -14,10 +14,8 @@
 //! appears in location |save_ptr+k| of the save stack.
 //
 // @d saved(#)==save_stack[save_ptr+#].int
-macro_rules! saved {
-    ($globals:expr, $ptr:expr) => {
-        $globals.save_stack[$globals.save_ptr + $ptr][crate::section_0113::MEMORY_WORD_INT]
-    };
+pub(crate) macro saved($globals:expr, $ptr:expr) {
+    $globals.save_stack[$globals.save_ptr + $ptr][crate::section_0113::MEMORY_WORD_INT]
 }
 //
 // @p procedure new_save_level(@!c:group_code); {begin a new level of grouping}
@@ -46,6 +44,11 @@ pub(crate) fn new_save_level(globals: &mut TeXGlobals, c: group_code) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0110::max_quarterword;
 use crate::section_0268::level_boundary;
+use crate::section_0268::save_index;
+use crate::section_0268::save_level;
+use crate::section_0268::save_type;
 use crate::section_0269::group_code;
+use crate::section_0273::check_full_save_stack;

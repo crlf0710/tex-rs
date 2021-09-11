@@ -12,7 +12,7 @@
 // @!align_state:integer; {group level with respect to current alignment}
 /// group level with respect to current alignment
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static align_state:integer = 0;
+pub(crate) static align_state: integer = 0;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::integer;

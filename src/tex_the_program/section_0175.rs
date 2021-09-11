@@ -1,6 +1,6 @@
 //! ` `
 // @<Print a short indication of the contents of node |p|@>=
-macro_rules! Print_a_short_indication_of_the_contents_of_node_p {
+pub(crate) macro Print_a_short_indication_of_the_contents_of_node_p {
     ($globals:expr, $p:expr) => {{
         // case type(p) of
         let type_p = r#type!($globals, $p);
@@ -14,7 +14,7 @@ macro_rules! Print_a_short_indication_of_the_contents_of_node_p {
             || type_p == adjust_node
             || type_p == unset_node
         {
-            print($globals, strpool_str!("[]").get() as _);
+            print($globals, crate::strpool_str!("[]").get() as _);
         }
         // rule_node: print_char("|");
         else if type_p == rule_node {
@@ -52,7 +52,12 @@ macro_rules! Print_a_short_indication_of_the_contents_of_node_p {
             do_nothing!();
         }
         // endcases
+        use crate::section_0004::make_globals_io_string_log_view;
+        use crate::section_0016::do_nothing;
+        use crate::section_0018::ASCII_code_literal;
+        use crate::section_0058::print_char;
         use crate::section_0059::print;
+        use crate::section_0133::r#type;
         use crate::section_0135::hlist_node;
         use crate::section_0137::vlist_node;
         use crate::section_0138::rule_node;
@@ -60,11 +65,16 @@ macro_rules! Print_a_short_indication_of_the_contents_of_node_p {
         use crate::section_0141::mark_node;
         use crate::section_0142::adjust_node;
         use crate::section_0143::ligature_node;
+        use crate::section_0143::lig_ptr;
+        use crate::section_0145::pre_break;
         use crate::section_0145::disc_node;
+        use crate::section_0145::post_break;
         use crate::section_0146::whatsit_node;
         use crate::section_0147::math_node;
         use crate::section_0149::glue_node;
+        use crate::section_0149::glue_ptr;
         use crate::section_0159::unset_node;
         use crate::section_0162::zero_glue;
-    }};
+        use crate::section_0174::short_display;
+    }}
 }

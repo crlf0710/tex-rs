@@ -15,13 +15,13 @@
 //! the rules.
 
 // @<Contribute the recently matched tokens to the current parameter...@>=
-macro_rules! Contribute_the_recently_matched_tokens_to_the_current_parameter__and_goto_continue_if_a_partial_match_is_still_in_effect__but_abort_if_s_null {
+pub(crate) macro Contribute_the_recently_matched_tokens_to_the_current_parameter__and_goto_continue_if_a_partial_match_is_still_in_effect__but_abort_if_s_null {
     ($globals:expr, $r:expr, $info_r:expr, $m:expr, $s:expr, $p:expr, $q:expr) => {
         // if s<>r then
         if $s != $r {
             // if s=null then @<Report an improper use of the macro and abort@>
             if $s == null {
-                Report_an_improper_use_of_the_macro_and_abort!($globals);
+                crate::section_0398::Report_an_improper_use_of_the_macro_and_abort!($globals);
             }
             // else  begin t:=s;
             else {
@@ -33,7 +33,7 @@ macro_rules! Contribute_the_recently_matched_tokens_to_the_current_parameter__an
                     incr!($m);
                     let u = link!($globals, t);
                     let v = $s;
-                    region_forward_label!(
+                    crate::region_forward_label!(
                         |'done|
                         {
                             todo!("inner");
@@ -64,5 +64,10 @@ macro_rules! Contribute_the_recently_matched_tokens_to_the_current_parameter__an
                 // end
             }
         }
+        use crate::section_0016::incr;
+        use crate::section_0115::null;
+        use crate::section_0118::info_tok;
+        use crate::section_0118::link;
+        use crate::section_0371::store_new_token;
     }
 }

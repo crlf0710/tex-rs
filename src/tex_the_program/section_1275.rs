@@ -26,8 +26,8 @@ pub(crate) fn open_or_close_in(globals: &mut TeXGlobals) -> TeXResult<()> {
         scan_optional_equals(globals)?;
         scan_file_name(globals)?;
         // if cur_ext="" then cur_ext:=".tex";
-        if globals.cur_ext == strpool_str!("") {
-            globals.cur_ext = strpool_str!(".tex");
+        if globals.cur_ext == crate::strpool_str!("") {
+            globals.cur_ext = crate::strpool_str!(".tex");
         }
         // pack_cur_name;
         pack_cur_name(globals);
@@ -41,10 +41,11 @@ pub(crate) fn open_or_close_in(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::u8_from_0_to_n;
+use crate::section_0004::make_globals_filename_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0027::a_open_in;

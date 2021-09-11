@@ -1,25 +1,25 @@
 //! ` `
 // @<Dump regions 5 and 6 of |eqtb|@>=
-macro_rules! Dump_regions_5_and_6_of_eqtb {
-    ($globals:expr, $k:expr) => {{
+pub(crate) macro Dump_regions_5_and_6_of_eqtb
+    ($globals:expr, $k:expr) {{
         /// all-purpose indices
         let (mut j, mut k, mut l): (integer, integer, integer);
         k = $k;
         // repeat j:=k;
         loop {
-            region_forward_label!(
+            crate::region_forward_label!(
             |'done2|
             {
-            region_forward_label!(
+            crate::region_forward_label!(
             |'found2|
             {
             j = k;
             // while j<eqtb_size do
             while j < eqtb_size as integer {
                 // begin if eqtb[j].int=eqtb[j+1].int then goto found2;
-                if $globals.eqtb[j as u16][MEMORY_WORD_INT] == 
+                if $globals.eqtb[j as u16][MEMORY_WORD_INT] ==
                     $globals.eqtb[j as u16 + 1][MEMORY_WORD_INT] {
-                    goto_forward_label!('found2);
+                    crate::goto_forward_label!('found2);
                 }
                 // incr(j);
                 incr!(j);
@@ -29,7 +29,7 @@ macro_rules! Dump_regions_5_and_6_of_eqtb {
             l = eqtb_size as integer + 1;
             /// `j=eqtb_size`
             const _ : () = ();
-            goto_forward_label!('done2);
+            crate::goto_forward_label!('done2);
             }
             // found2: incr(j); l:=j;
             'found2 <-
@@ -41,7 +41,7 @@ macro_rules! Dump_regions_5_and_6_of_eqtb {
                 // begin if eqtb[j].int<>eqtb[j+1].int then goto done2;
                 if $globals.eqtb[j as u16][MEMORY_WORD_INT] !=
                     $globals.eqtb[j as u16 + 1][MEMORY_WORD_INT] {
-                    goto_forward_label!('done2);
+                    crate::goto_forward_label!('done2);
                 }
                 // incr(j);
                 incr!(j);
@@ -70,5 +70,7 @@ macro_rules! Dump_regions_5_and_6_of_eqtb {
         use crate::pascal::integer;
         use crate::section_0113::MEMORY_WORD_INT;
         use crate::section_0247::eqtb_size;
+        use crate::section_0016::incr;
+        use crate::section_1305::dump_int;
+        use crate::section_1305::dump_wd;
     }}
-}

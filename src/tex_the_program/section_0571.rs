@@ -17,83 +17,80 @@
 //! of \TeX\ between computers.
 //
 // @d store_scaled(#)==begin fget; a:=fbyte; fget; b:=fbyte;
-macro_rules! store_scaled {
-    ($globals:expr, $val:expr, $z:expr, $alpha:expr, $beta:expr, $lbl_bad_tfm:lifetime) => {{
-        /// byte variables
-        let (a, b, c, d): (eight_bits, eight_bits, eight_bits, eight_bits);
-        /// accumulators
-        let sw: scaled;
+pub(crate) macro store_scaled($globals:expr, $val:expr, $z:expr, $alpha:expr, $beta:expr, $lbl_bad_tfm:lifetime) {{
+    /// byte variables
+    let (a, b, c, d): (eight_bits, eight_bits, eight_bits, eight_bits);
+    /// accumulators
+    let sw: scaled;
 
-        fget!($globals);
-        a = fbyte!($globals);
-        fget!($globals);
-        b = fbyte!($globals);
-        // fget; c:=fbyte; fget; d:=fbyte;@/
-        fget!($globals);
-        c = fbyte!($globals);
-        fget!($globals);
-        d = fbyte!($globals);
-        // sw:=(((((d*z)div@'400)+(c*z))div@'400)+(b*z))div beta;
-        sw = scaled::new_from_inner(
-            (((d as integer * $z) / 0o400 + (c as integer * $z)) / 0o400 + (b as integer * $z))
-                / $beta as integer,
-        );
-        // if a=0 then #:=sw@+else if a=255 then #:=sw-alpha@+else abort;
-        if a == 0 {
-            $val = sw;
-        } else if a == 255 {
-            $val = sw - scaled::new_from_inner($alpha);
-        } else {
-            goto_forward_label!($lbl_bad_tfm);
-        }
-        // end
-        use crate::section_0025::eight_bits;
-        use crate::section_0101::scaled;
-    }};
-}
+    fget!($globals);
+    a = fbyte!($globals);
+    fget!($globals);
+    b = fbyte!($globals);
+    // fget; c:=fbyte; fget; d:=fbyte;@/
+    fget!($globals);
+    c = fbyte!($globals);
+    fget!($globals);
+    d = fbyte!($globals);
+    // sw:=(((((d*z)div@'400)+(c*z))div@'400)+(b*z))div beta;
+    sw = scaled::new_from_inner(
+        (((d as integer * $z) / 0o400 + (c as integer * $z)) / 0o400 + (b as integer * $z))
+            / $beta as integer,
+    );
+    // if a=0 then #:=sw@+else if a=255 then #:=sw-alpha@+else abort;
+    if a == 0 {
+        $val = sw;
+    } else if a == 255 {
+        $val = sw - scaled::new_from_inner($alpha);
+    } else {
+        crate::goto_forward_label!($lbl_bad_tfm);
+    }
+    // end
+    use crate::pascal::integer;
+    use crate::section_0025::eight_bits;
+    use crate::section_0101::scaled;
+    use crate::section_0564::fbyte;
+    use crate::section_0564::fget;
+}}
 //
 // @<Read box dimensions@>=
-macro_rules! Read_box_dimensions {
-    ($globals:expr, $f:expr, $z:expr, $alpha:expr, $beta:expr, $lbl_bad_tfm:lifetime) => {{
-        // begin @<Replace |z| by $|z|^\prime$ and compute $\alpha,\beta$@>;
-        Replace_z_by_z_prime_and_compute_alpha_beta!($globals, $z, $alpha, $beta);
-        // for k:=width_base[f] to lig_kern_base[f]-1 do
-        for k in $globals.width_base[$f]..=$globals.lig_kern_base[$f] - 1 {
-            let k = k as pointer;
-            // store_scaled(font_info[k].sc);
-            store_scaled!(
-                $globals,
-                $globals.font_info[k][MEMORY_WORD_SC],
-                $z.inner(),
-                $alpha,
-                $beta,
-                $lbl_bad_tfm
-            );
-        }
-        // if font_info[width_base[f]].sc<>0 then abort; {\\{width}[0] must be zero}
-        /// `width`[0] must be zero
-        if $globals.font_info[$globals.width_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero()
-        {
-            goto_forward_label!($lbl_bad_tfm);
-        }
-        // if font_info[height_base[f]].sc<>0 then abort; {\\{height}[0] must be zero}
-        /// `height`[0] must be zero
-        if $globals.font_info[$globals.height_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero()
-        {
-            goto_forward_label!($lbl_bad_tfm);
-        }
-        // if font_info[depth_base[f]].sc<>0 then abort; {\\{depth}[0] must be zero}
-        if $globals.font_info[$globals.depth_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero()
-        {
-            goto_forward_label!($lbl_bad_tfm);
-        }
-        // if font_info[italic_base[f]].sc<>0 then abort; {\\{italic}[0] must be zero}
-        if $globals.font_info[$globals.italic_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero()
-        {
-            goto_forward_label!($lbl_bad_tfm);
-        }
-        // end
-        use crate::pascal::integer;
-        use crate::section_0101::MEMORY_WORD_SC;
-    }};
-}
+pub(crate) macro Read_box_dimensions($globals:expr, $f:expr, $z:expr, $alpha:expr, $beta:expr, $lbl_bad_tfm:lifetime) {{
+    // begin @<Replace |z| by $|z|^\prime$ and compute $\alpha,\beta$@>;
+    crate::section_0572::Replace_z_by_z_prime_and_compute_alpha_beta!($globals, $z, $alpha, $beta);
+    // for k:=width_base[f] to lig_kern_base[f]-1 do
+    for k in $globals.width_base[$f]..=$globals.lig_kern_base[$f] - 1 {
+        let k = k as pointer;
+        // store_scaled(font_info[k].sc);
+        store_scaled!(
+            $globals,
+            $globals.font_info[k][MEMORY_WORD_SC],
+            $z.inner(),
+            $alpha,
+            $beta,
+            $lbl_bad_tfm
+        );
+    }
+    // if font_info[width_base[f]].sc<>0 then abort; {\\{width}[0] must be zero}
+    /// `width`[0] must be zero
+    if $globals.font_info[$globals.width_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero() {
+        crate::goto_forward_label!($lbl_bad_tfm);
+    }
+    // if font_info[height_base[f]].sc<>0 then abort; {\\{height}[0] must be zero}
+    /// `height`[0] must be zero
+    if $globals.font_info[$globals.height_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero() {
+        crate::goto_forward_label!($lbl_bad_tfm);
+    }
+    // if font_info[depth_base[f]].sc<>0 then abort; {\\{depth}[0] must be zero}
+    if $globals.font_info[$globals.depth_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero() {
+        crate::goto_forward_label!($lbl_bad_tfm);
+    }
+    // if font_info[italic_base[f]].sc<>0 then abort; {\\{italic}[0] must be zero}
+    if $globals.font_info[$globals.italic_base[$f] as pointer][MEMORY_WORD_SC] != scaled::zero() {
+        crate::goto_forward_label!($lbl_bad_tfm);
+    }
+    // end
+    use crate::pascal::integer;
+    use crate::section_0101::scaled;
+    use crate::section_0101::MEMORY_WORD_SC;
+    use crate::section_0115::pointer;
+}}

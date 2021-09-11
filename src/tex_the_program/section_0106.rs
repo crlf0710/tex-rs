@@ -52,4 +52,5 @@ pub(crate) fn x_over_n(globals: &mut TeXGlobals, mut x: scaled, mut n: integer) 
 use crate::pascal::boolean;
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::negate;
 use crate::section_0101::scaled;

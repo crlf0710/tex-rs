@@ -22,8 +22,8 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 );
 
 use crate::pascal::u8_from_0_to_n;
+use crate::section_0004::TeXGlobals;
 use crate::section_0115::pointer;
+use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::Unsigned;
 use typenum::{U1, U8};
-use crate::section_0004::TeXGlobals;
-use globals_struct::{globals_struct_field, globals_struct_use};

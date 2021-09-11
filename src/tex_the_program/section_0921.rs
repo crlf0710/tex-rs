@@ -2,76 +2,58 @@
 
 // @d trie_link(#)==trie[#].rh {``downward'' link in a trie}
 /// "downward" link in a trie
-macro_rules! trie_link {
-    ($globals:expr, $v:expr) => {
-        $globals.trie[$v][crate::section_0113::TWO_HALVES_RH]
-    }
+pub(crate) macro trie_link($globals:expr, $v:expr) {
+    $globals.trie[$v][crate::section_0113::TWO_HALVES_RH]
 }
 // @d trie_char(#)==trie[#].b1 {character matched at this trie location}
 /// character matched at this trie location
 #[cfg(not(feature = "unicode_support"))]
 #[allow(unused_macros)]
-macro_rules! trie_char {
-    ($globals:expr, $p:expr) => {
-        $globals.trie[$p][TWO_HALVES_LH_B1]
-    };
+pub(crate) macro trie_char($globals:expr, $p:expr) {
+    $globals.trie[$p][TWO_HALVES_LH_B1]
 }
 
 /// character matched at this trie location
 #[cfg(feature = "unicode_support")]
 #[allow(unused_macros)]
-macro_rules! trie_char {
-    ($globals:expr, $p:expr) => {
-        crate::unicode_support::triecharop_value(
-            $globals,
-            $globals.trie[$p][TWO_HALVES_LH],
-        )
-        .char
-    };
+pub(crate) macro trie_char($globals:expr, $p:expr) {
+    crate::unicode_support::triecharop_value($globals, $globals.trie[$p][TWO_HALVES_LH]).char
 }
 
 // @d trie_op(#)==trie[#].b0 {program for hyphenation at this trie location}
 /// program for hyphenation at this trie location
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! trie_op {
-    ($globals:expr, $p:expr) => {
-        $globals.trie[$p][TWO_HALVES_LH_B0]
-    };
+pub(crate) macro trie_op($globals:expr, $p:expr) {
+    $globals.trie[$p][TWO_HALVES_LH_B0]
 }
 
 /// program for hyphenation at this trie location
 #[cfg(feature = "unicode_support")]
-macro_rules! trie_op {
-    ($globals:expr, $p:expr) => {
-        crate::unicode_support::triecharop_value(
-            $globals,
-            $globals.trie[$p][crate::section_0113::TWO_HALVES_LH],
-        )
-        .op
-    };
+pub(crate) macro trie_op($globals:expr, $p:expr) {
+    crate::unicode_support::triecharop_value(
+        $globals,
+        $globals.trie[$p][crate::section_0113::TWO_HALVES_LH],
+    )
+    .op
 }
 
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! assign_trie_char_and_op {
-    ($globals:expr, $p:expr, $char:expr, $op:expr) => {{
-        $globals.trie[$p][TWO_HALVES_LH_B1] = qi!($char);
-        $globals.trie[$p][TWO_HALVES_LH_B0] = qi!($op);
-    }};
-}
+pub(crate) macro assign_trie_char_and_op($globals:expr, $p:expr, $char:expr, $op:expr) {{
+    $globals.trie[$p][TWO_HALVES_LH_B1] = qi!($char);
+    $globals.trie[$p][TWO_HALVES_LH_B0] = qi!($op);
+}}
 
 #[cfg(feature = "unicode_support")]
-macro_rules! assign_trie_char_and_op {
-    ($globals:expr, $p:expr, $char:expr, $op:expr) => {{
-        $globals.trie[$p][crate::section_0113::TWO_HALVES_LH] =
-            crate::unicode_support::register_triecharop_value(
-                $globals,
-                crate::section_0921::trie_char_and_op {
-                    char: $char,
-                    op: $op,
-                },
-            );
-    }};
-}
+pub(crate) macro assign_trie_char_and_op($globals:expr, $p:expr, $char:expr, $op:expr) {{
+    $globals.trie[$p][crate::section_0113::TWO_HALVES_LH] =
+        crate::unicode_support::register_triecharop_value(
+            $globals,
+            crate::section_0921::trie_char_and_op {
+                char: $char,
+                op: $op,
+            },
+        );
+}}
 
 #[cfg(feature = "unicode_support")]
 #[derive(Copy, Clone, PartialEq)]
@@ -123,7 +105,8 @@ use crate::section_0113::quarterword;
 // @!op_start:array[ASCII_code] of 0..trie_op_size; {offset for current language}
 /// offset for current language
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static op_start: [u16_from_0_to_n<trie_op_size_TYPENUM>; 256] = [u16_from_0_to_n::default(); 256];
+pub(crate) static op_start: [u16_from_0_to_n<trie_op_size_TYPENUM>; 256] =
+    [u16_from_0_to_n::default(); 256];
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::u16_from_0_to_n;
@@ -133,5 +116,6 @@ use crate::section_0011::trie_op_size_TYPENUM;
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0113::quarterword;
 use globals_struct::{globals_struct_field, globals_struct_use};

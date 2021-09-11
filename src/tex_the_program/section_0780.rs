@@ -21,28 +21,39 @@ pub(crate) const cr_code: halfword = 257;
 /// this distinguishes `\crcr` from `\cr`
 pub(crate) const cr_cr_code: halfword = cr_code + 1;
 // @d end_template_token==cs_token_flag+frozen_end_template
-pub(crate) const end_template_token: cur_tok_repr = cur_tok_type::from_cs(frozen_end_template as _).get();
+pub(crate) const end_template_token: cur_tok_repr =
+    cur_tok_type::from_cs(frozen_end_template as _).get();
 
 // @<Put each of \TeX's primitives into the hash table@>=
 #[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0780(globals: &mut TeXGlobals) {
     // primitive("span",tab_mark,span_code);@/
-    primitive(globals, strpool_str!("span"), tab_mark, span_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("span"),
+        tab_mark,
+        span_code as _,
+    );
     // @!@:span_}{\.{\\span} primitive@>
     // primitive("cr",car_ret,cr_code);
-    primitive(globals, strpool_str!("cr"), car_ret, cr_code as _);
+    primitive(globals, crate::strpool_str!("cr"), car_ret, cr_code as _);
     // @!@:cr_}{\.{\\cr} primitive@>
     // text(frozen_cr):="cr"; eqtb[frozen_cr]:=eqtb[cur_val];@/
-    text!(globals, frozen_cr as pointer) = strpool_str!("cr").get() as _;
+    text!(globals, frozen_cr as pointer) = crate::strpool_str!("cr").get() as _;
     globals.eqtb[frozen_cr as pointer] = globals.eqtb[globals.cur_val as pointer];
     // primitive("crcr",car_ret,cr_cr_code);
-    primitive(globals, strpool_str!("crcr"), car_ret, cr_cr_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("crcr"),
+        car_ret,
+        cr_cr_code as _,
+    );
     // @!@:cr_cr_}{\.{\\crcr} primitive@>
     // text(frozen_end_template):="endtemplate"; text(frozen_endv):="endtemplate";
     // @.endtemplate@>
-    text!(globals, frozen_end_template as pointer) = strpool_str!("endtemplate").get() as _;
-    text!(globals, frozen_endv as pointer) = strpool_str!("endtemplate").get() as _;
+    text!(globals, frozen_end_template as pointer) = crate::strpool_str!("endtemplate").get() as _;
+    text!(globals, frozen_endv as pointer) = crate::strpool_str!("endtemplate").get() as _;
     // eq_type(frozen_endv):=endv; equiv(frozen_endv):=null_list;
     eq_type!(globals, frozen_endv as pointer) = endv as _;
     equiv!(globals, frozen_endv as pointer) = null_list;
@@ -60,13 +71,17 @@ use crate::section_0115::pointer;
 use crate::section_0162::null_list;
 use crate::section_0207::*;
 use crate::section_0210::end_template;
+use crate::section_0221::eq_level;
+use crate::section_0221::eq_type;
+use crate::section_0221::equiv;
 use crate::section_0221::level_one;
 use crate::section_0222::frozen_cr;
-use crate::section_0222::frozen_endv;
 use crate::section_0222::frozen_end_template;
+use crate::section_0222::frozen_endv;
+use crate::section_0256::text;
 use crate::section_0264::primitive;
-use crate::section_0297::cur_tok_type;
 use crate::section_0297::cur_tok_repr;
+use crate::section_0297::cur_tok_type;
 use crate::section_1336::PRIM2HT;
 use linkme::distributed_slice;
 

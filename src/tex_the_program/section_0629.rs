@@ -67,8 +67,9 @@ pub(crate) fn vlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     // while p<>null do @<Output node |p| for |vlist_out| and move to the next node,
     //   maintaining the condition |cur_h=left_edge|@>;
     while p != null {
-        Output_node_p_for_vlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_h_eq_left_edge!
-            (globals, p, left_edge, this_box, cur_glue, cur_g, g_sign, g_order);
+        crate::section_0630::Output_node_p_for_vlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_h_eq_left_edge!(
+            globals, p, left_edge, this_box, cur_glue, cur_g, g_sign, g_order
+        );
     }
     // prune_movements(save_loc);
     prune_movements(globals, save_loc);
@@ -79,18 +80,25 @@ pub(crate) fn vlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     // decr(cur_s);
     decr!(globals.cur_s);
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::pascal::real;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
+use crate::section_0016::incr;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
-use crate::section_0115::pointer;
+use crate::section_0109::float_constant;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0135::glue_order;
 use crate::section_0135::glue_sign;
+use crate::section_0135::height;
+use crate::section_0135::list_ptr;
 use crate::section_0150::glue_ord;
 use crate::section_0586::push;
+use crate::section_0598::dvi_out;
 use crate::section_0601::dvi_pop;
 use crate::section_0615::prune_movements;

@@ -22,12 +22,16 @@ pub(crate) fn end_graf(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0211::hmode;
+use crate::section_0213::head;
+use crate::section_0213::mode;
+use crate::section_0213::tail;
 use crate::section_0217::pop_nest;
+use crate::section_0236::widow_penalty;
 use crate::section_0815::line_break;
 use crate::section_1070::normal_paragraph;

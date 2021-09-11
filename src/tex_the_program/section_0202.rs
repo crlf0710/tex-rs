@@ -12,7 +12,7 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
     while p != null {
         /// successor to node `p`
         let q: pointer;
-        
+
         // @^inner loop@>
         // begin q:=link(p);
         q = link!(globals, p);
@@ -22,7 +22,7 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
         }
         // else  begin case type(p) of
         else {
-            region_forward_label!(
+            crate::region_forward_label!(
             |'done|
             {
                 let type_p = r#type!(globals, p);
@@ -34,7 +34,7 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     flush_node_list(globals, list_ptr!(globals, p))?;
                     // free_node(p,box_node_size); goto done;
                     free_node(globals, p, box_node_size as _);
-                    goto_forward_label!('done);
+                    crate::goto_forward_label!('done);
                     // end;
                 }
                 // rule_node: begin free_node(p,rule_node_size); goto done;
@@ -45,7 +45,7 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                 //   end;
                 // whatsit_node: @<Wipe out the whatsit node |p| and |goto done|@>;
                 else if type_p == whatsit_node {
-                    Wipe_out_the_whatsit_node_p_and_goto_done!(globals, p, 'done);
+                    crate::section_1358::Wipe_out_the_whatsit_node_p_and_goto_done!(globals, p, 'done);
                 }
                 // glue_node: begin fast_delete_glue_ref(glue_ptr(p));
                 else if type_p == glue_node {
@@ -70,8 +70,8 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                 // @t\4@>@<Cases of |flush_node_list| that arise in mlists only@>@;
                 // othercases confusion("flushing")
                 else {
-                    trace_error_expr!("type(p)={}", type_p);
-                    confusion(globals, strpool_str!("flushing"))?;
+                    crate::trace_error_expr!("type(p)={}", type_p);
+                    confusion(globals, crate::strpool_str!("flushing"))?;
                 }
                 // @:this can't happen flushing}{\quad flushing@>
                 // endcases;@/
@@ -87,22 +87,31 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::do_nothing;
 use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
+use crate::section_0118::link;
+use crate::section_0121::free_avail;
 use crate::section_0130::free_node;
-use crate::section_0135::hlist_node;
+use crate::section_0133::r#type;
+use crate::section_0134::is_char_node;
 use crate::section_0135::box_node_size;
+use crate::section_0135::hlist_node;
+use crate::section_0135::list_ptr;
 use crate::section_0137::vlist_node;
 use crate::section_0141::small_node_size;
 use crate::section_0146::whatsit_node;
 use crate::section_0147::math_node;
 use crate::section_0149::glue_node;
+use crate::section_0149::glue_ptr;
+use crate::section_0149::leader_ptr;
 use crate::section_0155::kern_node;
 use crate::section_0157::penalty_node;
 use crate::section_0159::unset_node;
+use crate::section_0201::fast_delete_glue_ref;

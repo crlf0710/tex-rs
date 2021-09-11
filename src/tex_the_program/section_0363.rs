@@ -25,3 +25,4 @@ pub(crate) fn firm_up_the_line(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0302::limit;

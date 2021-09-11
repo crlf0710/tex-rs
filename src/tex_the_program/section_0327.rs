@@ -3,7 +3,6 @@
 //! requires that |cur_tok| has been set. We disable interrupts during the
 //! call of |back_input| so that the help message won't be lost.
 
-
 // @p procedure back_error; {back up one token and call |error|}
 /// back up one token and call `error`
 pub(crate) fn back_error(globals: &mut TeXGlobals) -> TeXResult<()> {
@@ -13,7 +12,7 @@ pub(crate) fn back_error(globals: &mut TeXGlobals) -> TeXResult<()> {
     globals.OK_to_interrupt = true;
     error(globals)?;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 // @#
@@ -28,12 +27,12 @@ pub(crate) fn ins_error(globals: &mut TeXGlobals) -> TeXResult<()> {
     globals.OK_to_interrupt = true;
     error(globals)?;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0307::inserted;
+use crate::section_0307::token_type;
 use crate::section_0325::back_input;
-

@@ -4,10 +4,8 @@
 //! from getting extremely long.)
 //
 // @<Break the paragraph at the chosen...@>=
-macro_rules! Break_the_paragraph_at_the_chosen_breakpoints__justify_the_resulting_lines_to_the_correct_widths__and_append_them_to_the_current_vertical_list {
-    ($globals:expr, $final_widow_penalty:expr) => {{
-        // post_line_break(final_widow_penalty)
-        post_line_break($globals, $final_widow_penalty)?;
-        use crate::section_0877::post_line_break;
-    }}
-}
+pub(crate) macro Break_the_paragraph_at_the_chosen_breakpoints__justify_the_resulting_lines_to_the_correct_widths__and_append_them_to_the_current_vertical_list($globals:expr, $final_widow_penalty:expr) {{
+    // post_line_break(final_widow_penalty)
+    post_line_break($globals, $final_widow_penalty)?;
+    use crate::section_0877::post_line_break;
+}}

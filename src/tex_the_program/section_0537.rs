@@ -14,12 +14,12 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     /// set `cur_name` to desired file name
     scan_file_name(globals)?;
     // if cur_ext="" then cur_ext:=".tex";
-    if globals.cur_ext == strpool_str!("") {
-        globals.cur_ext = strpool_str!(".tex");
+    if globals.cur_ext == crate::strpool_str!("") {
+        globals.cur_ext = crate::strpool_str!(".tex");
     }
     // pack_cur_name;
     pack_cur_name(globals);
-    region_forward_label! {
+    crate::region_forward_label! {
     |'done|
     {
     // loop@+  begin begin_file_reading; {set up |cur_file| and new level of input}
@@ -28,15 +28,15 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         begin_file_reading(globals);
         // if a_open_in(cur_file) then goto done;
         if a_open_in(make_globals_filename_view!(globals), &mut cur_file!(globals)) {
-            goto_forward_label!('done);
+            crate::goto_forward_label!('done);
         }
         // if cur_area="" then
-        if globals.cur_area == strpool_str!("") {
+        if globals.cur_area == crate::strpool_str!("") {
             // begin pack_file_name(cur_name,TEX_area,cur_ext);
             pack_file_name(globals, globals.cur_name, TEX_area!(), globals.cur_ext);
             // if a_open_in(cur_file) then goto done;
             if a_open_in(make_globals_filename_view!(globals), &mut cur_file!(globals)) {
-                goto_forward_label!('done);
+                crate::goto_forward_label!('done);
             }
             // end;
         }
@@ -44,7 +44,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         /// remove the level that didn't work
         end_file_reading(globals);
         // prompt_file_name("input file name",".tex");
-        prompt_file_name(globals, strpool_str!("input file name"),strpool_str!(".tex"))?;
+        prompt_file_name(globals, crate::strpool_str!("input file name"), crate::strpool_str!(".tex"))?;
         // end;
     }
     }
@@ -56,7 +56,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         &mut cur_file!(globals),
     )
     .get() as _;
-    trace_expr!("name = {}", name!(globals));
+    crate::trace_expr!("name = {}", name!(globals));
     // if job_name=0 then
     if globals.job_name == 0 {
         // begin job_name:=cur_name; open_log_file;
@@ -87,7 +87,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         ASCII_code_literal!(b'('),
     );
     incr!(globals.open_parens);
-    trace_expr!("open_parens = {:?}", globals.open_parens);
+    crate::trace_expr!("open_parens = {:?}", globals.open_parens);
     slow_print(globals, name!(globals).into());
     update_terminal(globals);
     // state:=new_line;
@@ -95,23 +95,28 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
     // if name=str_ptr-1 then {conserve string pool space (but see note above)}
     if name!(globals) as integer == globals.str_ptr.get() as integer - 1 {
         /// conserve string pool space (but see note above)
-        const _ : () = ();
+        const _: () = ();
         // begin flush_string; name:=cur_name;
         flush_string(globals);
         name!(globals) = globals.cur_name.get() as _;
         // end;
     }
     // @<Read the first line of the new file@>;
-    Read_the_first_line_of_the_new_file!(globals);
+    crate::section_0538::Read_the_first_line_of_the_new_file!(globals);
     // end;
-    return_nojump!();
+    crate::return_nojump!();
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_filename_view;
+use crate::section_0004::make_globals_io_string_log_view;
+use crate::section_0004::make_globals_io_string_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0004::TeXGlobalsIoStringView;
+use crate::section_0016::incr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0027::a_open_in;
 use crate::section_0034::update_terminal;
 use crate::section_0040::length;
@@ -120,9 +125,13 @@ use crate::section_0057::print_ln;
 use crate::section_0058::print_char;
 use crate::section_0060::slow_print;
 use crate::section_0081::TeXResult;
+use crate::section_0302::name;
+use crate::section_0302::state;
 use crate::section_0303::new_line;
+use crate::section_0304::cur_file;
 use crate::section_0328::begin_file_reading;
 use crate::section_0329::end_file_reading;
+use crate::section_0514::TEX_area;
 use crate::section_0519::pack_file_name;
 use crate::section_0525::a_make_name_string;
 use crate::section_0526::scan_file_name;

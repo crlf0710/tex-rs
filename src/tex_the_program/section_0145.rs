@@ -20,24 +20,18 @@
 pub(crate) const disc_node: quarterword = 7;
 // @d replace_count==subtype {how many subsequent nodes to replace}
 /// how many subsequent nodes to replace
-macro_rules! replace_count {
-    ($globals:expr, $v:expr) => {
-        subtype!($globals, $v)
-    };
+pub(crate) macro replace_count($globals:expr, $v:expr) {
+    crate::section_0133::subtype!($globals, $v)
 }
 // @d pre_break==llink {text that precedes a discretionary break}
 /// text that precedes a discretionary break
-macro_rules! pre_break {
-    ($globals:expr, $v:expr) => {
-        llink!($globals, $v)
-    };
+pub(crate) macro pre_break($globals:expr, $v:expr) {
+    crate::section_0124::llink!($globals, $v)
 }
 // @d post_break==rlink {text that follows a discretionary break}
 /// text that follows a discretionary break
-macro_rules! post_break {
-    ($globals:expr, $v:expr) => {
-        rlink!($globals, $v)
-    };
+pub(crate) macro post_break($globals:expr, $v:expr) {
+    crate::section_0124::rlink!($globals, $v)
 }
 // @p function new_disc:pointer; {creates an empty |disc_node|}
 /// creates an empty `disc_node`
@@ -53,7 +47,7 @@ pub(crate) fn new_disc(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     pre_break!(globals, p) = null;
     post_break!(globals, p) = null;
     // new_disc:=p;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 
@@ -62,5 +56,7 @@ use crate::section_0081::TeXResult;
 use crate::section_0113::quarterword;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
 use crate::section_0141::small_node_size;

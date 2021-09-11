@@ -13,7 +13,7 @@ pub(crate) fn str_eq_buf(globals: &mut TeXGlobals, s: str_number, k: integer) ->
     // var j: pool_pointer; {running index}
     // @!result: boolean; {result of comparison}
     let result: boolean;
-    region_forward_label! {
+    crate::region_forward_label! {
     |'not_found|
     {
         #[cfg(not(feature = "unicode_support"))]
@@ -37,7 +37,7 @@ pub(crate) fn str_eq_buf(globals: &mut TeXGlobals, s: str_number, k: integer) ->
             for (p1, p2) in stored_bytes.zip(fss_utf_bytes) {
                 if p1.0 != p2 {
                     result = false;
-                    goto_forward_label!('not_found);
+                    crate::goto_forward_label!('not_found);
                 }
             }
 

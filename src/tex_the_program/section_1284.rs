@@ -9,4 +9,5 @@ pub(crate) fn give_err_help(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0230::err_help;
 use crate::section_0295::token_show;

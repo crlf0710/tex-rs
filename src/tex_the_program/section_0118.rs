@@ -10,49 +10,36 @@
 
 // @d link(#) == mem[#].hh.rh {the |link| field of a memory word}
 /// the `link` field of a memory word
-macro_rules! link {
-    ($globals:expr, $val:expr) => {
-        $globals.mem[$val][crate::section_0113::MEMORY_WORD_HH_RH]
-    };
+pub(crate) macro link($globals:expr, $val:expr) {
+    $globals.mem[$val][crate::section_0113::MEMORY_WORD_HH_RH]
 }
 // @d info(#) == mem[#].hh.lh {the |info| field of a memory word}
 /// the `info` field of a memory word
-macro_rules! info_inner {
-    ($globals:expr, $val:expr) => {
-        $globals.mem[$val][crate::section_0113::MEMORY_WORD_HH_LH]
-    };
+pub(crate) macro info_inner($globals:expr, $val:expr) {
+    $globals.mem[$val][crate::section_0113::MEMORY_WORD_HH_LH]
 }
 
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! info_tok {
-    ($globals:expr, $val:expr) => {
-        crate::section_0297::cur_tok_type::new(info_inner!($globals, $val))
-    };
+pub(crate) macro info_tok($globals:expr, $val:expr) {
+    crate::section_0297::cur_tok_type::new(info_inner!($globals, $val))
 }
 
 #[cfg(feature = "unicode_support")]
-macro_rules! info_tok {
-    ($globals:expr, $val:expr) => {
-        crate::section_0297::cur_tok_type::new(crate::unicode_support::info_value(
-            $globals,
-            info_inner!($globals, $val),
-        ))
-    };
+pub(crate) macro info_tok($globals:expr, $val:expr) {
+    crate::section_0297::cur_tok_type::new(crate::unicode_support::info_value(
+        $globals,
+        info_inner!($globals, $val),
+    ))
 }
 
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! info_tok_assign {
-    ($globals:expr, $ptr:expr, $val:expr) => {
-        info_inner!($globals, $ptr) = $val.get();
-    };
+pub(crate) macro info_tok_assign($globals:expr, $ptr:expr, $val:expr) {
+    info_inner!($globals, $ptr) = $val.get();
 }
 
 #[cfg(feature = "unicode_support")]
-macro_rules! info_tok_assign {
-    ($globals:expr, $ptr:expr, $val:expr) => {
-        info_inner!($globals, $ptr) =
-            crate::unicode_support::register_info_value($globals, $val.get());
-    };
+pub(crate) macro info_tok_assign($globals:expr, $ptr:expr, $val:expr) {
+    info_inner!($globals, $ptr) = crate::unicode_support::register_info_value($globals, $val.get());
 }
 
 // @<Glob...@>=

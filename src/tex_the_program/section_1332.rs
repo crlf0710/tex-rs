@@ -7,37 +7,31 @@
 #[distributed_slice]
 pub(crate) static CHECK_THE_CONSTANT_VALUES_FOR_CONSISTENCY: [fn(&mut TeXGlobals)] = [..];
 
-macro_rules! Check_the_constant_values_for_consistency {
-    ($globals:expr) => {
-        for f in CHECK_THE_CONSTANT_VALUES_FOR_CONSISTENCY {
-            f($globals);
-        }
-    };
+pub(crate) macro Check_the_constant_values_for_consistency($globals:expr) {
+    for f in CHECK_THE_CONSTANT_VALUES_FOR_CONSISTENCY {
+        f($globals);
+    }
 }
 
-macro_rules! Initialize_the_output_routines {
-    ($globals:expr) => {
-        Initialize_the_output_routines_0055!($globals);
-        Initialize_the_output_routines_0061!($globals);
-        //Initialize_the_output_routines_0528!($globals);
-        //Initialize_the_output_routines_053?!($globals);
-    };
+pub(crate) macro Initialize_the_output_routines($globals:expr) {
+    crate::section_0055::Initialize_the_output_routines_0055!($globals);
+    crate::section_0061::Initialize_the_output_routines_0061!($globals);
+    //Initialize_the_output_routines_0528!($globals);
+    //Initialize_the_output_routines_053?!($globals);
 }
-
 
 /// Main entry to TeX
 #[allow(unused_mut, unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub fn entry(globals: &mut TeXGlobals) {
-    workarounds!();
-    
+    crate::workarounds!();
 
     // @p begin @!{|start_here|}
 
     /// start_here
-    region_forward_label! {|'final_end|{
-    region_forward_label! {|'end_of_TEX|{
-    region_forward_label! {|'start_of_TEX|{
+    crate::region_forward_label! {|'final_end|{
+    crate::region_forward_label! {|'end_of_TEX|{
+    crate::region_forward_label! {|'start_of_TEX|{
 
     // history:=fatal_error_stop; {in case we quit during initialization}
     /// in case we quit during initialization
@@ -51,7 +45,7 @@ pub fn entry(globals: &mut TeXGlobals) {
 
     // if ready_already=314159 then goto start_of_TEX;
     if globals.ready_already == 314159 {
-        goto_forward_label!('start_of_TEX);
+        crate::goto_forward_label!('start_of_TEX);
     }
 
     // @<Check the ``constant'' values...@>@;
@@ -64,16 +58,16 @@ pub fn entry(globals: &mut TeXGlobals) {
         wterm_ln(make_globals_io_view!(globals), format!("{}{}{:1}","Ouch---my internal constants have been clobbered!",
             "---case ", globals.bad));
         //   goto final_end;
-        goto_forward_label!('final_end);
+        crate::goto_forward_label!('final_end);
         // end;
     }
     // initialize; {set global variables to their starting values}
     /// set global variables to their starting values
     initialize(globals);
     // @!init if not get_strings_started then goto final_end;
-    region_initex! {
+    crate::region_initex! {
         if !get_strings_started(globals) {
-            goto_forward_label!('final_end);
+            crate::goto_forward_label!('final_end);
         }
         // init_prim; {call |primitive| for each primitive}
         /// call `primitive` for each primitive
@@ -95,7 +89,7 @@ pub fn entry(globals: &mut TeXGlobals) {
     };
     Initialize_the_output_routines!(globals);
     // @<Get the first line of input and prepare to start@>;
-    Get_the_first_line_of_input_and_prepare_to_start!(globals, 'end_of_TEX, 'final_end);
+    crate::section_1337::Get_the_first_line_of_input_and_prepare_to_start!(globals, 'end_of_TEX, 'final_end);
     // history:=spotless; {ready to go!}
     /// ready to go!
     {
@@ -122,12 +116,15 @@ pub fn entry(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::initialize;
+use crate::section_0004::make_globals_io_view;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0033::t_open_out;
 use crate::section_0047::get_strings_started;
+use crate::section_0056::wterm_ln;
 use crate::section_0076::history_kind::{fatal_error_stop, spotless};
+use crate::section_0081::try_or_jump;
 use crate::section_0241::fix_date_and_time;
 use crate::section_1030::main_control;
 use crate::section_1333::close_files_and_terminate;

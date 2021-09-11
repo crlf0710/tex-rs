@@ -93,4 +93,4 @@ pub(crate) const post: dvi_command = dvi_command(248);
 /// postamble beginning
 pub(crate) const post_post: dvi_command = dvi_command(249);
 
-migration_complete!();
+crate::migration_complete!();

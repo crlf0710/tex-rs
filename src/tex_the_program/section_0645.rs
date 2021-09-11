@@ -15,7 +15,11 @@
 // @p procedure scan_spec(@!c:group_code;@!three_codes:boolean);
 //   {scans a box specification and left brace}
 /// scans a box specification and left brace
-pub(crate) fn scan_spec(globals: &mut TeXGlobals, c: group_code, three_codes: boolean) -> TeXResult<()> {
+pub(crate) fn scan_spec(
+    globals: &mut TeXGlobals,
+    c: group_code,
+    three_codes: boolean,
+) -> TeXResult<()> {
     // label found;
     // var @!s:integer; {temporarily saved value}
     /// temporarily saved value
@@ -26,16 +30,16 @@ pub(crate) fn scan_spec(globals: &mut TeXGlobals, c: group_code, three_codes: bo
     if three_codes {
         s = saved!(globals, 0);
     }
-    region_forward_label!(
+    crate::region_forward_label!(
     |'found|
     {
         // if scan_keyword("to") then spec_code:=exactly
-        if scan_keyword(globals, strpool_str!("to"))? {
+        if scan_keyword(globals, crate::strpool_str!("to"))? {
             spec_code = exactly;
         }
         // @.to@>
         // else if scan_keyword("spread") then spec_code:=additional
-        else if scan_keyword(globals, strpool_str!("spread"))? {
+        else if scan_keyword(globals, crate::strpool_str!("spread"))? {
             spec_code = additional;
         }
         // @.spread@>
@@ -44,7 +48,7 @@ pub(crate) fn scan_spec(globals: &mut TeXGlobals, c: group_code, three_codes: bo
             spec_code = additional;
             globals.cur_val = 0;
             // goto found;
-            goto_forward_label!('found);
+            crate::goto_forward_label!('found);
             // end;
         }
         // scan_normal_dimen;
@@ -53,7 +57,7 @@ pub(crate) fn scan_spec(globals: &mut TeXGlobals, c: group_code, three_codes: bo
     // found: if three_codes then
     'found <-
     );
-    
+
     if three_codes {
         // begin saved(0):=s; incr(save_ptr);
         saved!(globals, 0) = s;
@@ -68,16 +72,19 @@ pub(crate) fn scan_spec(globals: &mut TeXGlobals, c: group_code, three_codes: bo
     new_save_level(globals, c);
     scan_left_brace(globals)?;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
-use crate::pascal::integer;
 use crate::pascal::boolean;
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0081::TeXResult;
 use crate::section_0269::group_code;
 use crate::section_0274::new_save_level;
+use crate::section_0274::saved;
 use crate::section_0403::scan_left_brace;
 use crate::section_0407::scan_keyword;
+use crate::section_0448::scan_normal_dimen;
 use crate::section_0644::additional;
 use crate::section_0644::exactly;

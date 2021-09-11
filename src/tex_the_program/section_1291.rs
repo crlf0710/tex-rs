@@ -20,16 +20,36 @@ pub(crate) enum show_kind {
 #[allow(unused_variables)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1291(globals: &mut TeXGlobals) {
     // primitive("show",xray,show_code);
-    primitive(globals, strpool_str!("show"), xray, show_kind::show_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("show"),
+        xray,
+        show_kind::show_code as _,
+    );
     // @!@:show_}{\.{\\show} primitive@>
     // primitive("showbox",xray,show_box_code);
-    primitive(globals, strpool_str!("showbox"), xray, show_kind::show_box_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("showbox"),
+        xray,
+        show_kind::show_box_code as _,
+    );
     // @!@:show_box_}{\.{\\showbox} primitive@>
     // primitive("showthe",xray,show_the_code);
-    primitive(globals, strpool_str!("showthe"), xray, show_kind::show_the_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("showthe"),
+        xray,
+        show_kind::show_the_code as _,
+    );
     // @!@:show_the_}{\.{\\showthe} primitive@>
     // primitive("showlists",xray,show_lists_code);
-    primitive(globals, strpool_str!("showlists"), xray, show_kind::show_lists_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("showlists"),
+        xray,
+        show_kind::show_lists_code as _,
+    );
     // @!@:show_lists_code_}{\.{\\showlists} primitive@>
 }
 

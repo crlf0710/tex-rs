@@ -42,10 +42,8 @@ pub(crate) fn terminal_input(globals: &TeXGlobals) -> bool {
 
 // @d cur_file==input_file[index] {the current |alpha_file| variable}
 /// the current `alpha_file` variable
-macro_rules! cur_file {
-    ($globals:expr) => {
-        $globals.input_file[index!($globals)]
-    };
+pub(crate) macro cur_file($globals:expr) {
+    $globals.input_file[crate::section_0302::index!($globals)]
 }
 
 // @<Glob...@>=
@@ -111,5 +109,6 @@ use typenum::U1;
 use crate::pascal::u8_from_m_to_n;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::max_in_open_TYPENUM;
+use crate::section_0302::name;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;

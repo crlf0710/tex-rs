@@ -6,12 +6,10 @@
 #[distributed_slice]
 pub(crate) static PRIM2HT: [fn(&mut TeXGlobals)] = [..];
 
-macro_rules! Put_each_of_TeX_s_primitivies_into_the_hash_table {
-    ($globals:expr) => {
-        for f in PRIM2HT {
-            f($globals);
-        }
-    };
+pub(crate) macro Put_each_of_TeX_s_primitivies_into_the_hash_table($globals:expr) {
+    for f in PRIM2HT {
+        f($globals);
+    }
 }
 
 // @!init procedure init_prim; {initialize all the primitives}
@@ -27,7 +25,6 @@ pub(crate) fn init_prim(globals: &mut TeXGlobals) {
     // end;
     // tini
 }
-
 
 use crate::section_0004::TeXGlobals;
 use linkme::distributed_slice;

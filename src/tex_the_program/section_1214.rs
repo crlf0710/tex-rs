@@ -2,57 +2,50 @@
 //! since the following routines test for the \.{\\global} prefix as follows.
 //
 // @d global==(a>=4)
-macro_rules! global {
-    ($a:expr) => {
-        $a >= 4
-    }
+pub(crate) macro global($a:expr) {
+    $a >= 4
 }
 
 // @d define(#)==if global then geq_define(#)@+else eq_define(#)
-macro_rules! define {
-    ($globals:expr, $a:expr, $p:expr, $t:expr, $v:expr) => {
-        if global!($a) {
-            use crate::section_0279::geq_define;
-            geq_define($globals, $p, $t, $v)?;
-        } else {
-            use crate::section_0277::eq_define;
-            eq_define($globals, $p, $t, $v)?;
-        }
+pub(crate) macro define($globals:expr, $a:expr, $p:expr, $t:expr, $v:expr) {
+    if global!($a) {
+        use crate::section_0279::geq_define;
+        geq_define($globals, $p, $t, $v)?;
+    } else {
+        use crate::section_0277::eq_define;
+        eq_define($globals, $p, $t, $v)?;
     }
 }
 // @d word_define(#)==if global then geq_word_define(#)@+else eq_word_define(#)
-macro_rules! word_define {
-    ($globals:expr, $a:expr, $p:expr, $v:expr) => {
-        if global!($a) {
-            use crate::section_0279::geq_word_define;
-            geq_word_define($globals, $p, $v)
-        } else {
-            use crate::section_0278::eq_word_define;
-            eq_word_define($globals, $p, $v)
-        }
+pub(crate) macro word_define($globals:expr, $a:expr, $p:expr, $v:expr) {
+    if global!($a) {
+        use crate::section_0279::geq_word_define;
+        geq_word_define($globals, $p, $v)
+    } else {
+        use crate::section_0278::eq_word_define;
+        eq_word_define($globals, $p, $v)
     }
 }
 
 // @<Adjust \(f)for the setting of \.{\\globaldefs}@>=
-macro_rules! Adjust_f_for_the_setting_of_globaldefs {
-    ($globals:expr, $a:expr) => {{
-        // if global_defs<>0 then
-        if global_defs!($globals) != 0 {
-            // if global_defs<0 then
-            if global_defs!($globals) < 0 {
-                // begin if global then a:=a-4;
-                if global!($a) {
-                    $a = $a - 4;
-                }
-                // end
+pub(crate) macro Adjust_f_for_the_setting_of_globaldefs($globals:expr, $a:expr) {{
+    // if global_defs<>0 then
+    if global_defs!($globals) != 0 {
+        // if global_defs<0 then
+        if global_defs!($globals) < 0 {
+            // begin if global then a:=a-4;
+            if global!($a) {
+                $a = $a - 4;
             }
-            // else  begin if not global then a:=a+4;
-            else {
-                if !global!($a) {
-                    $a = $a + 4;
-                }
-                // end
-            }
+            // end
         }
-    }}
-}
+        // else  begin if not global then a:=a+4;
+        else {
+            if !global!($a) {
+                $a = $a + 4;
+            }
+            // end
+        }
+    }
+    use crate::section_0236::global_defs;
+}}

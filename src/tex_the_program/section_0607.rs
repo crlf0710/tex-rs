@@ -17,7 +17,7 @@ pub(crate) fn movement(globals: &mut TeXGlobals, mut w: scaled, o: dvi_command) 
     // @!k:integer; {index into |dvi_buf|, modulo |dvi_buf_size|}
     // begin q:=get_node(movement_node_size); {new node for the top of the stack}
     /// new node for the top of the stack
-    const _ : () = ();
+    const _: () = ();
     q = get_node(globals, movement_node_size.into())?;
     // width(q):=w; location(q):=dvi_offset+dvi_ptr;
     width!(globals, q) = w;
@@ -37,15 +37,16 @@ pub(crate) fn movement(globals: &mut TeXGlobals, mut w: scaled, o: dvi_command) 
     }
     // @<Look at the other stack entries until deciding what sort of \.{DVI} command
     //   to generate; |goto found| if node |p| is a ``hit''@>;
-    Look_at_the_other_stack_entries_until_deciding_what_sort_of_DVI_command_to_generate__goto_found_if_node_p_is_a_hit!
-        (globals, q, w, mstate);
+    crate::section_0611::Look_at_the_other_stack_entries_until_deciding_what_sort_of_DVI_command_to_generate__goto_found_if_node_p_is_a_hit!(
+        globals, q, w, mstate
+    );
     // @<Generate a |down| or |right| command for |w| and |return|@>;
-    Generate_a_down_or_right_command_for_w_and_return!(globals, q, w, o);
+    crate::section_0610::Generate_a_down_or_right_command_for_w_and_return!(globals, q, w, o);
     // found: @<Generate a |y0| or |z0| command in order to reuse a previous
     //   appearance of~|w|@>;
     todo!("generate y0 or z0");
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
@@ -53,7 +54,10 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0125::get_node;
-use crate::section_0586::dvi_command;
+use crate::section_0135::width;
 use crate::section_0586::down1;
+use crate::section_0586::dvi_command;
+use crate::section_0605::location;
 use crate::section_0605::movement_node_size;

@@ -74,14 +74,14 @@
 pub(crate) const token_list: quarterword = 0;
 // @d token_type==index {type of current token list}
 /// type of current token list
-macro_rules! token_type {
-    ($globals:expr) => {index!($globals)}
+pub(crate) macro token_type($globals:expr) {
+    crate::section_0302::index!($globals)
 }
 // @d param_start==limit {base of macro parameters in |param_stack|}
 /// base of macro parameters in `param_stack`
 #[allow(unused_macros)]
-macro_rules! param_start {
-    ($globals:expr) => {limit!($globals)}
+pub(crate) macro param_start($globals:expr) {
+    crate::section_0302::limit!($globals)
 }
 // @d parameter=0 {|token_type| code for parameter}
 /// `token_type` code for parameter

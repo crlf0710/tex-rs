@@ -50,3 +50,6 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
 use crate::section_0920::trie_pointer;
 use crate::section_0920::trie_pointer_repr;
+use crate::section_0921::assign_trie_char_and_op;
+use crate::section_0921::trie_link;
+use crate::section_0950::trie_ref;

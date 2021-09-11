@@ -34,7 +34,7 @@ pub(crate) fn fix_language(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
@@ -42,6 +42,14 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
 use crate::section_0081::TeXResult;
 use crate::section_0141::small_node_size;
+use crate::section_0213::clang;
+use crate::section_0213::tail;
+use crate::section_0236::language;
+use crate::section_0236::left_hyphen_min;
+use crate::section_0236::right_hyphen_min;
 use crate::section_1091::norm_min;
 use crate::section_1341::language_node;
+use crate::section_1341::what_lang;
+use crate::section_1341::what_lhm;
+use crate::section_1341::what_rhm;
 use crate::section_1349::new_whatsit;

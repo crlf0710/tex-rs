@@ -15,3 +15,6 @@ pub(crate) fn pop_nest(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
+use crate::section_0121::free_avail;
+use crate::section_0213::head;

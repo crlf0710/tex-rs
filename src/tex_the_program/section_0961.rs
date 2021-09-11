@@ -3,9 +3,9 @@
 //! pool, even if they are used only by \.{INITEX}.)
 //
 // @<Enter all of the patterns into a linked trie...@>=
-macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_right_brace {
-    ($globals:expr) => {{
-        trace_span!("Enter all of the patterns into a linked trie...");
+pub(crate) macro Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_right_brace
+    ($globals:expr) {{
+        crate::trace_span!("Enter all of the patterns into a linked trie...");
         /// indices into `hc` and `hyf`; not always in `small_number` range
         let (mut k, mut l): (u8_from_0_to_n<U64>, u8_from_0_to_n<U64>);
 
@@ -16,7 +16,7 @@ macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_rig
         k = 0.into();
         $globals.hyf[0] = 0.into();
         digit_sensed = false;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done|
         {
         // loop@+  begin get_x_token;
@@ -25,17 +25,17 @@ macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_rig
             // case cur_cmd of
             // letter,other_char:@<Append a new letter or a hyphen level@>;
             if $globals.cur_cmd == letter || $globals.cur_cmd == other_char {
-                Append_a_new_letter_or_a_hyphen_level!($globals, digit_sensed, k);
+                crate::section_0962::Append_a_new_letter_or_a_hyphen_level!($globals, digit_sensed, k);
             }
             // spacer,right_brace: begin if k>0 then
             else if $globals.cur_cmd == spacer || $globals.cur_cmd == right_brace {
                 if k > 0 {
                     // @<Insert a new pattern into the linked trie@>;
-                    Insert_a_new_pattern_into_the_linked_trie!($globals, k, l);
+                    crate::section_0963::Insert_a_new_pattern_into_the_linked_trie!($globals, k, l);
                 }
                 // if cur_cmd=right_brace then goto done;
                 if $globals.cur_cmd == right_brace {
-                    goto_forward_label!('done);
+                    crate::goto_forward_label!('done);
                 }
                 // k:=0; hyf[0]:=0; digit_sensed:=false;
                 k = 0.into();
@@ -45,11 +45,11 @@ macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_rig
             }
             // othercases begin print_err("Bad "); print_esc("patterns");
             else {
-                print_err!($globals, strpool_str!("Bad "));
-                print_esc($globals, strpool_str!("patterns"));
+                print_err!($globals, crate::strpool_str!("Bad "));
+                print_esc($globals, crate::strpool_str!("patterns"));
                 // @.Bad \\patterns@>
                 // help1("(See Appendix H.)"); error;
-                help1!($globals, strpool_str!("(See Appendix H.)"));
+                help1!($globals, crate::strpool_str!("(See Appendix H.)"));
                 error($globals)?;
                 // end
             }
@@ -63,6 +63,10 @@ macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_rig
 
         use crate::pascal::boolean;
         use crate::pascal::u8_from_0_to_n;
+        use crate::section_0063::print_esc;
+        use crate::section_0073::print_err;
+        use crate::section_0079::help1;
+        use crate::section_0082::error;
         use crate::section_0207::right_brace;
         use crate::section_0207::letter;
         use crate::section_0207::other_char;
@@ -70,4 +74,3 @@ macro_rules! Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_rig
         use crate::section_0380::get_x_token;
         use typenum::U64;
     }}
-}

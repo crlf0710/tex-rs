@@ -16,39 +16,29 @@
 //
 // @d set_glue_ratio_zero(#) == #:=0.0 {store the representation of zero ratio}
 /// store the representation of zero ratio
-macro_rules! set_glue_ratio_zero {
-    ($val:expr) => {
-        $val = 0.0;
-    };
+pub(crate) macro set_glue_ratio_zero($val:expr) {
+    $val = 0.0;
 }
 // @d set_glue_ratio_one(#) == #:=1.0 {store the representation of unit ratio}
 /// store the representation of unit ratio
 #[allow(unused_macros)]
-macro_rules! set_glue_ratio_one {
-    ($val:expr) => {
-        $val = 1.0;
-    };
+pub(crate) macro set_glue_ratio_one($val:expr) {
+    $val = 1.0;
 }
 // @d float(#) == # {convert from |glue_ratio| to type |real|}
 /// convert from `glue_ratio` to type `real`
-macro_rules! float {
-    ($val:expr) => {
-        $val
-    };
+pub(crate) macro float($val:expr) {
+    $val
 }
 // @d unfloat(#) == # {convert from |real| to type |glue_ratio|}
 /// convert from `real` to type `glue_ratio`
-macro_rules! unfloat {
-    ($val:expr) => {
-        $val
-    };
+pub(crate) macro unfloat($val:expr) {
+    $val
 }
 // @d float_constant(#) == #.0 {convert |integer| constant to |real|}
 /// convert `integer` constant to `real`
-macro_rules! float_constant {
-    ($val:expr) => {
-        $val as crate::pascal::real
-    };
+pub(crate) macro float_constant($val:expr) {
+    $val as crate::pascal::real
 }
 // @<Types...@>=
 // @!glue_ratio=real; {one-word representation of a glue expansion factor}

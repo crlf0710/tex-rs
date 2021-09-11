@@ -33,67 +33,53 @@ pub(crate) const depth_offset: quarterword = 2;
 pub(crate) const height_offset: quarterword = 3;
 // @d width(#) == mem[#+width_offset].sc {width of the box, in sp}
 /// width of the box, in sp
-macro_rules! width {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + crate::section_0135::width_offset as crate::section_0115::pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro width($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + crate::section_0135::width_offset as crate::section_0115::pointer]
+        [crate::section_0101::MEMORY_WORD_SC]
 }
 // @d depth(#) == mem[#+depth_offset].sc {depth of the box, in sp}
 /// depth of the box, in sp
-macro_rules! depth {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + crate::section_0135::depth_offset as crate::section_0115::pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro depth($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + crate::section_0135::depth_offset as crate::section_0115::pointer]
+        [crate::section_0101::MEMORY_WORD_SC]
 }
 // @d height(#) == mem[#+height_offset].sc {height of the box, in sp}
 /// height of the box, in sp
-macro_rules! height {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + crate::section_0135::height_offset as crate::section_0115::pointer]
-            [crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro height($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + crate::section_0135::height_offset as crate::section_0115::pointer]
+        [crate::section_0101::MEMORY_WORD_SC]
 }
 // @d shift_amount(#) == mem[#+4].sc {repositioning distance, in sp}
 /// repositioning distance, in sp
-macro_rules! shift_amount {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + 4][crate::section_0101::MEMORY_WORD_SC]
-    };
+pub(crate) macro shift_amount($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + 4][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d list_offset=5 {position of |list_ptr| field in a box node}
 /// position of `list_ptr` field in a box node
 pub(crate) const list_offset: quarterword = 5;
 // @d list_ptr(#) == link(#+list_offset) {beginning of the list inside the box}
 /// beginning of the list inside the box
-macro_rules! list_ptr {
-    ($globals:expr, $ptr:expr) => {
-        link!(
-            $globals,
-            $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
-        )
-    };
+pub(crate) macro list_ptr($globals:expr, $ptr:expr) {
+    crate::section_0118::link!(
+        $globals,
+        $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
+    )
 }
 // @d glue_order(#) == subtype(#+list_offset) {applicable order of infinity}
 /// applicable order of infinity
-macro_rules! glue_order {
-    ($globals:expr, $ptr:expr) => {
-        subtype!(
-            $globals,
-            $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
-        )
-    };
+pub(crate) macro glue_order($globals:expr, $ptr:expr) {
+    crate::section_0133::subtype!(
+        $globals,
+        $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
+    )
 }
 // @d glue_sign(#) == type(#+list_offset) {stretching or shrinking}
 /// stretching or shrinking
-macro_rules! glue_sign {
-    ($globals:expr, $ptr:expr) => {
-        r#type!(
-            $globals,
-            $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
-        )
-    };
+pub(crate) macro glue_sign($globals:expr, $ptr:expr) {
+    crate::section_0133::r#type!(
+        $globals,
+        $ptr + crate::section_0135::list_offset as crate::section_0115::pointer
+    )
 }
 // @d normal=0 {the most common case when several cases are named}
 // @d stretching = 1 {glue setting applies to the stretch components}
@@ -129,11 +115,9 @@ pub(crate) const glue_offset: quarterword = 6;
 // @d glue_set(#) == mem[#+glue_offset].gr
 //   {a word of type |glue_ratio| for glue setting}
 /// a word of type `glue_ratio` for glue setting
-macro_rules! glue_set {
-    ($globals:expr, $ptr:expr) => {
-        $globals.mem[$ptr + crate::section_0135::glue_offset as pointer]
-            [crate::section_0113::MEMORY_WORD_GR]
-    };
+pub(crate) macro glue_set($globals:expr, $ptr:expr) {
+    $globals.mem[$ptr + crate::section_0135::glue_offset as crate::section_0115::pointer]
+        [crate::section_0113::MEMORY_WORD_GR]
 }
 
 #[derive(Copy, Clone)]

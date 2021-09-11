@@ -31,7 +31,7 @@ pub(crate) fn begin_diagnostic(globals: &mut TeXGlobals) {
 #[allow(unused_variables)]
 pub(crate) fn end_diagnostic(globals: &mut TeXGlobals, blank_line: boolean) {
     // begin print_nl("");
-    print_nl(globals, strpool_str!(""));
+    print_nl(globals, crate::strpool_str!(""));
     // if blank_line then print_ln;
     if blank_line {
         print_ln(make_globals_io_string_log_view!(globals));
@@ -42,7 +42,10 @@ pub(crate) fn end_diagnostic(globals: &mut TeXGlobals, blank_line: boolean) {
 }
 
 use crate::pascal::boolean;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0016::decr;
 use crate::section_0057::print_ln;
 use crate::section_0062::print_nl;
+use crate::section_0236::tracing_online;

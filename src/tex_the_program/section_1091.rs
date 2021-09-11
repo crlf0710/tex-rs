@@ -57,7 +57,7 @@ pub(crate) fn new_graf(globals: &mut TeXGlobals, indented: boolean) -> TeXResult
         build_page(globals)?;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::boolean;
@@ -66,12 +66,26 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::null;
+use crate::section_0118::link;
+use crate::section_0135::width;
 use crate::section_0136::new_null_box;
 use crate::section_0152::new_param_glue;
 use crate::section_0211::hmode;
 use crate::section_0211::vmode;
+use crate::section_0213::clang;
+use crate::section_0213::head;
+use crate::section_0213::mode;
+use crate::section_0213::prev_graf;
+use crate::section_0213::space_factor;
+use crate::section_0213::tail;
+use crate::section_0214::tail_append;
 use crate::section_0216::push_nest;
 use crate::section_0224::par_skip_code;
+use crate::section_0230::every_par;
+use crate::section_0236::left_hyphen_min;
+use crate::section_0236::right_hyphen_min;
+use crate::section_0247::par_indent;
 use crate::section_0307::every_par_text;
 use crate::section_0323::begin_token_list;
+use crate::section_0934::set_cur_lang;
 use crate::section_0994::build_page;

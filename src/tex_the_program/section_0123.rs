@@ -19,7 +19,7 @@ pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
         loop {
             q = r;
             r = link!(globals, r);
-            region_stat! {
+            crate::region_stat! {
                 decr!(globals.dyn_used);
             }
             // until r=null; {now |q| is the last node on the list}
@@ -39,3 +39,4 @@ pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;

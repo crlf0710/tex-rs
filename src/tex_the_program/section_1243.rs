@@ -41,14 +41,19 @@ pub(crate) fn alter_aux(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
+use crate::section_0149::leader_ptr;
 use crate::section_0211::vmode;
+use crate::section_0213::mode;
+use crate::section_0213::prev_depth;
+use crate::section_0213::space_factor;
 use crate::section_0405::scan_optional_equals;
 use crate::section_0440::scan_int;
+use crate::section_0448::scan_normal_dimen;
 use crate::section_1050::report_illegal_case;

@@ -30,17 +30,20 @@ pub(crate) fn final_cleanup(globals: &mut TeXGlobals) -> TeXResult<()> {
     // while open_parens>0 do
     while globals.open_parens > 0 {
         // begin print(" )"); decr(open_parens);
-        print(globals, strpool_str!(" )").get() as _);
+        print(globals, crate::strpool_str!(" )").get() as _);
         decr!(globals.open_parens);
         // end;
     }
     // if cur_level>level_one then
     if globals.cur_level > level_one {
         // begin print_nl("("); print_esc("end occurred ");
-        print_nl(globals, strpool_str!("("));
-        print_esc(globals, strpool_str!("end occurred "));
+        print_nl(globals, crate::strpool_str!("("));
+        print_esc(globals, crate::strpool_str!("end occurred "));
         // print("inside a group at level ");
-        print(globals, strpool_str!("inside a group at level ").get() as _);
+        print(
+            globals,
+            crate::strpool_str!("inside a group at level ").get() as _,
+        );
         // @:end_}{\.{(\\end occurred...)}@>
         // print_int(cur_level-level_one); print_char(")");
         print_int(globals, (globals.cur_level - level_one).into());
@@ -53,10 +56,10 @@ pub(crate) fn final_cleanup(globals: &mut TeXGlobals) -> TeXResult<()> {
     // while cond_ptr<>null do
     while globals.cond_ptr != null {
         // begin print_nl("("); print_esc("end occurred ");
-        print_nl(globals, strpool_str!("("));
-        print_esc(globals, strpool_str!("end occurred "));
+        print_nl(globals, crate::strpool_str!("("));
+        print_esc(globals, crate::strpool_str!("end occurred "));
         // print("when "); print_cmd_chr(if_test,cur_if);
-        print(globals, strpool_str!("when ").get() as _);
+        print(globals, crate::strpool_str!("when ").get() as _);
         print_cmd_chr(
             globals,
             if_test,
@@ -65,12 +68,12 @@ pub(crate) fn final_cleanup(globals: &mut TeXGlobals) -> TeXResult<()> {
         // if if_line<>0 then
         if globals.if_line != 0 {
             // begin print(" on line "); print_int(if_line);
-            print(globals, strpool_str!(" on line ").get() as _);
+            print(globals, crate::strpool_str!(" on line ").get() as _);
             print_int(globals, globals.if_line);
             // end;
         }
         // print(" was incomplete)");
-        print(globals, strpool_str!(" was incomplete)").get() as _);
+        print(globals, crate::strpool_str!(" was incomplete)").get() as _);
         // if_line:=if_line_field(cond_ptr);
         globals.if_line = if_line_field!(globals, globals.cond_ptr);
         // cur_if:=subtype(cond_ptr); temp_ptr:=cond_ptr;
@@ -93,7 +96,7 @@ pub(crate) fn final_cleanup(globals: &mut TeXGlobals) -> TeXResult<()> {
                 // print_nl("(see the transcript file for additional information)");
                 print_nl(
                     globals,
-                    strpool_str!("(see the transcript file for additional information)"),
+                    crate::strpool_str!("(see the transcript file for additional information)"),
                 );
                 // @.see the transcript file...@>
                 // selector:=term_and_log;
@@ -105,7 +108,7 @@ pub(crate) fn final_cleanup(globals: &mut TeXGlobals) -> TeXResult<()> {
     // if c=1 then
     if c == 1 {
         // begin @!init for c:=top_mark_code to split_bot_mark_code do
-        region_initex! {
+        crate::region_initex! {
             for c in mark_code_kind::top_mark_code.get()..=mark_code_kind::split_bot_mark_code.get() {
                 // if cur_mark[c]<>null then delete_token_ref(cur_mark[c]);
                 if globals.cur_mark[c] != null {
@@ -118,20 +121,26 @@ pub(crate) fn final_cleanup(globals: &mut TeXGlobals) -> TeXResult<()> {
             }
             // store_fmt_file; return;@+tini@/
             store_fmt_file(globals)?;
-            return_nojump!();
+            crate::return_nojump!();
         }
         // print_nl("(\dump is performed only by INITEX)"); return;
-        print_nl(globals, strpool_str!("(\\dump is performed only by INITEX)"));
-        return_nojump!();
+        print_nl(
+            globals,
+            crate::strpool_str!("(\\dump is performed only by INITEX)"),
+        );
+        crate::return_nojump!();
         // @:dump_}{\.{\\dump...only by INITEX}@>
         // end;
     }
     // exit:end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0016::decr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0054::term_and_log;
 use crate::section_0054::term_only;
 use crate::section_0058::print_char;
@@ -144,17 +153,22 @@ use crate::section_0076::history_kind;
 use crate::section_0081::TeXResult;
 use crate::section_0110::max_halfword;
 use crate::section_0115::null;
+use crate::section_0118::link;
 use crate::section_0130::free_node;
+use crate::section_0133::subtype;
 use crate::section_0200::delete_token_ref;
 use crate::section_0201::delete_glue_ref;
 use crate::section_0210::if_test;
 use crate::section_0221::level_one;
+use crate::section_0236::new_line_char;
 use crate::section_0297::chr_code_type;
 use crate::section_0298::print_cmd_chr;
+use crate::section_0302::state;
 use crate::section_0307::token_list;
 use crate::section_0324::end_token_list;
 use crate::section_0329::end_file_reading;
 use crate::section_0382::mark_code_kind;
+use crate::section_0489::if_line_field;
 use crate::section_0489::if_node_size;
 use crate::section_0534::open_log_file;
 use crate::section_1302::store_fmt_file;

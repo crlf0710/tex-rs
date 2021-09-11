@@ -1,14 +1,14 @@
 //! ` `
 
 // @<Contribute an entire group to the current parameter@>=
-macro_rules! Contribute_an_entire_group_to_the_current_parameter {
+pub(crate) macro Contribute_an_entire_group_to_the_current_parameter {
     ($globals:expr, $p:expr, $q:expr, $unbalance:expr, $rbrace_ptr:expr) => {{
         // begin unbalance:=1;
         $unbalance = 1;
-        region_forward_label!(
+        crate::region_forward_label!(
             |'done1|
             {
-                
+
                 // @^inner loop@>
                 // loop@+  begin fast_store_new_token(cur_tok); get_token;
                 loop {
@@ -32,14 +32,14 @@ macro_rules! Contribute_an_entire_group_to_the_current_parameter {
                             decr!($unbalance);
                             // if unbalance=0 then goto done1;
                             if $unbalance == 0 {
-                                goto_forward_label!('done1);
+                                crate::goto_forward_label!('done1);
                             }
                             // end;
                         }
                     }
                     // end;
                 }
-                
+
             }
             // done1: rbrace_ptr:=p; store_new_token(cur_tok);
             'done1 <-
@@ -47,5 +47,13 @@ macro_rules! Contribute_an_entire_group_to_the_current_parameter {
         $rbrace_ptr = $p;
         store_new_token!($globals, $globals.cur_tok.get(), $p, $q);
         // end
+        use crate::section_0016::decr;
+        use crate::section_0016::incr;
+        use crate::section_0210::*;
+        use crate::section_0289::left_brace_limit;
+        use crate::section_0289::right_brace_limit;
+        use crate::section_0365::get_token;
+        use crate::section_0371::store_new_token;
+        use crate::section_0371::fast_store_new_token;
     }}
 }

@@ -38,76 +38,62 @@
 // @d is_char_node(#) == (#>=hi_mem_min)
 //   {does the argument point to a |char_node|?}
 /// does the argument point to a `char_node`?
-macro_rules! is_char_node {
-    ($globals:expr, $ptr:expr) => {
-        $ptr >= $globals.hi_mem_min
-    };
+pub(crate) macro is_char_node($globals:expr, $ptr:expr) {
+    $ptr >= $globals.hi_mem_min
 }
 
 // @d font == type {the font code in a |char_node|}
 /// the font code in a `char_node`
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! font {
-    ($globals:expr, $f:expr) => {
-        r#type!($globals, $f)
-    };
+pub(crate) macro font($globals:expr, $f:expr) {
+    r#type!($globals, $f)
 }
 
 /// the font code in a `char_node`
 #[cfg(feature = "unicode_support")]
-macro_rules! font {
-    ($globals:expr, $f:expr) => {
-        crate::unicode_support::fontchar_value(
-            $globals,
-            $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH],
-        )
-        .font
-    };
+pub(crate) macro font($globals:expr, $f:expr) {
+    crate::unicode_support::fontchar_value(
+        $globals,
+        $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH],
+    )
+    .font
 }
 
 // @d character == subtype {the character code in a |char_node|}
 
 /// the font code in a `char_node`
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! character {
-    ($globals:expr, $f:expr) => {
-        subtype!($globals, $f)
-    };
+pub(crate) macro character($globals:expr, $f:expr) {
+    subtype!($globals, $f)
 }
 
 /// the font code in a `char_node`
 #[cfg(feature = "unicode_support")]
-macro_rules! character {
-    ($globals:expr, $f:expr) => {
-        crate::unicode_support::fontchar_value(
-            $globals,
-            $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH],
-        )
-        .character
-    };
+pub(crate) macro character($globals:expr, $f:expr) {
+    crate::unicode_support::fontchar_value(
+        $globals,
+        $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH],
+    )
+    .character
 }
 
 #[cfg(not(feature = "unicode_support"))]
-macro_rules! assign_font_and_character {
-    ($globals:expr, $f:expr, $font:expr, $character:expr) => {{
-        r#type!($globals, $f) = $font;
-        subtype!($globals, $f) = $character;
-    }};
-}
+pub(crate) macro assign_font_and_character($globals:expr, $f:expr, $font:expr, $character:expr) {{
+    r#type!($globals, $f) = $font;
+    subtype!($globals, $f) = $character;
+}}
 
 #[cfg(feature = "unicode_support")]
-macro_rules! assign_font_and_character {
-    ($globals:expr, $f:expr, $font:expr, $character:expr) => {{
-        $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH] =
-            crate::unicode_support::register_fontchar_value(
-                $globals,
-                crate::section_0134::font_and_character {
-                    font: $font,
-                    character: $character,
-                },
-            );
-    }};
-}
+pub(crate) macro assign_font_and_character($globals:expr, $f:expr, $font:expr, $character:expr) {{
+    $globals.mem[$f][crate::section_0113::MEMORY_WORD_HH_LH] =
+        crate::unicode_support::register_fontchar_value(
+            $globals,
+            crate::section_0134::font_and_character {
+                font: $font,
+                character: $character,
+            },
+        );
+}}
 
 #[cfg(feature = "unicode_support")]
 #[derive(Copy, Clone, PartialEq)]
@@ -128,4 +114,5 @@ impl Default for font_and_character {
 
 use crate::section_0012::font_base;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0548::internal_font_number;

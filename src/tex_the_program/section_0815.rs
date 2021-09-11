@@ -3,14 +3,12 @@
 //! than we have done with the simpler procedures of \TeX. Here is the
 //! general outline.
 
-macro_rules! Get_ready_to_start_line_breaking {
-    ($globals:expr) => {{
-        Get_ready_to_start_line_breaking_0816!($globals);
-        Get_ready_to_start_line_breaking_0827!($globals);
-        Get_ready_to_start_line_breaking_0834!($globals);
-        Get_ready_to_start_line_breaking_0848!($globals);
-    }}
-}
+pub(crate) macro Get_ready_to_start_line_breaking($globals:expr) {{
+    crate::section_0816::Get_ready_to_start_line_breaking_0816!($globals);
+    crate::section_0827::Get_ready_to_start_line_breaking_0827!($globals);
+    crate::section_0834::Get_ready_to_start_line_breaking_0834!($globals);
+    crate::section_0848::Get_ready_to_start_line_breaking_0848!($globals);
+}}
 
 // @p@t\4@>@<Declare subprocedures for |line_break|@>
 // procedure line_break(@!final_widow_penalty:integer);
@@ -21,24 +19,27 @@ pub(crate) fn line_break(globals: &mut TeXGlobals, final_widow_penalty: integer)
     // var @<Local variables for line breaking@>@;
     // begin pack_begin_line:=mode_line; {this is for over/underfull box messages}
     /// this is for over/underfull box messages
-    const _ : () = ();
+    const _: () = ();
     globals.pack_begin_line = mode_line!(globals);
     // @<Get ready to start line breaking@>;
     Get_ready_to_start_line_breaking!(globals);
     // @<Find optimal breakpoints@>;
-    Find_optimal_breakpoints!(globals);
+    crate::section_0863::Find_optimal_breakpoints!(globals);
     // @<Break the paragraph at the chosen breakpoints, justify the resulting lines
     // to the correct widths, and append them to the current vertical list@>;
-    Break_the_paragraph_at_the_chosen_breakpoints__justify_the_resulting_lines_to_the_correct_widths__and_append_them_to_the_current_vertical_list!
-        (globals, final_widow_penalty);
+    crate::section_0876::Break_the_paragraph_at_the_chosen_breakpoints__justify_the_resulting_lines_to_the_correct_widths__and_append_them_to_the_current_vertical_list!(
+        globals,
+        final_widow_penalty
+    );
     // @<Clean up the memory by removing the break nodes@>;
-    Clean_up_the_memory_by_removing_the_break_nodes!(globals);
+    crate::section_0865::Clean_up_the_memory_by_removing_the_break_nodes!(globals);
     // pack_begin_line:=0;
     globals.pack_begin_line = 0;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0213::mode_line;

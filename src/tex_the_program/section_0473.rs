@@ -58,21 +58,23 @@ pub(crate) fn scan_toks(
     p = globals.def_ref;
     hash_brace = 0;
     t = zero_token as _;
-    trace_expr!("t = zero_token = {}", t);
+    crate::trace_expr!("t = zero_token = {}", t);
     // if macro_def then @<Scan and build the parameter part of the macro definition@>
     if macro_def {
-        Scan_and_build_the_parameter_part_of_the_macro_definition!(globals, t, hash_brace, p, q);
+        crate::section_0474::Scan_and_build_the_parameter_part_of_the_macro_definition!(
+            globals, t, hash_brace, p, q
+        );
     }
     // else scan_left_brace; {remove the compulsory left brace}
     else {
         /// remove the compulsory left brace
         scan_left_brace(globals)?;
     }
-    region_forward_label! {
+    crate::region_forward_label! {
     |'found|
     {
         // @<Scan and build the body of the token list; |goto found| when finished@>;
-        Scan_and_build_the_body_of_the_token_list__goto_found_when_finished!(globals,
+        crate::section_0477::Scan_and_build_the_body_of_the_token_list__goto_found_when_finished!(globals,
             macro_def, xpand, unbalance, t, p, q, 'found);
     }
     // found: scanner_status:=normal;
@@ -84,7 +86,7 @@ pub(crate) fn scan_toks(
         store_new_token!(globals, hash_brace, p, q);
     }
     // scan_toks:=p;
-    return_nojump!(p);
+    crate::return_nojump!(p);
     // end;
 }
 
@@ -92,11 +94,13 @@ use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0113::halfword;
-use crate::section_0115::pointer;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0120::get_avail;
+use crate::section_0200::token_ref_count;
 use crate::section_0297::cur_tok_repr;
 use crate::section_0305::scanner_status_kind;
+use crate::section_0371::store_new_token;
 use crate::section_0380::get_x_token;
 use crate::section_0403::scan_left_brace;
 use crate::section_0445::zero_token;

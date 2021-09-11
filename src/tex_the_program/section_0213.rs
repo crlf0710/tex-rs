@@ -1,75 +1,55 @@
 //! ` `
 // @d mode==cur_list.mode_field {current mode}
 /// current mode
-macro_rules! mode {
-    ($globals:expr) => {
-        $globals.cur_list.mode_field
-    };
+pub(crate) macro mode($globals:expr) {
+    $globals.cur_list.mode_field
 }
 // @d head==cur_list.head_field {header node of current list}
 /// header node of current list
-macro_rules! head {
-    ($globals:expr) => {
-        $globals.cur_list.head_field
-    };
+pub(crate) macro head($globals:expr) {
+    $globals.cur_list.head_field
 }
 // @d tail==cur_list.tail_field {final node on current list}
 /// final node on current list
-macro_rules! tail {
-    ($globals:expr) => {
-        $globals.cur_list.tail_field
-    };
+pub(crate) macro tail($globals:expr) {
+    $globals.cur_list.tail_field
 }
 
 // @d prev_graf==cur_list.pg_field {number of paragraph lines accumulated}
 /// number of paragraph lines accumulated
-macro_rules! prev_graf {
-    ($globals:expr) => {
-        $globals.cur_list.pg_field
-    };
+pub(crate) macro prev_graf($globals:expr) {
+    $globals.cur_list.pg_field
 }
 
 // @d aux==cur_list.aux_field {auxiliary data about the current list}
 /// auxiliary data about the current list
-macro_rules! aux {
-    ($globals:expr) => {
-        $globals.cur_list.aux_field
-    }
+pub(crate) macro aux($globals:expr) {
+    $globals.cur_list.aux_field
 }
 // @d prev_depth==aux.sc {the name of |aux| in vertical mode}
 /// the name of `aux` in vertical mode
-macro_rules! prev_depth {
-    ($globals:expr) => {
-        aux!($globals)[crate::section_0101::MEMORY_WORD_SC]
-    }
+pub(crate) macro prev_depth($globals:expr) {
+    aux!($globals)[crate::section_0101::MEMORY_WORD_SC]
 }
 // @d space_factor==aux.hh.lh {part of |aux| in horizontal mode}
 /// part of `aux` in horizontal mode
-macro_rules! space_factor {
-    ($globals:expr) => {
-        aux!($globals)[crate::section_0113::MEMORY_WORD_HH_LH]
-    }
+pub(crate) macro space_factor($globals:expr) {
+    aux!($globals)[crate::section_0113::MEMORY_WORD_HH_LH]
 }
 // @d clang==aux.hh.rh {the other part of |aux| in horizontal mode}
 /// the other part of `aux` in horizontal mode
-macro_rules! clang {
-    ($globals:expr) => {
-        aux!($globals)[crate::section_0113::MEMORY_WORD_HH_RH]
-    }
+pub(crate) macro clang($globals:expr) {
+    aux!($globals)[crate::section_0113::MEMORY_WORD_HH_RH]
 }
 // @d incompleat_noad==aux.int {the name of |aux| in math mode}
 /// the name of `aux` in math mode
-macro_rules! incompleat_noad {
-    ($globals:expr) => {
-        aux!($globals)[crate::section_0113::MEMORY_WORD_INT]
-    }
+pub(crate) macro incompleat_noad($globals:expr) {
+    aux!($globals)[crate::section_0113::MEMORY_WORD_INT]
 }
 // @d mode_line==cur_list.ml_field {source file line number at beginning of list}
 /// source file line number at beginning of list
-macro_rules! mode_line {
-    ($globals:expr) => {
-        $globals.cur_list.ml_field
-    }
+pub(crate) macro mode_line($globals:expr) {
+    $globals.cur_list.ml_field
 }
 
 // @<Glob...@>=
@@ -124,5 +104,5 @@ use crate::section_0211::mmode_POS_TYPENUM;
 use crate::pascal::u8_from_0_to_n;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::nest_size_TYPENUM;
-use typenum::U1;
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;

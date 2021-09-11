@@ -18,7 +18,7 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
     if s >= globals.str_ptr.get() as _ {
         /// this can't happen
         {
-            s = strpool_str!("???").get() as _;
+            s = crate::strpool_str!("???").get() as _;
             // @.???@>
         }
     }
@@ -27,19 +27,25 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
         // if s<0 then s:="???" {can't happen}
         if s < 0 {
             /// can't happen
-            const _ : () = ();
-            s = strpool_str!("???").get() as _;
+            const _: () = ();
+            s = crate::strpool_str!("???").get() as _;
         }
         // else begin if selector>pseudo then
         else {
             if globals.selector > pseudo {
                 // begin print_char(s); return; {internal strings are not expanded}
-                print_char(make_globals_io_string_log_view!(globals), ASCII_code::from(s));
+                print_char(
+                    make_globals_io_string_log_view!(globals),
+                    ASCII_code::from(s),
+                );
                 return;
                 // end;
             }
             // if (@<Character |s| is the current new-line character@>) then
-            if Character_s_is_the_current_new_line_character!(globals, ASCII_code::from(s)) {
+            if crate::section_0244::Character_s_is_the_current_new_line_character!(
+                globals,
+                ASCII_code::from(s)
+            ) {
                 // if selector<pseudo then
                 if globals.selector < pseudo {
                     // begin print_ln; return;
@@ -55,7 +61,7 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
             // nl:=new_line_char; new_line_char:=-1;
             //   {temporarily disable new-line character}
             /// temporarily disable new-line character
-            const _ : () = ();
+            const _: () = ();
             nl = new_line_char!(globals);
             new_line_char!(globals) = -1;
             // j:=str_start[s];
@@ -108,6 +114,7 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0018::ASCII_code;
@@ -116,3 +123,4 @@ use crate::section_0038::str_number;
 use crate::section_0054::pseudo;
 use crate::section_0057::print_ln;
 use crate::section_0058::print_char;
+use crate::section_0236::new_line_char;

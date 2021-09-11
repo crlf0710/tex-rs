@@ -28,7 +28,7 @@
 // procedure show_token_list(@!p,@!q:integer;@!l:integer);
 #[allow(unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integer, l:integer) {
+pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integer, l: integer) {
     // label exit;
     // var m,@!c:integer; {pieces of a token}
     // @!match_chr:ASCII_code; {character used in a `|match|'}
@@ -45,17 +45,19 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
     while p != null as integer && globals.tally < l {
         // begin if p=q then @<Do magic computation@>;
         if p == q {
-            Do_magic_computation!(globals);
+            crate::section_0320::Do_magic_computation!(globals);
         }
         // @<Display token |p|, and |return| if there are problems@>;
-        Display_token_p__and_return_if_there_are_problems!(globals, p, n, match_chr);
+        crate::section_0293::Display_token_p__and_return_if_there_are_problems!(
+            globals, p, n, match_chr
+        );
         // p:=link(p);
         p = link!(globals, p as pointer) as _;
         // end;
     }
     // if p<>null then print_esc("ETC.");
     if p != null as integer {
-        print_esc(globals, strpool_str!("ETC."));
+        print_esc(globals, crate::strpool_str!("ETC."));
     }
     // @.ETC@>
     // exit:
@@ -65,6 +67,8 @@ pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integ
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0063::print_esc;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;

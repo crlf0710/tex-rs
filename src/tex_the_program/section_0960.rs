@@ -20,19 +20,24 @@ pub(crate) fn new_patterns(globals: &mut TeXGlobals) -> TeXResult<()> {
         // begin set_cur_lang; scan_left_brace; {a left brace must follow \.{\\patterns}}
         set_cur_lang!(globals);
         /// a left brace must follow `\patterns`
-        const _ : () = ();
+        const _: () = ();
         scan_left_brace(globals)?;
         // @<Enter all of the patterns into a linked trie, until coming to a right
         // brace@>;
-        Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_right_brace!(globals);
+        crate::section_0961::Enter_all_of_the_patterns_into_a_linked_trie__until_coming_to_a_right_brace!(
+            globals
+        );
         // end
     }
     // else begin print_err("Too late for "); print_esc("patterns");
     else {
-        print_err!(globals, strpool_str!("Too late for "));
-        print_esc(globals, strpool_str!("patterns"));
+        print_err!(globals, crate::strpool_str!("Too late for "));
+        print_esc(globals, crate::strpool_str!("patterns"));
         // help1("All patterns must be given before typesetting begins.");
-        help1!(globals, strpool_str!("All patterns must be given before typesetting begins."));
+        help1!(
+            globals,
+            crate::strpool_str!("All patterns must be given before typesetting begins.")
+        );
         // error; link(garbage):=scan_toks(false,false); flush_list(def_ref);
         error(globals)?;
         link!(globals, garbage) = scan_toks(globals, false, false)?;
@@ -40,14 +45,18 @@ pub(crate) fn new_patterns(globals: &mut TeXGlobals) -> TeXResult<()> {
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0063::print_esc;
+use crate::section_0073::print_err;
+use crate::section_0079::help1;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;
+use crate::section_0118::link;
 use crate::section_0123::flush_list;
 use crate::section_0162::garbage;
 use crate::section_0403::scan_left_brace;
 use crate::section_0473::scan_toks;
+use crate::section_0934::set_cur_lang;

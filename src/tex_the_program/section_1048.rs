@@ -9,12 +9,16 @@
 //! here and in the other sections referred to under `See also \dots.'
 //
 // @<Forbidden cases...@>=
-macro_rules! Forbidden_cases_detected_in_main_control {
-    ($abs_mode_plus_cur_cmd:expr) => {
-        // vmode+vmove,hmode+hmove,mmode+hmove,any_mode(last_item),
-        $abs_mode_plus_cur_cmd == vmode as u16 + vmove as u16 ||
-        $abs_mode_plus_cur_cmd == hmode as u16 + hmove as u16 ||
-        $abs_mode_plus_cur_cmd == mmode as u16 + hmove as u16 ||
-        abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, last_item as u16)
-    }
-}
+pub(crate) macro Forbidden_cases_detected_in_main_control($abs_mode_plus_cur_cmd:expr) {{
+    // vmode+vmove,hmode+hmove,mmode+hmove,any_mode(last_item),
+    let result = $abs_mode_plus_cur_cmd == vmode as u16 + vmove as u16
+        || $abs_mode_plus_cur_cmd == hmode as u16 + hmove as u16
+        || $abs_mode_plus_cur_cmd == mmode as u16 + hmove as u16
+        || crate::section_1045::abs_mode_plus_cur_cmd_matches_any_mode!(
+            $abs_mode_plus_cur_cmd,
+            last_item as u16
+        );
+    use crate::section_0208::*;
+    use crate::section_0211::*;
+    result
+}}

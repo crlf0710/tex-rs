@@ -51,60 +51,40 @@
 
 #![allow(unused_macros)]
 
-macro_rules! migration_complete {
-    () => {};
+pub(crate) macro migration_complete() {}
+
+pub(crate) macro documentation_adjusted() {}
+
+pub(crate) macro moved_to_inner_scope() {}
+
+pub(crate) macro region_forward_label
+(|$lbl_:lifetime| {$($s: stmt)*} $lbl:lifetime <- ) {
+    #[allow(redundant_semicolons, unused_labels, unreachable_code)]
+    $lbl : loop {
+        $($s)*;
+        break;
+    }
 }
 
-macro_rules! documentation_adjusted {
-    () => {};
-}
-
-macro_rules! moved_to_inner_scope {
-    () => {};
-}
-
-macro_rules! reversing_order_items {
-    () => {};
-    ({$($inner_item:item)*}) => {$($inner_item)*};
-    ({$($inner_item:item)*}$({$($inner_item2:item)*})+) => {
-        reversing_order_items!($({$($inner_item2)*})*);
-        $($inner_item)*
-    };
-}
-
-macro_rules! region_forward_label {
-    (|$lbl_:lifetime| {$($s: stmt)*} $lbl:lifetime <- ) => {
+pub(crate) macro region_backward_label
+    ($lbl:lifetime <- {$($s: stmt)*} |$lbl_:lifetime| ) {
         #[allow(redundant_semicolons, unused_labels, unreachable_code)]
         $lbl : loop {
             $($s)*;
             break;
         }
-    };
+    }
+
+pub(crate) macro goto_forward_label($lbl:lifetime) {
+    break $lbl
 }
 
-macro_rules! region_backward_label {
-    ($lbl:lifetime <- {$($s: stmt)*} |$lbl_:lifetime| ) => {
-        #[allow(redundant_semicolons, unused_labels, unreachable_code)]
-        $lbl : loop {
-            $($s)*;
-            break;
-        }
-    };
-}
-
-macro_rules! goto_forward_label {
-    ($lbl:lifetime) => {
-        break $lbl
-    };
-}
-
-macro_rules! goto_backward_label {
-    ($lbl:lifetime) => {
+pub(crate) macro goto_backward_label
+    ($lbl:lifetime) {
         continue $lbl
-    };
-}
+    }
 
-macro_rules! region_multipart {
+pub(crate) macro region_multipart {
     (($lbl_block:lifetime, $part_idx:expr) {
         $($part:pat => {$($s: stmt)*},)*
     }) => {
@@ -123,17 +103,16 @@ macro_rules! region_multipart {
     }
 }
 
-macro_rules! goto_part_label {
-    ($lbl:lifetime, $status:expr, $label_val:expr) => {
+pub(crate) macro goto_part_label
+    ($lbl:lifetime, $status:expr, $label_val:expr) {
         $status = $label_val;
         continue $lbl;
-    };
-}
+    }
 
-macro_rules! region_multipart_autoincr {
+pub(crate) macro region_multipart_autoincr
     (($lbl_block:lifetime, $part_idx:expr) {
         $($part:pat => {$($s: stmt)*},)*
-    }) => {
+    }) {
         $lbl_block: loop {
             #[allow(unreachable_patterns)]
             match $part_idx {
@@ -148,100 +127,92 @@ macro_rules! region_multipart_autoincr {
             }
         }
     }
-}
 
-macro_rules! region_initex {
-    ($($statements:tt)* ) => {
+pub(crate) macro region_initex
+    ($($statements:tt)* ) {
         #[cfg(feature = "initex")]
         {
             $($statements)*
         }
-    };
-}
+    }
 
-macro_rules! region_debug {
-    ($($statements:tt)* ) => {
+pub(crate) macro region_debug
+    ($($statements:tt)* ) {
         #[cfg(all(feature = "debugging", debug_assertions))]
         {
             $($statements)*
         }
-    };
-}
+    }
 
-macro_rules! region_stat {
-    ($($statements:tt)* ) => {
+pub(crate) macro region_stat
+    ($($statements:tt)* ) {
         #[cfg(feature = "statistics")]
         {
             $($statements)*
         }
-    };
+    }
+
+pub(crate) macro strpool_str($s:expr) {{
+    #[::linkme::distributed_slice(crate::string_pool::STRPL_RAWSTRS)]
+    static __: &'static str = $s;
+
+    let v = crate::string_pool::string_pool_index($s);
+    debug_assert!(v <= crate::pascal::char::MAX.0 as _);
+    crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
+}}
+
+pub(crate) macro workarounds() {
+    crate::section_0074::workaround_47384();
+    crate::section_0164::workaround_47384();
+    crate::section_0215::workaround_47384();
+    crate::section_0222::workaround_47384();
+    crate::section_0226::workaround_47384();
+    crate::section_0230::workaround_47384();
+    crate::section_0232::workaround_47384();
+    crate::section_0238::workaround_47384();
+    crate::section_0240::workaround_47384();
+    crate::section_0248::workaround_47384();
+    crate::section_0254::workaround_47384();
+    crate::section_0258::workaround_47384();
+    crate::section_0265::workaround_47384();
+    crate::section_0272::workaround_47384();
+    crate::section_0334::workaround_47384();
+    crate::section_0376::workaround_47384();
+    crate::section_0411::workaround_47384();
+    crate::section_0416::workaround_47384();
+    crate::section_0468::workaround_47384();
+    crate::section_0487::workaround_47384();
+    crate::section_0491::workaround_47384();
+    crate::section_0521::workaround_47384();
+    crate::section_0552::workaround_47384();
+    crate::section_0553::workaround_47384();
+    crate::section_0593::workaround_47384();
+    crate::section_0596::workaround_47384();
+    crate::section_0780::workaround_47384();
+    crate::section_0983::workaround_47384();
+    crate::section_1052::workaround_47384();
+    crate::section_1058::workaround_47384();
+    crate::section_1071::workaround_47384();
+    crate::section_1088::workaround_47384();
+    crate::section_1107::workaround_47384();
+    crate::section_1114::workaround_47384();
+    crate::section_1208::workaround_47384();
+    crate::section_1219::workaround_47384();
+    crate::section_1222::workaround_47384();
+    crate::section_1230::workaround_47384();
+    crate::section_1250::workaround_47384();
+    crate::section_1254::workaround_47384();
+    crate::section_1262::workaround_47384();
+    crate::section_1272::workaround_47384();
+    crate::section_1277::workaround_47384();
+    crate::section_1286::workaround_47384();
+    crate::section_1291::workaround_47384();
+    crate::section_1301::workaround_47384();
+    crate::section_1344::workaround_47384();
+    crate::latex_support::workaround_47384();
 }
 
-macro_rules! strpool_str {
-    ($s:expr) => {{
-        #[::linkme::distributed_slice(crate::string_pool::STRPL_RAWSTRS)]
-        static __: &'static str = $s;
-
-        let v = crate::string_pool::string_pool_index($s);
-        debug_assert!(v <= crate::pascal::char::MAX.0 as _);
-        crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
-    }};
-}
-
-macro_rules! workarounds {
-    () => {
-        crate::section_0074::workaround_47384();
-        crate::section_0164::workaround_47384();
-        crate::section_0215::workaround_47384();
-        crate::section_0222::workaround_47384();
-        crate::section_0226::workaround_47384();
-        crate::section_0230::workaround_47384();
-        crate::section_0232::workaround_47384();
-        crate::section_0238::workaround_47384();
-        crate::section_0240::workaround_47384();
-        crate::section_0248::workaround_47384();
-        crate::section_0254::workaround_47384();
-        crate::section_0258::workaround_47384();
-        crate::section_0265::workaround_47384();
-        crate::section_0272::workaround_47384();
-        crate::section_0334::workaround_47384();
-        crate::section_0376::workaround_47384();
-        crate::section_0411::workaround_47384();
-        crate::section_0416::workaround_47384();
-        crate::section_0468::workaround_47384();
-        crate::section_0487::workaround_47384();
-        crate::section_0491::workaround_47384();
-        crate::section_0521::workaround_47384();
-        crate::section_0552::workaround_47384();
-        crate::section_0553::workaround_47384();
-        crate::section_0593::workaround_47384();
-        crate::section_0596::workaround_47384();
-        crate::section_0780::workaround_47384();
-        crate::section_0983::workaround_47384();
-        crate::section_1052::workaround_47384();
-        crate::section_1058::workaround_47384();
-        crate::section_1071::workaround_47384();
-        crate::section_1088::workaround_47384();
-        crate::section_1107::workaround_47384();
-        crate::section_1114::workaround_47384();
-        crate::section_1208::workaround_47384();
-        crate::section_1219::workaround_47384();
-        crate::section_1222::workaround_47384();
-        crate::section_1230::workaround_47384();
-        crate::section_1250::workaround_47384();
-        crate::section_1254::workaround_47384();
-        crate::section_1262::workaround_47384();
-        crate::section_1272::workaround_47384();
-        crate::section_1277::workaround_47384();
-        crate::section_1286::workaround_47384();
-        crate::section_1291::workaround_47384();
-        crate::section_1301::workaround_47384();
-        crate::section_1344::workaround_47384();
-        crate::latex_support::workaround_47384();
-    };
-}
-
-macro_rules! impl_debug_with_literal {
+pub(crate) macro impl_debug_with_literal {
     ($impl_type:ident, $literal: expr) => {
         impl core::fmt::Debug for $impl_type {
             fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
@@ -249,7 +220,7 @@ macro_rules! impl_debug_with_literal {
                 Ok(())
             }
         }
-    };
+    },
     ($impl_type:ident [ $($generics:tt)* ] , $literal: expr) => {
         impl<$($generics)*> core::fmt::Debug for $impl_type<$($generics)*> {
             fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
@@ -257,79 +228,70 @@ macro_rules! impl_debug_with_literal {
                 Ok(())
             }
         }
-    };
+    }
 }
 
-macro_rules! trace_span {
-    ($span_info:expr) => {
-        #[cfg(feature = "trace")]
-        let span = ::tracing::span!(::tracing::Level::TRACE, $span_info);
-        #[cfg(feature = "trace")]
-        let __ = span.enter();
-    };
+pub(crate) macro trace_span($span_info:expr) {
+    #[cfg(feature = "trace")]
+    let span = ::tracing::span!(::tracing::Level::TRACE, $span_info);
+    #[cfg(feature = "trace")]
+    let __ = span.enter();
 }
 
-macro_rules! trace_debug_span {
-    ($span_info:expr) => {
-        #[cfg(feature = "trace")]
-        let span = ::tracing::span!(::tracing::Level::DEBUG, $span_info);
-        #[cfg(feature = "trace")]
-        let __ = span.enter();
-    };
+pub(crate) macro trace_debug_span($span_info:expr) {
+    #[cfg(feature = "trace")]
+    let span = ::tracing::span!(::tracing::Level::DEBUG, $span_info);
+    #[cfg(feature = "trace")]
+    let __ = span.enter();
 }
 
-macro_rules! trace_error_span {
-    ($span_info:expr) => {
-        #[cfg(feature = "trace")]
-        let span = ::tracing::span!(::tracing::Level::ERROR, $span_info);
-        #[cfg(feature = "trace")]
-        let __ = span.enter();
-    };
+pub(crate) macro trace_error_span($span_info:expr) {
+    #[cfg(feature = "trace")]
+    let span = ::tracing::span!(::tracing::Level::ERROR, $span_info);
+    #[cfg(feature = "trace")]
+    let __ = span.enter();
 }
 
-macro_rules! trace_expr {
-    ($($x:tt)*) => {
+pub(crate) macro trace_expr
+    ($($x:tt)*) {
         #[cfg(feature = "trace")]
         {
             tracing::trace!($($x)*);
         }
-    };
-}
+    }
 
 #[allow(unused_macros)]
-macro_rules! trace_debug_expr {
-    ($($x:tt)*) => {
+pub(crate) macro trace_debug_expr
+    ($($x:tt)*) {
         #[cfg(feature = "trace")]
         {
             tracing::debug!($($x)*);
         }
-    };
-}
+    }
 
 #[allow(unused_macros)]
-macro_rules! trace_error_expr {
-    ($($x:tt)*) => {
+pub(crate) macro trace_error_expr
+    ($($x:tt)*) {
         #[cfg(feature = "trace")]
         {
             tracing::error!($($x)*);
         }
-    };
-}
+    }
 
-macro_rules! return_nojump {
+pub(crate) macro return_nojump {
     () => {
         return Ok(());
-    };
+    },
     ($val: expr) => {
         return Ok($val);
-    };
+    }
 }
 
-macro_rules! ok_nojump {
+pub(crate) macro ok_nojump {
     () => {
         Ok::<_, crate::section_0081::JumpOutToEndOfTEX>(())
-    };
+    },
     ($val: expr) => {
         Ok::<_, crate::section_0081::JumpOutToEndOfTEX>($val)
-    };
+    }
 }

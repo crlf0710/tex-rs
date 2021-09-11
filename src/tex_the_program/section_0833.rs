@@ -46,7 +46,7 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
 );
 
 use crate::pascal::integer;
-use crate::section_0817::{tight_fit_TYPENUM, very_loose_fit_TYPENUM};
 use crate::section_0817::fit_class_kind;
-use typenum::U1;
+use crate::section_0817::{tight_fit_TYPENUM, very_loose_fit_TYPENUM};
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::U1;

@@ -19,7 +19,7 @@ pub(crate) fn make_name_string(mut globals: TeXGlobalsIoStringView<'_>) -> str_n
         || cur_length!(globals) > 0
     {
         // make_name_string:="?"
-        return strpool_str!("?");
+        return crate::strpool_str!("?");
     }
     // else  begin for k:=1 to name_length do append_char(xord[name_of_file[k]]);
     else {
@@ -66,6 +66,7 @@ pub(crate) fn w_make_name_string(
     // end;
 }
 
+use crate::section_0004::make_globals_string_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringView;
 use crate::section_0004::TeXGlobalsStringView;
@@ -77,6 +78,7 @@ use crate::section_0025::byte_file;
 use crate::section_0038::pool_pointer_repr;
 use crate::section_0038::str_number;
 use crate::section_0038::str_number_repr;
+use crate::section_0041::cur_length;
 use crate::section_0042::append_char;
 use crate::section_0043::make_string;
 use crate::section_0113::word_file;

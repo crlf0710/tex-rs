@@ -33,13 +33,13 @@ pub(crate) fn show_node_list(globals: &mut TeXGlobals, mut p: integer) {
     while p > mem_min as integer {
         // begin print_ln; print_current_string; {display the nesting history}
         /// display the nesting history
-        const _ : () = ();
+        const _: () = ();
         print_ln(make_globals_io_string_log_view!(globals));
         print_current_string(globals);
         // if p>mem_end then {pointer out of range}
         if p > globals.mem_end as integer {
             /// pointer out of range
-            const _ : () = ();
+            const _: () = ();
             // begin print("Bad link, display aborted."); return;
             // @.Bad link...@>
             // end;
@@ -48,15 +48,15 @@ pub(crate) fn show_node_list(globals: &mut TeXGlobals, mut p: integer) {
         incr!(n);
         if n > globals.breadth_max {
             /// time to stop
-            const _ : () = ();
+            const _: () = ();
             // begin print("etc."); return;
-            print(globals, strpool_str!("etc.").get() as _);
+            print(globals, crate::strpool_str!("etc.").get() as _);
             return;
             // @.etc@>
             // end;
         }
         // @<Display node |p|@>;
-        Display_node_p!(globals, p);
+        crate::section_0183::Display_node_p!(globals, p);
         // p:=link(p);
         p = link!(globals, p as pointer) as _;
         // end;
@@ -66,10 +66,14 @@ pub(crate) fn show_node_list(globals: &mut TeXGlobals, mut p: integer) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
 use crate::section_0011::mem_min;
+use crate::section_0016::incr;
+use crate::section_0041::cur_length;
 use crate::section_0057::print_ln;
 use crate::section_0059::print;
 use crate::section_0070::print_current_string;
 use crate::section_0115::pointer;
+use crate::section_0118::link;

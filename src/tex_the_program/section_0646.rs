@@ -28,7 +28,7 @@ pub(crate) static total_shrink: glue_ord_array<scaled> = glue_ord_array::default
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0646::glue_ord_array;
 
-type glue_ord_array_LENGTH_TYPENUM = typenum::op!(filll_TYPENUM - normal_TYPENUM + U1); 
+type glue_ord_array_LENGTH_TYPENUM = typenum::op!(filll_TYPENUM - normal_TYPENUM + U1);
 
 define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
     pub(crate) glue_ord_array[glue_ord] =>
@@ -44,8 +44,8 @@ pub(crate) static last_badness: integer = 0;
 use crate::pascal::integer;
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0150::filll_TYPENUM;
 use crate::section_0150::glue_ord;
 use crate::section_0150::normal_TYPENUM;
-use crate::section_0150::filll_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;

@@ -22,7 +22,5 @@ use crate::section_0221::level_one;
 use crate::section_0269::bottom_level;
 use linkme::distributed_slice;
 
-
 // Workaround https://github.com/rust-lang/rust/issues/47384
 pub(crate) fn workaround_47384() {}
-

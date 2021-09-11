@@ -2,7 +2,7 @@
 
 // @<Check single-word...@>=
 #[allow(unused_macros)]
-macro_rules! Check_single_word_avail_list {
+pub(crate) macro Check_single_word_avail_list {
     ($globals:expr) => {{
         /// current locations of interest in `mem`
         let (mut p, mut q) : (pointer, pointer);
@@ -12,7 +12,7 @@ macro_rules! Check_single_word_avail_list {
         p = $globals.avail;
         q = null;
         clobbered = false;
-        region_forward_label!(
+        crate::region_forward_label!(
         |'done1|
         {
         // while p<>null do
@@ -28,11 +28,11 @@ macro_rules! Check_single_word_avail_list {
             // if clobbered then
             if clobbered {
                 // begin print_nl("AVAIL list clobbered at ");
-                print_nl($globals, strpool_str!("AVAIL list clobbered at "));
+                print_nl($globals, crate::strpool_str!("AVAIL list clobbered at "));
                 // @.AVAIL list clobbered...@>
                 // print_int(q); goto done1;
                 print_int($globals, q as _);
-                goto_forward_label!('done1);
+                crate::goto_forward_label!('done1);
                 // end;
             }
             // free[p]:=true; q:=p; p:=link(q);

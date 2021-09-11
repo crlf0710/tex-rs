@@ -152,9 +152,7 @@ impl cur_tok_type {
     }
 
     pub(crate) fn from_cmd_and_chr(cmd: eight_bits, chr: chr_code_type) -> Self {
-        cur_tok_type(
-            cmd as cur_tok_repr * cur_tok_type_cmd_multiplier + chr.0 as cur_tok_repr,
-        )
+        cur_tok_type(cmd as cur_tok_repr * cur_tok_type_cmd_multiplier + chr.0 as cur_tok_repr)
     }
 
     pub(crate) const fn from_cs(cs: pointer) -> Self {

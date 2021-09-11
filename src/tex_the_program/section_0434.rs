@@ -13,23 +13,28 @@ pub(crate) fn scan_char_num(globals: &mut TeXGlobals, extended_max: boolean) -> 
     // if (cur_val<0)or(cur_val>255) then
     if globals.cur_val < 0 || globals.cur_val > val_max {
         // begin print_err("Bad character code");
-        print_err!(globals, strpool_str!("Bad character code"));
+        print_err!(globals, crate::strpool_str!("Bad character code"));
         // @.Bad character code@>
         // help2("A character number must be between 0 and 255.")@/
         //   ("I changed this one to zero."); int_error(cur_val); cur_val:=0;
-        help2!(globals, strpool_str!("A character number must be between 0 and 255."),
-            strpool_str!("I changed this one to zero."));
+        help2!(
+            globals,
+            crate::strpool_str!("A character number must be between 0 and 255."),
+            crate::strpool_str!("I changed this one to zero.")
+        );
         int_error(globals, globals.cur_val)?;
         globals.cur_val = 0;
         // end;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
-use crate::pascal::integer;
 use crate::pascal::boolean;
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0073::print_err;
+use crate::section_0079::help2;
 use crate::section_0081::TeXResult;
 use crate::section_0091::int_error;
 use crate::section_0440::scan_int;

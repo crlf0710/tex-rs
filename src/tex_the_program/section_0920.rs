@@ -34,7 +34,6 @@ define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
     pub(crate) trie_pointer_array[trie_pointer] => u16; U16; trie_pointer_array_LENGTH_TYPENUM
 );
 
-
 use crate::pascal::u16_from_0_to_n;
 use crate::section_0011::trie_size_TYPENUM;
 use typenum::U1;

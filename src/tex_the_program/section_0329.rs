@@ -19,4 +19,10 @@ pub(crate) fn end_file_reading(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
 use crate::section_0028::a_close;
+use crate::section_0302::index;
+use crate::section_0302::name;
+use crate::section_0302::start;
+use crate::section_0304::cur_file;
+use crate::section_0322::pop_input;

@@ -25,6 +25,6 @@ impl font_index {
 }
 
 use crate::pascal::{u16_from_0_to_n, u16_from_m_to_n};
-use crate::section_0011::font_mem_size_TYPENUM;
 use crate::section_0011::font_max_TYPENUM;
+use crate::section_0011::font_mem_size_TYPENUM;
 use crate::section_0012::font_base_TYPENUM;

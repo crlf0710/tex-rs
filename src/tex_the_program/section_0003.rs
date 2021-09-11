@@ -36,4 +36,4 @@
 //! Many implementors have
 //! therefore chosen to substitute their own home-grown rounding procedure.
 
-migration_complete!();
+crate::migration_complete!();

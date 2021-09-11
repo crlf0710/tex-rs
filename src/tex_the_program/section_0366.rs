@@ -53,7 +53,7 @@ pub(crate) fn expand(globals: &mut TeXGlobals) -> TeXResult<()> {
     backup_backup = link!(globals, backup_head);
     // if cur_cmd<call then @<Expand a nonmacro@>
     if globals.cur_cmd < call {
-        Expand_a_nonmacro!(globals);
+        crate::section_0367::Expand_a_nonmacro!(globals);
     }
     // else if cur_cmd<end_template then macro_call
     else if globals.cur_cmd < end_template {
@@ -71,11 +71,12 @@ pub(crate) fn expand(globals: &mut TeXGlobals) -> TeXResult<()> {
     globals.cur_order = co_backup;
     link!(globals, backup_head) = backup_backup;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0118::link;
 use crate::section_0162::backup_head;
 use crate::section_0210::call;
 use crate::section_0210::end_template;

@@ -26,9 +26,7 @@
 //! @^system dependencies@>
 //
 // @<Character |k| cannot be printed@>=
-macro_rules! Character_k_cannot_be_printed {
-    ($k:expr) => {
-        // NOTE: This is used for 256 single byte characters
-        $k < b' ' || $k > b'~'
-    }
+pub(crate) macro Character_k_cannot_be_printed($k:expr) {
+    // NOTE: This is used for 256 single byte characters
+    $k < b' ' || $k > b'~'
 }

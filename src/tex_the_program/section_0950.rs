@@ -20,17 +20,13 @@
 //
 // @d trie_ref==trie_hash {where linked trie families go into |trie|}
 /// where linked trie families go into `trie`
-macro_rules! trie_ref {
-    ($globals:expr, $v:expr) => {
-        $globals.trie_hash[$v]
-    }
+pub(crate) macro trie_ref($globals:expr, $v:expr) {
+    $globals.trie_hash[$v]
 }
 // @d trie_back(#)==trie[#].lh {backward links in |trie| holes}
 /// backward links in `trie` holes
-macro_rules! trie_back {
-    ($globals:expr, $v:expr) => {
-        $globals.trie[$v][crate::section_0113::TWO_HALVES_LH]
-    }
+pub(crate) macro trie_back($globals:expr, $v:expr) {
+    $globals.trie[$v][crate::section_0113::TWO_HALVES_LH]
 }
 // @<Glob...@>=
 // @!init @!trie_taken:packed array[1..trie_size] of boolean;
@@ -68,11 +64,10 @@ pub(crate) static trie_not_ready: boolean = true;
 use crate::pascal::boolean;
 
 // tini
-const _ : () = ();
+const _: () = ();
 
 use crate::pascal::u16_from_m_to_n;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::trie_size_TYPENUM;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;
-

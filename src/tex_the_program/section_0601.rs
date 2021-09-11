@@ -18,4 +18,6 @@ pub(crate) fn dvi_pop(globals: &mut TeXGlobals, l: integer) {
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
 use crate::section_0586::pop;
+use crate::section_0598::dvi_out;

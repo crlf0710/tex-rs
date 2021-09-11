@@ -13,7 +13,7 @@
 //! macro makes such six-tuples convenient.
 //
 // @d do_all_six(#)==#(1);#(2);#(3);#(4);#(5);#(6)
-macro_rules! do_all_six {
+pub(crate) macro do_all_six {
     ($macro_ident:ident !; @globals = $globals:expr) => {{
         $macro_ident!($globals, 1);
         $macro_ident!($globals, 2);
@@ -21,7 +21,7 @@ macro_rules! do_all_six {
         $macro_ident!($globals, 4);
         $macro_ident!($globals, 5);
         $macro_ident!($globals, 6);
-    }};
+    }},
     ($macro_ident:ident !; @globals = $globals:expr; $($arg:expr),*) => {{
         $macro_ident!($globals, 1, $($arg),*);
         $macro_ident!($globals, 2, $($arg),*);
@@ -60,5 +60,5 @@ define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_and_length!(
 );
 
 use crate::pascal::u8_from_m_to_n;
-use typenum::{Unsigned, U1, U6};
 use globals_struct::{globals_struct_field, globals_struct_use};
+use typenum::{Unsigned, U1, U6};

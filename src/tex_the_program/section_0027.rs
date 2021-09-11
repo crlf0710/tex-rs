@@ -23,17 +23,13 @@
 //
 // @d reset_OK(#)==erstat(#)=0
 #[allow(unused_macros)]
-macro_rules! reset_OK {
-    ($f:expr) => {
-        crate::pascal::erstat($f) == 0
-    };
+pub(crate) macro reset_OK($f:expr) {
+    crate::pascal::erstat($f) == 0
 }
 // @d rewrite_OK(#)==erstat(#)=0
 #[allow(unused_macros)]
-macro_rules! rewrite_OK {
-    ($f:expr) => {
-        crate::pascal::erstat($f) == 0
-    };
+pub(crate) macro rewrite_OK($f:expr) {
+    crate::pascal::erstat($f) == 0
 }
 //
 // @p function a_open_in(var f:alpha_file):boolean;

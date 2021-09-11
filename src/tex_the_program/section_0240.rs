@@ -22,6 +22,13 @@ fn initialize_table_entries_done_by_initex_only_1301(globals: &mut TeXGlobals) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0022::carriage_return;
+use crate::section_0236::end_line_char;
+use crate::section_0236::escape_char;
+use crate::section_0236::hang_after;
+use crate::section_0236::mag;
+use crate::section_0236::max_dead_cycles;
+use crate::section_0236::tolerance;
+
 use linkme::distributed_slice;
 
 // Workaround https://github.com/rust-lang/rust/issues/47384

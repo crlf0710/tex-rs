@@ -22,7 +22,7 @@ pub(crate) fn new_ligature(
     lig_ptr!(globals, p) = q;
     // subtype(p):=0; new_ligature:=p;
     subtype!(globals, p) = 0;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 // @#
@@ -36,7 +36,7 @@ pub(crate) fn new_lig_item(globals: &mut TeXGlobals, c: ASCII_code) -> TeXResult
     assign_font_and_character!(globals, p, null_font, c);
     lig_ptr!(globals, p) = null;
     // new_lig_item:=p;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 
@@ -46,7 +46,12 @@ use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
+use crate::section_0134::assign_font_and_character;
 use crate::section_0141::small_node_size;
+use crate::section_0143::lig_char;
+use crate::section_0143::lig_ptr;
 use crate::section_0143::ligature_node;
 use crate::section_0232::null_font;
 use crate::section_0548::internal_font_number;

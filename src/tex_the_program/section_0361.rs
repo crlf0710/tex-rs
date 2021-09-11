@@ -11,5 +11,3 @@ pub(crate) static force_eof: boolean = false;
 use crate::pascal::boolean;
 
 use globals_struct::{globals_struct_field, globals_struct_use};
-
-

@@ -21,7 +21,8 @@ pub(crate) const format_extension: &'static str = ".fmt";
 // @<Glob...@>=
 // @!TEX_format_default:packed array[1..format_default_length] of char;
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static TEX_format_default: format_default_array<crate::pascal::char> = format_default_array::default();
+pub(crate) static TEX_format_default: format_default_array<crate::pascal::char> =
+    format_default_array::default();
 
 type format_default_length_LENGTH_TYPENUM = format_default_length_TYPENUM;
 

@@ -57,10 +57,16 @@ pub(crate) fn end_token_list(globals: &mut TeXGlobals) {
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
+use crate::section_0096::check_interrupt;
 use crate::section_0113::halfword;
 use crate::section_0123::flush_list;
 use crate::section_0200::delete_token_ref;
+use crate::section_0302::start;
 use crate::section_0307::backed_up;
 use crate::section_0307::inserted;
+use crate::section_0307::param_start;
 use crate::section_0307::r#macro;
+use crate::section_0307::token_type;
 use crate::section_0307::u_template;
+use crate::section_0322::pop_input;

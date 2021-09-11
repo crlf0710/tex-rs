@@ -6,10 +6,8 @@
 //! node is discarded after a break if its type is |math_node| or~more.
 //
 // @d precedes_break(#)==(type(#)<math_node)
-macro_rules! precedes_break {
-    ($globals:expr, $p:expr) => {
-        r#type!($globals, $p) < crate::section_0147::math_node
-    };
+pub(crate) macro precedes_break($globals:expr, $p:expr) {
+    crate::section_0133::r#type!($globals, $p) < crate::section_0147::math_node
 }
 // @d non_discardable(#)==(type(#)<math_node)
 //

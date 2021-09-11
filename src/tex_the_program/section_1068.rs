@@ -1,25 +1,31 @@
 //! ` `
 
-macro_rules! Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action {
-    ($globals:expr) => {
-        if false {
-            unreachable!();
-        } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1085!($globals) {
-            // already processed
-            true
-        } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1100!($globals) {
-            // already processed
-            true
-        } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1132!($globals) {
-            // already processed
-            true
-        } else if Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1168!($globals) {
-            // already processed
-            true
-        } else {
-            false
-        }
-    };
+pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action($globals:expr) {
+    if false {
+        unreachable!();
+    } else if crate::section_1085::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1085!(
+        $globals
+    ) {
+        // already processed
+        true
+    } else if crate::section_1100::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1100!(
+        $globals
+    ) {
+        // already processed
+        true
+    } else if crate::section_1132::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1132!(
+        $globals
+    ) {
+        // already processed
+        true
+    } else if crate::section_1168::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1168!(
+        $globals
+    ) {
+        // already processed
+        true
+    } else {
+        false
+    }
 }
 
 // @<Declare the procedure called |handle_right_brace|@>=
@@ -37,20 +43,22 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // bottom_level: begin print_err("Too many }'s");
     // @.Too many \}'s@>
     else if globals.cur_group == bottom_level {
-        print_err!(globals, strpool_str!("Too many }'s"));
+        print_err!(globals, crate::strpool_str!("Too many }'s"));
         // help2("You've closed more groups than you opened.")@/
         // ("Such booboos are generally harmless, so keep going."); error;
         help2!(
             globals,
-            strpool_str!("You've closed more groups than you opened."),
-            strpool_str!("Such booboos are generally harmless, so keep going.")
+            crate::strpool_str!("You've closed more groups than you opened."),
+            crate::strpool_str!("Such booboos are generally harmless, so keep going.")
         );
         error(globals)?;
     // end;
     }
     // semi_simple_group,math_shift_group,math_left_group: extra_right_brace;
-    else if globals.cur_group == semi_simple_group || globals.cur_group == math_shift_group ||
-        globals.cur_group == math_left_group {
+    else if globals.cur_group == semi_simple_group
+        || globals.cur_group == math_shift_group
+        || globals.cur_group == math_left_group
+    {
         todo!("extra right brace");
     }
     // @t\4@>@<Cases of |handle_right_brace| where a |right_brace| triggers
@@ -61,16 +69,18 @@ pub(crate) fn handle_right_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // othercases confusion("rightbrace")
     else {
-        trace_error_expr!("cur_group = {}", globals.cur_group.get());
-        confusion(globals, strpool_str!("rightbrace"))?;
+        crate::trace_error_expr!("cur_group = {}", globals.cur_group.get());
+        confusion(globals, crate::strpool_str!("rightbrace"))?;
         // @:this can't happen rightbrace}{\quad rightbrace@>
         // endcases;
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0073::print_err;
+use crate::section_0079::help2;
 use crate::section_0081::TeXResult;
 use crate::section_0082::error;
 use crate::section_0095::confusion;

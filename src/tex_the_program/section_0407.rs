@@ -38,7 +38,10 @@ pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult
     #[cfg(not(feature = "unicode_support"))]
     let u_count = (globals.str_start[s + 1] - k) as usize;
     #[cfg(feature = "unicode_support")]
-    let u_count = globals.str_pool.str_ascii_codes(&globals.str_start, s).count();
+    let u_count = globals
+        .str_pool
+        .str_ascii_codes(&globals.str_start, s)
+        .count();
     let mut u = 0;
     // while k<str_start[s+1] do
     while u < u_count {
@@ -49,7 +52,13 @@ pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult
         #[cfg(not(feature = "unicode_support"))]
         let s_k1 = so(globals.str_pool[k]);
         #[cfg(feature = "unicode_support")]
-        let s_k1 = xord(globals.str_pool.str_ascii_codes(&globals.str_start, s).nth(u).unwrap());
+        let s_k1 = xord(
+            globals
+                .str_pool
+                .str_ascii_codes(&globals.str_start, s)
+                .nth(u)
+                .unwrap(),
+        );
         let s_k2 = if s_k1 >= ASCII_code_literal!(b'a') && s_k1 <= ASCII_code_literal!(b'z') {
             ASCII_code::from(s_k1.numeric_value() as integer - b'a' as integer + b'A' as integer)
         } else {
@@ -57,7 +66,8 @@ pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult
         };
         // if (cur_cs=0)and@|
         //  ((cur_chr=so(str_pool[k]))or(cur_chr=so(str_pool[k])-"a"+"A")) then
-        if globals.cur_cs == 0 && (globals.cur_chr == s_k1.into() || globals.cur_chr == s_k2.into()) {
+        if globals.cur_cs == 0 && (globals.cur_chr == s_k1.into() || globals.cur_chr == s_k2.into())
+        {
             // begin store_new_token(cur_tok); incr(k);
             store_new_token!(globals, globals.cur_tok.get(), p, q);
             #[cfg(not(feature = "unicode_support"))]
@@ -74,7 +84,7 @@ pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult
                 back_list!(globals, link!(globals, backup_head));
             }
             // scan_keyword:=false; return;
-            return_nojump!(false);
+            crate::return_nojump!(false);
             // end;
         }
         // end;
@@ -82,13 +92,15 @@ pub(crate) fn scan_keyword(globals: &mut TeXGlobals, s: str_number) -> TeXResult
     // flush_list(link(backup_head)); scan_keyword:=true;
     // exit:end;
     flush_list(globals, link!(globals, backup_head));
-    ok_nojump!(true)
+    crate::ok_nojump!(true)
 }
 
 use crate::pascal::boolean;
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::incr;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0020::xchr;
 use crate::section_0020::xord;
 use crate::section_0038::pool_pointer;
@@ -96,8 +108,11 @@ use crate::section_0038::str_number;
 use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0123::flush_list;
 use crate::section_0162::backup_head;
 use crate::section_0207::spacer;
+use crate::section_0323::back_list;
 use crate::section_0325::back_input;
+use crate::section_0371::store_new_token;
 use crate::section_0380::get_x_token;

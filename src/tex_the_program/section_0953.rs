@@ -27,31 +27,31 @@ pub(crate) fn first_fit(globals: &mut TeXGlobals, p: trie_pointer) -> TeXResult<
     c = globals.trie_c[p];
     // z:=trie_min[c]; {get the first conceivably good hole}
     /// get the first conceivably good hole
-    const _ : () = ();
+    const _: () = ();
     let c_u8 = if c.numeric_value() < 256 {
         c.numeric_value() as u8
     } else {
         todo!();
     };
     z = globals.trie_min[c_u8 as usize];
-    region_forward_label!(
+    crate::region_forward_label!(
         |'found|
         {
             // loop@+  begin h:=z-c;@/
             loop {
                 h = trie_pointer::new((z.get() as integer - c_u8 as integer) as _);
                 // @<Ensure that |trie_max>=h+256|@>;
-                Ensure_that_trie_max_ge_h_plus_256!(globals, h);
-                region_forward_label!(
+                crate::section_0954::Ensure_that_trie_max_ge_h_plus_256!(globals, h);
+                crate::region_forward_label!(
                     |'not_found|
                     {
                         // if trie_taken[h] then goto not_found;
                         if globals.trie_taken[h.get()] {
-                            goto_forward_label!('not_found);
+                            crate::goto_forward_label!('not_found);
                         }
                         // @<If all characters of the family fit relative to |h|, then
                         //   |goto found|,\30\ otherwise |goto not_found|@>;
-                        If_all_characters_of_the_family_fit_relative_to_h__then_goto_found__otherwise_goto_not_found!
+                        crate::section_0955::If_all_characters_of_the_family_fit_relative_to_h__then_goto_found__otherwise_goto_not_found!
                             (globals, h, p, 'not_found, 'found);
                     }
                     // not_found: z:=trie_link(z); {move to the next hole}
@@ -66,9 +66,9 @@ pub(crate) fn first_fit(globals: &mut TeXGlobals, p: trie_pointer) -> TeXResult<
         // found: @<Pack the family into |trie| relative to |h|@>;
         'found <-
     );
-    Pack_the_family_into_trie_relative_to_h!(globals, h, p, z);
+    crate::section_0956::Pack_the_family_into_trie_relative_to_h!(globals, h, p, z);
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
@@ -76,3 +76,4 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0018::ASCII_code;
 use crate::section_0081::TeXResult;
 use crate::section_0920::trie_pointer;
+use crate::section_0921::trie_link;

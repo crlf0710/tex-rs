@@ -9,12 +9,12 @@ pub(crate) fn print_glue(globals: &mut TeXGlobals, d: scaled, mut order: integer
     print_scaled(globals, d);
     // if (order<normal)or(order>filll) then print("foul")
     if order < glue_ord::normal as integer || order > glue_ord::filll as integer {
-        print(globals, strpool_str!("foul").get() as _);
+        print(globals, crate::strpool_str!("foul").get() as _);
     }
     // else if order>normal then
     else if order > glue_ord::normal as integer {
         // begin print("fil");
-        print(globals, strpool_str!("fil").get() as _);
+        print(globals, crate::strpool_str!("fil").get() as _);
         // while order>fil do
         while order > glue_ord::fil as integer {
             // begin print_char("l"); decr(order);
@@ -35,8 +35,11 @@ pub(crate) fn print_glue(globals: &mut TeXGlobals, d: scaled, mut order: integer
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0016::decr;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;
 use crate::section_0059::print;

@@ -8,12 +8,12 @@
 pub(crate) fn privileged(globals: &mut TeXGlobals) -> TeXResult<boolean> {
     // begin if mode>0 then privileged:=true
     if mode!(globals) > 0 {
-        ok_nojump!(true)
+        crate::ok_nojump!(true)
     }
     // else  begin report_illegal_case; privileged:=false;
     else {
         report_illegal_case(globals)?;
-        ok_nojump!(false)
+        crate::ok_nojump!(false)
         // end;
     }
     // end;
@@ -22,4 +22,5 @@ pub(crate) fn privileged(globals: &mut TeXGlobals) -> TeXResult<boolean> {
 use crate::pascal::boolean;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0213::mode;
 use crate::section_1050::report_illegal_case;

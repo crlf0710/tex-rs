@@ -7,4 +7,4 @@
 //! blend nicely with the user's operating environment.
 //!
 
-migration_complete!();
+crate::migration_complete!();

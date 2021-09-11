@@ -42,9 +42,8 @@ pub(crate) static cur_boundary: u16_from_0_to_n<save_size_TYPENUM> = u16_from_0_
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0011::save_size_TYPENUM;
 
-
+use crate::pascal::u16_from_0_to_n;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::save_size_TYPENUM;
-use crate::pascal::u16_from_0_to_n;
 use globals_struct::{globals_struct_field, globals_struct_use};
 use typenum::U1;

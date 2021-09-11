@@ -10,12 +10,22 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1107(globals: &m
     // primitive("unskip",remove_item,glue_node);@/
     // @!@:un_skip_}{\.{\\unskip} primitive@>
     // primitive("unhbox",un_hbox,box_code);@/
-    primitive(globals, strpool_str!("unhbox"), un_hbox, box_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("unhbox"),
+        un_hbox,
+        box_code as _,
+    );
     // @!@:un_hbox_}{\.{\\unhbox} primitive@>
     // primitive("unhcopy",un_hbox,copy_code);@/
     // @!@:un_hcopy_}{\.{\\unhcopy} primitive@>
     // primitive("unvbox",un_vbox,box_code);@/
-    primitive(globals, strpool_str!("unvbox"), un_vbox, box_code as _);
+    primitive(
+        globals,
+        crate::strpool_str!("unvbox"),
+        un_vbox,
+        box_code as _,
+    );
     // @!@:un_vbox_}{\.{\\unvbox} primitive@>
     // primitive("unvcopy",un_vbox,copy_code);@/
     // @!@:un_vcopy_}{\.{\\unvcopy} primitive@>

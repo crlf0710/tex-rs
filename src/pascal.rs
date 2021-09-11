@@ -10,14 +10,12 @@ pub(crate) trait IsOddOrEven {
     }
 }
 
-macro_rules! impl_is_even_or_odd_for_primitive {
-    ($t:ty) => {
-        impl crate::pascal::IsOddOrEven for $t {
-            fn is_odd(&self) -> crate::pascal::boolean {
-                self % 2 != 0
-            }
+pub(crate) macro impl_is_even_or_odd_for_primitive($t:ty) {
+    impl crate::pascal::IsOddOrEven for $t {
+        fn is_odd(&self) -> crate::pascal::boolean {
+            self % 2 != 0
         }
-    };
+    }
 }
 
 impl_is_even_or_odd_for_primitive!(u8);
@@ -405,31 +403,27 @@ define_array_keyed_with_ranged_unsigned_integer_from_0!(pub array_keyed_with_u16
 define_array_keyed_with_ranged_unsigned_integer_from_0!(pub array_keyed_with_u32_from_0_to_n => u32; U32);
 
 */
-macro_rules! make_default_array {
-    ($elem_ty:ty; $elem_cnt:expr) => {{
-        use core::mem::{self, MaybeUninit};
-        let mut data: [MaybeUninit<$elem_ty>; $elem_cnt] =
-            unsafe { MaybeUninit::uninit().assume_init() };
-        for elem in &mut data[..] {
-            *elem = MaybeUninit::new(Default::default());
-        }
-        let data = MaybeUninit::new(data);
-        unsafe { mem::transmute_copy::<_, [$elem_ty; $elem_cnt]>(&data) }
-    }};
-}
+pub(crate) macro make_default_array($elem_ty:ty; $elem_cnt:expr) {{
+    use core::mem::{self, MaybeUninit};
+    let mut data: [MaybeUninit<$elem_ty>; $elem_cnt] =
+        unsafe { MaybeUninit::uninit().assume_init() };
+    for elem in &mut data[..] {
+        *elem = MaybeUninit::new(Default::default());
+    }
+    let data = MaybeUninit::new(data);
+    unsafe { mem::transmute_copy::<_, [$elem_ty; $elem_cnt]>(&data) }
+}}
 
-macro_rules! make_copied_array {
-    ($elem_ty:ty; $elem_val:expr; $elem_cnt:expr) => {{
-        use core::mem::{self, MaybeUninit};
-        let mut data: [MaybeUninit<$elem_ty>; $elem_cnt] =
-            unsafe { MaybeUninit::uninit().assume_init() };
-        for elem in &mut data[..] {
-            *elem = MaybeUninit::new($elem_val);
-        }
-        let data = MaybeUninit::new(data);
-        unsafe { mem::transmute_copy::<_, [$elem_ty; $elem_cnt]>(&data) }
-    }};
-}
+pub(crate) macro make_copied_array($elem_ty:ty; $elem_val:expr; $elem_cnt:expr) {{
+    use core::mem::{self, MaybeUninit};
+    let mut data: [MaybeUninit<$elem_ty>; $elem_cnt] =
+        unsafe { MaybeUninit::uninit().assume_init() };
+    for elem in &mut data[..] {
+        *elem = MaybeUninit::new($elem_val);
+    }
+    let data = MaybeUninit::new(data);
+    unsafe { mem::transmute_copy::<_, [$elem_ty; $elem_cnt]>(&data) }
+}}
 
 macro_rules! define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length {
     ($v:vis $name:ident[$index_type:path] => $base_index_type:path; $typenum_const:ident; $len_typenum:path) => {
@@ -455,7 +449,7 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_l
         where
             ELEMENT: Default {
             fn default() -> Self {
-                $name(make_default_array!(ELEMENT;<$len_typenum as typenum::Unsigned>::$typenum_const as usize ))
+                $name(crate::pascal::make_default_array!(ELEMENT;<$len_typenum as typenum::Unsigned>::$typenum_const as usize ))
             }
         }
 
@@ -521,7 +515,7 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
         where
             ELEMENT: Copy {
             $v fn from_copied(val: ELEMENT) -> Self {
-                $name(make_copied_array!(ELEMENT; val; <$length_typenum as typenum::Unsigned>::$typenum_const as usize ))
+                $name(crate::pascal::make_copied_array!(ELEMENT; val; <$length_typenum as typenum::Unsigned>::$typenum_const as usize ))
             }
         }
 
@@ -541,7 +535,7 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_with_fixed_start_an
         where
             ELEMENT: Default {
             fn default() -> Self {
-                $name(make_default_array!(ELEMENT;<$length_typenum as typenum::Unsigned>::$typenum_const as usize ))
+                $name(crate::pascal::make_default_array!(ELEMENT;<$length_typenum as typenum::Unsigned>::$typenum_const as usize ))
             }
         }
 
@@ -627,7 +621,7 @@ macro_rules! define_array_keyed_with_ranged_signed_integer_with_fixed_start_and_
         where
             ELEMENT: Copy {
             $v fn from_copied(val: ELEMENT) -> Self {
-                $name(make_copied_array!(ELEMENT; val; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize ))
+                $name(crate::pascal::make_copied_array!(ELEMENT; val; <$length_typenum as typenum::Unsigned>::$typenum_length_const as usize ))
             }
         }
 
@@ -647,7 +641,7 @@ macro_rules! define_array_keyed_with_ranged_signed_integer_with_fixed_start_and_
         where
             ELEMENT: Default {
             fn default() -> Self {
-                $name(make_default_array!(ELEMENT;<$length_typenum as typenum::Unsigned>::$typenum_length_const as usize ))
+                $name(crate::pascal::make_default_array!(ELEMENT;<$length_typenum as typenum::Unsigned>::$typenum_length_const as usize ))
             }
         }
 
@@ -913,7 +907,7 @@ impl Default for file_of_text_char {
     }
 }
 
-impl_debug_with_literal!(file_of_text_char, "file_of_text_char");
+crate::impl_debug_with_literal!(file_of_text_char, "file_of_text_char");
 
 impl PascalFile for file_of_text_char {
     type Unit = text_char;
@@ -995,7 +989,7 @@ pub(crate) struct file_of<T> {
     error_state: usize,
 }
 
-impl_debug_with_literal!(file_of[T], "file_of<T>");
+crate::impl_debug_with_literal!(file_of[T], "file_of<T>");
 
 impl<T> Default for file_of<T> {
     fn default() -> Self {
@@ -1498,7 +1492,7 @@ mod tests {
         *input_file.file_state_mut() = FileState::LineInspectionMode {
             read_target: Box::new(input_data),
             read_line_buffer: LineBufferState::UnknownState { initial_line: true },
-            read_flag_extra_eoln_line: true
+            read_flag_extra_eoln_line: true,
         };
         input_file.set_error_state(0);
         assert_eq!(false, eoln(&mut input_file));

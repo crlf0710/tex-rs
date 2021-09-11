@@ -21,5 +21,6 @@ pub(crate) fn make_string(globals: TeXGlobalsStringView<'_>) -> str_number {
 
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0011::max_strings;
+use crate::section_0016::incr;
 use crate::section_0038::str_number;
 use crate::section_0038::str_number_repr;

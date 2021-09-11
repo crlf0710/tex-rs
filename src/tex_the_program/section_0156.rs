@@ -13,7 +13,7 @@ pub(crate) fn new_kern(globals: &mut TeXGlobals, w: scaled) -> TeXResult<pointer
     // width(p):=w;
     width!(globals, p) = w;
     // new_kern:=p;
-    ok_nojump!(p)
+    crate::ok_nojump!(p)
     // end;
 }
 
@@ -22,6 +22,9 @@ use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
 use crate::section_0115::pointer;
 use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
+use crate::section_0135::width;
 use crate::section_0141::small_node_size;
 use crate::section_0155::kern_node;
 use crate::section_0155::kern_node_subtype;

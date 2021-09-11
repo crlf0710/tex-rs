@@ -5,10 +5,15 @@
 #[distributed_slice(PRIM2HT)]
 pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1114(globals: &mut TeXGlobals) {
     // primitive("-",discretionary,1);
-    primitive(globals, strpool_str!("-"), discretionary, 1);
+    primitive(globals, crate::strpool_str!("-"), discretionary, 1);
     // @!@:Single-character primitives -}{\quad\.{\\-}@>
     // primitive("discretionary",discretionary,0);
-    primitive(globals, strpool_str!("discretionary"), discretionary, 0);
+    primitive(
+        globals,
+        crate::strpool_str!("discretionary"),
+        discretionary,
+        0,
+    );
     // @!@:discretionary_}{\.{\\discretionary} primitive@>
 }
 

@@ -1,31 +1,31 @@
 //! ` `
 
 // @<Scan and build the parameter part...@>=
-macro_rules! Scan_and_build_the_parameter_part_of_the_macro_definition {
+pub(crate) macro Scan_and_build_the_parameter_part_of_the_macro_definition {
     ($globals:expr, $t:expr, $hash_brace:expr, $p:expr, $q:expr) => {{
-        region_forward_label! {
+        crate::region_forward_label! {
         |'done|
         {
-        region_forward_label! {
+        crate::region_forward_label! {
         |'done1|
         {
             // begin loop begin continue: get_token; {set |cur_cmd|, |cur_chr|, |cur_tok|}
             loop {
-                region_backward_label!(
+                crate::region_backward_label!(
                     'continue_ <-
                     {
                         /// set `cur_cmd`, `cur_chr`, `cur_tok`
                         get_token($globals)?;
                         // if cur_tok<right_brace_limit then goto done1;
                         if $globals.cur_tok < right_brace_limit {
-                            goto_forward_label!('done1);
+                            crate::goto_forward_label!('done1);
                         }
                         // if cur_cmd=mac_param then
                         if $globals.cur_cmd == mac_param {
                             // @<If the next character is a parameter number, make |cur_tok|
                             //   a |match| token; but if it is a left brace, store
                             //   `|left_brace|, |end_match|', set |hash_brace|, and |goto done|@>;
-                            If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_token__but_if_it_is_a_left_brace__store_left_brace_end_match__set_hash_brace_and_goto_done!
+                            crate::section_0476::If_the_next_character_is_a_parameter_number__make_cur_tok_a_match_token__but_if_it_is_a_left_brace__store_left_brace_end_match__set_hash_brace_and_goto_done!
                                 ($globals, $t, $hash_brace, 'done, 'continue_, $p, $q);
                         }
                         // store_new_token(cur_tok);
@@ -54,5 +54,6 @@ macro_rules! Scan_and_build_the_parameter_part_of_the_macro_definition {
         use crate::section_0289::end_match_token;
         use crate::section_0289::right_brace_limit;
         use crate::section_0365::get_token;
+        use crate::section_0371::store_new_token;
     }}
 }

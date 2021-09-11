@@ -24,4 +24,4 @@
 //! tables.
 //!
 
-migration_complete!();
+crate::migration_complete!();

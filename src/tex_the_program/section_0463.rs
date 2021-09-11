@@ -16,7 +16,7 @@ pub(crate) fn scan_rule_spec(globals: &mut TeXGlobals) -> TeXResult<pointer> {
     let q: pointer;
     // begin q:=new_rule; {|width|, |depth|, and |height| all equal |null_flag| now}
     /// `width`, `depth`, and `height` all equal `null_flag` now
-    const _ : () = ();
+    const _: () = ();
     q = new_rule(globals)?;
     // if cur_cmd=vrule then width(q):=default_rule
     if globals.cur_cmd == vrule {
@@ -29,40 +29,40 @@ pub(crate) fn scan_rule_spec(globals: &mut TeXGlobals) -> TeXResult<pointer> {
         // end;
     }
     // reswitch: if scan_keyword("width") then
-    region_backward_label!(
-        'reswitch <- 
+    crate::region_backward_label!(
+        'reswitch <-
         {
-            if scan_keyword(globals, strpool_str!("width"))? {
+            if scan_keyword(globals, crate::strpool_str!("width"))? {
                 // @.width@>
                 // begin scan_normal_dimen; width(q):=cur_val; goto reswitch;
                 scan_normal_dimen!(globals)?;
                 width!(globals, q) = scaled::new_from_inner(globals.cur_val);
-                goto_backward_label!('reswitch);
+                crate::goto_backward_label!('reswitch);
                 // end;
             }
             // if scan_keyword("height") then
-            if scan_keyword(globals, strpool_str!("height"))? {
+            if scan_keyword(globals, crate::strpool_str!("height"))? {
                 // @.height@>
                 // begin scan_normal_dimen; height(q):=cur_val; goto reswitch;
                 scan_normal_dimen!(globals)?;
                 height!(globals, q) = scaled::new_from_inner(globals.cur_val);
-                goto_backward_label!('reswitch);
+                crate::goto_backward_label!('reswitch);
                 // end;
             }
             // if scan_keyword("depth") then
-            if scan_keyword(globals, strpool_str!("depth"))? {
+            if scan_keyword(globals, crate::strpool_str!("depth"))? {
                 // @.depth@>
                 // begin scan_normal_dimen; depth(q):=cur_val; goto reswitch;
                 scan_normal_dimen!(globals)?;
                 depth!(globals, q) = scaled::new_from_inner(globals.cur_val);
-                goto_backward_label!('reswitch);
+                crate::goto_backward_label!('reswitch);
                 // end;
             }
         }
         |'reswitch|
     );
     // scan_rule_spec:=q;
-    return_nojump!(q);
+    crate::return_nojump!(q);
     // end;
 }
 
@@ -70,6 +70,10 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::scaled;
 use crate::section_0115::pointer;
+use crate::section_0135::depth;
+use crate::section_0135::height;
+use crate::section_0135::width;
 use crate::section_0139::new_rule;
 use crate::section_0208::vrule;
 use crate::section_0407::scan_keyword;
+use crate::section_0448::scan_normal_dimen;

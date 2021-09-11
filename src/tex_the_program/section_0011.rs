@@ -137,9 +137,10 @@ type U8000 = ::typenum::op!(U1000 * U8);
 type U20000 = ::typenum::op!(U10000 * U2);
 type U30000 = ::typenum::op!(U10000 * U3);
 type U32000 = ::typenum::op!(U10000 * U3 + U1000 * U2);
+use globals_struct::{globals_struct_field, globals_struct_use};
 use static_assertions::const_assert;
 use typenum::{
-    Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79, U8, U800
+    Unsigned, U0, U1000, U10000, U2, U200, U3, U40, U42, U500, U6, U60, U600, U72, U75, U79, U8,
+    U800,
 };
 use typenum::{N500, P500};
-use globals_struct::{globals_struct_field, globals_struct_use};

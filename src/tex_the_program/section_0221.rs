@@ -18,45 +18,33 @@
 //! things.
 //
 // @d eq_level_field(#)==#.hh.b1
-macro_rules! eq_level_field {
-    ($val:expr) => {
-        $val[crate::section_0113::MEMORY_WORD_HH_B1]
-    };
+pub(crate) macro eq_level_field($val:expr) {
+    $val[crate::section_0113::MEMORY_WORD_HH_B1]
 }
 // @d eq_type_field(#)==#.hh.b0
-macro_rules! eq_type_field {
-    ($val:expr) => {
-        $val[crate::section_0113::MEMORY_WORD_HH_B0]
-    };
+pub(crate) macro eq_type_field($val:expr) {
+    $val[crate::section_0113::MEMORY_WORD_HH_B0]
 }
 // @d equiv_field(#)==#.hh.rh
-macro_rules! equiv_field {
-    ($val:expr) => {
-        $val[crate::section_0113::MEMORY_WORD_HH_RH]
-    };
+pub(crate) macro equiv_field($val:expr) {
+    $val[crate::section_0113::MEMORY_WORD_HH_RH]
 }
 // @d eq_level(#)==eq_level_field(eqtb[#]) {level of definition}
 /// level of definition
 #[allow(unused_macros)]
-macro_rules! eq_level {
-    ($globals:expr, $val:expr) => {
-        eq_level_field!($globals.eqtb[$val as crate::section_0115::pointer])
-    };
+pub(crate) macro eq_level($globals:expr, $val:expr) {
+    crate::section_0221::eq_level_field!($globals.eqtb[$val as crate::section_0115::pointer])
 }
 // @d eq_type(#)==eq_type_field(eqtb[#]) {command code for equivalent}
 /// command code for equivalent
 #[allow(unused_macros)]
-macro_rules! eq_type {
-    ($globals:expr, $val:expr) => {
-        eq_type_field!($globals.eqtb[$val as crate::section_0115::pointer])
-    };
+pub(crate) macro eq_type($globals:expr, $val:expr) {
+    crate::section_0221::eq_type_field!($globals.eqtb[$val as crate::section_0115::pointer])
 }
 // @d equiv(#)==equiv_field(eqtb[#]) {equivalent value}
 /// equivalent value
-macro_rules! equiv {
-    ($globals:expr, $val:expr) => {
-        equiv_field!($globals.eqtb[$val as crate::section_0115::pointer])
-    };
+pub(crate) macro equiv($globals:expr, $val:expr) {
+    crate::section_0221::equiv_field!($globals.eqtb[$val as crate::section_0115::pointer])
 }
 // @d level_zero=min_quarterword {level for undefined quantities}
 /// level for undefined quantities

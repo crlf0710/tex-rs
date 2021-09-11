@@ -25,7 +25,7 @@ pub(crate) fn read_toks(globals: &mut TeXGlobals, n: integer, r: pointer) -> TeX
     token_ref_count!(globals, globals.def_ref) = null;
     // p:=def_ref; {the reference count}
     /// the reference count
-    const _ : () = ();
+    const _: () = ();
     p = globals.def_ref;
     // store_new_token(end_match_token);
     store_new_token!(globals, end_match_token, p, q);
@@ -39,10 +39,12 @@ pub(crate) fn read_toks(globals: &mut TeXGlobals, n: integer, r: pointer) -> TeX
     s = globals.align_state;
     globals.align_state = 1000000;
     /// disable tab marks, etc.
-    const _ : () = ();
+    const _: () = ();
     // repeat @<Input and store tokens from the next line of the file@>;
     loop {
-        Input_and_store_tokens_from_the_next_line_of_the_file!(globals, m, p, q);
+        crate::section_0483::Input_and_store_tokens_from_the_next_line_of_the_file!(
+            globals, m, p, q
+        );
         // until align_state=1000000;
         if globals.align_state == 1000000 {
             break;
@@ -53,7 +55,7 @@ pub(crate) fn read_toks(globals: &mut TeXGlobals, n: integer, r: pointer) -> TeX
     globals.scanner_status = scanner_status_kind::normal;
     globals.align_state = s;
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::pascal::integer;
@@ -61,7 +63,9 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0101::small_number;
 use crate::section_0115::null;
-use crate::section_0120::get_avail;
 use crate::section_0115::pointer;
+use crate::section_0120::get_avail;
+use crate::section_0200::token_ref_count;
 use crate::section_0289::end_match_token;
 use crate::section_0305::scanner_status_kind;
+use crate::section_0371::store_new_token;

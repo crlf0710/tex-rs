@@ -17,10 +17,8 @@
 //
 // @d preamble==link(align_head) {the current preamble list}
 /// the current preamble list
-macro_rules! preamble {
-    ($globals:expr) => {
-        link!($globals, crate::section_0162::align_head)
-    }
+pub(crate) macro preamble($globals:expr) {
+    crate::section_0118::link!($globals, crate::section_0162::align_head)
 }
 // @d align_stack_node_size=5 {number of |mem| words to save alignment states}
 /// number of `mem` words to save alignment states
@@ -60,5 +58,5 @@ use crate::section_0115::pointer;
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0115::null;
 
-use globals_struct::{globals_struct_field, globals_struct_use};
 use crate::section_0113::quarterword;
+use globals_struct::{globals_struct_field, globals_struct_use};

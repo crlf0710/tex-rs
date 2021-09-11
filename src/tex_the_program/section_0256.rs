@@ -25,35 +25,27 @@
 //
 // @d next(#) == hash[#].lh {link for coalesced lists}
 /// link for coalesced lists
-macro_rules! next {
-    ($globals:expr, $p:expr) => {
-        $globals.hash[$p][crate::section_0113::TWO_HALVES_LH]
-    };
+pub(crate) macro next($globals:expr, $p:expr) {
+    $globals.hash[$p][crate::section_0113::TWO_HALVES_LH]
 }
 // @d text(#) == hash[#].rh {string number for control sequence name}
 /// string number for control sequence name
-macro_rules! text {
-    ($globals:expr, $p:expr) => {
-        $globals.hash[$p][crate::section_0113::TWO_HALVES_RH]
-    };
+pub(crate) macro text($globals:expr, $p:expr) {
+    $globals.hash[$p][crate::section_0113::TWO_HALVES_RH]
 }
 // @d hash_is_full == (hash_used=hash_base) {test if all positions are occupied}
 /// test if all positions are occupied
-macro_rules! hash_is_full {
-    ($globals:expr) => {
-        $globals.hash_used == hash_base as pointer
-    };
+pub(crate) macro hash_is_full($globals:expr) {
+    $globals.hash_used == crate::section_0222::hash_base as crate::section_0115::pointer
 }
 // @d font_id_text(#) == text(font_id_base+#) {a frozen font identifier's name}
 /// a frozen font identifier's name
-macro_rules! font_id_text {
-    ($globals:expr, $ptr:expr) => {
-        text!(
-            $globals,
-            crate::section_0222::font_id_base as crate::section_0115::pointer
-                + $ptr as crate::section_0115::pointer
-        )
-    };
+pub(crate) macro font_id_text($globals:expr, $ptr:expr) {
+    text!(
+        $globals,
+        crate::section_0222::font_id_base as crate::section_0115::pointer
+            + $ptr as crate::section_0115::pointer
+    )
 }
 
 //

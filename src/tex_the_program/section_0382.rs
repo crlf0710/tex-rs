@@ -30,22 +30,16 @@ impl mark_code_kind {
 }
 
 // @d top_mark==cur_mark[top_mark_code]
-macro_rules! top_mark {
-    ($globals:expr) => {
-        $globals.cur_mark[crate::section_0382::mark_code_kind::top_mark_code]
-    }
+pub(crate) macro top_mark($globals:expr) {
+    $globals.cur_mark[crate::section_0382::mark_code_kind::top_mark_code]
 }
 // @d first_mark==cur_mark[first_mark_code]
-macro_rules! first_mark {
-    ($globals:expr) => {
-        $globals.cur_mark[crate::section_0382::mark_code_kind::first_mark_code]
-    }
+pub(crate) macro first_mark($globals:expr) {
+    $globals.cur_mark[crate::section_0382::mark_code_kind::first_mark_code]
 }
 // @d bot_mark==cur_mark[bot_mark_code]
-macro_rules! bot_mark {
-    ($globals:expr) => {
-        $globals.cur_mark[crate::section_0382::mark_code_kind::bot_mark_code]
-    }
+pub(crate) macro bot_mark($globals:expr) {
+    $globals.cur_mark[crate::section_0382::mark_code_kind::bot_mark_code]
 }
 // @d split_first_mark==cur_mark[split_first_mark_code]
 // @d split_bot_mark==cur_mark[split_bot_mark_code]
@@ -68,7 +62,6 @@ type mark_code_array_LENGTH_TYPENUM = typenum::U5;
 define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_length!(
     pub(crate) mark_code_array[mark_code_kind] => u8; U8; mark_code_array_LENGTH_TYPENUM
 );
-
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};

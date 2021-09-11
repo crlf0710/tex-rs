@@ -91,10 +91,9 @@ pub(crate) static cur_val_level: cur_val_level_kind = cur_val_level_kind::int_va
 #[globals_struct_use(TeXGlobals)]
 use crate::section_0410::cur_val_level_kind;
 
-
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::integer;
 
 use crate::section_0004::TeXGlobals;
-use globals_struct::{globals_struct_field, globals_struct_use};
 use crate::section_0101::small_number;
+use globals_struct::{globals_struct_field, globals_struct_use};

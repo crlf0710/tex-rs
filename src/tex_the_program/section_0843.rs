@@ -3,29 +3,23 @@
 // @d convert_to_break_width(#)==@|
 //   mem[prev_r+#].sc:=@|@t\hskip10pt@>mem[prev_r+#].sc
 //   -cur_active_width[#]+break_width[#]
-macro_rules! convert_to_break_width {
-    ($globals:expr, $idx:expr, $prev_r:expr) => {{
-        $globals.mem[$prev_r + $idx][crate::section_0101::MEMORY_WORD_SC] +=
-            -$globals.cur_active_width[$idx] + $globals.break_width[$idx];
-    }};
-}
+pub(crate) macro convert_to_break_width($globals:expr, $idx:expr, $prev_r:expr) {{
+    $globals.mem[$prev_r + $idx][crate::section_0101::MEMORY_WORD_SC] +=
+        -$globals.cur_active_width[$idx] + $globals.break_width[$idx];
+}}
 // @d store_break_width(#)==active_width[#]:=break_width[#]
-macro_rules! store_break_width {
-    ($globals:expr, $idx:expr) => {{
-        $globals.active_width[$idx] = $globals.break_width[$idx];
-    }};
-}
+pub(crate) macro store_break_width($globals:expr, $idx:expr) {{
+    $globals.active_width[$idx] = $globals.break_width[$idx];
+}}
 // @d new_delta_to_break_width(#)==@|
 //   mem[q+#].sc:=break_width[#]-cur_active_width[#]
-macro_rules! new_delta_to_break_width {
-    ($globals:expr, $idx:expr, $q:expr) => {{
-        $globals.mem[$q + $idx][crate::section_0101::MEMORY_WORD_SC] = $globals.break_width[$idx]
-            - $globals.cur_active_width[$idx];
-    }}
-}
+pub(crate) macro new_delta_to_break_width($globals:expr, $idx:expr, $q:expr) {{
+    $globals.mem[$q + $idx][crate::section_0101::MEMORY_WORD_SC] =
+        $globals.break_width[$idx] - $globals.cur_active_width[$idx];
+}}
 
 // @<Insert a delta node to prepare for breaks at |cur_p|@>=
-macro_rules! Insert_a_delta_node_to_prepare_for_breaks_at_cur_p {
+pub(crate) macro Insert_a_delta_node_to_prepare_for_breaks_at_cur_p {
     ($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr) => {{
         // if type(prev_r)=delta_node then {modify an existing delta node}
         if r#type!($globals, $prev_r) == delta_node {
@@ -63,8 +57,14 @@ macro_rules! Insert_a_delta_node_to_prepare_for_breaks_at_cur_p {
             $prev_r = q;
             // end
         }
+        use crate::section_0115::pointer;
+        use crate::section_0118::link;
         use crate::section_0125::get_node;
+        use crate::section_0133::r#type;
+        use crate::section_0133::subtype;
+        use crate::section_0162::active;
         use crate::section_0822::delta_node;
         use crate::section_0822::delta_node_size;
+        use crate::section_0823::do_all_six;
     }}
 }

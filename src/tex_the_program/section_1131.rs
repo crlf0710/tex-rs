@@ -13,17 +13,19 @@ pub(crate) fn do_endv(globals: &mut TeXGlobals) -> TeXResult<()> {
     // while (input_stack[base_ptr].index_field<>v_template) and
     //       (input_stack[base_ptr].loc_field=null) and
     //       (input_stack[base_ptr].state_field=token_list) do decr(base_ptr);
-    while globals.input_stack[globals.base_ptr].index_field != v_template &&
-        globals.input_stack[globals.base_ptr].loc_field == null &&
-        globals.input_stack[globals.base_ptr].state_field == token_list {
+    while globals.input_stack[globals.base_ptr].index_field != v_template
+        && globals.input_stack[globals.base_ptr].loc_field == null
+        && globals.input_stack[globals.base_ptr].state_field == token_list
+    {
         decr!(globals.base_ptr);
     }
     // if (input_stack[base_ptr].index_field<>v_template) or
     //       (input_stack[base_ptr].loc_field<>null) or
     //       (input_stack[base_ptr].state_field<>token_list) then
-    if globals.input_stack[globals.base_ptr].index_field != v_template ||
-        globals.input_stack[globals.base_ptr].loc_field != null ||
-        globals.input_stack[globals.base_ptr].state_field != token_list {
+    if globals.input_stack[globals.base_ptr].index_field != v_template
+        || globals.input_stack[globals.base_ptr].loc_field != null
+        || globals.input_stack[globals.base_ptr].state_field != token_list
+    {
         // fatal_error("(interwoven alignment preambles are not allowed)");
         todo!("fatal error");
     }
@@ -43,10 +45,11 @@ pub(crate) fn do_endv(globals: &mut TeXGlobals) -> TeXResult<()> {
         off_save(globals);
     }
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
 use crate::section_0081::TeXResult;
 use crate::section_0115::null;
 use crate::section_0269::align_group;
@@ -54,5 +57,5 @@ use crate::section_0307::token_list;
 use crate::section_0307::v_template;
 use crate::section_0791::fin_col;
 use crate::section_0799::fin_row;
-use crate::section_1096::end_graf;
 use crate::section_1064::off_save;
+use crate::section_1096::end_graf;

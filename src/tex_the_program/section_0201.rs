@@ -3,22 +3,22 @@
 //! @^reference counts@>
 
 // @d fast_delete_glue_ref(#)==@t@>@;@/
-macro_rules! fast_delete_glue_ref {
-    ($globals:expr, $ptr:expr) => {{
-        // begin if glue_ref_count(#)=null then free_node(#,glue_spec_size)
-        if glue_ref_count!($globals, $ptr) == null {
-            free_node($globals, $ptr, glue_spec_size as _);
-        }
-        // else decr(glue_ref_count(#));
-        else {
-            decr!(glue_ref_count!($globals, $ptr))
-        }
-        // end
-        use crate::section_0115::null;
-        use crate::section_0130::free_node;
-        use crate::section_0150::glue_spec_size;
-    }}
-}
+pub(crate) macro fast_delete_glue_ref($globals:expr, $ptr:expr) {{
+    // begin if glue_ref_count(#)=null then free_node(#,glue_spec_size)
+    if glue_ref_count!($globals, $ptr) == null {
+        free_node($globals, $ptr, glue_spec_size as _);
+    }
+    // else decr(glue_ref_count(#));
+    else {
+        decr!(glue_ref_count!($globals, $ptr))
+    }
+    // end
+    use crate::section_0016::decr;
+    use crate::section_0115::null;
+    use crate::section_0130::free_node;
+    use crate::section_0150::glue_ref_count;
+    use crate::section_0150::glue_spec_size;
+}}
 
 // @p procedure delete_glue_ref(@!p:pointer); {|p| points to a glue specification}
 /// `p` points to a glue specification

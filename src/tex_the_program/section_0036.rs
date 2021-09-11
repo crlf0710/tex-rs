@@ -26,8 +26,6 @@
 
 // @d loc==cur_input.loc_field {location of first unread character in |buffer|}
 /// location of first unread character in `buffer`
-macro_rules! loc {
-    ($globals:expr) => {
-        $globals.cur_input.loc_field
-    };
+pub(crate) macro loc($globals:expr) {
+    $globals.cur_input.loc_field
 }

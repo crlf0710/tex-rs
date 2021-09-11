@@ -25,7 +25,7 @@ pub(crate) fn free_node(globals: &mut TeXGlobals, p: pointer, s: halfword) {
     llink!(globals, globals.rover) = p;
     rlink!(globals, q) = p;
     // @!stat var_used:=var_used-s;@+tats@;{maintain statistics}
-    region_stat! {
+    crate::region_stat! {
         /// maintain statistics
         const _ : () = ();
         globals.var_used -= s as integer;
@@ -37,4 +37,8 @@ pub(crate) fn free_node(globals: &mut TeXGlobals, p: pointer, s: halfword) {
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0124::empty_flag;
+use crate::section_0124::llink;
+use crate::section_0124::node_size;
+use crate::section_0124::rlink;

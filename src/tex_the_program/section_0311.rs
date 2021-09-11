@@ -21,14 +21,14 @@ pub(crate) fn show_context(globals: &mut TeXGlobals) {
     // @<Local variables for formatting calculations@>@/
     // begin base_ptr:=input_ptr; input_stack[base_ptr]:=cur_input;
     /// store current state
-    const _ : () = ();
+    const _: () = ();
     globals.base_ptr = globals.input_ptr;
     globals.input_stack[globals.base_ptr] = globals.cur_input;
     //   {store current state}
     // nn:=-1; bottom_line:=false;
     nn = -1;
     bottom_line = false;
-    region_forward_label!(
+    crate::region_forward_label!(
     |'done|
     {
         // loop@+begin cur_input:=input_stack[base_ptr]; {enter into the context}
@@ -48,20 +48,20 @@ pub(crate) fn show_context(globals: &mut TeXGlobals) {
             if globals.base_ptr == globals.input_ptr || bottom_line ||
                 nn < error_context_lines!(globals) {
                 // @<Display the current context@>
-                Display_the_current_context!(globals, nn, old_setting);
+                crate::section_0312::Display_the_current_context!(globals, nn, old_setting);
             }
             // else if nn=error_context_lines then
             else if nn == error_context_lines!(globals) {
                 // begin print_nl("..."); incr(nn); {omitted if |error_context_lines<0|}
                 /// omitted if `error_context_lines<0`
                 const _ : () = ();
-                print_nl(globals, strpool_str!("..."));
+                print_nl(globals, crate::strpool_str!("..."));
                 incr!(nn);
                 // end;
             }
             // if bottom_line then goto done;
             if bottom_line {
-                goto_forward_label!('done);
+                crate::goto_forward_label!('done);
             }
             // decr(base_ptr);
             decr!(globals.base_ptr);
@@ -72,12 +72,17 @@ pub(crate) fn show_context(globals: &mut TeXGlobals) {
     'done <-
     );
     /// restore original state
-    const _ : () = ();
+    const _: () = ();
     globals.cur_input = globals.input_stack[globals.input_ptr];
     // end;
 }
 
 use crate::pascal::{boolean, integer};
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
+use crate::section_0016::incr;
 use crate::section_0062::print_nl;
+use crate::section_0236::error_context_lines;
+use crate::section_0302::name;
+use crate::section_0302::state;
 use crate::section_0307::token_list;

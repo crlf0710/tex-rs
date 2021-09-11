@@ -29,7 +29,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     // else if mem_end<mem_max then {or go into virgin territory}
     else if (globals.mem_end as u32) < mem_max {
         /// or go into virgin territory
-        trace_expr!("mem_end = {}", globals.mem_end);
+        crate::trace_expr!("mem_end = {}", globals.mem_end);
         todo!();
     //   begin incr(mem_end); p:=mem_end;
     //   end
@@ -55,7 +55,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     const _: () = ();
     link!(globals, p) = null;
     // @!stat incr(dyn_used);@+tats@;{maintain statistics}
-    region_stat! {
+    crate::region_stat! {
         /// maintain statistics
         incr!(globals.dyn_used);
     }
@@ -66,5 +66,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::mem_max;
+use crate::section_0016::decr;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;

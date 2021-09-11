@@ -68,4 +68,5 @@ pub(crate) fn trie_node(globals: &mut TeXGlobals, p: trie_pointer) -> trie_point
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0011::trie_size;
+use crate::section_0016::decr;
 use crate::section_0920::trie_pointer;

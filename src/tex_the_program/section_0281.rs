@@ -16,20 +16,21 @@ pub(crate) fn unsave(globals: &mut TeXGlobals) -> TeXResult<()> {
         // begin decr(cur_level);
         decr!(globals.cur_level);
         // @<Clear off top level from |save_stack|@>;
-        Clear_off_top_level_from_save_stack!(globals);
+        crate::section_0282::Clear_off_top_level_from_save_stack!(globals);
         // end
     }
     // else confusion("curlevel"); {|unsave| is not used when |cur_group=bottom_level|}
     else {
         /// `unsave` is not used when `cur_group=bottom_level`
-        confusion(globals, strpool_str!("curlevel"))?;
+        confusion(globals, crate::strpool_str!("curlevel"))?;
     }
     // @:this can't happen curlevel}{\quad curlevel@>
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::decr;
 use crate::section_0081::TeXResult;
 use crate::section_0095::confusion;
 use crate::section_0221::level_one;

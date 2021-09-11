@@ -3,29 +3,25 @@
 //! multiply integers.
 //
 // @d nx_plus_y(#)==mult_and_add(#,@'7777777777)
-macro_rules! nx_plus_y {
-    ($globals:expr, $n:expr, $x:expr, $y:expr) => {
-        crate::section_0105::mult_and_add(
-            $globals,
-            $n,
-            $x,
-            $y,
-            crate::section_0101::scaled::new_from_inner(0o7777777777),
-        )
-    };
+pub(crate) macro nx_plus_y($globals:expr, $n:expr, $x:expr, $y:expr) {
+    crate::section_0105::mult_and_add(
+        $globals,
+        $n,
+        $x,
+        $y,
+        crate::section_0101::scaled::new_from_inner(0o7777777777),
+    )
 }
 // @d mult_integers(#)==mult_and_add(#,0,@'17777777777)
-macro_rules! mult_integers {
-    ($globals:expr, $x:expr, $y:expr) => {
-        crate::section_0105::mult_and_add(
-            $globals,
-            $x,
-            crate::section_0101::scaled::new_from_inner($y),
-            crate::section_0101::scaled::zero(),
-            crate::section_0101::scaled::new_from_inner(0o17777777777),
-        )
-        .inner()
-    };
+pub(crate) macro mult_integers($globals:expr, $x:expr, $y:expr) {
+    crate::section_0105::mult_and_add(
+        $globals,
+        $x,
+        crate::section_0101::scaled::new_from_inner($y),
+        crate::section_0101::scaled::zero(),
+        crate::section_0101::scaled::new_from_inner(0o17777777777),
+    )
+    .inner()
 }
 
 // @p function mult_and_add(@!n:integer;@!x,@!y,@!max_answer:scaled):scaled;
@@ -67,4 +63,5 @@ pub(crate) fn mult_and_add(
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
+use crate::section_0016::negate;
 use crate::section_0101::scaled;

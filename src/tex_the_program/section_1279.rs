@@ -29,27 +29,29 @@ pub(crate) fn issue_message(globals: &mut TeXGlobals) -> TeXResult<()> {
     s = make_string(make_globals_string_view!(globals));
     // if c=0 then @<Print string |s| on the terminal@>
     if c == 0 {
-        Print_string_s_on_the_terminal!(globals, s);
+        crate::section_1280::Print_string_s_on_the_terminal!(globals, s);
     }
     // else @<Print string |s| as an error message@>;
     else {
-        Print_string_s_as_an_error_message!(globals, s.get() as _);
+        crate::section_1283::Print_string_s_as_an_error_message!(globals, s.get() as _);
     }
     // flush_string;
     flush_string(globals);
     // end;
-    ok_nojump!()
+    crate::ok_nojump!()
 }
 
+use crate::section_0004::make_globals_string_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
-use crate::section_0042::character_max_room;
-use crate::section_0054::new_string;
 use crate::section_0038::str_number;
+use crate::section_0042::character_max_room;
 use crate::section_0042::str_room;
 use crate::section_0043::make_string;
 use crate::section_0044::flush_string;
+use crate::section_0054::new_string;
 use crate::section_0081::TeXResult;
+use crate::section_0118::link;
 use crate::section_0123::flush_list;
 use crate::section_0162::garbage;
 use crate::section_0295::token_show;

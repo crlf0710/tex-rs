@@ -35,10 +35,13 @@ pub(crate) fn more_name(globals: &mut TeXGlobals, c: ASCII_code) -> boolean {
     // end;
 }
 
+use crate::pascal::boolean;
+use crate::section_0004::make_globals_string_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsStringView;
 use crate::section_0018::ASCII_code;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0038::pool_pointer;
-use crate::section_0042::str_room;
+use crate::section_0041::cur_length;
 use crate::section_0042::append_char;
-use crate::pascal::boolean;
+use crate::section_0042::str_room;

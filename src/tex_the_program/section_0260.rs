@@ -1,66 +1,70 @@
 // @ @<Insert a new control...@>=
-macro_rules! Insert_a_new_control_sequence_after_p_then_make_p_point_to_it {
-    ($globals:expr, $p:expr, $j:expr, $l_raw:expr) => {
-        // begin if text(p)>0 then
-        trace_expr!("p = {}", $p);
-        if text!($globals, $p) > 0 {
-            // begin repeat if hash_is_full then overflow("hash size",hash_size);
-            loop {
-                if hash_is_full!($globals) {
-                    todo!();
-                }
-                // @:TeX capacity exceeded hash size}{\quad hash size@>
-                // decr(hash_used);
-                decr!($globals.hash_used);
-                // until text(hash_used)=0; {search for an empty location in |hash|}
-                /// search for an empty location in |hash|
-                if text!($globals, $globals.hash_used) == 0 {
-                    break;
-                }
+pub(crate) macro Insert_a_new_control_sequence_after_p_then_make_p_point_to_it($globals:expr, $p:expr, $j:expr, $l_raw:expr) {
+    // begin if text(p)>0 then
+    crate::trace_expr!("p = {}", $p);
+    if text!($globals, $p) > 0 {
+        // begin repeat if hash_is_full then overflow("hash size",hash_size);
+        loop {
+            if hash_is_full!($globals) {
+                todo!();
             }
-            // next(p):=hash_used; p:=hash_used;
-            next!($globals, $p) = $globals.hash_used;
-            $p = $globals.hash_used;
-            // end;
+            // @:TeX capacity exceeded hash size}{\quad hash size@>
+            // decr(hash_used);
+            decr!($globals.hash_used);
+            // until text(hash_used)=0; {search for an empty location in |hash|}
+            /// search for an empty location in |hash|
+            if text!($globals, $globals.hash_used) == 0 {
+                break;
+            }
         }
-        #[cfg(not(feature = "unicode_support"))]
-        let l = $l_raw;
-        #[cfg(feature = "unicode_support")]
-        let l = buffer_range_bytes($globals, $j, $l_raw);
-        str_room($globals, l);
-        let d = cur_length!($globals);
-        // str_room(l); d:=cur_length;
-        // while pool_ptr>str_start[str_ptr] do
-        /// move current string up to make room for another
-        while $globals.pool_ptr > $globals.str_start[$globals.str_ptr] {
-            // begin decr(pool_ptr); str_pool[pool_ptr+l]:=str_pool[pool_ptr];
-            decr!($globals.pool_ptr);
-            $globals.str_pool[$globals.pool_ptr + l] = $globals.str_pool[$globals.pool_ptr];
-            // end; {move current string up to make room for another}
-        }
-        // for k:=j to j+l-1 do append_char(buffer[k]);
-        for k in $j..=$j + l - 1 {
-            append_char(
-                make_globals_string_view!($globals),
-                $globals.buffer[k as u16],
-            );
-        }
-        // text(p):=make_string; pool_ptr:=pool_ptr+d;
-        text!($globals, $p) = make_string(make_globals_string_view!($globals)).get() as _;
-        trace_expr!("text(p) = {}", text!($globals, $p));
-        $globals.pool_ptr = $globals.pool_ptr + d as _;
-        // @!stat incr(cs_count);@+tats@;@/
-        region_stat! {
-            incr!($globals.cs_count);
-        }
-        // end
-        use crate::section_0004::TeXGlobalsStringView;
-        use crate::section_0042::append_char;
-        use crate::section_0042::str_room;
-        use crate::section_0043::make_string;
-        #[cfg(feature = "unicode_support")]
-        use crate::section_0260::buffer_range_bytes;
-    };
+        // next(p):=hash_used; p:=hash_used;
+        next!($globals, $p) = $globals.hash_used;
+        $p = $globals.hash_used;
+        // end;
+    }
+    #[cfg(not(feature = "unicode_support"))]
+    let l = $l_raw;
+    #[cfg(feature = "unicode_support")]
+    let l = buffer_range_bytes($globals, $j, $l_raw);
+    str_room($globals, l);
+    let d = cur_length!($globals);
+    // str_room(l); d:=cur_length;
+    // while pool_ptr>str_start[str_ptr] do
+    /// move current string up to make room for another
+    while $globals.pool_ptr > $globals.str_start[$globals.str_ptr] {
+        // begin decr(pool_ptr); str_pool[pool_ptr+l]:=str_pool[pool_ptr];
+        decr!($globals.pool_ptr);
+        $globals.str_pool[$globals.pool_ptr + l] = $globals.str_pool[$globals.pool_ptr];
+        // end; {move current string up to make room for another}
+    }
+    // for k:=j to j+l-1 do append_char(buffer[k]);
+    for k in $j..=$j + l - 1 {
+        append_char(
+            make_globals_string_view!($globals),
+            $globals.buffer[k as u16],
+        );
+    }
+    // text(p):=make_string; pool_ptr:=pool_ptr+d;
+    text!($globals, $p) = make_string(make_globals_string_view!($globals)).get() as _;
+    crate::trace_expr!("text(p) = {}", text!($globals, $p));
+    $globals.pool_ptr = $globals.pool_ptr + d as _;
+    // @!stat incr(cs_count);@+tats@;@/
+    crate::region_stat! {
+        incr!($globals.cs_count);
+    }
+    // end
+    use crate::section_0004::make_globals_string_view;
+    use crate::section_0004::TeXGlobalsStringView;
+    use crate::section_0016::decr;
+    use crate::section_0041::cur_length;
+    use crate::section_0042::append_char;
+    use crate::section_0042::str_room;
+    use crate::section_0043::make_string;
+    use crate::section_0256::hash_is_full;
+    use crate::section_0256::next;
+    use crate::section_0256::text;
+    #[cfg(feature = "unicode_support")]
+    use crate::section_0260::buffer_range_bytes;
 }
 
 #[cfg(feature = "unicode_support")]

@@ -23,15 +23,15 @@ pub(crate) const script_script_size: quarterword = 32;
 pub(crate) fn print_size(globals: &mut TeXGlobals, s: integer) {
     // begin if s=text_size then print_esc("textfont")
     if s == text_size as integer {
-        print_esc(globals, strpool_str!("textfont"));
+        print_esc(globals, crate::strpool_str!("textfont"));
     }
     // else if s=script_size then print_esc("scriptfont")
     else if s == script_size as integer {
-        print_esc(globals, strpool_str!("scriptfont"));
+        print_esc(globals, crate::strpool_str!("scriptfont"));
     }
     // else print_esc("scriptscriptfont");
     else {
-        print_esc(globals, strpool_str!("scriptscriptfont"));
+        print_esc(globals, crate::strpool_str!("scriptscriptfont"));
     }
     // end;
 }

@@ -7,10 +7,8 @@
 
 // @d token_ref_count(#) == info(#) {reference count preceding a token list}
 /// reference count preceding a token list
-macro_rules! token_ref_count {
-    ($globals:expr, $val:expr) => {
-        info_inner!($globals, $val)
-    };
+pub(crate) macro token_ref_count($globals:expr, $val:expr) {
+    crate::section_0118::info_inner!($globals, $val)
 }
 
 // @p procedure delete_token_ref(@!p:pointer); {|p| points to the reference count
@@ -31,7 +29,7 @@ pub(crate) fn delete_token_ref(globals: &mut TeXGlobals, p: pointer) {
 }
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0115::pointer;
+use crate::section_0016::decr;
 use crate::section_0115::null;
+use crate::section_0115::pointer;
 use crate::section_0123::flush_list;
-
