@@ -45,21 +45,4 @@ pub(crate) type alpha_file = packed_file_of_text_char;
 
 pub(crate) type byte_file = packed_file_of<eight_bits>;
 
-impl FromBlob for eight_bits {
-    fn from_blob(data: &[u8]) -> Self {
-        assert!(data.len() == 1);
-        data[0]
-    }
-}
-
-impl IntoBlob for eight_bits {
-    type BlobType = [u8; 1];
-
-    fn into_blob(&self) -> Self::BlobType {
-        [*self]
-    }
-}
-
-use crate::pascal::FromBlob;
-use crate::pascal::IntoBlob;
 use crate::pascal::{packed_file_of, packed_file_of_text_char};

@@ -372,13 +372,14 @@ impl FromBlob for memory_word {
     }
 }
 
-impl IntoBlob for memory_word {
+impl ToBlob for memory_word {
     type BlobType = [u8; 4];
-    fn into_blob(&self) -> Self::BlobType {
+
+    fn to_blob(&self) -> Self::BlobType {
         self[MEMORY_WORD_INT].to_le_bytes()
     }
 }
 
 use crate::pascal::FromBlob;
-use crate::pascal::IntoBlob;
+use crate::pascal::ToBlob;
 use core::ops::{Index, IndexMut};

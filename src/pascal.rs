@@ -687,212 +687,6 @@ macro_rules! define_array_keyed_with_ranged_signed_integer_with_fixed_start_and_
     };
 }
 
-pub(crate) trait ReadLine {
-    fn read_line(&mut self, buf: &mut String) -> io::Result<usize>;
-}
-
-impl ReadLine for io::Stdin {
-    fn read_line(&mut self, buf: &mut String) -> io::Result<usize> {
-        io::Stdin::read_line(self, buf)
-    }
-}
-
-impl<R: io::Read> ReadLine for io::BufReader<R> {
-    fn read_line(&mut self, buf: &mut String) -> io::Result<usize> {
-        <Self as io::BufRead>::read_line(self, buf)
-    }
-}
-
-impl<T: AsRef<[u8]>> ReadLine for io::Cursor<T> {
-    fn read_line(&mut self, buf: &mut String) -> io::Result<usize> {
-        <Self as io::BufRead>::read_line(self, buf)
-    }
-}
-
-pub(crate) enum LineBufferState<T> {
-    UnknownState {
-        initial_line: bool,
-    },
-    AfterReadLine {
-        line_buffer: Vec<T>,
-        line_position: usize,
-        line_no_more: bool,
-    },
-    Eof,
-}
-
-pub(crate) enum BlockBufferState<T> {
-    UnknownState,
-    AfterReadBlock {
-        bytes_block_buffer: Box<[u8]>,
-        bytes_avail_length: usize,
-        bytes_position: usize,
-        bytes_buffer: Option<T>,
-    },
-    Eof,
-}
-
-pub(crate) enum FileState<T> {
-    Undefined,
-    GenerationMode {
-        write_buffer: Option<T>,
-        write_target: Box<dyn Write>,
-    },
-    LineInspectionMode {
-        read_line_buffer: LineBufferState<T>,
-        read_target: Box<dyn ReadLine>,
-        read_flag_extra_eoln_line: bool,
-    },
-    BlockInspectionMode {
-        read_block_buffer: BlockBufferState<T>,
-        read_target: Box<dyn Read>,
-    },
-}
-
-impl<T> Default for FileState<T> {
-    fn default() -> Self {
-        FileState::Undefined
-    }
-}
-
-impl<T> FileState<T> {
-    fn discard_buffer_variable_value_and_get_write_target(&mut self) -> &mut dyn Write {
-        match self {
-            FileState::GenerationMode {
-                write_buffer,
-                write_target,
-            } => {
-                *write_buffer = None;
-                write_target.as_mut()
-            }
-            _ => {
-                panic!("file not in generation mode!");
-            }
-        }
-    }
-
-    fn refill<F>(&mut self)
-    where
-        F: PascalFile<Unit = T>,
-    {
-        match self {
-            FileState::LineInspectionMode {
-                read_line_buffer,
-                read_target,
-                ..
-            } => match read_line_buffer {
-                LineBufferState::UnknownState { initial_line } => {
-                    let initial_line = *initial_line;
-                    let mut buf = String::new();
-                    read_target.read_line(&mut buf).expect("read line failure");
-                    if initial_line && buf.is_empty() {
-                        *read_line_buffer = LineBufferState::Eof;
-                        return;
-                    }
-                    let mut line_chars = vec![];
-                    F::convert_line_string_crlf_to_lf(&mut buf);
-                    F::convert_line_string_to_units(&buf, &mut line_chars);
-                    let no_more = match line_chars.last() {
-                        Some(c) => !F::is_eoln_unit(c),
-                        None => true,
-                    };
-                    if no_more {
-                        line_chars.push(F::eoln_unit());
-                    }
-                    *read_line_buffer = LineBufferState::AfterReadLine {
-                        line_buffer: line_chars,
-                        line_position: 0,
-                        line_no_more: no_more,
-                    };
-                    return;
-                }
-                _ => unreachable!(),
-            },
-            FileState::BlockInspectionMode {
-                read_block_buffer,
-                read_target,
-            } => {
-                const IDEAL_BUFSIZE: usize = 512;
-                let size_of_t = core::mem::size_of::<T>();
-                assert!(size_of_t > 0);
-                if matches!(read_block_buffer, BlockBufferState::UnknownState) {
-                    let dest_size = ((IDEAL_BUFSIZE / size_of_t) + 1) * size_of_t;
-                    *read_block_buffer = BlockBufferState::AfterReadBlock {
-                        bytes_block_buffer: vec![0u8; dest_size].into_boxed_slice(),
-                        bytes_avail_length: dest_size,
-                        bytes_position: dest_size - size_of_t,
-                        bytes_buffer: None,
-                    }
-                }
-                match read_block_buffer {
-                    BlockBufferState::AfterReadBlock {
-                        bytes_block_buffer,
-                        bytes_avail_length,
-                        bytes_position,
-                        bytes_buffer,
-                    } => {
-                        let bytes_position_end = *bytes_position + size_of_t;
-                        let mut remaining_range = bytes_position_end..*bytes_avail_length;
-                        if remaining_range.start > 0 {
-                            if remaining_range.len() > 0 {
-                                bytes_block_buffer.copy_within(remaining_range.clone(), 0);
-                                remaining_range = 0..remaining_range.len();
-                            } else {
-                                remaining_range = 0..0;
-                            }
-                        }
-                        *bytes_avail_length = remaining_range.end;
-                        *bytes_position = 0;
-                        *bytes_buffer = None;
-                        while *bytes_avail_length < size_of_t {
-                            let fillable_range = *bytes_avail_length..bytes_block_buffer.len();
-                            let newly_read_len = read_target
-                                .read(&mut bytes_block_buffer[fillable_range])
-                                .expect("read block failure");
-                            if newly_read_len == 0 {
-                                *read_block_buffer = BlockBufferState::Eof;
-                                return;
-                            }
-                            *bytes_avail_length += newly_read_len;
-                        }
-                    }
-                    _ => unreachable!(),
-                }
-            }
-            _ => {
-                panic!("file not in inspection mode!");
-            }
-        }
-    }
-}
-
-#[allow(unused_variables)]
-pub(crate) trait PascalFile {
-    type Unit;
-
-    fn is_text_file() -> bool;
-
-    fn is_eoln_unit(unit: &Self::Unit) -> bool;
-
-    fn eoln_unit() -> Self::Unit;
-
-    fn convert_line_string_crlf_to_lf(input: &mut String);
-
-    fn convert_line_string_to_units(input: &str, units: &mut Vec<Self::Unit>);
-
-    fn convert_blob_to_unit(input: &[u8]) -> Self::Unit;
-
-    fn convert_unit_to_blob(data: Self::Unit, f: &mut dyn for<'a> FnMut(&'a [u8]));
-
-    fn file_state(&self) -> &FileState<Self::Unit>;
-
-    fn file_state_mut(&mut self) -> &mut FileState<Self::Unit>;
-
-    fn error_state(&self) -> usize;
-
-    fn set_error_state(&mut self, error_state: usize);
-}
-
 pub(crate) struct file_of_text_char {
     file_state: FileState<text_char>,
     error_state: usize,
@@ -980,6 +774,18 @@ impl PascalFile for file_of_text_char {
     fn set_error_state(&mut self, error_state: usize) {
         self.error_state = error_state;
     }
+
+    fn open_text_file_for_read(path: &str) -> Result<(Box<dyn pascal_io::ReadLine>, bool), usize> {
+        open_text_file_for_read(path)
+    }
+
+    fn open_binary_file_for_read(path: &str) -> Result<Box<dyn Read>, usize> {
+        open_binary_file_for_read(path)
+    }
+
+    fn open_file_for_write(path: &str) -> Result<Box<dyn Write>, usize> {
+        open_file_for_write(path)
+    }
 }
 
 pub(crate) type packed_file_of_text_char = file_of_text_char;
@@ -1000,16 +806,7 @@ impl<T> Default for file_of<T> {
     }
 }
 
-pub(crate) trait FromBlob {
-    fn from_blob(data: &[u8]) -> Self;
-}
-pub(crate) trait IntoBlob {
-    type BlobType: core::borrow::Borrow<[u8]>;
-
-    fn into_blob(&self) -> Self::BlobType;
-}
-
-impl<T: FromBlob + IntoBlob> PascalFile for file_of<T> {
+impl<T: FromBlob + ToBlob> PascalFile for file_of<T> {
     type Unit = T;
 
     fn is_text_file() -> bool {
@@ -1038,7 +835,7 @@ impl<T: FromBlob + IntoBlob> PascalFile for file_of<T> {
 
     fn convert_unit_to_blob(v: Self::Unit, f: &mut dyn for<'a> FnMut(&'a [u8])) {
         use core::borrow::Borrow;
-        let blob = v.into_blob();
+        let blob = v.to_blob();
         f(blob.borrow());
     }
 
@@ -1057,467 +854,77 @@ impl<T: FromBlob + IntoBlob> PascalFile for file_of<T> {
     fn set_error_state(&mut self, error_state: usize) {
         self.error_state = error_state;
     }
+
+    fn open_text_file_for_read(path: &str) -> Result<(Box<dyn pascal_io::ReadLine>, bool), usize> {
+        open_text_file_for_read(path)
+    }
+
+    fn open_binary_file_for_read(path: &str) -> Result<Box<dyn Read>, usize> {
+        open_binary_file_for_read(path)
+    }
+
+    fn open_file_for_write(path: &str) -> Result<Box<dyn Write>, usize> {
+        open_file_for_write(path)
+    }
 }
 
 pub(crate) type packed_file_of<T> = file_of<T>;
 
-#[allow(unused_variables)]
-pub(crate) fn rewrite<F: PascalFile, P: Into<String>>(file: &mut F, path: P, options: &str) {
-    let path = path.into();
-    let new_write_target: Box<dyn Write> = if path == "TTY:" {
+fn open_text_file_for_read(path: &str) -> Result<(Box<dyn pascal_io::ReadLine>, bool), usize> {
+    let mut term_special_handling = false;
+    let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
+        term_special_handling = true;
+        Box::new(io::stdin())
+    } else if path == crate::section_0011::pool_name {
+        Box::new(crate::string_pool::pool_file())
+    } else {
+        let path = path.trim_end_matches(' ');
+        let file = match std::fs::File::open(path) {
+            Ok(f) => f,
+            Err(_) => {
+                return Err(1);
+            }
+        };
+        Box::new(io::BufReader::new(file))
+    };
+    Ok((new_read_target, term_special_handling))
+}
+
+fn open_binary_file_for_read(path: &str) -> Result<Box<dyn Read>, usize> {
+    let new_read_target: Box<dyn Read> = if path == "TTY:" {
+        Box::new(io::stdin())
+    } else {
+        let mut path = path.trim_end_matches(' ');
+        path = path.trim_start_matches("TeXfonts:");
+        path = path.trim_start_matches("TeXformats:");
+        let file = match std::fs::File::open(path) {
+            Ok(f) => f,
+            Err(_) => {
+                return Err(1);
+            }
+        };
+        Box::new(io::BufReader::new(file))
+    };
+    Ok(new_read_target)
+}
+
+fn open_file_for_write(path: &str) -> Result<Box<dyn Write>, usize> {
+    let write_target: Box<dyn Write> = if path == "TTY:" {
         Box::new(io::stdout())
     } else {
         let path = path.trim_end_matches(' ');
         let file = match std::fs::File::create(path) {
             Ok(f) => f,
-            Err(e) => {
-                *file.file_state_mut() = FileState::Undefined;
-                file.set_error_state(1);
-                return;
+            Err(_) => {
+                return Err(1);
             }
         };
         Box::new(file)
     };
-    *file.file_state_mut() = FileState::GenerationMode {
-        write_target: new_write_target,
-        write_buffer: None,
-    };
+    Ok(write_target)
 }
 
-pub(crate) fn buffer_variable_assign<F: PascalFile>(file: &mut F, value: F::Unit) {
-    match file.file_state_mut() {
-        FileState::GenerationMode { write_buffer, .. } => {
-            *write_buffer = Some(value);
-        }
-        _ => {
-            panic!("file not in generation mode!");
-        }
-    }
-}
-
-pub(crate) fn put<F: PascalFile>(file: &mut F) {
-    match file.file_state_mut() {
-        FileState::GenerationMode {
-            write_target,
-            write_buffer,
-        } => {
-            let caret_value = write_buffer
-                .take()
-                .expect("file buffer variable value is undefined!");
-            F::convert_unit_to_blob(caret_value, &mut |data| {
-                write_target.write_all(data).expect("fail to write data");
-            });
-        }
-        _ => {
-            panic!("file not in generation mode!");
-        }
-    }
-}
-
-#[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
-pub(crate) fn reset<F: PascalFile + fmt::Debug, P: Into<String> + fmt::Debug>(
-    file: &mut F,
-    path: P,
-    options: &str,
-) {
-    let path = path.into();
-    if F::is_text_file() {
-        let mut term_special_handling = false;
-        let new_read_target: Box<dyn ReadLine> = if path == "TTY:" {
-            term_special_handling = true;
-            Box::new(io::stdin())
-        } else if path == crate::section_0011::pool_name {
-            Box::new(crate::string_pool::pool_file())
-        } else {
-            let path = path.trim_end_matches(' ');
-            let file = match std::fs::File::open(path) {
-                Ok(f) => f,
-                Err(e) => {
-                    *file.file_state_mut() = FileState::Undefined;
-                    file.set_error_state(1);
-                    return;
-                }
-            };
-            Box::new(io::BufReader::new(file))
-        };
-
-        if term_special_handling {
-            *file.file_state_mut() = FileState::LineInspectionMode {
-                read_target: new_read_target,
-                read_line_buffer: LineBufferState::AfterReadLine {
-                    line_buffer: vec![F::eoln_unit()],
-                    line_position: 0,
-                    line_no_more: false,
-                },
-                read_flag_extra_eoln_line: true,
-            };
-        } else {
-            *file.file_state_mut() = FileState::LineInspectionMode {
-                read_target: new_read_target,
-                read_line_buffer: LineBufferState::UnknownState { initial_line: true },
-                read_flag_extra_eoln_line: false,
-            };
-        }
-        file.set_error_state(0);
-    } else {
-        let new_read_target: Box<dyn Read> = if path == "TTY:" {
-            Box::new(io::stdin())
-        } else {
-            let mut path = path.trim_end_matches(' ');
-            path = path.trim_start_matches("TeXfonts:");
-            path = path.trim_start_matches("TeXformats:");
-            let file = match std::fs::File::open(path) {
-                Ok(f) => f,
-                Err(e) => {
-                    *file.file_state_mut() = FileState::Undefined;
-                    file.set_error_state(1);
-                    return;
-                }
-            };
-            Box::new(io::BufReader::new(file))
-        };
-        *file.file_state_mut() = FileState::BlockInspectionMode {
-            read_target: new_read_target,
-            read_block_buffer: BlockBufferState::UnknownState,
-        };
-        file.set_error_state(0);
-    }
-}
-
-pub(crate) fn get<F: PascalFile>(file: &mut F) {
-    loop {
-        match file.file_state_mut() {
-            FileState::LineInspectionMode {
-                read_line_buffer, ..
-            } => match read_line_buffer {
-                LineBufferState::Eof => {
-                    panic!("file eof reached");
-                }
-                LineBufferState::UnknownState { .. } => {
-                    file.file_state_mut().refill::<F>();
-                    return;
-                }
-                LineBufferState::AfterReadLine {
-                    line_buffer,
-                    line_position,
-                    line_no_more,
-                } => {
-                    if *line_position + 1 < line_buffer.len() {
-                        *line_position += 1;
-                    } else {
-                        if *line_no_more {
-                            *read_line_buffer = LineBufferState::Eof
-                        } else {
-                            *read_line_buffer = LineBufferState::UnknownState {
-                                initial_line: false,
-                            };
-                        }
-                    }
-                }
-            },
-            FileState::BlockInspectionMode {
-                read_block_buffer, ..
-            } => match read_block_buffer {
-                BlockBufferState::Eof => {
-                    panic!("file eof reached");
-                }
-                BlockBufferState::UnknownState => {
-                    file.file_state_mut().refill::<F>();
-                    return;
-                }
-                BlockBufferState::AfterReadBlock {
-                    bytes_avail_length,
-                    bytes_position,
-                    bytes_buffer,
-                    ..
-                } => {
-                    let size_of_t = core::mem::size_of::<F::Unit>();
-                    assert!(size_of_t > 0);
-                    let bytes_position_end = *bytes_position + size_of_t;
-                    let new_bytes_position_end = bytes_position_end + size_of_t;
-                    if new_bytes_position_end > *bytes_avail_length {
-                        file.file_state_mut().refill::<F>();
-                        return;
-                    }
-                    *bytes_buffer = None;
-                    *bytes_position = bytes_position_end;
-                }
-            },
-            _ => {
-                panic!("file not in inspection mode");
-            }
-        }
-        return;
-    }
-}
-
-pub(crate) fn buffer_variable<F: PascalFile>(file: &mut F) -> F::Unit
-where
-    F::Unit: Clone,
-{
-    loop {
-        match file.file_state_mut() {
-            FileState::LineInspectionMode {
-                read_line_buffer, ..
-            } => match read_line_buffer {
-                LineBufferState::Eof => {
-                    panic!("file eof reached");
-                }
-                LineBufferState::UnknownState { .. } => {
-                    file.file_state_mut().refill::<F>();
-                    continue;
-                }
-                LineBufferState::AfterReadLine {
-                    line_buffer,
-                    line_position,
-                    ..
-                } => {
-                    return line_buffer[*line_position].clone();
-                }
-            },
-            FileState::BlockInspectionMode {
-                read_block_buffer, ..
-            } => match read_block_buffer {
-                BlockBufferState::Eof => {
-                    panic!("file eof reached");
-                }
-                BlockBufferState::UnknownState => {
-                    file.file_state_mut().refill::<F>();
-                    continue;
-                }
-                BlockBufferState::AfterReadBlock {
-                    bytes_block_buffer,
-                    bytes_buffer,
-                    bytes_position,
-                    ..
-                } => match bytes_buffer {
-                    None => {
-                        let size_of_t = core::mem::size_of::<F::Unit>();
-                        assert!(size_of_t > 0);
-                        let bytes_position_end = *bytes_position + size_of_t;
-                        let v = F::convert_blob_to_unit(
-                            &bytes_block_buffer[*bytes_position..bytes_position_end],
-                        );
-                        *bytes_buffer = Some(v.clone());
-                        return v;
-                    }
-                    Some(v) => {
-                        return v.clone();
-                    }
-                },
-            },
-            _ => panic!("file not in inspection mode"),
-        }
-    }
-}
-
-pub(crate) fn eof<F: PascalFile>(file: &mut F) -> bool {
-    loop {
-        match file.file_state() {
-            FileState::LineInspectionMode {
-                read_line_buffer, ..
-            } => match read_line_buffer {
-                LineBufferState::Eof => {
-                    return true;
-                }
-                LineBufferState::UnknownState { .. } => {
-                    file.file_state_mut().refill::<F>();
-                    continue;
-                }
-                LineBufferState::AfterReadLine { .. } => {
-                    return false;
-                }
-            },
-            FileState::BlockInspectionMode {
-                read_block_buffer, ..
-            } => match read_block_buffer {
-                BlockBufferState::Eof => {
-                    return true;
-                }
-                BlockBufferState::UnknownState { .. } => {
-                    file.file_state_mut().refill::<F>();
-                    continue;
-                }
-                BlockBufferState::AfterReadBlock { .. } => {
-                    return false;
-                }
-            },
-            FileState::GenerationMode { .. } => {
-                return true;
-            }
-            _ => panic!("file not in any mode"),
-        }
-    }
-}
-
-pub(crate) fn eoln<F: PascalFile>(file: &mut F) -> bool {
-    loop {
-        match file.file_state() {
-            FileState::LineInspectionMode {
-                read_line_buffer, ..
-            } => match read_line_buffer {
-                LineBufferState::Eof => {
-                    panic!("file eof reached");
-                }
-                LineBufferState::UnknownState { .. } => {
-                    file.file_state_mut().refill::<F>();
-                    continue;
-                }
-                LineBufferState::AfterReadLine {
-                    line_buffer,
-                    line_position,
-                    ..
-                } => {
-                    return F::is_eoln_unit(&line_buffer[*line_position]);
-                }
-            },
-            FileState::BlockInspectionMode { .. } => panic!("file is not text file"),
-            _ => panic!("file not in inspection mode"),
-        }
-    }
-}
-
-pub(crate) fn write<F: PascalFile, T: Display>(file: &mut F, val: T) {
-    let write_target = file
-        .file_state_mut()
-        .discard_buffer_variable_value_and_get_write_target();
-    write!(write_target, "{}", val).unwrap();
-}
-
-pub(crate) fn write_ln<F: PascalFile, T: Display>(file: &mut F, val: T) {
-    let write_target = file
-        .file_state_mut()
-        .discard_buffer_variable_value_and_get_write_target();
-    writeln!(write_target, "{}", val).unwrap();
-}
-
-pub(crate) fn write_ln_noargs<F: PascalFile>(file: &mut F) {
-    let write_target = file
-        .file_state_mut()
-        .discard_buffer_variable_value_and_get_write_target();
-    writeln!(write_target, "").unwrap();
-}
-
-pub(crate) fn write_binary<F: PascalFile, T: IntoBlob>(file: &mut F, val: T) {
-    use core::borrow::Borrow;
-    let write_target = file
-        .file_state_mut()
-        .discard_buffer_variable_value_and_get_write_target();
-    let blob = val.into_blob();
-    write_target.write_all(blob.borrow()).unwrap();
-}
-
-pub(crate) fn r#break<F: PascalFile>(file: &mut F) {
-    let write_target = file
-        .file_state_mut()
-        .discard_buffer_variable_value_and_get_write_target();
-    write_target.flush().unwrap();
-}
-
-pub(crate) fn read_onearg<F: PascalFile>(file: &mut F) -> F::Unit
-where
-    F::Unit: Copy,
-{
-    let v = buffer_variable(file);
-    get(file);
-    v
-}
-
-pub(crate) fn read_ln<F: PascalFile>(file: &mut F) {
-    while !eoln(file) {
-        get(file);
-    }
-    get(file);
-}
-
-pub(crate) fn break_in<F: PascalFile>(file: &mut F, _: boolean) {
-    // FIXME: this seems nonstandard. Verify if this handling is correct.
-    // and not sure what the 2nd argument should do here.
-    let file_state = file.file_state_mut();
-    match file_state {
-        FileState::LineInspectionMode {
-            read_line_buffer,
-            read_flag_extra_eoln_line,
-            ..
-        } => match read_line_buffer {
-            LineBufferState::AfterReadLine { line_no_more, .. } => {
-                if *line_no_more {
-                    *read_line_buffer = LineBufferState::Eof
-                } else {
-                    if *read_flag_extra_eoln_line {
-                        *read_line_buffer = LineBufferState::AfterReadLine {
-                            line_buffer: vec![F::eoln_unit()],
-                            line_position: 0,
-                            line_no_more: false,
-                        };
-                    } else {
-                        *read_line_buffer = LineBufferState::UnknownState {
-                            initial_line: false,
-                        };
-                    }
-                }
-            }
-            _ => {}
-        },
-        _ => panic!("file is not in line-inspection mode"),
-    }
-}
-
-#[allow(unused_variables)]
-pub(crate) fn erstat<F: PascalFile>(file: &mut F) -> usize {
-    file.error_state()
-}
-
-pub(crate) fn close<F: PascalFile>(file: &mut F) {
-    *file.file_state_mut() = FileState::default();
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[allow(non_snake_case)]
-    fn ASCII_lit_char(c: u8) -> char {
-        let val: u8 = c;
-        char::new(val as _)
-    }
-
-    #[test]
-    fn file_input_0001() {
-        use std::io::Cursor;
-        const DATA: &'static str = "A\nBC\nA";
-        let input_data = Cursor::new(DATA);
-        let mut input_file = file_of_text_char::default();
-        *input_file.file_state_mut() = FileState::LineInspectionMode {
-            read_target: Box::new(input_data),
-            read_line_buffer: LineBufferState::UnknownState { initial_line: true },
-            read_flag_extra_eoln_line: true,
-        };
-        input_file.set_error_state(0);
-        assert_eq!(false, eoln(&mut input_file));
-        assert_eq!(ASCII_lit_char(b'A'), buffer_variable(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(true, eoln(&mut input_file));
-        assert_eq!(ASCII_lit_char(b'\n'), buffer_variable(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(ASCII_lit_char(b'B'), buffer_variable(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(ASCII_lit_char(b'C'), buffer_variable(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(true, eoln(&mut input_file));
-        assert_eq!(ASCII_lit_char(b'\n'), buffer_variable(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(false, eoln(&mut input_file));
-        assert_eq!(ASCII_lit_char(b'A'), buffer_variable(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(true, eoln(&mut input_file));
-        assert_eq!(ASCII_lit_char(b'\n'), buffer_variable(&mut input_file));
-        assert_eq!(false, eof(&mut input_file));
-        get(&mut input_file);
-        assert_eq!(true, eof(&mut input_file));
-    }
-}
+pub(crate) use pascal_io::*;
 
 use crate::section_0019::text_char;
 use core::cell::Cell;
