@@ -3,6 +3,7 @@
 //
 // @<Initialize the input routines@>=
 pub(crate) macro Initialize_the_input_routines($globals:expr, $lbl_final_end:lifetime) {
+    crate::trace_span!("Initialize_the_input_routines");
     // begin input_ptr:=0; max_in_stack:=0;
     $globals.input_ptr = 0.into();
     $globals.max_in_stack = 0.into();

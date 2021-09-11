@@ -6,10 +6,16 @@ edition = "2021"
 [features]
 unicode_support = ['tex/unicode_support']
 debugging = ['tex/debugging']
-trace = ['tex/tracing', 'tracing-subscriber']
+trace = ['tex/trace', 'tracing', 'tracing-subscriber', 'tracing-tree']
 
 [dependencies]
 structopt = "0.3"
 tex = {path = ".."}
+tracing = { version = "0.1.26", optional = true }
 tracing-subscriber = { version = "0.2", optional = true }
+tracing-tree = { version = "0.1.10", optional = true }
+
+[dev-dependencies]
+rayon = "1.5.1"
+vfs = "0.5.1"
 
