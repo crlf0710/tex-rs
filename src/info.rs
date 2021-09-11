@@ -162,9 +162,7 @@ pub(crate) macro strpool_str($s:expr) {{
 }}
 
 pub(crate) macro workarounds() {
-    crate::section_0074::workaround_47384();
     crate::section_0164::workaround_47384();
-    crate::section_0215::workaround_47384();
     crate::section_0222::workaround_47384();
     crate::section_0226::workaround_47384();
     crate::section_0230::workaround_47384();
@@ -172,10 +170,8 @@ pub(crate) macro workarounds() {
     crate::section_0238::workaround_47384();
     crate::section_0240::workaround_47384();
     crate::section_0248::workaround_47384();
-    crate::section_0254::workaround_47384();
     crate::section_0258::workaround_47384();
     crate::section_0265::workaround_47384();
-    crate::section_0272::workaround_47384();
     crate::section_0334::workaround_47384();
     crate::section_0376::workaround_47384();
     crate::section_0411::workaround_47384();
@@ -183,11 +179,8 @@ pub(crate) macro workarounds() {
     crate::section_0468::workaround_47384();
     crate::section_0487::workaround_47384();
     crate::section_0491::workaround_47384();
-    crate::section_0521::workaround_47384();
     crate::section_0552::workaround_47384();
     crate::section_0553::workaround_47384();
-    crate::section_0593::workaround_47384();
-    crate::section_0596::workaround_47384();
     crate::section_0780::workaround_47384();
     crate::section_0983::workaround_47384();
     crate::section_1052::workaround_47384();

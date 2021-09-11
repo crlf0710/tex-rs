@@ -29,17 +29,17 @@ pub(crate) macro aux($globals:expr) {
 // @d prev_depth==aux.sc {the name of |aux| in vertical mode}
 /// the name of `aux` in vertical mode
 pub(crate) macro prev_depth($globals:expr) {
-    aux!($globals)[crate::section_0101::MEMORY_WORD_SC]
+    crate::section_0213::aux!($globals)[crate::section_0101::MEMORY_WORD_SC]
 }
 // @d space_factor==aux.hh.lh {part of |aux| in horizontal mode}
 /// part of `aux` in horizontal mode
 pub(crate) macro space_factor($globals:expr) {
-    aux!($globals)[crate::section_0113::MEMORY_WORD_HH_LH]
+    crate::section_0213::aux!($globals)[crate::section_0113::MEMORY_WORD_HH_LH]
 }
 // @d clang==aux.hh.rh {the other part of |aux| in horizontal mode}
 /// the other part of `aux` in horizontal mode
 pub(crate) macro clang($globals:expr) {
-    aux!($globals)[crate::section_0113::MEMORY_WORD_HH_RH]
+    crate::section_0213::aux!($globals)[crate::section_0113::MEMORY_WORD_HH_RH]
 }
 // @d incompleat_noad==aux.int {the name of |aux| in math mode}
 /// the name of `aux` in math mode

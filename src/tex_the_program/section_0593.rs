@@ -1,7 +1,7 @@
 //! ` `
 // @<Set init...@>=
-#[distributed_slice(SET_INIT_KEYVAR)]
-fn set_initial_values_of_key_variables_0593(globals: &mut TeXGlobals) {
+pub(crate) macro Set_initial_values_of_key_variables_0593($globals:expr) {{
+    let globals = &mut *$globals;
     // total_pages:=0; max_v:=0; max_h:=0; max_push:=0; last_bop:=-1;
     globals.total_pages = 0;
     globals.max_v = scaled::zero();
@@ -12,12 +12,6 @@ fn set_initial_values_of_key_variables_0593(globals: &mut TeXGlobals) {
     globals.doing_leaders = false;
     globals.dead_cycles = 0;
     globals.cur_s = -1;
-}
 
-use crate::section_0004::TeXGlobals;
-use crate::section_0008::SET_INIT_KEYVAR;
-use crate::section_0101::scaled;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}
+    use crate::section_0101::scaled;
+}}

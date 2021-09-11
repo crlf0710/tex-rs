@@ -5,7 +5,7 @@
 //
 // @<Do some work that has been queued up...@>=
 pub(crate) macro Do_some_work_that_has_been_queued_up_for_write($globals:expr, $p:expr) {{
-    let globals = $globals;
+    let globals = &mut *$globals;
     // if not doing_leaders then
     if !globals.doing_leaders {
         let p = $p;
