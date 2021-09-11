@@ -1,0 +1,15 @@
+[package]
+name = "tex-cli"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+unicode_support = ['tex/unicode_support']
+debugging = ['tex/debugging']
+trace = ['tex/tracing', 'tracing-subscriber']
+
+[dependencies]
+structopt = "0.3"
+tex = {path = ".."}
+tracing-subscriber = { version = "0.2", optional = true }
+

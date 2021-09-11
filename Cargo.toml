@@ -14,14 +14,16 @@ unicode-normalization = { version = "0.1.13", optional = true }
 linkme = "0.2.2"
 once_cell = "1.4.1"
 tracing = { version = "0.1.21", optional = true }
-tracing-subscriber = { version = "0.2.14", optional = true }
 ref-cast = "1.0.3"
+
+[workspace]
+members = ["cli"]
 
 [features]
 initex = []
 unicode_support = ['unicode-segmentation', 'unicode-normalization']
 latex_support = []
 debugging = []
-trace = ['tracing', 'tracing-subscriber']
+trace = ['tracing']
 statistics = []
 default = ['initex', 'unicode_support', 'latex_support']
