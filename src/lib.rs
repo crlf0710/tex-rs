@@ -68,16 +68,22 @@ use info::*;
 #[macro_use]
 mod pascal;
 
-#[macro_use]
+mod io_support;
+mod string_pool;
+
 mod tex_the_program;
 
 use tex_the_program::*;
 
 #[cfg(feature = "latex_support")]
 mod latex_support;
-mod string_pool;
 #[cfg(feature = "unicode_support")]
 mod unicode_support;
 
 pub use section_0004::TeXGlobals;
 pub use section_1332::entry;
+
+pub use io_support::install_io_handler;
+pub use io_support::reset_io_handler;
+pub use io_support::TeXIoHandler;
+pub use pascal_io::ReadLine as TeXIoReadLine;

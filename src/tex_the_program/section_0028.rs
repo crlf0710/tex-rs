@@ -33,7 +33,7 @@ pub(crate) fn w_close(f: &mut word_file) {
     // end;
 }
 
-use crate::pascal::close;
+use crate::io_support::close;
 use crate::section_0025::alpha_file;
 use crate::section_0025::byte_file;
 use crate::section_0113::word_file;

@@ -15,5 +15,5 @@ pub(crate) fn t_open_out(globals: &mut TeXGlobals) {
     rewrite(&mut globals.term_out, "TTY:", "/O");
 }
 
-use crate::pascal::{reset, rewrite};
+use crate::io_support::{reset, rewrite};
 use crate::section_0004::TeXGlobals;

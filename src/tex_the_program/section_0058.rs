@@ -92,8 +92,8 @@ pub(crate) fn print_char(mut globals: TeXGlobalsIoStringLogView<'_>, s: ASCII_co
     // exit:end;
 }
 
+use crate::io_support::write;
 use crate::pascal::integer;
-use crate::pascal::write;
 use crate::section_0004::make_globals_io_view;
 use crate::section_0004::make_globals_log_view;
 use crate::section_0004::make_globals_string_view;

@@ -9,7 +9,7 @@ pub(crate) macro bad_pool($globals:expr, $get_strings_started:expr, $val:expr) {
     $get_strings_started = false;
     return $get_strings_started;
     // end
-    use crate::pascal::write_ln;
+    use crate::io_support::write_ln;
     use crate::section_0028::a_close;
     use crate::section_0034::wake_up_terminal;
 }

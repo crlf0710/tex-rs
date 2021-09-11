@@ -45,7 +45,7 @@ pub(crate) macro Undump_constants_for_consistency_check($globals:expr, $lbl_bad_
     if x != hyph_size {
         crate::goto_forward_label!($lbl_bad_fmt);
     }
-    use crate::pascal::buffer_variable;
+    use crate::io_support::buffer_variable;
     use crate::pascal::integer;
     use crate::section_0012::hash_prime;
     use crate::section_0012::hyph_size;

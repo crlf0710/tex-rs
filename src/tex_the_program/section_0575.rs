@@ -55,7 +55,7 @@ pub(crate) macro Read_font_parameters($globals:expr, $f:expr, $z:expr, $alpha:ex
             scaled::zero();
     }
     // end
-    use crate::pascal::eof;
+    use crate::io_support::eof;
     use crate::pascal::integer;
     use crate::section_0101::scaled;
     use crate::section_0101::MEMORY_WORD_SC;

@@ -45,7 +45,7 @@ pub(crate) fn print_ln(mut globals: TeXGlobalsIoStringLogView<'_>) {
     const _: () = ();
 }
 
-use crate::pascal::write_ln_noargs;
+use crate::io_support::write_ln_noargs;
 use crate::section_0004::make_globals_io_view;
 use crate::section_0004::make_globals_log_view;
 use crate::section_0004::TeXGlobals;

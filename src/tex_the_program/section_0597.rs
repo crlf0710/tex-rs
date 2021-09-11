@@ -19,6 +19,6 @@ pub(crate) fn write_dvi(globals: &mut TeXGlobals, a: dvi_index, b: dvi_index) {
     // end;
 }
 
-use crate::pascal::write_binary;
+use crate::io_support::write_binary;
 use crate::section_0004::TeXGlobals;
 use crate::section_0594::dvi_index;

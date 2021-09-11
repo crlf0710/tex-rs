@@ -106,9 +106,9 @@ pub(crate) fn input_ln(
     input_ln
 }
 
+use crate::io_support::{buffer_variable, eof, eoln, get};
 use crate::pascal::boolean;
 use crate::pascal::u16_from_0_to_n;
-use crate::pascal::{buffer_variable, eof, eoln, get};
 use crate::section_0004::TeXGlobalsIoView;
 use crate::section_0011::buf_size;
 use crate::section_0011::buf_size_TYPENUM;

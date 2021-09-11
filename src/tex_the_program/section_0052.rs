@@ -51,9 +51,9 @@ pub(crate) macro Read_one_string_but_return_false_if_the_string_memory_space_is_
         // end;
     }
     // end
-    use crate::pascal::eoln;
+    use crate::io_support::eoln;
+    use crate::io_support::{read_ln, read_onearg};
     use crate::pascal::integer;
-    use crate::pascal::{read_ln, read_onearg};
     use crate::section_0004::make_globals_string_view;
     use crate::section_0004::TeXGlobalsStringView;
     use crate::section_0018::ASCII_code_literal;

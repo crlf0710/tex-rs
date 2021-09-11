@@ -26,7 +26,7 @@ pub(crate) macro Undump_a_couple_more_things_and_the_closing_check_word($globals
     if x != 69069 || eof(&mut $globals.fmt_file) {
         crate::goto_forward_label!($lbl_bad_fmt);
     }
-    use crate::pascal::eof;
+    use crate::io_support::eof;
     use crate::pascal::u8_from_m_to_n;
     use crate::section_0038::str_number;
     use crate::section_0073::batch_mode;

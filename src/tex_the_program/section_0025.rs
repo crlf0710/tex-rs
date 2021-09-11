@@ -45,4 +45,4 @@ pub(crate) type alpha_file = packed_file_of_text_char;
 
 pub(crate) type byte_file = packed_file_of<eight_bits>;
 
-use crate::pascal::{packed_file_of, packed_file_of_text_char};
+use crate::io_support::{packed_file_of, packed_file_of_text_char};

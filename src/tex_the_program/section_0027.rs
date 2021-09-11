@@ -24,12 +24,12 @@
 // @d reset_OK(#)==erstat(#)=0
 #[allow(unused_macros)]
 pub(crate) macro reset_OK($f:expr) {
-    crate::pascal::erstat($f) == 0
+    crate::io_support::erstat($f) == 0
 }
 // @d rewrite_OK(#)==erstat(#)=0
 #[allow(unused_macros)]
 pub(crate) macro rewrite_OK($f:expr) {
-    crate::pascal::erstat($f) == 0
+    crate::io_support::erstat($f) == 0
 }
 //
 // @p function a_open_in(var f:alpha_file):boolean;
@@ -92,9 +92,9 @@ pub(crate) fn w_open_out(globals: TeXGlobalsFilenameView<'_>, f: &mut word_file)
     // end;
 }
 
+use crate::io_support::reset;
+use crate::io_support::rewrite;
 use crate::pascal::boolean;
-use crate::pascal::reset;
-use crate::pascal::rewrite;
 use crate::section_0004::TeXGlobalsFilenameView;
 use crate::section_0025::alpha_file;
 use crate::section_0025::byte_file;

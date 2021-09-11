@@ -106,7 +106,8 @@ pub(crate) union memory_word {
 // @!word_file = file of memory_word;
 pub(crate) type word_file = file_of<memory_word>;
 
-use crate::pascal::{file_of, integer, word};
+use crate::io_support::file_of;
+use crate::pascal::{integer, word};
 use crate::section_0101::scaled;
 use crate::section_0109::glue_ratio;
 use crate::section_0110::{max_halfword, max_quarterword, min_halfword, min_quarterword};
@@ -380,6 +381,6 @@ impl ToBlob for memory_word {
     }
 }
 
-use crate::pascal::FromBlob;
-use crate::pascal::ToBlob;
+use crate::io_support::FromBlob;
+use crate::io_support::ToBlob;
 use core::ops::{Index, IndexMut};

@@ -8,23 +8,23 @@
 pub(crate) macro undump_wd($globals:expr, $v:expr) {{
     get(&mut $globals.fmt_file);
     $v = buffer_variable(&mut $globals.fmt_file);
-    use crate::pascal::buffer_variable;
-    use crate::pascal::get;
+    use crate::io_support::buffer_variable;
+    use crate::io_support::get;
 }}
 // @d undump_int(#)==begin get(fmt_file); #:=fmt_file^.int;@+end
 pub(crate) macro undump_int {
     ($globals:expr, $v:expr) => {{
         get(&mut $globals.fmt_file);
         $v = buffer_variable(&mut $globals.fmt_file)[MEMORY_WORD_INT];
-        use crate::pascal::buffer_variable;
-        use crate::pascal::get;
+        use crate::io_support::buffer_variable;
+        use crate::io_support::get;
         use crate::section_0113::MEMORY_WORD_INT;
     }},
     ($globals:expr, $v:expr, $value_ctor:expr) => {{
         get(&mut $globals.fmt_file);
         $v = ($value_ctor)(buffer_variable(&mut $globals.fmt_file)[MEMORY_WORD_INT] as _);
-        use crate::pascal::buffer_variable;
-        use crate::pascal::get;
+        use crate::io_support::buffer_variable;
+        use crate::io_support::get;
         use crate::section_0113::MEMORY_WORD_INT;
     }}
 }
@@ -32,16 +32,16 @@ pub(crate) macro undump_int {
 pub(crate) macro undump_hh($globals:expr, $v:expr) {{
     get(&mut $globals.fmt_file);
     $v = buffer_variable(&mut $globals.fmt_file)[MEMORY_WORD_HH];
-    use crate::pascal::buffer_variable;
-    use crate::pascal::get;
+    use crate::io_support::buffer_variable;
+    use crate::io_support::get;
     use crate::section_0113::MEMORY_WORD_HH;
 }}
 // @d undump_qqqq(#)==begin get(fmt_file); #:=fmt_file^.qqqq;@+end
 pub(crate) macro undump_qqqq($globals:expr, $v:expr) {{
     get(&mut $globals.fmt_file);
     $v = buffer_variable(&mut $globals.fmt_file)[MEMORY_WORD_QQQQ];
-    use crate::pascal::buffer_variable;
-    use crate::pascal::get;
+    use crate::io_support::buffer_variable;
+    use crate::io_support::get;
     use crate::section_0113::MEMORY_WORD_QQQQ;
 }}
 // @d undump_end_end(#)==#:=x;@+end

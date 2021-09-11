@@ -8,11 +8,11 @@
 //
 // @d fget==get(tfm_file)
 pub(crate) macro fget($globals:expr) {
-    crate::pascal::get(&mut $globals.tfm_file)
+    crate::io_support::get(&mut $globals.tfm_file)
 }
 // @d fbyte==tfm_file^
 pub(crate) macro fbyte($globals:expr) {
-    crate::pascal::buffer_variable(&mut $globals.tfm_file)
+    crate::io_support::buffer_variable(&mut $globals.tfm_file)
 }
 // @d read_sixteen(#)==begin #:=fbyte;
 pub(crate) macro read_sixteen($globals:expr, $val:expr, $lbl_bad_tfm:lifetime) {
