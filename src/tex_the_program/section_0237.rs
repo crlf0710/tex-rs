@@ -240,7 +240,6 @@ pub(crate) fn print_param(globals: &mut TeXGlobals, n: integer) {
     // end;
 }
 
-use crate::info::strpool_str;
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0059::print;

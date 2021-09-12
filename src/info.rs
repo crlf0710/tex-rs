@@ -152,15 +152,6 @@ pub(crate) macro region_stat
         }
     }
 
-pub(crate) macro strpool_str($s:expr) {{
-    #[::linkme::distributed_slice(crate::string_pool::STRPLI)]
-    static __: &'static str = $s;
-
-    let v = crate::string_pool::string_pool_index($s);
-    debug_assert!(v <= crate::pascal::char::MAX.0 as _);
-    crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
-}}
-
 pub(crate) macro workarounds() {
     crate::section_0226::workaround_47384();
     crate::section_0230::workaround_47384();

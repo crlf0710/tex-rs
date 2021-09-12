@@ -69,7 +69,15 @@ use info::*;
 mod pascal;
 
 mod io_support;
+
+pub use io_support::install_io_handler;
+pub use io_support::reset_io_handler;
+pub use io_support::TeXIoHandler;
+pub use pascal_io::ReadLine as TeXIoReadLine;
+
 mod string_pool;
+
+use string_pool::strpool_str;
 
 mod tex_the_program;
 
@@ -82,8 +90,3 @@ mod unicode_support;
 
 pub use section_0004::TeXGlobals;
 pub use section_1332::entry;
-
-pub use io_support::install_io_handler;
-pub use io_support::reset_io_handler;
-pub use io_support::TeXIoHandler;
-pub use pascal_io::ReadLine as TeXIoReadLine;

@@ -448,7 +448,6 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &m
     // @!@:error_context_lines_}{\.{\\errorcontextlines} primitive@>
 }
 
-use crate::info::strpool_str;
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
 use crate::section_0209::assign_int;
