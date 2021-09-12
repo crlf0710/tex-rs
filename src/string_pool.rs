@@ -24,6 +24,7 @@ fn prepare_compiletime_string_pool() -> Vec<&'static str> {
         result.push(str);
         existing.insert(str);
     }
+    result.sort();
     result
 }
 
@@ -42,6 +43,7 @@ fn prepare_compiletime_string_pool() -> Vec<&'static str> {
         result.push(str);
         existing.insert(str);
     }
+    result.sort();
     result
 }
 
