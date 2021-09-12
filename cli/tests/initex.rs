@@ -25,13 +25,13 @@ impl Default for TeXTestVFS {
             term_vfs,
             term_idx,
         };
-        vfs.prepare_current_term();
+        vfs.init_current_term();
         vfs
     }
 }
 
 impl TeXTestVFS {
-    fn prepare_current_term(&self) {
+    fn init_current_term(&self) {
         let idx = self.term_idx.load(Ordering::SeqCst);
         let term_in = format!("termin.{}.txt", idx);
         let term_out = format!("termout.{}.txt", idx);
@@ -73,6 +73,14 @@ impl TeXTestVFS {
         Ok(buffer)
     }
 
+    fn dump_file(&self, path: &str) -> Result<Vec<u8>, usize> {
+        let root = &self.disk_vfs;
+        let mut data = root.join(path).unwrap().open_file().map_err(|_| 1usize)?;
+        let mut buffer = Vec::new();
+        data.read_to_end(&mut buffer).map_err(|_| 1usize)?;
+        Ok(buffer)
+    }
+
     fn open_text_file(&self, path: &str) -> Result<Box<dyn tex::TeXIoReadLine>, usize> {
         let root = &self.disk_vfs;
         let data = root.join(path).unwrap().open_file().map_err(|_| 1usize)?;
@@ -89,6 +97,30 @@ impl TeXTestVFS {
         let root = &self.disk_vfs;
         let data = root.join(path).unwrap().create_file().map_err(|_| 1usize)?;
         Ok(data)
+    }
+
+    fn prepare_termin(self, data: &[u8]) -> Self {
+        let idx = self.term_idx.load(Ordering::SeqCst);
+        let term_in = format!("termin.{}.txt", idx);
+        let root = &self.term_vfs;
+        root.join(&term_in)
+            .unwrap()
+            .create_file()
+            .unwrap()
+            .write_all(data)
+            .unwrap();
+        self
+    }
+
+    fn prepare_file(self, path: &str, data: &[u8]) -> Self {
+        let root = &self.disk_vfs;
+        root.join(path)
+            .unwrap()
+            .create_file()
+            .unwrap()
+            .write_all(data)
+            .unwrap();
+        self
     }
 
     pub(crate) fn with_current<OP, R>(f: OP) -> R
@@ -168,5 +200,42 @@ fn initex_immediate_eof() {
             "! End of file on the terminal... why?"
         ),
         String::from_utf8_lossy(&term_output).as_ref()
+    );
+}
+
+#[test]
+fn initex_empty_fmt_and_minimal_term_in() {
+    let (term_output, empty_log) = prepare_pool().install(|| {
+        TeXTestVFS::default()
+            .prepare_file("empty.tex", b"")
+            .prepare_termin(b"empty\n\\end\n")
+            .install_as_tex_io_handler();
+        if let mut globals = tex::TeXGlobals::default() {
+            tex::entry(&mut globals);
+        }
+        TeXTestVFS::with_current(|vfs| {
+            let term_output = vfs.dump_current_term_out().unwrap();
+            let empty_log = vfs.dump_file("empty.log").unwrap();
+            (term_output, empty_log)
+        })
+    });
+    assert_eq!(
+        concat!(
+            "This is TeX-rs, Version 3.141592653 (INITEX)\n",
+            "**(empty.tex)\n",
+            "*No pages of output.\n",
+            "Transcript written on empty.log."
+        ),
+        String::from_utf8_lossy(&term_output).as_ref()
+    );
+    assert_eq!(
+        concat!(
+            "This is TeX-rs, Version 3.141592653 (INITEX)  4 JUL 1776 12:00\n",
+            "**empty\n",
+            "(empty.tex)\n",
+            "*\\end\n",
+            "No pages of output.\n",
+        ),
+        String::from_utf8_lossy(&empty_log).as_ref()
     );
 }

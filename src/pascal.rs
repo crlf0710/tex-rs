@@ -497,6 +497,21 @@ macro_rules! define_array_keyed_with_ranged_unsigned_integer_from_0_with_fixed_l
                 &mut (self.0)[range.start.get() as usize..range.end.get() as usize]
             }
         }
+
+        impl<ELEMENT> core::ops::Index<core::ops::RangeInclusive<$index_type>> for $name<ELEMENT>
+        {
+            type Output = [ELEMENT];
+            fn index(&self, range: core::ops::RangeInclusive<$index_type>) -> &[ELEMENT] {
+                &(self.0)[range.start().get() as usize..=range.end().get() as usize]
+            }
+        }
+
+        impl<ELEMENT> core::ops::IndexMut<core::ops::RangeInclusive<$index_type>> for $name<ELEMENT>
+        {
+            fn index_mut(&mut self, range: core::ops::RangeInclusive<$index_type>) -> &mut [ELEMENT] {
+                &mut (self.0)[range.start().get() as usize..=range.end().get() as usize]
+            }
+        }
     };
 }
 

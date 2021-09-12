@@ -84,11 +84,6 @@ pub(crate) fn input_ln(
             }
             // buffer[last]:=xord[f^]; get(f); incr(last);
             globals_view.buffer[*globals_view.last] = xord(buffer_variable(f));
-            crate::trace_expr!(
-                "buffer[{:?}] = {:?}",
-                globals_view.last,
-                globals_view.buffer[*globals_view.last]
-            );
             get(f);
             incr!(*globals_view.last);
             // if buffer[last-1]<>" " then last_nonblank:=last;
@@ -99,6 +94,12 @@ pub(crate) fn input_ln(
         }
         // last:=last_nonblank; input_ln:=true;
         *globals_view.last = last_nonblank;
+        crate::trace_expr!(
+            "input_ln: buffer[{:?}..{:?}] = {:?}",
+            &globals_view.first,
+            &globals_view.last,
+            &globals_view.buffer[*globals_view.first..*globals_view.last]
+        );
         input_ln = true;
         // end;
     }
