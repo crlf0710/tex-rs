@@ -153,7 +153,7 @@ pub(crate) macro region_stat
     }
 
 pub(crate) macro strpool_str($s:expr) {{
-    #[::linkme::distributed_slice(crate::string_pool::STRPL_RAWSTRS)]
+    #[::linkme::distributed_slice(crate::string_pool::STRPLI)]
     static __: &'static str = $s;
 
     let v = crate::string_pool::string_pool_index($s);

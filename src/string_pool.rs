@@ -1,12 +1,12 @@
 #[distributed_slice]
-pub(crate) static STRPL_RAWSTRS: [&'static str] = [..];
+pub(crate) static STRPLI: [&'static str] = [..];
 
 static STRPOOL_ITEMS_FROM_256: Lazy<Vec<&'static str>> = Lazy::new(prepare_compiletime_string_pool);
 
 fn prepare_compiletime_string_pool() -> Vec<&'static str> {
     let mut existing = BTreeSet::new();
     let mut result = vec![];
-    for str in STRPL_RAWSTRS.iter().cloned() {
+    for str in STRPLI.iter().cloned() {
         if str.len() == 1 {
             continue;
         }
