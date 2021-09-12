@@ -2,9 +2,9 @@
 //! characters, and its seven parameters are all equal to zero.
 //
 // @<Initialize table...@>=
-#[distributed_slice(INIT_TBLENTRY)]
 #[allow(unused_variables)]
-pub(crate) fn initialize_table_entries_done_by_initex_only_0552(globals: &mut TeXGlobals) {
+pub(crate) macro Initialize_table_entries_done_by_initex_only_0552($globals:expr) {{
+    let globals = &mut *$globals;
     // font_ptr:=null_font; fmem_ptr:=7;
     globals.font_ptr = null_font;
     globals.fmem_ptr = 7.into();
@@ -46,10 +46,9 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0552(globals: &mut Te
     for k in 0..=6 {
         globals.font_info[k][MEMORY_WORD_SC] = scaled::zero();
     }
-}
+}}
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0101::scaled;
 use crate::section_0101::MEMORY_WORD_SC;
 use crate::section_0115::null;
@@ -57,8 +56,3 @@ use crate::section_0232::null_font;
 use crate::section_0548::internal_font_number;
 use crate::section_0549::non_address;
 use crate::section_0549::non_char;
-
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

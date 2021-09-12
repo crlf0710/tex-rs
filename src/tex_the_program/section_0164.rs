@@ -8,9 +8,8 @@ pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes($globals:e
 }}
 
 // @<Initialize table entries...@>=
-#[distributed_slice(INIT_TBLENTRY)]
-#[allow(unused_variables)]
-pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut TeXGlobals) {
+pub(crate) macro Initialize_table_entries_done_by_initex_only_0164($globals:expr) {{
+    let globals = &mut *$globals;
     // for k:=mem_bot+1 to lo_mem_stat_max do mem[k].sc:=0;
     //   {all glue dimensions are zeroed}
     for k in mem_bot + 1..=lo_mem_stat_max {
@@ -83,11 +82,10 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0222(globals: &mut Te
     const _: () = ();
     globals.var_used = lo_mem_stat_max as integer + 1 - mem_bot as integer;
     globals.dyn_used = hi_mem_stat_usage as _;
-}
+}}
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
-use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0012::mem_bot;
 use crate::section_0012::mem_top;
 use crate::section_0101::scaled;
@@ -113,8 +111,3 @@ use crate::section_0162::hi_mem_stat_min;
 use crate::section_0162::hi_mem_stat_usage;
 use crate::section_0162::lo_mem_stat_max;
 use crate::section_0162::ss_glue;
-
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

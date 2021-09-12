@@ -22,14 +22,14 @@ pub(crate) macro Set_initial_values_of_key_variables($globals:expr) {
     crate::section_0596::Set_initial_values_of_key_variables_0596!($globals);
 }
 
-// FIXME: Using short name to workaround https://github.com/dtolnay/linkme/issues/35
-#[distributed_slice]
-pub(crate) static INIT_TBLENTRY: [fn(&mut TeXGlobals)] = [..];
-
 pub(crate) macro Initialize_table_entries_done_by_INITEX_only($globals:expr) {
-    for f in crate::section_0008::INIT_TBLENTRY {
-        f($globals);
-    }
+    crate::section_0164::Initialize_table_entries_done_by_initex_only_0164!($globals);
+    crate::section_0222::Initialize_table_entries_done_by_initex_only_0222!($globals);
+    crate::section_0232::Initialize_table_entries_done_by_initex_only_0232!($globals);
+    crate::section_0240::Initialize_table_entries_done_by_initex_only_0240!($globals);
+    crate::section_0258::Initialize_table_entries_done_by_initex_only_0258!($globals);
+    crate::section_0552::Initialize_table_entries_done_by_initex_only_0552!($globals);
+    crate::section_1301::Initialize_table_entries_done_by_initex_only_1301!($globals);
 }
 
 // @<Initialize whatever...@>=

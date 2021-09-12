@@ -14,9 +14,9 @@ pub(crate) const null_font: internal_font_number =
 // @d var_code==@'70000 {math code meaning ``use the current family''}
 //
 // @<Initialize table entries...@>=
-#[distributed_slice(INIT_TBLENTRY)]
 #[allow(unused_variables)]
-pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut TeXGlobals) {
+pub(crate) macro Initialize_table_entries_done_by_initex_only_0232($globals:expr) {{
+    let globals = &mut *$globals;
     // par_shape_ptr:=null; eq_type(par_shape_loc):=shape_ref;
     // eq_level(par_shape_loc):=level_one;@/
     // for k:=output_routine_loc to toks_base+255 do
@@ -74,10 +74,9 @@ pub(crate) fn initialize_table_entries_done_by_initex_only_0232(globals: &mut Te
         // sf_code(k):=999;
         // end;
     }
-}
+}}
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0008::INIT_TBLENTRY;
 use crate::section_0012::font_base;
 use crate::section_0018::ASCII_code;
 use crate::section_0018::ASCII_code_literal;
@@ -111,8 +110,3 @@ use crate::section_0230::math_code;
 use crate::section_0230::math_font_base;
 use crate::section_0230::sf_code;
 use crate::section_0548::internal_font_number;
-
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}
