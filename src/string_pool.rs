@@ -29,7 +29,11 @@ pub(crate) fn string_pool_index(val: &'static str) -> usize {
             return idx;
         }
     }
-    unreachable!();
+    unreachable!(
+        "Literal `{}` not found in string pool, string pool size is {}.",
+        val,
+        256 + STRPOOL_ITEMS_FROM_256.len()
+    );
 }
 
 static POOL_FILE: Lazy<Vec<u8>> = Lazy::new(generate_initial_memory_pool_file);
