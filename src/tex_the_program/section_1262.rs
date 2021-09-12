@@ -1,7 +1,7 @@
 //! ` `
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1262(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1262($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("batchmode",set_interaction,batch_mode);
     primitive(
         globals,
@@ -34,7 +34,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1262(globals: &m
         error_stop_mode as _,
     );
     // @!@:error_stop_mode_}{\.{\\errorstopmode} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0073::batch_mode;
@@ -43,8 +43,3 @@ use crate::section_0073::nonstop_mode;
 use crate::section_0073::scroll_mode;
 use crate::section_0209::set_interaction;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

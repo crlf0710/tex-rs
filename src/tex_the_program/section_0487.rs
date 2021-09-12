@@ -48,9 +48,9 @@ pub(crate) const if_false_code: quarterword = 15;
 pub(crate) const if_case_code: quarterword = 16;
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0487($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("if",if_test,if_char_code);
     primitive(
         globals,
@@ -146,15 +146,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0487(globals: &m
         if_case_code as _,
     );
     // @!@:if_case_}{\.{\\ifcase} primitive@>
-}
+}}
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::quarterword;
 use crate::section_0210::*;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

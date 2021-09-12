@@ -2,9 +2,9 @@
 //! and the font families are declared by |def_family|.
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1230($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("catcode",def_code,cat_code_base);
     primitive(
         globals,
@@ -77,7 +77,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1230(globals: &m
         (math_font_base + script_script_size as word) as _,
     );
     // @!@:script_script_font_}{\.{\\scriptscriptfont} primitive@>
-}
+}}
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
@@ -92,8 +92,3 @@ use crate::section_0236::del_code_base;
 use crate::section_0264::primitive;
 use crate::section_0699::script_script_size;
 use crate::section_0699::script_size;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

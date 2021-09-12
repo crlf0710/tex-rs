@@ -1,8 +1,8 @@
 //! @ The integer parameter names must be entered into the hash table.
 //
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0238($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("pretolerance",assign_int,int_base+pretolerance_code);@/
     primitive(
         globals,
@@ -446,7 +446,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0238(globals: &m
         (int_base + error_context_lines_code as word) as _,
     );
     // @!@:error_context_lines_}{\.{\\errorcontextlines} primitive@>
-}
+}}
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
@@ -454,8 +454,3 @@ use crate::section_0209::assign_int;
 use crate::section_0230::int_base;
 use crate::section_0236::*;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

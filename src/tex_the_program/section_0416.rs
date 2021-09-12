@@ -25,9 +25,9 @@ pub(crate) enum last_item_command_kind {
 }
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0416($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("spacefactor",set_aux,hmode);
     // @!@:space_factor_}{\.{\\spacefactor} primitive@>
     // primitive("prevdepth",set_aux,vmode);@/
@@ -88,7 +88,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0416(globals: &m
         last_item_command_kind::badness_code as _,
     );
     // @!@:badness_}{\.{\\badness} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0135::depth_offset;
@@ -99,8 +99,3 @@ use crate::section_0209::set_box_dimen;
 use crate::section_0209::set_page_int;
 use crate::section_0211::vmode;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

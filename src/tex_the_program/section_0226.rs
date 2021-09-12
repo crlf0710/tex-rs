@@ -3,9 +3,9 @@
 //! now, so that we don't have to list all those parameter names anywhere else.
 //
 // @<Put each of \TeX's primitives into the hash table@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0226(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0226($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("lineskip",assign_glue,glue_base+line_skip_code);@/
     primitive(
         globals,
@@ -152,7 +152,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0226(globals: &m
         (glue_base + thick_mu_skip_code as word) as _,
     );
     // @!@:thick_mu_skip_}{\.{\\thickmuskip} primitive@>
-}
+}}
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
@@ -161,8 +161,3 @@ use crate::section_0209::assign_mu_glue;
 use crate::section_0222::glue_base;
 use crate::section_0224::*;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

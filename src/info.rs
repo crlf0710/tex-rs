@@ -152,43 +152,6 @@ pub(crate) macro region_stat
         }
     }
 
-pub(crate) macro workarounds() {
-    crate::section_0226::workaround_47384();
-    crate::section_0230::workaround_47384();
-    crate::section_0238::workaround_47384();
-    crate::section_0248::workaround_47384();
-    crate::section_0265::workaround_47384();
-    crate::section_0334::workaround_47384();
-    crate::section_0376::workaround_47384();
-    crate::section_0411::workaround_47384();
-    crate::section_0416::workaround_47384();
-    crate::section_0468::workaround_47384();
-    crate::section_0487::workaround_47384();
-    crate::section_0491::workaround_47384();
-    crate::section_0553::workaround_47384();
-    crate::section_0780::workaround_47384();
-    crate::section_0983::workaround_47384();
-    crate::section_1052::workaround_47384();
-    crate::section_1058::workaround_47384();
-    crate::section_1071::workaround_47384();
-    crate::section_1088::workaround_47384();
-    crate::section_1107::workaround_47384();
-    crate::section_1114::workaround_47384();
-    crate::section_1208::workaround_47384();
-    crate::section_1219::workaround_47384();
-    crate::section_1222::workaround_47384();
-    crate::section_1230::workaround_47384();
-    crate::section_1250::workaround_47384();
-    crate::section_1254::workaround_47384();
-    crate::section_1262::workaround_47384();
-    crate::section_1272::workaround_47384();
-    crate::section_1277::workaround_47384();
-    crate::section_1286::workaround_47384();
-    crate::section_1291::workaround_47384();
-    crate::section_1344::workaround_47384();
-    crate::latex_support::workaround_47384();
-}
-
 pub(crate) macro impl_debug_with_literal {
     ($impl_type:ident, $literal: expr) => {
         impl core::fmt::Debug for $impl_type {

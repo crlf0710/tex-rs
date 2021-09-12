@@ -168,8 +168,8 @@ pub(crate) macro math_code($globals:expr, $val:expr) {
 }
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0230($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("output",assign_toks,output_routine_loc);
     primitive(
         globals,
@@ -242,17 +242,12 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0230(globals: &m
         err_help_loc as _,
     );
     // @!@:err_help_}{\.{\\errhelp} primitive@>
-}
+}}
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
 use crate::section_0209::assign_toks;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}
 
 use crate::section_0115::pointer;
 use crate::section_0224::local_base;

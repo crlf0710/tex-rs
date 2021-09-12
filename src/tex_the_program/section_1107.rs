@@ -1,8 +1,8 @@
 //! ` `
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1107(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1107($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("unpenalty",remove_item,penalty_node);@/
     // @!@:un_penalty_}{\.{\\unpenalty} primitive@>
     // primitive("unkern",remove_item,kern_node);@/
@@ -29,15 +29,10 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1107(globals: &m
     // @!@:un_vbox_}{\.{\\unvbox} primitive@>
     // primitive("unvcopy",un_vbox,copy_code);@/
     // @!@:un_vcopy_}{\.{\\unvcopy} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0208::un_hbox;
 use crate::section_0208::un_vbox;
 use crate::section_0264::primitive;
 use crate::section_1071::box_code;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

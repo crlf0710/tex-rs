@@ -24,8 +24,6 @@ pub(crate) macro Initialize_the_output_routines($globals:expr) {
 #[allow(unused_mut, unused_variables)]
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub fn entry(globals: &mut TeXGlobals) {
-    crate::workarounds!();
-
     // @p begin @!{|start_here|}
 
     /// start_here

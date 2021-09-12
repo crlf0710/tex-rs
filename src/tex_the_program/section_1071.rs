@@ -55,9 +55,9 @@ pub(crate) const vsplit_code: chr_code_repr = 3;
 pub(crate) const vtop_code: chr_code_repr = 4;
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1071(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1071($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("moveleft",hmove,1);
     // @!@:move_left_}{\.{\\moveleft} primitive@>
     // primitive("moveright",hmove,0);@/
@@ -109,7 +109,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1071(globals: &m
     // @!@:c_leaders_}{\.{\\cleaders} primitive@>
     // primitive("xleaders",leader_ship,x_leaders);
     // @!@:x_leaders_}{\.{\\xleaders} primitive@>
-}
+}}
 
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
@@ -121,8 +121,3 @@ use crate::section_0211::hmode;
 use crate::section_0211::vmode;
 use crate::section_0264::primitive;
 use crate::section_0297::chr_code_repr;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

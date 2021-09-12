@@ -39,9 +39,9 @@ impl From<u8> for convert_code_kind {
 }
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0468(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0468($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("number",convert,number_code);@/
     primitive(
         globals,
@@ -72,14 +72,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0468(globals: &m
     // @!@:font_name_}{\.{\\fontname} primitive@>
     // primitive("jobname",convert,job_name_code);@/
     // @!@:job_name_}{\.{\\jobname} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::quarterword;
 use crate::section_0210::convert;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

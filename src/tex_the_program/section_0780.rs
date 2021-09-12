@@ -25,9 +25,9 @@ pub(crate) const end_template_token: cur_tok_repr =
     cur_tok_type::from_cs(frozen_end_template as _).get();
 
 // @<Put each of \TeX's primitives into the hash table@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0780(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0780($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("span",tab_mark,span_code);@/
     primitive(
         globals,
@@ -63,7 +63,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0780(globals: &m
     globals.eqtb[frozen_end_template as pointer] = globals.eqtb[frozen_endv as pointer];
     // eq_type(frozen_end_template):=end_template;
     eq_type!(globals, frozen_end_template as pointer) = end_template as _;
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
@@ -82,8 +82,3 @@ use crate::section_0256::text;
 use crate::section_0264::primitive;
 use crate::section_0297::cur_tok_repr;
 use crate::section_0297::cur_tok_type;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

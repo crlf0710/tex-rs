@@ -1,9 +1,9 @@
 //! ` `
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0248(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0248($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("parindent",assign_dimen,dimen_base+par_indent_code);@/
     primitive(
         globals,
@@ -174,7 +174,7 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_0248(globals: &m
         (dimen_base + emergency_stretch_code as word) as _,
     );
     // @!@:emergency_stretch_}{\.{\\emergencystretch} primitive@>
-}
+}}
 
 use crate::pascal::word;
 use crate::section_0004::TeXGlobals;
@@ -182,8 +182,3 @@ use crate::section_0209::assign_dimen;
 use crate::section_0236::dimen_base;
 use crate::section_0247::*;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

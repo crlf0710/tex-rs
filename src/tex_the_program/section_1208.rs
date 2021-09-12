@@ -13,9 +13,9 @@
 //! have been used.)
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1208(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1208($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("long",prefix,1);
     primitive(globals, crate::strpool_str!("long"), prefix, 1);
     // @!@:long_}{\.{\\long} primitive@>
@@ -37,13 +37,8 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1208(globals: &m
     // primitive("xdef",def,3);
     primitive(globals, crate::strpool_str!("xdef"), def, 3);
     // @!@:xdef_}{\.{\\xdef} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0209::*;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

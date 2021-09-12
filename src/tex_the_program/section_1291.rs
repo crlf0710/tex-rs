@@ -16,9 +16,9 @@ pub(crate) enum show_kind {
 }
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1291(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1291($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("show",xray,show_code);
     primitive(
         globals,
@@ -51,13 +51,8 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1291(globals: &m
         show_kind::show_lists_code as _,
     );
     // @!@:show_lists_code_}{\.{\\showlists} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0208::xray;
 use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}

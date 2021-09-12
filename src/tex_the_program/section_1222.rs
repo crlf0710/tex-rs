@@ -28,9 +28,9 @@ pub(crate) const mu_skip_def_code: halfword = 5;
 pub(crate) const toks_def_code: halfword = 6;
 
 // @<Put each...@>=
-#[distributed_slice(PRIM2HT)]
 #[allow(unused_variables)]
-pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1222(globals: &mut TeXGlobals) {
+pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1222($globals:expr) {{
+    let globals = &mut *$globals;
     // primitive("chardef",shorthand_def,char_def_code);@/
     primitive(
         globals,
@@ -87,15 +87,9 @@ pub(crate) fn put_each_of_tex_s_primitivies_into_the_hash_table_1222(globals: &m
         toks_def_code,
     );
     // @!@:toks_def_}{\.{\\toksdef} primitive@>
-}
+}}
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0264::primitive;
-use crate::section_1336::PRIM2HT;
-use linkme::distributed_slice;
-
 use crate::section_0113::halfword;
 use crate::section_0209::shorthand_def;
-
-// Workaround https://github.com/rust-lang/rust/issues/47384
-pub(crate) fn workaround_47384() {}
+use crate::section_0264::primitive;
