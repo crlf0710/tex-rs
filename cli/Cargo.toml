@@ -17,5 +17,5 @@ tracing-tree = { version = "0.1.10", optional = true }
 
 [dev-dependencies]
 rayon = "1.5.1"
-vfs = "0.5.1"
+vfs_crate = {version = "0.5.1", package = "vfs"}
 
