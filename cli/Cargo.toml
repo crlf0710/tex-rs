@@ -16,6 +16,7 @@ tracing-subscriber = { version = "0.2", optional = true }
 tracing-tree = { version = "0.1.10", optional = true }
 
 [dev-dependencies]
+pretty_assertions = "0.7.2"
 rayon = "1.5.1"
 vfs_crate = {version = "0.5.1", package = "vfs"}
 

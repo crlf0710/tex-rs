@@ -30,8 +30,8 @@ fn initex_immediate_eof() {
 fn initex_empty_fmt_and_minimal_term_in() {
     let (term_output, empty_log) = prepare_pool().install(|| {
         TeXTestVFS::default()
-            .prepare_file("empty.tex", b"")
-            .prepare_termin(concat!("empty\n", "\\end\n").as_bytes())
+            .and_then_prepare_file("empty.tex", b"")
+            .and_then_prepare_termin(concat!("empty\n", "\\end\n").as_bytes())
             .install_as_tex_io_handler();
         if let mut globals = tex::TeXGlobals::default() {
             tex::entry(&mut globals);
@@ -69,113 +69,113 @@ const PLAIN_DMP_RECORD: &[u8] = include_bytes!("../tests_data/plain_dmp/plain.fm
 fn initex_plain_dump() {
     let (term_output, plain_log, plain_dmp) = prepare_pool().install(|| {
         TeXTestVFS::default()
-            .prepare_file("plain.tex", include_bytes!("../tests_data/plain/plain.tex"))
-            .prepare_file(
+            .and_then_prepare_file("plain.tex", include_bytes!("../tests_data/plain/plain.tex"))
+            .and_then_prepare_file(
                 "hyphen.tex",
                 include_bytes!("../tests_data/plain/hyphen.tex"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "manfnt.tfm",
                 include_bytes!("../tests_data/plain/manfnt.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmbsy10.tfm",
                 include_bytes!("../tests_data/plain/cmbsy10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmbx10.tfm",
                 include_bytes!("../tests_data/plain/cmbx10.tfm"),
             )
-            .prepare_file("cmbx5.tfm", include_bytes!("../tests_data/plain/cmbx5.tfm"))
-            .prepare_file("cmbx6.tfm", include_bytes!("../tests_data/plain/cmbx6.tfm"))
-            .prepare_file("cmbx7.tfm", include_bytes!("../tests_data/plain/cmbx7.tfm"))
-            .prepare_file("cmbx8.tfm", include_bytes!("../tests_data/plain/cmbx8.tfm"))
-            .prepare_file("cmbx9.tfm", include_bytes!("../tests_data/plain/cmbx9.tfm"))
-            .prepare_file(
+            .and_then_prepare_file("cmbx5.tfm", include_bytes!("../tests_data/plain/cmbx5.tfm"))
+            .and_then_prepare_file("cmbx6.tfm", include_bytes!("../tests_data/plain/cmbx6.tfm"))
+            .and_then_prepare_file("cmbx7.tfm", include_bytes!("../tests_data/plain/cmbx7.tfm"))
+            .and_then_prepare_file("cmbx8.tfm", include_bytes!("../tests_data/plain/cmbx8.tfm"))
+            .and_then_prepare_file("cmbx9.tfm", include_bytes!("../tests_data/plain/cmbx9.tfm"))
+            .and_then_prepare_file(
                 "cmcsc10.tfm",
                 include_bytes!("../tests_data/plain/cmcsc10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmdunh10.tfm",
                 include_bytes!("../tests_data/plain/cmdunh10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmex10.tfm",
                 include_bytes!("../tests_data/plain/cmex10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmmi10.tfm",
                 include_bytes!("../tests_data/plain/cmmi10.tfm"),
             )
-            .prepare_file("cmmi5.tfm", include_bytes!("../tests_data/plain/cmmi5.tfm"))
-            .prepare_file("cmmi6.tfm", include_bytes!("../tests_data/plain/cmmi6.tfm"))
-            .prepare_file("cmmi7.tfm", include_bytes!("../tests_data/plain/cmmi7.tfm"))
-            .prepare_file("cmmi8.tfm", include_bytes!("../tests_data/plain/cmmi8.tfm"))
-            .prepare_file("cmmi9.tfm", include_bytes!("../tests_data/plain/cmmi9.tfm"))
-            .prepare_file(
+            .and_then_prepare_file("cmmi5.tfm", include_bytes!("../tests_data/plain/cmmi5.tfm"))
+            .and_then_prepare_file("cmmi6.tfm", include_bytes!("../tests_data/plain/cmmi6.tfm"))
+            .and_then_prepare_file("cmmi7.tfm", include_bytes!("../tests_data/plain/cmmi7.tfm"))
+            .and_then_prepare_file("cmmi8.tfm", include_bytes!("../tests_data/plain/cmmi8.tfm"))
+            .and_then_prepare_file("cmmi9.tfm", include_bytes!("../tests_data/plain/cmmi9.tfm"))
+            .and_then_prepare_file(
                 "cmmib10.tfm",
                 include_bytes!("../tests_data/plain/cmmib10.tfm"),
             )
-            .prepare_file("cmr10.tfm", include_bytes!("../tests_data/plain/cmr10.tfm"))
-            .prepare_file("cmr5.tfm", include_bytes!("../tests_data/plain/cmr5.tfm"))
-            .prepare_file("cmr6.tfm", include_bytes!("../tests_data/plain/cmr6.tfm"))
-            .prepare_file("cmr7.tfm", include_bytes!("../tests_data/plain/cmr7.tfm"))
-            .prepare_file("cmr8.tfm", include_bytes!("../tests_data/plain/cmr8.tfm"))
-            .prepare_file("cmr9.tfm", include_bytes!("../tests_data/plain/cmr9.tfm"))
-            .prepare_file(
+            .and_then_prepare_file("cmr10.tfm", include_bytes!("../tests_data/plain/cmr10.tfm"))
+            .and_then_prepare_file("cmr5.tfm", include_bytes!("../tests_data/plain/cmr5.tfm"))
+            .and_then_prepare_file("cmr6.tfm", include_bytes!("../tests_data/plain/cmr6.tfm"))
+            .and_then_prepare_file("cmr7.tfm", include_bytes!("../tests_data/plain/cmr7.tfm"))
+            .and_then_prepare_file("cmr8.tfm", include_bytes!("../tests_data/plain/cmr8.tfm"))
+            .and_then_prepare_file("cmr9.tfm", include_bytes!("../tests_data/plain/cmr9.tfm"))
+            .and_then_prepare_file(
                 "cmsl10.tfm",
                 include_bytes!("../tests_data/plain/cmsl10.tfm"),
             )
-            .prepare_file("cmsl8.tfm", include_bytes!("../tests_data/plain/cmsl8.tfm"))
-            .prepare_file("cmsl9.tfm", include_bytes!("../tests_data/plain/cmsl9.tfm"))
-            .prepare_file(
+            .and_then_prepare_file("cmsl8.tfm", include_bytes!("../tests_data/plain/cmsl8.tfm"))
+            .and_then_prepare_file("cmsl9.tfm", include_bytes!("../tests_data/plain/cmsl9.tfm"))
+            .and_then_prepare_file(
                 "cmsltt10.tfm",
                 include_bytes!("../tests_data/plain/cmsltt10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmss10.tfm",
                 include_bytes!("../tests_data/plain/cmss10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmssbx10.tfm",
                 include_bytes!("../tests_data/plain/cmssbx10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmssi10.tfm",
                 include_bytes!("../tests_data/plain/cmssi10.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmssq8.tfm",
                 include_bytes!("../tests_data/plain/cmssq8.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmssqi8.tfm",
                 include_bytes!("../tests_data/plain/cmssqi8.tfm"),
             )
-            .prepare_file(
+            .and_then_prepare_file(
                 "cmsy10.tfm",
                 include_bytes!("../tests_data/plain/cmsy10.tfm"),
             )
-            .prepare_file("cmsy5.tfm", include_bytes!("../tests_data/plain/cmsy5.tfm"))
-            .prepare_file("cmsy6.tfm", include_bytes!("../tests_data/plain/cmsy6.tfm"))
-            .prepare_file("cmsy7.tfm", include_bytes!("../tests_data/plain/cmsy7.tfm"))
-            .prepare_file("cmsy8.tfm", include_bytes!("../tests_data/plain/cmsy8.tfm"))
-            .prepare_file("cmsy9.tfm", include_bytes!("../tests_data/plain/cmsy9.tfm"))
-            .prepare_file(
+            .and_then_prepare_file("cmsy5.tfm", include_bytes!("../tests_data/plain/cmsy5.tfm"))
+            .and_then_prepare_file("cmsy6.tfm", include_bytes!("../tests_data/plain/cmsy6.tfm"))
+            .and_then_prepare_file("cmsy7.tfm", include_bytes!("../tests_data/plain/cmsy7.tfm"))
+            .and_then_prepare_file("cmsy8.tfm", include_bytes!("../tests_data/plain/cmsy8.tfm"))
+            .and_then_prepare_file("cmsy9.tfm", include_bytes!("../tests_data/plain/cmsy9.tfm"))
+            .and_then_prepare_file(
                 "cmti10.tfm",
                 include_bytes!("../tests_data/plain/cmti10.tfm"),
             )
-            .prepare_file("cmti7.tfm", include_bytes!("../tests_data/plain/cmti7.tfm"))
-            .prepare_file("cmti8.tfm", include_bytes!("../tests_data/plain/cmti8.tfm"))
-            .prepare_file("cmti9.tfm", include_bytes!("../tests_data/plain/cmti9.tfm"))
-            .prepare_file(
+            .and_then_prepare_file("cmti7.tfm", include_bytes!("../tests_data/plain/cmti7.tfm"))
+            .and_then_prepare_file("cmti8.tfm", include_bytes!("../tests_data/plain/cmti8.tfm"))
+            .and_then_prepare_file("cmti9.tfm", include_bytes!("../tests_data/plain/cmti9.tfm"))
+            .and_then_prepare_file(
                 "cmtt10.tfm",
                 include_bytes!("../tests_data/plain/cmtt10.tfm"),
             )
-            .prepare_file("cmtt8.tfm", include_bytes!("../tests_data/plain/cmtt8.tfm"))
-            .prepare_file("cmtt9.tfm", include_bytes!("../tests_data/plain/cmtt9.tfm"))
-            .prepare_file("cmu10.tfm", include_bytes!("../tests_data/plain/cmu10.tfm"))
-            .prepare_termin(concat!("plain\n", "\\dump\n").as_bytes())
+            .and_then_prepare_file("cmtt8.tfm", include_bytes!("../tests_data/plain/cmtt8.tfm"))
+            .and_then_prepare_file("cmtt9.tfm", include_bytes!("../tests_data/plain/cmtt9.tfm"))
+            .and_then_prepare_file("cmu10.tfm", include_bytes!("../tests_data/plain/cmu10.tfm"))
+            .and_then_prepare_termin(concat!("plain\n", "\\dump\n").as_bytes())
             .install_as_tex_io_handler();
         if let mut globals = tex::TeXGlobals::default() {
             tex::entry(&mut globals);

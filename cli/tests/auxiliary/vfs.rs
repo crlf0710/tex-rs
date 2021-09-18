@@ -97,7 +97,12 @@ impl TeXTestVFS {
         Ok(data)
     }
 
-    pub(crate) fn prepare_termin(self, data: &[u8]) -> Self {
+    pub(crate) fn and_then_prepare_termin(self, data: &[u8]) -> Self {
+        self.prepare_termin(data);
+        self
+    }
+
+    pub(crate) fn prepare_termin(&self, data: &[u8]) {
         let idx = self.term_idx.load(Ordering::SeqCst);
         let term_in = format!("termin.{}.txt", idx);
         let root = &self.term_vfs;
@@ -107,10 +112,14 @@ impl TeXTestVFS {
             .unwrap()
             .write_all(data)
             .unwrap();
+    }
+
+    pub(crate) fn and_then_prepare_file(self, path: &str, data: &[u8]) -> Self {
+        self.prepare_file(path, data);
         self
     }
 
-    pub(crate) fn prepare_file(self, path: &str, data: &[u8]) -> Self {
+    pub(crate) fn prepare_file(&self, path: &str, data: &[u8]) {
         let root = &self.disk_vfs;
         root.join(path)
             .unwrap()
@@ -118,7 +127,6 @@ impl TeXTestVFS {
             .unwrap()
             .write_all(data)
             .unwrap();
-        self
     }
 
     pub(crate) fn with_current<OP, R>(f: OP) -> R

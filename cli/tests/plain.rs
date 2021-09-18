@@ -12,8 +12,8 @@ const PLAIN_DMP_RECORD: &[u8] = include_bytes!("../tests_data/plain_dmp/plain.fm
 fn plain_hello_world() {
     let (term_output, texput_log, texput_dvi) = prepare_pool().install(|| {
         TeXTestVFS::default()
-            .prepare_file("plain.fmt", PLAIN_DMP_RECORD)
-            .prepare_termin(concat!("&plain\n", "Hello world\n", "\\end\n").as_bytes())
+            .and_then_prepare_file("plain.fmt", PLAIN_DMP_RECORD)
+            .and_then_prepare_termin(concat!("&plain\n", "Hello world\n", "\\end\n").as_bytes())
             .install_as_tex_io_handler();
         if let mut globals = tex::TeXGlobals::default() {
             tex::entry(&mut globals);
