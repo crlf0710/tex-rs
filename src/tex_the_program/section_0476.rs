@@ -30,8 +30,8 @@ pub(crate) macro If_the_next_character_is_a_parameter_number__make_cur_tok_a_mat
     else {
         incr!($t);
         // if cur_tok<>t then
-        crate::trace_expr!("cur_tok = {}", $globals.cur_tok.get());
-        crate::trace_expr!("t = {}", $t);
+        crate::trace_expr_verbose!("cur_tok = {}", $globals.cur_tok.get());
+        crate::trace_expr_verbose!("t = {}", $t);
         if $globals.cur_tok.get() != $t as cur_tok_repr {
             todo!("numbering");
             // begin print_err("Parameters must be numbered consecutively");

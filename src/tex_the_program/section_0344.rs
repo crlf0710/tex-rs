@@ -15,10 +15,10 @@ pub(crate) macro state_plus_cur_cmd_matches_any_case_plus($state_plus_cur_cmd:ex
 // @<Change state if necessary...@>=
 pub(crate) macro Change_state_if_necessary_and_goto_switch_if_the_current_character_should_be_ignored_or_goto_reswitch_if_the_current_character_changes_to_another {
     ($globals:expr, $lbl_switch:lifetime, $lbl_reswitch:lifetime) => {{
-        crate::trace_span!("Change state if...");
+        crate::trace_span_verbose!("Change state if...");
         // case state+cur_cmd of
         let state_plus_cur_cmd = state!($globals) + $globals.cur_cmd;
-        crate::trace_expr!("state_plus_cur_cmd = {}", state_plus_cur_cmd);
+        crate::trace_expr_verbose!("state_plus_cur_cmd = {}", state_plus_cur_cmd);
         if crate::section_0345::State_plus_cur_cmd_matches_cases_where_character_is_ignored!(state_plus_cur_cmd) {
             // @<Cases where character is ignored@>: goto switch;
             crate::goto_backward_label!($lbl_switch);

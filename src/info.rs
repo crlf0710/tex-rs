@@ -178,6 +178,13 @@ pub(crate) macro trace_span($span_info:expr) {
     let __ = span.enter();
 }
 
+pub(crate) macro trace_span_verbose($span_info:expr) {
+    #[cfg(feature = "trace_verbose")]
+    let span = ::tracing::span!(::tracing::Level::TRACE, $span_info);
+    #[cfg(feature = "trace_verbose")]
+    let __ = span.enter();
+}
+
 pub(crate) macro trace_debug_span($span_info:expr) {
     #[cfg(feature = "trace")]
     let span = ::tracing::span!(::tracing::Level::DEBUG, $span_info);
@@ -195,6 +202,14 @@ pub(crate) macro trace_error_span($span_info:expr) {
 pub(crate) macro trace_expr
     ($($x:tt)*) {
         #[cfg(feature = "trace")]
+        {
+            tracing::trace!($($x)*);
+        }
+    }
+
+pub(crate) macro trace_expr_verbose
+    ($($x:tt)*) {
+        #[cfg(feature = "trace_verbose")]
         {
             tracing::trace!($($x)*);
         }

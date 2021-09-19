@@ -3,7 +3,7 @@
 //
 // @p procedure token_show(@!p:pointer);
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn token_show(globals: &mut TeXGlobals, p: pointer) {
     // begin if p<>null then show_token_list(link(p),null,10000000);
     if p != null {

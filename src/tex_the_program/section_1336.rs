@@ -3,6 +3,7 @@
 // @ @<Last-minute...@>=
 
 pub(crate) macro Put_each_of_TeX_s_primitivies_into_the_hash_table($globals:expr) {
+    crate::trace_span!("Put each of TeX's primitivies into the hash table");
     crate::section_0226::Put_each_of_tex_s_primitivies_into_the_hash_table_0226!($globals);
     crate::section_0230::Put_each_of_tex_s_primitivies_into_the_hash_table_0230!($globals);
     crate::section_0238::Put_each_of_tex_s_primitivies_into_the_hash_table_0238!($globals);

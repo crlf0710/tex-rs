@@ -6,7 +6,7 @@
 //   available}
 /// makes list of single-word nodes available
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
     // var @!q,@!r:pointer; {list traversers}
     /// list traversers

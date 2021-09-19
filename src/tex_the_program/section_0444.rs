@@ -2,7 +2,7 @@
 
 // @<Scan a numeric constant@>=
 pub(crate) macro Scan_a_numeric_constant($globals:expr) {{
-    crate::trace_span!("Scan a numeric constant");
+    crate::trace_span_verbose!("Scan a numeric constant");
     // begin radix:=10; m:=214748364;
     $globals.radix = 10.into();
     let mut m = 214748364;

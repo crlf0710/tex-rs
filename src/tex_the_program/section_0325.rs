@@ -9,7 +9,10 @@
 // @p procedure back_input; {undoes one token of input}
 /// undoes one token of input
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+#[cfg_attr(
+    feature = "trace_verbose",
+    tracing::instrument(level = "trace", skip(globals))
+)]
 pub(crate) fn back_input(globals: &mut TeXGlobals) {
     // var p:pointer; {a token list of length one}
     /// a token list of length one

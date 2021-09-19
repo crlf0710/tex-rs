@@ -10,7 +10,7 @@
 //   {new data for |eqtb|}
 /// new data for `eqtb`
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn eq_define(
     globals: &mut TeXGlobals,
     p: pointer,

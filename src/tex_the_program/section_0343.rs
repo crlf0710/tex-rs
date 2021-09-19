@@ -2,25 +2,25 @@
 // @^inner loop@>
 pub(crate) macro Input_from_external_file__goto_restart_if_no_input_found
     ($globals:expr, $lbl_restart:lifetime) {
-        crate::trace_span!("Input from external...");
+        crate::trace_span_verbose!("Input from external...");
         crate::region_backward_label! {
         'switch <-
         {
-            crate::trace_expr!("loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
+            crate::trace_expr_verbose!("loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
             // begin switch: if loc<=limit then {current line not yet finished}
             if loc!($globals) <= limit!($globals) {
                 /// current line not yet finished
                 const _ : () = ();
                 // begin cur_chr:=buffer[loc]; incr(loc);
                 $globals.cur_chr = $globals.buffer[loc!($globals)].into();
-                crate::trace_expr!("cur_chr = {:?}", $globals.cur_chr);
+                crate::trace_expr_verbose!("cur_chr = {:?}", $globals.cur_chr);
                 incr!(loc!($globals));
                 // reswitch: cur_cmd:=cat_code(cur_chr);
                 crate::region_backward_label! {
                 'reswitch <-
                 {
                     $globals.cur_cmd = cat_code!($globals, $globals.cur_chr.into()) as _;
-                    crate::trace_expr!("cur_cmd = {:?}", $globals.cur_cmd);
+                    crate::trace_expr_verbose!("cur_cmd = {:?}", $globals.cur_cmd);
                     // @<Change state if necessary, and |goto switch| if the
                     //   current character should be ignored,
                     //   or |goto reswitch| if the current character

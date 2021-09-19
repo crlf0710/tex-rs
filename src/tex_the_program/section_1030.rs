@@ -48,7 +48,7 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     crate::section_1031::Give_diagnostic_information_if_requested!(globals, 'big_switch);
     // case abs(mode)+cur_cmd of
     let abs_mode_plus_cur_cmd = mode!(globals).get().abs() as u16 + globals.cur_cmd as u16;
-    crate::trace_expr!("abs(mode)+cur_cmd={}", abs_mode_plus_cur_cmd);
+    crate::trace_expr_verbose!("abs(mode)+cur_cmd={}", abs_mode_plus_cur_cmd);
     // hmode+letter,hmode+other_char,hmode+char_given: goto main_loop;
     if abs_mode_plus_cur_cmd == hmode as u16 + letter as u16 ||
         abs_mode_plus_cur_cmd == hmode as u16 + other_char as u16 ||

@@ -56,7 +56,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         &mut cur_file!(globals),
     )
     .get() as _;
-    crate::trace_expr!("name = {}", name!(globals));
+    crate::trace_expr_verbose!("name = {}", name!(globals));
     // if job_name=0 then
     if globals.job_name == 0 {
         // begin job_name:=cur_name; open_log_file;
@@ -87,7 +87,7 @@ pub(crate) fn start_input(globals: &mut TeXGlobals) -> TeXResult<()> {
         ASCII_code_literal!(b'('),
     );
     incr!(globals.open_parens);
-    crate::trace_expr!("open_parens = {:?}", globals.open_parens);
+    crate::trace_expr_verbose!("open_parens = {:?}", globals.open_parens);
     slow_print(globals, name!(globals).into());
     update_terminal(globals);
     // state:=new_line;

@@ -25,7 +25,7 @@
 // @p function scan_toks(@!macro_def,@!xpand:boolean):pointer;
 #[allow(unused_variables)]
 #[allow(unused_assignments)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_toks(
     globals: &mut TeXGlobals,
     macro_def: boolean,
@@ -58,7 +58,7 @@ pub(crate) fn scan_toks(
     p = globals.def_ref;
     hash_brace = 0;
     t = zero_token as _;
-    crate::trace_expr!("t = zero_token = {}", t);
+    crate::trace_expr_verbose!("t = zero_token = {}", t);
     // if macro_def then @<Scan and build the parameter part of the macro definition@>
     if macro_def {
         crate::section_0474::Scan_and_build_the_parameter_part_of_the_macro_definition!(

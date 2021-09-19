@@ -2,7 +2,7 @@
 
 // @<Insert macro parameter...@>=
 pub(crate) macro Insert_macro_parameter_and_goto_restart($globals:expr, $lbl_restart:lifetime) {{
-    crate::trace_span!("Insert macro parameter...");
+    crate::trace_span_verbose!("Insert macro parameter...");
     // begin begin_token_list(param_stack[param_start+cur_chr-1],parameter);
     begin_token_list(
         $globals,

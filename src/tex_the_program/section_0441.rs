@@ -2,7 +2,7 @@
 
 // @<Get the next non-blank non-sign token...@>=
 pub(crate) macro Get_the_next_non_blank_non_sign_token__set_negative_appropriately($globals:expr, $negative:expr) {{
-    crate::trace_span!("Get the next non-blank non-sign token...");
+    crate::trace_span_verbose!("Get the next non-blank non-sign token...");
     // negative:=false;
     $negative = false;
     // repeat @<Get the next non-blank non-call token@>;

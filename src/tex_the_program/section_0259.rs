@@ -9,10 +9,10 @@
 // @p function id_lookup(@!j,@!l:integer):pointer; {search the hash table}
 /// search the hash table
 #[allow(unused_variables, unreachable_code, unused_mut, unused_assignments)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> pointer {
     debug_assert!(l > 1);
-    crate::trace_expr!("id_lookup(j = {}, l = {})", j, l);
+    crate::trace_expr_verbose!("id_lookup(j = {}, l = {})", j, l);
     // label found; {go here if you found it}
     // var h:integer; {hash code}
     /// hash code
@@ -24,12 +24,12 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
     // @!k:pointer; {index in |buffer| array}
     // begin @<Compute the hash code |h|@>;
     crate::section_0261::Compute_the_hash_code_h!(globals, h, j, l);
-    crate::trace_expr!("hash = {}", h);
+    crate::trace_expr_verbose!("hash = {}", h);
     // p:=h+hash_base; {we start searching here; note that |0<=h<hash_prime|}
     /// we start searching here; note that `0<=h<hash_prime`
     {
         p = (h as i32 + hash_base as i32) as pointer;
-        crate::trace_expr!("initial_p = {}", p);
+        crate::trace_expr_verbose!("initial_p = {}", p);
     }
     crate::region_forward_label!(
     |'found|
@@ -55,7 +55,7 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
                 // begin if no_new_control_sequence then
                 if globals.no_new_control_sequence  {
                     // p:=undefined_control_sequence
-                    crate::trace_expr!("p = undefined_cs = {}", undefined_control_sequence);
+                    crate::trace_expr_verbose!("p = undefined_cs = {}", undefined_control_sequence);
                     p = undefined_control_sequence;
                 } else {
                     // else @<Insert a new control sequence after |p|, then make
@@ -69,14 +69,14 @@ pub(crate) fn id_lookup(globals: &mut TeXGlobals, j: integer, l: integer) -> poi
             }
             // p:=next(p);
             p = next!(globals, p);
-            crate::trace_expr!("new_p = {}", p);
+            crate::trace_expr_verbose!("new_p = {}", p);
             // end;
         }
     }
     // found: id_lookup:=p;
     'found <-
     );
-    crate::trace_expr!("final_p = {}", p);
+    crate::trace_expr_verbose!("final_p = {}", p);
     return p;
     // end;
 }

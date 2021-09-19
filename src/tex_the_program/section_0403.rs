@@ -5,11 +5,11 @@
 
 // @p procedure scan_left_brace; {reads a mandatory |left_brace|}
 /// reads a mandatory `left_brace`
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_left_brace(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin @<Get the next non-blank non-relax non-call token@>;
     crate::section_0404::Get_the_next_non_blank_non_relax_non_call_token!(globals);
-    crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
+    crate::trace_expr_verbose!("cur_cmd = {}", globals.cur_cmd);
     // if cur_cmd<>left_brace then
     if globals.cur_cmd != left_brace {
         // begin print_err("Missing { inserted");

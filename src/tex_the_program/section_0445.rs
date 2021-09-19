@@ -13,7 +13,7 @@ pub(crate) const other_A_token: cur_tok_repr = other_token + b'A' as cur_tok_rep
 
 // @<Accumulate the constant...@>=
 pub(crate) macro Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit($globals:expr, $d:expr, $m:expr, $vacuous:expr) {{
-    crate::trace_span!("Accumulate the constant...");
+    crate::trace_span_verbose!("Accumulate the constant...");
     crate::region_forward_label! {
     |'done|
     {

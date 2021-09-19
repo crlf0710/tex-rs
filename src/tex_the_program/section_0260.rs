@@ -1,7 +1,7 @@
 // @ @<Insert a new control...@>=
 pub(crate) macro Insert_a_new_control_sequence_after_p_then_make_p_point_to_it($globals:expr, $p:expr, $j:expr, $l_raw:expr) {
     // begin if text(p)>0 then
-    crate::trace_expr!("p = {}", $p);
+    crate::trace_expr_verbose!("p = {}", $p);
     if text!($globals, $p) > 0 {
         // begin repeat if hash_is_full then overflow("hash size",hash_size);
         loop {
@@ -46,7 +46,7 @@ pub(crate) macro Insert_a_new_control_sequence_after_p_then_make_p_point_to_it($
     }
     // text(p):=make_string; pool_ptr:=pool_ptr+d;
     text!($globals, $p) = make_string(make_globals_string_view!($globals)).get() as _;
-    crate::trace_expr!("text(p) = {}", text!($globals, $p));
+    crate::trace_expr_verbose!("text(p) = {}", text!($globals, $p));
     $globals.pool_ptr = $globals.pool_ptr + d as _;
     // @!stat incr(cs_count);@+tats@;@/
     crate::region_stat! {

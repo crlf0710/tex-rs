@@ -16,11 +16,11 @@
 // @<Scan a control...@>=
 pub(crate) macro Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
     ($globals:expr) => {{
-        crate::trace_span!("Scan a control...");
+        crate::trace_span_verbose!("Scan a control...");
         crate::region_forward_label! {
         |'found|
         {
-        crate::trace_expr!("cs loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
+        crate::trace_expr_verbose!("cs loc, limit = ({:?}, {:?})", loc!($globals), limit!($globals));
         // begin if loc>limit then cur_cs:=null_cs {|state| is irrelevant in this case}
         if loc!($globals) > limit!($globals) {
             /// `state` is irrelevant in this case
@@ -33,7 +33,7 @@ pub(crate) macro Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
                 // else  begin start_cs: k:=loc; cur_chr:=buffer[k]; cat:=cat_code(cur_chr);
                 let mut k = loc!($globals);
                 $globals.cur_chr = $globals.buffer[k].into();
-                crate::trace_expr!("cs cur_chr = {:?}", $globals.cur_chr);
+                crate::trace_expr_verbose!("cs cur_chr = {:?}", $globals.cur_chr);
                 let mut cat = cat_code!($globals, $globals.buffer[k]) as quarterword;
                 // incr(k);
                 incr!(k);
@@ -78,11 +78,11 @@ pub(crate) macro Scan_a_control_sequence_and_set_state_skip_blanks_or_mid_line {
         // found: cur_cmd:=eq_type(cur_cs); cur_chr:=equiv(cur_cs);
         'found <-
         }
-        crate::trace_expr!("cur_cs = {}", $globals.cur_cs);
+        crate::trace_expr_verbose!("cur_cs = {}", $globals.cur_cs);
         $globals.cur_cmd = eq_type!($globals, $globals.cur_cs as u32);
-        crate::trace_expr!("cur_cmd = {}", $globals.cur_cmd);
+        crate::trace_expr_verbose!("cur_cmd = {}", $globals.cur_cmd);
         $globals.cur_chr = chr_code_type::new(equiv!($globals, $globals.cur_cs as u32) as _);
-        crate::trace_expr!("cur_chr = {:?}", $globals.cur_chr);
+        crate::trace_expr_verbose!("cur_chr = {:?}", $globals.cur_chr);
         // if cur_cmd>=outer_call then check_outer_validity;
         if $globals.cur_cmd >= outer_call {
             check_outer_validity($globals);

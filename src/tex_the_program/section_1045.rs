@@ -9,7 +9,7 @@ pub(crate) macro abs_mode_plus_cur_cmd_matches_any_mode($abs_mode_plus_cur_cmd:e
 }
 
 pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists($globals:expr, $abs_mode_plus_cur_cmd:expr) {{
-    crate::trace_span!("Cases of `main_control` that build...");
+    crate::trace_span_verbose!("Cases of `main_control` that build...");
     let processed = if crate::section_1056::Cases_of_main_control_that_build_boxes_and_lists_1056!(
         $globals,
         $abs_mode_plus_cur_cmd
@@ -123,7 +123,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists($globals:expr,
 }}
 
 pub(crate) macro Cases_of_main_control_that_dont_depend_on_mode($globals:expr, $abs_mode_plus_cur_cmd:expr) {{
-    crate::trace_span!("Cases of `main_control` that don't...");
+    crate::trace_span_verbose!("Cases of `main_control` that don't...");
     let processed = if crate::section_1210::Cases_of_main_control_that_dont_depend_on_mode_1210!(
         $globals,
         $abs_mode_plus_cur_cmd

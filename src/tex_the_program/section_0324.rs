@@ -6,7 +6,7 @@
 // @p procedure end_token_list; {leave a token-list input level}
 /// leave a token-list input level
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn end_token_list(globals: &mut TeXGlobals) {
     // begin if token_type>=backed_up then {token list to be deleted}
     if token_type!(globals) >= backed_up {

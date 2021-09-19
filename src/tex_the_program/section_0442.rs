@@ -3,7 +3,7 @@
 //
 // @<Scan an alphabetic character code into |cur_val|@>=
 pub(crate) macro Scan_an_alphabetic_character_code_into_cur_val($globals:expr) {{
-    crate::trace_span!("Scan an alphabetic character code...");
+    crate::trace_span_verbose!("Scan an alphabetic character code...");
     // begin get_token; {suppress macro expansion}
     /// suppress macro expansion
     get_token($globals)?;
@@ -52,7 +52,7 @@ pub(crate) macro Scan_an_alphabetic_character_code_into_cur_val($globals:expr) {
         crate::section_0443::Scan_an_optional_space!($globals);
     }
     // end
-    crate::trace_expr!("cur_val={}", $globals.cur_val);
+    crate::trace_expr_verbose!("cur_val={}", $globals.cur_val);
     use crate::section_0016::decr;
     use crate::section_0016::incr;
     use crate::section_0115::pointer;

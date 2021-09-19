@@ -2,7 +2,7 @@
 //! silently accepted.
 
 pub(crate) macro Assignments($globals:expr, $cur_cmd:expr, $a:expr, $lbl_done:lifetime) {{
-    crate::trace_span!("Assignments");
+    crate::trace_span_verbose!("Assignments");
     let processed = if false {
         unreachable!();
     /*} else if Assignments_xxx {
@@ -86,7 +86,10 @@ pub(crate) macro Assignments($globals:expr, $cur_cmd:expr, $a:expr, $lbl_done:li
 // @t\4@>@<Declare subprocedures for |prefixed_command|@>@t@>@;@/
 // procedure prefixed_command;
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+#[cfg_attr(
+    feature = "trace_verbose",
+    tracing::instrument(level = "trace", skip(globals))
+)]
 pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done,exit;
     // var a:small_number; {accumulated prefix codes so far}
@@ -114,7 +117,7 @@ pub(crate) fn prefixed_command(globals: &mut TeXGlobals) -> TeXResult<()> {
             // end;
         }
     }
-    crate::trace_expr!("cur_cmd={}", globals.cur_cmd);
+    crate::trace_expr_verbose!("cur_cmd={}", globals.cur_cmd);
     // @<Discard the prefixes \.{\\long} and \.{\\outer} if they are irrelevant@>;
     crate::section_1213::Discard_the_prefixes_long_and_outer_if_they_are_irrelevant!(globals, a);
     crate::region_forward_label!(

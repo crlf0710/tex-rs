@@ -2,7 +2,7 @@
 
 // @<Scan and build the body of the token list; |goto found| when finished@>=
 pub(crate) macro Scan_and_build_the_body_of_the_token_list__goto_found_when_finished($globals:expr, $macro_def:expr, $xpand:expr, $unbalance:expr, $t:expr, $p:expr, $q:expr, $lbl_found:lifetime) {
-    crate::trace_span!("Scan and build the body of the token list...");
+    crate::trace_span_verbose!("Scan and build the body of the token list...");
     // unbalance:=1;
     $unbalance = 1;
     // loop@+  begin if xpand then @<Expand the next part of the input@>

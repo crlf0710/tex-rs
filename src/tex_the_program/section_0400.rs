@@ -3,7 +3,7 @@
 //
 // @<Tidy up the parameter just scanned, and tuck it away@>=
 pub(crate) macro Tidy_up_the_parameter_just_scanned__and_tuck_it_away($globals:expr, $match_chr:expr, $m:expr, $n:expr, $p:expr, $q:expr, $rbrace_ptr:expr) {{
-    crate::trace_span!("Tidy up the parameter just scanned, and tuck it away");
+    crate::trace_span_verbose!("Tidy up the parameter just scanned, and tuck it away");
     // begin if (m=1)and(info(p)<right_brace_limit) then
     if $m == 1 && info_tok!($globals, $p) < right_brace_limit {
         // begin link(rbrace_ptr):=null; free_avail(p);

@@ -6,7 +6,10 @@
 //
 // @p procedure pass_text;
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+#[cfg_attr(
+    feature = "trace_verbose",
+    tracing::instrument(level = "trace", skip(globals))
+)]
 pub(crate) fn pass_text(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label done;
     // var l:integer; {level of $\.{\\if}\ldots\.{\\fi}$ nesting}

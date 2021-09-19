@@ -15,7 +15,7 @@ pub(crate) macro ins_list($globals:expr, $val:expr) {
 
 // @p procedure begin_token_list(@!p:pointer;@!t:quarterword);
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn begin_token_list(globals: &mut TeXGlobals, p: pointer, t: quarterword) {
     // begin push_input; state:=token_list; start:=p; token_type:=t;
     push_input!(globals);

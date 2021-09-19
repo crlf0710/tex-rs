@@ -3,7 +3,7 @@
 // @<Input from token list, |goto restart| if end of list or
 //   if a parameter needs to be expanded@>=
 pub(crate) macro Input_from_token_list__goto_restart_if_end_of_list_or_if_a_parameter_needs_to_be_expanded($globals:expr, $lbl_restart:lifetime) {{
-    crate::trace_span!("Input from token list...");
+    crate::trace_span_verbose!("Input from token list...");
 
     // if loc<>null then {list not exhausted}
     if loc!($globals) != null {
@@ -11,9 +11,9 @@ pub(crate) macro Input_from_token_list__goto_restart_if_end_of_list_or_if_a_para
         const _: () = ();
         // @^inner loop@>
         // begin t:=info(loc); loc:=link(loc); {move to next}
-        crate::trace_expr!("loc = {}", loc!($globals));
+        crate::trace_expr_verbose!("loc = {}", loc!($globals));
         let t: cur_tok_type = info_tok!($globals, loc!($globals));
-        crate::trace_expr!(
+        crate::trace_expr_verbose!(
             "retrieve_tok = 0x{:X}, {:?}, {:?}",
             t.get(),
             t.get_cs(),
@@ -22,7 +22,7 @@ pub(crate) macro Input_from_token_list__goto_restart_if_end_of_list_or_if_a_para
         /// move to next
         {
             loc!($globals) = link!($globals, loc!($globals));
-            crate::trace_expr!("loc = link(loc) = {}", loc!($globals));
+            crate::trace_expr_verbose!("loc = link(loc) = {}", loc!($globals));
         }
         // if t>=cs_token_flag then {a control sequence token}
         if let Some(cs) = t.get_cs() {

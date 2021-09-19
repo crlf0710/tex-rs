@@ -4,9 +4,9 @@
 //
 // @<Cases of |main_control| that build...@>=
 pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1094($globals:expr, $abs_mode_plus_cur_cmd:expr) {{
-    crate::trace_span!("Cases of `main_control` that build...1094");
     // vmode+par_end: begin normal_paragraph;
     let processed = if $abs_mode_plus_cur_cmd == vmode as u16 + par_end as u16 {
+        crate::trace_span!("Cases of `main_control` that build...1094");
         normal_paragraph($globals)?;
         // if mode>0 then build_page;
         if mode!($globals) > 0 {
@@ -20,6 +20,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1094($globals:
     // hmode+par_end: begin if align_state<0 then off_save; {this tries to
     //     recover from an alignment that didn't end properly}
     else if $abs_mode_plus_cur_cmd == hmode as u16 + par_end as u16 {
+        crate::trace_span!("Cases of `main_control` that build...1094");
         if $globals.align_state < 0 {
             /// this tries to recover from an alignment that didn't end properly
             const _: () = ();
@@ -46,6 +47,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1094($globals:
         || $abs_mode_plus_cur_cmd == hmode as u16 + un_vbox as u16
         || $abs_mode_plus_cur_cmd == hmode as u16 + halign as u16
     {
+        crate::trace_span!("Cases of `main_control` that build...1094");
         head_for_vmode($globals);
         use crate::section_1095::head_for_vmode;
         true

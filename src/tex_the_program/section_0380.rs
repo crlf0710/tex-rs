@@ -5,7 +5,10 @@
 // @p procedure get_x_token; {sets |cur_cmd|, |cur_chr|, |cur_tok|,
 //   and expands macros}
 /// sets `cur_cmd`, `cur_chr`, `cur_tok`, and expands macros
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+#[cfg_attr(
+    feature = "trace_verbose",
+    tracing::instrument(level = "trace", skip(globals))
+)]
 pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label restart,done;
     // begin restart: get_next;
@@ -16,8 +19,8 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     'restart <-
     {
         get_next(globals)?;
-        crate::trace_expr!("cur_chr = {:?}", globals.cur_chr);
-        crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
+        crate::trace_expr_verbose!("cur_chr = {:?}", globals.cur_chr);
+        crate::trace_expr_verbose!("cur_cmd = {}", globals.cur_cmd);
         // @^inner loop@>
         // if cur_cmd<=max_command then goto done;
         if globals.cur_cmd <= max_command {
@@ -58,7 +61,7 @@ pub(crate) fn get_x_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     } else {
         globals.cur_tok = cur_tok_type::from_cs(globals.cur_cs);
     }
-    crate::trace_expr!("cur_tok = {:?}", globals.cur_tok);
+    crate::trace_expr_verbose!("cur_tok = {:?}", globals.cur_tok);
 
     crate::return_nojump!();
 }

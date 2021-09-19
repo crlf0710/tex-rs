@@ -2,7 +2,7 @@
 
 // @<Append a new letter or a hyphen level@>=
 pub(crate) macro Append_a_new_letter_or_a_hyphen_level($globals:expr, $digit_sensed:expr, $k:expr) {{
-    crate::trace_span!("Append a new letter or a hyphen level");
+    crate::trace_span_verbose!("Append a new letter or a hyphen level");
     // if digit_sensed or(cur_chr<"0")or(cur_chr>"9") then
     if $digit_sensed
         || $globals.cur_chr.get() < b'0' as chr_code_repr

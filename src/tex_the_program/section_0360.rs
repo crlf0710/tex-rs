@@ -20,7 +20,7 @@ pub(crate) macro end_line_char_inactive($globals:expr) {{
 pub(crate) macro Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_line_or_return_if_a_read_line_has_finished($globals:expr, $lbl_restart:lifetime) {
     // if name>17 then @<Read next line of file into |buffer|, or
     //   |goto restart| if the file has ended@>
-    crate::trace_expr!("name = {}", name!($globals));
+    crate::trace_expr_verbose!("name = {}", name!($globals));
     if name!($globals) > 17 {
         crate::section_0362::Read_next_line_of_file_into_buffer_or_goto_restart_if_the_file_has_ended!(
             $globals,

@@ -7,7 +7,7 @@
 //
 // @<If an expanded...@>=
 pub(crate) macro If_an_expanded_code_is_present_reduce_it_and_goto_start_cs($globals:expr, $k:expr, $cat:expr, $lbl_start_cs:lifetime) {{
-    crate::trace_span!("If an expanded...");
+    crate::trace_span_verbose!("If an expanded...");
     // begin if buffer[k]=cur_chr then @+if cat=sup_mark then @+if k<limit then
     if $globals.buffer[$k].numeric_value() == $globals.cur_chr.get()
         && $cat == sup_mark

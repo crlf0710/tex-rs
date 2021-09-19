@@ -33,7 +33,7 @@ pub(crate) macro Read_next_line_of_file_into_buffer_or_goto_restart_if_the_file_
             ASCII_code_literal!(b')'),
         );
         decr!($globals.open_parens);
-        crate::trace_expr!("open_parens = {:?}", $globals.open_parens);
+        crate::trace_expr_verbose!("open_parens = {:?}", $globals.open_parens);
         // update_terminal; {show user that file has been read}
         /// show user that file has been read
         update_terminal($globals);

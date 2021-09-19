@@ -7,7 +7,7 @@
 //   {global |eq_define|}
 /// global `eq_define`
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn geq_define(
     globals: &mut TeXGlobals,
     p: pointer,

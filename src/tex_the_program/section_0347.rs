@@ -15,7 +15,7 @@ pub(crate) macro state_plus_cur_cmd_matches_state_with_delims_added($state_plus_
 //
 // @<Handle situations involving spaces, braces, changes of state@>=
 pub(crate) macro Handle_situations_involving_spaces_braces_changes_of_state($globals:expr, $state_plus_cur_cmd:expr, $lbl_switch:lifetime) {{
-    crate::trace_span!("Handle situations involving...");
+    crate::trace_span_verbose!("Handle situations involving...");
     // mid_line+spacer:@<Enter |skip_blanks| state, emit a space@>;
     let processed = if $state_plus_cur_cmd == mid_line + spacer {
         crate::section_0349::Enter_skip_blanks_state__emit_a_space!($globals);

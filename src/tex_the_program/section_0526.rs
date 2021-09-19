@@ -17,7 +17,7 @@ pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> TeXResult<()> {
     {
     // loop@+begin if (cur_cmd>other_char)or(cur_chr>255) then {not a character}
     loop {
-        crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
+        crate::trace_expr_verbose!("cur_cmd = {}", globals.cur_cmd);
         if globals.cur_cmd > other_char ||
             ASCII_code::from(globals.cur_chr).numeric_value() > 255 {
             /// not a character
@@ -29,7 +29,7 @@ pub(crate) fn scan_file_name(globals: &mut TeXGlobals) -> TeXResult<()> {
             //   end;
         }
 
-        crate::trace_expr!("cur_chr = {:?}", globals.cur_chr);
+        crate::trace_expr_verbose!("cur_chr = {:?}", globals.cur_chr);
         // if not more_name(cur_chr) then goto done;
         if !more_name(globals, ASCII_code::from(globals.cur_chr)) {
             crate::goto_forward_label!('done);

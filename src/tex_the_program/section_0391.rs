@@ -12,7 +12,7 @@
 
 pub(crate) macro Scan_the_parameters_and_make_link_r_point_to_the_macro_body__but_return_if_an_illegal_par_is_detected {
     ($globals:expr, $match_chr:expr, $r:expr, $info_r:expr, $m:expr, $n:expr, $p:expr, $q:expr) => {{
-        crate::trace_span!("Scan the parameters and make `link(r)` point to the macro body...");
+        crate::trace_span_verbose!("Scan the parameters and make `link(r)` point to the macro body...");
         /// unmatched left braces in current parameter
         let mut unbalance: halfword;
         /// backup pointer for parameter matching

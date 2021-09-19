@@ -4,7 +4,7 @@
 
 // @<Display the token ...@>=
 pub(crate) macro Display_the_token_m_c($globals:expr, $m:expr, $c:expr, $n:expr, $match_chr:expr) {{
-    crate::trace_span!("Display the token ...");
+    crate::trace_span_verbose!("Display the token ...");
     // case m of
     // left_brace,right_brace,math_shift,tab_mark,sup_mark,sub_mark,spacer,
     //   letter,other_char: print(c);

@@ -6,7 +6,7 @@
 // @<Scan a parameter until its delimiter string has been found; or, ...@>=
 pub(crate) macro Scan_a_parameter_until_its_delimiter_string_has_been_found_or_if_s_null_simply_scan_the_delimiter_string {
     ($globals:expr, $match_chr:expr, $r:expr, $info_r:expr, $s:expr, $m:expr, $n:expr, $p:expr, $q:expr, $unbalance:expr) => {{
-        crate::trace_span!("Scan a parameter until its delimiter string has been found; or, ...");
+        crate::trace_span_verbose!("Scan a parameter until its delimiter string has been found; or, ...");
         /// one step before the last |right_brace| token
         let mut rbrace_ptr: pointer = null;
         crate::region_backward_label! {

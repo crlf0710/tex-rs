@@ -6,7 +6,7 @@
 //
 // @<If an alignment entry has just ended, take appropriate action@>=
 pub(crate) macro If_an_alignment_entry_has_just_ended_take_appropriate_action($globals:expr, $lbl_restart:lifetime) {{
-    crate::trace_span!("If an alignment entry...");
+    crate::trace_span_verbose!("If an alignment entry...");
     // if cur_cmd<=car_ret then if cur_cmd>=tab_mark then if align_state=0 then
     if $globals.cur_cmd <= car_ret {
         if $globals.cur_cmd >= tab_mark {

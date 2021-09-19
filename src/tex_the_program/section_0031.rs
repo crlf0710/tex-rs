@@ -42,7 +42,7 @@
 //   {inputs the next line or returns |false|}
 /// inputs the next line or returns `false`
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn input_ln(
     globals_view: TeXGlobalsIoView<'_>,
     f: &mut alpha_file,
@@ -94,7 +94,7 @@ pub(crate) fn input_ln(
         }
         // last:=last_nonblank; input_ln:=true;
         *globals_view.last = last_nonblank;
-        crate::trace_expr!(
+        crate::trace_expr_verbose!(
             "input_ln: buffer[{:?}..{:?}] = {:?}",
             &globals_view.first,
             &globals_view.last,

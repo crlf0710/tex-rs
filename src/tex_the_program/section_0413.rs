@@ -15,7 +15,7 @@ pub(crate) macro scanned_result($globals:expr, $val:expr, $level:expr) {{
 // @p procedure scan_something_internal(@!level:small_number;@!negative:boolean);
 //   {fetch an internal parameter}
 /// fetch an internal parameter
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn scan_something_internal(
     globals: &mut TeXGlobals,
     level: small_number,
@@ -27,7 +27,7 @@ pub(crate) fn scan_something_internal(
     // @!p:0..nest_size; {index into |nest|}
     // begin m:=cur_chr;
     m = globals.cur_chr;
-    crate::trace_expr!("cur_cmd = {}", globals.cur_cmd);
+    crate::trace_expr_verbose!("cur_cmd = {}", globals.cur_cmd);
     // case cur_cmd of
     // def_code: @<Fetch a character code from some table@>;
     if globals.cur_cmd == def_code {

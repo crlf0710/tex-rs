@@ -27,7 +27,7 @@
 // @<Declare the procedure called |show_token_list|@>=
 // procedure show_token_list(@!p,@!q:integer;@!l:integer);
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn show_token_list(globals: &mut TeXGlobals, mut p: integer, q: integer, l: integer) {
     // label exit;
     // var m,@!c:integer; {pieces of a token}

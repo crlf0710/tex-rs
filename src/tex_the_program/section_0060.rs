@@ -7,7 +7,7 @@
 // procedure slow_print(@!s:integer); {prints string |s|}
 
 /// prints string `s`.
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn slow_print(globals: &mut TeXGlobals, s: integer) {
     // var j:pool_pointer; {current character code position}
     // begin if (s>=str_ptr) or (s<256) then print(s)

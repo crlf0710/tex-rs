@@ -8,7 +8,10 @@
 // @p procedure get_next; {sets |cur_cmd|, |cur_chr|, |cur_cs| to next token}
 /// sets `cur_cmd`, `cur_chr`, `cur_cs` to next token
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+#[cfg_attr(
+    feature = "trace_verbose",
+    tracing::instrument(level = "trace", skip(globals))
+)]
 pub(crate) fn get_next(globals: &mut TeXGlobals) -> TeXResult<()> {
     crate::region_forward_label! {
     |'exit|
@@ -30,7 +33,7 @@ pub(crate) fn get_next(globals: &mut TeXGlobals) -> TeXResult<()> {
     'restart <-
     {
     globals.cur_cs = 0;
-    crate::trace_expr!("state = {:?}", state!(globals));
+    crate::trace_expr_verbose!("state = {:?}", state!(globals));
     // if state<>token_list then
     if state!(globals) != token_list {
         // @<Input from external file, |goto restart| if no input found@>

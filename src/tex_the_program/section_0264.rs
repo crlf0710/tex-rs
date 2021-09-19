@@ -7,7 +7,10 @@
 // @p @!init procedure primitive(@!s:str_number;@!c:quarterword;@!o:halfword);
 #[cfg(feature = "initex")]
 #[allow(unused_variables, unreachable_code)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
+#[cfg_attr(
+    feature = "trace_verbose",
+    tracing::instrument(level = "trace", skip(globals))
+)]
 pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword, o: halfword) {
     // var k:pool_pointer; {index into |str_pool|}
     // @!j:small_number; {index into |buffer|}
@@ -51,12 +54,12 @@ pub(crate) fn primitive(globals: &mut TeXGlobals, s: str_number, c: quarterword,
         {
             flush_string(globals);
             text!(globals, globals.cur_val as pointer) = s.get() as _;
-            crate::trace_expr!("text(cur_val) = text({}) = {}", globals.cur_val, s.get());
+            crate::trace_expr_verbose!("text(cur_val) = text({}) = {}", globals.cur_val, s.get());
         }
         // end;
     }
     // eq_level(cur_val):=level_one; eq_type(cur_val):=c; equiv(cur_val):=o;
-    crate::trace_expr!("cur_val = {}", globals.cur_val);
+    crate::trace_expr_verbose!("cur_val = {}", globals.cur_val);
     eq_level!(globals, globals.cur_val as u32) = level_one;
     eq_type!(globals, globals.cur_val as u32) = c;
     equiv!(globals, globals.cur_val as u32) = o;

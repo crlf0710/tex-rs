@@ -4,7 +4,7 @@
 
 // @p procedure eq_word_define(@!p:pointer;@!w:integer);
 #[allow(unused_variables)]
-#[cfg_attr(feature = "trace", tracing::instrument(level = "trace"))]
+#[cfg_attr(feature = "trace_verbose", tracing::instrument(level = "trace"))]
 pub(crate) fn eq_word_define(globals: &mut TeXGlobals, p: pointer, w: integer) {
     // begin if xeq_level[p]<>cur_level then
     if globals.xeq_level[p] != globals.cur_level {
