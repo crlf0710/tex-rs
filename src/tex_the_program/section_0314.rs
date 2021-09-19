@@ -9,6 +9,9 @@ pub(crate) macro Print_type_of_token_list($globals:expr) {{
         print_nl($globals, crate::strpool_str!("<argument> "));
     }
     // u_template,v_template: print_nl("<template> ");
+    else if token_type == u_template || token_type == v_template {
+        print_nl($globals, crate::strpool_str!("<template> "));
+    }
     // backed_up: if loc=null then print_nl("<recently read> ")
     else if token_type == backed_up {
         if loc!($globals) == null {
