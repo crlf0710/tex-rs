@@ -16,7 +16,7 @@ pub(crate) fn make_accent(globals: &mut TeXGlobals) -> TeXResult<()> {
     let (s, t): (real, real);
     // @!p,@!q,@!r:pointer; {character, box, and kern nodes}
     /// character, box, and kern nodes
-    let (p, mut q, r): (pointer, pointer, pointer);
+    let (mut p, mut q, r): (pointer, pointer, pointer);
     // @!f:internal_font_number; {relevant font}
     /// relevant font
     let mut f;
@@ -29,10 +29,10 @@ pub(crate) fn make_accent(globals: &mut TeXGlobals) -> TeXResult<()> {
     // if p<>null then
     if p != null {
         /// heights and widths, as explained above
-        let (a, h, x, w, delta): (scaled, scaled, scaled, scaled, scaled);
+        let (a, h, x, w): (scaled, scaled, scaled, scaled);
         // begin x:=x_height(f); s:=slant(f)/float_constant(65536);
         x = x_height!(globals, f);
-        s = slant!(globals, f).inner() as real / float_constant!(65536);
+        s = slant!(globals, f).inner_real() / float_constant!(65536);
         // @^real division@>
         // a:=char_width(f)(char_info(f)(character(p)));@/
         let p_char_numeric = character!(globals, p).numeric_value();
@@ -47,7 +47,9 @@ pub(crate) fn make_accent(globals: &mut TeXGlobals) -> TeXResult<()> {
         // if q<>null then @<Append the accent with appropriate kerns,
         //     then set |p:=q|@>;
         if q != null {
-            todo!("q != null");
+            crate::section_1125::Append_the_accent_with_appropriate_kerns__then_set_p_to_q!(
+                globals, p, q, r, s, t, f, a, h, x, w
+            );
         }
         // link(tail):=p; tail:=p; space_factor:=1000;
         link!(globals, tail!(globals)) = p;

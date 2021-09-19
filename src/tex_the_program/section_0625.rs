@@ -32,7 +32,7 @@ pub(crate) macro Move_right_or_output_leaders($globals:expr, $p:expr, $this_box:
             // begin if stretch_order(g)=g_order then
             if stretch_order!($globals, $globals.ship_out_g) as integer == $g_order as integer {
                 // begin cur_glue:=cur_glue+stretch(g);
-                $cur_glue += stretch!($globals, $globals.ship_out_g).inner() as real;
+                $cur_glue += stretch!($globals, $globals.ship_out_g).inner_real();
                 // vet_glue(float(glue_set(this_box))*cur_glue);
                 vet_glue!(
                     glue_temp,
@@ -49,7 +49,7 @@ pub(crate) macro Move_right_or_output_leaders($globals:expr, $p:expr, $this_box:
         else {
             if shrink_order!($globals, $globals.ship_out_g) as integer == $g_order as integer {
                 // begin cur_glue:=cur_glue-shrink(g);
-                $cur_glue -= shrink!($globals, $globals.ship_out_g).inner() as real;
+                $cur_glue -= shrink!($globals, $globals.ship_out_g).inner_real();
                 // vet_glue(float(glue_set(this_box))*cur_glue);
                 vet_glue!(
                     glue_temp,

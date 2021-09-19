@@ -11,7 +11,7 @@ pub(crate) macro Determine_horizontal_glue_stretch_setting__then_return_or_goto_
     // if total_stretch[o]<>0 then glue_set(r):=unfloat(x/total_stretch[o])
     if $globals.total_stretch[o] != scaled::zero() {
         glue_set!($globals, $r) =
-            unfloat!(($x.inner() as real) / ($globals.total_stretch[o].inner() as real));
+            unfloat!(($x.inner_real()) / ($globals.total_stretch[o].inner_real()));
     }
     // @^real division@>
     // else  begin glue_sign(r):=normal;

@@ -26,8 +26,12 @@ impl scaled {
         scaled(v)
     }
 
-    pub(crate) const fn inner(&self) -> integer {
+    pub(crate) const fn inner(self) -> integer {
         self.0
+    }
+
+    pub(crate) const fn inner_real(self) -> real {
+        self.0 as real
     }
 }
 
@@ -79,6 +83,7 @@ impl core::ops::RemAssign<scaled> for scaled {
 pub type nonnegative_integer = i32_from_m_to_n<Z0, ::typenum::op!(P2147483648 - P1)>;
 pub type small_number = u8_from_m_to_n<U0, U63>;
 
+use crate::pascal::real;
 use crate::pascal::{i32_from_m_to_n, integer, u32_from_m_to_n, u8_from_m_to_n};
 use crate::section_0113::memory_word;
 use crate::section_0113::MEMORY_WORD_INT;

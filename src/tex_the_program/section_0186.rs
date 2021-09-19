@@ -54,7 +54,7 @@ pub(crate) macro Display_the_value_of_glue_set_p($globals:expr, $p:expr) {{
         else {
             print_glue(
                 $globals,
-                scaled::new_from_inner(((unity.inner() as real) * g).round() as _),
+                scaled::new_from_inner(((unity.inner_real()) * g).round() as _),
                 glue_order!($globals, $p) as _,
                 str_number::zero(),
             );
