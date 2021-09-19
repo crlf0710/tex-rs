@@ -188,6 +188,7 @@ fn initex_plain_dump() {
         })
     });
     assert_eq!(
+        String::from_utf8_lossy(&term_output).as_ref(),
         concat!(
             "This is TeX-rs, Version 3.141592653 (INITEX)\n",
             "**(plain.tex Preloading the plain format: codes, registers, parameters, fonts,\n",
@@ -195,7 +196,7 @@ fn initex_plain_dump() {
             ")\n",
             "*Beginning to dump on file plain.fmt\n",
             " (preloaded format=plain 1776.7.4)\n",
-            "1562 strings of total length 14305\n",
+            "1560 strings of total length 14299\n",
             "4990 memory locations dumped; current usage is 110&4877\n",
             "894 multiletter control sequences\n",
             "\\font\\nullfont=nullfont\n",
@@ -256,9 +257,9 @@ fn initex_plain_dump() {
             "No pages of output.\n",
             "Transcript written on plain.log.",
         ),
-        String::from_utf8_lossy(&term_output).as_ref()
     );
     assert_eq!(
+        String::from_utf8_lossy(&plain_log).as_ref(),
         concat!(
             "This is TeX-rs, Version 3.141592653 (INITEX)  4 JUL 1776 12:00\n",
             "**plain\n",
@@ -307,7 +308,7 @@ fn initex_plain_dump() {
             "*\\dump\n",
             "Beginning to dump on file plain.fmt\n",
             " (preloaded format=plain 1776.7.4)\n",
-            "1562 strings of total length 14305\n",
+            "1560 strings of total length 14299\n",
             "4990 memory locations dumped; current usage is 110&4877\n",
             "894 multiletter control sequences\n",
             "\\font\\n",
@@ -368,7 +369,6 @@ fn initex_plain_dump() {
             "  181 for language 0\n",
             "No pages of output.\n"
         ),
-        String::from_utf8_lossy(&plain_log).as_ref()
     );
     let plain_fmt_record = PLAIN_DMP_RECORD;
     assert_eq!(plain_fmt_record, plain_dmp);

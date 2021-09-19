@@ -60,6 +60,7 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0265($globals
     );
     // @!@:font_dimen_}{\.{\\fontdimen} primitive@>
     // primitive("halign",halign,0);@/
+    primitive(globals, crate::strpool_str!("halign"), halign, 0);
     // @!@:halign_}{\.{\\halign} primitive@>
     // primitive("hrule",hrule,0);@/
     primitive(globals, crate::strpool_str!("hrule"), hrule, 0);

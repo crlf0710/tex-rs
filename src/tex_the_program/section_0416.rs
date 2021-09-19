@@ -57,6 +57,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0416($globals
     );
     // @!@:wd_}{\.{\\wd} primitive@>
     // primitive("ht",set_box_dimen,height_offset);
+    primitive(
+        globals,
+        crate::strpool_str!("ht"),
+        set_box_dimen,
+        height_offset as _,
+    );
     // @!@:ht_}{\.{\\ht} primitive@>
     // primitive("dp",set_box_dimen,depth_offset);
     primitive(
@@ -92,6 +98,7 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0416($globals
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0135::depth_offset;
+use crate::section_0135::height_offset;
 use crate::section_0135::width_offset;
 use crate::section_0208::last_item;
 use crate::section_0209::set_aux;

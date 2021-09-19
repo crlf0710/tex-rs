@@ -76,6 +76,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1071($globals
     // primitive("vsplit",make_box,vsplit_code);
     // @!@:vsplit_}{\.{\\vsplit} primitive@>
     // primitive("vtop",make_box,vtop_code);@/
+    primitive(
+        globals,
+        crate::strpool_str!("vtop"),
+        make_box,
+        (vtop_code as chr_code_repr) as _,
+    );
     // @!@:vtop_}{\.{\\vtop} primitive@>
     // primitive("vbox",make_box,vtop_code+vmode);
     primitive(

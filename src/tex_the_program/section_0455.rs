@@ -49,7 +49,7 @@ pub(crate) macro Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign
         // @.em@>
         // else if scan_keyword("ex") then v:=(@<The x-height for |cur_font|@>)
         else if scan_keyword($globals, crate::strpool_str!("ex"))? {
-            todo!("v=ex");
+            v = crate::section_0559::The_x_height_for_cur_font!($globals).inner();
         }
         // @.ex@>
         // else goto not_found;

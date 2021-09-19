@@ -74,6 +74,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // halign: print_esc("halign");
+    else if $cmd == halign {
+        print_esc($globals, crate::strpool_str!("halign"));
+        true
+    }
     // hrule: print_esc("hrule");
     else if $cmd == hrule {
         print_esc($globals, crate::strpool_str!("hrule"));
