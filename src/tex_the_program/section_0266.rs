@@ -10,6 +10,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         unreachable!();
     }
     // accent: print_esc("accent");
+    else if $cmd == accent {
+        print_esc($globals, crate::strpool_str!("accent"));
+        true
+    }
     // advance: print_esc("advance");
     else if $cmd == advance {
         print_esc($globals, crate::strpool_str!("advance"));

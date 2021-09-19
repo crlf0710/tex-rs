@@ -11,7 +11,7 @@ pub(crate) macro Determine_horizontal_glue_shrink_setting__then_return_or_goto_c
     // if total_shrink[o]<>0 then glue_set(r):=unfloat((-x)/total_shrink[o])
     if $globals.total_shrink[o] != scaled::zero() {
         glue_set!($globals, $r) =
-            unfloat!(((-$x.inner()) / $globals.total_shrink[o].inner()) as real);
+            unfloat!(((-$x.inner()) as real) / ($globals.total_shrink[o].inner() as real));
     }
     // @^real division@>
     // else  begin glue_sign(r):=normal;

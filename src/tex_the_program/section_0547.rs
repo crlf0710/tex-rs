@@ -29,12 +29,14 @@
 //! additional parameter information, which is explained later.
 //
 // @d slant_code=1
+pub(crate) const slant_code: quarterword = 1;
 // @d space_code=2
 pub(crate) const space_code: quarterword = 2;
 // @d space_stretch_code=3
 // @d space_shrink_code=4
 pub(crate) const space_shrink_code: quarterword = 4;
 // @d x_height_code=5
+pub(crate) const x_height_code: quarterword = 5;
 // @d quad_code=6
 // @d extra_space_code=7
 pub(crate) const extra_space_code: quarterword = 7;

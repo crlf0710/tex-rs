@@ -12,6 +12,7 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0265($globals
     // primitive("/",ital_corr,0);@/
     // @!@:Single-character primitives /}{\quad\.{\\/}@>
     // primitive("accent",accent,0);@/
+    primitive(globals, crate::strpool_str!("accent"), accent, 0);
     // @!@:accent_}{\.{\\accent} primitive@>
     // primitive("advance",advance,0);@/
     primitive(globals, crate::strpool_str!("advance"), advance, 0);

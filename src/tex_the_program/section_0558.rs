@@ -8,10 +8,18 @@ pub(crate) macro param($globals:expr, $p:expr, $v:expr) {
         as crate::section_0548::font_index_repr][crate::section_0101::MEMORY_WORD_SC]
 }
 // @d slant==param(slant_code) {slant to the right, per unit distance upward}
+/// slant to the right, per unit distance upward
+pub(crate) macro slant($globals:expr, $v:expr) {
+    crate::section_0558::param!($globals, crate::section_0547::slant_code, $v.get())
+}
 // @d space==param(space_code) {normal space between words}
 // @d space_stretch==param(space_stretch_code) {stretch between words}
 // @d space_shrink==param(space_shrink_code) {shrink between words}
 // @d x_height==param(x_height_code) {one ex}
+/// one ex
+pub(crate) macro x_height($globals:expr, $v:expr) {
+    crate::section_0558::param!($globals, crate::section_0547::x_height_code, $v.get())
+}
 // @d quad==param(quad_code) {one em}
 // @d extra_space==param(extra_space_code) {additional space at end of sentence}
 /// additional space at end of sentence
