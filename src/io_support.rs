@@ -295,7 +295,11 @@ fn builtin_open_file_for_write(path: &str) -> Result<Box<dyn Write>, usize> {
 
 use crate::pascal::char_repr;
 use crate::section_0019::text_char;
-pub(crate) use pascal_io::*;
+pub(crate) use pascal_io::{
+    break_in, buffer_variable, buffer_variable_assign, close, eof, eoln, erstat, get, put, r#break,
+    read_ln, read_onearg, reset, rewrite, write, write_binary, write_ln, write_ln_noargs,
+    FileState, FromBlob, PascalFile, ReadLine, ToBlob,
+};
 use std::{
     borrow::{Borrow, BorrowMut},
     cell::RefCell,
