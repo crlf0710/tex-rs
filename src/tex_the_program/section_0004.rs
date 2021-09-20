@@ -106,6 +106,7 @@ pub mod TeXGlobals {
     include!("src/tex_the_program/section_0825.rs");
     include!("src/tex_the_program/section_0828.rs");
     include!("src/tex_the_program/section_0833.rs");
+    include!("src/tex_the_program/section_0839.rs");
     include!("src/tex_the_program/section_0847.rs");
     include!("src/tex_the_program/section_0872.rs");
     include!("src/tex_the_program/section_0892.rs");

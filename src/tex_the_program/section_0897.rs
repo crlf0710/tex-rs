@@ -39,7 +39,7 @@ pub(crate) macro Skip_to_node_hb__putting_letters_into_hu_and_hc {
             else if r#type!($globals, $s) != ligature_node {
                 // @<Move the characters of a ligature node to |hu| and |hc|;
                 //   but |goto done3| if they are not all letters@>
-                todo!("move the characters");
+                crate::section_0898::Move_the_characters_of_a_ligature_node_to_hu_and_hc__but_goto_done3_if_they_are_not_all_letters!($globals, $s, 'done3);
             }
             // else if (type(s)=kern_node)and(subtype(s)=normal) then
             else if r#type!($globals, $s) == kern_node &&

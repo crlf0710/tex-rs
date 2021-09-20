@@ -23,74 +23,80 @@ pub(crate) macro Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pa
             //   string of characters@>;
             crate::section_0867::Advance_cur_p_to_the_node_following_the_present_string_of_characters!($globals, $prev_p);
         }
-        // case type(cur_p) of
-        let type_cur_p = r#type!($globals, $globals.cur_p);
-        // hlist_node,vlist_node,rule_node: act_width:=act_width+width(cur_p);
-        if type_cur_p == hlist_node || type_cur_p == vlist_node || type_cur_p == rule_node {
-            act_width!($globals) += width!($globals, $globals.cur_p);
-        }
-        // whatsit_node: @<Advance \(p)past a whatsit node in the \(l)|line_break| loop@>;
-        else if type_cur_p == whatsit_node {
-            crate::section_1363::Advance_past_a_whatsit_node_in_the_line_break_loop!($globals);
-        }
-        // glue_node: begin @<If node |cur_p| is a legal breakpoint, call |try_break|;
-        //   then update the active widths by including the glue in |glue_ptr(cur_p)|@>;
-        else if type_cur_p == glue_node {
-            crate::section_0868::If_node_cur_p_is_a_legal_breakpoint__call_try_break__then_update_the_active_widths_by_including_the_glue_in_glue_ptr_cur_p!
-                ($globals, $prev_p, $auto_breaking);
-            // if second_pass and auto_breaking then
-            if $globals.second_pass && $auto_breaking {
-                // @<Try to hyphenate the following word@>;
-                crate::section_0894::Try_to_hyphenate_the_following_word!($globals);
-            }
-            // end;
-        }
-        // kern_node: if subtype(cur_p)=explicit then kern_break
-        else if type_cur_p == kern_node {
-            if subtype!($globals, $globals.cur_p) as integer == kern_node_subtype::explicit as integer {
-                todo!("kern_break");
-            }
-            // else act_width:=act_width+width(cur_p);
-            else {
+        crate::region_forward_label! {
+        |'done5|
+        {
+            // case type(cur_p) of
+            let type_cur_p = r#type!($globals, $globals.cur_p);
+            // hlist_node,vlist_node,rule_node: act_width:=act_width+width(cur_p);
+            if type_cur_p == hlist_node || type_cur_p == vlist_node || type_cur_p == rule_node {
                 act_width!($globals) += width!($globals, $globals.cur_p);
             }
-        }
-        // ligature_node: begin f:=font(lig_char(cur_p));
-        else if type_cur_p == ligature_node {
-            let f: internal_font_number;
-            f = font!($globals, lig_char!($globals.cur_p));
-            // act_width:=act_width+char_width(f)(char_info(f)(character(lig_char(cur_p))));
-            let c = character!($globals, lig_char!($globals.cur_p));
-            act_width!($globals) += char_width!($globals, f, char_info!($globals, f, c.numeric_value()));
-            // end;
-        }
-        // disc_node: @<Try to break after a discretionary fragment, then |goto done5|@>;
-        else if type_cur_p == disc_node {
-            todo!("disc_node");
-        }
-        // math_node: begin auto_breaking:=(subtype(cur_p)=after); kern_break;
-        //   end;
-        else if type_cur_p == math_node {
-            todo!("math_node");
-        }
-        // penalty_node: try_break(penalty(cur_p),unhyphenated);
-        else if type_cur_p == penalty_node {
-            try_break($globals, penalty!($globals, $globals.cur_p), unhyphenated.into())?;
-        }
-        // mark_node,ins_node,adjust_node: do_nothing;
-        else if type_cur_p == mark_node || type_cur_p == ins_node || type_cur_p == adjust_node {
-            do_nothing!();
-        }
-        // othercases confusion("paragraph")
-        else {
-            confusion($globals, crate::strpool_str!("paragraph"))?;
-        }
-        // @:this can't happen paragraph}{\quad paragraph@>
-        // endcases;@/
-        // prev_p:=cur_p; cur_p:=link(cur_p);
-        $prev_p = $globals.cur_p;
-        $globals.cur_p = link!($globals, $globals.cur_p);
-        // done5:end
+            // whatsit_node: @<Advance \(p)past a whatsit node in the \(l)|line_break| loop@>;
+            else if type_cur_p == whatsit_node {
+                crate::section_1363::Advance_past_a_whatsit_node_in_the_line_break_loop!($globals);
+            }
+            // glue_node: begin @<If node |cur_p| is a legal breakpoint, call |try_break|;
+            //   then update the active widths by including the glue in |glue_ptr(cur_p)|@>;
+            else if type_cur_p == glue_node {
+                crate::section_0868::If_node_cur_p_is_a_legal_breakpoint__call_try_break__then_update_the_active_widths_by_including_the_glue_in_glue_ptr_cur_p!
+                    ($globals, $prev_p, $auto_breaking);
+                // if second_pass and auto_breaking then
+                if $globals.second_pass && $auto_breaking {
+                    // @<Try to hyphenate the following word@>;
+                    crate::section_0894::Try_to_hyphenate_the_following_word!($globals);
+                }
+                // end;
+            }
+            // kern_node: if subtype(cur_p)=explicit then kern_break
+            else if type_cur_p == kern_node {
+                if subtype!($globals, $globals.cur_p) as integer == kern_node_subtype::explicit as integer {
+                    todo!("kern_break");
+                }
+                // else act_width:=act_width+width(cur_p);
+                else {
+                    act_width!($globals) += width!($globals, $globals.cur_p);
+                }
+            }
+            // ligature_node: begin f:=font(lig_char(cur_p));
+            else if type_cur_p == ligature_node {
+                let f: internal_font_number;
+                f = font!($globals, lig_char!($globals.cur_p));
+                // act_width:=act_width+char_width(f)(char_info(f)(character(lig_char(cur_p))));
+                let c = character!($globals, lig_char!($globals.cur_p));
+                act_width!($globals) += char_width!($globals, f, char_info!($globals, f, c.numeric_value()));
+                // end;
+            }
+            // disc_node: @<Try to break after a discretionary fragment, then |goto done5|@>;
+            else if type_cur_p == disc_node {
+                crate::section_0869::Try_to_break_after_a_discretionary_fragment__then_goto_done5!($globals, $prev_p, 'done5);
+            }
+            // math_node: begin auto_breaking:=(subtype(cur_p)=after); kern_break;
+            //   end;
+            else if type_cur_p == math_node {
+                todo!("math_node");
+            }
+            // penalty_node: try_break(penalty(cur_p),unhyphenated);
+            else if type_cur_p == penalty_node {
+                try_break($globals, penalty!($globals, $globals.cur_p), unhyphenated.into())?;
+            }
+            // mark_node,ins_node,adjust_node: do_nothing;
+            else if type_cur_p == mark_node || type_cur_p == ins_node || type_cur_p == adjust_node {
+                do_nothing!();
+            }
+            // othercases confusion("paragraph")
+            else {
+                confusion($globals, crate::strpool_str!("paragraph"))?;
+            }
+            // @:this can't happen paragraph}{\quad paragraph@>
+            // endcases;@/
+            // prev_p:=cur_p; cur_p:=link(cur_p);
+            $prev_p = $globals.cur_p;
+            $globals.cur_p = link!($globals, $globals.cur_p);
+            }
+            // done5:end
+            'done5 <-
+        };
         use crate::pascal::integer;
         use crate::section_0016::do_nothing;
         use crate::section_0095::confusion;

@@ -216,6 +216,9 @@ pub(crate) macro line_penalty($globals:expr) {
 }
 // @d hyphen_penalty==int_par(hyphen_penalty_code)
 // @d ex_hyphen_penalty==int_par(ex_hyphen_penalty_code)
+pub(crate) macro ex_hyphen_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::ex_hyphen_penalty_code)
+}
 // @d club_penalty==int_par(club_penalty_code)
 pub(crate) macro club_penalty($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::club_penalty_code)
