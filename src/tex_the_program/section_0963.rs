@@ -13,7 +13,7 @@ pub(crate) macro Insert_a_new_pattern_into_the_linked_trie($globals:expr, $k:exp
     crate::section_0965::Compute_the_trie_op_code__v__and_set_l_to_0!($globals, $k, $l, v);
     // q:=0; hc[0]:=cur_lang;
     q = 0.into();
-    $globals.hc[0] = $globals.cur_lang;
+    $globals.hc[0] = $globals.cur_lang.numeric_value() as _;
     // while l<=k do
     while $l <= $k {
         /// is `p=trie_l[q]`?
@@ -21,7 +21,7 @@ pub(crate) macro Insert_a_new_pattern_into_the_linked_trie($globals:expr, $k:exp
         /// character being inserted
         let c: ASCII_code;
         // begin c:=hc[l]; incr(l); p:=trie_l[q]; first_child:=true;
-        c = $globals.hc[$l.get() as usize];
+        c = ASCII_code::from($globals.hc[$l.get() as usize] as integer);
         incr!($l);
         p = $globals.trie_l[q];
         first_child = true;
@@ -65,6 +65,7 @@ pub(crate) macro Insert_a_new_pattern_into_the_linked_trie($globals:expr, $k:exp
     $globals.trie_o[q] = v;
     // end
     use crate::pascal::boolean;
+    use crate::pascal::integer;
     use crate::section_0016::incr;
     use crate::section_0018::ASCII_code;
     use crate::section_0073::print_err;

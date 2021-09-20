@@ -28,7 +28,7 @@ pub(crate) macro Try_to_hyphenate_the_following_word
             crate::section_0899::Check_that_the_nodes_following_hb_permit_hyphenation_and_that_at_least_l_hyf_plus_r_hyf_letters_have_been_found__otherwise_goto_done1!
                 ($globals, s, 'done1);
             // hyphenate;
-            hyphenate($globals);
+            hyphenate($globals)?;
             // end;
         }
         }

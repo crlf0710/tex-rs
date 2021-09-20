@@ -31,7 +31,7 @@ pub(crate) macro hex_to_cur_chr($globals:expr, $c:expr, $cc:expr) {{
 pub(crate) macro If_this_sup_mark_starts_an_expanded_character_like___A__or__df__then_goto_reswitch__otherwise_set_state__mid_line($globals:expr, $lbl_reswitch:lifetime) {{
     crate::trace_span!("If this `sup_mark` starts an expanded character...");
     // begin if cur_chr=buffer[loc] then if loc<limit then
-    crate::trace_expr!(
+    crate::trace_expr_verbose!(
         "buffer[loc] = {}",
         $globals.buffer[loc!($globals)].numeric_value()
     );
@@ -39,7 +39,7 @@ pub(crate) macro If_this_sup_mark_starts_an_expanded_character_like___A__or__df_
         if loc!($globals) < limit!($globals) {
             // begin c:=buffer[loc+1]; @+if c<@'200 then {yes we have an expanded char}
             let c = $globals.buffer[loc!($globals) + 1].numeric_value();
-            crate::trace_expr!("c = {}", c);
+            crate::trace_expr_verbose!("c = {}", c);
             if c < 0o200 {
                 /// yes we have an expanded char
                 const _: () = ();
@@ -50,7 +50,7 @@ pub(crate) macro If_this_sup_mark_starts_an_expanded_character_like___A__or__df_
                     if loc!($globals) <= limit!($globals) {
                         // begin cc:=buffer[loc]; @+if is_hex(cc) then
                         let cc = $globals.buffer[loc!($globals)].numeric_value();
-                        crate::trace_expr!("cc = {}", cc);
+                        crate::trace_expr_verbose!("cc = {}", cc);
                         if is_hex!(cc) {
                             // begin incr(loc); hex_to_cur_chr; goto reswitch;
                             incr!(loc!($globals));

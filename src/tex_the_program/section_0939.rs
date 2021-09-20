@@ -5,7 +5,7 @@ pub(crate) macro Enter_a_hyphenation_exception($globals:expr, $n:expr, $p:expr) 
     crate::trace_span!("Enter a hyphenation exception");
     // begin incr(n); hc[n]:=cur_lang; str_room(n); h:=0;
     incr!($n);
-    $globals.hc[$n.get() as usize] = $globals.cur_lang;
+    $globals.hc[$n.get() as usize] = $globals.cur_lang.numeric_value() as _;
     str_room($globals, $n.get() as integer * character_max_room);
 
     /// an index into `hyph_word` and `hyph_list`
@@ -16,13 +16,14 @@ pub(crate) macro Enter_a_hyphenation_exception($globals:expr, $n:expr, $p:expr) 
     for j in 1..=$n.get() {
         // begin h:=(h+h+hc[j]) mod hyph_size;
         h = hyph_pointer::new(
-            ((h.get() as integer
-                + h.get() as integer
-                + $globals.hc[j as usize].numeric_value() as integer)
+            ((h.get() as integer + h.get() as integer + $globals.hc[j as usize] as integer)
                 % hyph_size) as _,
         );
         // append_char(hc[j]);
-        append_char(make_globals_string_view!($globals), $globals.hc[j as usize]);
+        append_char(
+            make_globals_string_view!($globals),
+            ASCII_code::from($globals.hc[j as usize] as integer),
+        );
         // end;
     }
 
@@ -38,6 +39,7 @@ pub(crate) macro Enter_a_hyphenation_exception($globals:expr, $n:expr, $p:expr) 
     use crate::section_0004::TeXGlobalsStringView;
     use crate::section_0012::hyph_size;
     use crate::section_0016::incr;
+    use crate::section_0018::ASCII_code;
     use crate::section_0038::str_number;
     use crate::section_0042::append_char;
     use crate::section_0042::character_max_room;

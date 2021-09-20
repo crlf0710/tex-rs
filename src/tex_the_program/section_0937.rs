@@ -31,10 +31,10 @@ pub(crate) macro Append_a_new_letter_or_hyphen($globals:expr, $n:expr, $p:expr) 
         else if $n < 63 {
             // begin incr(n); hc[n]:=lc_code(cur_chr);
             incr!($n);
-            $globals.hc[$n.get() as usize] = ASCII_code::from(lc_code!(
+            $globals.hc[$n.get() as usize] = lc_code!(
                 $globals,
                 ASCII_code::from($globals.cur_chr.get() as integer)
-            ) as integer);
+            ) as _;
             // end;
         }
         // end

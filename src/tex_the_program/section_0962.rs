@@ -33,7 +33,7 @@ pub(crate) macro Append_a_new_letter_or_a_hyphen_level($globals:expr, $digit_sen
         if $k < 63 {
             // begin incr(k); hc[k]:=cur_chr; hyf[k]:=0; digit_sensed:=false;
             incr!($k);
-            $globals.hc[$k.get() as usize] = ASCII_code::from($globals.cur_chr.get() as integer);
+            $globals.hc[$k.get() as usize] = $globals.cur_chr.get() as _;
             $globals.hyf[$k.get() as usize] = 0.into();
             $digit_sensed = false;
             // end;

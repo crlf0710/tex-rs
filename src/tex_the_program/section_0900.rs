@@ -13,10 +13,18 @@
 pub(crate) static hyf: [u8_from_0_to_n<U9>; 65] = [u8_from_0_to_n::default(); 65];
 
 // @!init_list:pointer; {list of punctuation characters preceding the word}
-// @!init_lig:boolean; {does |init_list| represent a ligature?}
-// @!init_lft:boolean; {if so, did the ligature involve a left boundary?}
-//
+/// list of punctuation characters preceding the word
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static init_list: pointer = null;
 
+// @!init_lig:boolean; {does |init_list| represent a ligature?}
+/// does `init_list` represent a ligature?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static init_lig: boolean = false;
+// @!init_lft:boolean; {if so, did the ligature involve a left boundary?}
+/// if so, did the ligature involve a left boundary?
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static init_lft: boolean = false;
 
 #[globals_struct_use(TeXGlobals)]
 use crate::pascal::u8_from_0_to_n;

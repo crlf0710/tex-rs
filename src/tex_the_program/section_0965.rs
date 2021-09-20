@@ -4,11 +4,11 @@
 pub(crate) macro Compute_the_trie_op_code__v__and_set_l_to_0
     ($globals:expr, $k:expr, $l:expr, $v:expr) {{
         // if hc[1]=0 then hyf[0]:=0;
-        if $globals.hc[1] == ASCII_code::from(0) {
+        if $globals.hc[1] == 0 {
             $globals.hyf[0] = 0.into();
         }
         // if hc[k]=0 then hyf[k]:=0;
-        if $globals.hc[$k.get() as usize] == ASCII_code::from(0) {
+        if $globals.hc[$k.get() as usize] == 0 {
             $globals.hyf[$k.get() as usize] = 0.into();
         }
         // l:=k; v:=min_quarterword;

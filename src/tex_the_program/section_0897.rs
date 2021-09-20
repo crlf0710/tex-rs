@@ -3,6 +3,7 @@
 // @<Skip to node |hb|, putting letters...@>=
 pub(crate) macro Skip_to_node_hb__putting_letters_into_hu_and_hc {
     ($globals:expr, $s:expr) => {{
+        crate::trace_span!("Skip to node |hb|, putting letters...");
         // hn:=0;
         $globals.hn = 0.into();
         crate::region_forward_label!(
@@ -11,6 +12,11 @@ pub(crate) macro Skip_to_node_hb__putting_letters_into_hu_and_hc {
         // loop@+  begin if is_char_node(s) then
         loop {
             if is_char_node!($globals, $s) {
+                crate::trace_debug_expr_verbose!(
+                    "s = {}, s.lh = {}",
+                    $s,
+                    $globals.mem[$s][crate::section_0113::MEMORY_WORD_HH_LH]
+                );
                 let c;
                 // begin if font(s)<>hf then goto done3;
                 if font!($globals, $s) != $globals.hf {
@@ -30,13 +36,13 @@ pub(crate) macro Skip_to_node_hb__putting_letters_into_hu_and_hc {
                 // hb:=s; incr(hn); hu[hn]:=c; hc[hn]:=lc_code(c); hyf_bchar:=non_char;
                 $globals.hb = $s;
                 incr!($globals.hn);
-                $globals.hu[$globals.hn.get() as usize] = c;
-                $globals.hc[$globals.hn.get() as usize] = ASCII_code::from(lc_code!($globals, c) as integer);
+                $globals.hu[$globals.hn.get() as usize] = c.numeric_value() as _;
+                $globals.hc[$globals.hn.get() as usize] = lc_code!($globals, c) as _;
                 $globals.hyf_bchar = non_char;
                 // end
             }
             // else if type(s)=ligature_node then
-            else if r#type!($globals, $s) != ligature_node {
+            else if r#type!($globals, $s) == ligature_node {
                 // @<Move the characters of a ligature node to |hu| and |hc|;
                 //   but |goto done3| if they are not all letters@>
                 crate::section_0898::Move_the_characters_of_a_ligature_node_to_hu_and_hc__but_goto_done3_if_they_are_not_all_letters!($globals, $s, 'done3);

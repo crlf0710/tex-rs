@@ -6,6 +6,7 @@
 //
 // @<Compute the new line width@>=
 pub(crate) macro Compute_the_new_line_width($globals:expr, $l:expr, $old_l:expr, $line_width:expr) {{
+    crate::trace_span!("Compute the new line width");
     // if l>easy_line then
     if $l > $globals.easy_line {
         // begin line_width:=second_width; old_l:=max_halfword-1;

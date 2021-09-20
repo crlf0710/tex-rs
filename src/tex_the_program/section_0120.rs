@@ -29,7 +29,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     // else if mem_end<mem_max then {or go into virgin territory}
     else if (globals.mem_end as u32) < mem_max {
         /// or go into virgin territory
-        crate::trace_expr!("mem_end = {}", globals.mem_end);
+        crate::trace_expr_verbose!("mem_end = {}", globals.mem_end);
         todo!();
     //   begin incr(mem_end); p:=mem_end;
     //   end

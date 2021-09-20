@@ -45,11 +45,11 @@ pub(crate) macro If_an_expanded_code_is_present_reduce_it_and_goto_start_cs($glo
             else {
                 $globals.buffer[$k - 1] = ASCII_code::from(c as integer - 0o100);
             }
-            crate::trace_expr!(
+            crate::trace_expr_verbose!(
                 "buffer[k - 1] = {}",
                 $globals.buffer[$k - 1].numeric_value()
             );
-            crate::trace_expr!("d={}", d);
+            crate::trace_expr_verbose!("d={}", d);
             // limit:=limit-d; first:=first-d;
             limit!($globals) -= d;
             $globals.first -= d;

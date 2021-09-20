@@ -7,7 +7,7 @@
 // @!hc:array[0..65] of 0..256; {word to be hyphenated}
 /// word to be hyphenated
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static hc: [ASCII_code; 66] = [ASCII_code::default(); 66];
+pub(crate) static hc: [ASCII_code_or_non_char; 66] = [ASCII_code_or_non_char::default(); 66];
 // @!hn:0..64; {the number of positions occupied in |hc|;
 //                                   not always a |small_number|}
 /// the number of positions occupied in `hc`; not always a `small_number`
@@ -26,7 +26,7 @@ pub(crate) static hf: internal_font_number = internal_font_number::default();
 // @!hu:array[0..63] of 0..256; {like |hc|, before conversion to lowercase}
 /// like `hc`, before conversion to lowercase
 #[globals_struct_field(TeXGlobals)]
-pub(crate) static hu: [ASCII_code; 64] = [ASCII_code::default(); 64];
+pub(crate) static hu: [ASCII_code_or_non_char; 64] = [ASCII_code_or_non_char::default(); 64];
 // @!hyf_char:integer; {hyphen character of the relevant font}
 /// hyphen character of the relevant font
 #[globals_struct_field(TeXGlobals)]
@@ -62,3 +62,5 @@ use typenum::U64;
 
 use crate::section_0004::TeXGlobals;
 use globals_struct::{globals_struct_field, globals_struct_use};
+
+use super::section_0907::ASCII_code_or_non_char;

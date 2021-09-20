@@ -10,14 +10,18 @@ pub(crate) macro trie_link($globals:expr, $v:expr) {
 #[cfg(not(feature = "unicode_support"))]
 #[allow(unused_macros)]
 pub(crate) macro trie_char($globals:expr, $p:expr) {
-    $globals.trie[$p][TWO_HALVES_LH_B1]
+    $globals.trie[$p as u16][TWO_HALVES_LH_B1]
 }
 
 /// character matched at this trie location
 #[cfg(feature = "unicode_support")]
 #[allow(unused_macros)]
 pub(crate) macro trie_char($globals:expr, $p:expr) {
-    crate::unicode_support::triecharop_value($globals, $globals.trie[$p][TWO_HALVES_LH]).char
+    crate::unicode_support::triecharop_value(
+        $globals,
+        $globals.trie[$p as u16][crate::section_0113::TWO_HALVES_LH],
+    )
+    .char
 }
 
 // @d trie_op(#)==trie[#].b0 {program for hyphenation at this trie location}

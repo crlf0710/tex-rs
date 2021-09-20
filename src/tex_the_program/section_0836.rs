@@ -6,6 +6,7 @@
 //
 // @<Create new active nodes...@>=
 pub(crate) macro Create_new_active_nodes_for_the_best_feasible_breaks_just_found($globals:expr, $r:expr, $prev_r:expr, $prev_prev_r:expr, $break_type:expr, $no_break_yet:expr) {{
+    crate::trace_span!("Create new active nodes...");
     // begin if no_break_yet then @<Compute the values of |break_width|@>;
     if $no_break_yet {
         crate::section_0837::Compute_the_values_of_break_width!(

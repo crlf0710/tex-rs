@@ -225,6 +225,15 @@ pub(crate) macro trace_debug_expr
     }
 
 #[allow(unused_macros)]
+pub(crate) macro trace_debug_expr_verbose
+    ($($x:tt)*) {
+        #[cfg(feature = "trace_verbose")]
+        {
+            tracing::debug!($($x)*);
+        }
+    }
+
+#[allow(unused_macros)]
 pub(crate) macro trace_error_expr
     ($($x:tt)*) {
         #[cfg(feature = "trace")]
