@@ -13,11 +13,11 @@
 // @<Replace nodes |ha..hb| by a sequence of nodes...@>=
 pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the_discretionary_hyphens($globals:expr) {{
     /// temporary registers for list manipulation
-    let (q, r, s);
+    let (q, r, mut s);
     /// boundary character of hyphenated word, or `non_char`
     let bchar: ASCII_code_or_non_char;
     /// indices into `hc` or `hu`
-    let j;
+    let mut j;
     // q:=link(hb); link(hb):=null; r:=link(ha); link(ha):=null; bchar:=hyf_bchar;
     q = link!($globals, $globals.hb);
     link!($globals, $globals.hb) = null;
@@ -91,7 +91,7 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
     };
     flush_node_list($globals, r)?;
     // @<Reconstitute nodes for the hyphenated word, inserting discretionary hyphens@>;
-    todo!("Reconstitute nodes");
+    crate::section_0913::Reconstitute_nodes_for_the_hyphenated_word__inserting_discretionary_hyphens!($globals, j, bchar, q, r, s);
     // flush_list(init_list)
     flush_list($globals, $globals.init_list);
     use crate::section_0115::null;
