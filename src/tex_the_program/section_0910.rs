@@ -23,14 +23,16 @@ macro wrap_lig($globals:expr, $v:expr) {{
 //   end {if |lig_stack| isn't |null| we have |cur_rh=non_char|}
 //
 // @<Append a ligature and/or kern to the translation...@>=
-pub(crate) macro Append_a_ligature_and_or_kern_to_the_translation__goto_continue_if_the_stack_of_inserted_ligatures_is_nonempty($globals:expr, $w:expr) {{
+pub(crate) macro Append_a_ligature_and_or_kern_to_the_translation__goto_continue_if_the_stack_of_inserted_ligatures_is_nonempty($globals:expr, $t:expr, $w:expr) {{
     // wrap_lig(rt_hit);
     wrap_lig!($globals, $globals.rt_hit);
     // if w<>0 then
     if $w != scaled::zero() {
         // begin link(t):=new_kern(w); t:=link(t); w:=0;
+        link!($globals, $t) = new_kern($globals, $w)?;
+        $t = link!($globals, $t);
+        $w = scaled::zero();
         // end;
-        todo!("w != 0");
     }
     // if lig_stack>null then
     if $globals.lig_stack > null {
@@ -41,4 +43,6 @@ pub(crate) macro Append_a_ligature_and_or_kern_to_the_translation__goto_continue
     }
     use crate::section_0101::scaled;
     use crate::section_0115::null;
+    use crate::section_0118::link;
+    use crate::section_0156::new_kern;
 }}

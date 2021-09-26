@@ -2,6 +2,7 @@
 
 // @d append_charnode_to_t(#)== begin link(t):=get_avail; t:=link(t);
 macro append_charnode_to_t($globals:expr, $t:expr, $v:expr) {{
+    crate::trace_span!("append_charnode_to_t");
     link!($globals, $t) = get_avail($globals);
     $t = link!($globals, $t);
     // font(t):=hf; character(t):=#;

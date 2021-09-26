@@ -15,13 +15,22 @@ pub(crate) macro Try_to_break_after_a_discretionary_fragment__then_goto_done5($g
     }
     // else  begin repeat @<Add the width of node |s| to |disc_width|@>;
     else {
-        //   s:=link(s);
-        // until s=null;
+        loop {
+            crate::section_0870::Add_the_width_of_node_s_to_disc_width!($globals, s);
+            // s:=link(s);
+            s = link!($globals, s);
+            // until s=null;
+            if s == null {
+                break;
+            }
+        }
         // act_width:=act_width+disc_width;
+        act_width!($globals) += $globals.disc_width;
         // try_break(hyphen_penalty,hyphenated);
+        try_break($globals, hyphen_penalty!($globals), hyphenated.into())?;
         // act_width:=act_width-disc_width;
+        act_width!($globals) -= $globals.disc_width;
         // end;
-        todo!("s != null");
     }
     // r:=replace_count(cur_p); s:=link(cur_p);
     r = replace_count!($globals, $globals.cur_p);
@@ -41,9 +50,12 @@ pub(crate) macro Try_to_break_after_a_discretionary_fragment__then_goto_done5($g
     use crate::section_0101::scaled;
     use crate::section_0115::null;
     use crate::section_0118::link;
+    use crate::section_0135::width;
     use crate::section_0145::pre_break;
     use crate::section_0145::replace_count;
     use crate::section_0236::ex_hyphen_penalty;
+    use crate::section_0236::hyphen_penalty;
     use crate::section_0819::hyphenated;
     use crate::section_0829::try_break;
+    use crate::section_0866::act_width;
 }}

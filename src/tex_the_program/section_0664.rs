@@ -44,7 +44,11 @@ pub(crate) macro Determine_horizontal_glue_shrink_setting__then_return_or_goto_c
     else if o == glue_ord::normal && list_ptr!($globals, $r) != null {
         // @<Report a tight hbox and |goto common_ending|, if this box
         //   is sufficiently bad@>;
-        todo!("report a tight hbox");
+        crate::section_0667::Report_a_tight_hbox_and_goto_common_ending__if_this_box_is_sufficiently_bad!(
+            $globals,
+            $x,
+            $lbl_common_ending
+        );
     }
     // return;
     crate::return_nojump!($r);

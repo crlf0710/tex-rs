@@ -10,4 +10,6 @@ pub(crate) macro precedes_break($globals:expr, $p:expr) {
     crate::section_0133::r#type!($globals, $p) < crate::section_0147::math_node
 }
 // @d non_discardable(#)==(type(#)<math_node)
-//
+pub(crate) macro non_discardable($globals:expr, $p:expr) {
+    crate::section_0133::r#type!($globals, $p) < crate::section_0147::math_node
+}

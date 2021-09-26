@@ -1,18 +1,3 @@
-//! @ @<Compute the discretionary |break...@>=
-//! begin t:=replace_count(cur_p); v:=cur_p; s:=post_break(cur_p);
-//! while t>0 do
-//!   begin decr(t); v:=link(v);
-//!   @<Subtract the width of node |v| from |break_width|@>;
-//!   end;
-//! while s<>null do
-//!   begin @<Add the width of node |s| to |break_width|@>;
-//!   s:=link(s);
-//!   end;
-//! break_width[1]:=break_width[1]+disc_width;
-//! if post_break(cur_p)=null then s:=link(v);
-//!           {nodes may be discardable after the break}
-//! end
-//!
 //! @ Replacement texts and discretionary texts are supposed to contain
 //! only character nodes, kern nodes, ligature nodes, and box or rule nodes.
 //!

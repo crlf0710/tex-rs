@@ -36,7 +36,7 @@ pub(crate) macro Compute_the_values_of_break_width
         // if break_type>unhyphenated then if cur_p<>null then
         if $break_type > unhyphenated && $globals.cur_p != null {
             // @<Compute the discretionary |break_width| values@>;
-            todo!("compute the discretionary break_width");
+            crate::section_0840::Compute_the_discretionary_break_width_values!($globals, s);
         }
         crate::region_forward_label!(
         |'done|

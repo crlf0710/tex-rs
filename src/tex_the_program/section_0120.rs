@@ -38,7 +38,11 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     else {
         decr!(globals.hi_mem_min);
         p = globals.hi_mem_min;
-
+        crate::trace_expr_verbose!(
+            "hi_mem_min = {}, lo_mem_max = {}",
+            globals.hi_mem_min,
+            globals.lo_mem_max
+        );
         //   if hi_mem_min<=lo_mem_max then
         if globals.hi_mem_min <= globals.lo_mem_max {
             //     begin runaway; {if memory is exhausted, display possible runaway text}

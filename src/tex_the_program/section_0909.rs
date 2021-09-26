@@ -4,7 +4,7 @@
 //! in the program, so we'd better not try to look for both at once.)
 //
 // @<If there's a ligature or kern at the cursor position, update...@>=
-pub(crate) macro If_there_s_a_ligature_or_kern_at_the_cursor_position__update_the_data_structures__possibly_advancing_j__continue_until_the_cursor_moves($globals:expr, $cur_rh:expr, $test_char:expr, $lbl_continue:lifetime) {{
+pub(crate) macro If_there_s_a_ligature_or_kern_at_the_cursor_position__update_the_data_structures__possibly_advancing_j__continue_until_the_cursor_moves($globals:expr, $j:expr, $hchar:expr, $cur_rh:expr, $test_char:expr, $w:expr, $lbl_continue:lifetime) {{
     crate::region_forward_label! {
         |'done|
         {
@@ -61,19 +61,34 @@ pub(crate) macro If_there_s_a_ligature_or_kern_at_the_cursor_position__update_th
                 if q_lig_kern_cmd.next_char() as ASCII_code_or_non_char == $test_char &&
                     q_lig_kern_cmd.skip_byte() <= stop_flag {
                     // if cur_rh<non_char then
-                    //   begin hyphen_passed:=j; hchar:=non_char; cur_rh:=non_char;
-                    //   goto continue;
-                    //   end
+                    if $cur_rh < non_char {
+                        // begin hyphen_passed:=j; hchar:=non_char; cur_rh:=non_char;
+                        // goto continue;
+                        // end
+                        todo!("cur_rh < non_char");
+                    }
                     // else begin if hchar<non_char then if odd(hyf[j]) then
-                    //     begin hyphen_passed:=j; hchar:=non_char;
-                    //     end;
-                    //   if op_byte(q)<kern_flag then
-                    //   @<Carry out a ligature replacement, updating the cursor structure
-                    //     and possibly advancing~|j|; |goto continue| if the cursor doesn't
-                    //     advance, otherwise |goto done|@>;
-                    //   w:=char_kern(hf)(q); goto done; {this kern will be inserted below}
-                    //  end;
-                    todo!("q.next_char() == $test_char && q.skip_byte() <= stop_flag")
+                    else {
+                        if $hchar < non_char && $globals.hyf[$j.get() as usize].is_odd() {
+                            // begin hyphen_passed:=j; hchar:=non_char;
+                            $globals.hyphen_passed = $j;
+                            $hchar = non_char;
+                            // end;
+                        }
+                        //  if op_byte(q)<kern_flag then
+                        if q_lig_kern_cmd.op_byte() < kern_flag {
+                            // @<Carry out a ligature replacement, updating the cursor structure
+                            //   and possibly advancing~|j|; |goto continue| if the cursor doesn't
+                            //   advance, otherwise |goto done|@>;
+                            todo!("carry out");
+                        }
+                        // w:=char_kern(hf)(q); goto done; {this kern will be inserted below}
+                        $w = char_kern!($globals, $globals.hf, q_lig_kern_cmd);
+                        crate::goto_forward_label!('done);
+                        /// this kern will be inserted below
+                        const _ : () = ();
+                        // end;
+                    }
                 }
                 // if skip_byte(q)>=stop_flag then
                 if q_lig_kern_cmd.skip_byte() >= stop_flag {
@@ -97,13 +112,16 @@ pub(crate) macro If_there_s_a_ligature_or_kern_at_the_cursor_position__update_th
         // done:
         'done <-
     };
+    use crate::pascal::IsOddOrEven;
     use crate::section_0544::char_tag;
     use crate::section_0545::stop_flag;
     use crate::section_0545::MEMORY_WORD_LIG_KERN_CMD;
+    use crate::section_0545::kern_flag;
     use crate::section_0548::font_index;
     use crate::section_0549::non_address;
     use crate::section_0549::non_char;
     use crate::section_0554::char_info;
+    use crate::section_0557::char_kern;
     use crate::section_0557::lig_kern_restart;
     use crate::section_0557::lig_kern_start;
     use crate::section_0907::ASCII_code_or_non_char;

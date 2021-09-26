@@ -12,9 +12,10 @@ pub(crate) macro Reconstitute_nodes_for_the_hyphenated_word__inserting_discretio
             small_number::new($j as _),
             $globals.hn.get().into(),
             $bchar,
-            $globals.hyf_char as u32 + 1,
-        )
-        .get() as _;
+            $globals.hyf_char as u32,
+        )?
+        .get() as usize
+            + 1;
         // if hyphen_passed=0 then
         if $globals.hyphen_passed == 0 {
             // begin link(s):=link(hold_head);
@@ -26,8 +27,10 @@ pub(crate) macro Reconstitute_nodes_for_the_hyphenated_word__inserting_discretio
             // if odd(hyf[j-1]) then
             if $globals.hyf[$j - 1].is_odd() {
                 // begin l:=j; hyphen_passed:=j-1; link(hold_head):=null;
+                l = $j;
+                $globals.hyphen_passed = small_number::new(($j - 1) as _);
+                link!($globals, hold_head) = null;
                 // end;
-                todo!("odd(hyf[j-1])");
             }
             // end;
         }
@@ -36,7 +39,9 @@ pub(crate) macro Reconstitute_nodes_for_the_hyphenated_word__inserting_discretio
             // @<Create and append a discretionary node as an alternative to the
             //   unhyphenated word, and continue to develop both branches until they
             //   become equivalent@>;
-            todo!("hyphen_passed > 0");
+            crate::section_0914::Create_and_append_a_discretionary_node_as_an_alternative_to_the_unhyphenated_word__and_continue_to_develop_both_branches_until_they_become_equivalent!(
+                $globals, $j, $s, l
+            );
         }
         // until j>hn;
         if $j > $globals.hn.get() as usize {

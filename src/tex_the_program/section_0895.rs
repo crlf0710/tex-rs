@@ -3,6 +3,7 @@
 // @t\4@>@<Declare the function called |reconstitute|@>
 // procedure hyphenate;
 #[allow(unused_variables, unused_assignments)]
+#[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn hyphenate(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label common_ending,done,found,found1,found2,not_found,exit;
     // var @<Local variables for hyphenation@>@;

@@ -58,7 +58,7 @@ pub(crate) fn post_line_break(
         // if cur_p<>null then if not post_disc_break then
         if globals.cur_p != null && !post_disc_break {
             // @<Prune unwanted nodes at the beginning of the next line@>;
-            todo!("prune unwanted");
+            crate::section_0879::Prune_unwanted_nodes_at_the_beginning_of_the_next_line!(globals);
         }
         // until cur_p=null;
         if globals.cur_p == null {
