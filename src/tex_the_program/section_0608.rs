@@ -36,7 +36,13 @@ pub(crate) const z_here: quarterword = 2;
 /// `info` corresponding to an unconstrained `down` command
 pub(crate) const yz_OK: quarterword = 3;
 // @d y_OK=4 {|info| corresponding to a \\{down} that can't become a |z|}
+/// `info` corresponding to a `down` that can't become a `z`
+pub(crate) const y_OK: quarterword = 4;
 // @d z_OK=5 {|info| corresponding to a \\{down} that can't become a |y|}
+/// `info` corresponding to a `down` that can't become a `y`
+pub(crate) const z_OK: quarterword = 5;
 // @d d_fixed=6 {|info| corresponding to a \\{down} that can't change}
+/// `info` corresponding to a `down` that can't change
+pub(crate) const d_fixed: quarterword = 6;
 
 use crate::section_0113::quarterword;

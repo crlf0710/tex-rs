@@ -1,7 +1,7 @@
 //! ` `
 // @<Output the non-|char_node| |p| for |hlist_out|...@>=
 pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_node {
-    ($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr) => {{
+    ($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_reswitch:lifetime) => {{
         // begin case type(p) of
         let type_p = r#type!($globals, $p);
         crate::region_forward_label!(
@@ -34,7 +34,7 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         }
         // ligature_node: @<Make node |p| look like a |char_node| and |goto reswitch|@>;
         else if type_p == ligature_node {
-            todo!("ligature_node in hlist");
+            crate::section_0652::Make_node_p_look_like_a_char_node_and_goto_reswitch!($globals, $p, crate::goto_forward_label, $lbl_reswitch);
         }
         // othercases do_nothing
         else {

@@ -13,7 +13,7 @@ pub(crate) const rule_node: quarterword = 2;
 pub(crate) const rule_node_size: quarterword = 4;
 // @d null_flag==-@'10000000000 {$-2^{30}$, signifies a missing item}
 /// `-2^{30}`, signifies a missing item
-pub(crate) const null_flag: scaled = scaled::new_from_inner(0o10000000000);
+pub(crate) const null_flag: scaled = scaled::new_from_inner(-0o10000000000);
 // @d is_running(#) == (#=null_flag) {tests for a running dimension}
 /// tests for a running dimension
 pub(crate) macro is_running($v:expr) {

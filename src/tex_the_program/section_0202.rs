@@ -38,7 +38,11 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     // end;
                 }
                 // rule_node: begin free_node(p,rule_node_size); goto done;
-                //   end;
+                else if type_p == rule_node {
+                    free_node(globals, p, rule_node_size as _);
+                    crate::goto_forward_label!('done);
+                    // end;
+                }
                 // ins_node: begin flush_node_list(ins_ptr(p));
                 //   delete_glue_ref(split_top_ptr(p));
                 //   free_node(p,ins_node_size); goto done;
@@ -62,10 +66,17 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     do_nothing!();
                 }
                 // ligature_node: flush_node_list(lig_ptr(p));
+                else if type_p == ligature_node {
+                    flush_node_list(globals, lig_ptr!(globals, p))?;
+                }
                 // mark_node: delete_token_ref(mark_ptr(p));
                 // disc_node: begin flush_node_list(pre_break(p));
-                //   flush_node_list(post_break(p));
-                //   end;
+                else if type_p == disc_node {
+                    flush_node_list(globals, pre_break!(globals, p))?;
+                    // flush_node_list(post_break(p));
+                    flush_node_list(globals, post_break!(globals, p))?;
+                    // end;
+                }
                 // adjust_node: flush_node_list(adjust_ptr(p));
                 // @t\4@>@<Cases of |flush_node_list| that arise in mlists only@>@;
                 // othercases confusion("flushing")
@@ -105,7 +116,14 @@ use crate::section_0135::box_node_size;
 use crate::section_0135::hlist_node;
 use crate::section_0135::list_ptr;
 use crate::section_0137::vlist_node;
+use crate::section_0138::rule_node;
+use crate::section_0138::rule_node_size;
 use crate::section_0141::small_node_size;
+use crate::section_0143::lig_ptr;
+use crate::section_0143::ligature_node;
+use crate::section_0145::disc_node;
+use crate::section_0145::post_break;
+use crate::section_0145::pre_break;
 use crate::section_0146::whatsit_node;
 use crate::section_0147::math_node;
 use crate::section_0149::glue_node;

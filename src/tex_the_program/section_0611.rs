@@ -16,22 +16,25 @@ pub(crate) const y_seen: quarterword = 6;
 pub(crate) const z_seen: quarterword = 12;
 
 // @<Look at the other stack entries until deciding...@>=
-pub(crate) macro Look_at_the_other_stack_entries_until_deciding_what_sort_of_DVI_command_to_generate__goto_found_if_node_p_is_a_hit($globals:expr, $q:expr, $w:expr, $mstate:expr) {{
-    /// current and top nodes on the stack
-    let (mut p, _): (pointer, pointer);
+pub(crate) macro Look_at_the_other_stack_entries_until_deciding_what_sort_of_DVI_command_to_generate__goto_found_if_node_p_is_a_hit($globals:expr, $p:expr, $q:expr, $w:expr, $mstate:expr, $lbl_found:lifetime) {{
     // p:=link(q); mstate:=none_seen;
-    p = link!($globals, $q);
+    $p = link!($globals, $q);
     $mstate = none_seen;
+    crate::region_forward_label! {
+    |'not_found|
+    {
     // while p<>null do
-    while p != null {
+    while $p != null {
         // begin if width(p)=w then @<Consider a node with matching width;
         //   |goto found| if it's a hit@>
-        if width!($globals, p) == $w {
-            todo!("consider a node");
+        if width!($globals, $p) == $w {
+            crate::section_0612::Consider_a_node_with_matching_width__goto_found_if_it_s_a_hit!(
+                $globals, $mstate, $p, $lbl_found, 'not_found
+            );
         }
         // else  case mstate+info(p) of
         else {
-            let mstate_plus_info_p = $mstate + info_inner!($globals, p) as quarterword;
+            let mstate_plus_info_p = $mstate + info_inner!($globals, $p) as quarterword;
             // none_seen+y_here: mstate:=y_seen;
             if mstate_plus_info_p == none_seen + y_here {
                 $mstate = y_seen;
@@ -43,7 +46,7 @@ pub(crate) macro Look_at_the_other_stack_entries_until_deciding_what_sort_of_DVI
             // y_seen+z_here,z_seen+y_here: goto not_found;
             else if mstate_plus_info_p == y_seen + z_here || mstate_plus_info_p == z_seen + y_here
             {
-                todo!("goto not found");
+                crate::goto_forward_label!('not_found);
             }
             // othercases do_nothing
             else {
@@ -52,10 +55,13 @@ pub(crate) macro Look_at_the_other_stack_entries_until_deciding_what_sort_of_DVI
             // endcases;
         }
         // p:=link(p);
-        p = link!($globals, p);
+        $p = link!($globals, $p);
         // end;
     }
+    }
     // not_found:
+    'not_found <-
+    };
     use crate::section_0016::do_nothing;
     use crate::section_0113::quarterword;
     use crate::section_0115::null;

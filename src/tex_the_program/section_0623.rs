@@ -33,7 +33,6 @@ pub(crate) macro Output_a_box_in_an_hlist($globals:expr, $p:expr, $base_line:exp
         $globals.cur_h = edge + width!($globals, $p);
         $globals.cur_v = $base_line;
         // end
-        todo!();
     }
     use crate::section_0101::scaled;
     use crate::section_0115::null;
