@@ -36,15 +36,23 @@ pub(crate) macro Print_a_short_indication_of_the_contents_of_node_p {
         }
         // disc_node: begin short_display(pre_break(p));
         else if type_p == disc_node {
+            /// for replacement counts
+            let mut n: integer;
             short_display($globals, pre_break!($globals, $p) as _);
             // short_display(post_break(p));@/
             short_display($globals, post_break!($globals, $p) as _);
             // n:=replace_count(p);
-            todo!("disc_node");
+            n = replace_count!($globals, $p) as _;
             // while n>0 do
-            //   begin if link(p)<>null then p:=link(p);
-            //   decr(n);
-            //   end;
+            while n > 0 {
+                // begin if link(p)<>null then p:=link(p);
+                if link!($globals, $p) != null {
+                    $p = link!($globals, $p);
+                }
+                // decr(n);
+                decr!(n);
+                // end;
+            }
             // end;
         }
         // othercases do_nothing
@@ -52,11 +60,15 @@ pub(crate) macro Print_a_short_indication_of_the_contents_of_node_p {
             do_nothing!();
         }
         // endcases
+        use crate::pascal::integer;
         use crate::section_0004::make_globals_io_string_log_view;
         use crate::section_0016::do_nothing;
+        use crate::section_0016::decr;
         use crate::section_0018::ASCII_code_literal;
         use crate::section_0058::print_char;
         use crate::section_0059::print;
+        use crate::section_0115::null;
+        use crate::section_0118::link;
         use crate::section_0133::r#type;
         use crate::section_0135::hlist_node;
         use crate::section_0137::vlist_node;
@@ -69,6 +81,7 @@ pub(crate) macro Print_a_short_indication_of_the_contents_of_node_p {
         use crate::section_0145::pre_break;
         use crate::section_0145::disc_node;
         use crate::section_0145::post_break;
+        use crate::section_0145::replace_count;
         use crate::section_0146::whatsit_node;
         use crate::section_0147::math_node;
         use crate::section_0149::glue_node;

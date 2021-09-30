@@ -4,7 +4,6 @@
 //
 // @p procedure print_font_and_char(@!p:integer); {prints |char_node| data}
 /// prints `char_node` data
-#[allow(unused_variables)]
 pub(crate) fn print_font_and_char(globals: &mut TeXGlobals, p: integer) {
     // begin if p>mem_end then print_esc("CLOBBERED.")
     if p > globals.mem_end as integer {
@@ -45,10 +44,20 @@ pub(crate) fn print_font_and_char(globals: &mut TeXGlobals, p: integer) {
 // end;
 // @#
 // procedure print_rule_dimen(@!d:scaled); {prints dimension in rule node}
-// begin if is_running(d) then print_char("*") else print_scaled(d);
-// @.*\relax@>
-// end;
-//
+/// prints dimension in rule node
+pub(crate) fn print_rule_dimen(globals: &mut TeXGlobals, d: scaled) {
+    // begin if is_running(d) then print_char("*") else print_scaled(d);
+    if is_running!(d) {
+        print_char(
+            make_globals_io_string_log_view!(globals),
+            ASCII_code_literal!(b'*'),
+        );
+    } else {
+        print_scaled(globals, d);
+    }
+    // @.*\relax@>
+    // end;
+}
 
 use crate::pascal::integer;
 use crate::section_0004::make_globals_io_string_log_view;
@@ -60,6 +69,10 @@ use crate::section_0018::ASCII_code_literal;
 use crate::section_0058::print_char;
 use crate::section_0063::print_esc;
 use crate::section_0068::print_ASCII;
+use crate::section_0101::scaled;
+use crate::section_0103::print_scaled;
 use crate::section_0115::pointer;
 use crate::section_0134::character;
 use crate::section_0134::font;
+use crate::section_0135::height;
+use crate::section_0138::is_running;

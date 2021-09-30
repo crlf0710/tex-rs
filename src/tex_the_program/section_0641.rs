@@ -13,20 +13,30 @@ pub(crate) macro Update_the_values_of_max_h_and_max_v__but_if_the_page_is_too_la
             > scaled::new_from_inner(max_dimen)
         || width!($globals, $p) + h_offset!($globals) > scaled::new_from_inner(max_dimen)
     {
-        //   begin print_err("Huge page cannot be shipped out");
+        // begin print_err("Huge page cannot be shipped out");
+        print_err!(
+            $globals,
+            crate::strpool_str!("Huge page cannot be shipped out")
+        );
         // @.Huge page...@>
-        //   help2("The page just created is more than 18 feet tall or")@/
-        //    ("more than 18 feet wide, so I suspect something went wrong.");
-        //   error;
-        //   if tracing_output<=0 then
-        //     begin begin_diagnostic;
-        //     print_nl("The following box has been deleted:");
+        // help2("The page just created is more than 18 feet tall or")@/
+        //  ("more than 18 feet wide, so I suspect something went wrong.");
+        help2!(
+            $globals,
+            crate::strpool_str!("The page just created is more than 18 feet tall or"),
+            crate::strpool_str!("more than 18 feet wide, so I suspect something went wrong.")
+        );
+        // error;
+        error($globals)?;
+        // if tracing_output<=0 then
+        //   begin begin_diagnostic;
+        //   print_nl("The following box has been deleted:");
         // @.The following...deleted@>
-        //     show_box(p);
-        //     end_diagnostic(true);
-        //     end;
-        //   goto done;
+        //   show_box(p);
+        //   end_diagnostic(true);
         //   end;
+        // goto done;
+        // end;
         todo!("update the values of max_h and max_v");
     }
     // if height(p)+depth(p)+v_offset>max_v then max_v:=height(p)+depth(p)+v_offset;
@@ -37,6 +47,9 @@ pub(crate) macro Update_the_values_of_max_h_and_max_v__but_if_the_page_is_too_la
     if width!($globals, $p) + h_offset!($globals) > $globals.max_h {
         $globals.max_h = width!($globals, $p) + h_offset!($globals);
     }
+    use crate::section_0073::print_err;
+    use crate::section_0079::help2;
+    use crate::section_0082::error;
     use crate::section_0101::scaled;
     use crate::section_0135::depth;
     use crate::section_0135::height;

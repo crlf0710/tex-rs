@@ -15,6 +15,10 @@ pub(crate) const rule_node_size: quarterword = 4;
 /// `-2^{30}`, signifies a missing item
 pub(crate) const null_flag: scaled = scaled::new_from_inner(0o10000000000);
 // @d is_running(#) == (#=null_flag) {tests for a running dimension}
+/// tests for a running dimension
+pub(crate) macro is_running($v:expr) {
+    $v == crate::section_0138::null_flag
+}
 
 use crate::pascal::integer;
 use crate::section_0101::scaled;
