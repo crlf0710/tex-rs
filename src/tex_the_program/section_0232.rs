@@ -72,6 +72,7 @@ pub(crate) macro Initialize_table_entries_done_by_initex_only_0232($globals:expr
         lc_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) = (k_u8 + b'a' - b'A') as _;
         // uc_code(k):=k; uc_code(k+"a"-"A"):=k;@/
         // sf_code(k):=999;
+        sf_code!(globals, ASCII_code_literal!(k_u8)) = 999;
         // end;
     }
 }}

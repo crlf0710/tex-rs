@@ -39,6 +39,9 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
             crate::section_0194::Display_penalty_p!($globals, $p);
         }
         // disc_node: @<Display discretionary |p|@>;
+        else if type_p == disc_node {
+            crate::section_0195::Display_discretionary_p!($globals, $p);
+        }
         // mark_node: @<Display mark |p|@>;
         // adjust_node: @<Display adjustment |p|@>;
         // @t\4@>@<Cases of |show_node_list| that arise in mlists only@>@;
@@ -60,6 +63,7 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
     use crate::section_0137::vlist_node;
     use crate::section_0138::rule_node;
     use crate::section_0143::ligature_node;
+    use crate::section_0145::disc_node;
     use crate::section_0146::whatsit_node;
     use crate::section_0149::glue_node;
     use crate::section_0155::kern_node;
