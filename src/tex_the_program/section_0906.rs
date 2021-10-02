@@ -9,9 +9,9 @@ use super::section_0907::ASCII_code_or_non_char;
 #[cfg_attr(feature = "trace", tracing::instrument(level = "trace", skip(globals)))]
 pub(crate) fn reconstitute(
     globals: &mut TeXGlobals,
-    j: small_number,
+    mut j: small_number,
     n: small_number,
-    bchar: ASCII_code_or_non_char,
+    mut bchar: ASCII_code_or_non_char,
     mut hchar: ASCII_code_or_non_char,
 ) -> TeXResult<small_number> {
     // label continue,done;
@@ -48,12 +48,12 @@ pub(crate) fn reconstitute(
         'continue_ <-
         {
             crate::section_0909::If_there_s_a_ligature_or_kern_at_the_cursor_position__update_the_data_structures__possibly_advancing_j__continue_until_the_cursor_moves!(
-                globals, j, hchar, cur_rh, test_char, w, 'continue_
+                globals, j, n, bchar, hchar, cur_rh, test_char, w, 'continue_
             );
             // @<Append a ligature and/or kern to the translation;
             //   |goto continue| if the stack of inserted ligatures is nonempty@>;
             crate::section_0910::Append_a_ligature_and_or_kern_to_the_translation__goto_continue_if_the_stack_of_inserted_ligatures_is_nonempty!(
-                globals, t, w
+                globals, t, w, j, n, bchar, hchar, cur_rh, 'continue_
             );
         }
         |'continue_|
