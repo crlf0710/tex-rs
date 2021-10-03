@@ -19,11 +19,11 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
     }
     // else if n<local_base then @<Show equivalent |n|, in region 3@>
     else if (n as integer) < local_base as integer {
-        Show_equivalent_n__in_region_3!(globals, n);
+        crate::section_0229::Show_equivalent_n__in_region_3!(globals, n);
     }
     // else if n<int_base then @<Show equivalent |n|, in region 4@>
     else if (n as integer) < int_base as integer {
-        Show_equivalent_n__in_region_4!(globals, n);
+        crate::section_0233::Show_equivalent_n__in_region_4!(globals, n);
     }
     // else if n<dimen_base then @<Show equivalent |n|, in region 5@>
     else if (n as integer) < dimen_base as integer {
@@ -31,7 +31,7 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
     }
     // else if n<=eqtb_size then @<Show equivalent |n|, in region 6@>
     else if (n as integer) < eqtb_size as integer {
-        Show_equivalent_n__in_region_6!(globals, n);
+        crate::section_0251::Show_equivalent_n__in_region_6!(globals, n);
     }
     // else print_char("?"); {this can't happen either}
     else {
@@ -46,8 +46,10 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
 use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0058::print_char;
 use crate::section_0115::pointer;
 use crate::section_0222::active_base;

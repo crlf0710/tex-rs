@@ -17,8 +17,9 @@ pub(crate) macro Find_optimal_breakpoints
                     begin_diagnostic($globals);
                     print_nl($globals, crate::strpool_str!("@firstpass"));
                 }
-                use crate::section_0245::begin_diagnostic;
                 use crate::section_0062::print_nl;
+                use crate::section_0236::tracing_paragraphs;
+                use crate::section_0245::begin_diagnostic;
             }
             // second_pass:=false; final_pass:=false;
             $globals.second_pass = false;
@@ -37,6 +38,7 @@ pub(crate) macro Find_optimal_breakpoints
                     begin_diagnostic($globals);
                 }
                 use crate::section_0245::begin_diagnostic;
+                use crate::section_0236::tracing_paragraphs;
             }
             // end;
         }
@@ -93,6 +95,7 @@ pub(crate) macro Find_optimal_breakpoints
                         print_nl($globals, crate::strpool_str!("@secondpass"));
                     }
                     use crate::section_0062::print_nl;
+                    use crate::section_0236::tracing_paragraphs;
                 }
                 // threshold:=tolerance; second_pass:=true; final_pass:=(emergency_stretch<=0);
                 $globals.threshold = tolerance!($globals);
@@ -110,6 +113,7 @@ pub(crate) macro Find_optimal_breakpoints
                         print_nl($globals, crate::strpool_str!("@emergencypass"));
                     }
                     use crate::section_0062::print_nl;
+                    use crate::section_0236::tracing_paragraphs;
                 }
                 // background[2]:=background[2]+emergency_stretch; final_pass:=true;
                 $globals.background[2] += emergency_stretch!($globals);
@@ -130,6 +134,7 @@ pub(crate) macro Find_optimal_breakpoints
                 // end;@+tats@/
             }
             use crate::section_0092::normalize_selector;
+            use crate::section_0236::tracing_paragraphs;
             use crate::section_0245::end_diagnostic;
         }
 

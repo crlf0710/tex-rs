@@ -42,10 +42,17 @@ pub(crate) macro Print_a_symbolic_description_of_the_new_break_node($globals:exp
         );
     }
     // end
-    use crate::section_0004::TeXGlobalsIoStringLogView;
+    use crate::pascal::integer;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0018::ASCII_code_literal;
     use crate::section_0058::print_char;
     use crate::section_0059::print;
     use crate::section_0062::print_nl;
     use crate::section_0065::print_int;
+    use crate::section_0115::null;
     use crate::section_0819::hyphenated;
+    use crate::section_0819::line_number;
+    use crate::section_0819::total_demerits;
+    use crate::section_0821::prev_break;
+    use crate::section_0821::serial;
 }}

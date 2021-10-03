@@ -21,6 +21,7 @@ pub(crate) fn flush_list(globals: &mut TeXGlobals, p: pointer) {
             r = link!(globals, r);
             crate::region_stat! {
                 decr!(globals.dyn_used);
+                use crate::section_0016::decr;
             }
             // until r=null; {now |q| is the last node on the list}
             if r == null {

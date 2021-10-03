@@ -23,8 +23,9 @@ pub(crate) fn close_files_and_terminate(globals: &mut TeXGlobals) {
     // @!stat if tracing_stats>0 then @<Output statistics about this job@>;@;@+tats@/
     crate::region_stat! {
         if tracing_stats!(globals) > 0 {
-            Output_statistics_about_this_job!(globals);
+            crate::section_1334::Output_statistics_about_this_job!(globals);
         }
+        use crate::section_0236::tracing_stats;
     }
     // wake_up_terminal; @<Finish the \.{DVI} file@>;
     wake_up_terminal(globals);

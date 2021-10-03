@@ -17,6 +17,14 @@ pub(crate) macro Flush_the_box_from_memory__showing_statistics_if_requested {
                 // end;
             }
             // tats@/
+            use crate::section_0004::make_globals_io_string_log_view;
+            use crate::section_0018::ASCII_code_literal;
+            use crate::section_0057::print_ln;
+            use crate::section_0058::print_char;
+            use crate::section_0059::print;
+            use crate::section_0062::print_nl;
+            use crate::section_0065::print_int;
+            use crate::section_0236::tracing_stats;
         };
         // flush_node_list(p);
         flush_node_list($globals, $p)?;
@@ -37,6 +45,13 @@ pub(crate) macro Flush_the_box_from_memory__showing_statistics_if_requested {
                 // end;
             }
             // tats
+            use crate::section_0004::make_globals_io_string_log_view;
+            use crate::section_0018::ASCII_code_literal;
+            use crate::section_0057::print_ln;
+            use crate::section_0058::print_char;
+            use crate::section_0059::print;
+            use crate::section_0065::print_int;
+            use crate::section_0236::tracing_stats;
         };
         use crate::pascal::integer;
         use crate::section_0202::flush_node_list;

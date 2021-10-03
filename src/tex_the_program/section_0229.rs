@@ -41,7 +41,13 @@ pub(crate) macro Show_equivalent_n__in_region_3($globals:expr, $n:expr) {{
         // end
         todo!("muskip");
     }
+    use crate::pascal::integer;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0018::ASCII_code_literal;
+    use crate::section_0058::print_char;
     use crate::section_0178::print_spec;
+    use crate::section_0221::equiv;
+    use crate::section_0222::glue_base;
     use crate::section_0224::mu_skip_base;
     use crate::section_0224::skip_base;
     use crate::section_0224::thin_mu_skip_code;

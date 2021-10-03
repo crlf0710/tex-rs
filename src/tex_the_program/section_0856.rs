@@ -6,7 +6,7 @@ pub(crate) macro Print_a_symbolic_description_of_this_feasible_break($globals:ex
     if $globals.printed_node != $globals.cur_p {
         // @<Print the list between |printed_node| and |cur_p|,
         //   then set |printed_node:=cur_p|@>;
-        Print_the_list_between_printed_node_and_cur_p__then_set_printed_node_to_cur_p!($globals);
+        crate::section_0857::Print_the_list_between_printed_node_and_cur_p__then_set_printed_node_to_cur_p!($globals);
     }
     // print_nl("@@");
     print_nl($globals, crate::strpool_str!("@"));
@@ -74,14 +74,20 @@ pub(crate) macro Print_a_symbolic_description_of_this_feasible_break($globals:ex
         print_int($globals, $d);
     }
     // end
-    use crate::section_0004::TeXGlobalsIoStringLogView;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0018::ASCII_code_literal;
     use crate::section_0058::print_char;
     use crate::section_0059::print;
     use crate::section_0062::print_nl;
     use crate::section_0063::print_esc;
     use crate::section_0065::print_int;
+    use crate::section_0108::inf_bad;
+    use crate::section_0115::null;
+    use crate::section_0133::r#type;
     use crate::section_0145::disc_node;
     use crate::section_0149::glue_node;
     use crate::section_0155::kern_node;
     use crate::section_0157::penalty_node;
+    use crate::section_0819::break_node;
+    use crate::section_0821::serial;
 }}

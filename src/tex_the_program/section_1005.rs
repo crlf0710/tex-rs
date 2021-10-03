@@ -39,8 +39,9 @@ pub(crate) macro Check_if_node_p_is_a_new_champion_breakpoint__then_if_it_is_tim
         // @!stat if tracing_pages>0 then @<Display the page break cost@>;@+tats@;@/
         crate::region_stat! {
             if tracing_pages!($globals) > 0 {
-                Display_the_page_break_cost!($globals, b, $pi, c);
+                crate::section_1006::Display_the_page_break_cost!($globals, b, $pi, c);
             }
+            use crate::section_0236::tracing_pages;
         }
         // if c<=least_page_cost then
         if c <= $globals.least_page_cost {

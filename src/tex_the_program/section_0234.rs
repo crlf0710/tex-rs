@@ -39,11 +39,17 @@ pub(crate) macro Show_the_font_identifier_in_eqtb_n($globals:expr, $n:expr) {{
         ),
     );
     // end
+    use crate::pascal::integer;
     use crate::pascal::u16_from_m_to_n;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0018::ASCII_code_literal;
     use crate::section_0038::str_number;
+    use crate::section_0058::print_char;
     use crate::section_0059::print;
     use crate::section_0063::print_esc;
     use crate::section_0113::TWO_HALVES_RH;
+    use crate::section_0221::equiv;
     use crate::section_0222::font_id_base;
+    use crate::section_0230::cur_font_loc;
     use crate::section_0230::math_font_base;
 }}

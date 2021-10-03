@@ -11,6 +11,7 @@ pub(crate) macro free_avail($globals:expr, $ptr:expr) {{
     // @!stat decr(dyn_used);@+tats@/
     crate::region_stat! {
         decr!($globals.dyn_used);
+        use crate::section_0016::decr;
     }
     // end
     use crate::section_0118::link;

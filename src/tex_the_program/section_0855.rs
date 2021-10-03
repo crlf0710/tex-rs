@@ -31,10 +31,11 @@ pub(crate) macro Record_a_new_feasible_break($globals:expr, $r:expr, $l:expr, $b
     crate::region_stat! {
         if tracing_paragraphs!($globals) > 0 {
             // @<Print a symbolic description of this feasible break@>;
-            Print_a_symbolic_description_of_this_feasible_break!
+            crate::section_0856::Print_a_symbolic_description_of_this_feasible_break!
                 ($globals, $r, d, $b, $pi, $artificial_demerits);
         }
         // tats@;@/
+        use crate::section_0236::tracing_paragraphs;
     }
     // d:=d+total_demerits(r); {this is the minimum total demerits
     //   from the beginning to |cur_p| via |r|}

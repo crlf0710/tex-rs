@@ -29,8 +29,9 @@ pub(crate) fn restore_trace(globals: &mut TeXGlobals, p: pointer, s: str_number)
     // tats
 }
 
+use crate::section_0004::make_globals_io_string_log_view;
 use crate::section_0004::TeXGlobals;
-use crate::section_0004::TeXGlobalsIoStringLogView;
+use crate::section_0018::ASCII_code_literal;
 use crate::section_0038::str_number;
 use crate::section_0058::print_char;
 use crate::section_0059::print;

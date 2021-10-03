@@ -20,6 +20,7 @@ pub(crate) macro fast_get_avail($globals:expr, $val:expr) {{
         // @!stat incr(dyn_used);@+tats@/
         crate::region_stat! {
             incr!($globals.dyn_used);
+            use crate::section_0016::incr;
         }
         // end;
     }

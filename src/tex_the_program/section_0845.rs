@@ -16,6 +16,8 @@ pub(crate) macro Insert_a_new_active_node_from_best_place_fit_class_to_cur_p
         crate::region_stat! {
             incr!($globals.pass_number);
             serial!($globals, q) = $globals.pass_number;
+            use crate::section_0016::incr;
+            use crate::section_0821::serial;
         }
         // prev_break(q):=best_place[fit_class];@/
         prev_break!($globals, q) = $globals.best_place[$fit_class];
@@ -37,9 +39,10 @@ pub(crate) macro Insert_a_new_active_node_from_best_place_fit_class_to_cur_p
         crate::region_stat! {
             if tracing_paragraphs!($globals) > 0 {
                 // @<Print a symbolic description of the new break node@>;
-                Print_a_symbolic_description_of_the_new_break_node!($globals, q, $break_type, $fit_class);
+                crate::section_0846::Print_a_symbolic_description_of_the_new_break_node!($globals, q, $break_type, $fit_class);
             }
             // tats@;@/
+            use crate::section_0236::tracing_paragraphs;
         }
         // end
         use crate::section_0115::pointer;

@@ -35,12 +35,13 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     }
     // else if n<cat_code_base then @<Show the font identifier in |eqtb[n]|@>
     else if ($n as integer) < cat_code_base as integer {
-        Show_the_font_identifier_in_eqtb_n!($globals, $n);
+        crate::section_0234::Show_the_font_identifier_in_eqtb_n!($globals, $n);
     }
     // else @<Show the halfword code in |eqtb[n]|@>
     else {
         todo!("show halfword code");
     }
+    use crate::pascal::integer;
     use crate::section_0230::box_base;
     use crate::section_0230::cat_code_base;
     use crate::section_0230::cur_font_loc;

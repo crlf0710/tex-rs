@@ -36,7 +36,7 @@ pub(crate) macro prev_break($globals:expr, $p:expr) {
 /// serial number for symbolic identification
 #[cfg(feature = "statistics")]
 pub(crate) macro serial($globals:expr, $p:expr) {
-    info_inner!($globals, $p)
+    crate::section_0118::info_inner!($globals, $p)
 }
 // @<Glob...@>=
 // @!passive:pointer; {most recent node on passive list}

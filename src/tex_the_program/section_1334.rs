@@ -127,6 +127,7 @@ pub(crate) macro Output_statistics_about_this_job($globals:expr) {{
         // end
     }
     use crate::pascal::integer;
+    use crate::section_0004::make_globals_log_view;
     use crate::section_0011::buf_size;
     use crate::section_0011::font_max;
     use crate::section_0011::font_mem_size;

@@ -28,6 +28,7 @@ pub(crate) macro Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_gl
                 if tracing_restores!($globals) > 0 {
                     restore_trace($globals, $p, crate::strpool_str!("restoring"));
                 }
+                use crate::section_0236::tracing_restores;
                 use crate::section_0284::restore_trace;
             }
             // end
@@ -43,6 +44,7 @@ pub(crate) macro Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_gl
             if tracing_restores!($globals) > 0 {
                 restore_trace($globals, $p, crate::strpool_str!("restoring"));
             }
+            use crate::section_0236::tracing_restores;
             use crate::section_0284::restore_trace;
         }
         // end

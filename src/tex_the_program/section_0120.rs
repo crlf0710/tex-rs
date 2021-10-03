@@ -62,6 +62,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     crate::region_stat! {
         /// maintain statistics
         incr!(globals.dyn_used);
+        use crate::section_0016::incr;
     }
     // get_avail:=p;
     return p;

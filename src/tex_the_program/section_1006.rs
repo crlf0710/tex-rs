@@ -47,13 +47,17 @@ pub(crate) macro Display_the_page_break_cost($globals:expr, $b:expr, $pi:expr, $
     // end_diagnostic(false);
     end_diagnostic($globals, false);
     // end
-    use crate::section_0004::TeXGlobalsIoStringLogView;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0018::ASCII_code_literal;
     use crate::section_0058::print_char;
     use crate::section_0059::print;
     use crate::section_0062::print_nl;
     use crate::section_0065::print_int;
     use crate::section_0103::print_scaled;
+    use crate::section_0108::inf_bad;
     use crate::section_0245::begin_diagnostic;
     use crate::section_0245::end_diagnostic;
+    use crate::section_0833::awful_bad;
+    use crate::section_0982::page_goal;
     use crate::section_0985::print_totals;
 }}

@@ -51,6 +51,7 @@ pub(crate) macro Insert_a_new_control_sequence_after_p_then_make_p_point_to_it($
     // @!stat incr(cs_count);@+tats@;@/
     crate::region_stat! {
         incr!($globals.cs_count);
+        use crate::section_0016::incr;
     }
     // end
     use crate::section_0004::make_globals_string_view;

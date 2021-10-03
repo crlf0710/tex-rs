@@ -25,6 +25,15 @@ jobs:
     - name: Run tests
       run: cargo test --workspace --verbose
 
+  linux-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --workspace --features tex-cli/statistics --verbose
+
   windows-build:
 
     runs-on: windows-latest

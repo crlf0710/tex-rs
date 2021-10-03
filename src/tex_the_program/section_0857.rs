@@ -24,5 +24,9 @@ pub(crate) macro Print_the_list_between_printed_node_and_cur_p__then_set_printed
     // printed_node:=cur_p;
     $globals.printed_node = $globals.cur_p;
     // end
+    use crate::section_0062::print_nl;
+    use crate::section_0115::null;
+    use crate::section_0115::pointer;
+    use crate::section_0118::link;
     use crate::section_0174::short_display;
 }}
