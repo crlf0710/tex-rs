@@ -27,11 +27,24 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     // else if n<cur_font_loc then
     else if ($n as integer) < cur_font_loc as integer {
         // begin print_esc("box"); print_int(n-box_base); print_char("=");
+        print_esc($globals, crate::strpool_str!("box"));
+        print_int($globals, $n as integer - box_base as integer);
+        print_char(
+            make_globals_io_string_log_view!($globals),
+            ASCII_code_literal!(b'='),
+        );
         // if equiv(n)=null then print("void")
+        if equiv!($globals, $n) == null {
+            print($globals, crate::strpool_str!("void").get() as _);
+        }
         // else  begin depth_threshold:=0; breadth_max:=1; show_node_list(equiv(n));
-        //   end;
+        else {
+            $globals.depth_threshold = 0;
+            $globals.breadth_max = 1;
+            show_node_list($globals, equiv!($globals, $n) as _);
+            // end;
+        }
         // end
-        todo!("box");
     }
     // else if n<cat_code_base then @<Show the font identifier in |eqtb[n]|@>
     else if ($n as integer) < cat_code_base as integer {
@@ -42,6 +55,15 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
         todo!("show halfword code");
     }
     use crate::pascal::integer;
+    use crate::section_0004::make_globals_io_string_log_view;
+    use crate::section_0018::ASCII_code_literal;
+    use crate::section_0058::print_char;
+    use crate::section_0059::print;
+    use crate::section_0063::print_esc;
+    use crate::section_0065::print_int;
+    use crate::section_0115::null;
+    use crate::section_0182::show_node_list;
+    use crate::section_0221::equiv;
     use crate::section_0230::box_base;
     use crate::section_0230::cat_code_base;
     use crate::section_0230::cur_font_loc;

@@ -21,10 +21,15 @@ pub(crate) fn show_node_list(globals: &mut TeXGlobals, mut p: integer) {
     // @!g:real; {a glue ratio, as a floating point number}
     // begin if cur_length>depth_threshold then
     if cur_length!(globals) as integer > globals.depth_threshold {
-        todo!(" trunc");
         // begin if p>null then print(" []");
-        //   {indicate that there's been some truncation}
+        if p > null as integer {
+            print(globals, crate::strpool_str!(" []").get() as _);
+            // {indicate that there's been some truncation}
+            /// indicate that there's been some truncation
+            const _: () = ();
+        }
         // return;
+        return;
         // end;
     }
     // n:=0;
@@ -75,5 +80,6 @@ use crate::section_0041::cur_length;
 use crate::section_0057::print_ln;
 use crate::section_0059::print;
 use crate::section_0070::print_current_string;
+use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0118::link;

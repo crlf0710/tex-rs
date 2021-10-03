@@ -27,7 +27,7 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
     }
     // else if n<dimen_base then @<Show equivalent |n|, in region 5@>
     else if (n as integer) < dimen_base as integer {
-        todo!("show n in region 5");
+        crate::section_0242::Show_equivalent_n__in_region_5!(globals, n);
     }
     // else if n<=eqtb_size then @<Show equivalent |n|, in region 6@>
     else if (n as integer) < eqtb_size as integer {
