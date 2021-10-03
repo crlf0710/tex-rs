@@ -57,6 +57,14 @@ pub(crate) macro strpool_str($s:expr) {{
     crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
 }}
 
+#[cfg(not(target_os = "macos"))]
+pub(crate) macro submit_strpool_str($s:expr) {
+    const _: () = {
+        #[::linkme::distributed_slice(crate::string_pool::STRPLI)]
+        static __: &'static str = $s;
+    };
+}
+
 #[cfg(target_os = "macos")]
 pub(crate) macro strpool_str($s:expr) {{
     inventory::submit! {
@@ -67,6 +75,13 @@ pub(crate) macro strpool_str($s:expr) {{
     debug_assert!(v <= crate::pascal::char::MAX.0 as _);
     crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
 }}
+
+#[cfg(target_os = "macos")]
+pub(crate) macro submit_strpool_str($s:expr) {
+    inventory::submit! {
+        crate::string_pool::strpool_literal($s)
+    }
+}
 
 pub(crate) fn string_pool_index(val: &'static str) -> usize {
     if val.len() == 1 {
@@ -108,7 +123,8 @@ pub(crate) fn generate_checksum() -> usize {
     123456789
 }
 
-pub(crate) fn pool_file() -> io::Cursor<&'static [u8]> {
+/// TeX string pool data
+pub fn pool_file() -> io::Cursor<&'static [u8]> {
     io::Cursor::new(&*POOL_FILE)
 }
 

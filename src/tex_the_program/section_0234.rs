@@ -53,3 +53,6 @@ pub(crate) macro Show_the_font_identifier_in_eqtb_n($globals:expr, $n:expr) {{
     use crate::section_0230::cur_font_loc;
     use crate::section_0230::math_font_base;
 }}
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("current font");

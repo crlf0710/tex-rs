@@ -56,3 +56,15 @@ pub(crate) macro Print_a_symbolic_description_of_the_new_break_node($globals:exp
     use crate::section_0821::prev_break;
     use crate::section_0821::serial;
 }}
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("@@");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(": line ");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" t=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" -> @@");

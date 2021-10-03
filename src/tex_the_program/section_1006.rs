@@ -61,3 +61,21 @@ pub(crate) macro Display_the_page_break_cost($globals:expr, $b:expr, $pi:expr, $
     use crate::section_0982::page_goal;
     use crate::section_0985::print_totals;
 }}
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("%");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" t=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" g=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" b=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" p=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" c=");

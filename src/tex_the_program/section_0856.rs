@@ -91,3 +91,33 @@ pub(crate) macro Print_a_symbolic_description_of_this_feasible_break($globals:ex
     use crate::section_0819::break_node;
     use crate::section_0821::serial;
 }}
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("@");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("par");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("penalty");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("discretionary");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("kern");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!("math");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" via @@");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" b=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" p=");
+
+#[cfg(not(feature = "statistics"))]
+crate::submit_strpool_str!(" d=");

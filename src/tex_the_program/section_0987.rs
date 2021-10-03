@@ -36,6 +36,10 @@ pub(crate) fn freeze_page_specs(globals: &mut TeXGlobals, s: page_contents_kind)
         }
         use crate::section_0236::tracing_pages;
     }
+    crate::region_non_stat! {
+        crate::submit_strpool_str!("%% goal height=");
+        crate::submit_strpool_str!(", max depth=");
+    }
     // end;
 }
 

@@ -152,6 +152,14 @@ pub(crate) macro region_stat
         }
     }
 
+pub(crate) macro region_non_stat
+    ($($statements:tt)* ) {
+        #[cfg(not(feature = "statistics"))]
+        {
+            $($statements)*
+        }
+    }
+
 pub(crate) macro impl_debug_with_literal {
     ($impl_type:ident, $literal: expr) => {
         impl core::fmt::Debug for $impl_type {

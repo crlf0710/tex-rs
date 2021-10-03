@@ -77,7 +77,10 @@ pub use pascal_io::ReadLine as TeXIoReadLine;
 
 mod string_pool;
 
+#[doc(hidden)]
+pub use string_pool::pool_file;
 use string_pool::strpool_str;
+use string_pool::submit_strpool_str;
 
 mod tex_the_program;
 

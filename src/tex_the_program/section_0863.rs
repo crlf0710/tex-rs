@@ -21,6 +21,9 @@ pub(crate) macro Find_optimal_breakpoints
                 use crate::section_0236::tracing_paragraphs;
                 use crate::section_0245::begin_diagnostic;
             }
+            crate::region_non_stat! {
+                crate::submit_strpool_str!("@firstpass");
+            }
             // second_pass:=false; final_pass:=false;
             $globals.second_pass = false;
             $globals.final_pass = false;
@@ -97,6 +100,9 @@ pub(crate) macro Find_optimal_breakpoints
                     use crate::section_0062::print_nl;
                     use crate::section_0236::tracing_paragraphs;
                 }
+                crate::region_non_stat! {
+                    crate::submit_strpool_str!("@secondpass");
+                }
                 // threshold:=tolerance; second_pass:=true; final_pass:=(emergency_stretch<=0);
                 $globals.threshold = tolerance!($globals);
                 $globals.second_pass = true;
@@ -114,6 +120,9 @@ pub(crate) macro Find_optimal_breakpoints
                     }
                     use crate::section_0062::print_nl;
                     use crate::section_0236::tracing_paragraphs;
+                }
+                crate::region_non_stat! {
+                    crate::submit_strpool_str!("@emergencypass");
                 }
                 // background[2]:=background[2]+emergency_stretch; final_pass:=true;
                 $globals.background[2] += emergency_stretch!($globals);

@@ -26,6 +26,9 @@ pub(crate) macro Flush_the_box_from_memory__showing_statistics_if_requested {
             use crate::section_0065::print_int;
             use crate::section_0236::tracing_stats;
         };
+        crate::region_non_stat! {
+            crate::submit_strpool_str!("Memory usage before: ");
+        };
         // flush_node_list(p);
         flush_node_list($globals, $p)?;
         // @!stat if tracing_stats>1 then
@@ -53,6 +56,10 @@ pub(crate) macro Flush_the_box_from_memory__showing_statistics_if_requested {
             use crate::section_0065::print_int;
             use crate::section_0236::tracing_stats;
         };
+        crate::region_non_stat! {
+            crate::submit_strpool_str!(" after: ");
+            crate::submit_strpool_str!("; still untouched: ");
+        }
         use crate::pascal::integer;
         use crate::section_0202::flush_node_list;
     }}

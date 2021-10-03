@@ -55,6 +55,9 @@ pub(crate) macro Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_gl
         // @!stat if tracing_restores>0 then restore_trace(p,"retaining");@+tats@;@/
         // end
     }
+    crate::region_non_stat! {
+        crate::submit_strpool_str!("restoring");
+    };
     use crate::section_0115::pointer;
     use crate::section_0221::eq_level;
     use crate::section_0221::level_one;
