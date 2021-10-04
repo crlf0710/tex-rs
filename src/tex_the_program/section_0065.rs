@@ -28,13 +28,25 @@ pub(crate) fn print_int(globals: &mut TeXGlobals, mut n: integer) {
         }
         // else  begin m:=-1-n; n:=m div 10; m:=(m mod 10)+1; k:=1;
         else {
-            todo!();
-            //   if m<10 then dig[0]:=m
-            //   else  begin dig[0]:=0; incr(n);
-            //     end;
-            //   end;
+            /// used to negate `n` in possibly dangerous cases
+            let mut m: integer;
+            m = -1 - n;
+            n = m / 10;
+            m = (m % 10) + 1;
+            k = 1;
+            // if m<10 then dig[0]:=m
+            if m < 10 {
+                globals.dig[0] = (m as u8).into();
+            }
+            // else  begin dig[0]:=0; incr(n);
+            else {
+                globals.dig[0] = 0.into();
+                incr!(n);
+                // end;
+            }
             // end;
         }
+        // end;
     }
     // repeat dig[k]:=n mod 10; n:=n div 10; incr(k);
     loop {
