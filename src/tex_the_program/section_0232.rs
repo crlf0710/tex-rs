@@ -18,11 +18,23 @@ pub(crate) const null_font: internal_font_number =
 pub(crate) macro Initialize_table_entries_done_by_initex_only_0232($globals:expr) {{
     let globals = &mut *$globals;
     // par_shape_ptr:=null; eq_type(par_shape_loc):=shape_ref;
+    par_shape_ptr!(globals) = null;
+    eq_type!(globals, par_shape_loc) = shape_ref;
     // eq_level(par_shape_loc):=level_one;@/
+    eq_level!(globals, par_shape_loc) = level_one;
     // for k:=output_routine_loc to toks_base+255 do
-    //   eqtb[k]:=eqtb[undefined_control_sequence];
+    for k in output_routine_loc..=toks_base as u16 + 255 {
+        // eqtb[k]:=eqtb[undefined_control_sequence];
+        globals.eqtb[k as u16] = globals.eqtb[undefined_control_sequence as u16];
+    }
     // box(0):=null; eq_type(box_base):=box_ref; eq_level(box_base):=level_one;
+    r#box!(globals, 0) = null;
+    eq_type!(globals, box_base) = box_ref;
+    eq_level!(globals, box_base) = level_one;
     // for k:=box_base+1 to box_base+255 do eqtb[k]:=eqtb[box_base];
+    for k in box_base + 1..=box_base + 255 {
+        globals.eqtb[k as u16] = globals.eqtb[box_base as u16];
+    }
     // cur_font:=null_font; eq_type(cur_font_loc):=data;
     cur_font!(globals) = null_font.get() as _;
     eq_type!(globals, cur_font_loc) = data;
@@ -87,6 +99,7 @@ use crate::section_0022::null_code;
 use crate::section_0112::hi;
 use crate::section_0113::halfword;
 use crate::section_0113::quarterword;
+use crate::section_0115::null;
 use crate::section_0115::pointer;
 use crate::section_0207::car_ret;
 use crate::section_0207::comment;
@@ -96,11 +109,15 @@ use crate::section_0207::invalid_char;
 use crate::section_0207::letter;
 use crate::section_0207::other_char;
 use crate::section_0207::spacer;
+use crate::section_0210::box_ref;
 use crate::section_0210::data;
+use crate::section_0210::shape_ref;
 use crate::section_0221::eq_level;
 use crate::section_0221::eq_type;
 use crate::section_0221::equiv;
 use crate::section_0221::level_one;
+use crate::section_0222::undefined_control_sequence;
+use crate::section_0230::box_base;
 use crate::section_0230::cat_code;
 use crate::section_0230::cat_code_base;
 use crate::section_0230::cur_font;
@@ -109,5 +126,10 @@ use crate::section_0230::int_base;
 use crate::section_0230::lc_code;
 use crate::section_0230::math_code;
 use crate::section_0230::math_font_base;
+use crate::section_0230::output_routine_loc;
+use crate::section_0230::par_shape_loc;
+use crate::section_0230::par_shape_ptr;
+use crate::section_0230::r#box;
 use crate::section_0230::sf_code;
+use crate::section_0230::toks_base;
 use crate::section_0548::internal_font_number;
