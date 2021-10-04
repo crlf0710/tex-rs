@@ -111,25 +111,25 @@ pub(crate) macro baseline_skip($globals:expr) {
 // @d below_display_short_skip==glue_par(below_display_short_skip_code)
 // @d left_skip==glue_par(left_skip_code)
 pub(crate) macro left_skip($globals:expr) {
-    glue_par!($globals, crate::section_0224::left_skip_code)
+    crate::section_0224::glue_par!($globals, crate::section_0224::left_skip_code)
 }
 // @d right_skip==glue_par(right_skip_code)
 pub(crate) macro right_skip($globals:expr) {
-    glue_par!($globals, crate::section_0224::right_skip_code)
+    crate::section_0224::glue_par!($globals, crate::section_0224::right_skip_code)
 }
 // @d top_skip==glue_par(top_skip_code)
 // @d split_top_skip==glue_par(split_top_skip_code)
 pub(crate) macro split_top_skip($globals:expr) {
-    glue_par!($globals, crate::section_0224::split_top_skip_code)
+    crate::section_0224::glue_par!($globals, crate::section_0224::split_top_skip_code)
 }
 // @d tab_skip==glue_par(tab_skip_code)
 // @d space_skip==glue_par(space_skip_code)
 pub(crate) macro space_skip($globals:expr) {
-    glue_par!($globals, crate::section_0224::space_skip_code)
+    crate::section_0224::glue_par!($globals, crate::section_0224::space_skip_code)
 }
 // @d xspace_skip==glue_par(xspace_skip_code)
 pub(crate) macro xspace_skip($globals:expr) {
-    glue_par!($globals, crate::section_0224::xspace_skip_code)
+    crate::section_0224::glue_par!($globals, crate::section_0224::xspace_skip_code)
 }
 // @d par_fill_skip==glue_par(par_fill_skip_code)
 // @d thin_mu_skip==glue_par(thin_mu_skip_code)
@@ -138,7 +138,7 @@ pub(crate) macro xspace_skip($globals:expr) {
 //
 // @<Current |mem| equivalent of glue parameter number |n|@>=glue_par(n)
 pub(crate) macro Current_mem_equivalent_of_glue_parameter_number_n($globals:expr, $n:expr) {
-    glue_par!($globals, $n)
+    crate::section_0224::glue_par!($globals, $n)
 }
 //
 
