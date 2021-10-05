@@ -43,6 +43,17 @@ pub(crate) fn try_break(
     let mut no_break_yet: boolean;
     // @<Other local variables for |try_break|@>@;
     const _: () = ();
+
+    /// a step behind `prev_r`, if `type(prev_r)=delta_node`
+    let mut prev_prev_r: pointer = null;
+    /// the current line will be justified to this width
+    let mut line_width: scaled = scaled::zero();
+    /// line number of current active node
+    let mut l: halfword;
+
+    /// NOTE: The values of these relies on previous iteration.
+    const _: () = ();
+
     // begin @<Make sure that |pi| is in the proper range@>;
     crate::section_0831::Make_sure_that_pi_is_in_the_proper_range!(globals, pi);
     // no_break_yet:=true; prev_r:=active; old_l:=0;
@@ -53,13 +64,6 @@ pub(crate) fn try_break(
     do_all_six!(copy_to_cur_active !; @globals = globals);
     // loop@+  begin continue: r:=link(prev_r);
     loop {
-        /// a step behind `prev_r`, if `type(prev_r)=delta_node`
-        let mut prev_prev_r: pointer = null;
-        /// the current line will be justified to this width
-        let mut line_width: scaled = scaled::zero();
-        /// line number of current active node
-        let mut l: halfword;
-
         crate::region_backward_label!(
         'continue_ <-
         {
