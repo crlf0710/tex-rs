@@ -7,7 +7,7 @@
 //
 // @d closed=2 {not open, or at end of file}
 // @d just_open=1 {newly opened, first line not yet read}
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, Debug)]
 pub(crate) enum read_open_kind {
     normal = 0,
     /// newly opened, first line not yet read

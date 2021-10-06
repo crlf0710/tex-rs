@@ -57,7 +57,9 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // hmode+char_num: begin scan_char_num; cur_chr:=cur_val; goto main_loop;@+end;
     else if abs_mode_plus_cur_cmd == hmode as u16 + char_num as u16 {
-        todo!();
+        scan_char_num(globals, globals.allow_big_char_code)?;
+        globals.cur_chr = chr_code_type::new(globals.cur_val as _);
+        crate::goto_forward_label!('main_loop);
     }
     // hmode+no_boundary: begin get_x_token;
     else if abs_mode_plus_cur_cmd == hmode as u16 + no_boundary as u16 {
@@ -131,6 +133,8 @@ use crate::section_0211::*;
 use crate::section_0213::mode;
 use crate::section_0213::space_factor;
 use crate::section_0230::every_job;
+use crate::section_0297::chr_code_type;
 use crate::section_0307::every_job_text;
 use crate::section_0323::begin_token_list;
 use crate::section_0380::get_x_token;
+use crate::section_0434::scan_char_num;

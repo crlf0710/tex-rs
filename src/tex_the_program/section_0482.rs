@@ -3,7 +3,7 @@
 //! to the control sequence that will receive this token list.
 //
 // @p procedure read_toks(@!n:integer;@!r:pointer);
-pub(crate) fn read_toks(globals: &mut TeXGlobals, n: integer, r: pointer) -> TeXResult<()> {
+pub(crate) fn read_toks(globals: &mut TeXGlobals, mut n: integer, r: pointer) -> TeXResult<()> {
     // label done;
     // var p:pointer; {tail of the token list}
     /// tail of the token list
@@ -43,7 +43,7 @@ pub(crate) fn read_toks(globals: &mut TeXGlobals, n: integer, r: pointer) -> TeX
     // repeat @<Input and store tokens from the next line of the file@>;
     loop {
         crate::section_0483::Input_and_store_tokens_from_the_next_line_of_the_file!(
-            globals, m, p, q
+            globals, m, p, q, n, r
         );
         // until align_state=1000000;
         if globals.align_state == 1000000 {

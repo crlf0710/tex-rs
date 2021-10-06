@@ -2,13 +2,13 @@
 
 // @<Input and store tokens from the next line of the file@>=
 pub(crate) macro Input_and_store_tokens_from_the_next_line_of_the_file {
-    ($globals:expr, $m:expr, $p:expr, $q:expr) => {{
+    ($globals:expr, $m:expr, $p:expr, $q:expr, $n:expr, $r:expr) => {{
         // begin_file_reading; name:=m+1;
         begin_file_reading($globals);
         name!($globals) = $m.get() as halfword + 1;
         // if read_open[m]=closed then @<Input for \.{\\read} from the terminal@>
         if $globals.read_open[$m.get()] == read_open_kind::closed {
-            todo!("read from terminal");
+            crate::section_0484::Input_for_read_from_the_terminal!($globals, $n, $r);
         }
         // else if read_open[m]=just_open then @<Input the first line of |read_file[m]|@>
         else if $globals.read_open[$m.get()] == read_open_kind::just_open {

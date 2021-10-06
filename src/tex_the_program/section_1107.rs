@@ -8,6 +8,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1107($globals
     // primitive("unkern",remove_item,kern_node);@/
     // @!@:un_kern_}{\.{\\unkern} primitive@>
     // primitive("unskip",remove_item,glue_node);@/
+    primitive(
+        globals,
+        crate::strpool_str!("unskip"),
+        remove_item,
+        glue_node as _,
+    );
     // @!@:un_skip_}{\.{\\unskip} primitive@>
     // primitive("unhbox",un_hbox,box_code);@/
     primitive(
@@ -32,7 +38,7 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1107($globals
 }}
 
 use crate::section_0004::TeXGlobals;
-use crate::section_0208::un_hbox;
-use crate::section_0208::un_vbox;
+use crate::section_0149::glue_node;
+use crate::section_0208::*;
 use crate::section_0264::primitive;
 use crate::section_1071::box_code;

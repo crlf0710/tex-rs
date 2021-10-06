@@ -17,6 +17,7 @@ pub(crate) macro Set_initial_values_of_key_variables($globals:expr) {
     crate::section_0215::Set_initial_values_of_key_variables_0215!($globals);
     crate::section_0254::Set_initial_values_of_key_variables_0254!($globals);
     crate::section_0272::Set_initial_values_of_key_variables_0272!($globals);
+    crate::section_0481::Set_initial_values_of_key_variables_0481!($globals);
     crate::section_0521::Set_initial_values_of_key_variables_0521!($globals);
     crate::section_0593::Set_initial_values_of_key_variables_0593!($globals);
     crate::section_0596::Set_initial_values_of_key_variables_0596!($globals);
