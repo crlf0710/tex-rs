@@ -1,24 +1,3 @@
-//! @ @<Declare act...@>=
-//! procedure build_discretionary;
-//! label done,exit;
-//! var p,@!q:pointer; {for link manipulation}
-//! @!n:integer; {length of discretionary list}
-//! begin unsave;
-//! @<Prune the current list, if necessary, until it contains only
-//!   |char_node|, |kern_node|, |hlist_node|, |vlist_node|, |rule_node|,
-//!   and |ligature_node| items; set |n| to the length of the list,
-//!   and set |q| to the list's tail@>;
-//! p:=link(head); pop_nest;
-//! case saved(-1) of
-//! 0:pre_break(tail):=p;
-//! 1:post_break(tail):=p;
-//! 2:@<Attach list |p| to the current list, and record its length;
-//!   then finish up and |return|@>;
-//! end; {there are no other cases}
-//! incr(saved(-1)); new_save_level(disc_group); scan_left_brace;
-//! push_nest; mode:=-hmode; space_factor:=1000;
-//! exit:end;
-//!
 //! @ @<Attach list |p| to the current...@>=
 //! begin if (n>0)and(abs(mode)=mmode) then
 //!   begin print_err("Illegal math "); print_esc("discretionary");
