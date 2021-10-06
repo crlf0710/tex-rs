@@ -31,11 +31,17 @@ pub(crate) const vtop_group: quarterword = 5;
 /// code for `\halign{...}`, `\valign{...}`
 pub(crate) const align_group: quarterword = 6;
 // @d no_align_group=7 {code for `\.{\\noalign}\grp'}
+/// code for `\noalign{...}`
+pub(crate) const no_align_group: quarterword = 7;
 // @d output_group=8 {code for output routine}
 /// code for output routine
 pub(crate) const output_group: quarterword = 8;
 // @d math_group=9 {code for, e.g., `\.{\char'136}\grp'}
+/// code for, e.g., `\char'136{...}`
+pub(crate) const math_group: quarterword = 9;
 // @d disc_group=10 {code for `\.{\\discretionary}\grp\grp\grp'}
+/// code for `\discretionary{...}{...}{...}`
+pub(crate) const disc_group: quarterword = 10;
 // @d insert_group=11 {code for `\.{\\insert}\grp', `\.{\\vadjust}\grp'}
 /// code for `\insert{...}`, `\vadjust{...}`
 pub(crate) const insert_group: quarterword = 11;
@@ -43,6 +49,8 @@ pub(crate) const insert_group: quarterword = 11;
 /// code for `\vcenter{...}`
 pub(crate) const vcenter_group: quarterword = 12;
 // @d math_choice_group=13 {code for `\.{\\mathchoice}\grp\grp\grp\grp'}
+/// code for `\mathchoice{...}{...}{...}{...}`
+pub(crate) const math_choice_group: quarterword = 13;
 // @d semi_simple_group=14 {code for `\.{\\begingroup...\\endgroup}'}
 /// code for `\begingroup...\endgroup`
 pub(crate) const semi_simple_group: quarterword = 14;

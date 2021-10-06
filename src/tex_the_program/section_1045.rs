@@ -80,6 +80,13 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists($globals:expr,
         /// already processed
         do_nothing!();
         true
+    } else if crate::section_1116::Cases_of_main_control_that_build_boxes_and_lists_1116!(
+        $globals,
+        $abs_mode_plus_cur_cmd
+    ) {
+        /// already processed
+        do_nothing!();
+        true
     } else if crate::section_1122::Cases_of_main_control_that_build_boxes_and_lists_1122!(
         $globals,
         $abs_mode_plus_cur_cmd

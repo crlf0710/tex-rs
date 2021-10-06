@@ -244,7 +244,13 @@ pub(crate) macro inter_line_penalty($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::inter_line_penalty_code)
 }
 // @d double_hyphen_demerits==int_par(double_hyphen_demerits_code)
+pub(crate) macro double_hyphen_demerits($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::double_hyphen_demerits_code)
+}
 // @d final_hyphen_demerits==int_par(final_hyphen_demerits_code)
+pub(crate) macro final_hyphen_demerits($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::final_hyphen_demerits_code)
+}
 // @d adj_demerits==int_par(adj_demerits_code)
 pub(crate) macro adj_demerits($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::adj_demerits_code)

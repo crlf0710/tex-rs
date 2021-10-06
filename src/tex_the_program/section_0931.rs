@@ -62,7 +62,7 @@ pub(crate) macro If_the_string_hyph_word_h_is_less_than_hc_1_to_hn__goto_not_fou
                         }
                     }
                     // @<Insert hyphens as specified in |hyph_list[h]|@>;
-                    todo!("Insert hyphens");
+                    crate::section_0932::Insert_hyphens_as_specified_in_hyph_list_h!($globals, $h as u16);
                     // decr(hn); goto found;
                     decr!($globals.hn);
                     crate::goto_forward_label!($lbl_found);

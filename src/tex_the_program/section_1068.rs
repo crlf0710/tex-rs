@@ -13,12 +13,32 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
     ) {
         // already processed
         true
+    } else if crate::section_1118::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1118!(
+        $globals
+    ) {
+        // already processed
+        true
     } else if crate::section_1132::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1132!(
         $globals
     ) {
         // already processed
         true
+    } else if crate::section_1133::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1133!(
+        $globals
+    ) {
+        // already processed
+        true
     } else if crate::section_1168::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1168!(
+        $globals
+    ) {
+        // already processed
+        true
+    } else if crate::section_1173::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1173!(
+        $globals
+    ) {
+        // already processed
+        true
+    } else if crate::section_1186::Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1186!(
         $globals
     ) {
         // already processed

@@ -1,33 +1,3 @@
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! discretionary: if chr_code=1 then
-//!   print_esc("-")@+else print_esc("discretionary");
-//!
-//! @ @<Cases of |main_control| that build...@>=
-//! hmode+discretionary,mmode+discretionary: append_discretionary;
-//!
-//! @ The space factor does not change when we append a discretionary node,
-//! but it starts out as 1000 in the subsidiary lists.
-//!
-//! @<Declare act...@>=
-//! procedure append_discretionary;
-//! var c:integer; {hyphen character}
-//! begin tail_append(new_disc);
-//! if cur_chr=1 then
-//!   begin c:=hyphen_char[cur_font];
-//!   if c>=0 then if c<256 then pre_break(tail):=new_character(cur_font,c);
-//!   end
-//! else  begin incr(save_ptr); saved(-1):=0; new_save_level(disc_group);
-//!   scan_left_brace; push_nest; mode:=-hmode; space_factor:=1000;
-//!   end;
-//! end;
-//!
-//! @ The three discretionary lists are constructed somewhat as if they were
-//! hboxes. A~subroutine called |build_discretionary| handles the transitions.
-//! (This is sort of fun.)
-//!
-//! @<Cases of |handle...@>=
-//! disc_group: build_discretionary;
-//!
 //! @ @<Declare act...@>=
 //! procedure build_discretionary;
 //! label done,exit;
