@@ -38,6 +38,7 @@ pub(crate) const space_shrink_code: quarterword = 4;
 // @d x_height_code=5
 pub(crate) const x_height_code: quarterword = 5;
 // @d quad_code=6
+pub(crate) const quad_code: quarterword = 6;
 // @d extra_space_code=7
 pub(crate) const extra_space_code: quarterword = 7;
 

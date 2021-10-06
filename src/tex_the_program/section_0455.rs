@@ -44,7 +44,7 @@ pub(crate) macro Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign
         }
         // if scan_keyword("em") then v:=(@<The em width for |cur_font|@>)
         if scan_keyword($globals, crate::strpool_str!("em"))? {
-            todo!("v=em");
+            v = crate::section_0558::The_em_width_for_cur_font!($globals).inner();
         }
         // @.em@>
         // else if scan_keyword("ex") then v:=(@<The x-height for |cur_font|@>)

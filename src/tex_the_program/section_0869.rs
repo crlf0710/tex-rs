@@ -5,7 +5,7 @@
 // @<Try to break after a discretionary fragment...@>=
 pub(crate) macro Try_to_break_after_a_discretionary_fragment__then_goto_done5($globals:expr, $prev_p:expr, $lbl_done5:lifetime) {{
     /// miscellaneous nodes of temporary interest
-    let (r, mut s);
+    let (mut r, mut s);
     // begin s:=pre_break(cur_p); disc_width:=0;
     s = pre_break!($globals, $globals.cur_p);
     $globals.disc_width = scaled::zero();
@@ -38,15 +38,18 @@ pub(crate) macro Try_to_break_after_a_discretionary_fragment__then_goto_done5($g
     // while r>0 do
     while r > 0 {
         // begin @<Add the width of node |s| to |act_width|@>;
+        crate::section_0871::Add_the_width_of_node_s_to_act_width!($globals, s);
         // decr(r); s:=link(s);
+        decr!(r);
+        s = link!($globals, s);
         // end;
-        todo!("r > 0");
     }
     // prev_p:=cur_p; cur_p:=s; goto done5;
     $prev_p = $globals.cur_p;
     $globals.cur_p = s;
     crate::goto_forward_label!($lbl_done5);
     // end
+    use crate::section_0016::decr;
     use crate::section_0101::scaled;
     use crate::section_0115::null;
     use crate::section_0118::link;

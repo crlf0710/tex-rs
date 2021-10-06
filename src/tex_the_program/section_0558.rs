@@ -21,6 +21,10 @@ pub(crate) macro x_height($globals:expr, $v:expr) {
     crate::section_0558::param!($globals, crate::section_0547::x_height_code, $v.get())
 }
 // @d quad==param(quad_code) {one em}
+/// one em
+pub(crate) macro quad($globals:expr, $v:expr) {
+    crate::section_0558::param!($globals, crate::section_0547::quad_code, $v.get())
+}
 // @d extra_space==param(extra_space_code) {additional space at end of sentence}
 /// additional space at end of sentence
 pub(crate) macro extra_space($globals:expr, $v:expr) {
@@ -28,4 +32,10 @@ pub(crate) macro extra_space($globals:expr, $v:expr) {
 }
 
 // @<The em width for |cur_font|@>=quad(cur_font)
+pub(crate) macro The_em_width_for_cur_font($globals:expr) {
+    crate::section_0558::quad!(
+        $globals,
+        crate::section_0548::internal_font_number::new(crate::section_0230::cur_font!($globals))
+    )
+}
 //
