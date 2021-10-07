@@ -3,19 +3,22 @@
 //
 // @<Reconstitute nodes for the hyphenated word...@>=
 pub(crate) macro Reconstitute_nodes_for_the_hyphenated_word__inserting_discretionary_hyphens($globals:expr, $j:expr, $bchar:expr, $q:expr, $r:expr, $s:expr) {{
-    let mut l;
+    /// indices into `hc` or `hu`
+    let mut l: u8_from_0_to_n<U65>;
+    /// character temporarily replaced by a hyphen
+    let mut c: ASCII_code = ASCII_code::default();
     // repeat l:=j; j:=reconstitute(j,hn,bchar,qi(hyf_char))+1;
     loop {
-        l = $j;
-        $j = reconstitute(
+        l = $j.get().into();
+        $j = (reconstitute(
             $globals,
-            small_number::new($j as _),
+            $j.get().into(),
             $globals.hn.get().into(),
             $bchar,
             $globals.hyf_char as u32,
         )?
-        .get() as usize
-            + 1;
+        .get()
+            + 1).into();
         // if hyphen_passed=0 then
         if $globals.hyphen_passed == 0 {
             // begin link(s):=link(hold_head);
@@ -25,10 +28,10 @@ pub(crate) macro Reconstitute_nodes_for_the_hyphenated_word__inserting_discretio
                 $s = link!($globals, $s);
             }
             // if odd(hyf[j-1]) then
-            if $globals.hyf[$j - 1].is_odd() {
+            if $globals.hyf[$j.get() as usize - 1].is_odd() {
                 // begin l:=j; hyphen_passed:=j-1; link(hold_head):=null;
-                l = $j;
-                $globals.hyphen_passed = small_number::new(($j - 1) as _);
+                l = $j.get().into();
+                $globals.hyphen_passed = small_number::new($j.get() - 1);
                 link!($globals, hold_head) = null;
                 // end;
             }
@@ -40,18 +43,21 @@ pub(crate) macro Reconstitute_nodes_for_the_hyphenated_word__inserting_discretio
             //   unhyphenated word, and continue to develop both branches until they
             //   become equivalent@>;
             crate::section_0914::Create_and_append_a_discretionary_node_as_an_alternative_to_the_unhyphenated_word__and_continue_to_develop_both_branches_until_they_become_equivalent!(
-                $globals, $j, $s, l
+                $globals, $bchar, $j, $s, l, c
             );
         }
         // until j>hn;
-        if $j > $globals.hn.get() as usize {
+        if $j.get() > $globals.hn.get() {
             break;
         }
     }
     // link(s):=q
     link!($globals, $s) = $q;
 
+    use typenum::U65;
     use crate::pascal::IsOddOrEven;
+    use crate::pascal::u8_from_0_to_n;
+    use crate::section_0018::ASCII_code;
     use crate::section_0101::small_number;
     use crate::section_0115::null;
     use crate::section_0118::link;

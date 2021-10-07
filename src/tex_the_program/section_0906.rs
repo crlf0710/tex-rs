@@ -48,7 +48,7 @@ pub(crate) fn reconstitute(
         'continue_ <-
         {
             crate::section_0909::If_there_s_a_ligature_or_kern_at_the_cursor_position__update_the_data_structures__possibly_advancing_j__continue_until_the_cursor_moves!(
-                globals, j, n, bchar, hchar, cur_rh, test_char, w, 'continue_
+                globals, j, n, t, bchar, hchar, cur_rh, test_char, w, 'continue_
             );
             // @<Append a ligature and/or kern to the translation;
             //   |goto continue| if the stack of inserted ligatures is nonempty@>;

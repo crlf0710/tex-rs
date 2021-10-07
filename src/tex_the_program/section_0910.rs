@@ -1,18 +1,45 @@
 //! ` `
 // @d wrap_lig(#)==if ligature_present then
-macro wrap_lig($globals:expr, $v:expr) {{
+pub(crate) macro wrap_lig($globals:expr, $v:expr, $t:expr) {{
     if $globals.ligature_present {
+        /// temporary register for list manipulation
+        let p: pointer;
+
         // begin p:=new_ligature(hf,cur_l,link(cur_q));
+        p = new_ligature(
+            $globals,
+            $globals.hf,
+            ASCII_code::from($globals.cur_l as integer),
+            link!($globals, $globals.cur_q),
+        )?;
         // if lft_hit then
-        //   begin subtype(p):=2; lft_hit:=false;
-        //   end;
+        if $globals.lft_hit {
+            // begin subtype(p):=2; lft_hit:=false;
+            subtype!($globals, p) = 2;
+            $globals.lft_hit = false;
+            // end;
+        }
         // if # then if lig_stack=null then
-        //   begin incr(subtype(p)); rt_hit:=false;
-        //   end;
+        if $v && $globals.lig_stack == null {
+            // begin incr(subtype(p)); rt_hit:=false;
+            incr!(subtype!($globals, p));
+            $globals.rt_hit = false;
+            // end;
+        }
         // link(cur_q):=p; t:=p; ligature_present:=false;
+        link!($globals, $globals.cur_q) = p;
+        $t = p;
+        $globals.ligature_present = false;
         // end
-        todo!("wrap_lig");
     }
+    use crate::pascal::integer;
+    use crate::section_0016::incr;
+    use crate::section_0018::ASCII_code;
+    use crate::section_0115::null;
+    use crate::section_0115::pointer;
+    use crate::section_0118::link;
+    use crate::section_0133::subtype;
+    use crate::section_0144::new_ligature;
 }}
 
 // @d pop_lig_stack==begin if lig_ptr(lig_stack)>null then
@@ -56,7 +83,7 @@ pub(crate) macro pop_lig_stack($globals:expr, $t:expr, $j:expr, $n:expr, $bchar:
 // @<Append a ligature and/or kern to the translation...@>=
 pub(crate) macro Append_a_ligature_and_or_kern_to_the_translation__goto_continue_if_the_stack_of_inserted_ligatures_is_nonempty($globals:expr, $t:expr, $w:expr, $j:expr, $n:expr, $bchar:expr, $hchar:expr, $cur_rh:expr, $lbl_continue:lifetime) {{
     // wrap_lig(rt_hit);
-    wrap_lig!($globals, $globals.rt_hit);
+    wrap_lig!($globals, $globals.rt_hit, $t);
     // if w<>0 then
     if $w != scaled::zero() {
         // begin link(t):=new_kern(w); t:=link(t); w:=0;

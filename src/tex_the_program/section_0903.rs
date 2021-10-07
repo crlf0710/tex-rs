@@ -17,7 +17,7 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
     /// boundary character of hyphenated word, or `non_char`
     let bchar: ASCII_code_or_non_char;
     /// indices into `hc` or `hu`
-    let mut j;
+    let mut j: u8_from_0_to_n<U65>;
     // q:=link(hb); link(hb):=null; r:=link(ha); link(ha):=null; bchar:=hyf_bchar;
     q = link!($globals, $globals.hb);
     link!($globals, $globals.hb) = null;
@@ -59,7 +59,7 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
                     crate::goto_forward_label!('found2);
                 }
                 // j:=1; s:=ha; init_list:=null; goto common_ending;
-                j = 1;
+                j = 1.into();
                 s = $globals.ha;
                 $globals.init_list = null;
                 crate::goto_forward_label!('common_ending);
@@ -74,14 +74,14 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
                 s = link!($globals, s);
             }
             // j:=0; goto common_ending;
-            j = 0;
+            j = 0.into();
             crate::goto_forward_label!('common_ending);
         }
         // found2: s:=ha; j:=0; hu[0]:=256; init_lig:=false; init_list:=null;
         'found2 <-
         };
         s = $globals.ha;
-        j = 0;
+        j = 0.into();
         $globals.hu[0] = non_char;
         $globals.init_lig = false;
         $globals.init_list = null;
@@ -94,6 +94,8 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
     crate::section_0913::Reconstitute_nodes_for_the_hyphenated_word__inserting_discretionary_hyphens!($globals, j, bchar, q, r, s);
     // flush_list(init_list)
     flush_list($globals, $globals.init_list);
+    use typenum::U65;
+    use crate::pascal::u8_from_0_to_n;
     use crate::section_0115::null;
     use crate::section_0118::link;
     use crate::section_0123::flush_list;

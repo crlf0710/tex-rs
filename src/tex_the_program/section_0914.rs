@@ -7,7 +7,7 @@
 //! point. (Consider the word `difficult', where the letter `c' is in position |j|.)
 //
 // @d advance_major_tail==begin major_tail:=link(major_tail); incr(r_count);
-macro advance_major_tail($globals:expr, $major_tail:expr, $r_count:expr) {{
+pub(crate) macro advance_major_tail($globals:expr, $major_tail:expr, $r_count:expr) {{
     $major_tail = link!($globals, $major_tail);
     incr!($r_count);
     // end
@@ -16,7 +16,7 @@ macro advance_major_tail($globals:expr, $major_tail:expr, $r_count:expr) {{
 }}
 
 // @<Create and append a discretionary node as an alternative...@>=
-pub(crate) macro Create_and_append_a_discretionary_node_as_an_alternative_to_the_unhyphenated_word__and_continue_to_develop_both_branches_until_they_become_equivalent($globals:expr, $j:expr, $s:expr, $l:expr) {{
+pub(crate) macro Create_and_append_a_discretionary_node_as_an_alternative_to_the_unhyphenated_word__and_continue_to_develop_both_branches_until_they_become_equivalent($globals:expr, $bchar:expr, $j:expr, $s:expr, $l:expr, $c:expr) {{
     // repeat r:=get_node(small_node_size);
     loop {
         /// temporary registers for list manipulation
@@ -42,18 +42,18 @@ pub(crate) macro Create_and_append_a_discretionary_node_as_an_alternative_to_the
         i = $globals.hyphen_passed;
         $globals.hyf[i.get() as usize] = 0.into();
         // @<Put the \(c)characters |hu[l..i]| and a hyphen into |pre_break(r)|@>;
-        crate::section_0915::Put_the_characters_hu_l_to_i_and_a_hyphen_into_pre_break_r!($globals, minor_tail, $l, i, r);
+        crate::section_0915::Put_the_characters_hu_l_to_i_and_a_hyphen_into_pre_break_r!($globals, minor_tail, $l, i, r, $c);
         // @<Put the \(c)characters |hu[i+1..@,]| into |post_break(r)|, appending to this
         //   list and to |major_tail| until synchronization has been achieved@>;
-        crate::section_0916::Put_the_characters_hu_i_plus_1_to_end_into_post_break_r__appending_to_this_list_and_to_major_tail_until_synchronization_has_been_achieved!($globals, minor_tail, $l, i, r, $j);
+        crate::section_0916::Put_the_characters_hu_i_plus_1_to_end_into_post_break_r__appending_to_this_list_and_to_major_tail_until_synchronization_has_been_achieved!($globals, major_tail, minor_tail, $bchar, r_count, $l, i, r, $j, $c);
         // @<Move pointer |s| to the end of the current list, and set |replace_count(r)|
         //   appropriately@>;
         crate::section_0918::Move_pointer_s_to_the_end_of_the_current_list__and_set_replace_count_r_appropriately!($globals, $s, r, r_count, major_tail);
         // hyphen_passed:=j-1; link(hold_head):=null;
-        $globals.hyphen_passed = small_number::new(($j - 1) as _);
+        $globals.hyphen_passed = small_number::new($j.get() - 1);
         link!($globals, hold_head) = null;
         // until not odd(hyf[j-1])
-        if !$globals.hyf[$j - 1].is_odd() {
+        if !$globals.hyf[$j.get() as usize - 1].is_odd() {
             break;
         }
     }

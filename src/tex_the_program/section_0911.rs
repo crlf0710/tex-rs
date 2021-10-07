@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Carry out a ligature replacement, updating the cursor structure...@>=
-pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure_and_possibly_advancing_j__goto_continue_if_the_cursor_doesn_t_advance__otherwise_goto_done($globals:expr, $j:expr, $n:expr, $q:expr, $bchar:expr, $lbl_continue:lifetime, $lbl_done:lifetime) {{
+pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure_and_possibly_advancing_j__goto_continue_if_the_cursor_doesn_t_advance__otherwise_goto_done($globals:expr, $j:expr, $n:expr, $t:expr, $q:expr, $bchar:expr, $lbl_continue:lifetime, $lbl_done:lifetime) {{
     // begin if cur_l=non_char then lft_hit:=true;
     if $globals.cur_l == non_char {
         $globals.lft_hit = true;
@@ -62,16 +62,32 @@ pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure
             // end;
         }
         // qi(3):begin cur_r:=rem_byte(q); {\.{\?=:\?}}
-        //   p:=lig_stack; lig_stack:=new_lig_item(cur_r); link(lig_stack):=p;
-        //   end;
         3 => {
-            todo!("3");
+            /// `|=:|`
+            const _: () = ();
+
+            /// temporary register for list manipulation
+            let p: pointer;
+
+            $globals.cur_r = $q.rem_byte() as _;
+            // p:=lig_stack; lig_stack:=new_lig_item(cur_r); link(lig_stack):=p;
+            p = $globals.lig_stack;
+            $globals.lig_stack =
+                new_lig_item($globals, ASCII_code::from($globals.cur_r as integer))?;
+            link!($globals, $globals.lig_stack) = p;
+            // end;
         }
         // qi(7),qi(11):begin wrap_lig(false); {\.{\?=:\?>}, \.{\?=:\?>>}}
-        //   cur_q:=t; cur_l:=rem_byte(q); ligature_present:=true;
-        //   end;
         7 | 11 => {
-            todo!("7 or 11");
+            /// `|=:|>, |=:|>>`
+            const _: () = ();
+
+            wrap_lig!($globals, false, $t);
+            // cur_q:=t; cur_l:=rem_byte(q); ligature_present:=true;
+            $globals.cur_q = $t;
+            $globals.cur_l = $q.rem_byte() as _;
+            $globals.ligature_present = true;
+            // end;
         }
         // othercases begin cur_l:=rem_byte(q); ligature_present:=true; {\.{=:}}
         _ => {
@@ -96,10 +112,12 @@ pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure
     use crate::section_0112::qo;
     use crate::section_0115::null;
     use crate::section_0115::pointer;
+    use crate::section_0118::link;
     use crate::section_0120::get_avail;
     use crate::section_0134::assign_font_and_character;
     use crate::section_0134::character;
     use crate::section_0143::lig_ptr;
     use crate::section_0144::new_lig_item;
     use crate::section_0549::non_char;
+    use crate::section_0910::wrap_lig;
 }}

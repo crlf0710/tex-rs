@@ -3,9 +3,7 @@
 //! or kern. At this point we have |l-1<=i<j| and |i<hn|.
 //
 // @<Put the \(c)characters |hu[l..i]| and a hyphen into |pre_break(r)|@>=
-pub(crate) macro Put_the_characters_hu_l_to_i_and_a_hyphen_into_pre_break_r($globals:expr, $minor_tail:expr, $l:expr, $i:expr, $r:expr) {{
-    /// character temporarily replaced by a hyphen
-    let mut c: ASCII_code = ASCII_code::default();
+pub(crate) macro Put_the_characters_hu_l_to_i_and_a_hyphen_into_pre_break_r($globals:expr, $minor_tail:expr, $l:expr, $i:expr, $r:expr, $c:expr) {{
     /// the hyphen, if it exists
     let hyf_node: pointer;
     // minor_tail:=null; pre_break(r):=null; hyf_node:=new_character(hf,hyf_char);
@@ -16,23 +14,24 @@ pub(crate) macro Put_the_characters_hu_l_to_i_and_a_hyphen_into_pre_break_r($glo
     if hyf_node != null {
         // begin incr(i); c:=hu[i]; hu[i]:=hyf_char; free_avail(hyf_node);
         incr!($i);
-        c = ASCII_code::from($globals.hu[$i.get() as usize] as integer);
+        $c = ASCII_code::from($globals.hu[$i.get() as usize] as integer);
         $globals.hu[$i.get() as usize] = $globals.hyf_char as _;
         free_avail!($globals, hyf_node);
         // end;
     }
     // while l<=i do
-    while $l <= $i.get() as usize {
+    while $l.get() <= $i.get() {
         // begin l:=reconstitute(l,i,font_bchar[hf],non_char)+1;
         $l = (reconstitute(
             $globals,
-            small_number::new($l as _),
+            small_number::new($l.get() as _),
             $i,
             $globals.font_bchar[$globals.hf],
             non_char,
         )?
         .get()
-            + 1) as _;
+            + 1)
+        .into();
         // if link(hold_head)>null then
         if link!($globals, hold_head) > null {
             // begin if minor_tail=null then pre_break(r):=link(hold_head)
@@ -58,9 +57,9 @@ pub(crate) macro Put_the_characters_hu_l_to_i_and_a_hyphen_into_pre_break_r($glo
         // begin hu[i]:=c; {restore the character in the hyphen position}
         /// restore the character in the hyphen position
         const _: () = ();
-        $globals.hu[$i.get() as usize] = c.numeric_value() as _;
+        $globals.hu[$i.get() as usize] = $c.numeric_value() as _;
         // l:=i; decr(i);
-        $l = $i.get() as _;
+        $l = $i.get().into();
         decr!($i);
         // end
     }

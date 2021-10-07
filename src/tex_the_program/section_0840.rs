@@ -2,12 +2,14 @@
 // @<Compute the discretionary |break...@>=
 pub(crate) macro Compute_the_discretionary_break_width_values($globals:expr, $s:expr) {{
     // begin t:=replace_count(cur_p); v:=cur_p; s:=post_break(cur_p);
-    let t = replace_count!($globals, $globals.cur_p);
-    let v = $globals.cur_p;
+    let mut t = replace_count!($globals, $globals.cur_p);
+    let mut v = $globals.cur_p;
     $s = post_break!($globals, $globals.cur_p);
     // while t>0 do
     while t > 0 {
         // begin decr(t); v:=link(v);
+        decr!(t);
+        v = link!($globals, v);
         // @<Subtract the width of node |v| from |break_width|@>;
         // end;
         todo!("t>0");
@@ -29,6 +31,7 @@ pub(crate) macro Compute_the_discretionary_break_width_values($globals:expr, $s:
     /// nodes may be discardable after the break
     const _: () = ();
     // end
+    use crate::section_0016::decr;
     use crate::section_0115::null;
     use crate::section_0118::link;
     use crate::section_0145::post_break;
