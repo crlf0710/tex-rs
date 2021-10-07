@@ -19,7 +19,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1057($globals:
     else if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, kern as u16)
         || $abs_mode_plus_cur_cmd == mmode as u16 + mkern as u16
     {
-        append_kern($globals);
+        append_kern($globals)?;
         use crate::section_1061::append_kern;
         true
     } else {

@@ -56,15 +56,29 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1058($globals
     primitive(globals, crate::strpool_str!("vfilneg"), vskip, fil_neg_code);
     // @!@:vfil_neg_}{\.{\\vfilneg} primitive@>
     // primitive("mskip",mskip,mskip_code);@/
+    primitive(globals, crate::strpool_str!("mskip"), mskip, mskip_code);
     // @!@:mskip_}{\.{\\mskip} primitive@>
     // primitive("kern",kern,explicit);
+    primitive(
+        globals,
+        crate::strpool_str!("kern"),
+        kern,
+        kern_node_subtype::explicit as _,
+    );
     // @!@:kern_}{\.{\\kern} primitive@>
     // primitive("mkern",mkern,mu_glue);@/
+    primitive(
+        globals,
+        crate::strpool_str!("mkern"),
+        mkern,
+        kern_node_subtype::mu_glue as _,
+    );
     // @!@:mkern_}{\.{\\mkern} primitive@>
 }}
 
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
+use crate::section_0155::kern_node_subtype;
 use crate::section_0207::par_end;
 use crate::section_0208::*;
 use crate::section_0264::primitive;
