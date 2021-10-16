@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Carry out a ligature replacement, updating the cursor structure...@>=
-pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure_and_possibly_advancing_j__goto_continue_if_the_cursor_doesn_t_advance__otherwise_goto_done($globals:expr, $j:expr, $n:expr, $t:expr, $q:expr, $bchar:expr, $lbl_continue:lifetime, $lbl_done:lifetime) {{
+pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure_and_possibly_advancing_j__goto_continue_if_the_cursor_doesn_t_advance__otherwise_goto_done($globals:expr, $j:expr, $n:expr, $t:expr, $q:expr, $bchar:expr, $hchar:expr, $cur_rh:expr, $lbl_continue:lifetime, $lbl_done:lifetime) {{
     // begin if cur_l=non_char then lft_hit:=true;
     if $globals.cur_l == non_char {
         $globals.lft_hit = true;
@@ -20,8 +20,8 @@ pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure
             /// `=:|, =:|>`
             const _: () = ();
             $globals.cur_l = $q.rem_byte() as _;
-            todo!("1 or 5");
             // ligature_present:=true;
+            $globals.ligature_present = true;
             // end;
         }
         // qi(2),qi(6):begin cur_r:=rem_byte(q); {\.{\?=:}, \.{\?=:>}}
@@ -91,11 +91,27 @@ pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure
         }
         // othercases begin cur_l:=rem_byte(q); ligature_present:=true; {\.{=:}}
         _ => {
-            todo!("otherwise");
+            /// `=:`
+            const _: () = ();
+
+            $globals.cur_l = $q.rem_byte() as _;
+            $globals.ligature_present = true;
+
             // if lig_stack>null then pop_lig_stack
+            if $globals.lig_stack > null {
+                pop_lig_stack!($globals, $t, $j, $n, $bchar, $hchar, $cur_rh);
+            }
             // else if j=n then goto done
+            else if $j == $n {
+                crate::goto_forward_label!($lbl_done);
+            }
             // else begin append_charnode_to_t(cur_r); incr(j); set_cur_r;
-            //   end;
+            else {
+                append_charnode_to_t!($globals, $t, ASCII_code::from($globals.cur_r as integer));
+                incr!($j);
+                set_cur_r!($globals, $j, $n, $bchar, $hchar, $cur_rh);
+                // end;
+            }
             // end
         } // endcases;
     }
@@ -107,6 +123,7 @@ pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure
     crate::goto_backward_label!($lbl_continue);
     // end
     use crate::pascal::integer;
+    use crate::section_0016::incr;
     use crate::section_0018::ASCII_code;
     use crate::section_0096::check_interrupt;
     use crate::section_0112::qo;
@@ -119,5 +136,8 @@ pub(crate) macro Carry_out_a_ligature_replacement__updating_the_cursor_structure
     use crate::section_0143::lig_ptr;
     use crate::section_0144::new_lig_item;
     use crate::section_0549::non_char;
+    use crate::section_0908::append_charnode_to_t;
+    use crate::section_0908::set_cur_r;
+    use crate::section_0910::pop_lig_stack;
     use crate::section_0910::wrap_lig;
 }}

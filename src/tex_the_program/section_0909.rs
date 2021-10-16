@@ -63,9 +63,12 @@ pub(crate) macro If_there_s_a_ligature_or_kern_at_the_cursor_position__update_th
                     // if cur_rh<non_char then
                     if $cur_rh < non_char {
                         // begin hyphen_passed:=j; hchar:=non_char; cur_rh:=non_char;
+                        $globals.hyphen_passed = $j;
+                        $hchar = non_char;
+                        $cur_rh = non_char;
                         // goto continue;
+                        crate::goto_backward_label!($lbl_continue);
                         // end
-                        todo!("cur_rh < non_char");
                     }
                     // else begin if hchar<non_char then if odd(hyf[j]) then
                     else {
@@ -81,7 +84,7 @@ pub(crate) macro If_there_s_a_ligature_or_kern_at_the_cursor_position__update_th
                             //   and possibly advancing~|j|; |goto continue| if the cursor doesn't
                             //   advance, otherwise |goto done|@>;
                             crate::section_0911::Carry_out_a_ligature_replacement__updating_the_cursor_structure_and_possibly_advancing_j__goto_continue_if_the_cursor_doesn_t_advance__otherwise_goto_done!
-                                ($globals, $j, $n, $t, q_lig_kern_cmd, $bchar, $lbl_continue, 'done);
+                                ($globals, $j, $n, $t, q_lig_kern_cmd, $bchar, $hchar, $cur_rh, $lbl_continue, 'done);
                         }
                         // w:=char_kern(hf)(q); goto done; {this kern will be inserted below}
                         $w = char_kern!($globals, $globals.hf, q_lig_kern_cmd);

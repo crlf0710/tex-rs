@@ -11,15 +11,16 @@ pub(crate) macro Compute_the_discretionary_break_width_values($globals:expr, $s:
         decr!(t);
         v = link!($globals, v);
         // @<Subtract the width of node |v| from |break_width|@>;
+        crate::section_0841::Subtract_the_width_of_node_v_from_break_width!($globals, v);
         // end;
-        todo!("t>0");
     }
     // while s<>null do
     while $s != null {
         // begin @<Add the width of node |s| to |break_width|@>;
+        crate::section_0842::Add_the_width_of_node_s_to_break_width!($globals, $s);
         // s:=link(s);
+        $s = link!($globals, $s);
         // end;
-        todo!("s<>null");
     }
     // break_width[1]:=break_width[1]+disc_width;
     $globals.break_width[1] += $globals.disc_width;

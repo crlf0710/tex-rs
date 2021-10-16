@@ -6,7 +6,7 @@ pub(crate) macro Package_an_unset_box_for_the_current_column_and_record_its_widt
     /// natural width
     let w: scaled;
     /// span counter
-    let n: halfword;
+    let mut n: halfword;
     /// order of infinity
     let mut o: glue_ord;
     // begin if mode=-hmode then
@@ -34,7 +34,7 @@ pub(crate) macro Package_an_unset_box_for_the_current_column_and_record_its_widt
     n = min_quarterword as _;
     // if cur_span<>cur_align then @<Update width entry for spanned columns@>
     if $globals.cur_span != $globals.cur_align {
-        todo!("update width entry");
+        crate::section_0798::Update_width_entry_for_spanned_columns!($globals, n);
     }
     // else if w>width(cur_align) then width(cur_align):=w;
     else if w > width!($globals, $globals.cur_align) {

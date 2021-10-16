@@ -40,14 +40,29 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
             // else if type(ha)=ligature_node then
             else if r#type!($globals, $globals.ha) == ligature_node {
                 // if font(lig_char(ha))<>hf then goto found2
+                if font!($globals, lig_char!($globals.ha)) != $globals.hf {
+                    crate::goto_forward_label!('found2);
+                }
                 // else begin init_list:=lig_ptr(ha); init_lig:=true; init_lft:=(subtype(ha)>1);
-                //   hu[0]:=qo(character(lig_char(ha)));
-                //   if init_list=null then if init_lft then
-                //     begin hu[0]:=256; init_lig:=false;
-                //     end; {in this case a ligature will be reconstructed from scratch}
-                //   free_node(ha,small_node_size);
-                //   end
-                todo!("ligature node");
+                else {
+                    $globals.init_list = lig_ptr!($globals, $globals.ha);
+                    $globals.init_lig = true;
+                    $globals.init_lft = subtype!($globals, $globals.ha) > 1;
+                    // hu[0]:=qo(character(lig_char(ha)));
+                    $globals.hu[0] = character!($globals, lig_char!($globals.ha)).numeric_value() as _;
+                    // if init_list=null then if init_lft then
+                    if $globals.init_list == null && $globals.init_lft {
+                        // begin hu[0]:=256; init_lig:=false;
+                        $globals.hu[0] = non_char;
+                        $globals.init_lig = false;
+                        // end; {in this case a ligature will be reconstructed from scratch}
+                        /// in this case a ligature will be reconstructed from scratch
+                        const _ : () = ();
+                    }
+                    // free_node(ha,small_node_size);
+                    free_node($globals, $globals.ha, small_node_size as _);
+                    // end
+                }
             }
             // else begin {no punctuation found; look for left boundary}
             else {
@@ -99,10 +114,16 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
     use crate::section_0115::null;
     use crate::section_0118::link;
     use crate::section_0123::flush_list;
+    use crate::section_0130::free_node;
     use crate::section_0133::r#type;
     use crate::section_0133::subtype;
+    use crate::section_0134::character;
+    use crate::section_0134::font;
     use crate::section_0134::is_char_node;
+    use crate::section_0141::small_node_size;
+    use crate::section_0143::lig_ptr;
     use crate::section_0143::ligature_node;
+    use crate::section_0143::lig_char;
     use crate::section_0202::flush_node_list;
     use crate::section_0549::non_char;
     use crate::section_0907::ASCII_code_or_non_char;
