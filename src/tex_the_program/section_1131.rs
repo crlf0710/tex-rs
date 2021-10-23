@@ -36,7 +36,7 @@ pub(crate) fn do_endv(globals: &mut TeXGlobals) -> TeXResult<()> {
         end_graf(globals)?;
         // if fin_col then fin_row;
         if fin_col(globals)? {
-            fin_row(globals);
+            fin_row(globals)?;
         }
         // end
     }

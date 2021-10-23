@@ -26,7 +26,7 @@ pub(crate) fn init_row(globals: &mut TeXGlobals) -> TeXResult<()> {
     // cur_align:=link(preamble); cur_tail:=cur_head; init_span(cur_align);
     globals.cur_align = link!(globals, preamble!(globals));
     globals.cur_tail = globals.cur_head;
-
+    init_span(globals, globals.cur_align)?;
     // end;
     crate::ok_nojump!()
 }
@@ -48,3 +48,4 @@ use crate::section_0214::tail_append;
 use crate::section_0216::push_nest;
 use crate::section_0224::tab_skip_code;
 use crate::section_0770::preamble;
+use crate::section_0787::init_span;

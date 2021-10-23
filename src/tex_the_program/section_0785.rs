@@ -24,7 +24,7 @@ pub(crate) fn align_peek(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // else if cur_cmd=right_brace then fin_align
     else if globals.cur_cmd == right_brace {
-        todo!("align_peek 2");
+        fin_align(globals);
     }
     // else if (cur_cmd=car_ret)and(cur_chr=cr_cr_code) then
     else if globals.cur_cmd == car_ret
@@ -55,3 +55,4 @@ use crate::section_0208::no_align;
 use crate::section_0780::cr_cr_code;
 use crate::section_0786::init_row;
 use crate::section_0788::init_col;
+use crate::section_0800::fin_align;
