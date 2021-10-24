@@ -24,7 +24,7 @@ pub(crate) fn align_peek(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // else if cur_cmd=right_brace then fin_align
     else if globals.cur_cmd == right_brace {
-        fin_align(globals);
+        fin_align(globals)?;
     }
     // else if (cur_cmd=car_ret)and(cur_chr=cr_cr_code) then
     else if globals.cur_cmd == car_ret

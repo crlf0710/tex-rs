@@ -25,7 +25,9 @@ pub(crate) fn sort_avail(globals: &mut TeXGlobals) -> TeXResult<()> {
     // while p<>old_rover do @<Sort \(p)|p| into the list starting at |rover|
     //   and advance |p| to |rlink(p)|@>;
     while p != old_rover {
-        todo!("sort p into the list");
+        crate::section_0132::Sort_p_into_the_list_starting_at_rover_and_advance_p_to_rlink_p!(
+            globals, p
+        );
     }
     // p:=rover;
     p = globals.rover;

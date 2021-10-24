@@ -91,20 +91,20 @@ pub(crate) macro dimen_par($globals:expr, $val:expr) {
 }
 // @d par_indent==dimen_par(par_indent_code)
 pub(crate) macro par_indent($globals:expr) {
-    dimen_par!($globals, crate::section_0247::par_indent_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::par_indent_code)
 }
 // @d math_surround==dimen_par(math_surround_code)
 // @d line_skip_limit==dimen_par(line_skip_limit_code)
 pub(crate) macro line_skip_limit($globals:expr) {
-    dimen_par!($globals, crate::section_0247::line_skip_limit_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::line_skip_limit_code)
 }
 // @d hsize==dimen_par(hsize_code)
 pub(crate) macro hsize($globals:expr) {
-    dimen_par!($globals, crate::section_0247::hsize_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::hsize_code)
 }
 // @d vsize==dimen_par(vsize_code)
 pub(crate) macro vsize($globals:expr) {
-    dimen_par!($globals, crate::section_0247::vsize_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::vsize_code)
 }
 // @d max_depth==dimen_par(max_depth_code)
 pub(crate) macro max_depth($globals:expr) {
@@ -113,15 +113,15 @@ pub(crate) macro max_depth($globals:expr) {
 // @d split_max_depth==dimen_par(split_max_depth_code)
 // @d box_max_depth==dimen_par(box_max_depth_code)
 pub(crate) macro box_max_depth($globals:expr) {
-    dimen_par!($globals, crate::section_0247::box_max_depth_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::box_max_depth_code)
 }
 // @d hfuzz==dimen_par(hfuzz_code)
 pub(crate) macro hfuzz($globals:expr) {
-    dimen_par!($globals, crate::section_0247::hfuzz_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::hfuzz_code)
 }
 // @d vfuzz==dimen_par(vfuzz_code)
 pub(crate) macro vfuzz($globals:expr) {
-    dimen_par!($globals, crate::section_0247::vfuzz_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::vfuzz_code)
 }
 // @d delimiter_shortfall==dimen_par(delimiter_shortfall_code)
 // @d null_delimiter_space==dimen_par(null_delimiter_space_code)
@@ -129,25 +129,28 @@ pub(crate) macro vfuzz($globals:expr) {
 // @d pre_display_size==dimen_par(pre_display_size_code)
 // @d display_width==dimen_par(display_width_code)
 // @d display_indent==dimen_par(display_indent_code)
+pub(crate) macro display_indent($globals:expr) {
+    crate::section_0247::dimen_par!($globals, crate::section_0247::display_indent_code)
+}
 // @d overfull_rule==dimen_par(overfull_rule_code)
 pub(crate) macro overfull_rule($globals:expr) {
-    dimen_par!($globals, crate::section_0247::overfull_rule_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::overfull_rule_code)
 }
 // @d hang_indent==dimen_par(hang_indent_code)
 pub(crate) macro hang_indent($globals:expr) {
-    dimen_par!($globals, crate::section_0247::hang_indent_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::hang_indent_code)
 }
 // @d h_offset==dimen_par(h_offset_code)
 pub(crate) macro h_offset($globals:expr) {
-    dimen_par!($globals, crate::section_0247::h_offset_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::h_offset_code)
 }
 // @d v_offset==dimen_par(v_offset_code)
 pub(crate) macro v_offset($globals:expr) {
-    dimen_par!($globals, crate::section_0247::v_offset_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::v_offset_code)
 }
 // @d emergency_stretch==dimen_par(emergency_stretch_code)
 pub(crate) macro emergency_stretch($globals:expr) {
-    dimen_par!($globals, crate::section_0247::emergency_stretch_code)
+    crate::section_0247::dimen_par!($globals, crate::section_0247::emergency_stretch_code)
 }
 
 // @p procedure print_length_param(@!n:integer);
