@@ -18,6 +18,7 @@ const TRIPRECORD_TRIP_LOG: &[u8] = include_bytes!("../tests_data/trip/trip.log")
 const TRIPRECORD_TRIP_TYP: &[u8] = include_bytes!("../tests_data/trip/trip.typ");
 
 #[test]
+#[cfg_attr(not(feature = "statistics"), ignore)]
 #[ignore]
 fn trip() {
     let (
@@ -45,6 +46,10 @@ fn trip() {
         let (tripin_fot, tripin_log, trip_fmt) = TeXTestVFS::with_current(|vfs| {
             vfs.prepare_termin(concat!("\n", "\\input trip\n", "\\end\n").as_bytes());
             if let mut globals = tex::TeXGlobals::default() {
+                use tex::configure::TeXConfiguration;
+                globals.set_error_line(64);
+                globals.set_half_error_line(32);
+                globals.set_max_print_line(72);
                 tex::entry(&mut globals);
             }
             let tripin_fot = vfs.dump_current_term_out().unwrap();

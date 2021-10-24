@@ -65,6 +65,8 @@ mod info;
 
 use info::*;
 
+pub mod configure;
+
 #[macro_use]
 mod pascal;
 

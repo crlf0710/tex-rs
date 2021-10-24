@@ -8,10 +8,9 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_latex_support
         if_test,
         unimplemented_code as _,
     );
-
-    globals.error_line = 79;
-    globals.half_error_line = 50;
-    globals.max_print_line = 79;
+    // globals.error_line = 79;
+    // globals.half_error_line = 50;
+    // globals.max_print_line = 79;
 }}
 
 use crate::pascal::word;
