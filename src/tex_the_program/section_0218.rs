@@ -43,7 +43,7 @@ pub(crate) fn show_activities(globals: &mut TeXGlobals) {
                 make_globals_io_string_log_view!(globals),
                 ASCII_code_literal!(b','),
             );
-            print_int(globals, (globals.nest[p].pg_field / 200000) % 0o100);
+            print_int(globals, (globals.nest[p].pg_field / 0o200000) % 0o100);
             // print_char(")");
             print_char(
                 make_globals_io_string_log_view!(globals),
