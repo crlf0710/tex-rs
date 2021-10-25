@@ -8,6 +8,10 @@ pub trait TeXConfiguration {
     fn set_half_error_line(&mut self, half_error_line: u8);
     /// Configure `max_print_line` parameter
     fn set_max_print_line(&mut self, max_print_line: u8);
+
+    #[cfg(feature = "latex_support")]
+    /// Configure `latex_support` parameter
+    fn set_latex_support(&mut self, latex_support_enabled: bool);
 }
 
 impl TeXConfiguration for crate::section_0004::TeXGlobals {
@@ -21,5 +25,10 @@ impl TeXConfiguration for crate::section_0004::TeXGlobals {
 
     fn set_max_print_line(&mut self, max_print_line: u8) {
         self.max_print_line = max_print_line;
+    }
+
+    #[cfg(feature = "latex_support")]
+    fn set_latex_support(&mut self, latex_support_enabled: bool) {
+        self.latex_support_enabled = latex_support_enabled;
     }
 }

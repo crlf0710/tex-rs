@@ -129,6 +129,7 @@ pub mod TeXGlobals {
     include!("src/tex_the_program/section_1331.rs");
     include!("src/tex_the_program/section_1342.rs");
     include!("src/tex_the_program/section_1345.rs");
+    include!("src/latex_support.rs");
     include!("src/unicode_support.rs");
 }
 
