@@ -39,6 +39,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1344($globals
     );
     // @!@:close_out_}{\.{\\closeout} primitive@>
     // primitive("special",extension,special_node);@/
+    primitive(
+        globals,
+        crate::strpool_str!("special"),
+        extension,
+        special_node as _,
+    );
     // @!@:special_}{\.{\\special} primitive@>
     // primitive("immediate",extension,immediate_code);@/
     primitive(
@@ -65,4 +71,5 @@ use crate::section_0208::extension;
 use crate::section_0264::primitive;
 use crate::section_1341::close_node;
 use crate::section_1341::open_node;
+use crate::section_1341::special_node;
 use crate::section_1341::write_node;

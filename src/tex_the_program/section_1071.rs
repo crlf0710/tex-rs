@@ -59,21 +59,44 @@ pub(crate) const vtop_code: chr_code_repr = 4;
 pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1071($globals:expr) {{
     let globals = &mut *$globals;
     // primitive("moveleft",hmove,1);
+    primitive(globals, crate::strpool_str!("moveleft"), hmove, 1);
     // @!@:move_left_}{\.{\\moveleft} primitive@>
     // primitive("moveright",hmove,0);@/
+    primitive(globals, crate::strpool_str!("moveright"), hmove, 0);
     // @!@:move_right_}{\.{\\moveright} primitive@>
     // primitive("raise",vmove,1);
+    primitive(globals, crate::strpool_str!("raise"), vmove, 1);
     // @!@:raise_}{\.{\\raise} primitive@>
     // primitive("lower",vmove,0);
+    primitive(globals, crate::strpool_str!("lower"), vmove, 0);
     // @!@:lower_}{\.{\\lower} primitive@>
     // @#
     // primitive("box",make_box,box_code);
+    primitive(globals, crate::strpool_str!("box"), make_box, box_code as _);
     // @!@:box_}{\.{\\box} primitive@>
     // primitive("copy",make_box,copy_code);
+    primitive(
+        globals,
+        crate::strpool_str!("copy"),
+        make_box,
+        copy_code as _,
+    );
     // @!@:copy_}{\.{\\copy} primitive@>
     // primitive("lastbox",make_box,last_box_code);
+    primitive(
+        globals,
+        crate::strpool_str!("lastbox"),
+        make_box,
+        last_box_code as _,
+    );
     // @!@:last_box_}{\.{\\lastbox} primitive@>
     // primitive("vsplit",make_box,vsplit_code);
+    primitive(
+        globals,
+        crate::strpool_str!("vsplit"),
+        make_box,
+        vsplit_code as _,
+    );
     // @!@:vsplit_}{\.{\\vsplit} primitive@>
     // primitive("vtop",make_box,vtop_code);@/
     primitive(
@@ -110,10 +133,28 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1071($globals
     );
     // @!@:ship_out_}{\.{\\shipout} primitive@>
     // primitive("leaders",leader_ship,a_leaders);
+    primitive(
+        globals,
+        crate::strpool_str!("leaders"),
+        leader_ship,
+        glue_node_subtype::a_leaders as _,
+    );
     // @!@:leaders_}{\.{\\leaders} primitive@>
     // primitive("cleaders",leader_ship,c_leaders);
+    primitive(
+        globals,
+        crate::strpool_str!("cleaders"),
+        leader_ship,
+        glue_node_subtype::c_leaders as _,
+    );
     // @!@:c_leaders_}{\.{\\cleaders} primitive@>
     // primitive("xleaders",leader_ship,x_leaders);
+    primitive(
+        globals,
+        crate::strpool_str!("xleaders"),
+        leader_ship,
+        glue_node_subtype::x_leaders as _,
+    );
     // @!@:x_leaders_}{\.{\\xleaders} primitive@>
 }}
 
@@ -121,8 +162,7 @@ use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0113::halfword;
 use crate::section_0149::glue_node_subtype;
-use crate::section_0208::leader_ship;
-use crate::section_0208::make_box;
+use crate::section_0208::*;
 use crate::section_0211::hmode;
 use crate::section_0211::vmode;
 use crate::section_0264::primitive;

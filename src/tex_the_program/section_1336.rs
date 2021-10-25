@@ -11,6 +11,7 @@ pub(crate) macro Put_each_of_TeX_s_primitivies_into_the_hash_table($globals:expr
     crate::section_0265::Put_each_of_tex_s_primitivies_into_the_hash_table_0265!($globals);
     crate::section_0334::Put_each_of_tex_s_primitivies_into_the_hash_table_0334!($globals);
     crate::section_0376::Put_each_of_tex_s_primitivies_into_the_hash_table_0376!($globals);
+    crate::section_0384::Put_each_of_tex_s_primitivies_into_the_hash_table_0384!($globals);
     crate::section_0411::Put_each_of_tex_s_primitivies_into_the_hash_table_0411!($globals);
     crate::section_0416::Put_each_of_tex_s_primitivies_into_the_hash_table_0416!($globals);
     crate::section_0468::Put_each_of_tex_s_primitivies_into_the_hash_table_0468!($globals);
@@ -25,6 +26,11 @@ pub(crate) macro Put_each_of_TeX_s_primitivies_into_the_hash_table($globals:expr
     crate::section_1088::Put_each_of_tex_s_primitivies_into_the_hash_table_1088!($globals);
     crate::section_1107::Put_each_of_tex_s_primitivies_into_the_hash_table_1107!($globals);
     crate::section_1114::Put_each_of_tex_s_primitivies_into_the_hash_table_1114!($globals);
+    crate::section_1141::Put_each_of_tex_s_primitivies_into_the_hash_table_1141!($globals);
+    crate::section_1156::Put_each_of_tex_s_primitivies_into_the_hash_table_1156!($globals);
+    crate::section_1169::Put_each_of_tex_s_primitivies_into_the_hash_table_1169!($globals);
+    crate::section_1178::Put_each_of_tex_s_primitivies_into_the_hash_table_1178!($globals);
+    crate::section_1188::Put_each_of_tex_s_primitivies_into_the_hash_table_1188!($globals);
     crate::section_1208::Put_each_of_tex_s_primitivies_into_the_hash_table_1208!($globals);
     crate::section_1219::Put_each_of_tex_s_primitivies_into_the_hash_table_1219!($globals);
     crate::section_1222::Put_each_of_tex_s_primitivies_into_the_hash_table_1222!($globals);

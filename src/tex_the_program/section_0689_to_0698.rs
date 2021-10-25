@@ -1,33 +1,3 @@
-//! @ Math formulas can also contain instructions like \.{\\textstyle} that
-//! override \TeX's normal style rules. A |style_node| is inserted into the
-//! data structure to record such instructions; it is three words long, so it
-//! is considered a node instead of a noad. The |subtype| is either |display_style|
-//! or |text_style| or |script_style| or |script_script_style|. The
-//! second and third words of a |style_node| are not used, but they are
-//! present because a |choice_node| is converted to a |style_node|.
-//!
-//! \TeX\ uses even numbers 0, 2, 4, 6 to encode the basic styles
-//! |display_style|, \dots, |script_script_style|, and adds~1 to get the
-//! ``cramped'' versions of these styles. This gives a numerical order that
-//! is backwards from the convention of Appendix~G in {\sl The \TeX book\/};
-//! i.e., a smaller style has a larger numerical value.
-//! @:TeXbook}{\sl The \TeX book@>
-//!
-//! @d style_node=unset_node+1 {|type| of a style node}
-//! @d style_node_size=3 {number of words in a style node}
-//! @d display_style=0 {|subtype| for \.{\\displaystyle}}
-//! @d text_style=2 {|subtype| for \.{\\textstyle}}
-//! @d script_style=4 {|subtype| for \.{\\scriptstyle}}
-//! @d script_script_style=6 {|subtype| for \.{\\scriptscriptstyle}}
-//! @d cramped=1 {add this to an uncramped style if you want to cramp it}
-//!
-//! @p function new_style(@!s:small_number):pointer; {create a style node}
-//! var p:pointer; {the new node}
-//! begin p:=get_node(style_node_size); type(p):=style_node;
-//! subtype(p):=s; width(p):=0; depth(p):=0; {the |width| and |depth| are not used}
-//! new_style:=p;
-//! end;
-//!
 //! @ Finally, the \.{\\mathchoice} primitive creates a |choice_node|, which
 //! has special subfields |display_mlist|, |text_mlist|, |script_mlist|,
 //! and |script_script_mlist| pointing to the mlists for each style.

@@ -1,15 +1,3 @@
-//! @ The routine that inserts a |style_node| holds no surprises.
-//!
-//! @<Put each...@>=
-//! primitive("displaystyle",math_style,display_style);
-//! @!@:display_style_}{\.{\\displaystyle} primitive@>
-//! primitive("textstyle",math_style,text_style);
-//! @!@:text_style_}{\.{\\textstyle} primitive@>
-//! primitive("scriptstyle",math_style,script_style);
-//! @!@:script_style_}{\.{\\scriptstyle} primitive@>
-//! primitive("scriptscriptstyle",math_style,script_script_style);
-//! @!@:script_script_style_}{\.{\\scriptscriptstyle} primitive@>
-//!
 //! @ @<Cases of |print_cmd_chr|...@>=
 //! math_style: print_style(chr_code);
 //!

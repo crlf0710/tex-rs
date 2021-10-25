@@ -51,6 +51,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0468($globals
     );
     // @!@:number_}{\.{\\number} primitive@>
     // primitive("romannumeral",convert,roman_numeral_code);@/
+    primitive(
+        globals,
+        crate::strpool_str!("romannumeral"),
+        convert,
+        convert_code_kind::roman_numeral_code as _,
+    );
     // @!@:roman_numeral_}{\.{\\romannumeral} primitive@>
     // primitive("string",convert,string_code);@/
     primitive(
@@ -69,8 +75,20 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0468($globals
     );
     // @!@:meaning_}{\.{\\meaning} primitive@>
     // primitive("fontname",convert,font_name_code);@/
+    primitive(
+        globals,
+        crate::strpool_str!("fontname"),
+        convert,
+        convert_code_kind::font_name_code as _,
+    );
     // @!@:font_name_}{\.{\\fontname} primitive@>
     // primitive("jobname",convert,job_name_code);@/
+    primitive(
+        globals,
+        crate::strpool_str!("jobname"),
+        convert,
+        convert_code_kind::job_name_code as _,
+    );
     // @!@:job_name_}{\.{\\jobname} primitive@>
 }}
 

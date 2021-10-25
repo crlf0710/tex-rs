@@ -9,6 +9,8 @@ pub(crate) const char_num: quarterword = 16;
 /// explicit math code ( `\mathchar` )
 pub(crate) const math_char_num: quarterword = 17;
 // @d mark=18 {mark definition ( \.{\\mark} )}
+/// mark definition ( `\mark` )
+pub(crate) const mark: quarterword = 18;
 // @d xray=19 {peek inside of \TeX\ ( \.{\\show}, \.{\\showbox}, etc.~)}
 /// peek inside of `TeX` ( `\show`, `\showbox`, etc. )
 pub(crate) const xray: quarterword = 19;
@@ -65,6 +67,8 @@ pub(crate) const vrule: quarterword = 35;
 /// horizontal rule ( `\hrule` )
 pub(crate) const hrule: quarterword = 36;
 // @d insert=37 {vlist inserted in box ( \.{\\insert} )}
+/// vlist inserted in box ( `\insert` )
+pub(crate) const insert: quarterword = 37;
 // @d vadjust=38 {vlist inserted in enclosing paragraph ( \.{\\vadjust} )}
 /// vlist inserted in enclosing paragraph ( `\vadjust` )
 pub(crate) const vadjust: quarterword = 38;
@@ -72,6 +76,8 @@ pub(crate) const vadjust: quarterword = 38;
 /// gobble `spacer` tokens ( `\ignorespaces` )
 pub(crate) const ignore_spaces: quarterword = 39;
 // @d after_assignment=40 {save till assignment is done ( \.{\\afterassignment} )}
+/// save till assignment is done ( `\afterassignment` )
+pub(crate) const after_assignment: quarterword = 40;
 // @d after_group=41 {save till group is done ( \.{\\aftergroup} )}
 /// save till group is done ( `\aftergroup` )
 pub(crate) const after_group: quarterword = 41;
@@ -82,6 +88,8 @@ pub(crate) const break_penalty: quarterword = 42;
 /// begin paragraph ( `\indent`, `\noindent` )
 pub(crate) const start_par: quarterword = 43;
 // @d ital_corr=44 {italic correction ( \.{\\/} )}
+/// italic correction ( `\/` )
+pub(crate) const ital_corr: quarterword = 44;
 // @d accent=45 {attach accent in text ( \.{\\accent} )}
 /// attach accent in text ( `\accent` )
 pub(crate) const accent: quarterword = 45;
@@ -92,6 +100,8 @@ pub(crate) const math_accent: quarterword = 46;
 /// discretionary texts ( `\-`, `\discretionary` )
 pub(crate) const discretionary: quarterword = 47;
 // @d eq_no=48 {equation number ( \.{\\eqno}, \.{\\leqno} )}
+/// equation number ( `\eqno`, `\leqno` )
+pub(crate) const eq_no: quarterword = 48;
 // @d left_right=49 {variable delimiter ( \.{\\left}, \.{\\right} )}
 /// variable delimiter ( `\left`, `\right` )
 pub(crate) const left_right: quarterword = 49;

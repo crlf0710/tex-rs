@@ -30,7 +30,11 @@ pub(crate) const accent_noad: quarterword = over_noad + 1;
 /// `type` of a noad for `\vcenter`
 pub(crate) const vcenter_noad: quarterword = accent_noad + 1;
 // @d left_noad=vcenter_noad+1 {|type| of a noad for \.{\\left}}
+/// `type` of a noad for `\left`
+pub(crate) const left_noad: quarterword = vcenter_noad + 1;
 // @d right_noad=left_noad+1 {|type| of a noad for \.{\\right}}
+/// `type` of a noad for `\right`
+pub(crate) const right_noad: quarterword = left_noad + 1;
 // @d delimiter==nucleus {|delimiter| field in left and right noads}
 // @d scripts_allowed(#)==(type(#)>=ord_noad)and(type(#)<left_noad)
 //

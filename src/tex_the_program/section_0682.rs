@@ -21,16 +21,37 @@
 /// `type` of a noad classified Ord
 pub(crate) const ord_noad: quarterword = unset_node + 3;
 // @d op_noad=ord_noad+1 {|type| of a noad classified Op}
+/// `type` of a noad classified Op
+pub(crate) const op_noad: quarterword = ord_noad + 1;
 // @d bin_noad=ord_noad+2 {|type| of a noad classified Bin}
+/// `type` of a noad classified Bin
+pub(crate) const bin_noad: quarterword = ord_noad + 2;
 // @d rel_noad=ord_noad+3 {|type| of a noad classified Rel}
+/// `type` of a noad classified Rel
+pub(crate) const rel_noad: quarterword = ord_noad + 3;
 // @d open_noad=ord_noad+4 {|type| of a noad classified Open}
+/// `type` of a noad classified Open
+pub(crate) const open_noad: quarterword = ord_noad + 4;
 // @d close_noad=ord_noad+5 {|type| of a noad classified Close}
+/// `type` of a noad classified Close
+pub(crate) const close_noad: quarterword = ord_noad + 5;
 // @d punct_noad=ord_noad+6 {|type| of a noad classified Punct}
+/// `type` of a noad classified Punct
+pub(crate) const punct_noad: quarterword = ord_noad + 6;
 // @d inner_noad=ord_noad+7 {|type| of a noad classified Inner}
 /// `type` of a noad classified Inner
 pub(crate) const inner_noad: quarterword = ord_noad + 7;
 // @d limits=1 {|subtype| of |op_noad| whose scripts are to be above, below}
 // @d no_limits=2 {|subtype| of |op_noad| whose scripts are to be normal}
+
+#[derive(Clone, Copy)]
+pub(crate) enum op_noad_subtype {
+    normal = 0,
+    /// `subtype` of `op_noad` whose scripts are to be above, below
+    limits = 1,
+    /// `subtype` of `op_noad` whose scripts are to be normal
+    no_limits = 2,
+}
 
 use crate::section_0113::quarterword;
 use crate::section_0159::unset_node;

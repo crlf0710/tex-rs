@@ -13,7 +13,6 @@
 //! have been used.)
 
 // @<Put each...@>=
-#[allow(unused_variables)]
 pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_1208($globals:expr) {{
     let globals = &mut *$globals;
     // primitive("long",prefix,1);

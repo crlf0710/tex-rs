@@ -14,14 +14,20 @@ pub(crate) const if_int_code: quarterword = 2;
 /// `\ifdim`
 pub(crate) const if_dim_code: quarterword = 3;
 // @d if_odd_code=4 { `\.{\\ifodd}' }
+///  `\ifodd`
+pub(crate) const if_odd_code: quarterword = 4;
 // @d if_vmode_code=5 { `\.{\\ifvmode}' }
 /// `\ifvmode`
 pub(crate) const if_vmode_code: quarterword = 5;
 // @d if_hmode_code=6 { `\.{\\ifhmode}' }
+/// `\ifhmode`
+pub(crate) const if_hmode_code: quarterword = 6;
 // @d if_mmode_code=7 { `\.{\\ifmmode}' }
 /// `\ifmmode`
 pub(crate) const if_mmode_code: quarterword = 7;
 // @d if_inner_code=8 { `\.{\\ifinner}' }
+/// `\ifinner`
+pub(crate) const if_inner_code: quarterword = 8;
 // @d if_void_code=9 { `\.{\\ifvoid}' }
 /// `\ifvoid'
 pub(crate) const if_void_code: quarterword = 9;
@@ -60,6 +66,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0487($globals
     );
     // @!@:if_char_}{\.{\\if} primitive@>
     // primitive("ifcat",if_test,if_cat_code);
+    primitive(
+        globals,
+        crate::strpool_str!("ifcat"),
+        if_test,
+        if_cat_code as _,
+    );
     // @!@:if_cat_code_}{\.{\\ifcat} primitive@>
     // primitive("ifnum",if_test,if_int_code);
     primitive(
@@ -78,6 +90,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0487($globals
     );
     // @!@:if_dim_}{\.{\\ifdim} primitive@>
     // primitive("ifodd",if_test,if_odd_code);
+    primitive(
+        globals,
+        crate::strpool_str!("ifodd"),
+        if_test,
+        if_odd_code as _,
+    );
     // @!@:if_odd_}{\.{\\ifodd} primitive@>
     // primitive("ifvmode",if_test,if_vmode_code);
     primitive(
@@ -88,6 +106,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0487($globals
     );
     // @!@:if_vmode_}{\.{\\ifvmode} primitive@>
     // primitive("ifhmode",if_test,if_hmode_code);
+    primitive(
+        globals,
+        crate::strpool_str!("ifhmode"),
+        if_test,
+        if_hmode_code as _,
+    );
     // @!@:if_hmode_}{\.{\\ifhmode} primitive@>
     // primitive("ifmmode",if_test,if_mmode_code);
     primitive(
@@ -98,6 +122,12 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0487($globals
     );
     // @!@:if_mmode_}{\.{\\ifmmode} primitive@>
     // primitive("ifinner",if_test,if_inner_code);
+    primitive(
+        globals,
+        crate::strpool_str!("ifinner"),
+        if_test,
+        if_inner_code as _,
+    );
     // @!@:if_inner_}{\.{\\ifinner} primitive@>
     // primitive("ifvoid",if_test,if_void_code);
     primitive(
@@ -108,8 +138,20 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0487($globals
     );
     // @!@:if_void_}{\.{\\ifvoid} primitive@>
     // primitive("ifhbox",if_test,if_hbox_code);
+    primitive(
+        globals,
+        crate::strpool_str!("ifhbox"),
+        if_test,
+        if_hbox_code as _,
+    );
     // @!@:if_hbox_}{\.{\\ifhbox} primitive@>
     // primitive("ifvbox",if_test,if_vbox_code);
+    primitive(
+        globals,
+        crate::strpool_str!("ifvbox"),
+        if_test,
+        if_vbox_code as _,
+    );
     // @!@:if_vbox_}{\.{\\ifvbox} primitive@>
     // primitive("ifx",if_test,ifx_code);
     primitive(globals, crate::strpool_str!("ifx"), if_test, ifx_code as _);

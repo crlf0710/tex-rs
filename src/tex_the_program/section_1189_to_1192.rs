@@ -1,19 +1,3 @@
-//! @ @<Replace the tail...@>=
-//! begin q:=head; while link(q)<>tail do q:=link(q);
-//! link(q):=p; free_node(tail,noad_size); tail:=p;
-//! end
-//!
-//! @ We have dealt with all constructions of math mode except `\.{\\left}' and
-//! `\.{\\right}', so the picture is completed by the following sections of
-//! the program.
-//!
-//! @<Put each...@>=
-//! primitive("left",left_right,left_noad);
-//! @!@:left_}{\.{\\left} primitive@>
-//! primitive("right",left_right,right_noad);
-//! @!@:right_}{\.{\\right} primitive@>
-//! text(frozen_right):="right"; eqtb[frozen_right]:=eqtb[cur_val];
-//!
 //! @ @<Cases of |print_cmd_chr|...@>=
 //! left_right: if chr_code=left_noad then print_esc("left")
 //! else print_esc("right");

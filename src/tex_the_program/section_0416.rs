@@ -29,6 +29,12 @@ pub(crate) enum last_item_command_kind {
 pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0416($globals:expr) {{
     let globals = &mut *$globals;
     // primitive("spacefactor",set_aux,hmode);
+    primitive(
+        globals,
+        crate::strpool_str!("spacefactor"),
+        set_aux,
+        hmode as _,
+    );
     // @!@:space_factor_}{\.{\\spacefactor} primitive@>
     // primitive("prevdepth",set_aux,vmode);@/
     primitive(
@@ -39,6 +45,7 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0416($globals
     );
     // @!@:prev_depth_}{\.{\\prevdepth} primitive@>
     // primitive("deadcycles",set_page_int,0);
+    primitive(globals, crate::strpool_str!("deadcycles"), set_page_int, 0);
     // @!@:dead_cycles_}{\.{\\deadcycles} primitive@>
     // primitive("insertpenalties",set_page_int,1);
     primitive(
@@ -73,10 +80,28 @@ pub(crate) macro Put_each_of_tex_s_primitivies_into_the_hash_table_0416($globals
     );
     // @!@:dp_}{\.{\\dp} primitive@>
     // primitive("lastpenalty",last_item,int_val);
+    primitive(
+        globals,
+        crate::strpool_str!("lastpenalty"),
+        last_item,
+        last_item_command_kind::int_val as _,
+    );
     // @!@:last_penalty_}{\.{\\lastpenalty} primitive@>
     // primitive("lastkern",last_item,dimen_val);
+    primitive(
+        globals,
+        crate::strpool_str!("lastkern"),
+        last_item,
+        last_item_command_kind::dimen_val as _,
+    );
     // @!@:last_kern_}{\.{\\lastkern} primitive@>
     // primitive("lastskip",last_item,glue_val);
+    primitive(
+        globals,
+        crate::strpool_str!("lastskip"),
+        last_item,
+        last_item_command_kind::glue_val as _,
+    );
     // @!@:last_skip_}{\.{\\lastskip} primitive@>
     // primitive("inputlineno",last_item,input_line_no_code);
     primitive(
@@ -104,5 +129,6 @@ use crate::section_0208::last_item;
 use crate::section_0209::set_aux;
 use crate::section_0209::set_box_dimen;
 use crate::section_0209::set_page_int;
+use crate::section_0211::hmode;
 use crate::section_0211::vmode;
 use crate::section_0264::primitive;
