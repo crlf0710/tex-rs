@@ -50,6 +50,12 @@ pub(crate) enum scanner_status_kind {
     absorbing = 5,
 }
 
+impl Default for scanner_status_kind {
+    fn default() -> Self {
+        scanner_status_kind::normal
+    }
+}
+
 pub(crate) use scanner_status_kind::*;
 
 // @<Glob...@>=
