@@ -17,6 +17,16 @@ const TRIPRECORD_TRIP_FOT: &[u8] = include_bytes!("../tests_data/trip/trip.fot")
 const TRIPRECORD_TRIP_LOG: &[u8] = include_bytes!("../tests_data/trip/trip.log");
 const TRIPRECORD_TRIP_TYP: &[u8] = include_bytes!("../tests_data/trip/trip.typ");
 
+fn replace_banner(mut bytes: Vec<u8>, offset: usize) -> Vec<u8> {
+    // TeX-rs banner is different from the document of record version.
+    const SOURCE: &[u8] = b"This is TeX-rs, Version";
+    const TARGET: &[u8] = b"This is TeX, Version";
+    if bytes[offset..].starts_with(SOURCE) {
+        bytes.splice(offset..offset + SOURCE.len(), TARGET.iter().copied());
+    }
+    bytes
+}
+
 #[test]
 #[cfg_attr(not(feature = "statistics"), ignore)]
 #[ignore]
@@ -85,11 +95,11 @@ fn trip() {
         )
     });
     assert_eq!(
-        String::from_utf8_lossy(&tripin_log).as_ref(),
+        String::from_utf8_lossy(&replace_banner(tripin_log, 0)).as_ref(),
         String::from_utf8_lossy(TRIPRECORD_TRIPIN_LOG).as_ref(),
     );
     assert_eq!(
-        String::from_utf8_lossy(&tripin_fot).as_ref(),
+        String::from_utf8_lossy(&replace_banner(tripin_fot, 0)).as_ref(),
         String::from_utf8_lossy(TRIPRECORD_TRIPIN_FOT).as_ref(),
     );
 }
