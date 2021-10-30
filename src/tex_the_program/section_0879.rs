@@ -27,7 +27,7 @@ pub(crate) macro Prune_unwanted_nodes_at_the_beginning_of_the_next_line($globals
                     crate::goto_forward_label!('done1);
                 }
                 // {now |q| cannot be |null|}
-                /// now |q| cannot be |null|
+                /// now `q` cannot be `null`
                 const _ : () = ();
                 // if is_char_node(q) then goto done1;
                 if is_char_node!($globals, q) {

@@ -17,8 +17,8 @@ pub(crate) macro Modify_the_glue_specification_in_main_p_according_to_the_space_
     shrink!($globals, $globals.main_p) = xn_over_d(
         $globals,
         shrink!($globals, $globals.main_p),
-        space_factor!($globals).into(),
         1000,
+        space_factor!($globals).into(),
     );
 
     use crate::section_0107::xn_over_d;
