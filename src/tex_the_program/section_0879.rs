@@ -9,7 +9,7 @@
 // @<Prune unwanted nodes at the beginning of the next line@>=
 pub(crate) macro Prune_unwanted_nodes_at_the_beginning_of_the_next_line($globals:expr) {{
     /// temporary registers for list manipulation
-    let (q, r);
+    let (mut q, mut r);
 
     // begin r:=temp_head;
     r = temp_head;
@@ -38,9 +38,14 @@ pub(crate) macro Prune_unwanted_nodes_at_the_beginning_of_the_next_line($globals
                     crate::goto_forward_label!('done1);
                 }
                 // if type(q)=kern_node then if subtype(q)<>explicit then goto done1;
+                if r#type!($globals, q) == kern_node && subtype!($globals, q) != kern_node_subtype::explicit as _ {
+                    crate::goto_forward_label!('done1);
+                }
                 // r:=q; {now |type(q)=glue_node|, |kern_node|, |math_node|, or |penalty_node|}
+                r = q;
+                /// now `type(q)=``glue_node`, `kern_node`, `math_node`, or `penalty_node`
+                const _: () = ();
                 // end;
-                todo!("prune");
             }
         }
         // done1: if r<>temp_head then
@@ -48,14 +53,22 @@ pub(crate) macro Prune_unwanted_nodes_at_the_beginning_of_the_next_line($globals
     };
     if r != temp_head {
         // begin link(r):=null; flush_node_list(link(temp_head));
+        link!($globals, r) = null;
+        flush_node_list($globals, link!($globals, temp_head))?;
         // link(temp_head):=q;
+        link!($globals, temp_head) = q;
         // end;
-        todo!("prune2");
     }
     // end
+    use crate::section_0115::null;
     use crate::section_0118::link;
+    use crate::section_0133::subtype;
+    use crate::section_0133::r#type;
     use crate::section_0134::is_char_node;
     use crate::section_0148::non_discardable;
+    use crate::section_0155::kern_node_subtype;
+    use crate::section_0155::kern_node;
     use crate::section_0162::temp_head;
+    use crate::section_0202::flush_node_list;
     use crate::section_0821::cur_break;
 }}
