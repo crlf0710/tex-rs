@@ -11,8 +11,11 @@ pub(crate) macro Sort_p_into_the_list_starting_at_rover_and_advance_p_to_rlink_p
     // if p<rover then
     if $p < $globals.rover {
         // begin q:=p; p:=rlink(q); rlink(q):=rover; rover:=q;
+        q = $p;
+        $p = rlink!($globals, q);
+        rlink!($globals, q) = $globals.rover;
+        $globals.rover = q;
         // end
-        todo!("p < rover")
     }
     // else  begin q:=rover;
     else {

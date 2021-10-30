@@ -35,7 +35,7 @@
 // @d absorbing=5 {|scanner_status| when reading a balanced text}
 
 #[doc(hidden)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 pub(crate) enum scanner_status_kind {
     normal = 0,
     /// `scanner_status` when passing conditional text

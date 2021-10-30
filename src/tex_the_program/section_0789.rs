@@ -11,9 +11,17 @@
 pub(crate) macro Insert_the_v_j_template_and_goto_restart($globals:expr, $lbl_restart:lifetime) {{
     crate::trace_span!("Insert the v_j...");
     // begin if (scanner_status=aligning) or (cur_align=null) then
-    //   fatal_error("(interwoven alignment preambles are not allowed)");
+    if $globals.scanner_status == scanner_status_kind::aligning || $globals.cur_align == null {
+        // fatal_error("(interwoven alignment preambles are not allowed)");
+        fatal_error(
+            $globals,
+            crate::strpool_str!("(interwoven alignment preambles are not allowed)"),
+        )?;
+    }
     // @.interwoven alignment preambles...@>
     // cur_cmd:=extra_info(cur_align); extra_info(cur_align):=cur_chr;
+    $globals.cur_cmd = extra_info!($globals, $globals.cur_align) as _;
+    extra_info!($globals, $globals.cur_align) = $globals.cur_chr.get() as _;
     // if cur_cmd=omit then begin_token_list(omit_template,v_template)
     if $globals.cur_cmd == omit {
         begin_token_list($globals, omit_template, v_template);
@@ -30,9 +38,13 @@ pub(crate) macro Insert_the_v_j_template_and_goto_restart($globals:expr, $lbl_re
     $globals.align_state = 1000000;
     crate::goto_backward_label!($lbl_restart);
     // end
+    use crate::section_0093::fatal_error;
+    use crate::section_0115::null;
     use crate::section_0162::omit_template;
     use crate::section_0208::omit;
+    use crate::section_0305::scanner_status_kind;
     use crate::section_0307::v_template;
     use crate::section_0323::begin_token_list;
+    use crate::section_0769::extra_info;
     use crate::section_0769::v_part;
 }}
