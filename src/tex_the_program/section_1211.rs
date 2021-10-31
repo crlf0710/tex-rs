@@ -56,6 +56,10 @@ pub(crate) macro Assignments($globals:expr, $cur_cmd:expr, $a:expr, $lbl_done:li
         /// already processed
         do_nothing!();
         true
+    } else if crate::section_1248::Assignments_1248!($globals, $cur_cmd, $a) {
+        /// already processed
+        do_nothing!();
+        true
     } else if crate::section_1252::Assignments_1252!($globals, $cur_cmd, $a, $lbl_done) {
         /// already processed
         do_nothing!();
