@@ -5,7 +5,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1193($globals:
     // mmode+math_shift: if cur_group=math_shift_group then after_math
     let processed = if $abs_mode_plus_cur_cmd == mmode as u16 + math_shift as u16 {
         if $globals.cur_group == math_shift_group {
-            after_math($globals);
+            after_math($globals)?;
         }
         // else off_save;
         else {

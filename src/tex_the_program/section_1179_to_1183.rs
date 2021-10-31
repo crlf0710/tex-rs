@@ -56,30 +56,3 @@
 //! error;
 //! end
 //!
-//! @ At the end of a math formula or subformula, the |fin_mlist| routine is
-//! called upon to return a pointer to the newly completed mlist, and to
-//! pop the nest back to the enclosing semantic level. The parameter to
-//! |fin_mlist|, if not null, points to a |right_noad| that ends the
-//! current mlist; this |right_noad| has not yet been appended.
-//!
-//! @<Declare the function called |fin_mlist|@>=
-//! function fin_mlist(@!p:pointer):pointer;
-//! var q:pointer; {the mlist to return}
-//! begin if incompleat_noad<>null then @<Compleat the incompleat noad@>
-//! else  begin link(tail):=p; q:=link(head);
-//!   end;
-//! pop_nest; fin_mlist:=q;
-//! end;
-//!
-//! @ @<Compleat...@>=
-//! begin math_type(denominator(incompleat_noad)):=sub_mlist;
-//! info(denominator(incompleat_noad)):=link(head);
-//! if p=null then q:=incompleat_noad
-//! else  begin q:=info(numerator(incompleat_noad));
-//!   if type(q)<>left_noad then confusion("right");
-//! @:this can't happen right}{\quad right@>
-//!   info(numerator(incompleat_noad)):=link(q);
-//!   link(q):=incompleat_noad; link(incompleat_noad):=p;
-//!   end;
-//! end
-//!

@@ -94,6 +94,9 @@ pub(crate) macro par_indent($globals:expr) {
     crate::section_0247::dimen_par!($globals, crate::section_0247::par_indent_code)
 }
 // @d math_surround==dimen_par(math_surround_code)
+pub(crate) macro math_surround($globals:expr) {
+    crate::section_0247::dimen_par!($globals, crate::section_0247::math_surround_code)
+}
 // @d line_skip_limit==dimen_par(line_skip_limit_code)
 pub(crate) macro line_skip_limit($globals:expr) {
     crate::section_0247::dimen_par!($globals, crate::section_0247::line_skip_limit_code)

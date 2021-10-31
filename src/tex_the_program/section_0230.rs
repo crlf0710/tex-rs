@@ -132,6 +132,12 @@ pub(crate) macro cur_font($globals:expr) {
     crate::section_0221::equiv!($globals, crate::section_0230::cur_font_loc)
 }
 // @d fam_fnt(#)==equiv(math_font_base+#)
+pub(crate) macro fam_fnt($globals:expr, $val:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::math_font_base + $val as crate::pascal::word
+    )
+}
 // @d cat_code(#)==equiv(cat_code_base+#)
 pub(crate) macro cat_code($globals:expr, $val:expr) {
     crate::section_0221::equiv!(
