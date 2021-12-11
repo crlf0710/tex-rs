@@ -41,7 +41,13 @@ pub(crate) enum style_node_subtype {
     script_script_style_cramped = 6 + 1,
 }
 // @d cramped=1 {add this to an uncramped style if you want to cramp it}
-//
+
+impl style_node_subtype {
+    pub(crate) fn get(self) -> quarterword {
+        self as _
+    }
+}
+
 // @p function new_style(@!s:small_number):pointer; {create a style node}
 // var p:pointer; {the new node}
 // begin p:=get_node(style_node_size); type(p):=style_node;
@@ -49,3 +55,5 @@ pub(crate) enum style_node_subtype {
 // new_style:=p;
 // end;
 //
+
+use crate::section_0113::quarterword;

@@ -21,7 +21,7 @@ pub(crate) macro Finish_math_in_text($globals:expr, $p:expr) {{
     $globals.cur_mlist = $p;
     $globals.cur_style = small_number::new(style_node_subtype::text_style as _);
     $globals.mlist_penalties = mode!($globals) > 0;
-    mlist_to_hlist($globals);
+    mlist_to_hlist($globals)?;
     // link(tail):=link(temp_head);
     link!($globals, tail!($globals)) = link!($globals, temp_head);
     // while link(tail)<>null do tail:=link(tail);

@@ -1,24 +1,3 @@
-//! @ We also need to compute the change in style between mlists and their
-//! subsidiaries. The following macros define the subsidiary style for
-//! an overlined nucleus (|cramped_style|), for a subscript or a superscript
-//! (|sub_style| or |sup_style|), or for a numerator or denominator (|num_style|
-//! or |denom_style|).
-//!
-//! @d cramped_style(#)==2*(# div 2)+cramped {cramp the style}
-//! @d sub_style(#)==2*(# div 4)+script_style+cramped {smaller and cramped}
-//! @d sup_style(#)==2*(# div 4)+script_style+(# mod 2) {smaller}
-//! @d num_style(#)==#+2-2*(# div 6) {smaller unless already script-script}
-//! @d denom_style(#)==2*(# div 2)+cramped+2-2*(# div 6) {smaller, cramped}
-//!
-//! @ When the style changes, the following piece of program computes associated
-//! information:
-//!
-//! @<Set up the values of |cur_size| and |cur_mu|, based on |cur_style|@>=
-//! begin if cur_style<script_style then cur_size:=text_size
-//! else cur_size:=16*((cur_style-text_style) div 2);
-//! cur_mu:=x_over_n(math_quad(cur_size),18);
-//! end
-//!
 //! @ Here is a function that returns a pointer to a rule node having a given
 //! thickness |t|. The rule will extend horizontally to the boundary of the vlist
 //! that eventually contains it.

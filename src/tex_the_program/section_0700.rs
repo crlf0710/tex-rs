@@ -11,8 +11,17 @@
 
 // @d mathsy_end(#)==fam_fnt(2+#)]].sc
 // @d mathsy(#)==font_info[#+param_base[mathsy_end
+pub(crate) macro mathsy($globals:expr, $u:expr, $v:expr) {
+    $globals.font_info
+        [($u + $globals.param_base[crate::section_0230::fam_fnt!($globals, 2 + $v)]) as u16]
+        [crate::section_0101::MEMORY_WORD_SC]
+}
 // @d math_x_height==mathsy(5) {height of `\.x'}
 // @d math_quad==mathsy(6) {\.{18mu}}
+/// `18mu`
+pub(crate) macro math_quad($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 6, $v)
+}
 // @d num1==mathsy(8) {numerator shift-up in display styles}
 // @d num2==mathsy(9) {numerator shift-up in non-display, non-\.{\\atop}}
 // @d num3==mathsy(10) {numerator shift-up in non-display \.{\\atop}}
@@ -29,6 +38,10 @@
 //   in display styles}
 // @d delim2==mathsy(21) {size of \.{\\atopwithdelims} delimiters in non-displays}
 // @d axis_height==mathsy(22) {height of fraction lines above the baseline}
+/// height of fraction lines above the baseline
+pub(crate) macro axis_height($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 22, $v)
+}
 // @d total_mathsy_params=22
 pub(crate) const total_mathsy_params: halfword = 22;
 

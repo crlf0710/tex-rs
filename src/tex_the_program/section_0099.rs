@@ -19,11 +19,3 @@
 //! information will involve negative-numerator division. The same remarks
 //! apply for |mod| as well as for |div|.)
 //!
-//! @ Here is a routine that calculates half of an integer, using an
-//! unambiguous convention with respect to signed odd numbers.
-//!
-//! @p function half(@!x:integer):integer;
-//! begin if odd(x) then half:=(x+1) div 2
-//! else half:=x @!div 2;
-//! end;
-//!
