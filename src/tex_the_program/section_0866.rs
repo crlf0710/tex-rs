@@ -10,10 +10,26 @@ pub(crate) macro act_width($globals:expr) {
     $globals.active_width[1]
 }
 // @d kern_break==begin if not is_char_node(link(cur_p)) and auto_breaking then
-//     if type(link(cur_p))=glue_node then try_break(0,unhyphenated);
-//   act_width:=act_width+width(cur_p);
-//   end
-//
+//   if type(link(cur_p))=glue_node then try_break(0,unhyphenated);
+pub(crate) macro kern_break($globals:expr, $auto_breaking:expr) {{
+    if !is_char_node!($globals, link!($globals, $globals.cur_p))
+        && $auto_breaking
+        && r#type!($globals, link!($globals, $globals.cur_p)) == glue_node
+    {
+        try_break($globals, 0, unhyphenated.into())?;
+    }
+    // act_width:=act_width+width(cur_p);
+    act_width!($globals) += width!($globals, $globals.cur_p);
+    // end
+    use crate::section_0118::link;
+    use crate::section_0133::r#type;
+    use crate::section_0134::is_char_node;
+    use crate::section_0135::width;
+    use crate::section_0149::glue_node;
+    use crate::section_0819::unhyphenated;
+    use crate::section_0829::try_break;
+}}
+
 // @<Call |try_break| if |cur_p| is a legal breakpoint...@>=
 pub(crate) macro Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pass__also_try_to_hyphenate_the_next_word__if_cur_p_is_a_glue_node__then_advance_cur_p_to_the_next_node_of_the_paragraph_that_could_possibly_be_a_legal_breakpoint {
     ($globals:expr, $prev_p:expr, $auto_breaking:expr) => {{
@@ -72,9 +88,10 @@ pub(crate) macro Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pa
                 crate::section_0869::Try_to_break_after_a_discretionary_fragment__then_goto_done5!($globals, $prev_p, 'done5);
             }
             // math_node: begin auto_breaking:=(subtype(cur_p)=after); kern_break;
-            //   end;
             else if type_cur_p == math_node {
-                todo!("math_node");
+                $auto_breaking = subtype!($globals, $globals.cur_p) == math_node_subtype::after as _;
+                kern_break!($globals, $auto_breaking);
+                // end;
             }
             // penalty_node: try_break(penalty(cur_p),unhyphenated);
             else if type_cur_p == penalty_node {
@@ -118,6 +135,7 @@ pub(crate) macro Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pa
         use crate::section_0145::disc_node;
         use crate::section_0146::whatsit_node;
         use crate::section_0147::math_node;
+        use crate::section_0147::math_node_subtype;
         use crate::section_0149::glue_node;
         use crate::section_0155::kern_node;
         use crate::section_0155::kern_node_subtype;

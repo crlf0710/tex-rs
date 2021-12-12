@@ -13,6 +13,10 @@ pub(crate) macro slant($globals:expr, $v:expr) {
     crate::section_0558::param!($globals, crate::section_0547::slant_code, $v.get())
 }
 // @d space==param(space_code) {normal space between words}
+/// normal space between words
+pub(crate) macro space($globals:expr, $v:expr) {
+    crate::section_0558::param!($globals, crate::section_0547::space_code, $v.get())
+}
 // @d space_stretch==param(space_stretch_code) {stretch between words}
 // @d space_shrink==param(space_shrink_code) {shrink between words}
 // @d x_height==param(x_height_code) {one ex}

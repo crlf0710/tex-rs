@@ -20,7 +20,7 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
         tail_append!($globals, new_noad($globals)?);
         r#type!($globals, tail!($globals)) = vcenter_noad;
         // math_type(nucleus(tail)):=sub_box; info(nucleus(tail)):=p;
-        math_type!($globals, nucleus!(tail!($globals))) = sub_box as _;
+        math_type!($globals, nucleus!(tail!($globals))) = math_type_kind::sub_box as _;
         info_inner!($globals, nucleus!(tail!($globals))) = p;
         // end;
         true
@@ -42,8 +42,8 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
     use crate::section_0281::unsave;
     use crate::section_0668::vpack;
     use crate::section_0681::math_type;
+    use crate::section_0681::math_type_kind;
     use crate::section_0681::nucleus;
-    use crate::section_0681::sub_box;
     use crate::section_0686::new_noad;
     use crate::section_0687::vcenter_noad;
     use crate::section_1096::end_graf;

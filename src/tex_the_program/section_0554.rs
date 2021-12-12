@@ -51,10 +51,17 @@ impl char_info {
 }
 // @d char_italic_end(#)==(qo(#.b2)) div 4].sc
 // @d char_italic(#)==font_info[italic_base[#]+char_italic_end
+pub(crate) macro char_italic($globals:expr, $f:expr, $c:expr) {
+    $globals.font_info[$globals.italic_base[$f] as crate::section_0115::pointer
+        + $c.italic() as crate::section_0115::pointer][crate::section_0101::MEMORY_WORD_SC]
+}
 // @d height_depth(#)==qo(#.b1)
 impl char_info {
     pub(crate) fn width(self) -> eight_bits {
         qo!(self.0[FOUR_QUARTERS_B0])
+    }
+    pub(crate) fn italic(self) -> eight_bits {
+        qo!(self.0[FOUR_QUARTERS_B2]) / 4
     }
     pub(crate) fn height_depth(self) -> eight_bits {
         qo!(self.0[FOUR_QUARTERS_B1])
@@ -103,6 +110,12 @@ impl Index<MEMORY_WORD_CHAR_INFO> for memory_word {
 impl IndexMut<MEMORY_WORD_CHAR_INFO> for memory_word {
     fn index_mut(&mut self, _: MEMORY_WORD_CHAR_INFO) -> &mut char_info {
         char_info::ref_cast_mut(&mut self[MEMORY_WORD_QQQQ])
+    }
+}
+
+impl char_info {
+    pub(crate) const fn from_four_quarters(qqqq: four_quarters) -> Self {
+        char_info(qqqq)
     }
 }
 

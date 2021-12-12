@@ -22,7 +22,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // ord_noad: make_ord(q);
     else if $type_q == ord_noad {
-        todo!("ord_noad");
+        make_ord($globals, $q)?;
         true
     }
     // open_noad,inner_noad: do_nothing;
@@ -62,5 +62,6 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     use crate::section_0683::*;
     use crate::section_0687::*;
     use crate::section_0736::make_vcenter;
+    use crate::section_0752::make_ord;
     processed
 }}

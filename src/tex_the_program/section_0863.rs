@@ -51,7 +51,7 @@ pub(crate) macro Find_optimal_breakpoints
         // loop@+  begin if threshold>inf_bad then threshold:=inf_bad;
         loop {
             /// is node |cur_p| outside a formula?
-            let auto_breaking: boolean;
+            let mut auto_breaking: boolean;
             /// helps to determine when glue nodes are breakpoints
             let mut prev_p: pointer;
 

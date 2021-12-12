@@ -28,4 +28,7 @@ pub(crate) macro hi($val:expr) {
 }
 // @d ho(#)==#-min_halfword
 //   {to take a sixteen-bit item from a halfword}
-//
+/// to take a sixteen-bit item from a halfword
+pub(crate) macro ho($val:expr) {
+    $val - crate::section_0110::min_halfword
+}

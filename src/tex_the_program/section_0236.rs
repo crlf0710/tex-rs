@@ -355,6 +355,9 @@ pub(crate) macro global_defs($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::global_defs_code)
 }
 // @d cur_fam==int_par(cur_fam_code)
+pub(crate) macro cur_fam($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::cur_fam_code)
+}
 // @d escape_char==int_par(escape_char_code)
 pub(crate) macro escape_char($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::escape_char_code)

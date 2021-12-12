@@ -13,6 +13,7 @@
 // @!internal_font_number=font_base..font_max; {|font| in a |char_node|}
 /// `font` in a `char_node`
 pub(crate) type internal_font_number = u16_from_m_to_n<font_base_TYPENUM, font_max_TYPENUM>;
+pub(crate) type internal_font_number_repr = u16;
 // @!font_index=0..font_mem_size; {index into |font_info|}
 /// index into `font_info`
 pub(crate) type font_index = u16_from_0_to_n<font_mem_size_TYPENUM>;

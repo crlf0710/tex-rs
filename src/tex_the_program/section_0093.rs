@@ -1,7 +1,7 @@
 //! @ The following procedure prints \TeX's last words before dying.
 //
 // @d succumb==begin if interaction=error_stop_mode then
-pub(crate) fn succumb(globals: &mut TeXGlobals) -> TeXResult<()> {
+pub(crate) fn succumb(globals: &mut TeXGlobals) -> TeXResult<!> {
     if globals.interaction == error_stop_mode {
         //   interaction:=scroll_mode; {no more interaction}
         /// no more interaction
@@ -25,7 +25,7 @@ pub(crate) fn succumb(globals: &mut TeXGlobals) -> TeXResult<()> {
     /// irrecoverable error
     jump_out()?;
     // end
-    crate::ok_nojump!()
+    crate::never_nojump!()
 }
 //
 // @<Error hand...@>=

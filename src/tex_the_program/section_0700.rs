@@ -17,6 +17,10 @@ pub(crate) macro mathsy($globals:expr, $u:expr, $v:expr) {
         [crate::section_0101::MEMORY_WORD_SC]
 }
 // @d math_x_height==mathsy(5) {height of `\.x'}
+/// height of `x'
+pub(crate) macro math_x_height($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 5, $v)
+}
 // @d math_quad==mathsy(6) {\.{18mu}}
 /// `18mu`
 pub(crate) macro math_quad($globals:expr, $v:expr) {
@@ -28,12 +32,32 @@ pub(crate) macro math_quad($globals:expr, $v:expr) {
 // @d denom1==mathsy(11) {denominator shift-down in display styles}
 // @d denom2==mathsy(12) {denominator shift-down in non-display styles}
 // @d sup1==mathsy(13) {superscript shift-up in uncramped display style}
+/// superscript shift-up in uncramped display style
+pub(crate) macro sup1($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 13, $v)
+}
 // @d sup2==mathsy(14) {superscript shift-up in uncramped non-display}
+/// superscript shift-up in uncramped non-display
+pub(crate) macro sup2($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 14, $v)
+}
 // @d sup3==mathsy(15) {superscript shift-up in cramped styles}
+/// superscript shift-up in cramped styles
+pub(crate) macro sup3($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 15, $v)
+}
 // @d sub1==mathsy(16) {subscript shift-down if superscript is absent}
 // @d sub2==mathsy(17) {subscript shift-down if superscript is present}
 // @d sup_drop==mathsy(18) {superscript baseline below top of large box}
+/// superscript baseline below top of large box
+pub(crate) macro sup_drop($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 18, $v)
+}
 // @d sub_drop==mathsy(19) {subscript baseline below bottom of large box}
+/// subscript baseline below bottom of large box
+pub(crate) macro sub_drop($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 19, $v)
+}
 // @d delim1==mathsy(20) {size of \.{\\atopwithdelims} delimiters
 //   in display styles}
 // @d delim2==mathsy(21) {size of \.{\\atopwithdelims} delimiters in non-displays}

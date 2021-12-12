@@ -10,7 +10,7 @@
 //
 // @p@t\4@>@<Declare math construction procedures@>
 // procedure mlist_to_hlist;
-#[allow(unused_variables, unused_assignments)]
+#[allow(unused_variables, unused_assignments, unused_mut)]
 pub(crate) fn mlist_to_hlist(globals: &mut TeXGlobals) -> TeXResult<()> {
     // label reswitch, check_dimensions, done_with_noad, done_with_node, delete_q,
     //   done;
@@ -26,23 +26,23 @@ pub(crate) fn mlist_to_hlist(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @!save_style:small_number; {holds |cur_style| during recursion}
     // @!q:pointer; {runs through the mlist}
     /// runs through the mlist
-    let q;
+    let mut q;
     // @!r:pointer; {the most recent noad preceding |q|}
     /// the most recent noad preceding `q`
-    let r;
+    let mut r;
     // @!r_type:small_number; {the |type| of noad |r|, or |op_noad| if |r=null|}
     /// the `type` of noad `r`, or `op_noad` if `r=null`
-    let r_type;
+    let mut r_type;
     // @!t:small_number; {the effective |type| of noad |q| during the second pass}
     // @!p,@!x,@!y,@!z: pointer; {temporary registers for list construction}
     // @!pen:integer; {a penalty to be inserted}
     // @!s:small_number; {the size of a noad to be deleted}
     // @!max_h,@!max_d:scaled; {maximum height and depth of the list translated so far}
     /// maximum height and depth of the list translated so far
-    let (max_h, max_d);
+    let (mut max_h, mut max_d);
     // @!delta:scaled; {offset between subscript and superscript}
     /// offset between subscript and superscript
-    let delta;
+    let mut delta: scaled;
     // begin mlist:=cur_mlist; penalties:=mlist_penalties;
     mlist = globals.cur_mlist;
     penalties = globals.mlist_penalties;
@@ -67,10 +67,12 @@ pub(crate) fn mlist_to_hlist(globals: &mut TeXGlobals) -> TeXResult<()> {
         );
     }
     // @<Convert \(a)a final |bin_noad| to an |ord_noad|@>;
-    todo!("Convert a final bin_noad");
+    crate::section_0729::Convert_a_final_bin_noad_to_an_ord_noad!(globals, r, r_type);
     // @<Make a second pass over the mlist, removing all noads and inserting the
     //   proper spacing and penalties@>;
-    todo!("Make a second pass");
+    crate::section_0760::Make_a_second_pass_over_the_mlist__removing_all_noads_and_inserting_the_proper_spacing_and_penalties!(
+        globals, mlist, style, penalties
+    );
     // end;
     crate::ok_nojump!()
 }

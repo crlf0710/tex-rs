@@ -12,6 +12,8 @@
 pub(crate) const null_font: internal_font_number =
     unsafe { internal_font_number::new_unchecked(font_base as _) };
 // @d var_code==@'70000 {math code meaning ``use the current family''}
+/// math code meaning "use the current family"
+pub(crate) const var_code: integer = 0o70000;
 //
 // @<Initialize table entries...@>=
 #[allow(unused_variables)]
@@ -89,6 +91,7 @@ pub(crate) macro Initialize_table_entries_done_by_initex_only_0232($globals:expr
     }
 }}
 
+use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0012::font_base;
 use crate::section_0018::ASCII_code;

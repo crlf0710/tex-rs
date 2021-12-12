@@ -58,6 +58,7 @@
 #![allow(unreachable_code)]
 #![allow(unused_macros)]
 #![feature(decl_macro)]
+#![feature(never_type)]
 //! This is `TeX`-rs, a document compiler intended to produce typesetting of high quality.
 
 #[macro_use]

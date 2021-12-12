@@ -11,7 +11,7 @@
 //   {consistency check violated; |s| tells where}
 /// consistency check violated; `s` tells where
 #[allow(unused_variables)]
-pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) -> TeXResult<()> {
+pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) -> TeXResult<!> {
     // begin normalize_selector;
     normalize_selector(globals);
     // if history<error_message_issued then
@@ -50,7 +50,7 @@ pub(crate) fn confusion(globals: &mut TeXGlobals, s: str_number) -> TeXResult<()
     // succumb;
     succumb(globals)?;
     // end;
-    crate::ok_nojump!()
+    crate::never_nojump!()
 }
 
 use crate::section_0004::make_globals_io_string_log_view;

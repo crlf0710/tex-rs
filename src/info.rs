@@ -57,6 +57,10 @@ pub(crate) macro documentation_adjusted() {}
 
 pub(crate) macro moved_to_inner_scope() {}
 
+pub(crate) macro eliminated_text() {}
+
+pub(crate) macro moved_to_other_section(section $n:expr) {}
+
 pub(crate) macro region_forward_label
 (|$lbl_:lifetime| {$($s: stmt)*} $lbl:lifetime <- ) {
     #[allow(redundant_semicolons, unused_labels, unreachable_code)]
@@ -282,4 +286,8 @@ pub(crate) macro ok_nojump {
     ($val: expr) => {
         Ok::<_, crate::section_0081::JumpOutToEndOfTEX>($val)
     }
+}
+
+pub(crate) macro never_nojump() {
+    unreachable!()
 }

@@ -33,6 +33,10 @@ impl scaled {
     pub(crate) const fn inner_real(self) -> real {
         self.0 as real
     }
+
+    pub(crate) const fn abs(self) -> scaled {
+        scaled(self.0.abs())
+    }
 }
 
 impl Default for scaled {

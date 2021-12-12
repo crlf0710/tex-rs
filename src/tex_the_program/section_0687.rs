@@ -37,6 +37,10 @@ pub(crate) const left_noad: quarterword = vcenter_noad + 1;
 pub(crate) const right_noad: quarterword = left_noad + 1;
 // @d delimiter==nucleus {|delimiter| field in left and right noads}
 // @d scripts_allowed(#)==(type(#)>=ord_noad)and(type(#)<left_noad)
-//
+pub(crate) macro scripts_allowed($globals:expr, $v:expr) {
+    crate::section_0133::r#type!($globals, $v) >= crate::section_0682::ord_noad
+        && crate::section_0133::r#type!($globals, $v) < left_noad
+}
+
 use crate::section_0113::quarterword;
 use crate::section_0683::fraction_noad;

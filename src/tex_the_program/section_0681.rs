@@ -71,13 +71,34 @@ pub(crate) macro subscr($p:expr) {
 pub(crate) macro math_type($globals:expr, $p:expr) {
     crate::section_0118::link!($globals, $p)
 }
+
 // @d fam==font {a |quarterword| in |mem|}
+/// a `quarterword` in `mem`
+pub(crate) macro fam($globals:expr, $f:expr) {
+    crate::section_0134::font!($globals, $f)
+}
+
+pub(crate) macro assign_fam_and_character($globals:expr, $f:expr, $fam:expr, $character:expr) {
+    crate::section_0134::assign_font_and_character!($globals, $f, $fam, $character)
+}
+
 // @d math_char=1 {|math_type| when the attribute is simple}
 // @d sub_box=2 {|math_type| when the attribute is a box}
-/// `math_type` when the attribute is a box
-pub(crate) const sub_box: quarterword = 2;
 // @d sub_mlist=3 {|math_type| when the attribute is a formula}
 // @d math_text_char=4 {|math_type| when italic correction is dubious}
-//
+
+#[derive(Copy, Clone, PartialEq)]
+pub(crate) enum math_type_kind {
+    /// symbolic name for a null constant
+    empty = 0,
+    /// `math_type` when the attribute is simple
+    math_char = 1,
+    /// `math_type` when the attribute is a box
+    sub_box = 2,
+    /// `math_type` when the attribute is a formula
+    sub_mlist = 3,
+    /// `math_type` when italic correction is dubious
+    math_text_char = 4,
+}
 
 use crate::section_0113::quarterword;

@@ -16,12 +16,15 @@
 //! @:TeXbook}{\sl The \TeX book@>
 //
 // @d style_node=unset_node+1 {|type| of a style node}
+/// `type` of a style node
+pub(crate) const style_node: quarterword = unset_node + 1;
+
 // @d style_node_size=3 {number of words in a style node}
 // @d display_style=0 {|subtype| for \.{\\displaystyle}}
 // @d text_style=2 {|subtype| for \.{\\textstyle}}
 // @d script_style=4 {|subtype| for \.{\\scriptstyle}}
 // @d script_script_style=6 {|subtype| for \.{\\scriptscriptstyle}}
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq)]
 pub(crate) enum style_node_subtype {
     /// `subtype` for `\displaystyle`
     display_style = 0,
@@ -57,3 +60,4 @@ impl style_node_subtype {
 //
 
 use crate::section_0113::quarterword;
+use crate::section_0159::unset_node;
