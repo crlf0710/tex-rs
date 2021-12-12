@@ -19,9 +19,17 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
         $t = type_q;
     }
     // bin_noad: begin t:=bin_noad; pen:=bin_op_penalty;
-    //   end;
+    else if type_q == bin_noad {
+        $t = bin_noad;
+        $pen = bin_op_penalty!($globals);
+        // end;
+    }
     // rel_noad: begin t:=rel_noad; pen:=rel_penalty;
-    //   end;
+    else if type_q == rel_noad {
+        $t = rel_noad;
+        $pen = rel_penalty!($globals);
+        // end;
+    }
     // ord_noad,vcenter_noad,over_noad,under_noad: do_nothing;
     else if type_q == ord_noad
         || type_q == vcenter_noad
@@ -50,6 +58,8 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     use crate::section_0095::confusion;
     use crate::section_0133::r#type;
     use crate::section_0157::inf_penalty;
+    use crate::section_0236::bin_op_penalty;
+    use crate::section_0236::rel_penalty;
     use crate::section_0681::noad_size;
     use crate::section_0682::*;
     use crate::section_0687::*;

@@ -3,7 +3,7 @@
 //! The values of |r| and |r_type| make this fairly easy.
 //
 // @<Do first-pass processing...@>=
-pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_if_a_noad_has_been_fully_processed__goto_check_dimensions_if_it_has_been_translated_into_new_hlist_q___or_goto_done_with_node_if_a_node_has_been_fully_processed($globals:expr, $q:expr, $r_type:expr, $delta:expr, $lbl_check_dimensions:lifetime, $lbl_done_with_node:lifetime) {{
+pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_if_a_noad_has_been_fully_processed__goto_check_dimensions_if_it_has_been_translated_into_new_hlist_q___or_goto_done_with_node_if_a_node_has_been_fully_processed($globals:expr, $q:expr, $r:expr, $r_type:expr, $delta:expr, $lbl_check_dimensions:lifetime, $lbl_done_with_node:lifetime) {{
     // reswitch: delta:=0;
     crate::region_backward_label!{
         'reswitch <-
@@ -28,9 +28,12 @@ pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_i
             // rel_noad,close_noad,punct_noad,right_noad: begin@t@>@;@/
             } else if type_q == rel_noad || type_q == close_noad || type_q == punct_noad || type_q == right_noad {
                 // @<Convert \(a)a final |bin_noad| to an |ord_noad|@>;
+                crate::section_0729::Convert_a_final_bin_noad_to_an_ord_noad!($globals, $r, $r_type);
                 // if type(q)=right_noad then goto done_with_noad;
+                if r#type!($globals, $q) == right_noad {
+                    todo!("goto done_with_noad");
+                }
                 // end;
-                todo!("rel_noad, ...");
             }
             // @t\4@>@<Cases for noads that can follow a |bin_noad|@>@;
             else if crate::section_0733::Cases_for_noads_that_can_follow_a_bin_noad!($globals, $q, type_q)

@@ -74,17 +74,27 @@ pub(crate) macro Initialize_table_entries_done_by_initex_only_0232($globals:expr
     cat_code!(globals, ASCII_code_literal!(invalid_code)) = invalid_char as _;
     cat_code!(globals, ASCII_code_literal!(null_code)) = ignore as _;
     // for k:="0" to "9" do math_code(k):=hi(k+var_code);
+    for k_u8 in b'0'..=b'9' {
+        math_code!(globals, ASCII_code_literal!(k_u8)) =
+            hi!((k_u8 as integer + var_code) as halfword);
+    }
     // for k:="A" to "Z" do
     for k_u8 in b'A'..=b'Z' {
         // begin cat_code(k):=letter; cat_code(k+"a"-"A"):=letter;@/
         cat_code!(globals, ASCII_code_literal!(k_u8)) = letter as _;
         cat_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) = letter as _;
         // math_code(k):=hi(k+var_code+@"100);
+        math_code!(globals, ASCII_code_literal!(k_u8)) =
+            hi!((k_u8 as integer + var_code + 0x100) as halfword);
         // math_code(k+"a"-"A"):=hi(k+"a"-"A"+var_code+@"100);@/
+        math_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) =
+            hi!(((k_u8 + b'a' - b'A') as integer + var_code + 0x100) as halfword);
         // lc_code(k):=k+"a"-"A"; lc_code(k+"a"-"A"):=k+"a"-"A";@/
         lc_code!(globals, ASCII_code_literal!(k_u8)) = (k_u8 + b'a' - b'A') as _;
         lc_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) = (k_u8 + b'a' - b'A') as _;
         // uc_code(k):=k; uc_code(k+"a"-"A"):=k;@/
+        uc_code!(globals, ASCII_code_literal!(k_u8)) = (k_u8) as _;
+        uc_code!(globals, ASCII_code_literal!(k_u8 + b'a' - b'A')) = (k_u8) as _;
         // sf_code(k):=999;
         sf_code!(globals, ASCII_code_literal!(k_u8)) = 999;
         // end;
@@ -135,4 +145,5 @@ use crate::section_0230::par_shape_ptr;
 use crate::section_0230::r#box;
 use crate::section_0230::sf_code;
 use crate::section_0230::toks_base;
+use crate::section_0230::uc_code;
 use crate::section_0548::internal_font_number;

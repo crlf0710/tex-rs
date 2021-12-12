@@ -21,20 +21,23 @@ pub(crate) fn set_math_char(globals: &mut TeXGlobals, c: integer) -> TeXResult<(
         // character(nucleus(p)):=qi(c mod 256);
         // fam(nucleus(p)):=(c div 256) mod 16;
         let ch = qi!(((c as word) % 256) as u8);
-        let fam = internal_font_number::new(((c as word) / 256 % 16) as _);
-        assign_fam_and_character!(globals, nucleus!(p), fam, ASCII_code::from(ch as integer));
+        let mut fam = internal_font_number::new(((c as word) / 256 % 16) as _);
         // if c>=var_code then
         if c >= var_code {
             // begin if fam_in_range then fam(nucleus(p)):=cur_fam;
+            if fam_in_range!(globals) {
+                fam = internal_font_number::new(cur_fam!(globals) as _);
+            }
             // type(p):=ord_noad;
+            r#type!(globals, p) = ord_noad;
             // end
-            todo!("c >= var_code");
         }
         // else  type(p):=ord_noad+(c div @'10000);
         else {
             let t = ((c as word) / 0o10000) as quarterword;
             r#type!(globals, p) = ord_noad + t;
         }
+        assign_fam_and_character!(globals, nucleus!(p), fam, ASCII_code::from(ch as integer));
         // link(tail):=p; tail:=p;
         link!(globals, tail!(globals)) = p;
         tail!(globals) = p;
@@ -55,6 +58,7 @@ use crate::section_0118::link;
 use crate::section_0133::r#type;
 use crate::section_0213::tail;
 use crate::section_0232::var_code;
+use crate::section_0236::cur_fam;
 use crate::section_0548::internal_font_number;
 use crate::section_0681::assign_fam_and_character;
 use crate::section_0681::math_type;
@@ -62,3 +66,4 @@ use crate::section_0681::math_type_kind;
 use crate::section_0681::nucleus;
 use crate::section_0682::ord_noad;
 use crate::section_0686::new_noad;
+use crate::section_1151::fam_in_range;

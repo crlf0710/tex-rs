@@ -4,7 +4,7 @@
 // @<Construct a superscript box |x|@>=
 pub(crate) macro Construct_a_superscript_box_x($globals:expr, $x:expr, $q:expr, $shift_up:expr, $clr:expr) {{
     // begin x:=clean_box(supscr(q),sup_style(cur_style));
-    $x = clean_box($globals, supscr!($q), sup_style!($globals.cur_style).into());
+    $x = clean_box($globals, supscr!($q), sup_style!($globals.cur_style).into())?;
     // width(x):=width(x)+script_space;
     width!($globals, $x) += script_space!($globals);
     // if odd(cur_style) then clr:=sup3(cur_size)

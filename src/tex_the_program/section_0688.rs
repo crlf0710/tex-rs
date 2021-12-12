@@ -24,7 +24,7 @@ pub(crate) const style_node: quarterword = unset_node + 1;
 // @d text_style=2 {|subtype| for \.{\\textstyle}}
 // @d script_style=4 {|subtype| for \.{\\scriptstyle}}
 // @d script_script_style=6 {|subtype| for \.{\\scriptscriptstyle}}
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, PartialOrd)]
 pub(crate) enum style_node_subtype {
     /// `subtype` for `\displaystyle`
     display_style = 0,

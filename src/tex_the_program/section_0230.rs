@@ -153,6 +153,12 @@ pub(crate) macro lc_code($globals:expr, $val:expr) {
     )
 }
 // @d uc_code(#)==equiv(uc_code_base+#)
+pub(crate) macro uc_code($globals:expr, $val:expr) {
+    crate::section_0221::equiv!(
+        $globals,
+        crate::section_0230::index_offset_with_ASCII_code(crate::section_0230::uc_code_base, $val)
+    )
+}
 // @d sf_code(#)==equiv(sf_code_base+#)
 pub(crate) macro sf_code($globals:expr, $val:expr) {
     crate::section_0221::equiv!(
