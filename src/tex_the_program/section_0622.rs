@@ -10,15 +10,21 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         crate::region_forward_label!(
         |'move_past|
         {
+        crate::region_forward_label!(
+        |'fin_rule|
+        {
         // hlist_node,vlist_node:@<Output a box in an hlist@>;
         if type_p == hlist_node || type_p == vlist_node {
             crate::section_0623::Output_a_box_in_an_hlist!($globals, $p, $base_line);
         }
         // rule_node: begin rule_ht:=height(p); rule_dp:=depth(p); rule_wd:=width(p);
         else if type_p == rule_node {
+            $globals.rule_ht = height!($globals, $p);
+            $globals.rule_dp = depth!($globals, $p);
+            $globals.rule_wd = width!($globals, $p);
             // goto fin_rule;
+            crate::goto_forward_label!('fin_rule);
             // end;
-            todo!("rule_node in hlist");
         }
         // whatsit_node: @<Output the whatsit node |p| in an hlist@>;
         else if type_p == whatsit_node {
@@ -43,8 +49,11 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         // endcases;@/
         // goto next_p;
         crate::goto_forward_label!('next_p);
+        }
         // fin_rule: @<Output a rule in an hlist@>;
-        todo!("output a rule in hlist");
+        'fin_rule <-
+        );
+        crate::section_0624::Output_a_rule_in_an_hlist!($globals, $this_box, $base_line);
         }
         // move_past: cur_h:=cur_h+rule_wd;
         'move_past <-
@@ -60,6 +69,8 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         use crate::section_0118::link;
         use crate::section_0133::r#type;
         use crate::section_0135::width;
+        use crate::section_0135::height;
+        use crate::section_0135::depth;
         use crate::section_0135::hlist_node;
         use crate::section_0137::vlist_node;
         use crate::section_0138::rule_node;

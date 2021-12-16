@@ -2,7 +2,7 @@
 //! sets up default values so that most of the branches are short.
 //
 // @<If node |q| is a style node, change the style...@>=
-pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__otherwise_if_it_is_not_a_noad__put_it_into_the_hlist__advance_q__and_goto_done__otherwise_set_s_to_the_size_of_noad_q__set_t_to_the_associated_type_ord_noad_to_inner_noad__and_set_pen_to_the_associated_penalty($globals:expr, $q:expr, $t:expr, $s:expr, $pen:expr) {{
+pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__otherwise_if_it_is_not_a_noad__put_it_into_the_hlist__advance_q__and_goto_done__otherwise_set_s_to_the_size_of_noad_q__set_t_to_the_associated_type_ord_noad_to_inner_noad__and_set_pen_to_the_associated_penalty($globals:expr, $q:expr, $p:expr, $t:expr, $s:expr, $pen:expr, $lbl_done:lifetime) {{
     // t:=ord_noad; s:=noad_size; pen:=inf_penalty;
     $t = ord_noad;
     $s = noad_size;
@@ -45,8 +45,24 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     // style_node: @<Change the current style and |goto delete_q|@>;
     // whatsit_node,penalty_node,rule_node,disc_node,adjust_node,ins_node,mark_node,
     //  glue_node,kern_node:@t@>@;@/
-    //   begin link(p):=q; p:=q; q:=link(q); link(p):=null; goto done;
-    //   end;
+    else if type_q == whatsit_node
+        || type_q == penalty_node
+        || type_q == rule_node
+        || type_q == disc_node
+        || type_q == adjust_node
+        || type_q == ins_node
+        || type_q == mark_node
+        || type_q == glue_node
+        || type_q == kern_node
+    {
+        // begin link(p):=q; p:=q; q:=link(q); link(p):=null; goto done;
+        link!($globals, $p) = $q;
+        $p = $q;
+        $q = link!($globals, $q);
+        link!($globals, $p) = null;
+        crate::goto_forward_label!($lbl_done);
+        // end;
+    }
     // othercases confusion("mlist3")
     else {
         crate::trace_error_expr!("type(q)={}", type_q);
@@ -56,8 +72,19 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     // endcases
     use crate::section_0016::do_nothing;
     use crate::section_0095::confusion;
+    use crate::section_0115::null;
+    use crate::section_0118::link;
     use crate::section_0133::r#type;
+    use crate::section_0138::rule_node;
+    use crate::section_0140::ins_node;
+    use crate::section_0141::mark_node;
+    use crate::section_0142::adjust_node;
+    use crate::section_0145::disc_node;
+    use crate::section_0146::whatsit_node;
+    use crate::section_0149::glue_node;
+    use crate::section_0155::kern_node;
     use crate::section_0157::inf_penalty;
+    use crate::section_0157::penalty_node;
     use crate::section_0236::bin_op_penalty;
     use crate::section_0236::rel_penalty;
     use crate::section_0681::noad_size;

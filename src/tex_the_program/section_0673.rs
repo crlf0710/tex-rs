@@ -37,8 +37,8 @@ pub(crate) macro Determine_vertical_glue_stretch_setting__then_return_or_goto_co
     // end
     use crate::pascal::real;
     use crate::section_0101::scaled;
-    use crate::section_0109::unfloat;
     use crate::section_0109::set_glue_ratio_zero;
+    use crate::section_0109::unfloat;
     use crate::section_0115::null;
     use crate::section_0135::glue_set;
     use crate::section_0135::glue_sign;

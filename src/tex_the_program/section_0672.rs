@@ -36,7 +36,12 @@ pub(crate) macro Determine_the_value_of_height_r_and_the_appropriate_glue_settin
     // else @<Determine vertical glue shrink setting, then |return|
     //     or \hbox{|goto common_ending|}@>
     else {
-        todo!("x<0");
+        crate::section_0676::Determine_vertical_glue_shrink_setting__then_return_or_goto_common_ending!(
+            $globals,
+            $r,
+            $x,
+            $lbl_common_ending
+        );
     }
     use crate::section_0101::scaled;
     use crate::section_0109::set_glue_ratio_zero;

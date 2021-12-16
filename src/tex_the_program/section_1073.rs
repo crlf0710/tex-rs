@@ -9,10 +9,18 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1073($globals:
         || $abs_mode_plus_cur_cmd == mmode as u16 + vmove as u16
     {
         // vmode+hmove,hmode+vmove,mmode+vmove: begin t:=cur_chr;
-        //   scan_normal_dimen;
-        //   if t=0 then scan_box(cur_val)@+else scan_box(-cur_val);
-        //   end;
-        todo!("hmove/vmove");
+        let t = $globals.cur_chr;
+        // scan_normal_dimen;
+        scan_normal_dimen!($globals)?;
+        // if t=0 then scan_box(cur_val)@+else scan_box(-cur_val);
+        if t.get() == 0 {
+            scan_box($globals, $globals.cur_val)?;
+        } else {
+            scan_box($globals, -$globals.cur_val)?;
+        }
+        // end;
+        use crate::section_0448::scan_normal_dimen;
+        use crate::section_1084::scan_box;
         true
     } else if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, leader_ship as u16) {
         // any_mode(leader_ship): scan_box(leader_flag-a_leaders+cur_chr);

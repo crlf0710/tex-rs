@@ -19,8 +19,12 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
     }
     // box_code: begin scan_eight_bit_int; cur_box:=box(cur_val);
     else if cur_chr == box_code as chr_code_repr {
-        todo!("box_code");
+        scan_eight_bit_int(globals)?;
+        globals.cur_box = r#box!(globals, globals.cur_val);
         // box(cur_val):=null; {the box becomes void, at the same level}
+        /// the box becomes void, at the same level
+        const _: () = ();
+        r#box!(globals, globals.cur_val) = null;
         // end;
     }
     // copy_code: begin scan_eight_bit_int; cur_box:=copy_node_list(box(cur_val));
@@ -46,7 +50,8 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
     }
     // endcases;@/
     // box_end(box_context); {in simple cases, we use the box immediately}
-    todo!("box_end");
+    /// in simple cases, we use the box immediately
+    box_end(globals, box_context)?;
     // exit:end;
     crate::ok_nojump!()
 }
@@ -54,5 +59,9 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0115::null;
+use crate::section_0230::r#box;
 use crate::section_0297::chr_code_repr;
+use crate::section_0433::scan_eight_bit_int;
 use crate::section_1071::*;
+use crate::section_1075::box_end;

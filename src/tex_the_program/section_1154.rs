@@ -38,10 +38,12 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1154($globals:
         true
     }
     // mmode+delim_num: begin scan_twenty_seven_bit_int;
-    else if $abs_mode_plus_cur_cmd == mmode as u16 + math_given as u16 {
+    else if $abs_mode_plus_cur_cmd == mmode as u16 + delim_num as u16 {
+        scan_twenty_seven_bit_int($globals)?;
         // set_math_char(cur_val div @'10000);
+        set_math_char($globals, ($globals.cur_val / 0o10000) as _)?;
         // end;
-        todo!("mmode + delim_num");
+        use crate::section_0437::scan_twenty_seven_bit_int;
         true
     } else {
         false

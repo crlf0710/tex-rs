@@ -41,7 +41,7 @@ pub(crate) macro Make_a_second_pass_over_the_mlist__removing_all_noads_and_inser
                 crate::region_forward_label!{
                     |'delete_q|
                     {
-                        crate::section_0761::If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__otherwise_if_it_is_not_a_noad__put_it_into_the_hlist__advance_q__and_goto_done__otherwise_set_s_to_the_size_of_noad_q__set_t_to_the_associated_type_ord_noad_to_inner_noad__and_set_pen_to_the_associated_penalty!($globals, q, t, s, pen);
+                        crate::section_0761::If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__otherwise_if_it_is_not_a_noad__put_it_into_the_hlist__advance_q__and_goto_done__otherwise_set_s_to_the_size_of_noad_q__set_t_to_the_associated_type_ord_noad_to_inner_noad__and_set_pen_to_the_associated_penalty!($globals, q, p, t, s, pen, 'done);
                         // @<Append inter-element spacing based on |r_type| and |t|@>;
                         crate::section_0766::Append_inter_element_spacing_based_on_r_type_and_t!($globals, p, r_type, t);
                         // @<Append any |new_hlist| entries for |q|, and any appropriate penalties@>;
