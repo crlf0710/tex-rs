@@ -52,7 +52,7 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     }
     // else @<Show the halfword code in |eqtb[n]|@>
     else {
-        todo!("show halfword code");
+        crate::section_0235::Show_the_halfword_code_in_eqtb_n!($globals, $n);
     }
     use crate::pascal::integer;
     use crate::section_0004::make_globals_io_string_log_view;

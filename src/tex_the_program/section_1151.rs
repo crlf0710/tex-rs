@@ -43,7 +43,7 @@ pub(crate) fn scan_math(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     //   end;
     // othercases @<Scan a subformula enclosed in braces and |return|@>
     else {
-        todo!("scan a subformula");
+        crate::section_1153::Scan_a_subformula_enclosed_in_braces_and_return!(globals, p);
     }
     // endcases;@/
     // math_type(p):=math_char; character(p):=qi(c mod 256);

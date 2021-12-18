@@ -15,7 +15,7 @@ pub(crate) fn show_eqtb(globals: &mut TeXGlobals, n: pointer) {
     }
     // else if n<glue_base then @<Show equivalent |n|, in region 1 or 2@>
     else if (n as integer) < glue_base as integer {
-        todo!("show n in region 1 or 2");
+        crate::section_0223::Show_equivalent_n__in_region_1_or_2!(globals, n);
     }
     // else if n<local_base then @<Show equivalent |n|, in region 3@>
     else if (n as integer) < local_base as integer {

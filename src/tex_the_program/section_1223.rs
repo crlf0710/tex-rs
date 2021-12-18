@@ -52,8 +52,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1223
     }
     // math_given: begin print_esc("mathchar"); print_hex(chr_code);
     else if $cmd == math_given {
-        todo!("mathchar");
+        print_esc($globals, crate::strpool_str!("mathchar"));
+        print_hex($globals, $chr_code.get() as _);
         // end;
+        use crate::section_0067::print_hex;
         true
     } else {
         false
