@@ -9,7 +9,7 @@ pub(crate) const math_node: quarterword = 9;
 // @d before=0 {|subtype| for math node that introduces a formula}
 // @d after=1 {|subtype| for math node that winds up a formula}
 #[doc(hidden)]
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub(crate) enum math_node_subtype {
     /// `subtype` for math node that introduces a formula
     before = 0,

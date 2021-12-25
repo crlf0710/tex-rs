@@ -19,6 +19,7 @@ pub(crate) macro set_cur_lang($globals:expr) {{
         $globals.cur_lang = ASCII_code::from(language!($globals));
     }
     use crate::section_0018::ASCII_code;
+    use crate::section_0018::ASCII_code_literal;
     use crate::section_0236::language;
 }}
 

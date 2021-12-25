@@ -247,7 +247,13 @@ pub(crate) macro rel_penalty($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::rel_penalty_code)
 }
 // @d pre_display_penalty==int_par(pre_display_penalty_code)
+pub(crate) macro pre_display_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::pre_display_penalty_code)
+}
 // @d post_display_penalty==int_par(post_display_penalty_code)
+pub(crate) macro post_display_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::post_display_penalty_code)
+}
 // @d inter_line_penalty==int_par(inter_line_penalty_code)
 pub(crate) macro inter_line_penalty($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::inter_line_penalty_code)

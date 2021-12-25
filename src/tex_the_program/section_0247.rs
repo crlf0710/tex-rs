@@ -133,7 +133,13 @@ pub(crate) macro script_space($globals:expr) {
     crate::section_0247::dimen_par!($globals, crate::section_0247::script_space_code)
 }
 // @d pre_display_size==dimen_par(pre_display_size_code)
+pub(crate) macro pre_display_size($globals:expr) {
+    crate::section_0247::dimen_par!($globals, crate::section_0247::pre_display_size_code)
+}
 // @d display_width==dimen_par(display_width_code)
+pub(crate) macro display_width($globals:expr) {
+    crate::section_0247::dimen_par!($globals, crate::section_0247::display_width_code)
+}
 // @d display_indent==dimen_par(display_indent_code)
 pub(crate) macro display_indent($globals:expr) {
     crate::section_0247::dimen_par!($globals, crate::section_0247::display_indent_code)

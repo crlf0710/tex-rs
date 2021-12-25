@@ -2,7 +2,7 @@
 // @<Cases of |main_control| that build...@>=
 pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1158($globals:expr, $abs_mode_plus_cur_cmd:expr) {{
     // mmode+math_comp: begin tail_append(new_noad);
-    let processed = if $abs_mode_plus_cur_cmd == mmode as u16 + math_shift as u16 {
+    let processed = if $abs_mode_plus_cur_cmd == mmode as u16 + math_comp as u16 {
         tail_append!($globals, new_noad($globals)?);
         // type(tail):=cur_chr; scan_math(nucleus(tail));
         r#type!($globals, tail!($globals)) = $globals.cur_chr.get() as _;

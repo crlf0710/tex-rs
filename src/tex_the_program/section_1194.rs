@@ -14,7 +14,7 @@ pub(crate) fn after_math(globals: &mut TeXGlobals) -> TeXResult<()> {
     let m;
     // @!p:pointer; {the formula}
     /// the formula
-    let p;
+    let mut p;
     // @!a:pointer; {box containing equation number}
     /// box containing equation number
     let a;
@@ -59,10 +59,10 @@ pub(crate) fn after_math(globals: &mut TeXGlobals) -> TeXResult<()> {
     // else  begin if a=null then @<Check that another \.\$ follows@>;
     else {
         if a == null {
-            todo!("Check that another `$` follows");
+            crate::section_1197::Check_that_another_dollar_follows!(globals);
         }
         // @<Finish displayed math@>;
-        todo!("Finish displayed math");
+        crate::section_1199::Finish_displayed_math!(globals, p, a, l, danger);
         // end;
     }
     // end;

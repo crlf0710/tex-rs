@@ -34,13 +34,25 @@ pub(crate) fn scan_math(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
         // end;
     }
     // char_num: begin scan_char_num; cur_chr:=cur_val; cur_cmd:=char_given;
-    //   goto reswitch;
-    //   end;
+    else if globals.cur_cmd == char_num {
+        // goto reswitch;
+        // end;
+        todo!("char_num");
+    }
     // math_char_num: begin scan_fifteen_bit_int; c:=cur_val;
-    //   end;
+    else if globals.cur_cmd == math_char_num {
+        // end;
+        todo!("math_char_num");
+    }
     // math_given: c:=cur_chr;
+    else if globals.cur_cmd == math_given {
+        todo!("math_given");
+    }
     // delim_num: begin scan_twenty_seven_bit_int; c:=cur_val div @'10000;
-    //   end;
+    else if globals.cur_cmd == delim_num {
+        // end;
+        todo!("delim_num");
+    }
     // othercases @<Scan a subformula enclosed in braces and |return|@>
     else {
         crate::section_1153::Scan_a_subformula_enclosed_in_braces_and_return!(globals, p);

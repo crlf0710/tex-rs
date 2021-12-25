@@ -30,6 +30,9 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
             crate::section_0191::Display_kern_p!($globals, $p);
         }
         // math_node: @<Display math node |p|@>;
+        else if type_p == math_node {
+            todo!("math node");
+        }
         // ligature_node: @<Display ligature |p|@>;
         else if type_p == ligature_node {
             crate::section_0193::Display_ligature_p!($globals, $p);
@@ -65,6 +68,7 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
     use crate::section_0143::ligature_node;
     use crate::section_0145::disc_node;
     use crate::section_0146::whatsit_node;
+    use crate::section_0147::math_node;
     use crate::section_0149::glue_node;
     use crate::section_0155::kern_node;
     use crate::section_0157::penalty_node;
