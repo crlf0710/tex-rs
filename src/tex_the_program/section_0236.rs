@@ -231,6 +231,9 @@ pub(crate) macro widow_penalty($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::widow_penalty_code)
 }
 // @d display_widow_penalty==int_par(display_widow_penalty_code)
+pub(crate) macro display_widow_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::display_widow_penalty_code)
+}
 // @d broken_penalty==int_par(broken_penalty_code)
 pub(crate) macro broken_penalty($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::broken_penalty_code)

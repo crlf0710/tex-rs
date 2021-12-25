@@ -18,12 +18,12 @@ pub(crate) fn init_math(globals: &mut TeXGlobals) -> TeXResult<()> {
     get_token(globals)?;
     // if (cur_cmd=math_shift)and(mode>0) then @<Go into display math mode@>
     if globals.cur_cmd == math_shift && mode!(globals) > 0 {
-        todo!("go into display math mode");
+        crate::section_1145::Go_into_display_math_mode!(globals);
     }
     // else  begin back_input; @<Go into ordinary math mode@>;
     else {
         back_input(globals);
-        Go_into_ordinary_math_mode!(globals);
+        crate::section_1139::Go_into_ordinary_math_mode!(globals);
         // end;
     }
     // end;
@@ -36,4 +36,3 @@ use crate::section_0207::math_shift;
 use crate::section_0213::mode;
 use crate::section_0325::back_input;
 use crate::section_0365::get_token;
-use crate::section_1139::Go_into_ordinary_math_mode;

@@ -94,6 +94,9 @@ pub(crate) macro every_math($globals:expr) {
     crate::section_0221::equiv!($globals, crate::section_0230::every_math_loc)
 }
 // @d every_display==equiv(every_display_loc)
+pub(crate) macro every_display($globals:expr) {
+    crate::section_0221::equiv!($globals, crate::section_0230::every_display_loc)
+}
 // @d every_hbox==equiv(every_hbox_loc)
 pub(crate) macro every_hbox($globals:expr) {
     crate::section_0221::equiv!($globals, crate::section_0230::every_hbox_loc)

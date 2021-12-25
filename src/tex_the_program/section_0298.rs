@@ -193,7 +193,21 @@ pub(crate) fn print_cmd_chr(globals: &mut TeXGlobals, cmd: quarterword, chr_code
         );
     }
     // sup_mark: chr_cmd("superscript character ");
+    else if cmd == sup_mark {
+        chr_cmd!(
+            globals,
+            chr_code,
+            crate::strpool_str!("superscript character ")
+        );
+    }
     // sub_mark: chr_cmd("subscript character ");
+    else if cmd == sub_mark {
+        chr_cmd!(
+            globals,
+            chr_code,
+            crate::strpool_str!("subscript character ")
+        );
+    }
     // endv: print("end of alignment template");
     else if cmd == endv {
         print(

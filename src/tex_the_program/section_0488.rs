@@ -36,6 +36,9 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0488
             print_esc($globals, crate::strpool_str!("ifx"));
         }
         // if_eof_code:print_esc("ifeof");
+        else if chr_code == code::if_eof_code as chr_code_repr {
+            print_esc($globals, crate::strpool_str!("ifeof"));
+        }
         // if_true_code:print_esc("iftrue");
         // if_false_code:print_esc("iffalse");
         else if chr_code == code::if_false_code as chr_code_repr {
