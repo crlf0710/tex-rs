@@ -8,27 +8,64 @@
 pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_delayed_action_1186($globals:expr) {{
     // math_group: begin unsave; decr(save_ptr);@/
     let processed = if $globals.cur_group == math_group {
+        /// for short-term use
+        let p;
         unsave($globals)?;
         decr!($globals.save_ptr);
         // math_type(saved(0)):=sub_mlist; p:=fin_mlist(null); info(saved(0)):=p;
+        math_type!($globals, saved!($globals, 0) as pointer) = math_type_kind::sub_mlist as _;
+        p = fin_mlist($globals, null);
+        info_inner!($globals, saved!($globals, 0) as pointer) = p;
         // if p<>null then if link(p)=null then
-        //  if type(p)=ord_noad then
-        //   begin if math_type(subscr(p))=empty then
-        //    if math_type(supscr(p))=empty then
-        //     begin mem[saved(0)].hh:=mem[nucleus(p)].hh;
-        //     free_node(p,noad_size);
-        //     end;
-        //   end
-        // else if type(p)=accent_noad then if saved(0)=nucleus(tail) then
-        //  if type(tail)=ord_noad then @<Replace the tail of the list by |p|@>;
+        if p != null && link!($globals, p) == null {
+            // if type(p)=ord_noad then
+            let type_p = r#type!($globals, p);
+            if type_p == ord_noad {
+                // begin if math_type(subscr(p))=empty then
+                //  if math_type(supscr(p))=empty then
+                if math_type!($globals, subscr!(p)) == math_type_kind::empty as _
+                    && math_type!($globals, supscr!(p)) == math_type_kind::empty as _
+                {
+                    // begin mem[saved(0)].hh:=mem[nucleus(p)].hh;
+                    // free_node(p,noad_size);
+                    // end;
+                    todo!("ord_noad");
+                }
+                // end
+            }
+            // else if type(p)=accent_noad then if saved(0)=nucleus(tail) then
+            //  if type(tail)=ord_noad then @<Replace the tail of the list by |p|@>;
+            else if type_p == accent_noad {
+                if saved!($globals, 0) == nucleus!(tail!($globals)) as integer
+                    && r#type!($globals, tail!($globals)) == ord_noad
+                {
+                    todo!("Replace the tail of the list by |p|");
+                }
+            }
+        }
         // end;
-        todo!("math_group");
         true
     } else {
         false
     };
+    use crate::pascal::integer;
     use crate::section_0016::decr;
+    use crate::section_0115::null;
+    use crate::section_0115::pointer;
+    use crate::section_0118::info_inner;
+    use crate::section_0118::link;
+    use crate::section_0133::r#type;
+    use crate::section_0213::tail;
     use crate::section_0269::math_group;
+    use crate::section_0274::saved;
     use crate::section_0281::unsave;
+    use crate::section_0681::math_type;
+    use crate::section_0681::math_type_kind;
+    use crate::section_0681::nucleus;
+    use crate::section_0681::subscr;
+    use crate::section_0681::supscr;
+    use crate::section_0682::ord_noad;
+    use crate::section_0687::accent_noad;
+    use crate::section_1184::fin_mlist;
     processed
 }}

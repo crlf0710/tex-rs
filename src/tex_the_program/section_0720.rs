@@ -41,7 +41,7 @@ pub(crate) fn clean_box(
     }
     // sub_mlist: cur_mlist:=info(p);
     else if math_type_p == math_type_kind::sub_mlist as _ {
-        todo!("sub_mlist");
+        globals.cur_mlist = info_inner!(globals, p);
     }
     // othercases begin q:=new_null_box; goto found;
     else {
@@ -94,6 +94,7 @@ use crate::section_0101::scaled;
 use crate::section_0101::small_number;
 use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::info_inner;
 use crate::section_0118::link;
 use crate::section_0133::r#type;
 use crate::section_0134::is_char_node;

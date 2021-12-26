@@ -31,7 +31,7 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
         }
         // math_node: @<Display math node |p|@>;
         else if type_p == math_node {
-            todo!("math node");
+            crate::section_0192::Display_math_node_p!($globals, $p);
         }
         // ligature_node: @<Display ligature |p|@>;
         else if type_p == ligature_node {

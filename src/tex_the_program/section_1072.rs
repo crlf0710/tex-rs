@@ -9,7 +9,11 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1072
     }
     // vmove: if chr_code=1 then print_esc("raise")@+else print_esc("lower");
     else if $cmd == vmove {
-        todo!("vmove");
+        if $chr_code.get() == 1 {
+            print_esc($globals, crate::strpool_str!("raise"));
+        } else {
+            print_esc($globals, crate::strpool_str!("lower"));
+        }
         true
     }
     // make_box: case chr_code of

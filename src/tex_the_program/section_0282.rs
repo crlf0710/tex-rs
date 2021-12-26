@@ -24,7 +24,7 @@ pub(crate) macro Clear_off_top_level_from_save_stack {
                     // if save_type(save_ptr)=insert_token then
                     if save_type!($globals, $globals.save_ptr) == insert_token {
                         // @<Insert token |p| into \TeX's input@>
-                        todo!("insert token");
+                        crate::section_0326::Insert_token_p_into_TeX_s_input!($globals, p);
                     }
                     // else  begin if save_type(save_ptr)=restore_old_value then
                     else {

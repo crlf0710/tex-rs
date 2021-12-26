@@ -18,16 +18,21 @@ pub(crate) macro Scan_the_template_v_j__putting_the_resulting_token_list_in_hold
             if $globals.cur_cmd <= car_ret && $globals.cur_cmd >= tab_mark && $globals.align_state == -1000000 {
                 crate::goto_forward_label!('done2);
             }
-            todo!("scan v_j");
             // if cur_cmd=mac_param then
-            //   begin print_err("Only one # is allowed per tab");
-            // @.Only one \# is allowed...@>
-            //   help3("There should be exactly one # between &'s, when an")@/
-            //   ("\halign or \valign is being set up. In this case you had")@/
-            //   ("more than one, so I'm ignoring all but the first.");
-            //   error; goto continue;
-            //   end;
+            if $globals.cur_cmd == mac_param {
+                todo!("error");
+                // begin print_err("Only one # is allowed per tab");
+                // @.Only one \# is allowed...@>
+                // help3("There should be exactly one # between &'s, when an")@/
+                // ("\halign or \valign is being set up. In this case you had")@/
+                // ("more than one, so I'm ignoring all but the first.");
+                // error; goto continue;
+                // end;
+            }
             // link(p):=get_avail; p:=link(p); info(p):=cur_tok;
+            link!($globals, p) = get_avail($globals);
+            p = link!($globals, p);
+            info_inner!($globals, p) = $globals.cur_tok.get() as _;
             // end;
         }
         // done2: link(p):=get_avail; p:=link(p);
@@ -44,10 +49,12 @@ pub(crate) macro Scan_the_template_v_j__putting_the_resulting_token_list_in_hold
         use crate::section_0115::null;
         use crate::section_0118::link;
         use crate::section_0118::info_tok_assign;
+        use crate::section_0118::info_inner;
         use crate::section_0162::hold_head;
         use crate::section_0120::get_avail;
         use crate::section_0207::car_ret;
         use crate::section_0207::tab_mark;
+        use crate::section_0207::mac_param;
         use crate::section_0297::cur_tok_type;
         use crate::section_0780::end_template_token;
         use crate::section_0782::get_preamble_token;

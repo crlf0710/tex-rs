@@ -35,12 +35,21 @@ pub(crate) macro Convert_nucleus_q_to_an_hlist_and_attach_the_sub_superscripts($
     }
     // sub_mlist: begin cur_mlist:=info(nucleus(q)); save_style:=cur_style;
     else if math_type_nucleus_q == math_type_kind::sub_mlist as _ {
-        //   mlist_penalties:=false; mlist_to_hlist; {recursive call}
+        /// holds `cur_style` during recursion
+        let save_style;
+        $globals.cur_mlist = info_inner!($globals, nucleus!($q));
+        save_style = $globals.cur_style;
+        // mlist_penalties:=false; mlist_to_hlist; {recursive call}
+        $globals.mlist_penalties = false;
+        /// recursive call
+        mlist_to_hlist($globals)?;
         // @^recursion@>
-        //   cur_style:=save_style; @<Set up the values...@>;
-        //   p:=hpack(link(temp_head),natural);
-        //   end;
-        todo!("sub_mlist");
+        // cur_style:=save_style; @<Set up the values...@>;
+        $globals.cur_style = save_style;
+        crate::section_0703::Set_up_the_values_of_cur_size_and_cur_mu__based_on_cur_style!($globals);
+        // p:=hpack(link(temp_head),natural);
+        p = hpack($globals, link!($globals, temp_head), natural0!(), natural1!())?;
+        // end;
     }
     // othercases confusion("mlist2")
     else {
@@ -62,11 +71,17 @@ pub(crate) macro Convert_nucleus_q_to_an_hlist_and_attach_the_sub_superscripts($
     use crate::section_0095::confusion;
     use crate::section_0115::null;
     use crate::section_0118::info_inner;
+    use crate::section_0118::link;
+    use crate::section_0162::temp_head;
+    use crate::section_0644::natural0;
+    use crate::section_0644::natural1;
+    use crate::section_0649::hpack;
     use crate::section_0681::math_type;
     use crate::section_0681::math_type_kind;
     use crate::section_0681::nucleus;
     use crate::section_0681::subscr;
     use crate::section_0681::supscr;
     use crate::section_0725::new_hlist;
+    use crate::section_0726::mlist_to_hlist;
     use crate::section_0756::make_scripts;
 }}

@@ -4,7 +4,7 @@
 pub(crate) fn resume_after_display(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin if cur_group<>math_shift_group then confusion("display");
     if globals.cur_group != math_shift_group {
-        todo!("confusion");
+        confusion(globals, crate::strpool_str!("display"))?;
     }
     // @:this can't happen display}{\quad display@>
     // unsave; prev_graf:=prev_graf+3;
@@ -35,6 +35,7 @@ pub(crate) fn resume_after_display(globals: &mut TeXGlobals) -> TeXResult<()> {
 use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
+use crate::section_0095::confusion;
 use crate::section_0211::hmode;
 use crate::section_0213::clang;
 use crate::section_0213::mode;
