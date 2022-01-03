@@ -365,6 +365,9 @@ pub(crate) macro hang_after($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::hang_after_code)
 }
 // @d floating_penalty==int_par(floating_penalty_code)
+pub(crate) macro floating_penalty($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::floating_penalty_code)
+}
 // @d global_defs==int_par(global_defs_code)
 pub(crate) macro global_defs($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::global_defs_code)

@@ -41,7 +41,7 @@ pub(crate) const page_ins_node_size: quarterword = 4;
 // @d split_up=1 {an overflowed insertion class}
 #[doc(hidden)]
 #[derive(Clone, Copy)]
-pub(crate) enum page_ins_node_subtype {
+pub(crate) enum page_ins_node_type {
     /// an insertion class that has not yet overflowed
     inserting = 0,
     /// an overflowed insertion class
@@ -72,14 +72,14 @@ pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes_0981($glob
     // subtype(page_ins_head):=qi(255);
     subtype!($globals, page_ins_head) = qi!(255);
     // type(page_ins_head):=split_up; link(page_ins_head):=page_ins_head;
-    r#type!($globals, page_ins_head) = page_ins_node_subtype::split_up as _;
+    r#type!($globals, page_ins_head) = page_ins_node_type::split_up as _;
     link!($globals, page_ins_head) = page_ins_head;
     use crate::section_0112::qi;
     use crate::section_0118::link;
     use crate::section_0133::r#type;
     use crate::section_0133::subtype;
     use crate::section_0162::page_ins_head;
-    use crate::section_0981::page_ins_node_subtype;
+    use crate::section_0981::page_ins_node_type;
 }}
 
 use crate::section_0113::quarterword;

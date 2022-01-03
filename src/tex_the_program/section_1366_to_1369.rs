@@ -1,6 +1,3 @@
-//! @ @<Prepare to move whatsit |p| to the current page, then |goto contribute|@>=
-//! goto contribute
-//!
 //! @ @<Process whatsit |p| in |vert_break| loop, |goto not_found|@>=
 //! goto not_found
 //!

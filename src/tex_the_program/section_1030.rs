@@ -93,7 +93,7 @@ pub(crate) fn main_control(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @t\4@>@<Cases of |main_control| that are not part of the inner loop@>@;
     else {
         crate::section_1045::Cases_of_main_control_that_are_not_part_of_the_inner_loop!(
-            globals, abs_mode_plus_cur_cmd
+            globals, abs_mode_plus_cur_cmd, 'reswitch
         );
         // end; {of the big |case| statement}
     }

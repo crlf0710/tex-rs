@@ -6,7 +6,7 @@ pub(crate) macro Cases_of_main_control_that_dont_depend_on_mode_1271($globals:ex
     let processed =
         if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, after_group as u16) {
             get_token($globals)?;
-            save_for_after($globals, $globals.cur_tok.get());
+            save_for_after($globals, $globals.cur_tok);
             // end;
             true
         } else {

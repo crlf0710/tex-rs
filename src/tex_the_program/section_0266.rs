@@ -20,7 +20,15 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // after_assignment: print_esc("afterassignment");
+    else if $cmd == after_assignment {
+        print_esc($globals, crate::strpool_str!("afterassignment"));
+        true
+    }
     // after_group: print_esc("aftergroup");
+    else if $cmd == after_group {
+        print_esc($globals, crate::strpool_str!("aftergroup"));
+        true
+    }
     // assign_font_dimen: print_esc("fontdimen");
     else if $cmd == assign_font_dimen {
         print_esc($globals, crate::strpool_str!("fontdimen"));
@@ -84,7 +92,15 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // ignore_spaces: print_esc("ignorespaces");
+    else if $cmd == ignore_spaces {
+        print_esc($globals, crate::strpool_str!("ignorespaces"));
+        true
+    }
     // insert: print_esc("insert");
+    else if $cmd == insert {
+        print_esc($globals, crate::strpool_str!("insert"));
+        true
+    }
     // ital_corr: print_esc("/");
     // mark: print_esc("mark");
     // math_accent: print_esc("mathaccent");

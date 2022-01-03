@@ -315,7 +315,7 @@ pub(crate) fn register_info_value(globals: &mut TeXGlobals, info_val: cur_tok_re
 
 pub(crate) fn info_value(globals: &mut TeXGlobals, idx: halfword) -> cur_tok_repr {
     if idx as usize >= globals.info_val_count {
-        panic!("info idx out of bound");
+        panic!("info idx {} out of bound", idx);
     }
     globals.info_val_gallery[idx as usize]
 }

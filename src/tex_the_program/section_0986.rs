@@ -52,7 +52,7 @@ pub(crate) macro Show_the_status_of_the_current_page($globals:expr) {{
                 // print_scaled(t);
                 print_scaled($globals, scaled::new_from_inner(t));
                 // if type(r)=split_up then
-                if r#type!($globals, r) as integer == page_ins_node_subtype::split_up as integer {
+                if r#type!($globals, r) as integer == page_ins_node_type::split_up as integer {
                     // begin q:=page_head; t:=0;
                     q = page_head;
                     t = 0;
@@ -107,7 +107,7 @@ pub(crate) macro Show_the_status_of_the_current_page($globals:expr) {{
     use crate::section_0236::count;
     use crate::section_0980::page_contents_kind;
     use crate::section_0981::broken_ins;
-    use crate::section_0981::page_ins_node_subtype;
+    use crate::section_0981::page_ins_node_type;
     use crate::section_0982::page_goal;
     use crate::section_0985::print_totals;
 }}

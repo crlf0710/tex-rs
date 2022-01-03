@@ -31,7 +31,7 @@ pub(crate) macro If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_
     // whatsit_node: @<Prepare to move whatsit |p| to the current page,
     //   then |goto contribute|@>;
     else if type_p == whatsit_node {
-        todo!("prepare to move whatsit_node");
+        crate::section_1365::Prepare_to_move_whatsit_p_to_the_current_page__then_goto_contribute!($globals, $p, $lbl_contribute);
     }
     // glue_node: if page_contents<box_there then goto done1
     else if type_p == glue_node {
@@ -68,7 +68,7 @@ pub(crate) macro If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_
     }
     // ins_node: @<Append an insertion to the current page and |goto contribute|@>;
     else if type_p == ins_node {
-        todo!("move ins node");
+        crate::section_1008::Append_an_insertion_to_the_current_page_and_goto_contribute!($globals, $p, $lbl_contribute);
     }
     // othercases confusion("page")
     else {

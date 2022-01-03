@@ -59,6 +59,13 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists($globals:expr,
         /// already processed
         do_nothing!();
         true
+    } else if crate::section_1097::Cases_of_main_control_that_build_boxes_and_lists_1097!(
+        $globals,
+        $abs_mode_plus_cur_cmd
+    ) {
+        /// already processed
+        do_nothing!();
+        true
     } else if crate::section_1102::Cases_of_main_control_that_build_boxes_and_lists_1102!(
         $globals,
         $abs_mode_plus_cur_cmd
@@ -232,7 +239,7 @@ pub(crate) macro Cases_of_main_control_that_are_for_extensions_to_TeX($globals:e
 }}
 
 // @<Cases of |main_control| that are not part of the inner loop@>=
-pub(crate) macro Cases_of_main_control_that_are_not_part_of_the_inner_loop($globals:expr, $abs_mode_plus_cur_cmd:expr) {
+pub(crate) macro Cases_of_main_control_that_are_not_part_of_the_inner_loop($globals:expr, $abs_mode_plus_cur_cmd:expr, $lbl_reswitch:lifetime) {
     // any_mode(relax),vmode+spacer,mmode+spacer,mmode+no_boundary:do_nothing;
     if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, relax as u16)
         || $abs_mode_plus_cur_cmd == vmode as u16 + spacer as u16
@@ -244,17 +251,17 @@ pub(crate) macro Cases_of_main_control_that_are_not_part_of_the_inner_loop($glob
     // any_mode(ignore_spaces): begin @<Get the next non-blank non-call...@>;
     else if abs_mode_plus_cur_cmd_matches_any_mode!($abs_mode_plus_cur_cmd, ignore_spaces as u16)
     {
-        todo!("ignore_spaces");
+        crate::section_0406::Get_the_next_non_blank_non_call_token!($globals);
         // goto reswitch;
+        crate::goto_backward_label!($lbl_reswitch);
         // end;
     }
     // vmode+stop: if its_all_over then return; {this is the only way out}
     else if $abs_mode_plus_cur_cmd == vmode as u16 + stop as u16 {
         if its_all_over($globals)? {
             /// this is the only way out
-            {
-                crate::return_nojump!();
-            }
+            const _: () = ();
+            crate::return_nojump!();
         }
     }
     // @t\4@>@<Forbidden cases detected in |main_control|@>@+@,any_mode(mac_param):

@@ -114,6 +114,9 @@ pub(crate) macro max_depth($globals:expr) {
     dimen_par!($globals, crate::section_0247::max_depth_code)
 }
 // @d split_max_depth==dimen_par(split_max_depth_code)
+pub(crate) macro split_max_depth($globals:expr) {
+    crate::section_0247::dimen_par!($globals, crate::section_0247::split_max_depth_code)
+}
 // @d box_max_depth==dimen_par(box_max_depth_code)
 pub(crate) macro box_max_depth($globals:expr) {
     crate::section_0247::dimen_par!($globals, crate::section_0247::box_max_depth_code)

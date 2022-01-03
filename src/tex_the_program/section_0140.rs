@@ -14,9 +14,22 @@
 /// `type` of insertion nodes
 pub(crate) const ins_node: quarterword = 3;
 // @d ins_node_size=5 {number of words to allocate for an insertion}
+/// number of words to allocate for an insertion
+pub(crate) const ins_node_size: quarterword = 5;
 // @d float_cost(#)==mem[#+1].int {the |floating_penalty| to be used}
+/// the `floating_penalty` to be used
+pub(crate) macro float_cost($globals:expr, $p:expr) {
+    $globals.mem[$p + 1][crate::section_0113::MEMORY_WORD_INT]
+}
 // @d ins_ptr(#)==info(#+4) {the vertical list to be inserted}
+/// the vertical list to be inserted
+pub(crate) macro ins_ptr($globals:expr, $p:expr) {
+    crate::section_0118::info_inner!($globals, $p + 4)
+}
 // @d split_top_ptr(#)==link(#+4) {the |split_top_skip| to be used}
-//
+/// the `split_top_skip` to be used
+pub(crate) macro split_top_ptr($globals:expr, $p:expr) {
+    crate::section_0118::link!($globals, $p + 4)
+}
 
 use crate::section_0113::quarterword;
