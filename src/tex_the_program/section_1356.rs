@@ -11,8 +11,9 @@ pub(crate) macro Display_the_whatsit_node_p($globals:expr, $p:expr) {{
     }
     // write_node:begin print_write_whatsit("write",p);
     else if subtype_p == write_node {
-        todo!("write_node");
+        print_write_whatsit($globals, crate::strpool_str!("write"), $p as pointer);
         // print_mark(write_tokens(p));
+        print_mark($globals, write_tokens!($globals, $p as pointer) as _);
         // end;
     }
     // close_node:print_write_whatsit("closeout",p);
@@ -58,6 +59,7 @@ pub(crate) macro Display_the_whatsit_node_p($globals:expr, $p:expr) {{
     use crate::section_0065::print_int;
     use crate::section_0115::pointer;
     use crate::section_0133::subtype;
+    use crate::section_0176::print_mark;
     use crate::section_1341::close_node;
     use crate::section_1341::language_node;
     use crate::section_1341::open_node;
@@ -66,4 +68,6 @@ pub(crate) macro Display_the_whatsit_node_p($globals:expr, $p:expr) {{
     use crate::section_1341::what_lhm;
     use crate::section_1341::what_rhm;
     use crate::section_1341::write_node;
+    use crate::section_1341::write_tokens;
+    use crate::section_1355::print_write_whatsit;
 }}

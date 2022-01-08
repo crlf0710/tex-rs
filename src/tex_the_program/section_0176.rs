@@ -37,11 +37,33 @@ pub(crate) fn print_font_and_char(globals: &mut TeXGlobals, p: integer) {
 }
 // @#
 // procedure print_mark(@!p:integer); {prints token list data in braces}
-// begin print_char("{");
-// if (p<hi_mem_min)or(p>mem_end) then print_esc("CLOBBERED.")
-// else show_token_list(link(p),null,max_print_line-10);
-// print_char("}");
-// end;
+/// prints token list data in braces
+pub(crate) fn print_mark(globals: &mut TeXGlobals, p: integer) {
+    // begin print_char("{");
+    print_char(
+        make_globals_io_string_log_view!(globals),
+        ASCII_code_literal!(b'{'),
+    );
+    // if (p<hi_mem_min)or(p>mem_end) then print_esc("CLOBBERED.")
+    if p < globals.hi_mem_min as integer || p > globals.mem_end as integer {
+        print_esc(globals, crate::strpool_str!("CLOBBERED."));
+    }
+    // else show_token_list(link(p),null,max_print_line-10);
+    else {
+        show_token_list(
+            globals,
+            link!(globals, p as pointer) as _,
+            null as _,
+            (globals.max_print_line - 10) as _,
+        );
+    }
+    // print_char("}");
+    print_char(
+        make_globals_io_string_log_view!(globals),
+        ASCII_code_literal!(b'}'),
+    );
+    // end;
+}
 // @#
 // procedure print_rule_dimen(@!d:scaled); {prints dimension in rule node}
 /// prints dimension in rule node
@@ -71,8 +93,11 @@ use crate::section_0063::print_esc;
 use crate::section_0068::print_ASCII;
 use crate::section_0101::scaled;
 use crate::section_0103::print_scaled;
+use crate::section_0115::null;
 use crate::section_0115::pointer;
+use crate::section_0118::link;
 use crate::section_0134::character;
 use crate::section_0134::font;
 use crate::section_0135::height;
 use crate::section_0138::is_running;
+use crate::section_0292::show_token_list;

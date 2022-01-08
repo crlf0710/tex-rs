@@ -49,6 +49,11 @@ pub(crate) enum page_ins_node_type {
 }
 // @d broken_ptr(#)==link(#+1)
 //   {an insertion for this class will break here if anywhere}
+/// an insertion for this class will break here if anywhere
+pub(crate) macro broken_ptr($globals:expr, $p:expr) {
+    crate::section_0118::link!($globals, $p + 1)
+}
+
 // @d broken_ins(#)==info(#+1) {this insertion might break at |broken_ptr|}
 /// this insertion might break at `broken_ptr`
 pub(crate) macro broken_ins($globals:expr, $p:expr) {

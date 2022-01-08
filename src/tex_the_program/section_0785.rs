@@ -17,10 +17,14 @@ pub(crate) fn align_peek(globals: &mut TeXGlobals) -> TeXResult<()> {
     crate::section_0406::Get_the_next_non_blank_non_call_token!(globals);
     // if cur_cmd=no_align then
     if globals.cur_cmd == no_align {
-        todo!("align_peek 1");
-    // begin scan_left_brace; new_save_level(no_align_group);
-    // if mode=-vmode then normal_paragraph;
-    // end
+        // begin scan_left_brace; new_save_level(no_align_group);
+        scan_left_brace(globals)?;
+        new_save_level(globals, no_align_group.into());
+        // if mode=-vmode then normal_paragraph;
+        if mode!(globals) == -vmode {
+            normal_paragraph(globals)?;
+        }
+        // end
     }
     // else if cur_cmd=right_brace then fin_align
     else if globals.cur_cmd == right_brace {
@@ -52,7 +56,13 @@ use crate::section_0081::TeXResult;
 use crate::section_0207::car_ret;
 use crate::section_0207::right_brace;
 use crate::section_0208::no_align;
+use crate::section_0211::vmode;
+use crate::section_0213::mode;
+use crate::section_0269::no_align_group;
+use crate::section_0274::new_save_level;
+use crate::section_0403::scan_left_brace;
 use crate::section_0780::cr_cr_code;
 use crate::section_0786::init_row;
 use crate::section_0788::init_col;
 use crate::section_0800::fin_align;
+use crate::section_1070::normal_paragraph;

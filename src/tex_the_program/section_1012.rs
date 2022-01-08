@@ -15,7 +15,7 @@
 //
 // @<Declare the procedure called |fire_up|@>=
 // procedure fire_up(@!c:pointer);
-#[allow(unused_variables)]
+#[allow(unused_variables, unused_assignments)]
 pub(crate) fn fire_up(globals: &mut TeXGlobals, c: pointer) -> TeXResult<()> {
     // label exit;
     // var p,@!q,@!r,@!s:pointer; {nodes being examined and/or changed}

@@ -32,7 +32,7 @@ pub(crate) macro Scan_the_template_v_j__putting_the_resulting_token_list_in_hold
             // link(p):=get_avail; p:=link(p); info(p):=cur_tok;
             link!($globals, p) = get_avail($globals);
             p = link!($globals, p);
-            info_inner!($globals, p) = $globals.cur_tok.get() as _;
+            info_tok_assign!($globals, p, $globals.cur_tok);
             // end;
         }
         // done2: link(p):=get_avail; p:=link(p);

@@ -30,7 +30,7 @@ pub(crate) macro Set_the_glue_in_node_r_and_change_it_from_an_unset_node($global
     if mode!($globals) == -vmode {
         // @<Make the unset node |r| into an |hlist_node| of width |w|,
         //   setting the glue as if the width were |t|@>
-        todo!("Make the unset node |r| into an hlist_node");
+        crate::section_0810::Make_the_unset_node_r_into_an_hlist_node_of_width_w__setting_the_glue_as_if_the_width_were_t!($globals, $q, $r, w, t);
     }
     // else @<Make the unset node |r| into a |vlist_node| of height |w|,
     //     setting the glue as if the height were |t|@>;

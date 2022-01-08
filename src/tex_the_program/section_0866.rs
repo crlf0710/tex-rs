@@ -50,7 +50,7 @@ pub(crate) macro Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pa
             }
             // whatsit_node: @<Advance \(p)past a whatsit node in the \(l)|line_break| loop@>;
             else if type_cur_p == whatsit_node {
-                crate::section_1363::Advance_past_a_whatsit_node_in_the_line_break_loop!($globals);
+                crate::section_1362::Advance_past_a_whatsit_node_in_the_line_break_loop!($globals);
             }
             // glue_node: begin @<If node |cur_p| is a legal breakpoint, call |try_break|;
             //   then update the active widths by including the glue in |glue_ptr(cur_p)|@>;

@@ -1,6 +1,7 @@
 //! ` `
 
 pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes($globals:expr) {{
+    crate::section_0790::Initialize_the_special_list_heads_and_constant_nodes_0790!($globals);
     crate::section_0797::Initialize_the_special_list_heads_and_constant_nodes_0797!($globals);
     crate::section_0820::Initialize_the_special_list_heads_and_constant_nodes_0820!($globals);
     crate::section_0981::Initialize_the_special_list_heads_and_constant_nodes_0981!($globals);

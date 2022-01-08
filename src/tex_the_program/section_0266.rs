@@ -45,6 +45,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // char_num: print_esc("char");
+    else if $cmd == char_num {
+        print_esc($globals, crate::strpool_str!("char"));
+        true
+    }
     // cs_name: print_esc("csname");
     else if $cmd == cs_name {
         print_esc($globals, crate::strpool_str!("csname"));
@@ -56,6 +60,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // delim_num: print_esc("delimiter");
+    else if $cmd == delim_num {
+        print_esc($globals, crate::strpool_str!("delimiter"));
+        true
+    }
     // divide: print_esc("divide");
     else if $cmd == divide {
         print_esc($globals, crate::strpool_str!("divide"));
@@ -102,6 +110,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // ital_corr: print_esc("/");
+    else if $cmd == ital_corr {
+        print_esc($globals, crate::strpool_str!("/"));
+        true
+    }
     // mark: print_esc("mark");
     // math_accent: print_esc("mathaccent");
     // math_char_num: print_esc("mathchar");

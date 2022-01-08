@@ -9,8 +9,9 @@ pub(crate) macro Set_the_unset_box_q_and_the_unset_boxes_in_it($globals:expr, $p
     // begin if mode=-vmode then
     if mode!($globals) == -vmode {
         // begin type(q):=hlist_node; width(q):=width(p);
+        r#type!($globals, $q) = hlist_node;
+        width!($globals, $q) = width!($globals, $p);
         // end
-        todo!("mode == -vmode");
     }
     // else  begin type(q):=vlist_node; height(q):=height(p);
     else {
@@ -48,8 +49,10 @@ pub(crate) macro Set_the_unset_box_q_and_the_unset_boxes_in_it($globals:expr, $p
     use crate::section_0135::glue_set;
     use crate::section_0135::glue_sign;
     use crate::section_0135::height;
+    use crate::section_0135::hlist_node;
     use crate::section_0135::list_ptr;
     use crate::section_0135::shift_amount;
+    use crate::section_0135::width;
     use crate::section_0137::vlist_node;
     use crate::section_0211::vmode;
     use crate::section_0213::mode;

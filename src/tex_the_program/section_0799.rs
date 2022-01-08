@@ -12,12 +12,23 @@ pub(crate) fn fin_row(globals: &mut TeXGlobals) -> TeXResult<()> {
     // begin if mode=-hmode then
     if mode!(globals) == -hmode {
         // begin p:=hpack(link(head),natural);
+        p = hpack(
+            globals,
+            link!(globals, head!(globals)),
+            natural0!(),
+            natural1!(),
+        )?;
         // pop_nest; append_to_vlist(p);
+        pop_nest(globals);
+        append_to_vlist(globals, p)?;
         // if cur_head<>cur_tail then
-        //   begin link(tail):=link(cur_head); tail:=cur_tail;
-        //   end;
+        if globals.cur_head != globals.cur_tail {
+            // begin link(tail):=link(cur_head); tail:=cur_tail;
+            link!(globals, tail!(globals)) = link!(globals, globals.cur_head);
+            tail!(globals) = globals.cur_tail;
+            // end;
+        }
         // end
-        todo!("-hmode");
     }
     // else  begin p:=vpack(link(head),natural); pop_nest;
     else {
@@ -69,5 +80,7 @@ use crate::section_0307::every_cr_text;
 use crate::section_0323::begin_token_list;
 use crate::section_0644::natural0;
 use crate::section_0644::natural1;
+use crate::section_0649::hpack;
 use crate::section_0668::vpack;
+use crate::section_0679::append_to_vlist;
 use crate::section_0785::align_peek;

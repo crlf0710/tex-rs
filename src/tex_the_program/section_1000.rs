@@ -31,7 +31,7 @@ pub(crate) macro If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_
     // whatsit_node: @<Prepare to move whatsit |p| to the current page,
     //   then |goto contribute|@>;
     else if type_p == whatsit_node {
-        crate::section_1365::Prepare_to_move_whatsit_p_to_the_current_page__then_goto_contribute!($globals, $p, $lbl_contribute);
+        crate::section_1364::Prepare_to_move_whatsit_p_to_the_current_page__then_goto_contribute!($globals, $p, $lbl_contribute);
     }
     // glue_node: if page_contents<box_there then goto done1
     else if type_p == glue_node {
@@ -48,11 +48,22 @@ pub(crate) macro If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_
         }
     }
     // kern_node: if page_contents<box_there then goto done1
-    //   else if link(p)=null then return
-    //   else if type(link(p))=glue_node then pi:=0
-    //   else goto update_heights;
     else if type_p == kern_node {
-        todo!("move kern node");
+        if $globals.page_contents < page_contents_kind::box_there {
+            crate::goto_forward_label!($lbl_done1);
+        }
+        // else if link(p)=null then return
+        else if link!($globals, $p) == null {
+            crate::return_nojump!();
+        }
+        // else if type(link(p))=glue_node then pi:=0
+        else if r#type!($globals, link!($globals, $p)) == glue_node {
+            $pi = 0;
+        }
+        // else goto update_heights;
+        else {
+            crate::goto_forward_label!($lbl_update_heights);
+        }
     }
     // penalty_node: if page_contents<box_there then goto done1@+else pi:=penalty(p);
     else if type_p == penalty_node {
@@ -73,10 +84,12 @@ pub(crate) macro If_the_current_page_is_empty_and_node_p_is_to_be_deleted__goto_
     // othercases confusion("page")
     else {
         confusion($globals, crate::strpool_str!("page"))?;
+        // @:this can't happen page}{\quad page@>
     }
-    // @:this can't happen page}{\quad page@>
     // endcases
     use crate::section_0095::confusion;
+    use crate::section_0115::null;
+    use crate::section_0118::link;
     use crate::section_0133::r#type;
     use crate::section_0135::hlist_node;
     use crate::section_0137::vlist_node;

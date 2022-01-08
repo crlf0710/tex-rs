@@ -12,11 +12,23 @@ pub(crate) macro Package_the_preamble_list__to_determine_the_actual_tabskip_glue
     $globals.pack_begin_line = -mode_line!($globals);
     // if mode=-vmode then
     if mode!($globals) == -vmode {
+        /// temporary storage for `overfull_rule`
+        let rule_save;
         // begin rule_save:=overfull_rule;
+        rule_save = overfull_rule!($globals);
         // overfull_rule:=0; {prevent rule from being packaged}
+        overfull_rule!($globals) = scaled::zero();
+        /// prevent rule from being packaged
+        const _: () = ();
         // p:=hpack(preamble,saved(1),saved(0)); overfull_rule:=rule_save;
+        $p = hpack(
+            $globals,
+            preamble!($globals),
+            scaled::new_from_inner(saved!($globals, 1)),
+            small_number::new(saved!($globals, 0) as _),
+        )?;
+        overfull_rule!($globals) = rule_save;
         // end
-        todo!("mode = -vmode");
     }
     // else  begin q:=link(preamble);
     else {
@@ -67,7 +79,9 @@ pub(crate) macro Package_the_preamble_list__to_determine_the_actual_tabskip_glue
     use crate::section_0211::vmode;
     use crate::section_0213::mode;
     use crate::section_0213::mode_line;
+    use crate::section_0247::overfull_rule;
     use crate::section_0274::saved;
+    use crate::section_0649::hpack;
     use crate::section_0668::vpack;
     use crate::section_0770::preamble;
 }}

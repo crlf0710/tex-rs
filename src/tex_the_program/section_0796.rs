@@ -11,10 +11,19 @@ pub(crate) macro Package_an_unset_box_for_the_current_column_and_record_its_widt
     let mut o: glue_ord;
     // begin if mode=-hmode then
     if mode!($globals) == -hmode {
-        todo!("mode = -hmode");
-    // begin adjust_tail:=cur_tail; u:=hpack(link(head),natural); w:=width(u);
-    // cur_tail:=adjust_tail; adjust_tail:=null;
-    // end
+        // begin adjust_tail:=cur_tail; u:=hpack(link(head),natural); w:=width(u);
+        $globals.adjust_tail = $globals.cur_tail;
+        u = hpack(
+            $globals,
+            link!($globals, head!($globals)),
+            natural0!(),
+            natural1!(),
+        )?;
+        w = width!($globals, u);
+        // cur_tail:=adjust_tail; adjust_tail:=null;
+        $globals.cur_tail = $globals.adjust_tail;
+        $globals.adjust_tail = null;
+        // end
     }
     // else  begin u:=vpackage(link(head),natural,0); w:=height(u);
     else {
@@ -61,6 +70,7 @@ pub(crate) macro Package_an_unset_box_for_the_current_column_and_record_its_widt
     use crate::section_0101::scaled;
     use crate::section_0110::min_quarterword;
     use crate::section_0113::halfword;
+    use crate::section_0115::null;
     use crate::section_0115::pointer;
     use crate::section_0118::link;
     use crate::section_0133::r#type;
@@ -80,5 +90,6 @@ pub(crate) macro Package_an_unset_box_for_the_current_column_and_record_its_widt
     use crate::section_0217::pop_nest;
     use crate::section_0644::natural0;
     use crate::section_0644::natural1;
+    use crate::section_0649::hpack;
     use crate::section_0668::vpackage;
 }}

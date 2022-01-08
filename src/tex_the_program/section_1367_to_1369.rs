@@ -1,9 +1,3 @@
-//! @ @<Process whatsit |p| in |vert_break| loop, |goto not_found|@>=
-//! goto not_found
-//!
-//! @ @<Output the whatsit node |p| in a vlist@>=
-//! out_what(p)
-//!
 //! @ @<Output the whatsit node |p| in an hlist@>=
 //! out_what(p)
 //!

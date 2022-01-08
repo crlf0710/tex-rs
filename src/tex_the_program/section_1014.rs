@@ -7,7 +7,7 @@
 pub(crate) macro Put_the_optimal_current_page_into_box_255__update_first_mark_and_bot_mark__append_insertions_to_their_boxes__and_put_the_remaining_nodes_back_on_the_contribution_list
     ($globals:expr, $c:expr) {{
         /// nodes being examined and/or changed
-        let (mut p, q): (pointer, pointer);
+        let (mut p, mut q): (pointer, pointer);
         /// predecessor of `p`
         let mut prev_p: pointer;
         /// saved value of `split_top_skip`
@@ -40,11 +40,13 @@ pub(crate) macro Put_the_optimal_current_page_into_box_255__update_first_mark_an
         while p != $globals.best_page_break {
             // begin if type(p)=ins_node then
             if r#type!($globals, p) == ins_node {
-                todo!("ins node prior of page break");
                 // begin if holding_inserts<=0 then
-                //    @<Either insert the material specified by node |p| into the
-                //      appropriate box, or hold it for the next page;
-                //      also delete node |p| from the current page@>;
+                if holding_inserts!($globals) <= 0 {
+                    // @<Either insert the material specified by node |p| into the
+                    //   appropriate box, or hold it for the next page;
+                    //   also delete node |p| from the current page@>;
+                    crate::section_1020::Either_insert_the_material_specified_by_node_p_into_the_appropriate_box__or_hold_it_for_the_next_page__also_delete_node_p_from_the_current_page!($globals, p, prev_p, q);
+                }
                 // end
             }
             // else if type(p)=mark_node then @<Update the values of

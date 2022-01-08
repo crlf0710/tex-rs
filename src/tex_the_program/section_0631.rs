@@ -25,7 +25,7 @@ pub(crate) macro Output_the_non_char_node_p_for_vlist_out {
         }
         // whatsit_node: @<Output the whatsit node |p| in a vlist@>;
         else if type_p == whatsit_node {
-            todo!("output whatsit node");
+            crate::section_1366::Output_the_whatsit_node_p_in_a_vlist!($globals, $p);
         }
         // glue_node: @<Move down or output leaders@>;
         else if type_p == glue_node {

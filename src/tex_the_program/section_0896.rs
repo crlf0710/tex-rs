@@ -42,7 +42,7 @@ pub(crate) macro Skip_to_node_ha__or_goto_done1_if_no_hyphenation_should_be_atte
             // else if type(s)=whatsit_node then
             else if r#type!($globals, $s) == whatsit_node {
                 // begin @<Advance \(p)past a whatsit node in the \(p)pre-hyphenation loop@>;
-                crate::section_1364::Advance_past_a_whatsit_node_in_the_pre_hyphenation_loop!($globals, $s);
+                crate::section_1363::Advance_past_a_whatsit_node_in_the_pre_hyphenation_loop!($globals, $s);
                 // goto continue;
                 crate::goto_forward_label!('continue_);
                 // end
