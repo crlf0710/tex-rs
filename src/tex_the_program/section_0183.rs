@@ -48,6 +48,11 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
         // mark_node: @<Display mark |p|@>;
         // adjust_node: @<Display adjustment |p|@>;
         // @t\4@>@<Cases of |show_node_list| that arise in mlists only@>@;
+        else if crate::section_0690::Cases_of_show_node_list_that_arise_in_mlists_only!(
+            $globals, $p, type_p
+        ) {
+            // already processed
+        }
         // othercases print("Unknown node type!")
         else {
             crate::trace_error_expr!("type(p) = {}", r#type!($globals, $p as pointer));
