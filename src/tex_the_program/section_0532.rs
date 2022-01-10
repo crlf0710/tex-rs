@@ -3,30 +3,32 @@
 //
 // @d ensure_dvi_open==if output_file_name=0 then
 pub(crate) macro ensure_dvi_open($globals:expr) {{
-    // begin if job_name=0 then open_log_file;
-    if $globals.job_name == 0 {
-        open_log_file($globals);
+    if $globals.output_file_name == 0 {
+        // begin if job_name=0 then open_log_file;
+        if $globals.job_name == 0 {
+            open_log_file($globals);
+        }
+        // pack_job_name(".dvi");
+        pack_job_name($globals, crate::strpool_str!(".dvi"));
+        // while not b_open_out(dvi_file) do
+        while !b_open_out(
+            make_globals_filename_view!($globals),
+            &mut $globals.dvi_file,
+        ) {
+            // prompt_file_name("file name for output",".dvi");
+            prompt_file_name(
+                $globals,
+                crate::strpool_str!("file name for output"),
+                crate::strpool_str!(".dvi"),
+            )?;
+        }
+        // output_file_name:=b_make_name_string(dvi_file);
+        $globals.output_file_name = b_make_name_string(
+            make_globals_io_string_view!($globals),
+            &mut $globals.dvi_file,
+        );
+        // end
     }
-    // pack_job_name(".dvi");
-    pack_job_name($globals, crate::strpool_str!(".dvi"));
-    // while not b_open_out(dvi_file) do
-    while !b_open_out(
-        make_globals_filename_view!($globals),
-        &mut $globals.dvi_file,
-    ) {
-        // prompt_file_name("file name for output",".dvi");
-        prompt_file_name(
-            $globals,
-            crate::strpool_str!("file name for output"),
-            crate::strpool_str!(".dvi"),
-        )?;
-    }
-    // output_file_name:=b_make_name_string(dvi_file);
-    $globals.output_file_name = b_make_name_string(
-        make_globals_io_string_view!($globals),
-        &mut $globals.dvi_file,
-    );
-    // end
     use crate::section_0004::make_globals_filename_view;
     use crate::section_0004::make_globals_io_string_view;
     use crate::section_0004::TeXGlobalsFilenameView;
