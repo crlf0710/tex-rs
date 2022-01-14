@@ -52,6 +52,13 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists($globals:expr,
         /// already processed
         do_nothing!();
         true
+    } else if crate::section_1092::Cases_of_main_control_that_build_boxes_and_lists_1092!(
+        $globals,
+        $abs_mode_plus_cur_cmd
+    ) {
+        /// already processed
+        do_nothing!();
+        true
     } else if crate::section_1094::Cases_of_main_control_that_build_boxes_and_lists_1094!(
         $globals,
         $abs_mode_plus_cur_cmd
@@ -123,6 +130,13 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists($globals:expr,
         do_nothing!();
         true
     } else if crate::section_1137::Cases_of_main_control_that_build_boxes_and_lists_1137!(
+        $globals,
+        $abs_mode_plus_cur_cmd
+    ) {
+        /// already processed
+        do_nothing!();
+        true
+    } else if crate::section_1150::Cases_of_main_control_that_build_boxes_and_lists_1150!(
         $globals,
         $abs_mode_plus_cur_cmd
     ) {

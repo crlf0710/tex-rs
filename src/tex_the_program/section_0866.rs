@@ -67,7 +67,7 @@ pub(crate) macro Call_try_break_if_cur_p_is_a_legal_breakpoint__on_the_second_pa
             // kern_node: if subtype(cur_p)=explicit then kern_break
             else if type_cur_p == kern_node {
                 if subtype!($globals, $globals.cur_p) as integer == kern_node_subtype::explicit as integer {
-                    todo!("kern_break");
+                    kern_break!($globals, $auto_breaking);
                 }
                 // else act_width:=act_width+width(cur_p);
                 else {

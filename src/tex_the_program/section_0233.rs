@@ -13,9 +13,21 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     // else if n<toks_base then
     else if ($n as integer) < toks_base as integer {
         // begin print_cmd_chr(assign_toks,n); print_char("=");
+        print_cmd_chr($globals, assign_toks, chr_code_type::new($n as _));
+        print_char(
+            make_globals_io_string_log_view!($globals),
+            ASCII_code_literal!(b'='),
+        );
         // if equiv(n)<>null then show_token_list(link(equiv(n)),null,32);
+        if equiv!($globals, $n) != null {
+            show_token_list(
+                $globals,
+                link!($globals, equiv!($globals, $n)) as _,
+                null as _,
+                32,
+            );
+        }
         // end
-        todo!("assign_toks");
     }
     // else if n<box_base then
     else if ($n as integer) < box_base as integer {
@@ -62,11 +74,16 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     use crate::section_0063::print_esc;
     use crate::section_0065::print_int;
     use crate::section_0115::null;
+    use crate::section_0118::link;
     use crate::section_0182::show_node_list;
+    use crate::section_0209::assign_toks;
     use crate::section_0221::equiv;
     use crate::section_0230::box_base;
     use crate::section_0230::cat_code_base;
     use crate::section_0230::cur_font_loc;
     use crate::section_0230::par_shape_loc;
     use crate::section_0230::toks_base;
+    use crate::section_0292::show_token_list;
+    use crate::section_0297::chr_code_type;
+    use crate::section_0298::print_cmd_chr;
 }}

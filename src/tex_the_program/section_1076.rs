@@ -38,10 +38,15 @@ pub(crate) macro Append_box_cur_box_to_the_current_list__shifted_by_box_context(
             }
             // else  begin p:=new_noad;
             else {
+                /// `ord_noad` for new box in math mode
+                let p;
+                p = new_noad($globals)?;
                 // math_type(nucleus(p)):=sub_box;
+                math_type!($globals, nucleus!(p)) = math_type_kind::sub_box as _;
                 // info(nucleus(p)):=cur_box; cur_box:=p;
+                info_inner!($globals, nucleus!(p)) = $globals.cur_box;
+                $globals.cur_box = p;
                 // end;
-                todo!("mmode");
             }
             // link(tail):=cur_box; tail:=cur_box;
             link!($globals, tail!($globals)) = $globals.cur_box;
@@ -53,6 +58,7 @@ pub(crate) macro Append_box_cur_box_to_the_current_list__shifted_by_box_context(
     // end
     use crate::section_0101::scaled;
     use crate::section_0115::null;
+    use crate::section_0118::info_inner;
     use crate::section_0118::link;
     use crate::section_0135::shift_amount;
     use crate::section_0162::adjust_head;
@@ -62,5 +68,9 @@ pub(crate) macro Append_box_cur_box_to_the_current_list__shifted_by_box_context(
     use crate::section_0213::space_factor;
     use crate::section_0213::tail;
     use crate::section_0679::append_to_vlist;
+    use crate::section_0681::math_type;
+    use crate::section_0681::math_type_kind;
+    use crate::section_0681::nucleus;
+    use crate::section_0686::new_noad;
     use crate::section_0994::build_page;
 }}

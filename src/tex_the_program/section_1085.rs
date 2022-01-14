@@ -30,7 +30,12 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
     }
     // vtop_group: begin end_graf; package(vtop_code);
     else if $globals.cur_group == vtop_group {
-        todo!("vtop_group");
+        end_graf($globals)?;
+        package($globals, small_number::new(vtop_code as _))?;
+        use crate::section_0101::small_number;
+        use crate::section_1071::vtop_code;
+        use crate::section_1086::package;
+        use crate::section_1096::end_graf;
         true
     }
     //   end;

@@ -35,7 +35,7 @@ pub(crate) fn unpackage(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // if c=copy_code then link(tail):=copy_node_list(list_ptr(p))
     if c == copy_code as chr_code_repr {
-        link!(globals, tail!(globals)) = copy_node_list(globals, list_ptr!(globals, p));
+        link!(globals, tail!(globals)) = copy_node_list(globals, list_ptr!(globals, p))?;
     }
     // else  begin link(tail):=list_ptr(p); box(cur_val):=null;
     else {

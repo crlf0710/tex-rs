@@ -27,11 +27,14 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
                     && math_type!($globals, supscr!(p)) == math_type_kind::empty as _
                 {
                     // begin mem[saved(0)].hh:=mem[nucleus(p)].hh;
+                    $globals.mem[saved!($globals, 0) as pointer][MEMORY_WORD_HH] =
+                        $globals.mem[nucleus!(p)][MEMORY_WORD_HH];
                     // free_node(p,noad_size);
+                    free_node($globals, p, noad_size as _);
                     // end;
-                    todo!("ord_noad");
                 }
                 // end
+                use crate::section_0113::MEMORY_WORD_HH;
             }
             // else if type(p)=accent_noad then if saved(0)=nucleus(tail) then
             //  if type(tail)=ord_noad then @<Replace the tail of the list by |p|@>;
@@ -54,6 +57,7 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
     use crate::section_0115::pointer;
     use crate::section_0118::info_inner;
     use crate::section_0118::link;
+    use crate::section_0130::free_node;
     use crate::section_0133::r#type;
     use crate::section_0213::tail;
     use crate::section_0269::math_group;
@@ -61,6 +65,7 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
     use crate::section_0281::unsave;
     use crate::section_0681::math_type;
     use crate::section_0681::math_type_kind;
+    use crate::section_0681::noad_size;
     use crate::section_0681::nucleus;
     use crate::section_0681::subscr;
     use crate::section_0681::supscr;

@@ -1,6 +1,3 @@
-//! @ @<Cases of |main_control| that build...@>=
-//! hmode+start_par,mmode+start_par: indent_in_hmode;
-//!
 //! @ @<Declare act...@>=
 //! procedure indent_in_hmode;
 //! var p,@!q:pointer;

@@ -117,6 +117,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
     // mark: print_esc("mark");
     // math_accent: print_esc("mathaccent");
     // math_char_num: print_esc("mathchar");
+    else if $cmd == math_char_num {
+        print_esc($globals, crate::strpool_str!("mathchar"));
+        true
+    }
     // math_choice: print_esc("mathchoice");
     // multiply: print_esc("multiply");
     else if $cmd == multiply {

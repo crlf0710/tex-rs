@@ -28,8 +28,9 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1154($globals:
     }
     // mmode+math_char_num: begin scan_fifteen_bit_int; set_math_char(cur_val);
     else if $abs_mode_plus_cur_cmd == mmode as u16 + math_char_num as u16 {
+        scan_fifteen_bit_int($globals)?;
+        set_math_char($globals, $globals.cur_val as _)?;
         // end;
-        todo!("mmode + math_char_num");
         true
     }
     // mmode+math_given: set_math_char(cur_chr);
@@ -54,6 +55,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1154($globals:
     use crate::section_0208::*;
     use crate::section_0211::*;
     use crate::section_0230::math_code;
+    use crate::section_0436::scan_fifteen_bit_int;
     use crate::section_1155::set_math_char;
     processed
 }}
