@@ -2,7 +2,7 @@
 
 // @<Examine node |p| in the hlist, taking account of its effect...@>=
 pub(crate) macro Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__or_moving_it_to_the_adjustment_list__then_advance_p_to_the_next_node {
-    ($globals:expr, $p:expr, $h:expr, $d:expr, $x:expr) => {{
+    ($globals:expr, $p:expr, $q:expr, $h:expr, $d:expr, $x:expr) => {{
         // @^inner loop@>
         // begin reswitch: while is_char_node(p) do
         crate::region_backward_label! {
@@ -27,8 +27,8 @@ pub(crate) macro Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_th
                     // ins_node,mark_node,adjust_node: if adjust_tail<>null then
                     else if type_p == ins_node || type_p == mark_node || type_p == adjust_node {
                         if $globals.adjust_tail != null {
-                            todo!("transfer node")
                             // @<Transfer node |p| to the adjustment list@>;
+                            crate::section_0655::Transfer_node_p_to_the_adjustment_list!($globals, $p, $q);
                         }
                     }
                     // whatsit_node:@<Incorporate a whatsit node into an hbox@>;

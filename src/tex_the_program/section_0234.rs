@@ -9,18 +9,21 @@ pub(crate) macro Show_the_font_identifier_in_eqtb_n($globals:expr, $n:expr) {{
     // else if n<math_font_base+16 then
     else if ($n as integer) < math_font_base as integer + 16 {
         // begin print_esc("textfont"); print_int(n-math_font_base);
+        print_esc($globals, crate::strpool_str!("textfont"));
+        print_int($globals, $n as integer - math_font_base as integer);
         // end
-        todo!("textfont");
     }
     // else if n<math_font_base+32 then
     else if ($n as integer) < math_font_base as integer + 32 {
         // begin print_esc("scriptfont"); print_int(n-math_font_base-16);
+        print_esc($globals, crate::strpool_str!("scriptfont"));
+        print_int($globals, $n as integer - math_font_base as integer - 16);
         // end
-        todo!("scriptfont");
     }
     // else  begin print_esc("scriptscriptfont"); print_int(n-math_font_base-32);
     else {
-        todo!("scriptscriptfont");
+        print_esc($globals, crate::strpool_str!("scriptscriptfont"));
+        print_int($globals, $n as integer - math_font_base as integer - 32);
         // end;
     }
     // print_char("=");@/
@@ -47,6 +50,7 @@ pub(crate) macro Show_the_font_identifier_in_eqtb_n($globals:expr, $n:expr) {{
     use crate::section_0058::print_char;
     use crate::section_0059::print;
     use crate::section_0063::print_esc;
+    use crate::section_0065::print_int;
     use crate::section_0113::TWO_HALVES_RH;
     use crate::section_0221::equiv;
     use crate::section_0222::font_id_base;

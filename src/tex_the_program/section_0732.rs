@@ -8,13 +8,19 @@
 //
 // @<Convert \(m)math glue to ordinary glue@>=
 pub(crate) macro Convert_math_glue_to_ordinary_glue($globals:expr, $q:expr) {{
+    /// temporary registers for list construction
+    let (x, y);
     // if subtype(q)=mu_glue then
     if subtype!($globals, $q) == glue_node_subtype::mu_glue as _ {
         // begin x:=glue_ptr(q);
+        x = glue_ptr!($globals, $q);
         // y:=math_glue(x,cur_mu); delete_glue_ref(x); glue_ptr(q):=y;
+        y = math_glue($globals, x, $globals.cur_mu)?;
+        delete_glue_ref($globals, x);
+        glue_ptr!($globals, $q) = y;
         // subtype(q):=normal;
+        subtype!($globals, $q) = glue_node_subtype::normal as _;
         // end
-        todo!("mu_glue");
     }
     // else if (cur_size<>text_size)and(subtype(q)=cond_math_glue) then
     else if $globals.cur_size != text_size
@@ -29,5 +35,8 @@ pub(crate) macro Convert_math_glue_to_ordinary_glue($globals:expr, $q:expr) {{
     }
     use crate::section_0133::subtype;
     use crate::section_0149::glue_node_subtype;
+    use crate::section_0149::glue_ptr;
+    use crate::section_0201::delete_glue_ref;
     use crate::section_0699::text_size;
+    use crate::section_0716::math_glue;
 }}

@@ -31,9 +31,19 @@ pub(crate) macro Show_equivalent_n__in_region_3($globals:expr, $n:expr) {{
     // else if n<mu_skip_base then
     else if ($n as integer) < mu_skip_base as integer {
         // begin print_esc("skip"); print_int(n-skip_base); print_char("=");
+        print_esc($globals, crate::strpool_str!("skip"));
+        print_int($globals, $n as integer - skip_base as integer);
+        print_char(
+            make_globals_io_string_log_view!($globals),
+            ASCII_code_literal!(b'='),
+        );
         // print_spec(equiv(n),"pt");
+        print_spec(
+            $globals,
+            equiv!($globals, $n) as _,
+            crate::strpool_str!("pt"),
+        );
         // end
-        todo!("skip");
     }
     // else  begin print_esc("muskip"); print_int(n-mu_skip_base); print_char("=");
     else {
@@ -45,6 +55,8 @@ pub(crate) macro Show_equivalent_n__in_region_3($globals:expr, $n:expr) {{
     use crate::section_0004::make_globals_io_string_log_view;
     use crate::section_0018::ASCII_code_literal;
     use crate::section_0058::print_char;
+    use crate::section_0063::print_esc;
+    use crate::section_0065::print_int;
     use crate::section_0178::print_spec;
     use crate::section_0221::equiv;
     use crate::section_0222::glue_base;

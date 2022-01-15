@@ -3,7 +3,7 @@
 pub(crate) macro Display_glue_p($globals:expr, $p:expr) {{
     // if subtype(p)>=a_leaders then @<Display leaders |p|@>
     if subtype!($globals, $p as pointer) as integer >= glue_node_subtype::a_leaders as integer {
-        todo!("Display leaders");
+        crate::section_0190::Display_leaders_p!($globals, $p);
     }
     // else  begin print_esc("glue");
     else {

@@ -64,7 +64,7 @@ pub(crate) macro Put_the_optimal_current_page_into_box_255__update_first_mark_an
         // @<Break the current page at node |p|, put it in box~255,
         //   and put the remaining nodes on the contribution list@>;
         crate::section_1017::Break_the_current_page_at_node_p__put_it_in_box_255__and_put_the_remaining_nodes_on_the_contribution_list!
-            ($globals, p, q);
+            ($globals, p, q, prev_p);
         // @<Delete \(t)the page-insertion nodes@>
         crate::section_1019::Delete_the_page_insertion_nodes!($globals);
         use crate::section_0115::null;

@@ -22,7 +22,7 @@ pub(crate) fn box_end(globals: &mut TeXGlobals, box_context: integer) -> TeXResu
         // if box_context>ship_out_flag then @<Append a new leader node that
         //     uses |cur_box|@>
         if box_context > ship_out_flag {
-            todo!("append a new leader");
+            crate::section_1078::Append_a_new_leader_node_that_uses_cur_box!(globals, box_context);
         }
         // else ship_out(cur_box);
         else {

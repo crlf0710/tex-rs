@@ -5,7 +5,7 @@
 //! @^inner loop@>
 //
 // @<Output node |p| for |hlist_out|...@>=
-pub(crate) macro Output_node_p_for_hlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_v_eq_base_line($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr) {{
+pub(crate) macro Output_node_p_for_hlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_v_eq_base_line($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $left_edge:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr) {{
     crate::region_backward_label!{
     'reswitch <-
     {
@@ -70,7 +70,7 @@ pub(crate) macro Output_node_p_for_hlist_out_and_move_to_the_next_node__maintain
         //     and move to the next node@>
         else {
             crate::section_0622::Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_node!(
-                $globals, $p, $this_box, $base_line, $cur_glue, $cur_g, $g_sign, $g_order, 'reswitch
+                $globals, $p, $this_box, $base_line, $left_edge, $cur_glue, $cur_g, $g_sign, $g_order, 'reswitch
             );
         }
     }

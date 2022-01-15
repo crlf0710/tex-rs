@@ -75,7 +75,7 @@ pub(crate) fn hlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     //   maintaining the condition |cur_v=base_line|@>;
     while p != null {
         crate::section_0620::Output_node_p_for_hlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_v_eq_base_line!(
-            globals, p, this_box, base_line, cur_glue, cur_g, g_sign, g_order
+            globals, p, this_box, base_line, left_edge, cur_glue, cur_g, g_sign, g_order
         );
     }
     // prune_movements(save_loc);

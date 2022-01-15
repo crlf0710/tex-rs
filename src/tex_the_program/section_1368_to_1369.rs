@@ -1,6 +1,3 @@
-//! @ @<Output the whatsit node |p| in an hlist@>=
-//! out_what(p)
-//!
 //! @ After all this preliminary shuffling, we come finally to the routines
 //! that actually send out the requested data. Let's do \.{\\special} first
 //! (it's easier).

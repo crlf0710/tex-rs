@@ -1,7 +1,7 @@
 //! ` `
 // @<Output the non-|char_node| |p| for |hlist_out|...@>=
 pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_node {
-    ($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_reswitch:lifetime) => {{
+    ($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $left_edge:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_reswitch:lifetime) => {{
         // begin case type(p) of
         let type_p = r#type!($globals, $p);
         crate::region_forward_label!(
@@ -28,11 +28,11 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         }
         // whatsit_node: @<Output the whatsit node |p| in an hlist@>;
         else if type_p == whatsit_node {
-            todo!("whatsit_node in hlist");
+            crate::section_1367::Output_the_whatsit_node_p_in_a_hlist!($globals, $p);
         }
         // glue_node: @<Move right or output leaders@>;
         else if type_p == glue_node {
-            crate::section_0625::Move_right_or_output_leaders!($globals, $p, $this_box, $cur_glue, $cur_g, $g_sign, $g_order, 'move_past);
+            crate::section_0625::Move_right_or_output_leaders!($globals, $p, $this_box, $base_line, $left_edge, $cur_glue, $cur_g, $g_sign, $g_order, 'move_past, 'next_p);
         }
         // kern_node,math_node:cur_h:=cur_h+width(p);
         else if type_p == kern_node || type_p == math_node {

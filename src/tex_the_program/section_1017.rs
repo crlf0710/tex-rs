@@ -10,17 +10,27 @@
 //! are not actually present in the box.
 //
 // @<Break the current page at node |p|, put it...@>=
-pub(crate) macro Break_the_current_page_at_node_p__put_it_in_box_255__and_put_the_remaining_nodes_on_the_contribution_list($globals:expr, $p:expr, $q:expr) {{
+pub(crate) macro Break_the_current_page_at_node_p__put_it_in_box_255__and_put_the_remaining_nodes_on_the_contribution_list($globals:expr, $p:expr, $q:expr, $prev_p:expr) {{
     // if p<>null then
     if $p != null {
         // begin if link(contrib_head)=null then
-        //   if nest_ptr=0 then tail:=page_tail
-        //   else contrib_tail:=page_tail;
+        if link!($globals, contrib_head) == null {
+            // if nest_ptr=0 then tail:=page_tail
+            if $globals.nest_ptr == u8_from_0_to_n::new(0) {
+                tail!($globals) = $globals.page_tail;
+            }
+            // else contrib_tail:=page_tail;
+            else {
+                contrib_tail!($globals) = $globals.page_tail;
+            }
+        }
         // link(page_tail):=link(contrib_head);
+        link!($globals, $globals.page_tail) = link!($globals, contrib_head);
         // link(contrib_head):=p;
+        link!($globals, contrib_head) = $p;
         // link(prev_p):=null;
+        link!($globals, $prev_p) = null;
         // end;
-        todo!("p != null");
     }
     /// saved value of `vbadness`
     let save_vbadness: integer;
@@ -61,18 +71,22 @@ pub(crate) macro Break_the_current_page_at_node_p__put_it_in_box_255__and_put_th
         // end
     }
     use crate::pascal::integer;
+    use crate::pascal::u8_from_0_to_n;
     use crate::section_0101::scaled;
     use crate::section_0108::inf_bad;
     use crate::section_0110::max_halfword;
     use crate::section_0115::null;
     use crate::section_0118::link;
+    use crate::section_0162::contrib_head;
     use crate::section_0162::hold_head;
     use crate::section_0162::page_head;
     use crate::section_0201::delete_glue_ref;
+    use crate::section_0213::tail;
     use crate::section_0230::r#box;
     use crate::section_0236::vbadness;
     use crate::section_0247::vfuzz;
     use crate::section_0421::max_dimen;
     use crate::section_0644::exactly;
     use crate::section_0668::vpackage;
+    use crate::section_0995::contrib_tail;
 }}

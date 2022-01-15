@@ -42,7 +42,7 @@ pub(crate) fn hpack(
     //   then advance |p| to the next node@>;
     while p != null {
         crate::section_0651::Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_the_dimensions_of_the_new_box__or_moving_it_to_the_adjustment_list__then_advance_p_to_the_next_node!(
-            globals, p, h, d, x
+            globals, p, q, h, d, x
         );
     }
     // if adjust_tail<>null then link(adjust_tail):=null;

@@ -4,7 +4,7 @@
 pub(crate) macro Scan_the_template_u_j__putting_the_resulting_token_list_in_hold_head {
     ($globals:expr) => {{
         /// for short-term temporary use
-        let p: pointer;
+        let mut p: pointer;
         // p:=hold_head; link(p):=null;
         p = hold_head;
         link!($globals, p) = null;
@@ -18,20 +18,27 @@ pub(crate) macro Scan_the_template_u_j__putting_the_resulting_token_list_in_hold
             if $globals.cur_cmd == mac_param {
                 crate::goto_forward_label!('done1);
             }
-            todo!("scan u_j");
             // if (cur_cmd<=car_ret)and(cur_cmd>=tab_mark)and(align_state=-1000000) then
-            //  if (p=hold_head)and(cur_loop=null)and(cur_cmd=tab_mark)
-            //   then cur_loop:=cur_align
-            //  else  begin print_err("Missing # inserted in alignment preamble");
-            // @.Missing \# inserted...@>
-            //   help3("There should be exactly one # between &'s, when an")@/
-            //   ("\halign or \valign is being set up. In this case you had")@/
-            //   ("none, so I've put one in; maybe that will work.");
-            //   back_error; goto done1;
-            //   end
+            if $globals.cur_cmd <= car_ret && $globals.cur_cmd >= tab_mark && $globals.align_state == -1000000 {
+                // if (p=hold_head)and(cur_loop=null)and(cur_cmd=tab_mark)
+                //  then cur_loop:=cur_align
+                // else  begin print_err("Missing # inserted in alignment preamble");
+                // @.Missing \# inserted...@>
+                //  help3("There should be exactly one # between &'s, when an")@/
+                //  ("\halign or \valign is being set up. In this case you had")@/
+                //  ("none, so I've put one in; maybe that will work.");
+                //  back_error; goto done1;
+                //  end
+                todo!("(cur_cmd<=car_ret)and(cur_cmd>=tab_mark)and(align_state=-1000000)");
+            }
             // else if (cur_cmd<>spacer)or(p<>hold_head) then
-            //   begin link(p):=get_avail; p:=link(p); info(p):=cur_tok;
-            //   end;
+            else if $globals.cur_cmd != spacer || p != hold_head {
+                // begin link(p):=get_avail; p:=link(p); info(p):=cur_tok;
+                link!($globals, p) = get_avail($globals);
+                p = link!($globals, p);
+                info_tok_assign!($globals, p, $globals.cur_tok);
+                // end;
+            }
             // end;
         }
         // done1:
@@ -41,8 +48,13 @@ pub(crate) macro Scan_the_template_u_j__putting_the_resulting_token_list_in_hold
         use crate::section_0115::null;
         use crate::section_0115::pointer;
         use crate::section_0118::link;
+        use crate::section_0120::get_avail;
         use crate::section_0162::hold_head;
         use crate::section_0207::mac_param;
+        use crate::section_0207::spacer;
+        use crate::section_0207::tab_mark;
+        use crate::section_0207::car_ret;
+        use crate::section_0118::info_tok_assign;
         use crate::section_0782::get_preamble_token;
     }}
 }

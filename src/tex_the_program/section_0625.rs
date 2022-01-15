@@ -19,7 +19,7 @@ pub(crate) macro vet_glue($glue_temp:expr, $val:expr) {{
 }}
 
 // @<Move right or output leaders@>=
-pub(crate) macro Move_right_or_output_leaders($globals:expr, $p:expr, $this_box:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_move_past:lifetime) {{
+pub(crate) macro Move_right_or_output_leaders($globals:expr, $p:expr, $this_box:expr, $base_line:expr, $left_edge:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_move_past:lifetime, $lbl_next_p:lifetime) {{
     // begin g:=glue_ptr(p); rule_wd:=width(g)-cur_g;
     $globals.ship_out_g = glue_ptr!($globals, $p);
     $globals.rule_wd = width!($globals, $globals.ship_out_g) - $cur_g;
@@ -68,7 +68,7 @@ pub(crate) macro Move_right_or_output_leaders($globals:expr, $p:expr, $this_box:
     if subtype!($globals, $p) as integer >= glue_node_subtype::a_leaders as integer {
         // @<Output leaders in an hlist, |goto fin_rule| if a rule
         //   or to |next_p| if done@>;
-        todo!("output leaders in hlist");
+        crate::section_0626::Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_p_if_done!($globals, $p, $base_line, $left_edge, $lbl_next_p);
     }
     // goto move_past;
     crate::goto_forward_label!($lbl_move_past);

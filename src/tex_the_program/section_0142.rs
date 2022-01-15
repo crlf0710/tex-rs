@@ -8,6 +8,9 @@
 /// `type` of an adjust node
 pub(crate) const adjust_node: quarterword = 5;
 // @d adjust_ptr==mark_ptr {vertical list to be moved out of horizontal list}
-//
+/// vertical list to be moved out of horizontal list
+pub(crate) macro adjust_ptr($globals:expr, $v:expr) {
+    crate::section_0141::mark_ptr!($globals, $v)
+}
 
 use crate::section_0113::quarterword;

@@ -27,9 +27,13 @@ pub(crate) macro Let_d_be_the_natural_width_of_this_glue__if_stretching_or_shrin
     else if glue_sign!($globals, $globals.just_box) == glue_sign::shrinking as _ {
         // begin if (glue_order(just_box)=shrink_order(q))and@|
         //    (shrink(q)<>0) then
-        //   v:=max_dimen;
+        if glue_order!($globals, $globals.just_box) == shrink_order!($globals, q)
+            && shrink!($globals, q) != scaled::zero()
+        {
+            // v:=max_dimen;
+            $v = scaled::new_from_inner(max_dimen);
+        }
         // end;
-        todo!("shrinking");
     }
     // if subtype(p)>=a_leaders then goto found;
     if subtype!($globals, $p) >= glue_node_subtype::a_leaders as _ {
@@ -43,6 +47,8 @@ pub(crate) macro Let_d_be_the_natural_width_of_this_glue__if_stretching_or_shrin
     use crate::section_0135::width;
     use crate::section_0149::glue_node_subtype;
     use crate::section_0149::glue_ptr;
+    use crate::section_0150::shrink;
+    use crate::section_0150::shrink_order;
     use crate::section_0150::stretch;
     use crate::section_0150::stretch_order;
     use crate::section_0421::max_dimen;

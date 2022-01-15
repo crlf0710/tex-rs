@@ -15,16 +15,25 @@ pub(crate) macro Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condit
         crate::section_0503::Test_relation_between_integers_or_dimensions!($globals, $this_if, $b);
     }
     // if_odd_code: @<Test if an integer is odd@>;
+    else if $this_if == if_odd_code {
+        crate::section_0504::Test_if_an_integer_is_odd!($globals, $b);
+    }
     // if_vmode_code: b:=(abs(mode)=vmode);
     else if $this_if == if_vmode_code {
         $b = mode!($globals).get().abs() == vmode;
     }
     // if_hmode_code: b:=(abs(mode)=hmode);
+    else if $this_if == if_hmode_code {
+        $b = mode!($globals).get().abs() == hmode;
+    }
     // if_mmode_code: b:=(abs(mode)=mmode);
     else if $this_if == if_mmode_code {
         $b = mode!($globals).get().abs() == mmode;
     }
     // if_inner_code: b:=(mode<0);
+    else if $this_if == if_inner_code {
+        $b = mode!($globals).get() < 0;
+    }
     // if_void_code, if_hbox_code, if_vbox_code: @<Test box register status@>;
     else if $this_if == if_void_code || $this_if == if_hbox_code || $this_if == if_vbox_code {
         crate::section_0505::Test_box_register_status!($globals, $this_if, $b);
@@ -64,6 +73,7 @@ pub(crate) macro Either_process_ifcase_or_set_b_to_the_value_of_a_boolean_condit
         /// there are no other cases
         unreachable!();
     }
+    use crate::section_0211::hmode;
     use crate::section_0211::mmode;
     use crate::section_0211::vmode;
     use crate::section_0213::mode;

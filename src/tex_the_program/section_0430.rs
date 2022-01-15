@@ -11,7 +11,7 @@ pub(crate) macro Fix_the_reference_count__if_any__and_negate_cur_val_if_negative
             // begin cur_val:=new_spec(cur_val);
             $globals.cur_val = new_spec($globals, $globals.cur_val as pointer)? as _;
             // @<Negate all three glue components of |cur_val|@>;
-            todo!("Negate");
+            crate::section_0431::Negate_all_three_glue_components_of_cur_val!($globals);
             // end
         }
         // else negate(cur_val)

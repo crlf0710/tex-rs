@@ -11,5 +11,9 @@ pub(crate) const mark_node: quarterword = 4;
 /// number of words to allocate for most node types
 pub(crate) const small_node_size: quarterword = 2;
 // @d mark_ptr(#)==mem[#+1].int {head of the token list for a mark}
+/// head of the token list for a mark
+pub(crate) macro mark_ptr($globals:expr, $v:expr) {{
+    $globals.mem[$v + 1][crate::section_0113::MEMORY_WORD_INT]
+}}
 
 use crate::section_0113::quarterword;

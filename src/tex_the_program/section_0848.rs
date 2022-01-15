@@ -16,7 +16,9 @@ pub(crate) macro Get_ready_to_start_line_breaking_0848($globals:expr) {{
         }
         // else @<Set line length parameters in preparation for hanging indentation@>
         else {
-            todo!("par_shape_ptr == null b");
+            crate::section_0849::Set_line_length_parameters_in_preparation_for_hanging_indentation!(
+                $globals
+            );
         }
     }
     // else  begin last_special_line:=info(par_shape_ptr)-1;

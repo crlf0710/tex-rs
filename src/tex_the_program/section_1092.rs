@@ -6,7 +6,7 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1092($globals:
     let processed = if $abs_mode_plus_cur_cmd == hmode as u16 + start_par as u16
         || $abs_mode_plus_cur_cmd == mmode as u16 + start_par as u16
     {
-        todo!("indent_in_hmode");
+        indent_in_hmode($globals)?;
         true
     } else {
         false
@@ -14,5 +14,6 @@ pub(crate) macro Cases_of_main_control_that_build_boxes_and_lists_1092($globals:
     use crate::section_0208::start_par;
     use crate::section_0211::hmode;
     use crate::section_0211::mmode;
+    use crate::section_1093::indent_in_hmode;
     processed
 }}

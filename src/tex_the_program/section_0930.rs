@@ -21,8 +21,8 @@ pub(crate) macro Look_for_the_word_hc_1_to_hn_in_the_exception_table__and_goto_f
             // loop@+  begin @<If the string |hyph_word[h]| is less than \(hc)|hc[1..hn]|,
             //     |goto not_found|; but if the two strings are equal,
             //     set |hyf| to the hyphen positions and |goto found|@>;
-            crate::section_0931::If_the_string_hyph_word_h_is_less_than_hc_1_to_hn__goto_not_found__but_if_the_two_strings_are_equal__set_hyf_to_the_hyphen_positions_and_goto_found!($globals, h, 'not_found, $lbl_found);
             loop {
+                crate::section_0931::If_the_string_hyph_word_h_is_less_than_hc_1_to_hn__goto_not_found__but_if_the_two_strings_are_equal__set_hyf_to_the_hyphen_positions_and_goto_found!($globals, h, 'not_found, $lbl_found);
                 // if h>0 then decr(h)@+else h:=hyph_size;
                 if h > 0 {
                     decr!(h);

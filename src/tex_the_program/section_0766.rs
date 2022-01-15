@@ -43,7 +43,7 @@ pub(crate) macro Append_inter_element_spacing_based_on_r_type_and_t($globals:exp
         }
         // othercases confusion("mlist4")
         else {
-            crate::trace_error_expr!("spacing = {}", spacing);
+            crate::trace_error_expr!("r_type = {}, t = {}, spacing = {}", $r_type, $t, spacing);
             confusion($globals, crate::strpool_str!("mlist4"))?;
             // @:this can't happen mlist4}{\quad mlist4@>
         }
