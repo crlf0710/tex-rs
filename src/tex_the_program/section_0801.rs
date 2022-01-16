@@ -37,7 +37,9 @@ pub(crate) macro Go_through_the_preamble_list__determining_the_column_widths_and
         // if width(q)=null_flag then
         if width!($globals, q) == null_flag {
             // @<Nullify |width(q)| and the tabskip glue following this column@>;
-            todo!("Nullify");
+            crate::section_0802::Nullify_width_q_and_the_tabskip_glue_following_this_column!(
+                $globals, q
+            );
         }
         // if info(q)<>end_span then
         if info_inner!($globals, q) != end_span {

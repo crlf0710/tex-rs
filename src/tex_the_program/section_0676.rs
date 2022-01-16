@@ -36,7 +36,7 @@ pub(crate) macro Determine_vertical_glue_shrink_setting__then_return_or_goto_com
     else if o == glue_ord::normal && list_ptr!($globals, $r) != null {
         // @<Report a tight vbox and |goto common_ending|, if this box
         //   is sufficiently bad@>;
-        todo!("shrink 2");
+        crate::section_0678::Report_a_tight_vbox_and_goto_common_ending__if_this_box_is_sufficiently_bad!($globals, $x);
     }
     // return;
     crate::return_nojump!($r);

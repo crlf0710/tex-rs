@@ -29,7 +29,7 @@ pub(crate) macro Scan_a_parameter_until_its_delimiter_string_has_been_found_or_i
                         //   |goto continue| if a partial match is still in effect;
                         //   but abort if |s=null|@>;
                         crate::section_0397::Contribute_the_recently_matched_tokens_to_the_current_parameter__and_goto_continue_if_a_partial_match_is_still_in_effect__but_abort_if_s_null!
-                            ($globals, $r, $info_r, $m, $s, $p, $q);
+                            ($globals, $r, $info_r, $m, $s, $p, $q, 'continue_);
                         // if cur_tok=par_token then if long_state<>long_call then
                         if $globals.cur_tok == $globals.par_token && $globals.long_state != long_call {
                             // @<Report a runaway argument and abort@>;

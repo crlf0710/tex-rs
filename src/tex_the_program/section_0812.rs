@@ -23,7 +23,7 @@ pub(crate) macro Insert_the_current_list_into_its_environment($globals:expr) {{
     pop_nest($globals);
     // if mode=mmode then @<Finish an alignment in a display@>
     if mode!($globals) == mmode {
-        todo!("Finish alignment in display");
+        crate::section_1206::Finish_an_alignment_in_a_display!($globals, p, q, aux_save);
     }
     // else  begin aux:=aux_save; link(tail):=p;
     else {

@@ -40,7 +40,7 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         }
         // ligature_node: @<Make node |p| look like a |char_node| and |goto reswitch|@>;
         else if type_p == ligature_node {
-            crate::section_0652::Make_node_p_look_like_a_char_node_and_goto_reswitch!($globals, $p, crate::goto_forward_label, $lbl_reswitch);
+            crate::section_0652::Make_node_p_look_like_a_char_node_and_goto_reswitch!($globals, $p, $lbl_reswitch);
         }
         // othercases do_nothing
         else {

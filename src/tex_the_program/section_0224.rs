@@ -106,7 +106,13 @@ pub(crate) macro baseline_skip($globals:expr) {
 }
 // @d par_skip==glue_par(par_skip_code)
 // @d above_display_skip==glue_par(above_display_skip_code)
+pub(crate) macro above_display_skip($globals:expr) {
+    crate::section_0224::glue_par!($globals, crate::section_0224::above_display_skip_code)
+}
 // @d below_display_skip==glue_par(below_display_skip_code)
+pub(crate) macro below_display_skip($globals:expr) {
+    crate::section_0224::glue_par!($globals, crate::section_0224::below_display_skip_code)
+}
 // @d above_display_short_skip==glue_par(above_display_short_skip_code)
 // @d below_display_short_skip==glue_par(below_display_short_skip_code)
 // @d left_skip==glue_par(left_skip_code)

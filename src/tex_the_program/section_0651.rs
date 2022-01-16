@@ -46,7 +46,7 @@ pub(crate) macro Examine_node_p_in_the_hlist__taking_account_of_its_effect_on_th
                     // ligature_node: @<Make node |p| look like a |char_node|
                     //   and |goto reswitch|@>;
                     else if type_p == ligature_node {
-                        crate::section_0652::Make_node_p_look_like_a_char_node_and_goto_reswitch!($globals, $p, crate::goto_backward_label, 'reswitch);
+                        crate::section_0652::Make_node_p_look_like_a_char_node_and_goto_reswitch!($globals, $p, 'reswitch);
                     }
                     // othercases do_nothing
                     else {

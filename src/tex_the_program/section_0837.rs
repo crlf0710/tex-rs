@@ -59,7 +59,7 @@ pub(crate) macro Compute_the_values_of_break_width
             }
             // math_node: break_width[1]:=break_width[1]-width(s);
             else if type_s == math_node {
-                todo!();
+                $globals.break_width[1] = $globals.break_width[1] - width!($globals, s);
             }
             // kern_node: if subtype(s)<>explicit then goto done
             else if type_s == kern_node {

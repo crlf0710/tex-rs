@@ -30,7 +30,7 @@ pub(crate) macro Let_d_be_the_natural_width_of_node_p__if_the_node_is_visible__g
         }
         // ligature_node:@<Make node |p| look like a |char_node|...@>;
         else if type_p == ligature_node {
-            todo!("Make node p");
+            crate::section_0652::Make_node_p_look_like_a_char_node_and_goto_reswitch!($globals, $p, 'reswitch);
         }
         // kern_node,math_node: d:=width(p);
         else if type_p == kern_node || type_p == math_node {
@@ -43,7 +43,7 @@ pub(crate) macro Let_d_be_the_natural_width_of_node_p__if_the_node_is_visible__g
         }
         // whatsit_node: @<Let |d| be the width of the whatsit |p|@>;
         else if type_p == whatsit_node {
-            todo!("width of whatsit node");
+            crate::section_1361::Let_d_be_the_width_of_the_whatsit_p!($globals, $p, $d);
         }
         // othercases d:=0
         else {

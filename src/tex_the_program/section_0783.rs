@@ -21,15 +21,20 @@ pub(crate) macro Scan_the_template_u_j__putting_the_resulting_token_list_in_hold
             // if (cur_cmd<=car_ret)and(cur_cmd>=tab_mark)and(align_state=-1000000) then
             if $globals.cur_cmd <= car_ret && $globals.cur_cmd >= tab_mark && $globals.align_state == -1000000 {
                 // if (p=hold_head)and(cur_loop=null)and(cur_cmd=tab_mark)
-                //  then cur_loop:=cur_align
+                if p == hold_head && $globals.cur_loop == null && $globals.cur_cmd == tab_mark {
+                    // then cur_loop:=cur_align
+                    $globals.cur_loop = $globals.cur_align;
+                }
                 // else  begin print_err("Missing # inserted in alignment preamble");
-                // @.Missing \# inserted...@>
-                //  help3("There should be exactly one # between &'s, when an")@/
-                //  ("\halign or \valign is being set up. In this case you had")@/
-                //  ("none, so I've put one in; maybe that will work.");
-                //  back_error; goto done1;
-                //  end
-                todo!("(cur_cmd<=car_ret)and(cur_cmd>=tab_mark)and(align_state=-1000000)");
+                else {
+                    // @.Missing \# inserted...@>
+                    //  help3("There should be exactly one # between &'s, when an")@/
+                    //  ("\halign or \valign is being set up. In this case you had")@/
+                    //  ("none, so I've put one in; maybe that will work.");
+                    //  back_error; goto done1;
+                    //  end
+                    todo!("error");
+                }
             }
             // else if (cur_cmd<>spacer)or(p<>hold_head) then
             else if $globals.cur_cmd != spacer || p != hold_head {

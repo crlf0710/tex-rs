@@ -16,7 +16,7 @@
 
 // @<Contribute the recently matched tokens to the current parameter...@>=
 pub(crate) macro Contribute_the_recently_matched_tokens_to_the_current_parameter__and_goto_continue_if_a_partial_match_is_still_in_effect__but_abort_if_s_null {
-    ($globals:expr, $r:expr, $info_r:expr, $m:expr, $s:expr, $p:expr, $q:expr) => {
+    ($globals:expr, $r:expr, $info_r:expr, $m:expr, $s:expr, $p:expr, $q:expr, $lbl_continue:lifetime) => {
         // if s<>r then
         if $s != $r {
             // if s=null then @<Report an improper use of the macro and abort@>
@@ -25,25 +25,41 @@ pub(crate) macro Contribute_the_recently_matched_tokens_to_the_current_parameter
             }
             // else  begin t:=s;
             else {
-                let t = $s;
-                let info_t = info_tok!($globals, t);
+                let mut t = $s;
+                let mut info_t = info_tok!($globals, t);
                 // repeat store_new_token(info(t)); incr(m); u:=link(t); v:=s;
                 loop {
                     store_new_token!($globals, info_t.get(), $p, $q);
                     incr!($m);
-                    let u = link!($globals, t);
-                    let v = $s;
+                    let mut u = link!($globals, t);
+                    let mut v = $s;
                     crate::region_forward_label!(
                         |'done|
                         {
-                            todo!("inner");
                             // loop@+  begin if u=r then
-                            //     if cur_tok<>info(v) then goto done
-                            //     else  begin r:=link(v); goto continue;
-                            //       end;
-                            //   if info(u)<>info(v) then goto done;
-                            //   u:=link(u); v:=link(v);
-                            //   end;
+                            loop {
+                                if u == $r {
+                                    // if cur_tok<>info(v) then goto done
+                                    let info_tok_v = info_tok!($globals, v);
+                                    if $globals.cur_tok != info_tok_v {
+                                        crate::goto_forward_label!('done);
+                                    }
+                                    // else  begin r:=link(v); goto continue;
+                                    else {
+                                        $r = link!($globals, v);
+                                        crate::goto_backward_label!($lbl_continue);
+                                        // end;
+                                    }
+                                }
+                                // if info(u)<>info(v) then goto done;
+                                if info_tok!($globals, u) != info_tok!($globals, v) {
+                                    crate::goto_forward_label!('done);
+                                }
+                                // u:=link(u); v:=link(v);
+                                u = link!($globals, u);
+                                v = link!($globals, v);
+                                // end;
+                            }
                         }
                         // done: t:=link(t);
                         'done <-
@@ -57,10 +73,9 @@ pub(crate) macro Contribute_the_recently_matched_tokens_to_the_current_parameter
                 }
                 // r:=s; {at this point, no tokens are recently matched}
                 /// at this point, no tokens are recently matched
-                {
-                    $r = $s;
-                    $info_r = info_tok!($globals, $r);
-                }
+                const _: () = ();
+                $r = $s;
+                $info_r = info_tok!($globals, $r);
                 // end
             }
         }
