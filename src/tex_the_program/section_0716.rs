@@ -2,7 +2,7 @@
 //! one that is expressed in `\.{mu}', given the value of the math unit.
 
 // @d mu_mult(#)==nx_plus_y(n,#,xn_over_d(#,f,@'200000))
-pub(self) macro mu_mult($globals:expr, $v:expr, $n:expr, $f:expr) {{
+pub(crate) macro mu_mult($globals:expr, $v:expr, $n:expr, $f:expr) {{
     let y = xn_over_d($globals, $v, $f.inner(), 0o200000);
     nx_plus_y!($globals, $n, $v, y)
 }}

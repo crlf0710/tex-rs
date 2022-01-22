@@ -1,3 +1,6 @@
+#[globals_struct_field(TeXGlobals)]
+pub(crate) static max_allowed_ASCII_code_repr: integer = 255;
+
 thread_local! {
     static GRAPHE_REGISTRY: GraphemeRegistry = GraphemeRegistry::new();
 }

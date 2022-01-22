@@ -191,6 +191,12 @@ pub(crate) type dimen_base_TYPENUM = typenum::op!(del_code_base_TYPENUM + U256);
 pub(crate) const dimen_base: word = dimen_base_TYPENUM::U32;
 // @#
 // @d del_code(#)==eqtb[del_code_base+#].int
+pub(crate) macro del_code($globals:expr, $val:expr) {
+    $globals.eqtb[crate::section_0230::index_offset_with_ASCII_code(
+        crate::section_0236::del_code_base,
+        $val,
+    ) as crate::section_0115::pointer][crate::section_0113::MEMORY_WORD_INT]
+}
 // @d count(#)==eqtb[count_base+#].int
 pub(crate) macro count($globals:expr, $val:expr) {
     $globals.eqtb[crate::section_0236::count_base as crate::section_0115::pointer

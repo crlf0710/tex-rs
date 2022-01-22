@@ -39,10 +39,25 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
         do_nothing!();
     }
     // radical_noad: s:=radical_noad_size;
+    else if type_q == radical_noad {
+        $s = radical_noad_size;
+    }
     // accent_noad: s:=accent_noad_size;
+    else if type_q == accent_noad {
+        todo!("accent_noad");
+    }
     // fraction_noad: s:=fraction_noad_size;
+    else if type_q == fraction_noad {
+        $s = fraction_noad_size;
+    }
     // left_noad,right_noad: t:=make_left_right(q,style,max_d,max_h);
+    else if type_q == left_noad || type_q == right_noad {
+        todo!("left_noad || right_noad");
+    }
     // style_node: @<Change the current style and |goto delete_q|@>;
+    else if type_q == style_node {
+        todo!("style_node");
+    }
     // whatsit_node,penalty_node,rule_node,disc_node,adjust_node,ins_node,mark_node,
     //  glue_node,kern_node:@t@>@;@/
     else if type_q == whatsit_node
@@ -89,5 +104,10 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     use crate::section_0236::rel_penalty;
     use crate::section_0681::noad_size;
     use crate::section_0682::*;
+    use crate::section_0683::fraction_noad;
+    use crate::section_0683::fraction_noad_size;
+    use crate::section_0683::radical_noad;
+    use crate::section_0683::radical_noad_size;
     use crate::section_0687::*;
+    use crate::section_0688::style_node;
 }}

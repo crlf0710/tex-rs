@@ -36,17 +36,18 @@ pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_got
         true
     }
     // glue_node: begin @<Convert \(m)math glue to ordinary glue@>;
-    //   goto done_with_node;
-    //   end;
     else if $type_q == glue_node {
         crate::section_0732::Convert_math_glue_to_ordinary_glue!($globals, $q);
+        // goto done_with_node;
         crate::goto_forward_label!($lbl_done_with_node);
+        // end;
         true
     }
     // kern_node: begin math_kern(q,cur_mu); goto done_with_node;
-    //   end;
     else if $type_q == kern_node {
-        todo!("kern_node");
+        math_kern($globals, $q, $globals.cur_mu);
+        crate::goto_forward_label!($lbl_done_with_node);
+        // end;
         true
     } else {
         false
@@ -62,5 +63,6 @@ pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_got
     use crate::section_0157::penalty_node;
     use crate::section_0688::style_node;
     use crate::section_0689::choice_node;
+    use crate::section_0717::math_kern;
     processed
 }}

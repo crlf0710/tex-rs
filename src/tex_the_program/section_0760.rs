@@ -27,7 +27,7 @@ pub(crate) macro Make_a_second_pass_over_the_mlist__removing_all_noads_and_inser
         /// the effective |type| of noad |q| during the second pass
         let mut t;
         /// the size of a noad to be deleted
-        let s;
+        let mut s;
         /// a penalty to be inserted
         let mut pen;
         // begin @<If node |q| is a style node, change the style and |goto delete_q|;

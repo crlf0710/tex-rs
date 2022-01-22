@@ -5,7 +5,17 @@
 //! or |denom_style|).
 //
 // @d cramped_style(#)==2*(# div 2)+cramped {cramp the style}
+/// cramp the style
+pub(crate) macro cramped_style($v:expr) {
+    2 * ($v.get() / 2) + crate::section_0688::cramped
+}
 // @d sub_style(#)==2*(# div 4)+script_style+cramped {smaller and cramped}
+/// smaller and cramped
+pub(crate) macro sub_style($v:expr) {
+    2 * ($v.get() / 4)
+        + crate::section_0688::style_node_subtype::script_style.get()
+        + crate::section_0688::cramped
+}
 // @d sup_style(#)==2*(# div 4)+script_style+(# mod 2) {smaller}
 /// smaller
 pub(crate) macro sup_style($v:expr) {

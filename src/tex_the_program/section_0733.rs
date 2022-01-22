@@ -32,7 +32,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // radical_noad: make_radical(q);
     else if $type_q == radical_noad {
-        todo!("radical_noad");
+        make_radical($globals, $q)?;
         true
     }
     // over_noad: make_over(q);
@@ -62,6 +62,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     use crate::section_0683::*;
     use crate::section_0687::*;
     use crate::section_0736::make_vcenter;
+    use crate::section_0737::make_radical;
     use crate::section_0752::make_ord;
     processed
 }}

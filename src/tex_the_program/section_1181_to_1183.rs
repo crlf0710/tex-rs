@@ -1,16 +1,3 @@
-//! @ @<Cases of |print_cmd_chr|...@>=
-//! above: case chr_code of
-//!   over_code:print_esc("over");
-//!   atop_code:print_esc("atop");
-//!   delimited_code+above_code:print_esc("abovewithdelims");
-//!   delimited_code+over_code:print_esc("overwithdelims");
-//!   delimited_code+atop_code:print_esc("atopwithdelims");
-//!   othercases print_esc("above")
-//!   endcases;
-//!
-//! @ @<Cases of |main_control| that build...@>=
-//! mmode+above: math_fraction;
-//!
 //! @ @<Declare act...@>=
 //! procedure math_fraction;
 //! var c:small_number; {the type of generalized fraction we are scanning}

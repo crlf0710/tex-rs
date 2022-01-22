@@ -61,7 +61,7 @@ pub(crate) fn expand(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // else @<Insert a token containing |frozen_endv|@>;
     else {
-        todo!();
+        crate::section_0375::Insert_a_token_containing_frozen_endv!(globals);
     }
     // cur_val:=cv_backup; cur_val_level:=cvl_backup; radix:=radix_backup;
     globals.cur_val = cv_backup;

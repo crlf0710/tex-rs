@@ -15,7 +15,7 @@ pub(crate) fn make_ord(globals: &mut TeXGlobals, q: pointer) -> TeXResult<()> {
     // var a:integer; {address of lig/kern instruction}
     // @!p,@!r:pointer; {temporary registers for list manipulation}
     /// temporary registers for list manipulation
-    let (p,);
+    let mut p;
     // begin restart:@t@>@;@/
     // if math_type(subscr(q))=empty then if math_type(supscr(q))=empty then
     //  if math_type(nucleus(q))=math_char then
@@ -68,7 +68,7 @@ pub(crate) fn make_ord(globals: &mut TeXGlobals, q: pointer) -> TeXResult<()> {
                 //     moved past a noad, or |goto restart|@>;
                 loop {
                     crate::section_0753::If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_after_q__or_if_it_is_a_ligature_with_cur_c__combine_noads_q_and_p_appropriately__then_return_if_the_cursor_has_moved_past_a_noad__or_goto_restart!(
-                        globals, cur_f, cur_c, cur_i
+                        globals, p, q, cur_f, cur_c, cur_i
                     );
                     // if skip_byte(cur_i)>=stop_flag then return;
                     if cur_i.skip_byte() >= stop_flag {

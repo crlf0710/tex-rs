@@ -1,30 +1,3 @@
-//! @ According to the rules in the \.{DVI} file specifications, we ensure alignment
-//! @^square roots@>
-//! between a square root sign and the rule above its nucleus by assuming that the
-//! baseline of the square-root symbol is the same as the bottom of the rule. The
-//! height of the square-root symbol will be the thickness of the rule, and the
-//! depth of the square-root symbol should exceed or equal the height-plus-depth
-//! of the nucleus plus a certain minimum clearance~|clr|. The symbol will be
-//! placed so that the actual clearance is |clr| plus half the excess.
-//!
-//! @<Declare math...@>=
-//! procedure make_radical(@!q:pointer);
-//! var x,@!y:pointer; {temporary registers for box construction}
-//! @!delta,@!clr:scaled; {dimensions involved in the calculation}
-//! begin x:=clean_box(nucleus(q),cramped_style(cur_style));
-//! if cur_style<text_style then {display style}
-//!   clr:=default_rule_thickness+(abs(math_x_height(cur_size)) div 4)
-//! else  begin clr:=default_rule_thickness; clr:=clr + (abs(clr) div 4);
-//!   end;
-//! y:=var_delimiter(left_delimiter(q),cur_size,height(x)+depth(x)+clr+
-//!   default_rule_thickness);
-//! delta:=depth(y)-(height(x)+depth(x)+clr);
-//! if delta>0 then clr:=clr+half(delta); {increase the actual clearance}
-//! shift_amount(y):=-(height(x)+clr);
-//! link(y):=overbar(x,clr,height(y));
-//! info(nucleus(q)):=hpack(y,natural); math_type(nucleus(q)):=sub_box;
-//! end;
-//!
 //! @ Slants are not considered when placing accents in math mode. The accenter is
 //! centered over the accentee, and the accent width is treated as zero with
 //! respect to the size of the final box.

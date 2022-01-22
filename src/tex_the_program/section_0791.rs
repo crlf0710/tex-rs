@@ -9,7 +9,7 @@ pub(crate) fn fin_col(globals: &mut TeXGlobals) -> TeXResult<boolean> {
     // label exit;
     // var p:pointer; {the alignrecord after the current one}
     /// the alignrecord after the current one
-    let p: pointer;
+    let mut p: pointer;
     // @!q,@!r:pointer; {temporary pointers for list manipulation}
     /// temporary pointers for list manipulation
     let (q, _): (pointer, pointer);
@@ -41,7 +41,7 @@ pub(crate) fn fin_col(globals: &mut TeXGlobals) -> TeXResult<boolean> {
     p = link!(globals, q);
     // @<If the preamble list has been traversed, check that the row has ended@>;
     crate::section_0792::If_the_preamble_list_has_been_traversed__check_that_the_row_has_ended!(
-        globals, p
+        globals, p, q
     );
     // if extra_info(cur_align)<>span_code then
     if extra_info!(globals, globals.cur_align) != span_code {

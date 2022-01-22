@@ -25,7 +25,7 @@ pub(crate) fn sub_sup(globals: &mut TeXGlobals) -> TeXResult<()> {
     }
     // if (p=null)or(t<>empty) then @<Insert a dummy noad to be sub/superscripted@>;
     if p == null || t != math_type_kind::empty as _ {
-        todo!("Insert a dummy noad");
+        crate::section_1177::Insert_a_dummy_noad_to_be_sub_superscripted!(globals, p, t);
     }
     // scan_math(p);
     scan_math(globals, p)?;

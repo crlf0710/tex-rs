@@ -32,7 +32,7 @@ pub(crate) macro Modify_the_end_of_the_line_to_reflect_the_nature_of_the_break_a
                     if r#type!($globals, $q) == disc_node {
                         // @<Change discretionary to compulsory and set
                         //   |disc_break:=true|@>
-                        crate::section_0882::Change_discretionary_to_compulsory_and_set_disc_break_to_true!($globals, $q, $disc_break);
+                        crate::section_0882::Change_discretionary_to_compulsory_and_set_disc_break_to_true!($globals, $q, $disc_break, $post_disc_break);
                     }
                     // else if (type(q)=math_node)or(type(q)=kern_node) then width(q):=0;
                     else if r#type!($globals, $q) == math_node || r#type!($globals, $q) == kern_node {

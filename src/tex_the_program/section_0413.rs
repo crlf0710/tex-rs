@@ -78,7 +78,13 @@ pub(crate) fn scan_something_internal(
         );
     }
     // set_aux: @<Fetch the |space_factor| or the |prev_depth|@>;
+    else if globals.cur_cmd == set_aux {
+        crate::section_0418::Fetch_the_space_factor_or_the_prev_depth!(globals, m);
+    }
     // set_prev_graf: @<Fetch the |prev_graf|@>;
+    else if globals.cur_cmd == set_prev_graf {
+        todo!("Fetch the prev_graf");
+    }
     // set_page_int:@<Fetch the |dead_cycles| or the |insert_penalties|@>;
     else if globals.cur_cmd == set_page_int {
         crate::section_0419::Fetch_the_dead_cycles_or_the_insert_penalties!(globals, m);
@@ -88,6 +94,9 @@ pub(crate) fn scan_something_internal(
         crate::section_0421::Fetch_something_on_the_page_so_far!(globals, m);
     }
     // set_shape: @<Fetch the |par_shape| size@>;
+    else if globals.cur_cmd == set_shape {
+        todo!("Fetch the |par_shape| size");
+    }
     // set_box_dimen: @<Fetch a box dimension@>;
     else if globals.cur_cmd == set_box_dimen {
         crate::section_0420::Fetch_a_box_dimension!(globals, m);

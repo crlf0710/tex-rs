@@ -15,7 +15,7 @@ pub(crate) fn make_scripts(globals: &mut TeXGlobals, q: pointer, delta: scaled) 
     let (mut p, x, z): (pointer, pointer, pointer);
     // @!shift_up,@!shift_down,@!clr:scaled; {dimensions in the calculation}
     /// dimensions in the calculation
-    let (mut shift_up, shift_down, mut clr);
+    let (mut shift_up, mut shift_down, mut clr);
     // @!t:small_number; {subsidiary size code}
     /// subsidiary size code
     let t;
@@ -48,7 +48,9 @@ pub(crate) fn make_scripts(globals: &mut TeXGlobals, q: pointer, delta: scaled) 
     // if math_type(supscr(q))=empty then
     if math_type!(globals, supscr!(q)) == math_type_kind::empty as _ {
         // @<Construct a subscript box |x| when there is no superscript@>
-        todo!("construct 1");
+        crate::section_0757::Construct_a_subscript_box_x_when_there_is_no_superscript!(
+            globals, x, q, shift_down, clr
+        );
     }
     // else  begin @<Construct a superscript box |x|@>;
     else {

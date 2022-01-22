@@ -1,6 +1,6 @@
 //! ` `
 // @<Change discretionary to compulsory...@>=
-pub(crate) macro Change_discretionary_to_compulsory_and_set_disc_break_to_true($globals:expr, $q:expr, $disc_break:expr) {{
+pub(crate) macro Change_discretionary_to_compulsory_and_set_disc_break_to_true($globals:expr, $q:expr, $disc_break:expr, $post_disc_break:expr) {{
     /// used for replacement counts in discretionary nodes
     let mut t;
     /// temporary registers for list manipulation
@@ -14,7 +14,7 @@ pub(crate) macro Change_discretionary_to_compulsory_and_set_disc_break_to_true($
     );
     // if post_break(q)<>null then @<Transplant the post-break list@>;
     if post_break!($globals, $q) != null {
-        todo!("transplant post-break");
+        crate::section_0884::Transplant_the_post_break_list!($globals, $q, r, $post_disc_break);
     }
     // if pre_break(q)<>null then @<Transplant the pre-break list@>;
     if pre_break!($globals, $q) != null {

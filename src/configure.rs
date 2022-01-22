@@ -9,6 +9,10 @@ pub trait TeXConfiguration {
     /// Configure `max_print_line` parameter
     fn set_max_print_line(&mut self, max_print_line: u8);
 
+    #[cfg(feature = "unicode_support")]
+    /// Configure `unicode_support` parameter
+    fn set_unicode_support(&mut self, unicode_support_enabled: bool);
+
     #[cfg(feature = "latex_support")]
     /// Configure `latex_support` parameter
     fn set_latex_support(&mut self, latex_support_enabled: bool);
@@ -25,6 +29,15 @@ impl TeXConfiguration for crate::section_0004::TeXGlobals {
 
     fn set_max_print_line(&mut self, max_print_line: u8) {
         self.max_print_line = max_print_line;
+    }
+
+    #[cfg(feature = "unicode_support")]
+    fn set_unicode_support(&mut self, unicode_support_enabled: bool) {
+        self.max_allowed_ASCII_code_repr = if unicode_support_enabled {
+            crate::pascal::char::MAX.0 as _
+        } else {
+            255
+        };
     }
 
     #[cfg(feature = "latex_support")]

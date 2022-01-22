@@ -131,6 +131,9 @@ pub(crate) macro vfuzz($globals:expr) {
 }
 // @d delimiter_shortfall==dimen_par(delimiter_shortfall_code)
 // @d null_delimiter_space==dimen_par(null_delimiter_space_code)
+pub(crate) macro null_delimiter_space($globals:expr) {
+    crate::section_0247::dimen_par!($globals, crate::section_0247::null_delimiter_space_code)
+}
 // @d script_space==dimen_par(script_space_code)
 pub(crate) macro script_space($globals:expr) {
     crate::section_0247::dimen_par!($globals, crate::section_0247::script_space_code)

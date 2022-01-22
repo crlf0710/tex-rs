@@ -7,7 +7,7 @@
 //! \chardef\?='174 % vertical line to indicate character retention
 //
 // @<If instruction |cur_i| is a kern with |cur_c|, ...@>=
-pub(crate) macro If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_after_q__or_if_it_is_a_ligature_with_cur_c__combine_noads_q_and_p_appropriately__then_return_if_the_cursor_has_moved_past_a_noad__or_goto_restart($globals:expr, $cur_f:expr, $cur_c:expr, $cur_i:expr) {{
+pub(crate) macro If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_after_q__or_if_it_is_a_ligature_with_cur_c__combine_noads_q_and_p_appropriately__then_return_if_the_cursor_has_moved_past_a_noad__or_goto_restart($globals:expr, $p:expr, $q:expr, $cur_f:expr, $cur_c:expr, $cur_i:expr) {{
     // if next_char(cur_i)=cur_c then if skip_byte(cur_i)<=stop_flag then
     if $cur_i.next_char() as integer == $cur_c.numeric_value() as integer
         && $cur_i.skip_byte() <= stop_flag
@@ -15,9 +15,12 @@ pub(crate) macro If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_afte
         // if op_byte(cur_i)>=kern_flag then
         if $cur_i.op_byte() >= kern_flag {
             // begin p:=new_kern(char_kern(cur_f)(cur_i));
+            $p = new_kern($globals, char_kern!($globals, $cur_f, $cur_i))?;
             // link(p):=link(q); link(q):=p; return;
+            link!($globals, $p) = link!($globals, $q);
+            link!($globals, $q) = $p;
+            crate::return_nojump!();
             // end
-            todo!("op_byte(cur_i)>=kern_flag");
         }
         // else  begin check_interrupt; {allow a way out of infinite ligature loop}
         else {
@@ -47,6 +50,9 @@ pub(crate) macro If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_afte
     }
     use crate::pascal::integer;
     use crate::section_0096::check_interrupt;
+    use crate::section_0118::link;
+    use crate::section_0156::new_kern;
     use crate::section_0545::kern_flag;
     use crate::section_0545::stop_flag;
+    use crate::section_0557::char_kern;
 }}

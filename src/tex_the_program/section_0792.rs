@@ -1,11 +1,11 @@
 //! ` `
 // @<If the preamble list has been traversed, check that the row has ended@>=
-pub(crate) macro If_the_preamble_list_has_been_traversed__check_that_the_row_has_ended($globals:expr, $p:expr) {{
+pub(crate) macro If_the_preamble_list_has_been_traversed__check_that_the_row_has_ended($globals:expr, $p:expr, $q:expr) {{
     // if (p=null)and(extra_info(cur_align)<cr_code) then
     if $p == null && extra_info!($globals, $globals.cur_align) < cr_code {
         // if cur_loop<>null then @<Lengthen the preamble periodically@>
         if $globals.cur_loop != null {
-            todo!("Lengthen the preamble periodically");
+            crate::section_0793::Lengthen_the_preamble_periodically!($globals, $p, $q);
         }
         // else  begin print_err("Extra alignment tab has been changed to ");
         else {

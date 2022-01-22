@@ -23,10 +23,18 @@ pub(crate) macro Set_line_length_parameters_in_preparation_for_hanging_indentati
     }
     // else  begin first_width:=hsize; first_indent:=0;
     else {
-        todo!("positive hang_after");
+        $globals.first_width = hsize!($globals);
+        $globals.first_indent = scaled::zero();
         // second_width:=hsize-abs(hang_indent);
+        $globals.second_width = hsize!($globals) - hang_indent!($globals).abs();
         // if hang_indent>=0 then second_indent:=hang_indent
+        if hang_indent!($globals) >= scaled::zero() {
+            $globals.second_indent = hang_indent!($globals);
+        }
         // else second_indent:=0;
+        else {
+            $globals.second_indent = scaled::zero();
+        }
         // end;
     }
     // end

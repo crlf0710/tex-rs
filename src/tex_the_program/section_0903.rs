@@ -33,9 +33,16 @@ pub(crate) macro Replace_nodes_ha_to_hb_by_a_sequence_of_nodes_that_includes_the
             // if is_char_node(ha) then
             if is_char_node!($globals, $globals.ha) {
                 // if font(ha)<>hf then goto found2
+                if font!($globals, $globals.ha) != $globals.hf {
+                    crate::goto_forward_label!('found2);
+                }
                 // else begin init_list:=ha; init_lig:=false; hu[0]:=qo(character(ha));
-                //   end
-                todo!("char node");
+                else {
+                    $globals.init_list = $globals.ha;
+                    $globals.init_lig = false;
+                    $globals.hu[0] = character!($globals, $globals.ha).numeric_value() as _;
+                    // end
+                }
             }
             // else if type(ha)=ligature_node then
             else if r#type!($globals, $globals.ha) == ligature_node {

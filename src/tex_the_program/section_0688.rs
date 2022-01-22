@@ -44,6 +44,8 @@ pub(crate) enum style_node_subtype {
     script_script_style_cramped = 6 + 1,
 }
 // @d cramped=1 {add this to an uncramped style if you want to cramp it}
+/// add this to an uncramped style if you want to cramp it
+pub(crate) const cramped: quarterword = 1;
 
 impl style_node_subtype {
     pub(crate) fn get(self) -> quarterword {

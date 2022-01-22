@@ -98,7 +98,15 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives($glo
         $globals, $cmd, $chr_code
     ) {
         true
+    } else if crate::section_1115::Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1115!(
+        $globals, $cmd, $chr_code
+    ) {
+        true
     } else if crate::section_1157::Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1157!(
+        $globals, $cmd, $chr_code
+    ) {
+        true
+    } else if crate::section_1179::Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1179!(
         $globals, $cmd, $chr_code
     ) {
         true

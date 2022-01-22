@@ -39,7 +39,11 @@ pub(crate) macro Append_inter_element_spacing_based_on_r_type_and_t($globals:exp
         }
         // "4": if cur_style<script_style then x:=thick_mu_skip_code@+else x:=0;
         else if spacing == b'4' {
-            todo!("4");
+            if $globals.cur_style.get() < style_node_subtype::script_style as _ {
+                x = thick_mu_skip_code;
+            } else {
+                x = 0;
+            }
         }
         // othercases confusion("mlist4")
         else {
@@ -75,6 +79,7 @@ pub(crate) macro Append_inter_element_spacing_based_on_r_type_and_t($globals:exp
     use crate::section_0153::new_glue;
     use crate::section_0224::glue_par;
     use crate::section_0224::med_mu_skip_code;
+    use crate::section_0224::thick_mu_skip_code;
     use crate::section_0224::thin_mu_skip_code;
     use crate::section_0688::style_node_subtype;
     use crate::section_0716::math_glue;

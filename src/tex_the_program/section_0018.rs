@@ -42,6 +42,17 @@ impl ASCII_code {
             }
         }
     }
+
+    pub(crate) fn max_allowed_repr(globals: &TeXGlobals) -> integer {
+        #[cfg(not(feature = "unicode_support"))]
+        {
+            crate::pascal::char::MAX.0 as _
+        }
+        #[cfg(feature = "unicode_support")]
+        {
+            globals.max_allowed_ASCII_code_repr
+        }
+    }
 }
 
 crate::migration_complete!();
@@ -72,4 +83,5 @@ impl ASCII_code {
 }
 
 use crate::pascal::integer;
+use crate::section_0004::TeXGlobals;
 use core::fmt;
