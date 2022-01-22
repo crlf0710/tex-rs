@@ -44,7 +44,7 @@ pub(crate) macro clang($globals:expr) {
 // @d incompleat_noad==aux.int {the name of |aux| in math mode}
 /// the name of `aux` in math mode
 pub(crate) macro incompleat_noad($globals:expr) {
-    aux!($globals)[crate::section_0113::MEMORY_WORD_INT]
+    crate::section_0213::aux!($globals)[crate::section_0113::MEMORY_WORD_INT]
 }
 // @d mode_line==cur_list.ml_field {source file line number at beginning of list}
 /// source file line number at beginning of list

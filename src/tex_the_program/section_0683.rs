@@ -148,9 +148,24 @@ pub(crate) macro assign_large_fam_and_char($globals:expr, $f:expr, $fam:expr, $c
         );
 }}
 // @d thickness==width {|thickness| field in a fraction noad}
+/// `thickness` field in a fraction noad
+pub(crate) macro thickness($globals:expr, $v:expr) {
+    crate::section_0135::width!($globals, $v)
+}
 // @d default_code==@'10000000000 {denotes |default_rule_thickness|}
+/// denotes `default_rule_thickness`
+pub(crate) const default_code: scaled = scaled::new_from_inner(0o10000000000);
 // @d numerator==supscr {|numerator| field in a fraction noad}
+/// `numerator` field in a fraction noad
+pub(crate) macro numerator($v:expr) {
+    crate::section_0681::supscr!($v)
+}
 // @d denominator==subscr {|denominator| field in a fraction noad}
-//
+/// `denominator` field in a fraction noad
+pub(crate) macro denominator($v:expr) {
+    crate::section_0681::subscr!($v)
+}
+
+use crate::section_0101::scaled;
 use crate::section_0113::quarterword;
 use crate::section_0682::inner_noad;

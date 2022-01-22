@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Cases for noads that can follow a |bin_noad|@>=
-pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:expr, $type_q:expr) {{
+pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:expr, $type_q:expr, $lbl_check_dimensions:lifetime) {{
     // left_noad: goto done_with_noad;
     let processed = if $type_q == left_noad {
         todo!("left_noad");
@@ -9,7 +9,8 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // fraction_noad: begin make_fraction(q); goto check_dimensions;
     else if $type_q == fraction_noad {
-        todo!("fraction_noad");
+        make_fraction($globals, $q);
+        crate::goto_forward_label!($lbl_check_dimensions);
         // end;
         true
     }
@@ -63,6 +64,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     use crate::section_0687::*;
     use crate::section_0736::make_vcenter;
     use crate::section_0737::make_radical;
+    use crate::section_0743::make_fraction;
     use crate::section_0752::make_ord;
     processed
 }}

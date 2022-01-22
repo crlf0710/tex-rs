@@ -36,7 +36,7 @@ pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_i
                 // end;
             }
             // @t\4@>@<Cases for noads that can follow a |bin_noad|@>@;
-            else if crate::section_0733::Cases_for_noads_that_can_follow_a_bin_noad!($globals, $q, type_q)
+            else if crate::section_0733::Cases_for_noads_that_can_follow_a_bin_noad!($globals, $q, type_q, $lbl_check_dimensions)
             {
                 // already processed
             }

@@ -14,7 +14,7 @@ pub(crate) fn fin_mlist(globals: &mut TeXGlobals, p: pointer) -> pointer {
     let q;
     // begin if incompleat_noad<>null then @<Compleat the incompleat noad@>
     if incompleat_noad!(globals) as pointer != null {
-        todo!("Compleat the incompleat noad");
+        crate::section_1185::Compleat_the_incompleat_noad!(globals, p, q);
     }
     // else  begin link(tail):=p; q:=link(head);
     else {
