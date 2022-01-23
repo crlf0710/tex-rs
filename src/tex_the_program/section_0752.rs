@@ -17,75 +17,81 @@ pub(crate) fn make_ord(globals: &mut TeXGlobals, q: pointer) -> TeXResult<()> {
     /// temporary registers for list manipulation
     let mut p;
     // begin restart:@t@>@;@/
-    // if math_type(subscr(q))=empty then if math_type(supscr(q))=empty then
-    //  if math_type(nucleus(q))=math_char then
-    if math_type!(globals, subscr!(q)) == math_type_kind::empty as _
-        && math_type!(globals, supscr!(q)) == math_type_kind::empty as _
-        && math_type!(globals, nucleus!(q)) == math_type_kind::math_char as _
-    {
-        // begin p:=link(q);
-        p = link!(globals, q);
-        // if p<>null then if (type(p)>=ord_noad)and(type(p)<=punct_noad) then
-        //   if math_type(nucleus(p))=math_char then
-        //   if fam(nucleus(p))=fam(nucleus(q)) then
-        if p != null
-            && r#type!(globals, p) >= ord_noad
-            && r#type!(globals, p) <= punct_noad
-            && math_type!(globals, nucleus!(p)) == math_type_kind::math_char as _
-            && fam!(globals, nucleus!(p)) == fam!(globals, nucleus!(q))
+    crate::region_backward_label! {
+        'restart <-
         {
-            // begin math_type(nucleus(q)):=math_text_char;
-            math_type!(globals, nucleus!(q)) = math_type_kind::math_text_char as _;
-            // fetch(nucleus(q));
-            let FetchedMathCharInfo {
-                cur_f,
-                cur_c: _,
-                cur_i,
-            } = fetch(globals, nucleus!(q));
-            // if char_tag(cur_i)=lig_tag then
-            if cur_i.char_tag() == char_tag::lig_tag {
-                /// address of lig/kern instruction
-                let mut a;
-                /// the `character` field of a `math_char`
-                let cur_c;
-                // begin a:=lig_kern_start(cur_f)(cur_i);
-                a = lig_kern_start!(globals, cur_f, cur_i);
-                // cur_c:=character(nucleus(p));
-                cur_c = character!(globals, nucleus!(p));
-                // cur_i:=font_info[a].qqqq;
-                let mut cur_i = globals.font_info[a as font_index_repr][MEMORY_WORD_LIG_KERN_CMD];
-                // if skip_byte(cur_i)>stop_flag then
-                if cur_i.skip_byte() > stop_flag {
-                    // begin a:=lig_kern_restart(cur_f)(cur_i);
-                    a = lig_kern_restart!(globals, cur_f, cur_i);
-                    // cur_i:=font_info[a].qqqq;
-                    cur_i = globals.font_info[a as font_index_repr][MEMORY_WORD_LIG_KERN_CMD];
-                    // end;
-                }
-                // loop@+ begin @<If instruction |cur_i| is a kern with |cur_c|, attach
-                //     the kern after~|q|; or if it is a ligature with |cur_c|, combine
-                //     noads |q| and~|p| appropriately; then |return| if the cursor has
-                //     moved past a noad, or |goto restart|@>;
-                loop {
-                    crate::section_0753::If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_after_q__or_if_it_is_a_ligature_with_cur_c__combine_noads_q_and_p_appropriately__then_return_if_the_cursor_has_moved_past_a_noad__or_goto_restart!(
-                        globals, p, q, cur_f, cur_c, cur_i
-                    );
-                    // if skip_byte(cur_i)>=stop_flag then return;
-                    if cur_i.skip_byte() >= stop_flag {
-                        crate::return_nojump!();
+            // if math_type(subscr(q))=empty then if math_type(supscr(q))=empty then
+            //  if math_type(nucleus(q))=math_char then
+            if math_type!(globals, subscr!(q)) == math_type_kind::empty as _
+                && math_type!(globals, supscr!(q)) == math_type_kind::empty as _
+                && math_type!(globals, nucleus!(q)) == math_type_kind::math_char as _
+            {
+                // begin p:=link(q);
+                p = link!(globals, q);
+                // if p<>null then if (type(p)>=ord_noad)and(type(p)<=punct_noad) then
+                //   if math_type(nucleus(p))=math_char then
+                //   if fam(nucleus(p))=fam(nucleus(q)) then
+                if p != null
+                    && r#type!(globals, p) >= ord_noad
+                    && r#type!(globals, p) <= punct_noad
+                    && math_type!(globals, nucleus!(p)) == math_type_kind::math_char as _
+                    && fam!(globals, nucleus!(p)) == fam!(globals, nucleus!(q))
+                {
+                    // begin math_type(nucleus(q)):=math_text_char;
+                    math_type!(globals, nucleus!(q)) = math_type_kind::math_text_char as _;
+                    // fetch(nucleus(q));
+                    let FetchedMathCharInfo {
+                        cur_f,
+                        cur_c: _,
+                        cur_i,
+                    } = fetch(globals, nucleus!(q));
+                    // if char_tag(cur_i)=lig_tag then
+                    if cur_i.char_tag() == char_tag::lig_tag {
+                        /// address of lig/kern instruction
+                        let mut a;
+                        /// the `character` field of a `math_char`
+                        let cur_c;
+                        // begin a:=lig_kern_start(cur_f)(cur_i);
+                        a = lig_kern_start!(globals, cur_f, cur_i);
+                        // cur_c:=character(nucleus(p));
+                        cur_c = character!(globals, nucleus!(p));
+                        // cur_i:=font_info[a].qqqq;
+                        let mut cur_i = globals.font_info[a as font_index_repr][MEMORY_WORD_LIG_KERN_CMD];
+                        // if skip_byte(cur_i)>stop_flag then
+                        if cur_i.skip_byte() > stop_flag {
+                            // begin a:=lig_kern_restart(cur_f)(cur_i);
+                            a = lig_kern_restart!(globals, cur_f, cur_i);
+                            // cur_i:=font_info[a].qqqq;
+                            cur_i = globals.font_info[a as font_index_repr][MEMORY_WORD_LIG_KERN_CMD];
+                            // end;
+                        }
+                        // loop@+ begin @<If instruction |cur_i| is a kern with |cur_c|, attach
+                        //     the kern after~|q|; or if it is a ligature with |cur_c|, combine
+                        //     noads |q| and~|p| appropriately; then |return| if the cursor has
+                        //     moved past a noad, or |goto restart|@>;
+                        loop {
+                            crate::section_0753::If_instruction_cur_i_is_a_kern_with_cur_c__attach_the_kern_after_q__or_if_it_is_a_ligature_with_cur_c__combine_noads_q_and_p_appropriately__then_return_if_the_cursor_has_moved_past_a_noad__or_goto_restart!(
+                                globals, p, q, cur_f, cur_c, cur_i, 'restart
+                            );
+                            // if skip_byte(cur_i)>=stop_flag then return;
+                            if cur_i.skip_byte() >= stop_flag {
+                                crate::return_nojump!();
+                            }
+                            // a:=a+qo(skip_byte(cur_i))+1;
+                            a = a + qo!(cur_i.skip_byte()) as integer + 1;
+                            // cur_i:=font_info[a].qqqq;
+                            cur_i = globals.font_info[a as font_index_repr][MEMORY_WORD_LIG_KERN_CMD];
+                            // end;
+                        }
+                        // end;
                     }
-                    // a:=a+qo(skip_byte(cur_i))+1;
-                    a = a + qo!(cur_i.skip_byte()) as integer + 1;
-                    // cur_i:=font_info[a].qqqq;
-                    cur_i = globals.font_info[a as font_index_repr][MEMORY_WORD_LIG_KERN_CMD];
                     // end;
                 }
-                // end;
             }
-            // end;
         }
-        // end;
+        |'restart|
     }
+    // end;
     // exit:end;
     crate::ok_nojump!()
 }

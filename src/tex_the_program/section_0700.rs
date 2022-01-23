@@ -27,10 +27,30 @@ pub(crate) macro math_quad($globals:expr, $v:expr) {
     crate::section_0700::mathsy!($globals, 6, $v)
 }
 // @d num1==mathsy(8) {numerator shift-up in display styles}
+/// numerator shift-up in display styles
+pub(crate) macro num1($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 8, $v)
+}
 // @d num2==mathsy(9) {numerator shift-up in non-display, non-\.{\\atop}}
+/// numerator shift-up in non-display, non-`\atop`
+pub(crate) macro num2($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 9, $v)
+}
 // @d num3==mathsy(10) {numerator shift-up in non-display \.{\\atop}}
+/// numerator shift-up in non-display `\atop`
+pub(crate) macro num3($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 10, $v)
+}
 // @d denom1==mathsy(11) {denominator shift-down in display styles}
+/// denominator shift-down in display styles
+pub(crate) macro denom1($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 11, $v)
+}
 // @d denom2==mathsy(12) {denominator shift-down in non-display styles}
+/// denominator shift-down in non-display styles
+pub(crate) macro denom2($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 12, $v)
+}
 // @d sup1==mathsy(13) {superscript shift-up in uncramped display style}
 /// superscript shift-up in uncramped display style
 pub(crate) macro sup1($globals:expr, $v:expr) {
@@ -64,7 +84,15 @@ pub(crate) macro sub_drop($globals:expr, $v:expr) {
 }
 // @d delim1==mathsy(20) {size of \.{\\atopwithdelims} delimiters
 //   in display styles}
+/// size of `\atopwithdelims` delimiters in display styles
+pub(crate) macro delim1($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 20, $v)
+}
 // @d delim2==mathsy(21) {size of \.{\\atopwithdelims} delimiters in non-displays}
+/// size of `\atopwithdelims` delimiters in non-displays
+pub(crate) macro delim2($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 21, $v)
+}
 // @d axis_height==mathsy(22) {height of fraction lines above the baseline}
 /// height of fraction lines above the baseline
 pub(crate) macro axis_height($globals:expr, $v:expr) {

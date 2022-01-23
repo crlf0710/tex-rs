@@ -22,8 +22,10 @@ pub(crate) macro Look_at_the_list_of_characters_starting_with_x_in_font_g__set_f
                     // begin if char_tag(q)=ext_tag then
                     if $q.char_tag() == char_tag::ext_tag {
                         // begin f:=g; c:=y; goto found;
+                        $f = $g;
+                        $c = y;
+                        crate::goto_forward_label!($lbl_found);
                         // end;
-                        todo!("ext_tag");
                     }
                     // hd:=height_depth(q);
                     hd = $q.height_depth();

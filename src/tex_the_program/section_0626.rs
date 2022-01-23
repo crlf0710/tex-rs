@@ -21,7 +21,7 @@ pub(crate) macro Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_
         /// left edge of sub-box, or right edge of leader space
         let edge;
         /// extra space between leader boxes
-        let lx;
+        let mut lx;
         // begin rule_wd:=rule_wd+10; {compensate for floating-point rounding}
         /// compensate for floating-point rounding
         const _: () = ();
@@ -31,7 +31,7 @@ pub(crate) macro Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_
         lx = scaled::zero();
         // @<Let |cur_h| be the position of the first box, and set |leader_wd+lx|
         //   to the spacing between corresponding parts of boxes@>;
-        crate::section_0627::Let_cur_h_be_the_position_of_the_first_box__and_set_leader_wd_plus_lx_to_the_spacing_between_corresponding_parts_of_boxes!($globals, $p, $left_edge, leader_wd);
+        crate::section_0627::Let_cur_h_be_the_position_of_the_first_box__and_set_leader_wd_plus_lx_to_the_spacing_between_corresponding_parts_of_boxes!($globals, $p, $left_edge, leader_wd, lx);
         // while cur_h+leader_wd<=edge do
         while $globals.cur_h + leader_wd <= edge {
             // @<Output a leader box at |cur_h|,

@@ -4,7 +4,11 @@
 pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1072($globals:expr, $cmd:expr, $chr_code:expr) {{
     // hmove: if chr_code=1 then print_esc("moveleft")@+else print_esc("moveright");
     let processed = if $cmd == hmove {
-        todo!("hmove");
+        if $chr_code.get() == 1 {
+            print_esc($globals, crate::strpool_str!("moveleft"));
+        } else {
+            print_esc($globals, crate::strpool_str!("moveright"));
+        }
         true
     }
     // vmove: if chr_code=1 then print_esc("raise")@+else print_esc("lower");

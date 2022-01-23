@@ -82,7 +82,7 @@ pub(crate) fn var_delimiter(
     };
     if f != null_font {
         // @<Make variable |b| point to a box for |(f,c)|@>
-        crate::section_0710::Make_variable_b_point_to_a_box_for_f_and_c!(globals, b, q, f, c);
+        crate::section_0710::Make_variable_b_point_to_a_box_for_f_and_c!(globals, b, q, v, f, c);
     }
     // else  begin b:=new_null_box;
     else {

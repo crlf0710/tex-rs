@@ -24,5 +24,12 @@ pub(crate) macro sup_style($v:expr) {
         + ($v.get() % 2)
 }
 // @d num_style(#)==#+2-2*(# div 6) {smaller unless already script-script}
+/// smaller unless already script-script
+pub(crate) macro num_style($v:expr) {
+    $v.get() + 2 - 2 * ($v.get() / 6)
+}
 // @d denom_style(#)==2*(# div 2)+cramped+2-2*(# div 6) {smaller, cramped}
-//
+/// smaller, cramped
+pub(crate) macro denom_style($v:expr) {
+    2 * ($v.get() / 2) + crate::section_0688::cramped + 2 - 2 * ($v.get() / 6)
+}

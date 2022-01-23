@@ -20,7 +20,6 @@ pub(crate) macro add_token_ref($globals:expr, $token:expr) {
 }
 // @d add_glue_ref(#)==incr(glue_ref_count(#)) {new reference to a glue spec}
 /// new reference to a glue spec
-#[allow(unused_macros)]
 pub(crate) macro add_glue_ref($globals:expr, $glue:expr) {
     crate::section_0016::incr!(crate::section_0150::glue_ref_count!($globals, $glue))
 }

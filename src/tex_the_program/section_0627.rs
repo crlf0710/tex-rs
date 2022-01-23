@@ -15,7 +15,7 @@
 //! accumulate; half of this rounding error is placed at each end of the leaders.
 //
 // @<Let |cur_h| be the position of the first box, ...@>=
-pub(crate) macro Let_cur_h_be_the_position_of_the_first_box__and_set_leader_wd_plus_lx_to_the_spacing_between_corresponding_parts_of_boxes($globals:expr, $p:expr, $left_edge:expr, $leader_wd:expr) {{
+pub(crate) macro Let_cur_h_be_the_position_of_the_first_box__and_set_leader_wd_plus_lx_to_the_spacing_between_corresponding_parts_of_boxes($globals:expr, $p:expr, $left_edge:expr, $leader_wd:expr, $lx:expr) {{
     // if subtype(p)=a_leaders then
     if subtype!($globals, $p) == glue_node_subtype::a_leaders as _ {
         /// what `dvi_h` should pop to
@@ -36,13 +36,27 @@ pub(crate) macro Let_cur_h_be_the_position_of_the_first_box__and_set_leader_wd_p
     }
     // else  begin lq:=rule_wd div leader_wd; {the number of box copies}
     else {
+        /// quantities used in calculations for leaders
+        let (lq, lr);
+        /// the number of box copies
+        const _: () = ();
+        lq = $globals.rule_wd.inner() / $leader_wd.inner();
         // lr:=rule_wd mod leader_wd; {the remaining space}
+        /// the remaining space
+        const _: () = ();
+        lr = $globals.rule_wd.inner() % $leader_wd.inner();
         // if subtype(p)=c_leaders then cur_h:=cur_h+(lr div 2)
+        if subtype!($globals, $p) == glue_node_subtype::c_leaders as _ {
+            $globals.cur_h += scaled::new_from_inner(lr / 2);
+        }
         // else  begin lx:=lr div (lq+1);
-        //   cur_h:=cur_h+((lr-(lq-1)*lx) div 2);
-        //   end;
+        else {
+            $lx = scaled::new_from_inner(lr / (lq + 1));
+            // cur_h:=cur_h+((lr-(lq-1)*lx) div 2);
+            $globals.cur_h += scaled::new_from_inner((lr - (lq - 1) * $lx.inner()) / 2);
+            // end;
+        }
         // end
-        todo!("not a_leaders");
     }
     use crate::section_0101::scaled;
     use crate::section_0133::subtype;

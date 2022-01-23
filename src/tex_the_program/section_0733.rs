@@ -9,7 +9,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // fraction_noad: begin make_fraction(q); goto check_dimensions;
     else if $type_q == fraction_noad {
-        make_fraction($globals, $q);
+        make_fraction($globals, $q)?;
         crate::goto_forward_label!($lbl_check_dimensions);
         // end;
         true

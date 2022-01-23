@@ -29,7 +29,8 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
     }
     // copy_code: begin scan_eight_bit_int; cur_box:=copy_node_list(box(cur_val));
     else if cur_chr == copy_code as chr_code_repr {
-        todo!("copy_code");
+        scan_eight_bit_int(globals)?;
+        globals.cur_box = copy_node_list(globals, r#box!(globals, globals.cur_val))?;
         // end;
     }
     // last_box_code: @<If the current list ends with a box node, delete it from
@@ -60,6 +61,7 @@ use crate::pascal::integer;
 use crate::section_0004::TeXGlobals;
 use crate::section_0081::TeXResult;
 use crate::section_0115::null;
+use crate::section_0204::copy_node_list;
 use crate::section_0230::r#box;
 use crate::section_0297::chr_code_repr;
 use crate::section_0433::scan_eight_bit_int;

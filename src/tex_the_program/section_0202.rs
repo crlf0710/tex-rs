@@ -44,9 +44,15 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     // end;
                 }
                 // ins_node: begin flush_node_list(ins_ptr(p));
-                //   delete_glue_ref(split_top_ptr(p));
-                //   free_node(p,ins_node_size); goto done;
-                //   end;
+                else if type_p == ins_node {
+                    flush_node_list(globals, ins_ptr!(globals, p))?;
+                    // delete_glue_ref(split_top_ptr(p));
+                    delete_glue_ref(globals, split_top_ptr!(globals, p));
+                    // free_node(p,ins_node_size); goto done;
+                    free_node(globals, p, ins_node_size as _);
+                    crate::goto_forward_label!('done);
+                    // end;
+                }
                 // whatsit_node: @<Wipe out the whatsit node |p| and |goto done|@>;
                 else if type_p == whatsit_node {
                     crate::section_1358::Wipe_out_the_whatsit_node_p_and_goto_done!(globals, p, 'done);
@@ -118,6 +124,10 @@ use crate::section_0135::list_ptr;
 use crate::section_0137::vlist_node;
 use crate::section_0138::rule_node;
 use crate::section_0138::rule_node_size;
+use crate::section_0140::ins_node;
+use crate::section_0140::ins_node_size;
+use crate::section_0140::ins_ptr;
+use crate::section_0140::split_top_ptr;
 use crate::section_0141::small_node_size;
 use crate::section_0143::lig_ptr;
 use crate::section_0143::ligature_node;
@@ -132,4 +142,5 @@ use crate::section_0149::leader_ptr;
 use crate::section_0155::kern_node;
 use crate::section_0157::penalty_node;
 use crate::section_0159::unset_node;
+use crate::section_0201::delete_glue_ref;
 use crate::section_0201::fast_delete_glue_ref;

@@ -141,6 +141,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
     // non_script: print_esc("nonscript");
     // omit: print_esc("omit");
     // radical: print_esc("radical");
+    else if $cmd == radical {
+        print_esc($globals, crate::strpool_str!("radical"));
+        true
+    }
     // read_to_cs: print_esc("read");
     else if $cmd == read_to_cs {
         print_esc($globals, crate::strpool_str!("read"));

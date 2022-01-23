@@ -17,6 +17,9 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
             crate::section_0187::Display_rule_p!($globals, $p);
         }
         // ins_node: @<Display insertion |p|@>;
+        else if type_p == ins_node {
+            crate::section_0188::Display_insertion_p!($globals, $p);
+        }
         // whatsit_node: @<Display the whatsit node |p|@>;
         else if type_p == whatsit_node {
             crate::section_1356::Display_the_whatsit_node_p!($globals, $p);
@@ -70,6 +73,7 @@ pub(crate) macro Display_node_p($globals:expr, $p:expr) {{
     use crate::section_0135::hlist_node;
     use crate::section_0137::vlist_node;
     use crate::section_0138::rule_node;
+    use crate::section_0140::ins_node;
     use crate::section_0143::ligature_node;
     use crate::section_0145::disc_node;
     use crate::section_0146::whatsit_node;
