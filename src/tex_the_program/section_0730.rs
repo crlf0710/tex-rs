@@ -4,10 +4,14 @@
 pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_goto_done_with_node($globals:expr, $q:expr, $type_q:expr, $lbl_done_with_node:lifetime) {{
     // style_node: begin cur_style:=subtype(q);
     let processed = if $type_q == style_node {
+        $globals.cur_style = subtype!($globals, $q).into();
         // @<Set up the values of |cur_size| and |cur_mu|, based on |cur_style|@>;
+        crate::section_0703::Set_up_the_values_of_cur_size_and_cur_mu__based_on_cur_style!(
+            $globals
+        );
         // goto done_with_node;
+        crate::goto_forward_label!($lbl_done_with_node);
         // end;
-        todo!("style_node");
         true
     }
     // choice_node: @<Change this node to a style node followed by the correct choice,
@@ -52,6 +56,7 @@ pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_got
     } else {
         false
     };
+    use crate::section_0133::subtype;
     use crate::section_0138::rule_node;
     use crate::section_0140::ins_node;
     use crate::section_0141::mark_node;

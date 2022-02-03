@@ -2,7 +2,7 @@
 //! sets up default values so that most of the branches are short.
 //
 // @<If node |q| is a style node, change the style...@>=
-pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__otherwise_if_it_is_not_a_noad__put_it_into_the_hlist__advance_q__and_goto_done__otherwise_set_s_to_the_size_of_noad_q__set_t_to_the_associated_type_ord_noad_to_inner_noad__and_set_pen_to_the_associated_penalty($globals:expr, $q:expr, $p:expr, $t:expr, $s:expr, $pen:expr, $lbl_done:lifetime) {{
+pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__otherwise_if_it_is_not_a_noad__put_it_into_the_hlist__advance_q__and_goto_done__otherwise_set_s_to_the_size_of_noad_q__set_t_to_the_associated_type_ord_noad_to_inner_noad__and_set_pen_to_the_associated_penalty($globals:expr, $q:expr, $p:expr, $t:expr, $s:expr, $pen:expr, $style:expr, $max_h:expr, $max_d:expr, $lbl_done:lifetime, $lbl_delete_q:lifetime) {{
     // t:=ord_noad; s:=noad_size; pen:=inf_penalty;
     $t = ord_noad;
     $s = noad_size;
@@ -52,11 +52,16 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     }
     // left_noad,right_noad: t:=make_left_right(q,style,max_d,max_h);
     else if type_q == left_noad || type_q == right_noad {
-        todo!("left_noad || right_noad");
+        $t = make_left_right($globals, $q, $style, $max_d, $max_h)?.get();
     }
     // style_node: @<Change the current style and |goto delete_q|@>;
     else if type_q == style_node {
-        todo!("style_node");
+        crate::section_0763::Change_the_current_style_and_goto_delete_q!(
+            $globals,
+            $q,
+            $s,
+            $lbl_delete_q
+        );
     }
     // whatsit_node,penalty_node,rule_node,disc_node,adjust_node,ins_node,mark_node,
     //  glue_node,kern_node:@t@>@;@/
@@ -110,4 +115,5 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     use crate::section_0683::radical_noad_size;
     use crate::section_0687::*;
     use crate::section_0688::style_node;
+    use crate::section_0762::make_left_right;
 }}

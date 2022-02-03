@@ -18,8 +18,9 @@
 // @d style_node=unset_node+1 {|type| of a style node}
 /// `type` of a style node
 pub(crate) const style_node: quarterword = unset_node + 1;
-
 // @d style_node_size=3 {number of words in a style node}
+/// number of words in a style node
+pub(crate) const style_node_size: quarterword = 3;
 // @d display_style=0 {|subtype| for \.{\\displaystyle}}
 // @d text_style=2 {|subtype| for \.{\\textstyle}}
 // @d script_style=4 {|subtype| for \.{\\scriptstyle}}
@@ -54,12 +55,34 @@ impl style_node_subtype {
 }
 
 // @p function new_style(@!s:small_number):pointer; {create a style node}
-// var p:pointer; {the new node}
-// begin p:=get_node(style_node_size); type(p):=style_node;
-// subtype(p):=s; width(p):=0; depth(p):=0; {the |width| and |depth| are not used}
-// new_style:=p;
-// end;
-//
+/// create a style node
+pub(crate) fn new_style(globals: &mut TeXGlobals, s: small_number) -> TeXResult<pointer> {
+    // var p:pointer; {the new node}
+    /// the new node
+    let p;
+    // begin p:=get_node(style_node_size); type(p):=style_node;
+    p = get_node(globals, style_node_size as _)?;
+    r#type!(globals, p) = style_node;
+    // subtype(p):=s; width(p):=0; depth(p):=0; {the |width| and |depth| are not used}
+    subtype!(globals, p) = s.get() as _;
+    /// the `width` and `depth` are not used
+    const _: () = ();
+    width!(globals, p) = scaled::zero();
+    depth!(globals, p) = scaled::zero();
+    // new_style:=p;
+    crate::ok_nojump!(p)
+    // end;
+}
 
+use crate::section_0004::TeXGlobals;
+use crate::section_0081::TeXResult;
+use crate::section_0101::scaled;
+use crate::section_0101::small_number;
 use crate::section_0113::quarterword;
+use crate::section_0115::pointer;
+use crate::section_0125::get_node;
+use crate::section_0133::r#type;
+use crate::section_0133::subtype;
+use crate::section_0135::depth;
+use crate::section_0135::width;
 use crate::section_0159::unset_node;

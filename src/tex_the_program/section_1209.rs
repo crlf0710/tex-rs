@@ -2,8 +2,8 @@
 
 // @<Cases of |print_cmd_chr|...@>=
 pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1209($globals:expr, $cmd:expr, $chr_code:expr) {{
+    // prefix: if chr_code=1 then print_esc("long")
     let processed = if $cmd == prefix {
-        // prefix: if chr_code=1 then print_esc("long")
         if $chr_code.get() == 1 {
             print_esc($globals, crate::strpool_str!("long"));
         }

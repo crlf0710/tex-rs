@@ -281,6 +281,9 @@ pub(crate) macro mag($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::mag_code)
 }
 // @d delimiter_factor==int_par(delimiter_factor_code)
+pub(crate) macro delimiter_factor($globals:expr) {
+    crate::section_0236::int_par!($globals, crate::section_0236::delimiter_factor_code)
+}
 // @d looseness==int_par(looseness_code)
 pub(crate) macro looseness($globals:expr) {
     crate::section_0236::int_par!($globals, crate::section_0236::looseness_code)

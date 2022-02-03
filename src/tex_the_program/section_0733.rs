@@ -1,10 +1,10 @@
 //! ` `
 
 // @<Cases for noads that can follow a |bin_noad|@>=
-pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:expr, $type_q:expr, $lbl_check_dimensions:lifetime) {{
+pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:expr, $type_q:expr, $delta:expr, $lbl_check_dimensions:lifetime, $lbl_done_with_noad:lifetime) {{
     // left_noad: goto done_with_noad;
     let processed = if $type_q == left_noad {
-        todo!("left_noad");
+        crate::goto_forward_label!($lbl_done_with_noad);
         true
     }
     // fraction_noad: begin make_fraction(q); goto check_dimensions;
@@ -16,9 +16,12 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // op_noad: begin delta:=make_op(q);
     else if $type_q == op_noad {
+        $delta = make_op($globals, $q)?;
         // if subtype(q)=limits then goto check_dimensions;
+        if subtype!($globals, $q) == op_noad_subtype::limits as _ {
+            crate::goto_forward_label!($lbl_check_dimensions);
+        }
         // end;
-        todo!("op_noad");
         true
     }
     // ord_noad: make_ord(q);
@@ -59,12 +62,14 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
         false
     };
     use crate::section_0016::do_nothing;
+    use crate::section_0133::subtype;
     use crate::section_0682::*;
     use crate::section_0683::*;
     use crate::section_0687::*;
     use crate::section_0736::make_vcenter;
     use crate::section_0737::make_radical;
     use crate::section_0743::make_fraction;
+    use crate::section_0749::make_op;
     use crate::section_0752::make_ord;
     processed
 }}

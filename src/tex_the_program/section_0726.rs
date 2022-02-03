@@ -71,7 +71,7 @@ pub(crate) fn mlist_to_hlist(globals: &mut TeXGlobals) -> TeXResult<()> {
     // @<Make a second pass over the mlist, removing all noads and inserting the
     //   proper spacing and penalties@>;
     crate::section_0760::Make_a_second_pass_over_the_mlist__removing_all_noads_and_inserting_the_proper_spacing_and_penalties!(
-        globals, mlist, style, penalties
+        globals, mlist, style, penalties, max_h, max_d
     );
     // end;
     crate::ok_nojump!()

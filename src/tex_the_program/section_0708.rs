@@ -3,7 +3,7 @@
 // @<Look at the list of characters starting with |x|...@>=
 pub(crate) macro Look_at_the_list_of_characters_starting_with_x_in_font_g__set_f_and_c_whenever_a_better_character_is_found__goto_found_as_soon_as_a_large_enough_variant_is_encountered($globals:expr, $x:expr, $g:expr, $f:expr, $c:expr, $w:expr, $v:expr, $q:expr, $lbl_found:lifetime) {{
     /// best-so-far and tentative character codes
-    let y;
+    let mut y;
     // begin y:=x;
     y = $x;
     // if (qo(y)>=font_bc[g])and(qo(y)<=font_ec[g]) then
@@ -46,8 +46,9 @@ pub(crate) macro Look_at_the_list_of_characters_starting_with_x_in_font_g__set_f
                     // if char_tag(q)=list_tag then
                     if $q.char_tag() == char_tag::list_tag {
                         // begin y:=rem_byte(q); goto continue;
+                        y = ASCII_code::from($q.rem_byte() as integer);
+                        crate::goto_backward_label!('continue_);
                         // end;
-                        todo!("list_tag");
                     }
                     // end;
                 }
@@ -57,6 +58,8 @@ pub(crate) macro Look_at_the_list_of_characters_starting_with_x_in_font_g__set_f
         // end;
     }
     // end
+    use crate::pascal::integer;
+    use crate::section_0018::ASCII_code;
     use crate::section_0544::char_tag;
     use crate::section_0554::char_depth;
     use crate::section_0554::char_height;

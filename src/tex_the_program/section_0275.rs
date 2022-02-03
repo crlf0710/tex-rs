@@ -25,9 +25,19 @@ pub(crate) fn eq_destroy(globals: &mut TeXGlobals, w: memory_word) -> TeXResult<
     }
     // shape_ref: begin q:=equiv_field(w); {we need to free a \.{\\parshape} block}
     else if eq_type_field_w == shape_ref {
-        todo!("shape_ref");
+        /// `equiv` field of `w`
+        let q;
+        /// we need to free a `\parshape` block
+        const _: () = ();
+        q = equiv_field!(w);
         // if q<>null then free_node(q,info(q)+info(q)+1);
-        // end; {such a block is |2n+1| words long, where |n=info(q)|}
+        if q != null {
+            let info_q = info_inner!(globals, q);
+            free_node(globals, q, info_q + info_q + 1);
+            // end; {such a block is |2n+1| words long, where |n=info(q)|}
+            /// such a block is `2n+1` words long, where `n=info(q)`
+            const _: () = ();
+        }
     }
     // box_ref: flush_node_list(equiv_field(w));
     else if eq_type_field_w == box_ref {
@@ -46,6 +56,9 @@ use crate::section_0004::TeXGlobals;
 use crate::section_0016::do_nothing;
 use crate::section_0081::TeXResult;
 use crate::section_0113::memory_word;
+use crate::section_0115::null;
+use crate::section_0118::info_inner;
+use crate::section_0130::free_node;
 use crate::section_0200::delete_token_ref;
 use crate::section_0201::delete_glue_ref;
 use crate::section_0202::flush_node_list;

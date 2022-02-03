@@ -24,9 +24,12 @@ pub(crate) macro Get_ready_to_start_line_breaking_0848($globals:expr) {{
     // else  begin last_special_line:=info(par_shape_ptr)-1;
     else {
         $globals.last_special_line = info_inner!($globals, par_shape_ptr!($globals)) - 1;
-        todo!("get ready par_shape_ptr != null");
         // second_width:=mem[par_shape_ptr+2*(last_special_line+1)].sc;
+        $globals.second_width = $globals.mem
+            [par_shape_ptr!($globals) + 2 * ($globals.last_special_line + 1)][MEMORY_WORD_SC];
         // second_indent:=mem[par_shape_ptr+2*last_special_line+1].sc;
+        $globals.second_indent = $globals.mem
+            [par_shape_ptr!($globals) + 2 * $globals.last_special_line + 1][MEMORY_WORD_SC];
         // end;
     }
     // if looseness=0 then easy_line:=last_special_line
@@ -38,6 +41,7 @@ pub(crate) macro Get_ready_to_start_line_breaking_0848($globals:expr) {{
         $globals.easy_line = max_halfword;
     }
     use crate::section_0101::scaled;
+    use crate::section_0101::MEMORY_WORD_SC;
     use crate::section_0110::max_halfword;
     use crate::section_0115::null;
     use crate::section_0118::info_inner;
