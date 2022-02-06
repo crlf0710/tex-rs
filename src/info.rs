@@ -272,10 +272,10 @@ pub(crate) macro trace_error_expr
 
 pub(crate) macro return_nojump {
     () => {
-        return Ok(());
+        return Ok(())
     },
     ($val: expr) => {
-        return Ok($val);
+        return Ok($val)
     }
 }
 

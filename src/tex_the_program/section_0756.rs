@@ -12,7 +12,7 @@
 pub(crate) fn make_scripts(globals: &mut TeXGlobals, q: pointer, delta: scaled) -> TeXResult<()> {
     // var p,@!x,@!y,@!z:pointer; {temporary registers for box construction}
     /// temporary registers for box construction
-    let (mut p, x, z): (pointer, pointer, pointer);
+    let (mut p, mut x, z): (pointer, pointer, pointer);
     // @!shift_up,@!shift_down,@!clr:scaled; {dimensions in the calculation}
     /// dimensions in the calculation
     let (mut shift_up, mut shift_down, mut clr);
@@ -62,7 +62,9 @@ pub(crate) fn make_scripts(globals: &mut TeXGlobals, q: pointer, delta: scaled) 
         // else @<Construct a sub/superscript combination box |x|, with the
         //   superscript offset by |delta|@>;
         else {
-            todo!("construct 3");
+            crate::section_0759::Construct_a_sub_superscript_combination_box_x__with_the_superscript_offset_by_delta!(
+                globals, p, x, z, q, clr, delta, shift_up, shift_down
+            );
         }
         // end;
     }

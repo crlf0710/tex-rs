@@ -46,11 +46,17 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
         }
         // else  begin tail_append(get_node(small_node_size));
         else {
+            tail_append!($globals, get_node($globals, small_node_size as _)?);
             // type(tail):=adjust_node;@/
+            r#type!($globals, tail!($globals)) = adjust_node;
             // subtype(tail):=0; {the |subtype| is not used}
+            /// the `subtype` is not used
+            const _: () = ();
+            subtype!($globals, tail!($globals)) = 0;
             // adjust_ptr(tail):=list_ptr(p); delete_glue_ref(q);
+            adjust_ptr!($globals, tail!($globals)) = list_ptr!($globals, p) as _;
+            delete_glue_ref($globals, q);
             // end;
-            todo!("saved 0 == 255");
         }
         // free_node(p,box_node_size);
         free_node($globals, p, box_node_size as _);
@@ -87,6 +93,10 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
     use crate::section_0140::ins_node_size;
     use crate::section_0140::ins_ptr;
     use crate::section_0140::split_top_ptr;
+    use crate::section_0141::small_node_size;
+    use crate::section_0142::adjust_node;
+    use crate::section_0142::adjust_ptr;
+    use crate::section_0201::delete_glue_ref;
     use crate::section_0203::add_glue_ref;
     use crate::section_0213::head;
     use crate::section_0213::tail;

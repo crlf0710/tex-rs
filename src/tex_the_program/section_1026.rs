@@ -33,11 +33,18 @@ pub(crate) macro Resume_the_page_builder_after_an_output_routine_has_come_to_an_
     // if link(page_head)<>null then {and both go before heldover contributions}
     if link!($globals, page_head) != null {
         /// and both go before heldover contributions
-        todo!("append heldover contributions");
+        const _: () = ();
         // begin if link(contrib_head)=null then contrib_tail:=page_tail;
+        if link!($globals, contrib_head) == null {
+            contrib_tail!($globals) = $globals.page_tail;
+        }
         // link(page_tail):=link(contrib_head);
+        link!($globals, $globals.page_tail) = link!($globals, contrib_head);
         // link(contrib_head):=link(page_head);
+        link!($globals, contrib_head) = link!($globals, page_head);
         // link(page_head):=null; page_tail:=page_head;
+        link!($globals, page_head) = null;
+        $globals.page_tail = page_head;
         // end;
     }
     // pop_nest; build_page;
@@ -47,6 +54,7 @@ pub(crate) macro Resume_the_page_builder_after_an_output_routine_has_come_to_an_
     use crate::section_0036::loc;
     use crate::section_0115::null;
     use crate::section_0118::link;
+    use crate::section_0162::contrib_head;
     use crate::section_0162::page_head;
     use crate::section_0213::head;
     use crate::section_0213::tail;
@@ -57,5 +65,6 @@ pub(crate) macro Resume_the_page_builder_after_an_output_routine_has_come_to_an_
     use crate::section_0307::token_type;
     use crate::section_0324::end_token_list;
     use crate::section_0994::build_page;
+    use crate::section_0995::contrib_tail;
     use crate::section_1096::end_graf;
 }}

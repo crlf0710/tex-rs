@@ -8,7 +8,7 @@ pub(crate) macro Either_insert_the_material_specified_by_node_p_into_the_appropr
     /// nodes being examined and/or changed
     let mut r;
     /// should the present insertion be held over?
-    let wait;
+    let mut wait;
 
     // begin r:=link(page_ins_head);
     r = link!($globals, page_ins_head);
@@ -32,7 +32,7 @@ pub(crate) macro Either_insert_the_material_specified_by_node_p_into_the_appropr
             // @<Wrap up the box specified by node |r|, splitting node |p| if
             // called for; set |wait:=true| if node |p| holds a remainder after
             // splitting@>
-            crate::section_1021::Wrap_up_the_box_specified_by_node_r__splitting_node_p_if_called_for__set_wait_to_true_if_node_p_holds_a_remainder_after_splitting!($globals, $p, r);
+            crate::section_1021::Wrap_up_the_box_specified_by_node_r__splitting_node_p_if_called_for__set_wait_to_true_if_node_p_holds_a_remainder_after_splitting!($globals, $p, r, s, wait);
         }
         // else  begin while link(s)<>null do s:=link(s);
         else {

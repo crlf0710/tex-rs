@@ -27,6 +27,7 @@ pub(crate) fn scan_math(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
         // if c=@'100000 then
         if c == 0o100000 {
             // begin @<Treat |cur_chr| as an active character@>;
+            crate::section_1152::Treat_cur_chr_as_an_active_character!(globals);
             // goto restart;
             // end;
             todo!("treat");
@@ -46,7 +47,7 @@ pub(crate) fn scan_math(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     }
     // math_given: c:=cur_chr;
     else if globals.cur_cmd == math_given {
-        todo!("math_given");
+        c = globals.cur_chr.get() as _;
     }
     // delim_num: begin scan_twenty_seven_bit_int; c:=cur_val div @'10000;
     else if globals.cur_cmd == delim_num {

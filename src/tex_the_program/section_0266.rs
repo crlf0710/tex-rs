@@ -115,19 +115,35 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // mark: print_esc("mark");
+    else if $cmd == mark {
+        print_esc($globals, crate::strpool_str!("mark"));
+        true
+    }
     // math_accent: print_esc("mathaccent");
+    else if $cmd == math_accent {
+        print_esc($globals, crate::strpool_str!("mathaccent"));
+        true
+    }
     // math_char_num: print_esc("mathchar");
     else if $cmd == math_char_num {
         print_esc($globals, crate::strpool_str!("mathchar"));
         true
     }
     // math_choice: print_esc("mathchoice");
+    else if $cmd == math_choice {
+        print_esc($globals, crate::strpool_str!("mathchoice"));
+        true
+    }
     // multiply: print_esc("multiply");
     else if $cmd == multiply {
         print_esc($globals, crate::strpool_str!("multiply"));
         true
     }
     // no_align: print_esc("noalign");
+    else if $cmd == no_align {
+        print_esc($globals, crate::strpool_str!("noalign"));
+        true
+    }
     // no_boundary:print_esc("noboundary");
     else if $cmd == no_boundary {
         print_esc($globals, crate::strpool_str!("noboundary"));
@@ -139,7 +155,15 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // non_script: print_esc("nonscript");
+    else if $cmd == non_script {
+        print_esc($globals, crate::strpool_str!("nonscript"));
+        true
+    }
     // omit: print_esc("omit");
+    else if $cmd == omit {
+        print_esc($globals, crate::strpool_str!("omit"));
+        true
+    }
     // radical: print_esc("radical");
     else if $cmd == radical {
         print_esc($globals, crate::strpool_str!("radical"));
@@ -161,6 +185,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // set_prev_graf: print_esc("prevgraf");
+    else if $cmd == set_prev_graf {
+        print_esc($globals, crate::strpool_str!("prevgraf"));
+        true
+    }
     // set_shape: print_esc("parshape");
     else if $cmd == set_shape {
         print_esc($globals, crate::strpool_str!("parshape"));
@@ -172,6 +200,10 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0266
         true
     }
     // toks_register: print_esc("toks");
+    else if $cmd == toks_register {
+        print_esc($globals, crate::strpool_str!("toks"));
+        true
+    }
     // vadjust: print_esc("vadjust");
     else if $cmd == vadjust {
         print_esc($globals, crate::strpool_str!("vadjust"));

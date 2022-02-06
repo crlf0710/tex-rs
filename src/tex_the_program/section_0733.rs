@@ -41,12 +41,12 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // over_noad: make_over(q);
     else if $type_q == over_noad {
-        todo!("over_noad");
+        make_over($globals, $q)?;
         true
     }
     // under_noad: make_under(q);
     else if $type_q == under_noad {
-        todo!("under_noad");
+        make_under($globals, $q)?;
         true
     }
     // accent_noad: make_math_accent(q);
@@ -66,6 +66,8 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     use crate::section_0682::*;
     use crate::section_0683::*;
     use crate::section_0687::*;
+    use crate::section_0734::make_over;
+    use crate::section_0735::make_under;
     use crate::section_0736::make_vcenter;
     use crate::section_0737::make_radical;
     use crate::section_0743::make_fraction;

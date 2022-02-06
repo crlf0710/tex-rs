@@ -17,7 +17,11 @@ pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_got
     // choice_node: @<Change this node to a style node followed by the correct choice,
     //    then |goto done_with_node|@>;
     else if $type_q == choice_node {
-        todo!("choice_node");
+        crate::section_0731::Change_this_node_to_a_style_node_followed_by_the_correct_choice__then_goto_done_with_node!(
+            $globals,
+            $q,
+            $lbl_done_with_node
+        );
         true
     }
     // ins_node,mark_node,adjust_node,

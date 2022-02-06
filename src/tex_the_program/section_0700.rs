@@ -72,6 +72,10 @@ pub(crate) macro sub1($globals:expr, $v:expr) {
     crate::section_0700::mathsy!($globals, 16, $v)
 }
 // @d sub2==mathsy(17) {subscript shift-down if superscript is present}
+/// subscript shift-down if superscript is present
+pub(crate) macro sub2($globals:expr, $v:expr) {
+    crate::section_0700::mathsy!($globals, 17, $v)
+}
 // @d sup_drop==mathsy(18) {superscript baseline below top of large box}
 /// superscript baseline below top of large box
 pub(crate) macro sup_drop($globals:expr, $v:expr) {

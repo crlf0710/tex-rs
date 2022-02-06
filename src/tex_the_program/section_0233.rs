@@ -5,10 +5,26 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     // if n=par_shape_loc then
     if ($n as integer) == par_shape_loc as integer {
         // begin print_esc("parshape"); print_char("=");
+        print_esc($globals, crate::strpool_str!("parshape"));
+        print_char(
+            make_globals_io_string_log_view!($globals),
+            ASCII_code_literal!(b'='),
+        );
         // if par_shape_ptr=null then print_char("0")
+        if par_shape_ptr!($globals) == null {
+            print_char(
+                make_globals_io_string_log_view!($globals),
+                ASCII_code_literal!(b'0'),
+            );
+        }
         // else print_int(info(par_shape_ptr));
+        else {
+            print_int(
+                $globals,
+                info_inner!($globals, par_shape_ptr!($globals)) as _,
+            );
+        }
         // end
-        todo!("par_shape_loc");
     }
     // else if n<toks_base then
     else if ($n as integer) < toks_base as integer {
@@ -74,6 +90,7 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     use crate::section_0063::print_esc;
     use crate::section_0065::print_int;
     use crate::section_0115::null;
+    use crate::section_0118::info_inner;
     use crate::section_0118::link;
     use crate::section_0182::show_node_list;
     use crate::section_0209::assign_toks;
@@ -82,6 +99,7 @@ pub(crate) macro Show_equivalent_n__in_region_4($globals:expr, $n:expr) {{
     use crate::section_0230::cat_code_base;
     use crate::section_0230::cur_font_loc;
     use crate::section_0230::par_shape_loc;
+    use crate::section_0230::par_shape_ptr;
     use crate::section_0230::toks_base;
     use crate::section_0292::show_token_list;
     use crate::section_0297::chr_code_type;

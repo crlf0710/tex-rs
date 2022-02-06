@@ -10,7 +10,7 @@ pub(crate) fn set_math_char(globals: &mut TeXGlobals, c: integer) -> TeXResult<(
     // begin if c>=@'100000 then
     if c >= 0o100000 {
         // @<Treat |cur_chr|...@>
-        todo!("treat");
+        crate::section_1152::Treat_cur_chr_as_an_active_character!(globals);
     }
     // else  begin p:=new_noad; math_type(nucleus(p)):=math_char;
     else {

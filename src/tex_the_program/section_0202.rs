@@ -76,6 +76,9 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     flush_node_list(globals, lig_ptr!(globals, p))?;
                 }
                 // mark_node: delete_token_ref(mark_ptr(p));
+                else if type_p == mark_node {
+                    delete_token_ref(globals, mark_ptr!(globals, p) as _);
+                }
                 // disc_node: begin flush_node_list(pre_break(p));
                 else if type_p == disc_node {
                     flush_node_list(globals, pre_break!(globals, p))?;
@@ -84,14 +87,21 @@ pub(crate) fn flush_node_list(globals: &mut TeXGlobals, mut p: pointer) -> TeXRe
                     // end;
                 }
                 // adjust_node: flush_node_list(adjust_ptr(p));
+                else if type_p == adjust_node {
+                    flush_node_list(globals, adjust_ptr!(globals, p) as _)?;
+                }
                 // @t\4@>@<Cases of |flush_node_list| that arise in mlists only@>@;
+                else if crate::section_0698::Cases_of_flush_node_list_that_arise_in_mlists_only!(globals, p, type_p, 'done) {
+                    /// already processed
+                    const _: () = ();
+                }
                 // othercases confusion("flushing")
                 else {
-                    crate::trace_error_expr!("type(p)={}", type_p);
+                    crate::trace_error_expr!("flushing type(p)={}", type_p);
                     confusion(globals, crate::strpool_str!("flushing"))?;
+                    // @:this can't happen flushing}{\quad flushing@>
+                    // endcases;@/
                 }
-                // @:this can't happen flushing}{\quad flushing@>
-                // endcases;@/
                 // free_node(p,small_node_size);
                 free_node(globals, p, small_node_size as _);
             }
@@ -128,7 +138,11 @@ use crate::section_0140::ins_node;
 use crate::section_0140::ins_node_size;
 use crate::section_0140::ins_ptr;
 use crate::section_0140::split_top_ptr;
+use crate::section_0141::mark_node;
+use crate::section_0141::mark_ptr;
 use crate::section_0141::small_node_size;
+use crate::section_0142::adjust_node;
+use crate::section_0142::adjust_ptr;
 use crate::section_0143::lig_ptr;
 use crate::section_0143::ligature_node;
 use crate::section_0145::disc_node;
@@ -142,5 +156,6 @@ use crate::section_0149::leader_ptr;
 use crate::section_0155::kern_node;
 use crate::section_0157::penalty_node;
 use crate::section_0159::unset_node;
+use crate::section_0200::delete_token_ref;
 use crate::section_0201::delete_glue_ref;
 use crate::section_0201::fast_delete_glue_ref;

@@ -8,7 +8,7 @@ pub(crate) macro Append_an_insertion_to_the_current_page_and_goto_contribute($gl
     let mut n;
     // begin if page_contents=empty then freeze_page_specs(inserts_only);
     if $globals.page_contents == page_contents_kind::empty {
-        todo!("freeze_page_specs(inserts_only)");
+        freeze_page_specs($globals, page_contents_kind::inserts_only);
     }
     // n:=subtype(p); r:=page_ins_head;
     n = subtype!($globals, $p);
@@ -28,7 +28,7 @@ pub(crate) macro Append_an_insertion_to_the_current_page_and_goto_contribute($gl
     }
     // if type(r)=split_up then insert_penalties:=insert_penalties+float_cost(p)
     if r#type!($globals, r) == page_ins_node_type::split_up as _ {
-        todo!("update insert_penalties");
+        $globals.insert_penalties += float_cost!($globals, $p);
     }
     // else  begin last_ins_ptr(r):=p;
     else {
@@ -61,7 +61,7 @@ pub(crate) macro Append_an_insertion_to_the_current_page_and_goto_contribute($gl
         // else @<Find the best way to split the insertion, and change
         //   |type(r)| to |split_up|@>;
         else {
-            todo!("Find the best way");
+            crate::section_1010::Find_the_best_way_to_split_the_insertion__and_change_type_r_to_split_up!($globals, r, n, $p);
         }
         // end;
     }
@@ -76,6 +76,7 @@ pub(crate) macro Append_an_insertion_to_the_current_page_and_goto_contribute($gl
     use crate::section_0133::r#type;
     use crate::section_0133::subtype;
     use crate::section_0135::height;
+    use crate::section_0140::float_cost;
     use crate::section_0162::page_ins_head;
     use crate::section_0236::count;
     use crate::section_0247::dimen;
@@ -86,4 +87,5 @@ pub(crate) macro Append_an_insertion_to_the_current_page_and_goto_contribute($gl
     use crate::section_0982::page_total;
     use crate::section_0982::page_depth;
     use crate::section_0982::page_shrink;
+    use crate::section_0987::freeze_page_specs;
 }}

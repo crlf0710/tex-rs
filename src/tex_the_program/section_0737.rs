@@ -27,7 +27,14 @@ pub(crate) fn make_radical(globals: &mut TeXGlobals, q: pointer) -> TeXResult<()
         /// display style
         const _: () = ();
         // clr:=default_rule_thickness+(abs(math_x_height(cur_size)) div 4)
-        todo!("display style");
+        let default_rule_thickness = default_rule_thickness!(globals);
+        clr = default_rule_thickness
+            + scaled::new_from_inner(
+                math_x_height!(globals, globals.cur_size.get())
+                    .inner()
+                    .abs()
+                    / 4,
+            );
     }
     // else  begin clr:=default_rule_thickness; clr:=clr + (abs(clr) div 4);
     else {
@@ -82,6 +89,7 @@ use crate::section_0681::math_type_kind;
 use crate::section_0681::nucleus;
 use crate::section_0683::left_delimiter;
 use crate::section_0688::style_node_subtype;
+use crate::section_0700::math_x_height;
 use crate::section_0701::default_rule_thickness;
 use crate::section_0702::cramped_style;
 use crate::section_0705::overbar;

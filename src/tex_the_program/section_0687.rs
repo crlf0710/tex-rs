@@ -25,6 +25,8 @@ pub(crate) const over_noad: quarterword = under_noad + 1;
 /// `type` of a noad for accented subformulas
 pub(crate) const accent_noad: quarterword = over_noad + 1;
 // @d accent_noad_size=5 {number of |mem| words in an accent noad}
+/// number of `mem` words in an accent noad
+pub(crate) const accent_noad_size: quarterword = 5;
 // @d accent_chr(#)==#+4 {the |accent_chr| field of an accent noad}
 // @d vcenter_noad=accent_noad+1 {|type| of a noad for \.{\\vcenter}}
 /// `type` of a noad for `\vcenter`
