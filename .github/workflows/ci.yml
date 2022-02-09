@@ -36,6 +36,17 @@ jobs:
     - name: Run tests
       run: cargo test --workspace --features tex-cli/statistics --verbose
 
+  linux-build-with-opt:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --release --workspace --verbose
+    - name: Run tests
+      run: cargo test --release --workspace --verbose
+
   windows-build:
 
     runs-on: windows-latest
@@ -58,6 +69,17 @@ jobs:
     - name: Run tests
       run: cargo test --workspace --features tex-cli/statistics --verbose
 
+  windows-build-with-opt:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --release --workspace --verbose
+    - name: Run tests
+      run: cargo test --release --workspace --verbose
+
   macos-build:
 
     runs-on: macOS-latest
@@ -79,3 +101,14 @@ jobs:
       run: cargo build --workspace --features tex-cli/statistics --verbose
     - name: Run tests
       run: cargo test --workspace --features tex-cli/statistics --verbose
+
+  macos-build-with-opt:
+
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --release --workspace --verbose
+    - name: Run tests
+      run: cargo test --release --workspace --verbose
