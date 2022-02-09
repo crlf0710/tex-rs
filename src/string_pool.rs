@@ -1,16 +1,16 @@
-#[cfg(not(target_os = "macos"))]
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
 #[distributed_slice]
 pub(crate) static STRPLI: [&'static str] = [..];
 
-#[cfg(target_os = "macos")]
+#[cfg(any(target_os = "macos", target_os = "windows"))]
 pub(crate) struct strpool_literal(pub(crate) &'static str);
 
-#[cfg(target_os = "macos")]
+#[cfg(any(target_os = "macos", target_os = "windows"))]
 inventory::collect!(strpool_literal);
 
 static STRPOOL_ITEMS_FROM_256: Lazy<Vec<&'static str>> = Lazy::new(prepare_compiletime_string_pool);
 
-#[cfg(not(target_os = "macos"))]
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
 fn prepare_compiletime_string_pool() -> Vec<&'static str> {
     let mut existing = BTreeSet::new();
     let mut result = vec![];
@@ -28,7 +28,7 @@ fn prepare_compiletime_string_pool() -> Vec<&'static str> {
     result
 }
 
-#[cfg(target_os = "macos")]
+#[cfg(any(target_os = "macos", target_os = "windows"))]
 fn prepare_compiletime_string_pool() -> Vec<&'static str> {
     let mut existing = BTreeSet::new();
     let mut result = vec![];
@@ -47,7 +47,7 @@ fn prepare_compiletime_string_pool() -> Vec<&'static str> {
     result
 }
 
-#[cfg(not(target_os = "macos"))]
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
 pub(crate) macro strpool_str($s:expr) {{
     #[::linkme::distributed_slice(crate::string_pool::STRPLI)]
     static __: &'static str = $s;
@@ -57,7 +57,7 @@ pub(crate) macro strpool_str($s:expr) {{
     crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
 }}
 
-#[cfg(not(target_os = "macos"))]
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
 pub(crate) macro submit_strpool_str($s:expr) {
     const _: () = {
         #[::linkme::distributed_slice(crate::string_pool::STRPLI)]
@@ -65,7 +65,7 @@ pub(crate) macro submit_strpool_str($s:expr) {
     };
 }
 
-#[cfg(target_os = "macos")]
+#[cfg(any(target_os = "macos", target_os = "windows"))]
 pub(crate) macro strpool_str($s:expr) {{
     inventory::submit! {
         crate::string_pool::strpool_literal($s)
@@ -76,7 +76,7 @@ pub(crate) macro strpool_str($s:expr) {{
     crate::section_0038::str_number(crate::pascal::u32_from_m_to_n::new(v as u32))
 }}
 
-#[cfg(target_os = "macos")]
+#[cfg(any(target_os = "macos", target_os = "windows"))]
 pub(crate) macro submit_strpool_str($s:expr) {
     inventory::submit! {
         crate::string_pool::strpool_literal($s)
