@@ -16,10 +16,30 @@ pub(crate) macro default_rule_thickness($globals:expr) {
     crate::section_0701::mathex!($globals, 8)
 }
 // @d big_op_spacing1==mathex(9) {minimum clearance above a displayed op}
+/// minimum clearance above a displayed op
+pub(crate) macro big_op_spacing1($globals:expr) {
+    crate::section_0701::mathex!($globals, 9)
+}
 // @d big_op_spacing2==mathex(10) {minimum clearance below a displayed op}
+/// minimum clearance below a displayed op
+pub(crate) macro big_op_spacing2($globals:expr) {
+    crate::section_0701::mathex!($globals, 10)
+}
 // @d big_op_spacing3==mathex(11) {minimum baselineskip above displayed op}
+/// minimum baselineskip above displayed op
+pub(crate) macro big_op_spacing3($globals:expr) {
+    crate::section_0701::mathex!($globals, 11)
+}
 // @d big_op_spacing4==mathex(12) {minimum baselineskip below displayed op}
+/// minimum baselineskip below displayed op
+pub(crate) macro big_op_spacing4($globals:expr) {
+    crate::section_0701::mathex!($globals, 12)
+}
 // @d big_op_spacing5==mathex(13) {padding above and below displayed limits}
+/// padding above and below displayed limits
+pub(crate) macro big_op_spacing5($globals:expr) {
+    crate::section_0701::mathex!($globals, 13)
+}
 // @d total_mathex_params=13
 pub(crate) const total_mathex_params: halfword = 13;
 

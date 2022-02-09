@@ -17,7 +17,8 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_0227
         }
         // else  begin print_esc("muskip"); print_int(chr_code-mu_skip_base);
         else {
-            todo!("muskip");
+            print_esc($globals, crate::strpool_str!("muskip"));
+            print_int($globals, ($chr_code.get() - mu_skip_base) as integer);
             // end;
         }
         true

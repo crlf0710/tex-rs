@@ -28,6 +28,10 @@ pub(crate) const accent_noad: quarterword = over_noad + 1;
 /// number of `mem` words in an accent noad
 pub(crate) const accent_noad_size: quarterword = 5;
 // @d accent_chr(#)==#+4 {the |accent_chr| field of an accent noad}
+/// the `accent_chr` field of an accent noad
+pub(crate) macro accent_chr($v:expr) {
+    $v + 4
+}
 // @d vcenter_noad=accent_noad+1 {|type| of a noad for \.{\\vcenter}}
 /// `type` of a noad for `\vcenter`
 pub(crate) const vcenter_noad: quarterword = accent_noad + 1;

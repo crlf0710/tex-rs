@@ -44,7 +44,7 @@ pub(crate) macro If_node_q_is_a_style_node__change_the_style_and_goto_delete_q__
     }
     // accent_noad: s:=accent_noad_size;
     else if type_q == accent_noad {
-        todo!("accent_noad");
+        $s = accent_noad_size;
     }
     // fraction_noad: s:=fraction_noad_size;
     else if type_q == fraction_noad {

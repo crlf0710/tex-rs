@@ -16,9 +16,13 @@ pub(crate) macro Construct_a_vlist_box_for_the_fraction__according_to_shift_up_a
     // if thickness(q)=0 then
     if thickness!($globals, $q) == scaled::zero() {
         // begin p:=new_kern((shift_up-depth(x))-(height(z)-shift_down));
+        p = new_kern(
+            $globals,
+            ($shift_up - depth!($globals, $x)) - (height!($globals, $z) - $shift_down),
+        )?;
         // link(p):=z;
+        link!($globals, p) = $z;
         // end
-        todo!("thickness(q)=0");
     }
     // else  begin y:=fraction_rule(thickness(q));@/
     else {

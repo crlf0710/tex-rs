@@ -47,9 +47,19 @@ pub(crate) macro Show_equivalent_n__in_region_3($globals:expr, $n:expr) {{
     }
     // else  begin print_esc("muskip"); print_int(n-mu_skip_base); print_char("=");
     else {
+        print_esc($globals, crate::strpool_str!("muskip"));
+        print_int($globals, $n as integer - mu_skip_base as integer);
+        print_char(
+            make_globals_io_string_log_view!($globals),
+            ASCII_code_literal!(b'='),
+        );
         // print_spec(equiv(n),"mu");
+        print_spec(
+            $globals,
+            equiv!($globals, $n) as _,
+            crate::strpool_str!("mu"),
+        );
         // end
-        todo!("muskip");
     }
     use crate::pascal::integer;
     use crate::section_0004::make_globals_io_string_log_view;

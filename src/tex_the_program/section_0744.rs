@@ -27,8 +27,9 @@ pub(crate) macro Create_equal_width_boxes_x_and_z_for_the_numerator_and_denomina
         /// display style
         const _: () = ();
         // begin shift_up:=num1(cur_size); shift_down:=denom1(cur_size);
+        $shift_up = num1!($globals, $globals.cur_size.get());
+        $shift_down = denom1!($globals, $globals.cur_size.get());
         // end
-        todo!("display style");
     }
     // else  begin shift_down:=denom2(cur_size);
     else {
@@ -50,7 +51,9 @@ pub(crate) macro Create_equal_width_boxes_x_and_z_for_the_numerator_and_denomina
     use crate::section_0683::numerator;
     use crate::section_0683::thickness;
     use crate::section_0688::style_node_subtype;
+    use crate::section_0700::denom1;
     use crate::section_0700::denom2;
+    use crate::section_0700::num1;
     use crate::section_0700::num2;
     use crate::section_0700::num3;
     use crate::section_0702::denom_style;

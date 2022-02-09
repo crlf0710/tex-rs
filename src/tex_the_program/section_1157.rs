@@ -50,13 +50,23 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1157
     }
     // limit_switch: if chr_code=limits then print_esc("limits")
     else if $cmd == limit_switch {
+        if $chr_code.get() == op_noad_subtype::limits as _ {
+            print_esc($globals, crate::strpool_str!("limits"));
+        }
         // else if chr_code=no_limits then print_esc("nolimits")
+        else if $chr_code.get() == op_noad_subtype::no_limits as _ {
+            print_esc($globals, crate::strpool_str!("nolimits"));
+        }
         // else print_esc("displaylimits");
-        todo!("limit_switch");
+        else {
+            print_esc($globals, crate::strpool_str!("displaylimits"));
+        }
+        true
     } else {
         false
     };
     use crate::section_0063::print_esc;
     use crate::section_0208::*;
+    use crate::section_0682::op_noad_subtype;
     processed
 }}

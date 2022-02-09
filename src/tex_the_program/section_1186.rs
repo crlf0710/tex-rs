@@ -42,7 +42,7 @@ pub(crate) macro Cases_of_handle_right_brace_where_a_right_brace_triggers_a_dela
                 if saved!($globals, 0) == nucleus!(tail!($globals)) as integer
                     && r#type!($globals, tail!($globals)) == ord_noad
                 {
-                    todo!("Replace the tail of the list by |p|");
+                    crate::section_1187::Replace_the_tail_of_the_list_by_p!($globals, p);
                 }
             }
         }

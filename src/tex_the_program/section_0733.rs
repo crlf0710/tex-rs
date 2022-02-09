@@ -51,7 +51,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     }
     // accent_noad: make_math_accent(q);
     else if $type_q == accent_noad {
-        todo!("accent_noad");
+        make_math_accent($globals, $q)?;
         true
     }
     // vcenter_noad: make_vcenter(q);
@@ -70,6 +70,7 @@ pub(crate) macro Cases_for_noads_that_can_follow_a_bin_noad($globals:expr, $q:ex
     use crate::section_0735::make_under;
     use crate::section_0736::make_vcenter;
     use crate::section_0737::make_radical;
+    use crate::section_0738::make_math_accent;
     use crate::section_0743::make_fraction;
     use crate::section_0749::make_op;
     use crate::section_0752::make_ord;

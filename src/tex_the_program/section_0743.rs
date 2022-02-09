@@ -25,7 +25,9 @@ pub(crate) fn make_fraction(globals: &mut TeXGlobals, q: pointer) -> TeXResult<(
     // if thickness(q)=0 then @<Adjust \(s)|shift_up| and |shift_down| for the case
     //   of no fraction line@>
     if thickness!(globals, q) == scaled::zero() {
-        todo!("Adjust shift_up and shift_down");
+        crate::section_0745::Adjust_shift_up_and_shift_down_for_the_case_of_no_fraction_line!(
+            globals, x, z, shift_up, shift_down, delta
+        );
     }
     // else @<Adjust \(s)|shift_up| and |shift_down| for the case of a fraction line@>;
     else {

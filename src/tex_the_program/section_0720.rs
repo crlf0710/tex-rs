@@ -26,44 +26,52 @@ pub(crate) fn clean_box(
     /// box to be returned
     let x;
     // @!r:pointer; {temporary pointer}
-    // begin case math_type(p) of
-    let math_type_p = math_type!(globals, p);
-    // math_char: begin cur_mlist:=new_noad; mem[nucleus(cur_mlist)]:=mem[p];
-    if math_type_p == math_type_kind::math_char as _ {
-        globals.cur_mlist = new_noad(globals)?;
-        globals.mem[nucleus!(globals.cur_mlist)] = globals.mem[p];
-        // end;
+    crate::region_forward_label! {
+        |'found|
+        {
+            // begin case math_type(p) of
+            let math_type_p = math_type!(globals, p);
+            // math_char: begin cur_mlist:=new_noad; mem[nucleus(cur_mlist)]:=mem[p];
+            if math_type_p == math_type_kind::math_char as _ {
+                globals.cur_mlist = new_noad(globals)?;
+                globals.mem[nucleus!(globals.cur_mlist)] = globals.mem[p];
+                // end;
+            }
+            // sub_box: begin q:=info(p); goto found;
+            else if math_type_p == math_type_kind::sub_box as _ {
+                q = info_inner!(globals, p);
+                crate::goto_forward_label!('found);
+                // end;
+            }
+            // sub_mlist: cur_mlist:=info(p);
+            else if math_type_p == math_type_kind::sub_mlist as _ {
+                globals.cur_mlist = info_inner!(globals, p);
+            }
+            // othercases begin q:=new_null_box; goto found;
+            else {
+                q = new_null_box(globals)?;
+                crate::goto_forward_label!('found);
+                // end
+            }
+            // endcases;@/
+            // save_style:=cur_style; cur_style:=s; mlist_penalties:=false;@/
+            save_style = globals.cur_style;
+            globals.cur_style = s;
+            globals.mlist_penalties = false;
+            // mlist_to_hlist; q:=link(temp_head); {recursive call}
+            /// recursive call
+            mlist_to_hlist(globals)?;
+            q = link!(globals, temp_head);
+            // cur_style:=save_style; {restore the style}
+            /// restore the style
+            const _: () = ();
+            globals.cur_style = save_style;
+            // @<Set up the values of |cur_size| and |cur_mu|, based on |cur_style|@>;
+            crate::section_0703::Set_up_the_values_of_cur_size_and_cur_mu__based_on_cur_style!(globals);
+        }
+        // found: if is_char_node(q)or(q=null) then x:=hpack(q,natural)
+        'found <-
     }
-    // sub_box: begin q:=info(p); goto found;
-    else if math_type_p == math_type_kind::sub_box as _ {
-        todo!("sub_box");
-        // end;
-    }
-    // sub_mlist: cur_mlist:=info(p);
-    else if math_type_p == math_type_kind::sub_mlist as _ {
-        globals.cur_mlist = info_inner!(globals, p);
-    }
-    // othercases begin q:=new_null_box; goto found;
-    else {
-        todo!("othercases");
-        // end
-    }
-    // endcases;@/
-    // save_style:=cur_style; cur_style:=s; mlist_penalties:=false;@/
-    save_style = globals.cur_style;
-    globals.cur_style = s;
-    globals.mlist_penalties = false;
-    // mlist_to_hlist; q:=link(temp_head); {recursive call}
-    /// recursive call
-    mlist_to_hlist(globals)?;
-    q = link!(globals, temp_head);
-    // cur_style:=save_style; {restore the style}
-    /// restore the style
-    const _: () = ();
-    globals.cur_style = save_style;
-    // @<Set up the values of |cur_size| and |cur_mu|, based on |cur_style|@>;
-    crate::section_0703::Set_up_the_values_of_cur_size_and_cur_mu__based_on_cur_style!(globals);
-    // found: if is_char_node(q)or(q=null) then x:=hpack(q,natural)
     if is_char_node!(globals, q) || q == null {
         x = hpack(globals, q, natural0!(), natural1!())?;
     }
@@ -99,6 +107,7 @@ use crate::section_0118::link;
 use crate::section_0133::r#type;
 use crate::section_0134::is_char_node;
 use crate::section_0135::shift_amount;
+use crate::section_0136::new_null_box;
 use crate::section_0137::vlist_node;
 use crate::section_0162::temp_head;
 use crate::section_0644::natural0;

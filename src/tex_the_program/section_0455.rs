@@ -23,9 +23,13 @@ pub(crate) macro Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign
         // else  begin if mu then
         else {
             if $mu {
-                todo!("mu")
                 // begin scan_something_internal(mu_val,false); @<Coerce glue...@>;
+                scan_something_internal($globals, small_number::new(cur_val_level_kind::mu_val as _), false)?;
+                crate::section_0451::Coerce_glue_to_a_dimension!($globals);
                 // if cur_val_level<>mu_val then mu_error;
+                if $globals.cur_val_level != cur_val_level_kind::mu_val {
+                    mu_error($globals)?;
+                }
                 // end
             }
             // else scan_something_internal(dimen_val,false);
@@ -78,6 +82,7 @@ pub(crate) macro Scan_for_u_units_that_are_internal_dimensions__goto_attach_sign
         use crate::section_0107::xn_over_d;
         use crate::section_0325::back_input;
         use crate::section_0407::scan_keyword;
+        use crate::section_0408::mu_error;
         use crate::section_0410::cur_val_level_kind;
         use crate::section_0413::scan_something_internal;
         use crate::section_0208::min_internal;
