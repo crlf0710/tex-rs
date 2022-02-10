@@ -32,7 +32,7 @@ pub(crate) macro Output_the_non_char_node_p_for_hlist_out_and_move_to_the_next_n
         }
         // glue_node: @<Move right or output leaders@>;
         else if type_p == glue_node {
-            crate::section_0625::Move_right_or_output_leaders!($globals, $p, $this_box, $base_line, $left_edge, $cur_glue, $cur_g, $g_sign, $g_order, 'move_past, 'next_p);
+            crate::section_0625::Move_right_or_output_leaders!($globals, $p, $this_box, $base_line, $left_edge, $cur_glue, $cur_g, $g_sign, $g_order, 'move_past, 'next_p, 'fin_rule);
         }
         // kern_node,math_node:cur_h:=cur_h+width(p);
         else if type_p == kern_node || type_p == math_node {

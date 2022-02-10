@@ -31,7 +31,7 @@ pub(crate) macro Set_the_unset_box_q_and_the_unset_boxes_in_it($globals:expr, $p
     // repeat @<Set the glue in node |r| and change it from an unset node@>;
     loop {
         crate::section_0808::Set_the_glue_in_node_r_and_change_it_from_an_unset_node!(
-            $globals, $q, r, s
+            $globals, $p, $q, r, s
         );
         // r:=link(link(r)); s:=link(link(s));
         r = link!($globals, link!($globals, r));

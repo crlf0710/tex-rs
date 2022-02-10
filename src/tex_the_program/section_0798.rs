@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Update width entry for spanned columns@>=
-pub(crate) macro Update_width_entry_for_spanned_columns($globals:expr, $n:expr) {{
+pub(crate) macro Update_width_entry_for_spanned_columns($globals:expr, $n:expr, $w:expr) {{
     /// temporary pointers for list manipulation
     let mut q: pointer;
     // begin q:=cur_span;
@@ -28,17 +28,32 @@ pub(crate) macro Update_width_entry_for_spanned_columns($globals:expr, $n:expr) 
     while link!($globals, info_inner!($globals, q)) < $n {
         q = info_inner!($globals, q);
     }
+    let info_q = info_inner!($globals, q);
     // if link(info(q))>n then
-    //   begin s:=get_node(span_node_size); info(s):=info(q); link(s):=n;
-    //   info(q):=s; width(s):=w;
-    //   end
+    if link!($globals, info_q) > $n {
+        /// a new span node
+        let s;
+        // begin s:=get_node(span_node_size); info(s):=info(q); link(s):=n;
+        s = get_node($globals, span_node_size as _)?;
+        info_inner!($globals, s) = info_inner!($globals, q);
+        link!($globals, s) = $n;
+        // info(q):=s; width(s):=w;
+        info_inner!($globals, q) = s;
+        width!($globals, s) = $w;
+        // end
+    }
     // else if width(info(q))<w then width(info(q)):=w;
+    else if width!($globals, info_q) < $w {
+        width!($globals, info_q) = $w;
+    }
     // end
-    todo!("update");
     use crate::section_0016::incr;
     use crate::section_0095::confusion;
     use crate::section_0110::max_quarterword;
     use crate::section_0115::pointer;
     use crate::section_0118::info_inner;
     use crate::section_0118::link;
+    use crate::section_0125::get_node;
+    use crate::section_0135::width;
+    use crate::section_0797::span_node_size;
 }}

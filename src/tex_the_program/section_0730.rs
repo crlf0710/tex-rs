@@ -1,7 +1,7 @@
 //! ` `
 
 // @<Cases for nodes that can appear in an mlist...@>=
-pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_goto_done_with_node($globals:expr, $q:expr, $type_q:expr, $lbl_done_with_node:lifetime) {{
+pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_goto_done_with_node($globals:expr, $q:expr, $type_q:expr, $max_h:expr, $max_d:expr, $lbl_done_with_node:lifetime) {{
     // style_node: begin cur_style:=subtype(q);
     let processed = if $type_q == style_node {
         $globals.cur_style = subtype!($globals, $q).into();
@@ -33,14 +33,20 @@ pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_got
         || $type_q == penalty_node
         || $type_q == disc_node
     {
-        todo!("ins_node, ...");
+        crate::goto_forward_label!($lbl_done_with_node);
         true
     }
     // rule_node: begin if height(q)>max_h then max_h:=height(q);
-    //   if depth(q)>max_d then max_d:=depth(q); goto done_with_node;
-    //   end;
     else if $type_q == rule_node {
-        todo!("rule_node");
+        if height!($globals, $q) > $max_h {
+            $max_h = height!($globals, $q);
+        }
+        // if depth(q)>max_d then max_d:=depth(q); goto done_with_node;
+        if depth!($globals, $q) > $max_d {
+            $max_d = depth!($globals, $q);
+        }
+        crate::goto_forward_label!($lbl_done_with_node);
+        // end;
         true
     }
     // glue_node: begin @<Convert \(m)math glue to ordinary glue@>;
@@ -61,6 +67,8 @@ pub(crate) macro Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_got
         false
     };
     use crate::section_0133::subtype;
+    use crate::section_0135::height;
+    use crate::section_0135::depth;
     use crate::section_0138::rule_node;
     use crate::section_0140::ins_node;
     use crate::section_0141::mark_node;

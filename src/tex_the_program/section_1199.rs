@@ -5,17 +5,17 @@
 // @<Finish displayed math@>=
 pub(crate) macro Finish_displayed_math($globals:expr, $p:expr, $a:expr, $l:expr, $danger:expr) {{
     /// box containing the equation
-    let b;
+    let mut b;
     /// width of the equation
-    let w;
+    let mut w;
     /// width of the line
     let z;
     /// width of equation number
-    let e;
+    let mut e;
     /// width of equation number plus space to separate from equation
     let q;
     /// displacement of equation in the line
-    let d: scaled;
+    let mut d: scaled;
     /// move the line right this much
     let s;
     /// tail of adjustment list
@@ -59,7 +59,7 @@ pub(crate) macro Finish_displayed_math($globals:expr, $p:expr, $a:expr, $l:expr,
         // @<Squeeze the equation as much as possible; if there is an equation
         //   number that should go on a separate line by itself,
         //   set~|e:=0|@>;
-        todo!("Squeeze");
+        crate::section_1201::Squeeze_the_equation_as_much_as_possible__if_there_is_an_equation_number_that_should_go_on_a_separate_line_by_itself__set_e_to_0!($globals, w, q, z, $p, b, e);
     }
 
     // @<Determine the displacement, |d|, of the left edge of the equation, with
@@ -68,7 +68,7 @@ pub(crate) macro Finish_displayed_math($globals:expr, $p:expr, $a:expr, $l:expr,
     // @<Append the glue or equation number preceding the display@>;
     crate::section_1203::Append_the_glue_or_equation_number_preceding_the_display!($globals, d, s, $l, e, g1, g2);
     // @<Append the display and perhaps also the equation number@>;
-    crate::section_1204::Append_the_display_and_perhaps_also_the_equation_number!($globals, e, s, d, b);
+    crate::section_1204::Append_the_display_and_perhaps_also_the_equation_number!($globals, e, s, d, $a, b, z, w, $l);
     // @<Append the glue or equation number following the display@>;
     crate::section_1205::Append_the_glue_or_equation_number_following_the_display!($globals, $a, e, $l, t, g2);
     // resume_after_display

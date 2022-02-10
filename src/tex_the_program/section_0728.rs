@@ -3,7 +3,7 @@
 //! The values of |r| and |r_type| make this fairly easy.
 //
 // @<Do first-pass processing...@>=
-pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_if_a_noad_has_been_fully_processed__goto_check_dimensions_if_it_has_been_translated_into_new_hlist_q___or_goto_done_with_node_if_a_node_has_been_fully_processed($globals:expr, $q:expr, $r:expr, $r_type:expr, $delta:expr, $lbl_check_dimensions:lifetime, $lbl_done_with_noad:lifetime, $lbl_done_with_node:lifetime) {{
+pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_if_a_noad_has_been_fully_processed__goto_check_dimensions_if_it_has_been_translated_into_new_hlist_q___or_goto_done_with_node_if_a_node_has_been_fully_processed($globals:expr, $q:expr, $r:expr, $r_type:expr, $delta:expr, $max_h:expr, $max_d:expr, $lbl_check_dimensions:lifetime, $lbl_done_with_noad:lifetime, $lbl_done_with_node:lifetime) {{
     // reswitch: delta:=0;
     crate::region_backward_label!{
         'reswitch <-
@@ -43,7 +43,7 @@ pub(crate) macro Do_first_pass_processing_based_on_type_q__goto_done_with_noad_i
             // @t\4@>@<Cases for nodes that can appear in an mlist, after which we
             //   |goto done_with_node|@>@;
             else if crate::section_0730::Cases_for_nodes_that_can_appear_in_an_mlist__after_which_we_goto_done_with_node!(
-                $globals, $q, type_q, $lbl_done_with_node
+                $globals, $q, type_q, $max_h, $max_d, $lbl_done_with_node
             ) {
                 // already processed
             }

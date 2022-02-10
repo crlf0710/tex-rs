@@ -10,7 +10,9 @@
 //! column.
 //
 // @d span_node_size=2 {number of |mem| words for a span node}
-//
+/// number of `mem` words for a span node
+pub(crate) const span_node_size: quarterword = 2;
+
 // @<Initialize the special list heads...@>=
 pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes_0797($globals:expr) {{
     // link(end_span):=max_quarterword+1; info(end_span):=null;
@@ -23,3 +25,5 @@ pub(crate) macro Initialize_the_special_list_heads_and_constant_nodes_0797($glob
     use crate::section_0118::link;
     use crate::section_0162::end_span;
 }}
+
+use crate::section_0113::quarterword;

@@ -1,6 +1,6 @@
 //! ` `
 // @<Move down or output leaders@>=
-pub(crate) macro Move_down_or_output_leaders($globals:expr, $p:expr, $this_box:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_move_past:lifetime) {{
+pub(crate) macro Move_down_or_output_leaders($globals:expr, $p:expr, $left_edge:expr, $top_edge:expr, $this_box:expr, $cur_glue:expr, $cur_g:expr, $g_sign:expr, $g_order:expr, $lbl_move_past:lifetime, $lbl_next_p:lifetime, $lbl_fin_rule:lifetime) {{
     // begin g:=glue_ptr(p); rule_ht:=width(g)-cur_g;
     $globals.ship_out_g = glue_ptr!($globals, $p);
     $globals.rule_ht = width!($globals, $globals.ship_out_g) - $cur_g;
@@ -49,7 +49,7 @@ pub(crate) macro Move_down_or_output_leaders($globals:expr, $p:expr, $this_box:e
     if subtype!($globals, $p) as integer >= glue_node_subtype::a_leaders as integer {
         // @<Output leaders in a vlist, |goto fin_rule| if a rule
         //   or to |next_p| if done@>;
-        todo!("output leaders");
+        crate::section_0635::Output_leaders_in_a_vlist__goto_fin_rule_if_a_rule_or_to_next_p_if_done!($globals, $p, $left_edge, $top_edge, $lbl_next_p, $lbl_fin_rule);
     }
     // goto move_past;
     crate::goto_forward_label!($lbl_move_past);

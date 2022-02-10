@@ -16,9 +16,8 @@ pub(crate) fn scan_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRes
     // else if (box_context>=leader_flag)and((cur_cmd=hrule)or(cur_cmd=vrule)) then
     else if box_context >= leader_flag && (globals.cur_cmd == hrule || globals.cur_cmd == vrule) {
         // begin cur_box:=scan_rule_spec; box_end(box_context);
-        /*globals.cur_box = scan_rule_spec;
-        box_end(box_context);*/
-        todo!("box_end");
+        globals.cur_box = scan_rule_spec(globals)?;
+        box_end(globals, box_context)?;
         // end
     }
     // else  begin@t@>@;@/
@@ -54,5 +53,7 @@ use crate::section_0208::hrule;
 use crate::section_0208::make_box;
 use crate::section_0208::vrule;
 use crate::section_0327::back_error;
+use crate::section_0463::scan_rule_spec;
 use crate::section_1071::leader_flag;
+use crate::section_1075::box_end;
 use crate::section_1079::begin_box;

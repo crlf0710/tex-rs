@@ -11,9 +11,17 @@ pub(crate) macro Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_gl
         // if eq_level(p)=level_one then
         if eq_level!($globals, $p) == level_one {
             // begin eq_destroy(save_stack[save_ptr]); {destroy the saved value}
+            /// destroy the saved value
+            eq_destroy($globals, $globals.save_stack[$globals.save_ptr])?;
             // @!stat if tracing_restores>0 then restore_trace(p,"retaining");@+tats@;@/
+            crate::region_stat! {
+                if tracing_restores!($globals) > 0 {
+                    restore_trace($globals, $p, crate::strpool_str!("retaining"));
+                }
+                use crate::section_0236::tracing_restores;
+                use crate::section_0284::restore_trace;
+            }
             // end
-            todo!("store 1a");
         }
         // else  begin eq_destroy(eqtb[p]); {destroy the current value}
         else {
@@ -57,6 +65,7 @@ pub(crate) macro Store_s_save_stack_save_ptr_in_eqtb_p__unless_eqtb_p_holds_a_gl
     }
     crate::region_non_stat! {
         crate::submit_strpool_str!("restoring");
+        crate::submit_strpool_str!("retaining");
     };
     use crate::section_0115::pointer;
     use crate::section_0221::eq_level;

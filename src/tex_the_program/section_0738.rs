@@ -9,7 +9,7 @@ pub(crate) fn make_math_accent(globals: &mut TeXGlobals, q: pointer) -> TeXResul
     // label done,done1;
     // var p,@!x,@!y:pointer; {temporary registers for box construction}
     /// temporary registers for box construction
-    let (p, x, mut y);
+    let (mut p, mut x, mut y);
     // @!a:integer; {address of lig/kern instruction}
     // @!c:quarterword; {accent character}
     /// accent character
@@ -25,10 +25,10 @@ pub(crate) fn make_math_accent(globals: &mut TeXGlobals, q: pointer) -> TeXResul
     let mut s: scaled;
     // @!h:scaled; {height of character being accented}
     /// height of character being accented
-    let h;
+    let mut h;
     // @!delta:scaled; {space to remove between accent and accentee}
     /// space to remove between accent and accentee
-    let delta;
+    let mut delta;
     // @!w:scaled; {width of the accentee, not including sub/superscripts}
     /// width of the accentee, not including sub/superscripts
     let w;
@@ -67,7 +67,9 @@ pub(crate) fn make_math_accent(globals: &mut TeXGlobals, q: pointer) -> TeXResul
             // if math_type(nucleus(q))=math_char then
             if math_type!(globals, nucleus!(q)) == math_type_kind::math_char as _ {
                 // @<Swap the subscript and superscript into box |x|@>;
-                todo!("swap");
+                crate::section_0742::Swap_the_subscript_and_superscript_into_box_x!(
+                    globals, q, x, h, delta
+                );
             }
         }
         // y:=char_box(f,c);
@@ -84,7 +86,7 @@ pub(crate) fn make_math_accent(globals: &mut TeXGlobals, q: pointer) -> TeXResul
         width!(globals, y) = width!(globals, x);
         // if height(y)<h then @<Make the height of box |y| equal to |h|@>;
         if height!(globals, y) < h {
-            todo!("Make the height");
+            crate::section_0739::Make_the_height_of_box_y_equal_to_h!(globals, y, h, p);
         }
         // info(nucleus(q)):=y;
         info_inner!(globals, nucleus!(q)) = y;

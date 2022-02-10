@@ -68,7 +68,7 @@ pub(crate) fn vlist_out(globals: &mut TeXGlobals) -> TeXResult<()> {
     //   maintaining the condition |cur_h=left_edge|@>;
     while p != null {
         crate::section_0630::Output_node_p_for_vlist_out_and_move_to_the_next_node__maintaining_the_condition_cur_h_eq_left_edge!(
-            globals, p, left_edge, this_box, cur_glue, cur_g, g_sign, g_order
+            globals, p, left_edge, top_edge, this_box, cur_glue, cur_g, g_sign, g_order
         );
     }
     // prune_movements(save_loc);

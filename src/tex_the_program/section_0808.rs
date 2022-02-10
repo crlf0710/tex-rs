@@ -5,11 +5,11 @@
 //! arithmetic from entering into the dimensions of any boxes.
 //
 // @<Set the glue in node |r|...@>=
-pub(crate) macro Set_the_glue_in_node_r_and_change_it_from_an_unset_node($globals:expr, $q:expr, $r:expr, $s:expr) {{
+pub(crate) macro Set_the_glue_in_node_r_and_change_it_from_an_unset_node($globals:expr, $p:expr, $q:expr, $r:expr, $s:expr) {{
     /// registers for the list operations
     let (mut u,);
     /// width of column
-    let (t, w);
+    let (mut t, w);
     /// matching span amount
     let mut n;
     // n:=span_count(r); t:=width(s); w:=t; u:=hold_head;
@@ -23,7 +23,7 @@ pub(crate) macro Set_the_glue_in_node_r_and_change_it_from_an_unset_node($global
         decr!(n);
         // @<Append tabskip glue and an empty box to list |u|,
         //   and update |s| and |t| as the prototype nodes are passed@>;
-        todo!("Append tabskip glue");
+        crate::section_0809::Append_tabskip_glue_and_an_empty_box_to_list_u__and_update_s_and_t_as_the_prototype_nodes_are_passed!($globals, $p, $s, t, u);
         // end;
     }
     // if mode=-vmode then

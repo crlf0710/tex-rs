@@ -36,7 +36,9 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
     // last_box_code: @<If the current list ends with a box node, delete it from
     //   the list and make |cur_box| point to it; otherwise set |cur_box:=null|@>;
     else if cur_chr == last_box_code as chr_code_repr {
-        todo!("last_box_code");
+        crate::section_1080::If_the_current_list_ends_with_a_box_node__delete_it_from_the_list_and_make_cur_box_point_to_it__otherwise_set_cur_box_to_null!(
+            globals
+        );
     }
     // vsplit_code: @<Split off part of a vertical box, make |cur_box| point to it@>;
     else if cur_chr == vsplit_code as chr_code_repr {

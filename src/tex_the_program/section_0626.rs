@@ -1,6 +1,6 @@
 //! ` `
 // @<Output leaders in an hlist...@>=
-pub(crate) macro Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_p_if_done($globals:expr, $p:expr, $base_line:expr, $left_edge:expr, $lbl_next_p:lifetime) {{
+pub(crate) macro Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_p_if_done($globals:expr, $p:expr, $base_line:expr, $left_edge:expr, $lbl_next_p:lifetime, $lbl_fin_rule:lifetime) {{
     /// the leader box being replicated
     let leader_box;
     /// width of leader box being replicated
@@ -10,9 +10,11 @@ pub(crate) macro Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_
     // if type(leader_box)=rule_node then
     if r#type!($globals, leader_box) == rule_node {
         // begin rule_ht:=height(leader_box); rule_dp:=depth(leader_box);
+        $globals.rule_ht = height!($globals, leader_box);
+        $globals.rule_dp = depth!($globals, leader_box);
         // goto fin_rule;
+        crate::goto_forward_label!($lbl_fin_rule);
         // end;
-        todo!("rule_node");
     }
     // leader_wd:=width(leader_box);
     leader_wd = width!($globals, leader_box);
@@ -47,6 +49,8 @@ pub(crate) macro Output_leaders_in_an_hlist__goto_fin_rule_if_a_rule_or_to_next_
     use crate::section_0101::scaled;
     use crate::section_0133::r#type;
     use crate::section_0135::width;
+    use crate::section_0135::height;
+    use crate::section_0135::depth;
     use crate::section_0138::rule_node;
     use crate::section_0149::leader_ptr;
 }}

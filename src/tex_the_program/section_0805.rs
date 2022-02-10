@@ -22,7 +22,9 @@ pub(crate) macro Set_the_glue_in_all_the_unset_boxes_of_the_current_list($global
             else if r#type!($globals, q) == rule_node {
                 // @<Make the running dimensions in rule |q| extend to the
                 //   boundaries of the alignment@>;
-                todo!("Make the running dimensions");
+                crate::section_0806::Make_the_running_dimensions_in_rule_q_extend_to_the_boundaries_of_the_alignment!(
+                    $globals, $p, q, $o, s
+                );
             }
         }
         // s:=q; q:=link(q);

@@ -45,7 +45,7 @@ pub(crate) macro Go_through_the_preamble_list__determining_the_column_widths_and
         if info_inner!($globals, q) != end_span {
             // @<Merge the widths in the span nodes of |q| with those of |p|,
             //   destroying the span nodes of |q|@>;
-            todo!("Merge");
+            crate::section_0803::Merge_the_widths_in_the_span_nodes_of_q_with_those_of_p__destroying_the_span_nodes_of_q!($globals, p, q);
         }
         // type(q):=unset_node; span_count(q):=min_quarterword; height(q):=0;
         r#type!($globals, q) = unset_node;
