@@ -8,7 +8,7 @@ pub(crate) macro check_full_save_stack($globals:expr) {{
     $globals.max_save_stack = $globals.save_ptr;
     // if max_save_stack>save_size-6 then overflow("save size",save_size);
     if $globals.max_save_stack > save_size - 6 {
-        todo!();
+        todo!("not yet implemented in {}", file!());
     }
     // @:TeX capacity exceeded save size}{\quad save size@>
     // end

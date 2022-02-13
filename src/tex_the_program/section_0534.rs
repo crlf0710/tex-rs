@@ -22,7 +22,7 @@ pub(crate) fn open_log_file(globals: &mut TeXGlobals) {
     pack_job_name(globals, crate::strpool_str!(".log"));
     // while not a_open_out(log_file) do @<Try to get a different log file name@>;
     while !a_open_out(make_globals_filename_view!(globals), &mut globals.log_file) {
-        todo!("");
+        todo!("not yet implemented in {}", file!())
     }
     // log_name:=a_make_name_string(log_file);
     globals.log_name =

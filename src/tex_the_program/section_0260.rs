@@ -6,7 +6,7 @@ pub(crate) macro Insert_a_new_control_sequence_after_p_then_make_p_point_to_it($
         // begin repeat if hash_is_full then overflow("hash size",hash_size);
         loop {
             if hash_is_full!($globals) {
-                todo!();
+                todo!("not yet implemented in {}", file!());
             }
             // @:TeX capacity exceeded hash size}{\quad hash size@>
             // decr(hash_used);

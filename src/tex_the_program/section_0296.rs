@@ -18,7 +18,7 @@ pub(crate) fn print_meaning(globals: &mut TeXGlobals) {
     }
     // else if cur_cmd=top_bot_mark then
     else if globals.cur_cmd == top_bot_mark {
-        todo!();
+        todo!("not yet implemented in {}", file!());
         // begin print_char(":"); print_ln;
         // token_show(cur_mark[cur_chr]);
         // end;

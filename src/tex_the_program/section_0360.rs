@@ -87,7 +87,7 @@ pub(crate) macro Move_to_next_line_of_file_or_goto_restart_if_there_is_no_next_l
             loc!($globals) = start!($globals);
             // end
         } else {
-            todo!();
+            todo!("not yet implemented in {}", file!());
             //   else fatal_error("*** (job aborted, no legal \end found)");
             // @.job aborted@>
             //     {nonstop mode, which is intended for overnight batch processing,

@@ -14,7 +14,7 @@ pub(crate) fn change_if_limit(globals: &mut TeXGlobals, l: small_number, p: poin
     }
     // else  begin q:=cond_ptr;
     else {
-        todo!();
+        todo!("not yet implemented in {}", file!());
         //   loop@+  begin if q=null then confusion("if");
         // @:this can't happen if}{\quad if@>
         //     if link(q)=p then

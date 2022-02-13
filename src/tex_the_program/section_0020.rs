@@ -10,7 +10,7 @@
 
 #[cfg(not(feature = "unicode_support"))]
 pub(crate) fn xord(val: text_char) -> ASCII_code {
-    todo!();
+    todo!("not yet implemented in {}", file!());
 }
 
 #[cfg(feature = "unicode_support")]
@@ -20,7 +20,7 @@ pub(crate) fn xord(val: text_char) -> ASCII_code {
 
 #[cfg(not(feature = "unicode_support"))]
 pub(crate) fn xchr(val: ASCII_code) -> text_char {
-    todo!();
+    todo!("not yet implemented in {}", file!());
 }
 
 #[cfg(feature = "unicode_support")]

@@ -3,86 +3,24 @@
 
 pub(crate) macro Assignments($globals:expr, $cur_cmd:expr, $a:expr, $lbl_done:lifetime) {{
     crate::trace_span_verbose!("Assignments");
-    let processed = if false {
-        unreachable!();
-    /*} else if Assignments_xxx {
-        todo!();
-    */
-    } else if crate::section_1217::Assignments_1217!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1218::Assignments_1218!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1221::Assignments_1221!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1224::Assignments_1224!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1225::Assignments_1225!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1226::Assignments_1226!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1228::Assignments_1228!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1232::Assignments_1232!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1234::Assignments_1234!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1235::Assignments_1235!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1241::Assignments_1241!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1242::Assignments_1242!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1248::Assignments_1248!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1252::Assignments_1252!($globals, $cur_cmd, $a, $lbl_done) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1253::Assignments_1253!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1256::Assignments_1256!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    } else if crate::section_1264::Assignments_1264!($globals, $cur_cmd, $a) {
-        /// already processed
-        do_nothing!();
-        true
-    /*} else if Assignments_xxx {
-        todo!();
-    */
-    } else {
-        false
-    };
-    use crate::section_0016::do_nothing;
+    let processed = false
+        || crate::section_1217::Assignments_1217!($globals, $cur_cmd, $a)
+        || crate::section_1218::Assignments_1218!($globals, $cur_cmd, $a)
+        || crate::section_1221::Assignments_1221!($globals, $cur_cmd, $a)
+        || crate::section_1224::Assignments_1224!($globals, $cur_cmd, $a)
+        || crate::section_1225::Assignments_1225!($globals, $cur_cmd, $a)
+        || crate::section_1226::Assignments_1226!($globals, $cur_cmd, $a)
+        || crate::section_1228::Assignments_1228!($globals, $cur_cmd, $a)
+        || crate::section_1232::Assignments_1232!($globals, $cur_cmd, $a)
+        || crate::section_1234::Assignments_1234!($globals, $cur_cmd, $a)
+        || crate::section_1235::Assignments_1235!($globals, $cur_cmd, $a)
+        || crate::section_1241::Assignments_1241!($globals, $cur_cmd, $a)
+        || crate::section_1242::Assignments_1242!($globals, $cur_cmd, $a)
+        || crate::section_1248::Assignments_1248!($globals, $cur_cmd, $a)
+        || crate::section_1252::Assignments_1252!($globals, $cur_cmd, $a, $lbl_done)
+        || crate::section_1253::Assignments_1253!($globals, $cur_cmd, $a)
+        || crate::section_1256::Assignments_1256!($globals, $cur_cmd, $a)
+        || crate::section_1264::Assignments_1264!($globals, $cur_cmd, $a);
     processed
 }}
 

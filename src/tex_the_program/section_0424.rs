@@ -37,13 +37,33 @@ pub(crate) macro Fetch_an_item_in_the_current_node__if_appropriate($globals:expr
         if !is_char_node!($globals, tail!($globals)) && mode!($globals) != 0 {
             // case cur_chr of
             // int_val: if type(tail)=penalty_node then cur_val:=penalty(tail);
+            if $globals.cur_chr.get() == last_item_command_kind::int_val as _ {
+                if r#type!($globals, tail!($globals)) == penalty_node {
+                    $globals.cur_val = penalty!($globals, tail!($globals));
+                }
+            }
             // dimen_val: if type(tail)=kern_node then cur_val:=width(tail);
+            else if $globals.cur_chr.get() == last_item_command_kind::dimen_val as _ {
+                if r#type!($globals, tail!($globals)) == kern_node {
+                    $globals.cur_val = width!($globals, tail!($globals)).inner();
+                }
+            }
             // glue_val: if type(tail)=glue_node then
-            //   begin cur_val:=glue_ptr(tail);
-            //   if subtype(tail)=mu_glue then cur_val_level:=mu_val;
-            //   end;
-            // end {there are no other cases}
-            todo!("fetch an item 2a");
+            else if $globals.cur_chr.get() == last_item_command_kind::glue_val as _ {
+                if r#type!($globals, tail!($globals)) == glue_node {
+                    // begin cur_val:=glue_ptr(tail);
+                    $globals.cur_val = glue_ptr!($globals, tail!($globals)) as _;
+                    // if subtype(tail)=mu_glue then cur_val_level:=mu_val;
+                    if subtype!($globals, tail!($globals)) == glue_node_subtype::mu_glue as _ {
+                        $globals.cur_val_level = cur_val_level_kind::mu_val;
+                    }
+                    // end;
+                }
+            } else {
+                // end {there are no other cases}
+                /// there are no other cases
+                unreachable!()
+            }
         }
         // else if (mode=vmode)and(tail=head) then
         else if mode!($globals) == vmode && tail!($globals) == head!($globals) {
@@ -71,7 +91,16 @@ pub(crate) macro Fetch_an_item_in_the_current_node__if_appropriate($globals:expr
     }
     use crate::pascal::integer;
     use crate::section_0110::max_halfword;
+    use crate::section_0133::r#type;
+    use crate::section_0133::subtype;
     use crate::section_0134::is_char_node;
+    use crate::section_0135::width;
+    use crate::section_0149::glue_node;
+    use crate::section_0149::glue_node_subtype;
+    use crate::section_0149::glue_ptr;
+    use crate::section_0155::kern_node;
+    use crate::section_0157::penalty;
+    use crate::section_0157::penalty_node;
     use crate::section_0162::zero_glue;
     use crate::section_0211::vmode;
     use crate::section_0213::head;

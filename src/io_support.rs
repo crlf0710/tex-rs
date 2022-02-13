@@ -55,7 +55,7 @@ impl PascalFile for file_of_text_char {
                     if byte_offset == 0 {
                         units.push(text_char::new(ch as _))
                     } else {
-                        todo!();
+                        todo!("not yet implemented in {}", file!());
                     }
                 }
             }

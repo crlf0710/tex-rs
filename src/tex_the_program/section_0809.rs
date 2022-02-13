@@ -28,9 +28,15 @@ pub(crate) macro Append_tabskip_glue_and_an_empty_box_to_list_u__and_update_s_an
     // else if glue_sign(p)=shrinking then
     else if glue_sign!($globals, $p) == glue_sign::shrinking as _ {
         // begin if shrink_order(v)=glue_order(p) then
-        //   t:=t-round(float(glue_set(p))*shrink(v));
+        if shrink_order!($globals, v) == glue_order!($globals, $p) {
+            // t:=t-round(float(glue_set(p))*shrink(v));
+            $t = $t
+                - scaled::new_from_inner(
+                    (float!(glue_set!($globals, $p)) * shrink!($globals, v).inner_real()).round()
+                        as _,
+                );
+        }
         // end;
-        todo!("shrinking");
     }
     // s:=link(s); link(u):=new_null_box; u:=link(u); t:=t+width(s);
     $s = link!($globals, $s);
@@ -59,6 +65,8 @@ pub(crate) macro Append_tabskip_glue_and_an_empty_box_to_list_u__and_update_s_an
     use crate::section_0136::new_null_box;
     use crate::section_0137::vlist_node;
     use crate::section_0149::glue_ptr;
+    use crate::section_0150::shrink;
+    use crate::section_0150::shrink_order;
     use crate::section_0150::stretch;
     use crate::section_0150::stretch_order;
     use crate::section_0153::new_glue;

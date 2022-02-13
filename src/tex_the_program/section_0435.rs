@@ -8,7 +8,7 @@ pub(crate) fn scan_four_bit_int(globals: &mut TeXGlobals) -> TeXResult<()> {
     scan_int(globals)?;
     // if (cur_val<0)or(cur_val>15) then
     if globals.cur_val < 0 || globals.cur_val > 15 {
-        todo!();
+        todo!("not yet implemented in {}", file!());
         // begin print_err("Bad number");
         // @.Bad number@>
         // help2("Since I expected to read a number between 0 and 15,")@/

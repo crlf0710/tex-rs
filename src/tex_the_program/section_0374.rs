@@ -53,7 +53,7 @@ pub(crate) macro Look_up_the_characters_of_list_r_in_the_hash_table__and_set_cur
         /// the list has length one
         const _: () = ();
         if $globals.buffer[$globals.first].numeric_value() > 255 {
-            todo!();
+            todo!("not yet implemented in {}", file!());
         }
         $globals.cur_cs =
             (single_base + $globals.buffer[$globals.first].numeric_value()) as pointer;

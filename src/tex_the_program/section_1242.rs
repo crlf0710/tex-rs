@@ -16,17 +16,20 @@ pub(crate) macro Assignments_1242($globals:expr, $cur_cmd:expr, $a:expr) {{
     }
     // set_prev_graf:alter_prev_graf;
     else if $cur_cmd == set_prev_graf {
-        todo!("");
+        alter_prev_graf($globals)?;
+        use crate::section_1244::alter_prev_graf;
         true
     }
     // set_page_dimen:alter_page_so_far;
     else if $cur_cmd == set_page_dimen {
-        todo!("");
+        alter_page_so_far($globals)?;
+        use crate::section_1245::alter_page_so_far;
         true
     }
     // set_page_int:alter_integer;
     else if $cur_cmd == set_page_int {
-        todo!("");
+        alter_integer($globals)?;
+        use crate::section_1246::alter_integer;
         true
     }
     // set_box_dimen:alter_box_dimen;

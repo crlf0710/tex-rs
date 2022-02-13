@@ -45,7 +45,7 @@ pub(crate) fn end_token_list(globals: &mut TeXGlobals) {
         }
         // else fatal_error("(interwoven alignment preambles are not allowed)");
         else {
-            todo!();
+            todo!("not yet implemented in {}", file!());
         }
     }
     // @.interwoven alignment preambles...@>

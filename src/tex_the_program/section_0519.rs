@@ -37,7 +37,7 @@ pub(crate) fn pack_file_name(
         // for j:=str_start[a] to str_start[a+1]-1 do append_to_name(so(str_pool[j]));
         // for j:=str_start[n] to str_start[n+1]-1 do append_to_name(so(str_pool[j]));
         // for j:=str_start[e] to str_start[e+1]-1 do append_to_name(so(str_pool[j]));
-        todo!();
+        todo!("not yet implemented in {}", file!());
     }
     #[cfg(feature = "unicode_support")]
     {

@@ -39,7 +39,7 @@ pub(crate) macro Scan_an_alphabetic_character_code_into_cur_val($globals:expr) {
     }
     // if cur_val>255 then
     if $globals.cur_val > 255 {
-        todo!();
+        todo!("not yet implemented in {}", file!());
         //   begin print_err("Improper alphabetic constant");
         // @.Improper alphabetic constant@>
         //   help2("A one-character control sequence belongs after a ` mark.")@/

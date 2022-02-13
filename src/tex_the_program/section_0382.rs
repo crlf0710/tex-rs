@@ -42,6 +42,9 @@ pub(crate) macro bot_mark($globals:expr) {
     $globals.cur_mark[crate::section_0382::mark_code_kind::bot_mark_code]
 }
 // @d split_first_mark==cur_mark[split_first_mark_code]
+pub(crate) macro split_first_mark($globals:expr) {
+    $globals.cur_mark[crate::section_0382::mark_code_kind::split_first_mark_code]
+}
 // @d split_bot_mark==cur_mark[split_bot_mark_code]
 //
 // @<Glob...@>=

@@ -9,7 +9,7 @@ pub(crate) macro Change_the_case_of_the_token_in_p_if_a_change_is_appropriate($g
     let t = info_tok!($globals, $p);
     #[cfg(not(feature = "unicode_support"))]
     {
-        todo!();
+        todo!("not yet implemented in {}", file!());
         // if t<cs_token_flag+single_base then
         //   begin c:=t mod 256;
         //   if equiv(b+c)<>0 then info(p):=t-c+equiv(b+c);
@@ -28,7 +28,7 @@ pub(crate) macro Change_the_case_of_the_token_in_p_if_a_change_is_appropriate($g
             if chr.get() < 256 {
                 c = Some((chr.get() % 256) as u8)
             } else {
-                todo!();
+                todo!("not yet implemented in {}", file!());
             }
         } else {
             c = None;

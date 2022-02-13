@@ -28,7 +28,7 @@ pub(crate) macro Pseudoprint_the_line($globals:expr, $l:expr) {{
             // print(buffer[i]);
             let ch = $globals.buffer[i].numeric_value();
             if ch >= 256 {
-                todo!();
+                todo!("not yet implemented in {}", file!());
             }
             print($globals, ch as _);
             // end

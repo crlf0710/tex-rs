@@ -49,7 +49,7 @@ pub(crate) macro Accumulate_the_constant_until_cur_tok_is_not_a_suitable_digit($
             $vacuous = false;
             //   if (cur_val>=m)and((cur_val>m)or(d>7)or(radix<>10)) then
             if $globals.cur_val >= $m && ($globals.cur_val > $m || $d > 7 || $globals.radix != 10) {
-                todo!();
+                todo!("not yet implemented in {}", file!());
                 //     begin if OK_so_far then
                 //       begin print_err("Number too big");
                 // @.Number too big@>

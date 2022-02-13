@@ -279,7 +279,7 @@ pub(crate) fn index_offset_with_ASCII_code(initial: word, offset: ASCII_code) ->
         if offset.0 < 256 {
             initial + offset.0
         } else {
-            unimplemented!();
+            todo!("not yet implemented in {}", file!());
         }
     }
 }

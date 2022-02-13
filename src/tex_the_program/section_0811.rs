@@ -16,11 +16,20 @@ pub(crate) macro Make_the_unset_node_r_into_a_vlist_node_of_height_w__setting_th
     // else if t>height(r) then
     else if $t > height!($globals, $r) {
         // begin glue_sign(r):=stretching;
+        glue_sign!($globals, $r) = glue_sign::stretching as _;
         // if glue_stretch(r)=0 then set_glue_ratio_zero(glue_set(r))
+        if glue_stretch!($globals, $r) == scaled::zero() {
+            set_glue_ratio_zero!(glue_set!($globals, $r));
+        }
         // else glue_set(r):=unfloat((t-height(r))/glue_stretch(r));
-        // @^real division@>
+        else {
+            glue_set!($globals, $r) = unfloat!(
+                (($t - height!($globals, $r)).inner_real())
+                    / (glue_stretch!($globals, $r).inner_real())
+            );
+            // @^real division@>
+        }
         // end
-        todo!("t > height(r)");
     }
     // else  begin glue_order(r):=glue_sign(r); glue_sign(r):=shrinking;
     else {
@@ -35,7 +44,9 @@ pub(crate) macro Make_the_unset_node_r_into_a_vlist_node_of_height_w__setting_th
     height!($globals, $r) = $w;
     r#type!($globals, $r) = vlist_node;
     // end
+    use crate::section_0101::scaled;
     use crate::section_0109::set_glue_ratio_zero;
+    use crate::section_0109::unfloat;
     use crate::section_0133::r#type;
     use crate::section_0135::glue_order;
     use crate::section_0135::glue_set;
@@ -44,4 +55,5 @@ pub(crate) macro Make_the_unset_node_r_into_a_vlist_node_of_height_w__setting_th
     use crate::section_0135::width;
     use crate::section_0137::vlist_node;
     use crate::section_0150::glue_ord;
+    use crate::section_0159::glue_stretch;
 }}

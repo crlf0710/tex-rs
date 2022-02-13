@@ -30,7 +30,7 @@ pub(crate) macro Print_the_result_of_command_c($globals:expr, $c:expr) {{
         }
         // font_name_code: begin print(font_name[cur_val]);
         convert_code_kind::font_name_code => {
-            todo!();
+            todo!("font_name_code");
             // if font_size[cur_val]<>font_dsize[cur_val] then
             //   begin print(" at "); print_scaled(font_size[cur_val]);
             //   print("pt");

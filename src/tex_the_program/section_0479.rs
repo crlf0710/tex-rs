@@ -14,7 +14,7 @@ pub(crate) macro Look_for_parameter_number_or_sharpsharp($globals:expr, $xpand:e
     if $globals.cur_cmd != mac_param {
         //   if (cur_tok<=zero_token)or(cur_tok>t) then
         if $globals.cur_tok <= zero_token || $globals.cur_tok > $t {
-            todo!();
+            todo!("not yet implemented in {}", file!());
             //     begin print_err("Illegal parameter number in definition of ");
             // @.Illegal parameter number...@>
             //     sprint_cs(warning_index);

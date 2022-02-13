@@ -42,6 +42,9 @@ pub(crate) macro Case_statement_to_copy_different_types_and_set_words_to_the_num
     }
     // whatsit_node:@<Make a partial copy of the whatsit node |p| and make |r|
     //   point to it; set |words| to the number of initial words not yet copied@>;
+    else if type_p == whatsit_node {
+        todo!("Make a partial copy");
+    }
     // glue_node: begin r:=get_node(small_node_size); add_glue_ref(glue_ptr(p));
     else if type_p == glue_node {
         $r = get_node($globals, small_node_size as _)?;
@@ -60,13 +63,25 @@ pub(crate) macro Case_statement_to_copy_different_types_and_set_words_to_the_num
         // end;
     }
     // ligature_node: begin r:=get_node(small_node_size);
-    //   mem[lig_char(r)]:=mem[lig_char(p)]; {copy |font| and |character|}
-    //   lig_ptr(r):=copy_node_list(lig_ptr(p));
-    //   end;
+    else if type_p == ligature_node {
+        $r = get_node($globals, small_node_size as _)?;
+        // mem[lig_char(r)]:=mem[lig_char(p)]; {copy |font| and |character|}
+        /// copy `font` and `character`
+        const _: () = ();
+        $globals.mem[lig_char!($r)] = $globals.mem[lig_char!($p)];
+        // lig_ptr(r):=copy_node_list(lig_ptr(p));
+        lig_ptr!($globals, $r) = copy_node_list($globals, lig_ptr!($globals, $p))?;
+        // end;
+    }
     // disc_node: begin r:=get_node(small_node_size);
-    //   pre_break(r):=copy_node_list(pre_break(p));
-    //   post_break(r):=copy_node_list(post_break(p));
-    //   end;
+    else if type_p == disc_node {
+        $r = get_node($globals, small_node_size as _)?;
+        // pre_break(r):=copy_node_list(pre_break(p));
+        pre_break!($globals, $r) = copy_node_list($globals, pre_break!($globals, $p))?;
+        // post_break(r):=copy_node_list(post_break(p));
+        post_break!($globals, $r) = copy_node_list($globals, post_break!($globals, $p))?;
+        // end;
+    }
     // mark_node: begin r:=get_node(small_node_size); add_token_ref(mark_ptr(p));
     //   words:=small_node_size;
     //   end;
@@ -94,6 +109,13 @@ pub(crate) macro Case_statement_to_copy_different_types_and_set_words_to_the_num
     use crate::section_0140::ins_ptr;
     use crate::section_0140::split_top_ptr;
     use crate::section_0141::small_node_size;
+    use crate::section_0143::lig_char;
+    use crate::section_0143::lig_ptr;
+    use crate::section_0143::ligature_node;
+    use crate::section_0145::disc_node;
+    use crate::section_0145::post_break;
+    use crate::section_0145::pre_break;
+    use crate::section_0146::whatsit_node;
     use crate::section_0147::math_node;
     use crate::section_0149::glue_node;
     use crate::section_0149::glue_ptr;

@@ -25,9 +25,11 @@ pub(crate) macro Resume_the_page_builder_after_an_output_routine_has_come_to_an_
     // if tail<>head then {current list goes after heldover insertions}
     if tail!($globals) != head!($globals) {
         /// current list goes after heldover insertions
-        todo!("append current list again");
+        const _: () = ();
         // begin link(page_tail):=link(head);
+        link!($globals, $globals.page_tail) = link!($globals, head!($globals));
         // page_tail:=tail;
+        $globals.page_tail = tail!($globals);
         // end;
     }
     // if link(page_head)<>null then {and both go before heldover contributions}

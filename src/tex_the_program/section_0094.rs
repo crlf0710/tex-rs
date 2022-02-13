@@ -13,7 +13,7 @@ pub(crate) fn overflow(globals: &mut TeXGlobals, s: str_number, n: integer) -> T
     //   ("you can ask a wizard to enlarge me.");
     // succumb;
     // end;
-    todo!();
+    todo!("not yet implemented in {}", file!());
 }
 
 use crate::pascal::integer;

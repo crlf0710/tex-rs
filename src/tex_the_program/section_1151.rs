@@ -51,8 +51,9 @@ pub(crate) fn scan_math(globals: &mut TeXGlobals, p: pointer) -> TeXResult<()> {
     }
     // delim_num: begin scan_twenty_seven_bit_int; c:=cur_val div @'10000;
     else if globals.cur_cmd == delim_num {
+        scan_twenty_seven_bit_int(globals)?;
+        c = globals.cur_val / 0o10000;
         // end;
-        todo!("delim_num");
     }
     // othercases @<Scan a subformula enclosed in braces and |return|@>
     else {
@@ -87,6 +88,7 @@ use crate::section_0208::*;
 use crate::section_0230::math_code;
 use crate::section_0232::var_code;
 use crate::section_0236::cur_fam;
+use crate::section_0437::scan_twenty_seven_bit_int;
 use crate::section_0548::internal_font_number;
 use crate::section_0548::internal_font_number_repr;
 use crate::section_0681::assign_fam_and_character;

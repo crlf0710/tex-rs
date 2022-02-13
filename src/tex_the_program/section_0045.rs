@@ -18,7 +18,7 @@ pub(crate) fn str_eq_buf(globals: &mut TeXGlobals, s: str_number, k: integer) ->
     {
         #[cfg(not(feature = "unicode_support"))]
         {
-            todo!();
+            todo!("not yet implemented in {}", file!());
             // begin j:=str_start[s];
             // while j<str_start[s+1] do
             //   begin if so(str_pool[j])<>buffer[k] then

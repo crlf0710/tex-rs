@@ -83,7 +83,7 @@ pub(crate) fn scan_something_internal(
     }
     // set_prev_graf: @<Fetch the |prev_graf|@>;
     else if globals.cur_cmd == set_prev_graf {
-        todo!("Fetch the prev_graf");
+        crate::section_0422::Fetch_the_prev_graf!(globals);
     }
     // set_page_int:@<Fetch the |dead_cycles| or the |insert_penalties|@>;
     else if globals.cur_cmd == set_page_int {

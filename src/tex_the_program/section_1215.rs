@@ -23,7 +23,7 @@ pub(crate) fn get_r_token(globals: &mut TeXGlobals) -> TeXResult<()> {
     // if (cur_cs=0)or(cur_cs>frozen_control_sequence) then
     if globals.cur_cs == 0 || globals.cur_cs > frozen_control_sequence as _ {
         crate::trace_expr_verbose!("cur_cs = {}", globals.cur_cs);
-        todo!();
+        todo!("not yet implemented in {}", file!());
         //   begin print_err("Missing control sequence inserted");
         // @.Missing control...@>
         //   help5("Please don't say `\def cs{...}', say `\def\cs{...}'.")@/

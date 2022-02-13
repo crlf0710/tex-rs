@@ -31,7 +31,7 @@ pub(crate) fn first_fit(globals: &mut TeXGlobals, p: trie_pointer) -> TeXResult<
     let c_u8 = if c.numeric_value() < 256 {
         c.numeric_value() as u8
     } else {
-        todo!();
+        todo!("not yet implemented in {}", file!());
     };
     z = globals.trie_min[c_u8 as usize];
     crate::region_forward_label!(

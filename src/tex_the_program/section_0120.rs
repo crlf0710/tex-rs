@@ -30,7 +30,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
     else if (globals.mem_end as u32) < mem_max {
         /// or go into virgin territory
         crate::trace_expr_verbose!("mem_end = {}", globals.mem_end);
-        todo!();
+        todo!("not yet implemented in {}", file!());
     //   begin incr(mem_end); p:=mem_end;
     //   end
     }
@@ -51,7 +51,7 @@ pub(crate) fn get_avail(globals: &mut TeXGlobals) -> pointer {
             // @:TeX capacity exceeded main memory size}{\quad main memory size@>
             //     end;
             //   end;
-            todo!();
+            todo!("not yet implemented in {}", file!());
         }
     }
     // link(p):=null; {provide an oft-desired initialization of the new node}

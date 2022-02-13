@@ -12,7 +12,7 @@ pub(crate) fn print_current_string(globals: &mut TeXGlobals) {
         //   begin print_char(so(str_pool[j])); incr(j);
         //   end;
         // end;
-        todo!();
+        todo!("not yet implemented in {}", file!());
     }
     #[cfg(feature = "unicode_support")]
     {

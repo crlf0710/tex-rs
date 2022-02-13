@@ -70,7 +70,7 @@ pub(crate) fn print(globals: &mut TeXGlobals, mut s: integer) {
             //   end;
             #[cfg(not(feature = "unicode_support"))]
             {
-                todo!();
+                todo!("not yet implemented in {}", file!());
             }
             #[cfg(feature = "unicode_support")]
             {

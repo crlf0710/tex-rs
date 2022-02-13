@@ -42,7 +42,7 @@ pub(crate) fn begin_box(globals: &mut TeXGlobals, box_context: integer) -> TeXRe
     }
     // vsplit_code: @<Split off part of a vertical box, make |cur_box| point to it@>;
     else if cur_chr == vsplit_code as chr_code_repr {
-        todo!("vsplit_code");
+        crate::section_1082::Split_off_part_of_a_vertical_box__make_cur_box_point_to_it!(globals);
     }
     // othercases @<Initiate the construction of an hbox or vbox, then |return|@>
     else {

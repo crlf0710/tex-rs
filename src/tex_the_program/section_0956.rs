@@ -15,7 +15,7 @@ pub(crate) macro Pack_the_family_into_trie_relative_to_h($globals:expr, $h:expr,
 
         let trie_c_q = $globals.trie_c[q];
         let trie_c_q_u8 = if trie_c_q.numeric_value() > 255 {
-            todo!();
+            todo!("not yet implemented in {}", file!());
         } else {
             trie_c_q.numeric_value() as u8
         };

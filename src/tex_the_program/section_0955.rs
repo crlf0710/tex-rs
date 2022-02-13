@@ -9,7 +9,7 @@ pub(crate) macro If_all_characters_of_the_family_fit_relative_to_h__then_goto_fo
     while q > 0 {
         let trie_c_q = $globals.trie_c[q];
         let trie_c_q_u8 = if trie_c_q.numeric_value() > 255 {
-            todo!()
+            todo!("not yet implemented in {}", file!())
         } else {
             trie_c_q.numeric_value() as u8
         };

@@ -26,7 +26,7 @@ pub(crate) fn trie_fix(globals: &mut TeXGlobals, mut p: trie_pointer) {
         let c_u8 = if c.numeric_value() < 256 {
             c.numeric_value() as u8
         } else {
-            todo!();
+            todo!("not yet implemented in {}", file!());
         };
         // trie_link(z+c):=trie_ref[q]; trie_char(z+c):=qi(c); trie_op(z+c):=trie_o[p];
         trie_link!(globals, z + c_u8 as trie_pointer_repr) = trie_ref!(globals, q).get();

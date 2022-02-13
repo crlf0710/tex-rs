@@ -31,7 +31,7 @@ pub(crate) macro Assignments_1241($globals:expr, $cur_cmd:expr, $a:expr) {{
             //   ("or between \accent and an accented character."); error;
             //   end;
             // end;
-            todo!();
+            todo!("not yet implemented in {}", file!());
         }
         true
     } else {

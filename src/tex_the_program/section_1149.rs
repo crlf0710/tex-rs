@@ -31,14 +31,29 @@ pub(crate) macro Calculate_the_length__l__and_the_shift_amount__s__of_the_displa
     }
     // else  begin n:=info(par_shape_ptr);
     else {
+        /// current node when calculating `pre_display_size`
+        let p;
+        /// scope of paragraph shape specification
+        let n;
+        n = info_inner!($globals, par_shape_ptr!($globals));
         // if prev_graf+2>=n then p:=par_shape_ptr+2*n
+        if prev_graf!($globals) as halfword + 2 >= n {
+            p = par_shape_ptr!($globals) + 2 * n;
+        }
         // else p:=par_shape_ptr+2*(prev_graf+2);
+        else {
+            p = par_shape_ptr!($globals) + 2 * (prev_graf!($globals) as halfword + 2);
+        }
         // s:=mem[p-1].sc; l:=mem[p].sc;
+        $s = $globals.mem[p - 1][MEMORY_WORD_SC];
+        $l = $globals.mem[p][MEMORY_WORD_SC];
         // end
-        todo!("par_shape_ptr != null");
     }
     use crate::section_0101::scaled;
+    use crate::section_0101::MEMORY_WORD_SC;
+    use crate::section_0113::halfword;
     use crate::section_0115::null;
+    use crate::section_0118::info_inner;
     use crate::section_0213::prev_graf;
     use crate::section_0230::par_shape_ptr;
     use crate::section_0236::hang_after;
