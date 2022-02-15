@@ -70,7 +70,7 @@ pub(crate) macro Generate_a_down_or_right_command_for_w_and_return
         crate::return_nojump!();
         use crate::section_0101::scaled;
         use crate::section_0600::dvi_four;
-        use  crate::section_0598::dvi_out;
+        use crate::section_0598::dvi_out;
         use crate::section_0118::info_inner;
         use crate::section_0608::yz_OK;
     }}

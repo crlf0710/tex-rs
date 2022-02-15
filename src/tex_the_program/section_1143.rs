@@ -12,5 +12,7 @@ pub(crate) macro Cases_of_print_cmd_chr_for_symbolic_printing_of_primitives_1143
     } else {
         false
     };
+    use crate::section_0063::print_esc;
+    use crate::section_0208::eq_no;
     processed
 }}

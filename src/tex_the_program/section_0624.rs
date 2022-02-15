@@ -23,7 +23,7 @@ pub(crate) macro Output_a_rule_in_an_hlist($globals:expr, $this_box:expr, $base_
         $globals.cur_v = $base_line + $globals.rule_dp;
         synch_v!($globals);
         // dvi_out(set_rule); dvi_four(rule_ht); dvi_four(rule_wd);
-        dvi_out!($globals, put_rule.byte());
+        dvi_out!($globals, set_rule.byte());
         dvi_four($globals, $globals.rule_ht.inner());
         dvi_four($globals, $globals.rule_wd.inner());
         // cur_v:=base_line; dvi_h:=dvi_h+rule_wd;
@@ -36,7 +36,7 @@ pub(crate) macro Output_a_rule_in_an_hlist($globals:expr, $this_box:expr, $base_
     use crate::section_0135::height;
     use crate::section_0135::width;
     use crate::section_0138::is_running;
-    use crate::section_0586::put_rule;
+    use crate::section_0586::set_rule;
     use crate::section_0598::dvi_out;
     use crate::section_0600::dvi_four;
     use crate::section_0616::synch_h;
