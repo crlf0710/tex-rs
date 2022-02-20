@@ -29,9 +29,9 @@ pub(crate) fn math_fraction(globals: &mut TeXGlobals) -> TeXResult<()> {
         // mem[denominator(incompleat_noad)].hh:=empty_field;
         globals.mem[denominator!(incompleat_noad)][MEMORY_WORD_HH] = empty_field;
         // mem[left_delimiter(incompleat_noad)].qqqq:=null_delimiter;
-        globals.mem[left_delimiter!(incompleat_noad)][MEMORY_WORD_QQQQ] = null_delimiter;
+        globals.mem[left_delimiter!(incompleat_noad)] = null_delimiter(globals);
         // mem[right_delimiter(incompleat_noad)].qqqq:=null_delimiter;@/
-        globals.mem[right_delimiter!(incompleat_noad)][MEMORY_WORD_QQQQ] = null_delimiter;
+        globals.mem[right_delimiter!(incompleat_noad)] = null_delimiter(globals);
         // link(head):=null; tail:=head;
         link!(globals, head!(globals)) = null;
         tail!(globals) = head!(globals);
