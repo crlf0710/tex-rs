@@ -12,7 +12,7 @@ pub(crate) macro Construct_a_superscript_box_x($globals:expr, $x:expr, $q:expr, 
         $clr = sup3!($globals, $globals.cur_size.get());
     }
     // else if cur_style<text_style then clr:=sup1(cur_size)
-    else if $globals.cur_size.get() < style_node_subtype::text_style as _ {
+    else if $globals.cur_style.get() < style_node_subtype::text_style as _ {
         $clr = sup1!($globals, $globals.cur_size.get());
     }
     // else clr:=sup2(cur_size);
