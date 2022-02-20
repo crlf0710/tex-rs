@@ -22,10 +22,11 @@ pub(crate) macro Get_ready_to_start_line_breaking_0827($globals:expr) {{
     // background[2+stretch_order(r)]:=@|background[2+stretch_order(r)]+stretch(r);@/
     $globals.background[2 + stretch_order!($globals, r)] += stretch!($globals, r);
     // background[6]:=shrink(q)+shrink(r);
-    $globals.background[6] = stretch!($globals, q) + stretch!($globals, r);
+    $globals.background[6] = shrink!($globals, q) + shrink!($globals, r);
     use crate::section_0101::scaled;
     use crate::section_0115::pointer;
     use crate::section_0135::width;
+    use crate::section_0150::shrink;
     use crate::section_0150::stretch;
     use crate::section_0150::stretch_order;
     use crate::section_0224::left_skip;
